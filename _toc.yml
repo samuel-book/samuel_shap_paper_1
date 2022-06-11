@@ -1,0 +1,12 @@
+format: jb-book
+root: introduction/intro
+parts:
+- caption: XG Boost
+  chapters:
+  - file: xgb/xgb_combined_fit_accuracy
+
+
+
+  
+
+
