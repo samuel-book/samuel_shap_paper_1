@@ -1,0 +1,19 @@
+# Folders to ignore
+/admin
+_build/
+data/
+temp/
+
+# Ignore file types that may contain data or models
+*.p
+*.pkl
+*.csv
+*.xlsx
+*.txt
+# Ignore all checkpoints folders
+**/.ipynb_checkpoints/
+
+# Ignore PyCharm files
+.idea
+
+
