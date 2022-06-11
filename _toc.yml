@@ -5,6 +5,8 @@ parts:
   chapters:
   - file: xgb/xgb_combined_fit_accuracy
   - file: xgb/xgb_combined_shap
+  - file: xgb/compare_10k_cohort_1
+  - file: xgb/compare_benchmark_decisions
 
 
 
