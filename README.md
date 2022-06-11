@@ -1,2 +1,4 @@
 # shap_short_paper_1
-Exploratory work with Shap using SAMueL-1 data
+
+
+Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis.
