@@ -231,6 +231,19 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -243,6 +256,19 @@ const thebe_selector_output = ".output, .cell_output"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -252,6 +278,19 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="applying-explainable-machine-learning-to-national-stroke-audit-data-to-explore-variation-in-decisions-to-use-thrombolysis">
 <h1>Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis<a class="headerlink" href="#applying-explainable-machine-learning-to-national-stroke-audit-data-to-explore-variation-in-decisions-to-use-thrombolysis" title="Permalink to this headline">¶</a></h1>
 <p>Kerry Pearn &amp; Michael Allen</p>
+<blockquote class="epigraph">
+<div><p>“Your decision to treat or not treat … That’s the difficult part. That’s the grey area where everyone does a different thing.”</p>
+<p class="attribution">—Stroke Consultant during interviews for SAMueL</p>
+</div></blockquote>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>Stroke is a common cause of adult disability. Expert opinion is that about one in five patients should receive clot-busting drugs to break up the blood clot that is causing their stroke, and this is the target set in the NHS long term plan. This clot-busting treatment is called thrombolysis. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment in different hospitals.</p>
+<p>In a previous project, <a class="reference external" href="https://samuel-book.github.io/samuel-1/introduction/intro.html">SAMueL-1</a>, we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital <a class="reference internal" href="#high-level-md"><span class="std std-numref">Figure 1</span></a>.</p>
+<div class="figure align-default" id="high-level-md">
+<a class="reference internal image-reference" href="../_images/ml_model_high_level.png"><img alt="../_images/ml_model_high_level.png" src="../_images/ml_model_high_level.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">A high level depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.</span><a class="headerlink" href="#high-level-md" title="Permalink to this image">¶</a></p>
+</div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
