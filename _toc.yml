@@ -3,10 +3,11 @@ root: introduction/intro
 parts:
 - caption: XG Boost
   chapters:
-  - file: xgb/xgb_combined_fit_accuracy
-  - file: xgb/xgb_combined_shap
-  - file: xgb/compare_10k_cohort_1
-  - file: xgb/compare_benchmark_decisions
+  - file: xgb/01_xgb_combined_fit_accuracy
+  - file: xgb/02_xgb_combined_shap
+  - file: xgb/03_compare_10k_cohort
+  - file: xgb/04_compare_benchmark_decisions
+  - file: xgb/05_predict_differences_between_local_and_benchmark
 
 
 
