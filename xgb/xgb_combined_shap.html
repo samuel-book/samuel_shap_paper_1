@@ -119,6 +119,11 @@ const thebe_selector_output = ".output, .cell_output"
    Compare local thrombolysis decisions with benchmark decisions
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="predict_differences_between_local_and_benchmark.html">
+   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -437,7 +442,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Fit model and get feature importances for each k-fold training/test split.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_models</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Otherwise load models</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_models</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Otherwise load models</span>
 
 <span class="c1"># Set up lists for k-fold fits</span>
 <span class="n">model_kfold</span> <span class="o">=</span> <span class="p">[]</span>
@@ -527,7 +532,7 @@ Accuracy k-fold 5: 0.853
 <h3>Get Shap values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_shap_values</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Otherwise load Shap values</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_shap_values</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Otherwise load Shap values</span>
 
 <span class="n">k_fold_shap_values_extended</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">k_fold_shap_values</span> <span class="o">=</span> <span class="p">[]</span>
@@ -560,6 +565,38 @@ Accuracy k-fold 5: 0.853
             <span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
             <span class="n">k_fold_shap_values_extended</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">)</span>
             <span class="n">k_fold_shap_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17209/17759 [00:28&lt;00:00]       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 1 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17678/17759 [00:30&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 2 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17703/17758 [00:29&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 3 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17432/17758 [00:35&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 4 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17305/17758 [00:34&lt;00:00]       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 5 of 5
 </pre></div>
 </div>
 </div>
@@ -1031,7 +1068,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17428/17759 [00:45&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17285/17759 [00:33&lt;00:00]       
 </pre></div>
 </div>
 </div>

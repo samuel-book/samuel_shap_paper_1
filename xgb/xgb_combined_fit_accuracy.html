@@ -119,6 +119,11 @@ const thebe_selector_output = ".output, .cell_output"
    Compare local thrombolysis decisions with benchmark decisions
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="predict_differences_between_local_and_benchmark.html">
+   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -631,7 +636,6 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list to store models and calibarion threshold</span>
 <span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">thresholds</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Set up lists for observed and predicted</span>
 <span class="n">observed</span> <span class="o">=</span> <span class="p">[]</span>
@@ -678,7 +682,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">importance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
     <span class="n">feature_importance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">importance</span><span class="p">)</span>
     
-    <span class="c1"># Calibrate model and get class</span>
+    <span class="c1"># Get class</span>
     <span class="n">true_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
     <span class="n">y_class</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
     <span class="n">y_class</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_class</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
