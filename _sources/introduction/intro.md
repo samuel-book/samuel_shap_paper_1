@@ -17,8 +17,14 @@ In a previous project, [SAMueL-1](https://samuel-book.github.io/samuel-1/introdu
 :::{figure-md} high_level_md
 <img src="./images/ml_model_high_level.png" width="800px">
 
-A high level depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.
+A high level depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information. Machine learning models used are logistic regression, random forest, XGBoost, and neural networks.
 :::
+
+## Aims of this study
+
+The aims of this study are 1) to apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals, and 2) to model and explain what are the the features that are most important in hospitals making *different* decisions about the same patient.
+
+
 
 
 
