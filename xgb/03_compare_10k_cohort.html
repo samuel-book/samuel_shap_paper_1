@@ -101,7 +101,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_xgb_combined_fit_accuracy.html">
-   XGBoost Classifier - Measuring accuracy of a model fitted to all stroke teams together
+   Measuring accuracy of a XGBoost Classifier
   </a>
  </li>
  <li class="toctree-l1">
@@ -519,11 +519,15 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Show stats<a class="headerlink" href="#show-stats" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thrombolysis_rate</span><span class="p">)</span>
-<span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">thrombolysis_rate</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
+<span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
+<span class="n">minimum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
+<span class="n">maximum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
 
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;StDev: </span><span class="si">{</span><span class="n">stdev</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Min: </span><span class="si">{</span><span class="n">minimum</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Max</span><span class="si">{</span><span class="n">maximum</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

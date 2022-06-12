@@ -101,7 +101,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../xgb/01_xgb_combined_fit_accuracy.html">
-   XGBoost Classifier - Measuring accuracy of a model fitted to all stroke teams together
+   Measuring accuracy of a XGBoost Classifier
   </a>
  </li>
  <li class="toctree-l1">
@@ -483,6 +483,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="aims">
 <h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><p>To assess predicted thrombolysis in 1 10K corhort of patients if that same cohort attended each of 132 hospitals.</p></li>
 <li><p>To investigate the output of the hospital and clinical subnets of the embedding neural network.</p></li>
 <li><p>To examine the link between hospital subnet output and use of thrombolysis in hospitals - both the actual thrombolysis use, and the predicted thrombolysis use of a 10k set of patients passed through all hospital models.</p></li>
 <li><p>To examine the link between the patient clinical feature subnet output and the use of thrombolysis, and the link between patient features and the clinical feature subnet output</p></li>
@@ -529,7 +530,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-06-12 17:19:24.547200: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-06-13 00:42:53.027376: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
 </pre></div>
 </div>
 </div>
@@ -637,6 +638,56 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">probability</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
 <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">y_pred_test</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-06-13 00:42:54.864907: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-06-13 00:42:54.865661: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-06-13 00:42:54.901500: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:54.901665: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: NVIDIA GeForce GTX 1650 Ti computeCapability: 7.5
+coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 178.84GiB/s
+2022-06-13 00:42:54.901698: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-06-13 00:42:54.903114: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-06-13 00:42:54.903162: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-06-13 00:42:54.904436: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-06-13 00:42:54.904677: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-06-13 00:42:54.906036: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-06-13 00:42:54.906714: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-06-13 00:42:54.909501: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-06-13 00:42:54.909615: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:54.909825: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:54.909949: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-06-13 00:42:54.910264: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-06-13 00:42:54.910731: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-06-13 00:42:54.910820: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:54.910958: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: NVIDIA GeForce GTX 1650 Ti computeCapability: 7.5
+coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 178.84GiB/s
+2022-06-13 00:42:54.910984: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-06-13 00:42:54.911012: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-06-13 00:42:54.911032: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-06-13 00:42:54.911049: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-06-13 00:42:54.911067: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-06-13 00:42:54.911084: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-06-13 00:42:54.911103: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-06-13 00:42:54.911121: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-06-13 00:42:54.911180: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:54.911354: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:54.911473: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-06-13 00:42:54.911508: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-06-13 00:42:55.408857: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-06-13 00:42:55.408882: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2022-06-13 00:42:55.408888: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2022-06-13 00:42:55.409075: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:55.409300: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:55.409479: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-06-13 00:42:55.409626: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3404 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA GeForce GTX 1650 Ti, pci bus id: 0000:01:00.0, compute capability: 7.5)
+2022-06-13 00:42:55.618120: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2022-06-13 00:42:55.635145: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2599990000 Hz
+2022-06-13 00:42:55.760065: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
 </pre></div>
 </div>
 </div>
@@ -800,15 +851,21 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
 <span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
+<span class="n">minimum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
+<span class="n">maximum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
 
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;StDev: </span><span class="si">{</span><span class="n">stdev</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Min: </span><span class="si">{</span><span class="n">minimum</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Max</span><span class="si">{</span><span class="n">maximum</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.284
 StDev: 0.075
+Min: 0.144
+Max0.470
 </pre></div>
 </div>
 </div>
@@ -1002,7 +1059,7 @@ StDev: 0.075
 <span class="n">r_square_model</span> <span class="o">=</span> \
     <span class="n">correlation</span><span class="p">[</span><span class="s1">&#39;hosp_subnet_output&#39;</span><span class="p">][</span><span class="s1">&#39;actual_thrombolysis&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R-squared: </span><span class="si">{</span><span class="n">r_square_model</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Actual thrombolysis vs.</span><span class="se">\n</span><span class="s1">hospital subnet output&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
@@ -1017,7 +1074,7 @@ StDev: 0.075
 <span class="n">r_square_model</span> <span class="o">=</span> \
     <span class="n">correlation</span><span class="p">[</span><span class="s1">&#39;hosp_subnet_output&#39;</span><span class="p">][</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R-squared: </span><span class="si">{</span><span class="n">r_square_model</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicted 10k thrombolysis vs.</span><span class="se">\n</span><span class="s1">hospital subnet output&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
@@ -1032,7 +1089,7 @@ StDev: 0.075
 <img alt="../_images/04_analyse_10k_1d_modular_20_0.png" src="../_images/04_analyse_10k_1d_modular_20_0.png" />
 </div>
 </div>
-<p>We can see that the hospital subnet output correlates with the actual use of thrombolysis at each hospital (R-Squared 0.669), but with some scatter. The scatter will be due to factors other than hospital thrombolysis decision making effecting final thrombolysis use (such as differences in patient populations attending each hospital). When subnet activation is compared to predicted thrombolysis use of the same patients passing through all hospitals, the correlation between hospital subnet activation (which is embedded in the model during training, and is not effected by the test patients) is virtually perfect (R-Squared 0.996).</p>
+<p>We can see that the hospital subnet output correlates with the actual use of thrombolysis at each hospital (R-Squared 0.693), but with some scatter. The scatter will be due to factors other than hospital thrombolysis decision making effecting final thrombolysis use (such as differences in patient populations attending each hospital). When subnet activation is compared to predicted thrombolysis use of the same patients passing through all hospitals, the correlation between hospital subnet activation (which is embedded in the model during training, and is not effected by the test patients) is virtually perfect (R-Squared 0.998).</p>
 <p>The results show:</p>
 <ol class="simple">
 <li><p>Hospital subnet output, fixed during network training, is very closely correlated with the thrombolysis use of a fixed set of patients passed through all hospitals. Hospital subnet output may therefore be used as a measure of “willingness to thrombolyse”, with hospitals ranked in tendency to use thrombolysis by this subnet output value.</p></li>
@@ -1213,7 +1270,13 @@ Name: patient_subnet_output, dtype: float32
 </div>
 <div class="section" id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
-<p>Using subnets for different types of data increased model accuracy (previously described). But subnets also provide insight into both hospitals and patients. The subnets allow ranking of hospitals in likelihood to use thrombolysis (independent of patients) and allow ranking of patient clinical characteristics in suitability for thrombolysis.</p>
+<ul class="simple">
+<li><p>The model had 85% accuracy (in line with accuracy assed by k-fold replication).</p></li>
+<li><p>Thrombolysis use in the 10K cohort was predicted to be 14% to 47%</p></li>
+<li><p>Activation of the hospital subnet correlated with predicted thrombolysis use in the 10K patient cohort across hospitals (R-Squared 0.998) and with observed thrombolysis use across hospitals (R-Squared 0.693).</p></li>
+<li><p>Activation of the clinical subnet was strongly associated with observed thrombolysis use across hospitals. The clinical subnet showed clear relationships with key clinical features such as stroke type, stroke severity, and disability before stroke.</p></li>
+<li><p>Subnets provide insight into both hospitals and patients. The subnets allow ranking of hospitals in likelihood to use thrombolysis (independent of patients) and allow ranking of patient clinical characteristics in suitability for thrombolysis.</p></li>
+</ul>
 </div>
 </div>
 
