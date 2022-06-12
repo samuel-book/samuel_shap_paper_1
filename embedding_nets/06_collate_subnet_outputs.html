@@ -1,0 +1,1536 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Investigating the output of neural net embedding subnets &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Understanding influence of features of neural net subnet outputs" href="07_fit_xgboost_to_subnet.html" />
+    <link rel="prev" title="Compare local thrombolysis decisions with benchmark decisions" href="05_compare_benchmark_decisions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/intro.html">
+   Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  XG Boost
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../xgb/01_xgb_combined_fit_accuracy.html">
+   XGBoost Classifier - Measuring accuracy of a model fitted to all stroke teams together
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../xgb/02_xgb_combined_shap.html">
+   Explaining XGBoost model predictions with Shapley values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../xgb/03_compare_10k_cohort.html">
+   A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../xgb/04_compare_benchmark_decisions.html">
+   Compare local thrombolysis decisions with benchmark decisions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../xgb/05_predict_differences_between_local_and_benchmark.html">
+   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Embedding neural nets
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_1d_modular_fit_k_fold.html">
+   Modular TensorFlow model with 1D embedding - Train and save models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_1d_modular_analyse.html">
+   Modular TensorFlow model with 1D embedding - analyse
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_generate_1d_net_for_10k.html">
+   Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_analyse_10k_1d_modular.html">
+   Investigating the output of neural net embedding subnets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_compare_benchmark_decisions.html">
+   Compare local thrombolysis decisions with benchmark decisions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Investigating the output of neural net embedding subnets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_fit_xgboost_to_subnet.html">
+   Understanding influence of features of neural net subnet outputs
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/embedding_nets/06_collate_subnet_outputs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network-structure">
+   Neural Network structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-of-model">
+   Fitting of model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-libraries">
+   Load libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-scale-data">
+   Define function to scale data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-model-outputs-for-test-data">
+   Get model outputs for test data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-predictions-for-thrombolysis-use-of-10k-set-of-patients-at-each-hospital">
+   Get predictions for thrombolysis use of 10k set of patients at each hospital
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-subnet-outpus">
+   Get subnet outpus
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-hospital-subnet-outout">
+     Get hospital subnet outout
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-clinical-subnet-output">
+     Get clinical subnet output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-pathway-subnet-output">
+     Get pathway subnet output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-actual-thrombolysis">
+     Add actual thrombolysis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scale-all-subnet-output-0-1-with-1-more-likely-to-thrombolyse">
+   Scale all subnet output 0-1 with 1 = more likely to thrombolyse
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-data-frames">
+   Save Data Frames
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Investigating the output of neural net embedding subnets</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network-structure">
+   Neural Network structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-of-model">
+   Fitting of model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-libraries">
+   Load libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-scale-data">
+   Define function to scale data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-model-outputs-for-test-data">
+   Get model outputs for test data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-predictions-for-thrombolysis-use-of-10k-set-of-patients-at-each-hospital">
+   Get predictions for thrombolysis use of 10k set of patients at each hospital
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-subnet-outpus">
+   Get subnet outpus
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-hospital-subnet-outout">
+     Get hospital subnet outout
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-clinical-subnet-output">
+     Get clinical subnet output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-pathway-subnet-output">
+     Get pathway subnet output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-actual-thrombolysis">
+     Add actual thrombolysis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scale-all-subnet-output-0-1-with-1-more-likely-to-thrombolyse">
+   Scale all subnet output 0-1 with 1 = more likely to thrombolyse
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-data-frames">
+   Save Data Frames
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="investigating-the-output-of-neural-net-embedding-subnets">
+<h1>Investigating the output of neural net embedding subnets<a class="headerlink" href="#investigating-the-output-of-neural-net-embedding-subnets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To investigate the output of the hospital and clinical subnets of the embedding neural network.</p></li>
+<li><p>To examine the link between hospital subnet output and use of thrombolysis in hospitals - both the actual thrombolysis use, and the predicted thrombolysis use of a 10k set of patients passed through all hospital models.</p></li>
+<li><p>To examine the link between the patient clinical feature subnet output and the use of thrombolysis, and the link between patient features and the clinical feature subnet output</p></li>
+</ul>
+</div>
+<div class="section" id="neural-network-structure">
+<h2>Neural Network structure<a class="headerlink" href="#neural-network-structure" title="Permalink to this headline">¶</a></h2>
+<p>The model contains three subnets that take portions of the data. The output of these subnets is an n-dimensional vector. In this case the output is a 1D vector, that is each subnet is reduced to a single value output. The subnets created are for:</p>
+<ol class="simple">
+<li><p><em>Patient clinical data</em>: Age, gender, ethnicity, disability before stroke, stroke scale data. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
+<li><p><em>Pathway process data</em>: Times of arrival and scan, time of day, day of week. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
+<li><p><em>Hospital ID</em> (one-hot encoded): Connect input directly to single neuron with sigmoid activation.</p></li>
+</ol>
+<p>The outputs of the three subnet outputs are then passed to a single neuron with sigmoid activation for final output.</p>
+<p><img alt="" src="../_images/embedding_1d_with_subnet_output.png" /></p>
+</div>
+<div class="section" id="fitting-of-model">
+<h2>Fitting of model<a class="headerlink" href="#fitting-of-model" title="Permalink to this headline">¶</a></h2>
+<p>The model has been pre-trained (see the notebook <em>Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset</em>)</p>
+</div>
+<div class="section" id="load-libraries">
+<h2>Load libraries<a class="headerlink" href="#load-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># sklearn for pre-processing</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="c1"># TensorFlow api model</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="n">binary_crossentropy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-06-12 17:24:44.772019: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-function-to-scale-data">
+<h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
+<p>Scale input data 0-1 (MinMax scaling).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scale_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scale data 0-1 based on min and max in training set&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Initialise a new scaling object for normalising input data</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+    <span class="c1"># Set up the scaler just on the training set</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># Apply the scaler to the training and test sets</span>
+    <span class="n">train_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">test_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_sc</span><span class="p">,</span> <span class="n">test_sc</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="get-model-outputs-for-test-data">
+<h2>Get model outputs for test data<a class="headerlink" href="#get-model-outputs-for-test-data" title="Permalink to this headline">¶</a></h2>
+<p>Get prediction probabilities for the test 10k training set. Training data is used only to scale test set X values.</p>
+<p>This prediction run is used to check model, and get accuracy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data subgroups</span>
+<span class="n">subgroups</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/subnet.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Item&#39;</span><span class="p">)</span>
+<span class="c1"># Get list of clinical items</span>
+<span class="n">clinical_subgroup</span> <span class="o">=</span> <span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">subgroups</span><span class="p">[</span><span class="s1">&#39;Subnet&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;clinical&#39;</span><span class="p">]</span>
+<span class="n">clinical_subgroup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">clinical_subgroup</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="c1"># Get list of pathway items</span>
+<span class="n">pathway_subgroup</span> <span class="o">=</span> <span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">subgroups</span><span class="p">[</span><span class="s1">&#39;Subnet&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;pathway&#39;</span><span class="p">]</span>
+<span class="n">pathway_subgroup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pathway_subgroup</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="c1"># Get list of hospital items</span>
+<span class="n">hospital_subgroup</span> <span class="o">=</span> <span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">subgroups</span><span class="p">[</span><span class="s1">&#39;Subnet&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;hospital&#39;</span><span class="p">]</span>
+<span class="n">hospital_subgroup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hospital_subgroup</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+  
+<span class="c1"># Load data</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/10k_training_test/cohort_10000_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/10k_training_test/cohort_10000_test.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Limit subgroups to fields present</span>
+<span class="c1"># Due to improved data selection in this repository</span>
+<span class="n">clinical_subgroup</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">subgroup</span> <span class="k">for</span> <span class="n">subgroup</span> <span class="ow">in</span> <span class="n">clinical_subgroup</span> <span class="k">if</span> <span class="n">subgroup</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">train</span><span class="p">)]</span>
+<span class="n">pathway_subgroup</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">subgroup</span> <span class="k">for</span> <span class="n">subgroup</span> <span class="ow">in</span> <span class="n">pathway_subgroup</span> <span class="k">if</span> <span class="n">subgroup</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">train</span><span class="p">)]</span>
+
+<span class="c1"># OneHot encode stroke team</span>
+<span class="n">coded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">])</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">coded</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">coded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">])</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">test</span><span class="p">,</span> <span class="n">coded</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Split into X, y</span>
+<span class="n">X_train_df</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="n">y_train_df</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
+<span class="n">X_test_df</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="n">y_test_df</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span> 
+
+<span class="c1"># Split train and test data by subgroups</span>
+<span class="n">X_train_patients</span> <span class="o">=</span> <span class="n">X_train_df</span><span class="p">[</span><span class="n">clinical_subgroup</span><span class="p">]</span>
+<span class="n">X_test_patients</span> <span class="o">=</span> <span class="n">X_test_df</span><span class="p">[</span><span class="n">clinical_subgroup</span><span class="p">]</span>
+<span class="n">X_train_pathway</span> <span class="o">=</span> <span class="n">X_train_df</span><span class="p">[</span><span class="n">pathway_subgroup</span><span class="p">]</span>
+<span class="n">X_test_pathway</span> <span class="o">=</span> <span class="n">X_test_df</span><span class="p">[</span><span class="n">pathway_subgroup</span><span class="p">]</span>
+<span class="n">X_train_hospitals</span> <span class="o">=</span> <span class="n">X_train_df</span><span class="p">[</span><span class="n">hospital_subgroup</span><span class="p">]</span>
+<span class="n">X_test_hospitals</span> <span class="o">=</span> <span class="n">X_test_df</span><span class="p">[</span><span class="n">hospital_subgroup</span><span class="p">]</span>
+
+<span class="c1"># Convert to NumPy</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_test_df</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Scale data</span>
+<span class="n">X_train_patients_sc</span><span class="p">,</span> <span class="n">X_test_patients_sc</span> <span class="o">=</span> \
+    <span class="n">scale_data</span><span class="p">(</span><span class="n">X_train_patients</span><span class="p">,</span> <span class="n">X_test_patients</span><span class="p">)</span>
+
+<span class="n">X_train_pathway_sc</span><span class="p">,</span> <span class="n">X_test_pathway_sc</span> <span class="o">=</span> \
+    <span class="n">scale_data</span><span class="p">(</span><span class="n">X_train_pathway</span><span class="p">,</span> <span class="n">X_test_pathway</span><span class="p">)</span>
+
+<span class="n">X_train_hospitals_sc</span><span class="p">,</span> <span class="n">X_test_hospitals_sc</span> <span class="o">=</span> \
+    <span class="n">scale_data</span><span class="p">(</span><span class="n">X_train_hospitals</span><span class="p">,</span> <span class="n">X_test_hospitals</span><span class="p">)</span>
+
+<span class="c1"># Load model</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models/1d_for_10k/&#39;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">10k_model.h5&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># Test model</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">X_test_patients_sc</span><span class="p">,</span> <span class="n">X_test_pathway_sc</span><span class="p">,</span> <span class="n">X_test_hospitals_sc</span><span class="p">])</span>
+<span class="n">own_unit_prob</span> <span class="o">=</span> <span class="n">probability</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">probability</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">y_pred_test</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy test </span><span class="si">{</span><span class="n">accuracy_test</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy test 0.852
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="get-predictions-for-thrombolysis-use-of-10k-set-of-patients-at-each-hospital">
+<h2>Get predictions for thrombolysis use of 10k set of patients at each hospital<a class="headerlink" href="#get-predictions-for-thrombolysis-use-of-10k-set-of-patients-at-each-hospital" title="Permalink to this headline">¶</a></h2>
+<p>Here we ask the counter-factual question - “what treatment would a patient be expected to receive at each of the 132 hospitals?”.</p>
+<p>Hospital is one-hot encoded as input to the hospital subnet. To make a prediction of treatment at different hospitals we change the one-hot encoding of the hospital when making prediction.</p>
+<p>For each hospital we pass through the 10k test set, and record the proportion of the patients receiving thrombolysis at that hospital.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get number of hospitals</span>
+<span class="n">num_hospitals</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test_hospitals_sc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Create test array for changing hospital ID</span>
+<span class="n">X_hospitals_alter</span> <span class="o">=</span> <span class="n">X_test_hospitals_sc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># Get classification for all patients at all hospials</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through setting hospital</span>
+<span class="n">hospital_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">hosp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_hospitals</span><span class="p">):</span>
+    <span class="c1"># Set all hospitals to zero</span>
+    <span class="n">X_hospitals_alter</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Set test hospital to 1</span>
+    <span class="n">X_hospitals_alter</span><span class="p">[:,</span><span class="n">hosp</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Get probability of thrombolysis</span>
+    <span class="n">probability</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">X_test_patients_sc</span><span class="p">,</span> <span class="n">X_test_pathway_sc</span><span class="p">,</span> <span class="n">X_hospitals_alter</span><span class="p">])</span>
+    <span class="c1"># Classify</span>
+    <span class="n">classified</span> <span class="o">=</span> <span class="n">probability</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
+    <span class="n">patient_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">classified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert patient results to NumPy array</span>
+<span class="n">patient_results_np</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">patient_results</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Put patient results in DataFrame</span>
+<span class="n">cohort_results_all_hospitals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">patient_results_np</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">hospital_subgroup</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_results_all_hospitals</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AGNOF1041H</th>
+      <th>AKCGO9726K</th>
+      <th>AOBTM3098N</th>
+      <th>APXEE8191H</th>
+      <th>ATDID5461S</th>
+      <th>BBXPQ0212O</th>
+      <th>BICAW1125K</th>
+      <th>BQZGT7491V</th>
+      <th>BXXZS5063A</th>
+      <th>CNBGF2713O</th>
+      <th>...</th>
+      <th>XKAWN3771U</th>
+      <th>XPABC1435F</th>
+      <th>XQAGA4299B</th>
+      <th>XWUBX0795L</th>
+      <th>YEXCH8391J</th>
+      <th>YPKYH1768F</th>
+      <th>YQMZV4284N</th>
+      <th>ZBVSO0975W</th>
+      <th>ZHCLE1578P</th>
+      <th>ZRRCV7012C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9995</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9996</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9997</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9998</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9999</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10000 rows × 132 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="get-subnet-outpus">
+<h2>Get subnet outpus<a class="headerlink" href="#get-subnet-outpus" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="get-hospital-subnet-outout">
+<h3>Get hospital subnet outout<a class="headerlink" href="#get-hospital-subnet-outout" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer_name</span> <span class="o">=</span> <span class="s1">&#39;hospital_encode&#39;</span>
+<span class="n">hospital_encode_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">,</span><span class="n">outputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">layer_name</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+<span class="n">hospital_encode_output</span> <span class="o">=</span> <span class="n">hospital_encode_model</span><span class="p">([</span>
+    <span class="n">X_test_patients_sc</span><span class="p">,</span> <span class="n">X_test_pathway_sc</span><span class="p">,</span> <span class="n">X_test_hospitals_sc</span><span class="p">])</span>
+<span class="n">hospital_encode_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hospital_encode_output</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="s1">&#39;hospital_subnet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hospital_encode_output</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="get-clinical-subnet-output">
+<h3>Get clinical subnet output<a class="headerlink" href="#get-clinical-subnet-output" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer_name</span> <span class="o">=</span> <span class="s1">&#39;patient_encode&#39;</span>
+<span class="n">patient_encode_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">,</span><span class="n">outputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">layer_name</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+<span class="n">patient_encode_output</span> <span class="o">=</span> <span class="n">patient_encode_model</span><span class="p">([</span>
+    <span class="n">X_test_patients_sc</span><span class="p">,</span> <span class="n">X_test_pathway_sc</span><span class="p">,</span> <span class="n">X_test_hospitals_sc</span><span class="p">])</span>
+<span class="n">patient_encode_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">patient_encode_output</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="s1">&#39;clinical_subnet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_encode_output</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="get-pathway-subnet-output">
+<h3>Get pathway subnet output<a class="headerlink" href="#get-pathway-subnet-output" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer_name</span> <span class="o">=</span> <span class="s1">&#39;pathway_encode&#39;</span>
+<span class="n">patient_encode_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">,</span><span class="n">outputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">layer_name</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+<span class="n">pathway_encode_output</span> <span class="o">=</span> <span class="n">patient_encode_model</span><span class="p">([</span>
+    <span class="n">X_test_patients_sc</span><span class="p">,</span> <span class="n">X_test_pathway_sc</span><span class="p">,</span> <span class="n">X_test_hospitals_sc</span><span class="p">])</span>
+<span class="n">pathway_encode_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pathway_encode_output</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="s1">&#39;pathway_subnet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pathway_encode_output</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="add-actual-thrombolysis">
+<h3>Add actual thrombolysis<a class="headerlink" href="#add-actual-thrombolysis" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hospital_subnet</th>
+      <th>clinical_subnet</th>
+      <th>pathway_subnet</th>
+      <th>Thrombolysis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.676831</td>
+      <td>0.009032</td>
+      <td>0.299687</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.469118</td>
+      <td>0.115673</td>
+      <td>0.977729</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.703789</td>
+      <td>0.852798</td>
+      <td>0.983000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.410166</td>
+      <td>0.807462</td>
+      <td>0.027178</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.468869</td>
+      <td>0.379883</td>
+      <td>0.154912</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9995</th>
+      <td>0.882832</td>
+      <td>0.217620</td>
+      <td>0.284438</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9996</th>
+      <td>0.999913</td>
+      <td>0.337073</td>
+      <td>0.370088</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9997</th>
+      <td>0.331239</td>
+      <td>0.802803</td>
+      <td>0.262890</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9998</th>
+      <td>0.468869</td>
+      <td>0.581135</td>
+      <td>0.071124</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9999</th>
+      <td>0.767849</td>
+      <td>0.608838</td>
+      <td>0.119847</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10000 rows × 4 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="scale-all-subnet-output-0-1-with-1-more-likely-to-thrombolyse">
+<h2>Scale all subnet output 0-1 with 1 = more likely to thrombolyse<a class="headerlink" href="#scale-all-subnet-output-0-1-with-1-more-likely-to-thrombolyse" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hospital_subnet</th>
+      <th>clinical_subnet</th>
+      <th>pathway_subnet</th>
+    </tr>
+    <tr>
+      <th>Thrombolysis</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.588916</td>
+      <td>0.428909</td>
+      <td>0.389943</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.532970</td>
+      <td>0.801131</td>
+      <td>0.133646</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hospital_subnet</th>
+      <th>clinical_subnet</th>
+      <th>pathway_subnet</th>
+      <th>Thrombolysis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>10000.000000</td>
+      <td>10000.000000</td>
+      <td>10000.000000</td>
+      <td>10000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.572378</td>
+      <td>0.538938</td>
+      <td>0.314181</td>
+      <td>0.295600</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.209576</td>
+      <td>0.306723</td>
+      <td>0.302895</td>
+      <td>0.456335</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.005932</td>
+      <td>0.002952</td>
+      <td>0.008583</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.434379</td>
+      <td>0.271398</td>
+      <td>0.067754</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.583605</td>
+      <td>0.605153</td>
+      <td>0.186311</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.714548</td>
+      <td>0.810452</td>
+      <td>0.473568</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.999999</td>
+      <td>0.989428</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_value_by_thrombolyse</span> <span class="o">=</span> <span class="n">cohort_subnet_outputs</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">mean_value_by_thrombolyse</span><span class="p">:</span>
+    
+    <span class="c1"># Multipy values by -1 if thrombolysed patients have lower value</span>
+    <span class="n">reverse_values</span> <span class="o">=</span> \
+        <span class="n">mean_value_by_thrombolyse</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mean_value_by_thrombolyse</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">reverse_values</span><span class="p">:</span>
+        <span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    
+    <span class="c1"># Scale data</span>
+    <span class="n">min_value</span> <span class="o">=</span> <span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">max_value</span> <span class="o">=</span> <span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">max_value</span> <span class="o">-</span> <span class="n">min_value</span>
+    <span class="n">scaled_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span> <span class="o">/</span> <span class="n">diff</span>
+    <span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled_values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hospital_subnet</th>
+      <th>clinical_subnet</th>
+      <th>pathway_subnet</th>
+    </tr>
+    <tr>
+      <th>Thrombolysis</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.413536</td>
+      <td>0.431797</td>
+      <td>0.615339</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.469817</td>
+      <td>0.809122</td>
+      <td>0.873854</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohort_subnet_outputs</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hospital_subnet</th>
+      <th>clinical_subnet</th>
+      <th>pathway_subnet</th>
+      <th>Thrombolysis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>10000.000000</td>
+      <td>10000.000000</td>
+      <td>10000.000000</td>
+      <td>10000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.430171</td>
+      <td>0.543334</td>
+      <td>0.691757</td>
+      <td>0.295600</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.210830</td>
+      <td>0.310928</td>
+      <td>0.305517</td>
+      <td>0.456335</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.287155</td>
+      <td>0.272127</td>
+      <td>0.530990</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.418880</td>
+      <td>0.610457</td>
+      <td>0.820734</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.568996</td>
+      <td>0.818571</td>
+      <td>0.940317</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="save-data-frames">
+<h2>Save Data Frames<a class="headerlink" href="#save-data-frames" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add original proability</span>
+<span class="n">cohort_subnet_outputs</span><span class="p">[</span><span class="s1">&#39;predicted_prob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">own_unit_prob</span>
+
+<span class="n">cohort_results_all_hospitals</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./predictions/cohort_results_all_hospitals.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">cohort_subnet_outputs</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./predictions/cohort_results_subnet_output.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">X_test_patients</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./predictions/cohort_clinical_input.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">X_test_pathway</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./predictions/cohort_pathway_input.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">X_test_hospitals</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./predictions/cohort_hospital_input.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./embedding_nets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="05_compare_benchmark_decisions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Compare local thrombolysis decisions with benchmark decisions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07_fit_xgboost_to_subnet.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Understanding influence of features of neural net subnet outputs</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Kerry Pearn & Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
