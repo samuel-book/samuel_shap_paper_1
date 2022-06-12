@@ -238,9 +238,16 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#note-on-shap-version-0-40">
-   Note on shap version 0.40:
+  <a class="reference internal nav-link" href="#aims">
+   Aims
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-on-shap-version-0-40">
+     Note on shap version 0.40:
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-packages">
@@ -277,13 +284,11 @@ const thebe_selector_output = ".output, .cell_output"
      Examine consistency across top Shap values (mean |Shap|)
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examine-consitency-of-feature-importances">
-   Examine consitency of feature importances
-  </a>
-  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examine-consitency-of-feature-importances">
+     Examine consitency of feature importances
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#compare-top-10-shap-and-importances">
      Compare top 10 Shap and importances
@@ -311,11 +316,16 @@ const thebe_selector_output = ".output, .cell_output"
      Show the relationship between feature value and Shap value for top 5 influential features.
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#showing-waterfall-plots-using-probability-values">
+     Showing waterfall plots using probability values
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#showing-waterfall-plots-using-probability-values">
-   Showing waterfall plots using probability values
+  <a class="reference internal nav-link" href="#observations">
+   Observations
   </a>
  </li>
 </ul>
@@ -339,9 +349,16 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#note-on-shap-version-0-40">
-   Note on shap version 0.40:
+  <a class="reference internal nav-link" href="#aims">
+   Aims
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-on-shap-version-0-40">
+     Note on shap version 0.40:
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-packages">
@@ -378,13 +395,11 @@ const thebe_selector_output = ".output, .cell_output"
      Examine consistency across top Shap values (mean |Shap|)
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examine-consitency-of-feature-importances">
-   Examine consitency of feature importances
-  </a>
-  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examine-consitency-of-feature-importances">
+     Examine consitency of feature importances
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#compare-top-10-shap-and-importances">
      Compare top 10 Shap and importances
@@ -412,11 +427,16 @@ const thebe_selector_output = ".output, .cell_output"
      Show the relationship between feature value and Shap value for top 5 influential features.
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#showing-waterfall-plots-using-probability-values">
+     Showing waterfall plots using probability values
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#showing-waterfall-plots-using-probability-values">
-   Showing waterfall plots using probability values
+  <a class="reference internal nav-link" href="#observations">
+   Observations
   </a>
  </li>
 </ul>
@@ -434,12 +454,28 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Shapley values may be used across model types, and so provide a model-agnostic measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows black box models like neural networks to be explained, at least in part.</p>
 <p>For more on Shapley values in general see Chris Molner’s excellent book chapter:</p>
 <p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shapley.html">https://christophm.github.io/interpretable-ml-book/shapley.html</a></p>
-<p>More information on the shap library, inclusding lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
-<p>Here we provide an example of using shap with random forests.</p>
+<p>More information on the shap library may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
+<div class="section" id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
+<p>The aim of this notebook are:</p>
+<ul class="simple">
+<li><p>Examine consistency of Shap values across 5 k-fold replications.</p></li>
+<li><p>Examine consistency of XGBoost <em>Importance</em> values across 5 k-fold replications.</p></li>
+<li><p>Compare Shap values and XGBoost <em>Importance</em> values.</p></li>
+<li><p>Further investigate the relationship between features and Shap values with:</p>
+<ul>
+<li><p>Beeswarm plots</p></li>
+<li><p>Waterfall plots</p></li>
+<li><p>Scatter plots</p></li>
+</ul>
+</li>
+<li><p>Provide an example of plotting Shap values as probabilities rather than log odds-ratios.</p></li>
+</ul>
 <div class="section" id="note-on-shap-version-0-40">
-<h2>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">¶</a></h2>
+<h3>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">¶</a></h3>
 <p>Installed using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code></p>
 <p>There is a bug in the waterfall plot where <code class="docutils literal notranslate"><span class="pre">show=False</span></code> (required to save plot) fails. To correct this find the <code class="docutils literal notranslate"><span class="pre">_waterfall.py</span></code> file in the shap library (e.g. in <code class="docutils literal notranslate"><span class="pre">anaconda/envs/samuel2/lib/python3.8/site-packages/shap/plots</span></code>, and search/replace all <code class="docutils literal notranslate"><span class="pre">pl.</span></code> to <code class="docutils literal notranslate"><span class="pre">.plt</span></code>, and replace initial import of <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">pl</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>.</p>
+</div>
 </div>
 <div class="section" id="load-packages">
 <h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">¶</a></h2>
@@ -712,13 +748,12 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_15_0.png" src="../_images/02_xgb_combined_shap_15_0.png" />
-</div>
+<img alt="../_images/02_xgb_combined_shap_16_0.png" src="../_images/02_xgb_combined_shap_16_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="examine-consitency-of-feature-importances">
-<h2>Examine consitency of feature importances<a class="headerlink" href="#examine-consitency-of-feature-importances" title="Permalink to this headline">¶</a></h2>
+<h3>Examine consitency of feature importances<a class="headerlink" href="#examine-consitency-of-feature-importances" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build df for k fold values</span>
@@ -762,7 +797,8 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_19_0.png" src="../_images/02_xgb_combined_shap_19_0.png" />
+<img alt="../_images/02_xgb_combined_shap_20_0.png" src="../_images/02_xgb_combined_shap_20_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="compare-top-10-shap-and-importances">
@@ -962,7 +998,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_23_0.png" src="../_images/02_xgb_combined_shap_23_0.png" />
+<img alt="../_images/02_xgb_combined_shap_24_0.png" src="../_images/02_xgb_combined_shap_24_0.png" />
 </div>
 </div>
 </div>
@@ -1006,7 +1042,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_27_0.png" src="../_images/02_xgb_combined_shap_27_0.png" />
+<img alt="../_images/02_xgb_combined_shap_28_0.png" src="../_images/02_xgb_combined_shap_28_0.png" />
 </div>
 </div>
 </div>
@@ -1036,7 +1072,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_31_0.png" src="../_images/02_xgb_combined_shap_31_0.png" />
+<img alt="../_images/02_xgb_combined_shap_32_0.png" src="../_images/02_xgb_combined_shap_32_0.png" />
 </div>
 </div>
 <p>An example with high probability of receiving thrombolysis.</p>
@@ -1051,7 +1087,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_33_0.png" src="../_images/02_xgb_combined_shap_33_0.png" />
+<img alt="../_images/02_xgb_combined_shap_34_0.png" src="../_images/02_xgb_combined_shap_34_0.png" />
 </div>
 </div>
 </div>
@@ -1067,11 +1103,11 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_35_0.png" src="../_images/02_xgb_combined_shap_35_0.png" />
-<img alt="../_images/02_xgb_combined_shap_35_1.png" src="../_images/02_xgb_combined_shap_35_1.png" />
-<img alt="../_images/02_xgb_combined_shap_35_2.png" src="../_images/02_xgb_combined_shap_35_2.png" />
-<img alt="../_images/02_xgb_combined_shap_35_3.png" src="../_images/02_xgb_combined_shap_35_3.png" />
-<img alt="../_images/02_xgb_combined_shap_35_4.png" src="../_images/02_xgb_combined_shap_35_4.png" />
+<img alt="../_images/02_xgb_combined_shap_36_0.png" src="../_images/02_xgb_combined_shap_36_0.png" />
+<img alt="../_images/02_xgb_combined_shap_36_1.png" src="../_images/02_xgb_combined_shap_36_1.png" />
+<img alt="../_images/02_xgb_combined_shap_36_2.png" src="../_images/02_xgb_combined_shap_36_2.png" />
+<img alt="../_images/02_xgb_combined_shap_36_3.png" src="../_images/02_xgb_combined_shap_36_3.png" />
+<img alt="../_images/02_xgb_combined_shap_36_4.png" src="../_images/02_xgb_combined_shap_36_4.png" />
 </div>
 </div>
 <p>Examine <code class="docutils literal notranslate"><span class="pre">S2BrainImagingTime_min</span></code> in range 0-400 minutes.</p>
@@ -1089,13 +1125,12 @@ Accuracy k-fold 5: 0.853
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 400.0)
 </pre></div>
 </div>
-<img alt="../_images/02_xgb_combined_shap_37_1.png" src="../_images/02_xgb_combined_shap_37_1.png" />
-</div>
+<img alt="../_images/02_xgb_combined_shap_38_1.png" src="../_images/02_xgb_combined_shap_38_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="showing-waterfall-plots-using-probability-values">
-<h2>Showing waterfall plots using probability values<a class="headerlink" href="#showing-waterfall-plots-using-probability-values" title="Permalink to this headline">¶</a></h2>
+<h3>Showing waterfall plots using probability values<a class="headerlink" href="#showing-waterfall-plots-using-probability-values" title="Permalink to this headline">¶</a></h3>
 <p>Though Shap values for XGBoost most accurately describe the effect on log odds ratio of classification, it may be easier for people to understand influence of features using probabilities. Here we plot waterfall plots using probabilities.</p>
 <p>A disadvantage of this method is that it distorts the influence of features someone - those features pushing the probability down from a low level to an even lower level get ‘squashed’ in apparent importance. This distortion is avoided when plotting log odds ratio, but at the cost of using an output that is poorly understandable by many.</p>
 <div class="cell docutils container">
@@ -1138,7 +1173,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_42_0.png" src="../_images/02_xgb_combined_shap_42_0.png" />
+<img alt="../_images/02_xgb_combined_shap_43_0.png" src="../_images/02_xgb_combined_shap_43_0.png" />
 </div>
 </div>
 <p>An example with high probability of receiving thrombolysis.</p>
@@ -1153,9 +1188,34 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_shap_44_0.png" src="../_images/02_xgb_combined_shap_44_0.png" />
+<img alt="../_images/02_xgb_combined_shap_45_0.png" src="../_images/02_xgb_combined_shap_45_0.png" />
 </div>
 </div>
+</div>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>There was good consiency of Shap values and importances across 5 k-fold replications.</p></li>
+<li><p>There was a reasonable correlation between Shap and imortance values, but also some differences in the rank order of importance.
+The five most influential features as judged by Shap were:</p>
+<ul>
+<li><p>Stroke type</p></li>
+<li><p>Arrival-to-scan time</p></li>
+<li><p>Stroke severity (NIHSS)</p></li>
+<li><p>Stroke onset time type (precise vs. estimated)</p></li>
+<li><p>Disability level (Rankin) before stroke
+The five most influential features as judged by importance were:</p></li>
+<li><p>Stroke type</p></li>
+<li><p>Use of AF Anticoagulant</p></li>
+<li><p>Stroke onset time type (precise vs. estimated)</p></li>
+<li><p>Stroke during sleep</p></li>
+<li><p>Stroke severity (NIHSS)</p></li>
+</ul>
+</li>
+<li><p>Beeswarm, waterfall, and scatter plots all help elucidate the relationship between feature values and Shap value.</p></li>
+<li><p>Plotting SHap values as probabilities are more understandable than plotting as log odds-ratios, but can distort the relative importance of features overall.</p></li>
+</ul>
 </div>
 </div>
 
