@@ -10,6 +10,7 @@ parts:
   - file: xgb/05_predict_differences_between_local_and_benchmark
 - caption: Embedding neural nets
   chapters:
+  - file: embedding_nets/outline
   - file: embedding_nets/01_1d_modular_fit_k_fold
   - file: embedding_nets/02_1d_modular_analyse
   - file: embedding_nets/03_generate_1d_net_for_10k
