@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Investigating the output of neural net embedding subnets" href="06_collate_subnet_outputs.html" />
+    <link rel="prev" title="Collate embedding subnet outputs" href="06_collate_subnet_outputs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -131,18 +131,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01_1d_modular_fit_k_fold.html">
-   Modular TensorFlow model with 1D embedding - Train and save models
+   Train and save k-fold models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_1d_modular_analyse.html">
-   Modular TensorFlow model with 1D embedding - analyse
+   Assess accuracy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_generate_1d_net_for_10k.html">
-   Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset
+   Train and save network for 10K patient subset
   </a>
  </li>
  <li class="toctree-l1">
@@ -152,12 +157,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_compare_benchmark_decisions.html">
-   Compare local thrombolysis decisions with benchmark decisions
+   Compare local thrombolysis decisions with
+   <em>
+    benchmark
+   </em>
+   decisions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_collate_subnet_outputs.html">
-   Investigating the output of neural net embedding subnets
+   Collate embedding subnet outputs
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -247,8 +256,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-xg-boost-based-on-subnet-outputs">
-   Fit XG Boost based on subnet outputs
+  <a class="reference internal nav-link" href="#fit-xgboost-based-on-subnet-outputs">
+   Fit XGBoost based on subnet outputs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -325,6 +334,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
  </li>
 </ul>
 
@@ -357,8 +371,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-xg-boost-based-on-subnet-outputs">
-   Fit XG Boost based on subnet outputs
+  <a class="reference internal nav-link" href="#fit-xgboost-based-on-subnet-outputs">
+   Fit XGBoost based on subnet outputs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -436,6 +450,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -448,6 +467,12 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="understanding-influence-of-features-of-neural-net-subnet-outputs">
 <h1>Understanding influence of features of neural net subnet outputs<a class="headerlink" href="#understanding-influence-of-features-of-neural-net-subnet-outputs" title="Permalink to this headline">¶</a></h1>
 <p>Here we fit an XGBoost model to model how features infleucne neural net subnet output, and use Shap to understand those influences.</p>
+<p>Aims:</p>
+<ul class="simple">
+<li><p>Fit an XGBoost model to predict thrombolysis use given three embedding subnet outputs. Assess accuracy and ROC AUC.</p></li>
+<li><p>Get model importances and Shap values for this simple XGBoost model. Show relationships between Shap values and model output.</p></li>
+<li><p>Fit XGBoost regressors to predict clinical and pathway subnet output, get Shap values for the regressor, and show relationships between Shap values and model output.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -625,8 +650,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="fit-xg-boost-based-on-subnet-outputs">
-<h2>Fit XG Boost based on subnet outputs<a class="headerlink" href="#fit-xg-boost-based-on-subnet-outputs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fit-xgboost-based-on-subnet-outputs">
+<h2>Fit XGBoost based on subnet outputs<a class="headerlink" href="#fit-xgboost-based-on-subnet-outputs" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define model</span>
@@ -2014,6 +2039,47 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>An XGBoost model based just on the three embedding subnet outputs from the 1D embedding networks predicts use of thrombolysis with 82.3% accuracy, annd with an ROC AUC of 0.895.</p></li>
+<li><p>Both XGBoost <em>importance</em> and Shap values had the following order of influence of embedding subnet output: Clinical &gt; Pathway &gt; Hospital.</p></li>
+<li><p>An XGBoost regressor predicts clinical subnet output with R-Squared of 0.994.</p></li>
+<li><p>The five most influential clincal features, assesed by model <em>importance</em>, were:</p>
+<ul>
+<li><p>Stroke type</p></li>
+<li><p>AF Anticoagulant</p></li>
+<li><p>Stroke severity (NIHSS)</p></li>
+<li><p>Disability (Rankin) before stroke</p></li>
+<li><p>Previous TIA</p></li>
+</ul>
+</li>
+<li><p>The five most influential clincal features, assesed by Shap values, were:</p>
+<ul>
+<li><p>Stroke type</p></li>
+<li><p>Stroke severity (NIHSS)</p></li>
+<li><p>Disability (Rankin) before stroke</p></li>
+<li><p>AF Anticoagulant</p></li>
+<li><p>NIHSS ‘best language’ score</p></li>
+</ul>
+</li>
+<li><p>An XGBoost regressor predicts clinical subnet output with R-Squared of 0.996.</p></li>
+<li><p>The three most influential pathway features, assesed by model <em>importance</em>, were:</p>
+<ul>
+<li><p>Onset time type (precise vs. estimated)</p></li>
+<li><p>Onset during sleep</p></li>
+<li><p>Time from arrival to scan</p></li>
+</ul>
+</li>
+<li><p>The three most influential pathway features, assesed by model <em>importance</em>, were:</p>
+<ul>
+<li><p>Time from arrival to scan</p></li>
+<li><p>Onset time type (precise vs. estimated)</p></li>
+<li><p>Time from onset to arrival</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -2045,7 +2111,7 @@ const thebe_selector_output = ".output, .cell_output"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Investigating the output of neural net embedding subnets</p>
+            <p class="prev-next-title">Collate embedding subnet outputs</p>
         </div>
     </a>
 </div>

@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Compare local thrombolysis decisions with benchmark decisions" href="05_compare_benchmark_decisions.html" />
-    <link rel="prev" title="Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset" href="03_generate_1d_net_for_10k.html" />
+    <link rel="prev" title="Train and save network for 10K patient subset" href="03_generate_1d_net_for_10k.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -132,18 +132,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01_1d_modular_fit_k_fold.html">
-   Modular TensorFlow model with 1D embedding - Train and save models
+   Train and save k-fold models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_1d_modular_analyse.html">
-   Modular TensorFlow model with 1D embedding - analyse
+   Assess accuracy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_generate_1d_net_for_10k.html">
-   Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset
+   Train and save network for 10K patient subset
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -153,12 +158,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_compare_benchmark_decisions.html">
-   Compare local thrombolysis decisions with benchmark decisions
+   Compare local thrombolysis decisions with
+   <em>
+    benchmark
+   </em>
+   decisions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_collate_subnet_outputs.html">
-   Investigating the output of neural net embedding subnets
+   Collate embedding subnet outputs
   </a>
  </li>
  <li class="toctree-l1">
@@ -240,16 +249,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-network-structure">
-   Neural Network structure
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-of-model">
-   Fitting of model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -369,16 +368,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-network-structure">
-   Neural Network structure
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-of-model">
-   Fitting of model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-libraries">
    Load libraries
   </a>
@@ -483,26 +472,11 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="aims">
 <h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>To assess predicted thrombolysis in 1 10K corhort of patients if that same cohort attended each of 132 hospitals.</p></li>
-<li><p>To investigate the output of the hospital and clinical subnets of the embedding neural network.</p></li>
-<li><p>To examine the link between hospital subnet output and use of thrombolysis in hospitals - both the actual thrombolysis use, and the predicted thrombolysis use of a 10k set of patients passed through all hospital models.</p></li>
-<li><p>To examine the link between the patient clinical feature subnet output and the use of thrombolysis, and the link between patient features and the clinical feature subnet output</p></li>
+<li><p>To assess predicted thrombolysis in a 10K cohort of patients if that same cohort attended each of 132 hospitals.</p></li>
+<li><p>To investigate the output of the hospital and clinical embedding subnets of the embedding neural network.</p></li>
+<li><p>To examine the link between hospital embedding subnet output and use of thrombolysis in hospitals - both the actual thrombolysis use, and the predicted thrombolysis use of a 10k set of patients passed through all hospital models.</p></li>
+<li><p>To examine the link between the patient clinical feature embedding subnet output and the use of thrombolysis, and the link between patient features and the clinical feature embedding subnet output.</p></li>
 </ul>
-</div>
-<div class="section" id="neural-network-structure">
-<h2>Neural Network structure<a class="headerlink" href="#neural-network-structure" title="Permalink to this headline">¶</a></h2>
-<p>The model contains three subnets that take portions of the data. The output of these subnets is an n-dimensional vector. In this case the output is a 1D vector, that is each subnet is reduced to a single value output. The subnets created are for:</p>
-<ol class="simple">
-<li><p><em>Patient clinical data</em>: Age, gender, ethnicity, disability before stroke, stroke scale data. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
-<li><p><em>Pathway process data</em>: Times of arrival and scan, time of day, day of week. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
-<li><p><em>Hospital ID</em> (one-hot encoded): Connect input directly to single neuron with sigmoid activation.</p></li>
-</ol>
-<p>The outputs of the three subnet outputs are then passed to a single neuron with sigmoid activation for final output.</p>
-<p><img alt="" src="../_images/embedding_1d_with_subnet_output.png" /></p>
-</div>
-<div class="section" id="fitting-of-model">
-<h2>Fitting of model<a class="headerlink" href="#fitting-of-model" title="Permalink to this headline">¶</a></h2>
-<p>The model has been pre-trained (see the notebook <em>Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset</em>)</p>
 </div>
 <div class="section" id="load-libraries">
 <h2>Load libraries<a class="headerlink" href="#load-libraries" title="Permalink to this headline">¶</a></h2>
@@ -1309,13 +1283,13 @@ Name: patient_subnet_output, dtype: float32
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset</p>
+            <p class="prev-next-title">Train and save network for 10K patient subset</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="05_compare_benchmark_decisions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Compare local thrombolysis decisions with benchmark decisions</p>
+        <p class="prev-next-title">Compare local thrombolysis decisions with <em>benchmark</em> decisions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modular TensorFlow model with 1D embedding - analyse &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>Assess accuracy &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset" href="03_generate_1d_net_for_10k.html" />
-    <link rel="prev" title="Modular TensorFlow model with 1D embedding - Train and save models" href="01_1d_modular_fit_k_fold.html" />
+    <link rel="next" title="Train and save network for 10K patient subset" href="03_generate_1d_net_for_10k.html" />
+    <link rel="prev" title="Train and save k-fold models" href="01_1d_modular_fit_k_fold.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -132,18 +132,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01_1d_modular_fit_k_fold.html">
-   Modular TensorFlow model with 1D embedding - Train and save models
+   Train and save k-fold models
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Modular TensorFlow model with 1D embedding - analyse
+   Assess accuracy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_generate_1d_net_for_10k.html">
-   Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset
+   Train and save network for 10K patient subset
   </a>
  </li>
  <li class="toctree-l1">
@@ -153,12 +158,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_compare_benchmark_decisions.html">
-   Compare local thrombolysis decisions with benchmark decisions
+   Compare local thrombolysis decisions with
+   <em>
+    benchmark
+   </em>
+   decisions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_collate_subnet_outputs.html">
-   Investigating the output of neural net embedding subnets
+   Collate embedding subnet outputs
   </a>
  </li>
  <li class="toctree-l1">
@@ -237,79 +246,72 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Modular TensorFlow model with 1D embedding - analyse
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-libraries">
-     Import libraries
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-data">
-     Import data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-to-scale-data">
-     Define function to scale data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-for-accuracy">
-     Define function for accuracy
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-for-line-intersect">
-     Define function for line intersect
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#use-trained-models-to-predict-outcome-of-test-data-sets">
-     Use trained models to predict outcome of test data sets
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#receiver-operator-characteristic-roc-curve-and-sensitivity-specificity-curves">
-     Receiver Operator Characteristic (ROC) Curve and Sensitivity-Specificity Curves
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#identify-cross-over-of-sensitivity-and-specificity">
-       Identify cross-over of sensitivity and specificity
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#collate-and-save-results">
-     Collate and save results
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">
-     Compare predicted and actual thrombolysis rates
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
-     Calibration and assessment of accuracy when model has high confidence
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-data">
+   Import data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-scale-data">
+   Define function to scale data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-for-accuracy">
+   Define function for accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-for-line-intersect">
+   Define function for line intersect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-trained-models-to-predict-outcome-of-test-data-sets">
+   Use trained models to predict outcome of test data sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#receiver-operator-characteristic-roc-curve-and-sensitivity-specificity-curves">
+   Receiver Operator Characteristic (ROC) Curve and Sensitivity-Specificity Curves
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#identify-cross-over-of-sensitivity-and-specificity">
+     Identify cross-over of sensitivity and specificity
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collate-and-save-results">
+   Collate and save results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">
+   Compare predicted and actual thrombolysis rates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
+   Calibration and assessment of accuracy when model has high confidence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
  </li>
 </ul>
 
@@ -321,7 +323,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Modular TensorFlow model with 1D embedding - analyse</h1>
+                <h1>Assess accuracy</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -331,79 +333,72 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Modular TensorFlow model with 1D embedding - analyse
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-libraries">
-     Import libraries
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-data">
-     Import data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-to-scale-data">
-     Define function to scale data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-for-accuracy">
-     Define function for accuracy
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-for-line-intersect">
-     Define function for line intersect
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#use-trained-models-to-predict-outcome-of-test-data-sets">
-     Use trained models to predict outcome of test data sets
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#receiver-operator-characteristic-roc-curve-and-sensitivity-specificity-curves">
-     Receiver Operator Characteristic (ROC) Curve and Sensitivity-Specificity Curves
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#identify-cross-over-of-sensitivity-and-specificity">
-       Identify cross-over of sensitivity and specificity
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#collate-and-save-results">
-     Collate and save results
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">
-     Compare predicted and actual thrombolysis rates
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
-     Calibration and assessment of accuracy when model has high confidence
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-data">
+   Import data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-scale-data">
+   Define function to scale data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-for-accuracy">
+   Define function for accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-for-line-intersect">
+   Define function for line intersect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-trained-models-to-predict-outcome-of-test-data-sets">
+   Use trained models to predict outcome of test data sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#receiver-operator-characteristic-roc-curve-and-sensitivity-specificity-curves">
+   Receiver Operator Characteristic (ROC) Curve and Sensitivity-Specificity Curves
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#identify-cross-over-of-sensitivity-and-specificity">
+     Identify cross-over of sensitivity and specificity
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collate-and-save-results">
+   Collate and save results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">
+   Compare predicted and actual thrombolysis rates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
+   Calibration and assessment of accuracy when model has high confidence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
  </li>
 </ul>
 
@@ -414,24 +409,20 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="modular-tensorflow-model-with-1d-embedding-analyse">
-<h1>Modular TensorFlow model with 1D embedding - analyse<a class="headerlink" href="#modular-tensorflow-model-with-1d-embedding-analyse" title="Permalink to this headline">¶</a></h1>
-<p><em>Embedding</em> converts a categorical variable into a projection onto n-dimensional space [1], and has been shown to be an effective way to train neural network when using categorical data, while also allowing a measure of similarity/distance between different values of the categorical data, Here we use embedding for hospital ID. We also convert patient data and pathway data into an embedded vector (this may also be known as <em>encoding</em> the data in a vector with fewer dimensions than the original data set for those groups of features).</p>
-<p>[1] Guo C, &amp; Berkhahn F. (2016) Entity Embeddings of Categorical Variables. arXiv:160406737 [cs] <a class="reference external" href="http://arxiv.org/abs/1604.06737">http://arxiv.org/abs/1604.06737</a></p>
-<p>Pre-trained models from 002b_1d_modular_fit.ipynb</p>
-<p>Model are fitted to previously split training and test data sets.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="assess-accuracy">
+<h1>Assess accuracy<a class="headerlink" href="#assess-accuracy" title="Permalink to this headline">¶</a></h1>
+<p>This notebook assesses accuracy of k-fold 1D embedding networks.</p>
+<div class="section" id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).</p></li>
+<li><p>Plot Receiver Operator Characteristic Curve and measure AUC.</p></li>
+<li><p>Identify cross-over point of sensitivity and specificity.</p></li>
+<li><p>Save individual patient predictions.</p></li>
+<li><p>Compare predicted and observed thrombolysis use at each hospital.</p></li>
+<li><p>Check model calibration.</p></li>
+</ul>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="aims">
-<h1>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h1>
-<p>Test performance of model using subnets for:</p>
-<ol class="simple">
-<li><p><em>Patient clinical data</em>: Age, gender, ethnicity, disability before stroke, stroke scale data. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
-<li><p><em>Pathway process data</em>: Times of arrival and scan, time of day, day of week. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
-<li><p><em>Hospital ID</em> (one-hot encoded): Connect input directly to single neuron with sigmoid activation.</p></li>
-</ol>
-<p>The three subnet outputs are then past to a single neuron with sigmoid activation for final output.</p>
-<p>Note: In this experiment the output of each subnet is a vector with a single value (a 1D output), but the model is structured to allow for more neurons(dimensions) for each subnet, e.g. to allow for encoding of hospitals that allow more complex interactions with patients (which may also have &gt;1 dimension output).</p>
-<p><img alt="" src="../_images/embedding_1d_with_subnet_output.png" /></p>
 <div class="section" id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -1550,6 +1541,7 @@ Accuracy: 0.904
 <li><p>Using nominal threshold (50% probability), specificity (89%) is greater than sensitivity (76%)</p></li>
 <li><p>The model can achieve 84.5% sensitivity and specificity simultaneously</p></li>
 <li><p>ROC AUC = 0.921</p></li>
+<li><p>The model is well calibrated</p></li>
 </ul>
 </div>
 </div>
@@ -1583,13 +1575,13 @@ Accuracy: 0.904
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Modular TensorFlow model with 1D embedding - Train and save models</p>
+            <p class="prev-next-title">Train and save k-fold models</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03_generate_1d_net_for_10k.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset</p>
+        <p class="prev-next-title">Train and save network for 10K patient subset</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

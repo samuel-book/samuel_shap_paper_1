@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modular TensorFlow model with 1D embedding - Train and save models &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>Train and save k-fold models &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Modular TensorFlow model with 1D embedding - analyse" href="02_1d_modular_analyse.html" />
-    <link rel="prev" title="Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital" href="../xgb/05_predict_differences_between_local_and_benchmark.html" />
+    <link rel="next" title="Assess accuracy" href="02_1d_modular_analyse.html" />
+    <link rel="prev" title="Outline" href="outline.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -131,19 +131,24 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Modular TensorFlow model with 1D embedding - Train and save models
+   Train and save k-fold models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_1d_modular_analyse.html">
-   Modular TensorFlow model with 1D embedding - analyse
+   Assess accuracy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_generate_1d_net_for_10k.html">
-   Modular TensorFlow model with 1D embedding - Train and save model for 10k patient subset
+   Train and save network for 10K patient subset
   </a>
  </li>
  <li class="toctree-l1">
@@ -153,12 +158,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_compare_benchmark_decisions.html">
-   Compare local thrombolysis decisions with benchmark decisions
+   Compare local thrombolysis decisions with
+   <em>
+    benchmark
+   </em>
+   decisions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_collate_subnet_outputs.html">
-   Investigating the output of neural net embedding subnets
+   Collate embedding subnet outputs
   </a>
  </li>
  <li class="toctree-l1">
@@ -243,11 +252,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-methodology">
-   Basic methodology
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-modules">
    Load modules
   </a>
@@ -267,6 +271,11 @@ const thebe_selector_output = ".output, .cell_output"
    Fit models
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -277,7 +286,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Modular TensorFlow model with 1D embedding - Train and save models</h1>
+                <h1>Train and save k-fold models</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -293,11 +302,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-methodology">
-   Basic methodology
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-modules">
    Load modules
   </a>
@@ -317,6 +321,11 @@ const thebe_selector_output = ".output, .cell_output"
    Fit models
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -326,29 +335,13 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="modular-tensorflow-model-with-1d-embedding-train-and-save-models">
-<h1>Modular TensorFlow model with 1D embedding - Train and save models<a class="headerlink" href="#modular-tensorflow-model-with-1d-embedding-train-and-save-models" title="Permalink to this headline">¶</a></h1>
-<p><em>Embedding</em> converts a categorical variable into a projection onto n-dimensional space [1], and has been shown to be an effective way to train neural network when using categorical data, while also allowing a measure of similarity/distance between different values of the categorical data, Here we use embedding for hospital ID. We also convert patient data and pathway data into an embedded vector (this may also be known as <em>encoding</em> the data in a vector with fewer dimensions than the original data set for those groups of features).</p>
-<p>[1] Guo C, &amp; Berkhahn F. (2016) Entity Embeddings of Categorical Variables. arXiv:160406737 [cs] <a class="reference external" href="http://arxiv.org/abs/1604.06737">http://arxiv.org/abs/1604.06737</a></p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="train-and-save-k-fold-models">
+<h1>Train and save k-fold models<a class="headerlink" href="#train-and-save-k-fold-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="aims">
 <h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>To train and save fully connected models for the 5-fold training/test data sets</p></li>
+<li><p>To train and save 1D embedding neural networks based on stratified k-fold train/test data split (data has previously been split and saved).</p></li>
 </ul>
-</div>
-<div class="section" id="basic-methodology">
-<h2>Basic methodology<a class="headerlink" href="#basic-methodology" title="Permalink to this headline">¶</a></h2>
-<p>Models are fitted to previously split training and test data sets.</p>
-<p>The model contains three subnets that take portions of the data. The output of these subnets is an n-dimensional vector. In this case the output is a 1D vector, that is each subnet is reduced to a single value output. The subnets created are for:</p>
-<ol class="simple">
-<li><p><em>Patient clinical data</em>: Age, gender, ethnicity, disability before stroke, stroke scale data. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
-<li><p><em>Pathway process data</em>: Times of arrival and scan, time of day, day of week. Pass through one hidden layer (with 2x neurons as input features) and then to single neuron with sigmoid activation.</p></li>
-<li><p><em>Hospital ID</em> (one-hot encoded): Connect input directly to single neuron with sigmoid activation.</p></li>
-</ol>
-<p>The outputs of the three subnet outputs are then passed to a single neuron with sigmoid activation for final output.</p>
-<p><img alt="" src="../_images/embedding_1d_with_subnet_output.png" /></p>
-<p>Models are fitted with keras ‘early-stopping’. This monitors accuracy of the test set and stops when there has been no improvement in <em>n</em> epochs (this is the ‘patience’, and is set to 100 epochs here).</p>
-<p>NOTE: In the training charts below you will see that test accuracy is higher than training accuracy. This may seem surprising; it is due to keras returning the accuracy of the training set during training when dropout is used (and no dropout is used for the test set).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models/1d_modular/&#39;</span>
@@ -699,6 +692,12 @@ coreClock: 1.48GHz coreCount: 14 deviceMemorySize: 7.92GiB deviceMemoryBandwidth
 </div>
 </div>
 </div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In the training charts above you will see that test accuracy is higher than training accuracy. This may seem surprising; it is due to keras returning the accuracy of the training set during training when dropout is used (and no dropout is used for the test set).</p></li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -726,17 +725,17 @@ coreClock: 1.48GHz coreCount: 14 deviceMemorySize: 7.92GiB deviceMemoryBandwidth
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../xgb/05_predict_differences_between_local_and_benchmark.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="outline.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital</p>
+            <p class="prev-next-title">Outline</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="02_1d_modular_analyse.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modular TensorFlow model with 1D embedding - analyse</p>
+        <p class="prev-next-title">Assess accuracy</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
