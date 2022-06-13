@@ -22,7 +22,7 @@ The outputs of the three subnet outputs are then passed to a single neuron with 
 ![](./images/embedding_1d_with_subnet_output.png)
 
 :::{figure-md} subnet_diagram
-<img src="./images/xgb_waterfall_low_probability.jpg" width="800">
+<img src="./images/embedding_1d_with_subnet_output.png" width="800">
 
 An overview of the embedding neural network.
 :::
