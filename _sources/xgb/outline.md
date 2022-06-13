@@ -24,7 +24,7 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * Compare predicted and observed thrombolysis use at each hospital.
     * Check model calibration.
     
-    
+
 * *Explaining XGBoost model predictions with Shapley values*:
     * Fit XGBoost model to k-fold train/test splits.
     * Get Shap values for each k-fold split.
@@ -37,7 +37,6 @@ More information on the `shap` library, used to estimate Shapley values, may be 
         * Scatter plots
     * Show example of Shap waterfall plot as *probability* rather than *log odds ratio*.
   
-  
 * *A comparison of 10K cohort thrombolysis rates across hospitals*:
     * Train XGBoost model on all data except for a 10K set of patients
     * Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot coding).
@@ -48,7 +47,6 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * Check similarity between local decisions and benchmark decisions.
     * Estimate thrombolysis use at each hospital if benchmark decisions made.
     * Save comparison of local and benchmark decisions.
-    
     
 * *Predicting differences between local and benchmark decisions*:
     * This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit. 
