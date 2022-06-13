@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital" href="05_predict_differences_between_local_and_benchmark.html" />
-    <link rel="prev" title="A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model" href="03_compare_10k_cohort.html" />
+    <link rel="next" title="Predicting differences between local and benchmark decisions" href="05_predict_differences_between_local_and_benchmark.html" />
+    <link rel="prev" title="A comparison of 10K cohort thrombolysis rates across hospitals" href="03_compare_10k_cohort.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -100,8 +100,13 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01_xgb_combined_fit_accuracy.html">
-   Measuring accuracy of a XGBoost Classifier
+   Measuring accuracy of k-fold modelsr
   </a>
  </li>
  <li class="toctree-l1">
@@ -111,7 +116,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_compare_10k_cohort.html">
-   A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model
+   A comparison of 10K cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -121,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_predict_differences_between_local_and_benchmark.html">
-   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+   Predicting differences between local and benchmark decisions
   </a>
  </li>
 </ul>
@@ -143,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../embedding_nets/02_1d_modular_analyse.html">
-   Assess accuracy
+   Assess accuracy of k-fold embedding networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -281,6 +286,11 @@ const thebe_selector_output = ".output, .cell_output"
    Save comparisons of decisions
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -336,6 +346,11 @@ const thebe_selector_output = ".output, .cell_output"
    Save comparisons of decisions
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -348,6 +363,14 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="compare-local-thrombolysis-decisions-with-benchmark-decisions">
 <h1>Compare local thrombolysis decisions with benchmark decisions<a class="headerlink" href="#compare-local-thrombolysis-decisions-with-benchmark-decisions" title="Permalink to this headline">¶</a></h1>
 <p>Benchmark decisions are decisions made at the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.</p>
+<p>Aims:</p>
+<ul class="simple">
+<li><p>Predict thrombolysis use of 10K cohort of patients at all 132 hospitals.</p></li>
+<li><p>Get predicted thrombolysis decisions for all patients at the 30 benchmark hospitals.</p></li>
+<li><p>Check similarity between local decisions and benchmark decisions.</p></li>
+<li><p>Estimate thrombolysis use at each hospital if benchmark decisions made.</p></li>
+<li><p>Save comparison of local and benchmark decisions.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -1122,6 +1145,14 @@ Run 5, accuracy: 0.853
 </div>
 </div>
 </div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>84.2% decisions are identical between local and benchmark decisions.</p></li>
+<li><p>Thrombolysis use would be increased 15.8% if benchmark decisions were made at all hospitals.</p></li>
+<li><p>The ration of benchmark:local thrombolysis use was 0.7 to 2.1.</p></li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1153,13 +1184,13 @@ Run 5, accuracy: 0.853
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model</p>
+            <p class="prev-next-title">A comparison of 10K cohort thrombolysis rates across hospitals</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="05_predict_differences_between_local_and_benchmark.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital</p>
+        <p class="prev-next-title">Predicting differences between local and benchmark decisions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

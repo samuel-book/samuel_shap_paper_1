@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>A comparison of 10K cohort thrombolysis rates across hospitals &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -100,8 +100,13 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01_xgb_combined_fit_accuracy.html">
-   Measuring accuracy of a XGBoost Classifier
+   Measuring accuracy of k-fold modelsr
   </a>
  </li>
  <li class="toctree-l1">
@@ -111,7 +116,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model
+   A comparison of 10K cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1">
@@ -121,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_predict_differences_between_local_and_benchmark.html">
-   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+   Predicting differences between local and benchmark decisions
   </a>
  </li>
 </ul>
@@ -143,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../embedding_nets/02_1d_modular_analyse.html">
-   Assess accuracy
+   Assess accuracy of k-fold embedding networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -247,6 +252,11 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
    Import libraries
   </a>
@@ -287,6 +297,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
  </li>
 </ul>
 
@@ -298,7 +313,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model</h1>
+                <h1>A comparison of 10K cohort thrombolysis rates across hospitals</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -308,6 +323,11 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
    Import libraries
@@ -350,6 +370,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -359,10 +384,15 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="a-comparison-of-10k-corhort-thrombolysis-rates-across-hospitals-using-a-combined-xgboost-model">
-<h1>A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model<a class="headerlink" href="#a-comparison-of-10k-corhort-thrombolysis-rates-across-hospitals-using-a-combined-xgboost-model" title="Permalink to this headline">¶</a></h1>
-<p>A 10K cohort set of patients is set aside, and and XGBoost model trained on the remainder of patients (using one-hot encoding of hospital). Predictions are then made of which of the 10K patients each hospital would give thrombolysis to.</p>
-<p>The predicted thrombolysis use at each hospital (for this 10K patient) is saved; later this will be used to select the top hospitals with greatest propensity to use thrombolysis.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals">
+<h1>A comparison of 10K cohort thrombolysis rates across hospitals<a class="headerlink" href="#a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="aims">
+<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Train XGBoost model on all data except for a 10K set of patients</p></li>
+<li><p>Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot coding).</p></li>
+</ul>
+</div>
 <div class="section" id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -528,10 +558,10 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Show stats<a class="headerlink" href="#show-stats" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
-<span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
-<span class="n">minimum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
-<span class="n">maximum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predicted_thrombolysis</span><span class="p">[</span><span class="s1">&#39;10k_thrombolysis&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">])</span>
+<span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">])</span>
+<span class="n">minimum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">])</span>
+<span class="n">maximum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">])</span>
 
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;StDev: </span><span class="si">{</span><span class="n">stdev</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -543,11 +573,20 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.278
 StDev: 0.050
+Min: 0.136
+Max0.407
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The 10K cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing.</p></li>
+<li><p>The predicted thrombolysis use in the 10K cohort of patients ranged from 14% to 41%.</p></li>
+</ul>
 </div>
 </div>
 

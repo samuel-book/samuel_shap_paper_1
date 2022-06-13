@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>Predicting differences between local and benchmark decisions &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -100,8 +100,13 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01_xgb_combined_fit_accuracy.html">
-   Measuring accuracy of a XGBoost Classifier
+   Measuring accuracy of k-fold modelsr
   </a>
  </li>
  <li class="toctree-l1">
@@ -111,7 +116,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_compare_10k_cohort.html">
-   A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model
+   A comparison of 10K cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1">
@@ -121,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+   Predicting differences between local and benchmark decisions
   </a>
  </li>
 </ul>
@@ -143,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../embedding_nets/02_1d_modular_analyse.html">
-   Assess accuracy
+   Assess accuracy of k-fold embedding networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -359,7 +364,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital</h1>
+                <h1>Predicting differences between local and benchmark decisions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -481,9 +486,14 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="building-a-model-to-predict-patients-who-will-be-thrombolysed-at-a-unit-out-of-those-who-will-be-thrombolysed-by-the-majority-of-benchmark-hospital">
-<h1>Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital<a class="headerlink" href="#building-a-model-to-predict-patients-who-will-be-thrombolysed-at-a-unit-out-of-those-who-will-be-thrombolysed-by-the-majority-of-benchmark-hospital" title="Permalink to this headline">¶</a></h1>
-<p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit. We examine the importances of features in the model prediction.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="predicting-differences-between-local-and-benchmark-decisions">
+<h1>Predicting differences between local and benchmark decisions<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions" title="Permalink to this headline">¶</a></h1>
+<p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit.</p>
+<p>Aims:</p>
+<ul class="simple">
+<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be thrombolysed at a local unit.</p></li>
+<li></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>

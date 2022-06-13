@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Train and save k-fold models" href="01_1d_modular_fit_k_fold.html" />
-    <link rel="prev" title="Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital" href="../xgb/05_predict_differences_between_local_and_benchmark.html" />
+    <link rel="prev" title="Predicting differences between local and benchmark decisions" href="../xgb/05_predict_differences_between_local_and_benchmark.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -100,8 +100,13 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../xgb/outline.html">
+   Outline
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../xgb/01_xgb_combined_fit_accuracy.html">
-   Measuring accuracy of a XGBoost Classifier
+   Measuring accuracy of k-fold modelsr
   </a>
  </li>
  <li class="toctree-l1">
@@ -111,7 +116,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../xgb/03_compare_10k_cohort.html">
-   A comparison of 10K corhort thrombolysis rates across hospitals using a combined XGBoost model
+   A comparison of 10K cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1">
@@ -121,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../xgb/05_predict_differences_between_local_and_benchmark.html">
-   Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital
+   Predicting differences between local and benchmark decisions
   </a>
  </li>
 </ul>
@@ -143,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_1d_modular_analyse.html">
-   Assess accuracy
+   Assess accuracy of k-fold embedding networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -338,7 +343,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Train 5 neural networks based on stratified k-fold train/test data splits.</p></li>
 </ul>
 </li>
-<li><p><em>Assess accuracy</em> of k-fold networks*:</p>
+<li><p><em>Assess accuracy of k-fold networks</em>:</p>
 <ul>
 <li><p>Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).</p></li>
 <li><p>Plot Receiver Operator Characteristic Curve and measure AUC.</p></li>
@@ -415,7 +420,7 @@ const thebe_selector_output = ".output, .cell_output"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Building a model to predict patients who will be thrombolysed at a unit out of those who will be thrombolysed by the majority of benchmark hospital</p>
+            <p class="prev-next-title">Predicting differences between local and benchmark decisions</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="01_1d_modular_fit_k_fold.html" title="next page">

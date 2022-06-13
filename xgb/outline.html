@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>Outline &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,7 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Outline" href="../xgb/outline.html" />
+    <link rel="next" title="Measuring accuracy of k-fold modelsr" href="01_xgb_combined_fit_accuracy.html" />
+    <link rel="prev" title="Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis" href="../introduction/intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -86,8 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/intro.html">
    Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis
   </a>
  </li>
@@ -97,34 +98,34 @@ const thebe_selector_output = ".output, .cell_output"
   XG Boost
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb/outline.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Outline
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../xgb/01_xgb_combined_fit_accuracy.html">
+  <a class="reference internal" href="01_xgb_combined_fit_accuracy.html">
    Measuring accuracy of k-fold modelsr
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../xgb/02_xgb_combined_shap.html">
+  <a class="reference internal" href="02_xgb_combined_shap.html">
    Explaining XGBoost model predictions with Shapley values
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../xgb/03_compare_10k_cohort.html">
+  <a class="reference internal" href="03_compare_10k_cohort.html">
    A comparison of 10K cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../xgb/04_compare_benchmark_decisions.html">
+  <a class="reference internal" href="04_compare_benchmark_decisions.html">
    Compare local thrombolysis decisions with benchmark decisions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../xgb/05_predict_differences_between_local_and_benchmark.html">
+  <a class="reference internal" href="05_predict_differences_between_local_and_benchmark.html">
    Predicting differences between local and benchmark decisions
   </a>
  </li>
@@ -220,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/introduction/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/xgb/outline.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -251,28 +252,13 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
+  <a class="reference internal nav-link" href="#xgboost-models">
+   XGBoost models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims-of-this-study">
-   Aims of this study
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods">
-   Methods
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#key-findings">
-   Key findings
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusions">
-   Conclusions
+  <a class="reference internal nav-link" href="#notebooks-in-this-section">
+   Notebooks in this section
   </a>
  </li>
 </ul>
@@ -285,7 +271,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</h1>
+                <h1>Outline</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -296,28 +282,13 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
+  <a class="reference internal nav-link" href="#xgboost-models">
+   XGBoost models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims-of-this-study">
-   Aims of this study
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods">
-   Methods
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#key-findings">
-   Key findings
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusions">
-   Conclusions
+  <a class="reference internal nav-link" href="#notebooks-in-this-section">
+   Notebooks in this section
   </a>
  </li>
 </ul>
@@ -329,61 +300,76 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="applying-explainable-machine-learning-to-national-stroke-audit-data-to-explore-variation-in-decisions-to-use-thrombolysis">
-<h1>Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis<a class="headerlink" href="#applying-explainable-machine-learning-to-national-stroke-audit-data-to-explore-variation-in-decisions-to-use-thrombolysis" title="Permalink to this headline">¶</a></h1>
-<p>Kerry Pearn &amp; Michael Allen</p>
-<blockquote class="epigraph">
-<div><p>“Your decision to treat or not treat … That’s the difficult part. That’s the grey area where everyone does a different thing.”</p>
-<p class="attribution">—Stroke Consultant during interviews for SAMueL</p>
-</div></blockquote>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<p>Stroke is a common cause of adult disability. Expert opinion is that about one in five patients should receive clot-busting drugs to break up the blood clot that is causing their stroke, and this is the target set in the NHS long term plan. This clot-busting treatment is called thrombolysis. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment in different hospitals.</p>
-<p>In a previous project, <a class="reference external" href="https://samuel-book.github.io/samuel-1/introduction/intro.html">SAMueL-1</a>, we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital <a class="reference internal" href="#high-level-md"><span class="std std-numref">Figure 1</span></a>.</p>
-<div class="figure align-default" id="high-level-md">
-<a class="reference internal image-reference" href="../_images/ml_model_high_level.png"><img alt="../_images/ml_model_high_level.png" src="../_images/ml_model_high_level.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">A high level depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information. Machine learning models used are logistic regression, random forest, XGBoost, and neural networks.</span><a class="headerlink" href="#high-level-md" title="Permalink to this image">¶</a></p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="outline">
+<h1>Outline<a class="headerlink" href="#outline" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xgboost-models">
+<h2>XGBoost models<a class="headerlink" href="#xgboost-models" title="Permalink to this headline">¶</a></h2>
+<p>XGBoost are a decision tree-based method for prediction.</p>
+<p>We use <em>Shapley values</em> to provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
+<p>Shapley values may be used across model types, and so provide a model-agnostic measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows black box models like neural networks to be explained, at least in part.</p>
+<p>For more on Shapley values in general see Chris Molner’s excellent book chapter:</p>
+<p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shapley.html">https://christophm.github.io/interpretable-ml-book/shapley.html</a></p>
+<p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, used to estimate Shapley values, may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
 </div>
-</div>
-<div class="section" id="aims-of-this-study">
-<h2>Aims of this study<a class="headerlink" href="#aims-of-this-study" title="Permalink to this headline">¶</a></h2>
-<p>The aims of this study were 1) to apply <em>explainable machine learning</em> techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals, and 2) to model and explain what are the the features that are most important in hospitals making <em>different</em> decisions about the same patient.</p>
-</div>
-<div class="section" id="methods">
-<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
-<p>In this study we used with XGBoost or embedding neural networks to model decisions to give thrombolysis. Models were fitted to all hospital simultaneously, with hospital ID encoded as a <em>one-hot</em> vector. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
-</div>
-<div class="section" id="key-findings">
-<h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">¶</a></h2>
-<p>The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:</p>
-<ol class="simple">
-<li><p>Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).</p></li>
-<li><p>Time from arrival at hospital to time brain imaging was performed: Predicted probability of using thrombolysis reduced with increasing time to scan.</p></li>
-<li><p>Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
-<li><p>Stroke onset time type (precise vs. estimated): Predicted probability of using thrombolysis is increased with a precisely known  onset.</p></li>
-<li><p>Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
-</ol>
-<p>When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
-<ol class="simple">
-<li><p>Disability level (Rankin) before stroke: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
-<li><p>Stroke severity (NIHSS) on arrival: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.</p></li>
-<li><p>Stroke onset time type (precise vs. estimated): lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.</p></li>
-<li><p>Time from onset to arrival at hospital: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.</p></li>
-<li><p>Time from arrival at hospital to time brain imaging was performed: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.</p></li>
-</ol>
-<p>Shap plots may be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 2</span></a>).</p>
-<div class="figure align-default" id="waterfall-example">
-<a class="reference internal image-reference" href="../_images/xgb_waterfall_low_probability.jpg"><img alt="../_images/xgb_waterfall_low_probability.jpg" src="../_images/xgb_waterfall_low_probability.jpg" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="conclusions">
-<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
-<p><em>Explainable machine learning</em> techniques give significant insight into models prediction clinical decision-making. At a global level, Shap allows for an understanding of the relationship between feature values and the model prediction, and at an individual level Shap allows for an understanding of the most influential features in any single prediction.</p>
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
+<div class="section" id="notebooks-in-this-section">
+<h2>Notebooks in this section<a class="headerlink" href="#notebooks-in-this-section" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><em>Assess accuracy of k-fold models</em>:</p>
+<ul>
+<li><p>Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).</p></li>
+<li><p>Plot Receiver Operator Characteristic Curve and measure AUC.</p></li>
+<li><p>Identify cross-over point of sensitivity and specificity.</p></li>
+<li><p>Save individual patient predictions.</p></li>
+<li><p>Compare predicted and observed thrombolysis use at each hospital.</p></li>
+<li><p>Check model calibration.</p></li>
+</ul>
+</li>
+<li><p><em>Explaining XGBoost model predictions with Shapley values</em>:</p>
+<ul>
+<li><p>Fit XGBoost model to k-fold train/test splits.</p></li>
+<li><p>Get Shap values for each k-fold split.</p></li>
+<li><p>Examine consistency of Shap values across k-fold splits.</p></li>
+<li><p>Examine consistency of XGBoost Importance across k-fold splits.</p></li>
+<li><p>Compare Shap values and XGBoost Importance.</p></li>
+<li><p>Further analyse Shap values with:</p>
+<ul>
+<li><p>Beeswarm plots</p></li>
+<li><p>Waterfall plots</p></li>
+<li><p>Scatter plots</p></li>
+</ul>
+</li>
+<li><p>Show example of Shap waterfall plot as <em>probability</em> rather than <em>log odds ratio</em>.</p></li>
+</ul>
+</li>
+<li><p><em>A comparison of 10K cohort thrombolysis rates across hospitals</em>:</p>
+<ul>
+<li><p>Train XGBoost model on all data except for a 10K set of patients</p></li>
+<li><p>Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot coding).</p></li>
+</ul>
+</li>
+<li><p><em>Compare local thrombolysis decisions with benchmark decisions</em>:</p>
+<ul>
+<li><p>Benchmark decisions are decisions made my the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.</p></li>
+<li><p>Get predicted thrombolysis decisions for all patients at the 30 benchmark hospitals.</p></li>
+<li><p>Check similarity between local decisions and benchmark decisions.</p></li>
+<li><p>Estimate thrombolysis use at each hospital if benchmark decisions made.</p></li>
+<li><p>Save comparison of local and benchmark decisions.</p></li>
+</ul>
+</li>
+<li><p><em>Predicting differences between local and benchmark decisions</em>:</p>
+<ul>
+<li><p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit.</p></li>
+<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be thrombolysed at a local unit.</p></li>
+<li><p>Get Shap values for predictions.</p>
+<ul>
+<li><p>Check consistency of Shap values and XGBoost Importance across k-fold replications</p></li>
+<li><p>Compare Shap values and XGBoost Importance</p></li>
+<li><p>Anlyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -400,7 +386,7 @@ const thebe_selector_output = ".output, .cell_output"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./introduction"
+            path: "./xgb"
         },
         predefinedOutput: true
     }
@@ -411,11 +397,18 @@ const thebe_selector_output = ".output, .cell_output"
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="../xgb/outline.html" title="next page">
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../introduction/intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="01_xgb_combined_fit_accuracy.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Outline</p>
+        <p class="prev-next-title">Measuring accuracy of k-fold modelsr</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
