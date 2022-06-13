@@ -34,7 +34,7 @@ An overview of the embedding neural network.
 * *Train and save k-fold networks*:
     * Train 5 neural networks based on stratified k-fold train/test data splits.
 
-* *Assess accuracy* of k-fold networks*:
+* *Assess accuracy of k-fold networks*:
     * Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).
     * Plot Receiver Operator Characteristic Curve and measure AUC.
     * Identify cross-over point of sensitivity and specificity.

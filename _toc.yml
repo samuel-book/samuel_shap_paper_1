@@ -3,6 +3,7 @@ root: introduction/intro
 parts:
 - caption: XG Boost
   chapters:
+  - file: xgb/outline
   - file: xgb/01_xgb_combined_fit_accuracy
   - file: xgb/02_xgb_combined_shap
   - file: xgb/03_compare_10k_cohort
