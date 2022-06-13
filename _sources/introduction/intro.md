@@ -38,9 +38,9 @@ In this study we used with XGBoost or embedding neural networks to model decisio
 
 Or, imagine a pub quiz team with four people, who may be chosen from a pool of six people:
 
-    * There are 15 combinations of people (choose 4 from 6).
+* There are 15 combinations of people (choose 4 from 6).
 
-    * The Shapley value for any team member describes the average difference in score when a particular player is present or absent compared to the average of all combinations of players.
+* The Shapley value for any team member describes the average difference in score when a particular player is present or absent compared to the average of all combinations of players.
 
 The same principle may be applied in machine learning: How does any one feature, on average, contribute to the prediction after considering all possible combinations of features? 
 
