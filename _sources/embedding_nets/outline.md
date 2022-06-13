@@ -19,8 +19,6 @@ The model contains three subnets that take portions of the data. The output of t
 
 The outputs of the three subnet outputs are then passed to a single neuron with sigmoid activation for final output. The outputs of the subnets may also be accessed separately. A schematic of the embeddign neural network design is shown in {numref}`Figure {number} <subnet_diagram>`
 
-![](./images/embedding_1d_with_subnet_output.png)
-
 :::{figure-md} subnet_diagram
 <img src="./images/embedding_1d_with_subnet_output.png" width="800">
 
