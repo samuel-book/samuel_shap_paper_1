@@ -28,7 +28,7 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## Methods
 
-In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as a *'one-hot'* vector. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
+In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
 
 ### What are Shapley values?
 
@@ -48,41 +48,41 @@ The same principle may be applied in machine learning: How does any one feature 
 
 The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:
 
-1. Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).
-2. Time from arrival at hospital to time brain imaging was performed: Predicted probability of using thrombolysis reduced with increasing time to scan.
-3. Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
-4. Stroke onset time type (precise vs. estimated): Predicted probability of using thrombolysis is increased with a precisely known  onset.
-5. Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
+2. *Time from arrival at hospital to time brain imaging was performed*: Predicted probability of using thrombolysis reduced with increasing time to scan.
+3. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
+4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis is increased with a precisely known  onset.
+5. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+
+Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
+
+:::{figure-md} waterfall_example
+<img src="./images/xgb_waterfall_low.png" width="800">
+
+An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
+:::
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
 
 When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
 
-1. Disability level (Rankin) before stroke: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.
-2. Stroke severity (NIHSS) on arrival: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.
-3. Stroke onset time type (precise vs. estimated): lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
-4. Time from onset to arrival at hospital: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
-5. Time from arrival at hospital to time brain imaging was performed: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
+1. *Disability level (Rankin) before stroke*: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.
+2. *Stroke severity (NIHSS) on arrival*: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.
+3. *Stroke onset time type (precise vs. estimated)*: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
+4. *Time from onset to arrival at hospital*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
+5. *Time from arrival at hospital to time brain imaging was performed*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
 
-Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
-
-:::{figure-md} waterfall_example
-<img src="./images/xgb_waterfall_low.png" width="600">
-
-An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
-:::
-
-### Predicting thrombolysis use with embndding neural networks
+### Predicting thrombolysis use with embedding neural networks
 
 Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics > pathway/process characteristics > hospital ID.
 
 Within patient/clinical characteristics, the five most influential features were:
 
-1. Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).
-2. Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
-3. Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
-4. AF-Anticoagulant: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.
-5. Best language: Those patients who's stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.
+1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
+2. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
+3. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+4. *AF-Anticoagulant*: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.
+5. *Best language*: Those patients who's stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.
 
 
 ## Conclusions
