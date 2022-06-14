@@ -276,6 +276,27 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#key-findings">
    Key findings
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xgboost-model">
+     Predicting thrombolysis use with an XGBoost model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
+     Predicting
+     <em>
+      differences
+     </em>
+     in thrombolysis use between hospitals with an XGBoost model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-embndding-neural-networks">
+     Predicting thrombolysis use with embndding neural networks
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusions">
@@ -328,6 +349,27 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#key-findings">
    Key findings
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xgboost-model">
+     Predicting thrombolysis use with an XGBoost model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
+     Predicting
+     <em>
+      differences
+     </em>
+     in thrombolysis use between hospitals with an XGBoost model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-embndding-neural-networks">
+     Predicting thrombolysis use with embndding neural networks
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusions">
@@ -382,6 +424,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="key-findings">
 <h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="predicting-thrombolysis-use-with-an-xgboost-model">
+<h3>Predicting thrombolysis use with an XGBoost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
 <p>The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:</p>
 <ol class="simple">
 <li><p>Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).</p></li>
@@ -390,6 +434,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Stroke onset time type (precise vs. estimated): Predicted probability of using thrombolysis is increased with a precisely known  onset.</p></li>
 <li><p>Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
 </ol>
+</div>
+<div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
+<h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XGBoost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
 <p>When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
 <ol class="simple">
 <li><p>Disability level (Rankin) before stroke: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
@@ -403,6 +450,9 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference internal image-reference" href="../_images/xgb_waterfall_low_probability.jpg"><img alt="../_images/xgb_waterfall_low_probability.jpg" src="../_images/xgb_waterfall_low_probability.jpg" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
 </div>
+</div>
+<div class="section" id="predicting-thrombolysis-use-with-embndding-neural-networks">
+<h3>Predicting thrombolysis use with embndding neural networks<a class="headerlink" href="#predicting-thrombolysis-use-with-embndding-neural-networks" title="Permalink to this headline">¶</a></h3>
 <p>Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics &gt; pathway/process characteristics &gt; hospital ID.</p>
 <p>Within patient/clinical characteristics, the five most influential features were:</p>
 <ol class="simple">
@@ -412,6 +462,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>AF-Anticoagulant: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.</p></li>
 <li><p>Best language: Those patients who’s stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.</p></li>
 </ol>
+</div>
 </div>
 <div class="section" id="conclusions">
 <h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
