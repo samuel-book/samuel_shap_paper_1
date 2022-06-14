@@ -28,7 +28,7 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## Methods
 
-In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as a *'one-hot'* vector. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
+In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
 
 ### What are Shapley values?
 
@@ -54,6 +54,14 @@ The five most influential features in the XGBoost model predicting whether throm
 4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis is increased with a precisely known  onset.
 5. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
 
+Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
+
+:::{figure-md} waterfall_example
+<img src="./images/xgb_waterfall_low.png" width="800">
+
+An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
+:::
+
 ### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
 
 When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
@@ -63,14 +71,6 @@ When an XGBoost model was trained to predict different choices in thrombolysis b
 3. *Stroke onset time type (precise vs. estimated)*: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
 4. *Time from onset to arrival at hospital*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
 5. *Time from arrival at hospital to time brain imaging was performed*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
-
-Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
-
-:::{figure-md} waterfall_example
-<img src="./images/xgb_waterfall_low.png" width="800">
-
-An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
-:::
 
 ### Predicting thrombolysis use with embedding neural networks
 

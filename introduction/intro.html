@@ -408,7 +408,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
-<p>In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as a <em>‘one-hot’</em> vector. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
+<p>In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
 <div class="section" id="what-are-shapley-values">
 <h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -434,6 +434,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><em>Stroke onset time type (precise vs. estimated)</em>: Predicted probability of using thrombolysis is increased with a precisely known  onset.</p></li>
 <li><p><em>Disability level (Rankin) before stroke</em>: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
 </ol>
+<p>Shap plots may be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 2</span></a>).</p>
+<div class="figure align-default" id="waterfall-example">
+<a class="reference internal image-reference" href="../_images/xgb_waterfall_low.png"><img alt="../_images/xgb_waterfall_low.png" src="../_images/xgb_waterfall_low.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
+</div>
 </div>
 <div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
 <h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XGBoost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
@@ -445,11 +450,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><em>Time from onset to arrival at hospital</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.</p></li>
 <li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.</p></li>
 </ol>
-<p>Shap plots may be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 2</span></a>).</p>
-<div class="figure align-default" id="waterfall-example">
-<a class="reference internal image-reference" href="../_images/xgb_waterfall_low.png"><img alt="../_images/xgb_waterfall_low.png" src="../_images/xgb_waterfall_low.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
-</div>
 </div>
 <div class="section" id="predicting-thrombolysis-use-with-embedding-neural-networks">
 <h3>Predicting thrombolysis use with embedding neural networks<a class="headerlink" href="#predicting-thrombolysis-use-with-embedding-neural-networks" title="Permalink to this headline">¶</a></h3>
