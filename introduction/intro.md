@@ -67,7 +67,7 @@ When an XGBoost model was trained to predict different choices in thrombolysis b
 Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
 
 :::{figure-md} waterfall_example
-<img src="./images/xgb_waterfall_low_probability.jpg" width="600">
+<img src="./images/xgb_waterfall_low.png" width="600">
 
 An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
 :::
