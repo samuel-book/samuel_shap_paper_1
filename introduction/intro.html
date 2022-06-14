@@ -403,6 +403,15 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference internal image-reference" href="../_images/xgb_waterfall_low_probability.jpg"><img alt="../_images/xgb_waterfall_low_probability.jpg" src="../_images/xgb_waterfall_low_probability.jpg" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
 </div>
+<p>Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics &gt; pathway/process characteristics &gt; hospital ID.</p>
+<p>Within patient/clinical characteristics, the five most influential features were:</p>
+<ol class="simple">
+<li><p>Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).</p></li>
+<li><p>Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
+<li><p>Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
+<li><p>AF-Anticoagulant: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.</p></li>
+<li><p>Best language: Those patients who’s stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.</p></li>
+</ol>
 </div>
 <div class="section" id="conclusions">
 <h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>

@@ -68,6 +68,17 @@ Shap plots may be used to explain predictions of any individual patient (e.g. {n
 An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
 :::
 
+Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics > pathway/process characteristics > hospital ID.
+
+Within patient/clinical characteristics, the five most influential features were:
+
+1. Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).
+2. Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
+3. Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+4. AF-Anticoagulant: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.
+5. Best language: Those patients who's stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.
+
+
 ## Conclusions
 
 *Explainable machine learning* techniques give significant insight into models prediction clinical decision-making. At a global level, Shap allows for an understanding of the relationship between feature values and the model prediction, and at an individual level Shap allows for an understanding of the most influential features in any single prediction.
