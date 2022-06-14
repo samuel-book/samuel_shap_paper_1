@@ -57,9 +57,9 @@ The five most influential features in the XGBoost model predicting whether throm
 Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
 
 :::{figure-md} waterfall_example
-<img src="./images/xgb_waterfall_low.png" width="800">
+<img src="./images/xgb_waterfall_low_probability.jpg" width="800">
 
-An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
+An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
 :::
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
