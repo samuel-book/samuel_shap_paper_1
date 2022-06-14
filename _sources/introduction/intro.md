@@ -72,7 +72,7 @@ Shap plots may be used to explain predictions of any individual patient (e.g. {n
 An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
 :::
 
-### Predicting thrombolysis use with embndding neural networks
+### Predicting thrombolysis use with embedding neural networks
 
 Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics > pathway/process characteristics > hospital ID.
 
