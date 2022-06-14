@@ -44,6 +44,8 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ## Key findings
 
+### Predicting thrombolysis use with an XGBoost model
+
 The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:
 
 1. Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).
@@ -51,6 +53,8 @@ The five most influential features in the XGBoost model predicting whether throm
 3. Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
 4. Stroke onset time type (precise vs. estimated): Predicted probability of using thrombolysis is increased with a precisely known  onset.
 5. Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+
+### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
 
 When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
 
@@ -67,6 +71,8 @@ Shap plots may be used to explain predictions of any individual patient (e.g. {n
 
 An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis).
 :::
+
+### Predicting thrombolysis use with embndding neural networks
 
 Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics > pathway/process characteristics > hospital ID.
 
