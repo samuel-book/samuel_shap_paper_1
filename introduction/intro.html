@@ -264,11 +264,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#methods">
    Methods
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-are-shapley-values">
-   What are Shapley values?
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-shapley-values">
+     What are Shapley values?
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#key-findings">
@@ -314,11 +316,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#methods">
    Methods
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-are-shapley-values">
-   What are Shapley values?
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-shapley-values">
+     What are Shapley values?
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#key-findings">
@@ -362,10 +366,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
-<p>In this study we used with XGBoost or embedding neural networks to model decisions to give thrombolysis. Models were fitted to all hospital simultaneously, with hospital ID encoded as a <em>one-hot</em> vector. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
-</div>
+<p>In this study we used two machine learnggn methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as a <em>‘one-hot’</em> vector. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
 <div class="section" id="what-are-shapley-values">
-<h2>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">¶</a></h2>
+<h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>Shapley values are the average expected marginal contribution of one player after all possible combinations have been considered.</p>
 </div></blockquote>
@@ -375,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>The Shapley value for any team member describes the average difference in score when a particular player is present or absent compared to the average of all combinations of players.</p></li>
 </ul>
 <p>The same principle may be applied in machine learning: How does any one feature, on average, contribute to the prediction after considering all possible combinations of features?</p>
+</div>
 </div>
 <div class="section" id="key-findings">
 <h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">¶</a></h2>

@@ -28,9 +28,9 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## Methods
 
-In this study we used with XGBoost or embedding neural networks to model decisions to give thrombolysis. Models were fitted to all hospital simultaneously, with hospital ID encoded as a *one-hot* vector. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
+In this study we used two machine learnggn methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as a *'one-hot'* vector. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
 
-## What are Shapley values?
+### What are Shapley values?
 
 > Shapley values are the average expected marginal contribution of one player after all possible combinations have been considered.
 
