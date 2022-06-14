@@ -48,21 +48,21 @@ The same principle may be applied in machine learning: How does any one feature 
 
 The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:
 
-1. Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).
-2. Time from arrival at hospital to time brain imaging was performed: Predicted probability of using thrombolysis reduced with increasing time to scan.
-3. Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
-4. Stroke onset time type (precise vs. estimated): Predicted probability of using thrombolysis is increased with a precisely known  onset.
-5. Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
+2. *Time from arrival at hospital to time brain imaging was performed*: Predicted probability of using thrombolysis reduced with increasing time to scan.
+3. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
+4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis is increased with a precisely known  onset.
+5. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
 
 When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
 
-1. Disability level (Rankin) before stroke: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.
-2. Stroke severity (NIHSS) on arrival: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.
-3. Stroke onset time type (precise vs. estimated): lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
-4. Time from onset to arrival at hospital: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
-5. Time from arrival at hospital to time brain imaging was performed: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
+1. *Disability level (Rankin) before stroke*: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.
+2. *Stroke severity (NIHSS) on arrival*: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.
+3. *Stroke onset time type (precise vs. estimated)*: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
+4. *Time from onset to arrival at hospital*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
+5. *Time from arrival at hospital to time brain imaging was performed*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
 
 Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
 
@@ -78,11 +78,11 @@ Embedding neural nets allow us to isolate the influence of different feature typ
 
 Within patient/clinical characteristics, the five most influential features were:
 
-1. Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).
-2. Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
-3. Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
-4. AF-Anticoagulant: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.
-5. Best language: Those patients who's stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.
+1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
+2. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
+3. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+4. *AF-Anticoagulant*: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.
+5. *Best language*: Those patients who's stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.
 
 
 ## Conclusions

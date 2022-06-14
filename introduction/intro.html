@@ -428,22 +428,22 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Predicting thrombolysis use with an XGBoost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
 <p>The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:</p>
 <ol class="simple">
-<li><p>Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).</p></li>
-<li><p>Time from arrival at hospital to time brain imaging was performed: Predicted probability of using thrombolysis reduced with increasing time to scan.</p></li>
-<li><p>Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
-<li><p>Stroke onset time type (precise vs. estimated): Predicted probability of using thrombolysis is increased with a precisely known  onset.</p></li>
-<li><p>Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
+<li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
+<li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: Predicted probability of using thrombolysis reduced with increasing time to scan.</p></li>
+<li><p><em>Stroke severity (NIHSS) on arrival</em>: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
+<li><p><em>Stroke onset time type (precise vs. estimated)</em>: Predicted probability of using thrombolysis is increased with a precisely known  onset.</p></li>
+<li><p><em>Disability level (Rankin) before stroke</em>: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
 </ol>
 </div>
 <div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
 <h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XGBoost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
 <p>When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
 <ol class="simple">
-<li><p>Disability level (Rankin) before stroke: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
-<li><p>Stroke severity (NIHSS) on arrival: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.</p></li>
-<li><p>Stroke onset time type (precise vs. estimated): lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.</p></li>
-<li><p>Time from onset to arrival at hospital: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.</p></li>
-<li><p>Time from arrival at hospital to time brain imaging was performed: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.</p></li>
+<li><p><em>Disability level (Rankin) before stroke</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
+<li><p><em>Stroke severity (NIHSS) on arrival</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.</p></li>
+<li><p><em>Stroke onset time type (precise vs. estimated)</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.</p></li>
+<li><p><em>Time from onset to arrival at hospital</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.</p></li>
+<li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.</p></li>
 </ol>
 <p>Shap plots may be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 2</span></a>).</p>
 <div class="figure align-default" id="waterfall-example">
@@ -456,11 +456,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics &gt; pathway/process characteristics &gt; hospital ID.</p>
 <p>Within patient/clinical characteristics, the five most influential features were:</p>
 <ol class="simple">
-<li><p>Stroke type (infarction vs. haemorrhage): Use of thrombolysis depended on it being an infarction (clot).</p></li>
-<li><p>Stroke severity (NIHSS) on arrival: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
-<li><p>Disability level (Rankin) before stroke: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
-<li><p>AF-Anticoagulant: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.</p></li>
-<li><p>Best language: Those patients who’s stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.</p></li>
+<li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
+<li><p><em>Stroke severity (NIHSS) on arrival</em>: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
+<li><p><em>Disability level (Rankin) before stroke</em>: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
+<li><p><em>AF-Anticoagulant</em>: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.</p></li>
+<li><p><em>Best language</em>: Those patients who’s stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.</p></li>
 </ol>
 </div>
 </div>
