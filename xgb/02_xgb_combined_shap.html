@@ -594,7 +594,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="k">if</span> <span class="n">fit_models</span><span class="p">:</span>       
 
         <span class="c1"># Define and Fit model</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
         <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
         <span class="n">model_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
@@ -630,11 +630,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy k-fold 1: 0.855
-Accuracy k-fold 2: 0.858
-Accuracy k-fold 3: 0.853
-Accuracy k-fold 4: 0.860
-Accuracy k-fold 5: 0.853
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy k-fold 1: 0.849
+Accuracy k-fold 2: 0.856
+Accuracy k-fold 3: 0.850
+Accuracy k-fold 4: 0.857
+Accuracy k-fold 5: 0.849
 </pre></div>
 </div>
 </div>
@@ -684,31 +684,31 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17209/17759 [00:28&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17331/17759 [00:28&lt;00:00]        
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 1 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17678/17759 [00:30&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17664/17759 [00:30&lt;00:00]        
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 2 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17703/17758 [00:29&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17263/17758 [00:28&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 3 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17432/17758 [00:35&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17246/17758 [00:28&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 4 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17305/17758 [00:34&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17441/17758 [00:28&lt;00:00]        
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 5 of 5
@@ -911,17 +911,17 @@ Accuracy k-fold 5: 0.853
     <tr>
       <th>7</th>
       <td>BestLanguage</td>
-      <td>StrokeTIA_Yes</td>
+      <td>team_MHMYL4920B</td>
     </tr>
     <tr>
       <th>8</th>
       <td>S1AgeOnArrival</td>
-      <td>team_MHMYL4920B</td>
+      <td>team_GKONI0110I</td>
     </tr>
     <tr>
       <th>9</th>
       <td>StrokeTIA_Yes</td>
-      <td>team_GKONI0110I</td>
+      <td>team_QWKRA8499D</td>
     </tr>
   </tbody>
 </table>
@@ -965,53 +965,53 @@ Accuracy k-fold 5: 0.853
   <tbody>
     <tr>
       <th>S2StrokeType_Infarction</th>
-      <td>1.953866</td>
-      <td>0.219501</td>
+      <td>2.133372</td>
+      <td>0.247758</td>
     </tr>
     <tr>
       <th>S2BrainImagingTime_min</th>
-      <td>0.898744</td>
-      <td>0.022319</td>
+      <td>1.085855</td>
+      <td>0.015350</td>
     </tr>
     <tr>
       <th>S2NihssArrival</th>
-      <td>0.691105</td>
-      <td>0.026022</td>
+      <td>0.741077</td>
+      <td>0.020082</td>
     </tr>
     <tr>
       <th>S1OnsetTimeType_Precise</th>
-      <td>0.497961</td>
-      <td>0.033955</td>
+      <td>0.564728</td>
+      <td>0.031745</td>
     </tr>
     <tr>
       <th>S2RankinBeforeStroke</th>
-      <td>0.293955</td>
-      <td>0.019013</td>
+      <td>0.340353</td>
+      <td>0.014269</td>
     </tr>
     <tr>
       <th>S1OnsetToArrival_min</th>
-      <td>0.250435</td>
-      <td>0.003548</td>
+      <td>0.328686</td>
+      <td>0.003044</td>
     </tr>
     <tr>
       <th>AFAnticoagulent_Yes</th>
-      <td>0.217247</td>
-      <td>0.055520</td>
+      <td>0.251501</td>
+      <td>0.055378</td>
     </tr>
     <tr>
       <th>BestLanguage</th>
-      <td>0.215998</td>
-      <td>0.004993</td>
+      <td>0.239179</td>
+      <td>0.004005</td>
     </tr>
     <tr>
       <th>S1AgeOnArrival</th>
-      <td>0.144034</td>
-      <td>0.003468</td>
+      <td>0.172148</td>
+      <td>0.003016</td>
     </tr>
     <tr>
       <th>StrokeTIA_Yes</th>
-      <td>0.120929</td>
-      <td>0.010317</td>
+      <td>0.145231</td>
+      <td>0.006983</td>
     </tr>
   </tbody>
 </table>
@@ -1182,7 +1182,7 @@ Accuracy k-fold 5: 0.853
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17285/17759 [00:33&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17406/17759 [00:33&lt;00:00]        
 </pre></div>
 </div>
 </div>
