@@ -55,3 +55,7 @@ More information on the `shap` library, used to estimate Shapley values, may be 
         * Check consistency of Shap values and XGBoost Importance across k-fold replications
         * Compare Shap values and XGBoost Importance
         * Anlyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.
+        
+## Experiments with restricted features
+
+The above experiments are repeated but after selecting eight key features (based on forward feature selection).
