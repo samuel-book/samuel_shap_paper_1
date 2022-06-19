@@ -32,6 +32,9 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 
 ## Notebooks in this section
 
+* *A simple worked example of Shap*:
+    * A very simple example of Shap values based on three people who may contribute to the scores of a pub quiz team.
+
 * *XGBoost feature selection*:
     * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in ROC AUC score (8 were chosen).
 
