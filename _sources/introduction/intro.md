@@ -49,9 +49,9 @@ https://github.com/samuel-book/samuel_shap_paper_1
 
 > Shapley values are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.
 
-Or, imagine a pub quiz team with four people, who may be chosen from a pool of six people:
+Or, imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:
 
-* There are 15 combinations of people (choose any 4 from our pool of 6).
+* There are 8 possible combinations of players (including no-one turning up).
 
 * The Shapley value for any team member describes the average difference in score when a particular player is present or absent compared to the average of all combinations of players.
 
