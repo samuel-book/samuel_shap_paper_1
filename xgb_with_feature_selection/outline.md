@@ -1,5 +1,21 @@
 # Outline
 
+Experiments using an XGBoost classifier are performed after first reducing the number of features using feature selection. The features selected were:
+
+* S2BrainImagingTime_min
+* S2StrokeType_Infarction
+* S2NihssArrival
+* S1OnsetTimeType_Precise
+* S2RankinBeforeStroke
+* StrokeTeam
+* AFAnticoagulent_Yes
+* S1OnsetToArrival_min
+
+Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all avilable features:
+
+https://github.com/samuel-book/samuel_shap_paper_1
+
+
 ## XGBoost models
 
 XGBoost are a decision tree-based method for prediction.
@@ -15,6 +31,9 @@ https://christophm.github.io/interpretable-ml-book/shapley.html
 More information on the `shap` library, used to estimate Shapley values, may be found at: https://shap.readthedocs.io/en/latest/index.html
 
 ## Notebooks in this section
+
+* *XGBoost feature selection*:
+    * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in ROC AUC score (8 were chosen).
 
 * *Assess accuracy of k-fold models*:
     * Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).
@@ -56,6 +75,3 @@ More information on the `shap` library, used to estimate Shapley values, may be 
         * Compare Shap values and XGBoost Importance
         * Anlyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.
         
-## Experiments with restricted features
-
-The above experiments are repeated but after selecting eight key features (based on forward feature selection).

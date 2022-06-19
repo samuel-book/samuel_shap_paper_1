@@ -3,20 +3,13 @@ root: introduction/intro
 parts:
 - caption: XG Boost
   chapters:
-  - file: xgb/outline
-  - file: xgb/01_xgb_combined_fit_accuracy
-  - file: xgb/02_xgb_combined_shap
-  - file: xgb/03_compare_10k_cohort
-  - file: xgb/04_compare_benchmark_decisions
-  - file: xgb/05_predict_differences_between_local_and_benchmark
-- caption: XG Boost using key features only
-  chapters:
-  - file: xgb/01a_xgb_combined_fit_feature_selection
-  - file: xgb/01b_xgb_combined_fit_accuracy_key_features
-  - file: xgb/02a_xgb_combined_shap_key_features
-  - file: xgb/03a_compare_10k_cohort_key_features
-  - file: xgb/04a_compare_benchmark_decisions_key_features
-  - file: xgb/05a_predict_differences_between_local_and_benchmark_key_features
+  - file: xgb_with_feature_selection/outline
+  - file: xgb_with_feature_selection/01_xgb_combined_fit_feature_selection
+  - file: xgb_with_feature_selection/02_xgb_combined_fit_accuracy_key_features
+  - file: xgb_with_feature_selection/03_xgb_combined_shap_key_features
+  - file: xgb_with_feature_selection/04_compare_10k_cohort_key_features
+  - file: xgb_with_feature_selection/05_compare_benchmark_decisions_key_features
+  - file: xgb_with_feature_selection/06_predict_differences_between_local_and_benchmark_key_features
 - caption: Embedding neural nets
   chapters:
   - file: embedding_nets/outline
