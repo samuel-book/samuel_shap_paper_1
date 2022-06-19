@@ -3,8 +3,8 @@ root: introduction/intro
 parts:
 - caption: XG Boost
   chapters:
-  - file: shap_worked_example
   - file: xgb_with_feature_selection/outline
+  - file: shap_worked_example
   - file: xgb_with_feature_selection/01_xgb_combined_fit_feature_selection
   - file: xgb_with_feature_selection/02_xgb_combined_fit_accuracy_key_features
   - file: xgb_with_feature_selection/03_xgb_combined_shap_key_features
