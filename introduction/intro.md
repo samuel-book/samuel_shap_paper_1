@@ -30,6 +30,21 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
 
+The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:
+
+* S2BrainImagingTime_min
+* S2StrokeType_Infarction
+* S2NihssArrival
+* S1OnsetTimeType_Precise
+* S2RankinBeforeStroke
+* StrokeTeam
+* AFAnticoagulent_Yes
+* S1OnsetToArrival_min
+
+Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:
+
+https://github.com/samuel-book/samuel_shap_paper_1
+
 ### What are Shapley values?
 
 > Shapley values are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.

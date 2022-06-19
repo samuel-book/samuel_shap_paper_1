@@ -11,7 +11,7 @@ Experiments using an XGBoost classifier are performed after first reducing the n
 * AFAnticoagulent_Yes
 * S1OnsetToArrival_min
 
-Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all avilable features:
+Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:
 
 https://github.com/samuel-book/samuel_shap_paper_1
 
