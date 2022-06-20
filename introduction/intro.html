@@ -326,11 +326,6 @@ title="Print to PDF"
      in thrombolysis use between hospitals with an XGBoost model
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-embedding-neural-networks">
-     Predicting thrombolysis use with embedding neural networks
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -398,11 +393,6 @@ title="Print to PDF"
      in thrombolysis use between hospitals with an XGBoost model
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-embedding-neural-networks">
-     Predicting thrombolysis use with embedding neural networks
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -445,7 +435,7 @@ title="Print to PDF"
 </section>
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
-<p>In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
+<p>In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
 <p>The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:</p>
 <ul class="simple">
 <li><p>S2BrainImagingTime_min</p></li>
@@ -501,18 +491,6 @@ title="Print to PDF"
 <li><p><em>Stroke onset time type (precise vs. estimated)</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.</p></li>
 <li><p><em>Time from onset to arrival at hospital</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.</p></li>
 <li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.</p></li>
-</ol>
-</section>
-<section id="predicting-thrombolysis-use-with-embedding-neural-networks">
-<h3>Predicting thrombolysis use with embedding neural networks<a class="headerlink" href="#predicting-thrombolysis-use-with-embedding-neural-networks" title="Permalink to this headline">#</a></h3>
-<p>Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics &gt; pathway/process characteristics &gt; hospital ID.</p>
-<p>Within patient/clinical characteristics, the five most influential features were:</p>
-<ol class="simple">
-<li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
-<li><p><em>Stroke severity (NIHSS) on arrival</em>: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
-<li><p><em>Disability level (Rankin) before stroke</em>: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
-<li><p><em>AF-Anticoagulant</em>: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.</p></li>
-<li><p><em>Best language</em>: Those patients who’s stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.</p></li>
 </ol>
 </section>
 </section>
