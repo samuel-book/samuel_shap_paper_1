@@ -38,6 +38,9 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 * *XGBoost feature selection*:
     * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in ROC AUC score (8 were chosen).
 
+* *Check correlation between selected features*:
+    * Check correlation between 8 features selected by feature selection.
+    
 * *Assess accuracy of k-fold models*:
     * Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).
     * Plot Receiver Operator Characteristic Curve and measure AUC.
