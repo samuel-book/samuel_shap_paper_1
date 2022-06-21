@@ -28,18 +28,18 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## Methods
 
-In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
+In this study we used two machine learning methods (XGBoost and embedding neural networks) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
 
 The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:
 
-* S2BrainImagingTime_min: Time from arrival at hopsital to scan)
-* S2StrokeType_Infarction: Stroke type: clot (infarction) or bleed (haemorrhage)
-* S2NihssArrival _Stroke severity (NIHSS) on arrival
-* S1OnsetTimeType_Precise: Is stroke onset time known precisely (or estimated)
-* S2RankinBeforeStroke: Disability level (modified Rankin Scale) before stroke
-* StrokeTeam: Hospital ID
-* AFAnticoagulent_Yes: Patient on anticoagulant therapy for atrial fibrillation
-* S1OnsetToArrival_min: Tiem from stroke onset to arrival at hospital
+* S2BrainImagingTime_min
+* S2StrokeType_Infarction
+* S2NihssArrival
+* S1OnsetTimeType_Precise
+* S2RankinBeforeStroke
+* StrokeTeam
+* AFAnticoagulent_Yes
+* S1OnsetToArrival_min
 
 Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:
 
@@ -86,6 +86,19 @@ When an XGBoost model was trained to predict different choices in thrombolysis b
 3. *Stroke onset time type (precise vs. estimated)*: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
 4. *Time from onset to arrival at hospital*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
 5. *Time from arrival at hospital to time brain imaging was performed*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
+
+### Predicting thrombolysis use with embedding neural networks
+
+Embedding neural nets allow us to isolate the influence of different feature types. This allows us to see that the order of importance of feature types was: patient/clinical characteristics > pathway/process characteristics > hospital ID.
+
+Within patient/clinical characteristics, the five most influential features were:
+
+1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
+2. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
+3. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+4. *AF-Anticoagulant*: Patients on anticoagulation therapy for atrial fibrillation had lower predicted probability of receiving thrombolysis.
+5. *Best language*: Those patients who's stroke had affected their speech and comprehension less had lower predicted probability of receiving thrombolysis.
+
 
 ## Conclusions
 
