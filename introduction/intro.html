@@ -438,14 +438,14 @@ title="Print to PDF"
 <p>In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
 <p>The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:</p>
 <ul class="simple">
-<li><p>S2BrainImagingTime_min: Time from arrival at hopsital to scan)</p></li>
-<li><p>S2StrokeType_Infarction: Stroke type: clot (infarction) or bleed (haemorrhage)</p></li>
-<li><p>S2NihssArrival _Stroke severity (NIHSS) on arrival</p></li>
-<li><p>S1OnsetTimeType_Precise: Is stroke onset time known precisely (or estimated)</p></li>
-<li><p>S2RankinBeforeStroke: Disability level (modified Rankin Scale) before stroke</p></li>
-<li><p>StrokeTeam: Hospital ID</p></li>
-<li><p>AFAnticoagulent_Yes: Patient on anticoagulant therapy for atrial fibrillation</p></li>
-<li><p>S1OnsetToArrival_min: Tiem from stroke onset to arrival at hospital</p></li>
+<li><p><em>S2BrainImagingTime_min</em>: Time from arrival at hospital to scan</p></li>
+<li><p><em>S2StrokeType_Infarction</em>: Stroke type: clot (‘infarction’) or bleed (‘haemorrhage’)</p></li>
+<li><p><em>S2NihssArrival</em>: Stroke severity (National Institutes of Health Stroke Scale; NIHSS) on arrival</p></li>
+<li><p><em>S1OnsetTimeType_Precise</em>: Is stroke onset time known precisely (or estimated)</p></li>
+<li><p><em>S2RankinBeforeStroke</em>: Disability level (modified Rankin Scale) <em>before</em> stroke</p></li>
+<li><p><em>StrokeTeam</em>: Hospital ID</p></li>
+<li><p><em>AFAnticoagulent_Yes</em>: Patient on anticoagulant therapy for atrial fibrillation</p></li>
+<li><p><em>S1OnsetToArrival_min</em>: Time from stroke onset to arrival at hospital</p></li>
 </ul>
 <p>Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:</p>
 <p><a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">https://github.com/samuel-book/samuel_shap_paper_1</a></p>
