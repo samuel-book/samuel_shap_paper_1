@@ -32,14 +32,14 @@ In this study we used a machine learning method (XGBoost) to model decisions to 
 
 The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:
 
-* S2BrainImagingTime_min: Time from arrival at hopsital to scan)
-* S2StrokeType_Infarction: Stroke type: clot (infarction) or bleed (haemorrhage)
-* S2NihssArrival _Stroke severity (NIHSS) on arrival
-* S1OnsetTimeType_Precise: Is stroke onset time known precisely (or estimated)
-* S2RankinBeforeStroke: Disability level (modified Rankin Scale) before stroke
-* StrokeTeam: Hospital ID
-* AFAnticoagulent_Yes: Patient on anticoagulant therapy for atrial fibrillation
-* S1OnsetToArrival_min: Tiem from stroke onset to arrival at hospital
+* *S2BrainImagingTime_min*: Time from arrival at hospital to scan
+* *S2StrokeType_Infarction*: Stroke type: clot ('infarction') or bleed ('haemorrhage')
+* *S2NihssArrival*: Stroke severity (National Institutes of Health Stroke Scale; NIHSS) on arrival
+* *S1OnsetTimeType_Precise*: Is stroke onset time known precisely (or estimated)
+* *S2RankinBeforeStroke*: Disability level (modified Rankin Scale) *before* stroke
+* *StrokeTeam*: Hospital ID
+* *AFAnticoagulent_Yes*: Patient on anticoagulant therapy for atrial fibrillation
+* *S1OnsetToArrival_min*: Time from stroke onset to arrival at hospital
 
 Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:
 
