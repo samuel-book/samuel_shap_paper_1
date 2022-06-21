@@ -435,7 +435,7 @@ title="Print to PDF"
 </section>
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
-<p>In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
+<p>In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hospital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the <code class="docutils literal notranslate"><span class="pre">Shap</span></code> package) to explain model predictions at global and individual levels.</p>
 <p>The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:</p>
 <ul class="simple">
 <li><p><em>S2BrainImagingTime_min</em>: Time from arrival at hospital to scan</p></li>
@@ -447,8 +447,7 @@ title="Print to PDF"
 <li><p><em>AFAnticoagulent_Yes</em>: Patient on anticoagulant therapy for atrial fibrillation</p></li>
 <li><p><em>S1OnsetToArrival_min</em>: Time from stroke onset to arrival at hospital</p></li>
 </ul>
-<p>Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:</p>
-<p><a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">https://github.com/samuel-book/samuel_shap_paper_1</a></p>
+<p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes the same notebooks, but for XGBoost models using all available features:</p>
 <section id="what-are-shapley-values">
 <h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">#</a></h3>
 <blockquote>
