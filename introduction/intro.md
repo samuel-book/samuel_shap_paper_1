@@ -28,7 +28,7 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## Methods
 
-In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hopsital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
+In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hospital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
 
 The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:
 
@@ -41,9 +41,7 @@ The XGBoost model described in this Jupyter Book used forward feature selection 
 * *AFAnticoagulent_Yes*: Patient on anticoagulant therapy for atrial fibrillation
 * *S1OnsetToArrival_min*: Time from stroke onset to arrival at hospital
 
-Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:
-
-https://github.com/samuel-book/samuel_shap_paper_1
+Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes the same notebooks, but for XGBoost models using all available features:
 
 ### What are Shapley values?
 
