@@ -55,7 +55,7 @@ In order to make the model easier to explain we found the most important feature
 * *AFAnticoagulent_Yes*: Patient on anticoagulant therapy for atrial fibrillation
 * *S1OnsetToArrival_min*: Time from stroke onset to arrival at hospital
 
-Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XGBoost models using all available features.
+Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XG-Boost models using all available features.
 
 In order to explain model predictions we turned to a method called Shapley values, which we describe below.
 
@@ -91,7 +91,7 @@ Shap plots may be used to explain predictions of any individual patient (e.g. {n
 An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) slow arrival-to-scan time (138 mins), low stroke severity (NIHSS 2), and 3 the hospital attended.
 :::
 
-### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
+### Predicting *differences* in thrombolysis use between hospitals with an XG-Boost model
 
 When an XG-Boost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
 

@@ -251,12 +251,12 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
+    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
      Predicting
      <em>
       differences
      </em>
-     in thrombolysis use between hospitals with an XGBoost model
+     in thrombolysis use between hospitals with an XG-Boost model
     </a>
    </li>
   </ul>
@@ -328,12 +328,12 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
+    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
      Predicting
      <em>
       differences
      </em>
-     in thrombolysis use between hospitals with an XGBoost model
+     in thrombolysis use between hospitals with an XG-Boost model
     </a>
    </li>
   </ul>
@@ -396,7 +396,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><em>AFAnticoagulent_Yes</em>: Patient on anticoagulant therapy for atrial fibrillation</p></li>
 <li><p><em>S1OnsetToArrival_min</em>: Time from stroke onset to arrival at hospital</p></li>
 </ul>
-<p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XGBoost models using all available features.</p>
+<p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features.</p>
 <p>In order to explain model predictions we turned to a method called Shapley values, which we describe below.</p>
 <div class="section" id="what-are-shapley-values">
 <h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">¶</a></h3>
@@ -429,8 +429,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) slow arrival-to-scan time (138 mins), low stroke severity (NIHSS 2), and 3 the hospital attended.</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
-<h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XGBoost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
+<h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XG-Boost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model" title="Permalink to this headline">¶</a></h3>
 <p>When an XG-Boost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
 <ol class="simple">
 <li><p><em>Disability level (Rankin) before stroke</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
