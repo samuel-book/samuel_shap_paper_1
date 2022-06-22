@@ -12,7 +12,7 @@ Kerry Pearn & Michael Allen
 
 ## Background
 
-Stroke is a common cause of adult disability. Expert opinion is that about one in five patients should receive clot-busting drugs to break up the blood clot that is causing their stroke, and this is the target set in the NHS long term plan. This clot-busting treatment is called *thrombolysis*. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment in different hospitals.
+Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain. Expert opinion is that about one in five patients should receive clot-busting drugs to break up the blood clot that is causing their stroke, and this is the target set in the NHS long term plan. This clot-busting treatment is called *thrombolysis*. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment in different hospitals.
 
 In a previous project, [SAMueL-1](https://samuel-book.github.io/samuel-1/introduction/intro.html), we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital. This allows us to investigate what differences in treatment are likely to be due to differences between patients, and what differences in treatment are likely to be due to differences between hospitals rather differences in the patients each hospital sees.
 
@@ -22,7 +22,7 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## What is *Explainable Machine Learning*?
 
-Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning models learns the relationship between those features and the *target* that we would like to predict - that is whether the patient receives thrombolysis or not. 
+Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning model learns the relationship between those features and the *target* that we would like to predict - that is whether the patient receives thrombolysis or not. 
 
 A high level diagram of our machine learning is shown in {numref}`Figure {number} <high_level_md>`. 
 
