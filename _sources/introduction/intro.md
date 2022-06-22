@@ -14,23 +14,37 @@ Kerry Pearn & Michael Allen
 
 Stroke is a common cause of adult disability. Expert opinion is that about one in five patients should receive clot-busting drugs to break up the blood clot that is causing their stroke, and this is the target set in the NHS long term plan. This clot-busting treatment is called *thrombolysis*. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment in different hospitals.
 
-In a previous project, [SAMueL-1](https://samuel-book.github.io/samuel-1/introduction/intro.html), we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital {numref}`Figure {number} <high_level_md>`. This allows us to investigate what differences in treatment are likely to be due to differences between patients, and what differences in treatment are likely to be due to differences between hospitals.
-
-:::{figure-md} high_level_md
-<img src="./images/ml_model_high_level.png" width="600">
-
-A high level depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information. Machine learning models used are logistic regression, random forest, XGBoost, and neural networks.
-:::
+In a previous project, [SAMueL-1](https://samuel-book.github.io/samuel-1/introduction/intro.html), we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital. This allows us to investigate what differences in treatment are likely to be due to differences between patients, and what differences in treatment are likely to be due to differences between hospitals rather differences in the patients each hospital sees.
 
 ## Aims of this study
 
 The aims of this study were 1) to apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals, and 2) to model and explain what are the the features that are most important in hospitals making *different* decisions about the same patient.
 
+## What is *Explainable Machine Learning*?
+
+Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of *features' about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning models learns the relationship between those features and the *target* that we would like to predict - that is whether the patient receives thrombolysis or not. 
+
+A high level diagram of our machine learning is shown in {numref}`Figure {number} <high_level_md>`. 
+
+:::{figure-md} high_level_md
+<img src="./images/ml_model_high_level.png" width="600">
+
+A high level depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information. 
+:::
+
+There are many different types of machine learning (here we use one called *XG-Boost*), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call *black box* models - that is we give it some information, and it makes a prediction, but we don't know *why* it made that particular prediction. 
+
+*Explainable Machine Learning* seeks to be able to communicate why models make the prediction they do. We seek to understand, and communicate, the general patterns that the model is making (sometimes we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (sometimes we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how a sure can we be of the model's predictions - both generally and for any particular prediction.
+
+In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor *explainable machine learning* output to different audience's wishes?
+
+(*Explainable machine learning* may also be known as *Explainable ML*, *Explainable artificial intelligence*, or *Explainable AI*).
+
 ## Methods
 
-In this study we used a machine learning method (XGBoost) to model decisions to give thrombolysis at each hospital. Models were fitted to all hospital simultaneously, with hospital ID encoded as an input feature. We used Shapley values (using the `Shap` package) to explain model predictions at global and individual levels.
+In this study we used a machine learning method (XG-Boost) to model decisions to give thrombolysis at each hospital. 
 
-The XGBoost model described in this Jupyter Book used forward feature selection to choose the 8 features which led to the greatest accuracy (measured by ROC AUC). These features were:
+In order to make the model easier to explain we found the most important features that would predict whetehr a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to use all available features. These 8 features were:
 
 * *S2BrainImagingTime_min*: Time from arrival at hospital to scan
 * *S2StrokeType_Infarction*: Stroke type: clot ('infarction') or bleed ('haemorrhage')
@@ -43,9 +57,11 @@ The XGBoost model described in this Jupyter Book used forward feature selection 
 
 Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes the same notebooks, but for XGBoost models using all available features:
 
+In order to explain model predictions we turned to a method called Shapley values, which we describe below.
+
 ### What are Shapley values?
 
-> Shapley values are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.
+> Shapley values (or *Shap* values)are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.
 
 Or, imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:
 
@@ -59,7 +75,7 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ### Predicting thrombolysis use with an XGBoost model
 
-The five most influential features in the XGBoost model predicting whether thrombolysis would be given or not were:
+The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):
 
 1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
 2. *Time from arrival at hospital to time brain imaging was performed*: Predicted probability of using thrombolysis reduced with increasing time to scan.
