@@ -69,7 +69,7 @@ Or, imagine a pub quiz team with up to 3 people. Any number of people may actual
 
 * The Shapley value for any team member describes the average difference in score when a particular player is present or absent compared to the average of all combinations of players.
 
-The same principle may be applied in machine learning: How does any one feature (e.g. stroke severity, or age), on average, contribute to the prediction after considering all possible combinations of features? 
+The same principle may be applied in machine learning: How does any one feature (e.g. stroke severity, or age), on average, contribute to the prediction after considering all possible combinations of features? What difference does that feature make to the prediction?
 
 ## Key findings
 
