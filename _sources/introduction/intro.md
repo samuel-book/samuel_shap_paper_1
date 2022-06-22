@@ -44,7 +44,7 @@ In this project we are very much on a journey - discovering what different peopl
 
 In this study we used a machine learning method (XG-Boost) to predict decisions to give thrombolysis at each hospital. 
 
-In order to make the model easier to explain we found the most important features that would predict whetehr a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to use all available features. These 8 features were:
+In order to make the model easier to explain we found the most important features that would predict whether a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to using all available features. These 8 features were:
 
 * *S2BrainImagingTime_min*: Time from arrival at hospital to scan
 * *S2StrokeType_Infarction*: Stroke type: clot ('infarction') or bleed ('haemorrhage')
