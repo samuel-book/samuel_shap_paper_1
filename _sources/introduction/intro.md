@@ -2,7 +2,7 @@
 
 *Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis*: Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project.
 
-Kerry Pearn & Michael Allen
+Kerry Pearn, Martin James & Michael Allen
 
 ```{epigraph}
 "Your decision to treat or not treat … That’s the difficult part. That’s the grey area where everyone does a different thing."
