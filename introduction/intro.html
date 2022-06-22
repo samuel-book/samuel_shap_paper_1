@@ -246,8 +246,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xgboost-model">
-     Predicting thrombolysis use with an XGBoost model
+    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">
+     Predicting thrombolysis use with an XG-Boost model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -323,8 +323,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xgboost-model">
-     Predicting thrombolysis use with an XGBoost model
+    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">
+     Predicting thrombolysis use with an XG-Boost model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -371,7 +371,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="what-is-explainable-machine-learning">
 <h2>What is <em>Explainable Machine Learning</em>?<a class="headerlink" href="#what-is-explainable-machine-learning" title="Permalink to this headline">¶</a></h2>
-<p>Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of *features’ about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning models learns the relationship between those features and the <em>target</em> that we would like to predict - that is whether the patient receives thrombolysis or not.</p>
+<p>Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of <em>features</em> about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning models learns the relationship between those features and the <em>target</em> that we would like to predict - that is whether the patient receives thrombolysis or not.</p>
 <p>A high level diagram of our machine learning is shown in <a class="reference internal" href="#high-level-md"><span class="std std-numref">Figure 1</span></a>.</p>
 <div class="figure align-default" id="high-level-md">
 <a class="reference internal image-reference" href="../_images/ml_model_high_level.png"><img alt="../_images/ml_model_high_level.png" src="../_images/ml_model_high_level.png" style="width: 600px;" /></a>
@@ -384,7 +384,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
-<p>In this study we used a machine learning method (XG-Boost) to model decisions to give thrombolysis at each hospital.</p>
+<p>In this study we used a machine learning method (XG-Boost) to predict decisions to give thrombolysis at each hospital.</p>
 <p>In order to make the model easier to explain we found the most important features that would predict whetehr a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to use all available features. These 8 features were:</p>
 <ul class="simple">
 <li><p><em>S2BrainImagingTime_min</em>: Time from arrival at hospital to scan</p></li>
@@ -413,8 +413,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="key-findings">
 <h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="predicting-thrombolysis-use-with-an-xgboost-model">
-<h3>Predicting thrombolysis use with an XGBoost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="predicting-thrombolysis-use-with-an-xg-boost-model">
+<h3>Predicting thrombolysis use with an XG-Boost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xg-boost-model" title="Permalink to this headline">¶</a></h3>
 <p>The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):</p>
 <ol class="simple">
 <li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
@@ -431,7 +431,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model">
 <h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XGBoost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xgboost-model" title="Permalink to this headline">¶</a></h3>
-<p>When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
+<p>When an XG-Boost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
 <ol class="simple">
 <li><p><em>Disability level (Rankin) before stroke</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
 <li><p><em>Stroke severity (NIHSS) on arrival</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.</p></li>

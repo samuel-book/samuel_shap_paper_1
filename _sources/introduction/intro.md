@@ -22,7 +22,7 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 
 ## What is *Explainable Machine Learning*?
 
-Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of *features' about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning models learns the relationship between those features and the *target* that we would like to predict - that is whether the patient receives thrombolysis or not. 
+Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In our use case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. And the machine learning models learns the relationship between those features and the *target* that we would like to predict - that is whether the patient receives thrombolysis or not. 
 
 A high level diagram of our machine learning is shown in {numref}`Figure {number} <high_level_md>`. 
 
@@ -42,7 +42,7 @@ In this project we are very much on a journey - discovering what different peopl
 
 ## Methods
 
-In this study we used a machine learning method (XG-Boost) to model decisions to give thrombolysis at each hospital. 
+In this study we used a machine learning method (XG-Boost) to predict decisions to give thrombolysis at each hospital. 
 
 In order to make the model easier to explain we found the most important features that would predict whetehr a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to use all available features. These 8 features were:
 
@@ -73,7 +73,7 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ## Key findings
 
-### Predicting thrombolysis use with an XGBoost model
+### Predicting thrombolysis use with an XG-Boost model
 
 The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):
 
@@ -93,7 +93,7 @@ An example of a Shap *waterfall* plot showing the most influential features in i
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XGBoost model
 
-When an XGBoost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
+When an XG-Boost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
 
 1. *Disability level (Rankin) before stroke*: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.
 2. *Stroke severity (NIHSS) on arrival*: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.
