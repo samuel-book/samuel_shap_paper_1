@@ -42,7 +42,7 @@ In this project we are very much on a journey - discovering what different peopl
 
 ## Methods
 
-In this study we used a machine learning method (XG-Boost) to predict decisions to give thrombolysis at each hospital. 
+In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. 
 
 In order to make the model easier to explain we found the most important features that would predict whether a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to using all available features. These 8 features were:
 
@@ -55,7 +55,7 @@ In order to make the model easier to explain we found the most important feature
 * *AFAnticoagulent_Yes*: Patient on anticoagulant therapy for atrial fibrillation
 * *S1OnsetToArrival_min*: Time from stroke onset to arrival at hospital
 
-Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes the same notebooks, but for XGBoost models using all available features:
+Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XGBoost models using all available features.
 
 In order to explain model predictions we turned to a method called Shapley values, which we describe below.
 
