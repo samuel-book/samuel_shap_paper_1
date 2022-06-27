@@ -378,14 +378,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">A basic depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.</span><a class="headerlink" href="#high-level-md" title="Permalink to this image">¶</a></p>
 </div>
 <p>There are many different types of machine learning (here we use one called <em>XG-Boost</em>), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call a <em>black box</em> model - that is we give it some information, and it makes a prediction, but we don’t know <em>why</em> it made that particular prediction.</p>
-<p><em>Explainable Machine Learning</em> seeks to be able to communicate why models make the prediction they do. We seek to understand, and communicate, the general patterns that the model is making (sometimes we call this <em>global explainability</em>), as well as why the model made the prediction it did for one particular patient (sometimes we call this <em>local explainability</em>). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how a sure can we be of the model’s predictions - both generally and for any particular prediction.</p>
-<p>In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor <em>explainable machine learning</em> output to different audience’s wishes?</p>
+<p><em>Explainable Machine Learning</em> seeks to be able to communicate <em>why</em> a model make the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (sometimes we call this <em>global explainability</em>), as well as why the model made the prediction it did for one particular patient (sometimes we call this <em>local explainability</em>). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how sure we can be of the model’s predictions - both generally and for any particular prediction.</p>
+<p>In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, carers, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor <em>explainable machine learning</em> output to the wished of different audiences?</p>
 <p>(<em>Explainable machine learning</em> may also be known as <em>Explainable ML</em>, <em>Explainable artificial intelligence</em>, or <em>Explainable AI</em>).</p>
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
 <p>In this study we used a machine learning method called <em>XG-Boost</em> to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions.</p>
-<p>In order to make the model easier to explain we found the most important features that would predict whether a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to using all available features. These 8 features were:</p>
+<p>In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 8 features we could get accuracy that was very close to using <em>all</em> available features. These 8 features were:</p>
 <ul class="simple">
 <li><p><em>S2BrainImagingTime_min</em>: Time from arrival at hospital to scan</p></li>
 <li><p><em>S2StrokeType_Infarction</em>: Stroke type: clot (‘infarction’) or bleed (‘haemorrhage’)</p></li>
@@ -397,13 +397,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><em>S1OnsetToArrival_min</em>: Time from stroke onset to arrival at hospital</p></li>
 </ul>
 <p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features.</p>
-<p>In order to explain model predictions we turned to a method called Shapley values, which we describe below.</p>
+<p>In order to explain model predictions we used a method called Shapley values, which are described below.</p>
 <div class="section" id="what-are-shapley-values">
 <h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>Shapley values (or <em>Shap</em> values)are <em>‘the average expected marginal contribution of one player after all possible combinations have been considered’</em>.</p>
 </div></blockquote>
-<p>Or, imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:</p>
+<p>Imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:</p>
 <ul class="simple">
 <li><p>There are 8 possible combinations of players (including no-one turning up).</p></li>
 <li><p>The Shapley value for any team member describes the average difference in score when a particular player is present or absent compared to the average of all combinations of players.</p></li>
@@ -419,11 +419,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ol class="simple">
 <li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
 <li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: Predicted probability of using thrombolysis reduced with increasing time to scan.</p></li>
-<li><p><em>Stroke severity (NIHSS) on arrival</em>: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.</p></li>
-<li><p><em>Stroke onset time type (precise vs. estimated)</em>: Predicted probability of using thrombolysis is increased with a precisely known  onset.</p></li>
+<li><p><em>Stroke severity (NIHSS) on arrival</em>: Predicted probability of using thrombolysis was low with very mild strokes,rose with increasing severity with a plateau at about NIHSS of 10-20, and then reduced with the most severe strokes.</p></li>
+<li><p><em>Stroke onset time type (precise vs. estimated)</em>: Predicted probability of using thrombolysis increased with a precisely known  onset.</p></li>
 <li><p><em>Disability level (Rankin) before stroke</em>: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
 </ol>
-<p>Shap plots may be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 2</span></a>).</p>
+<p>Shap plots could be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 2</span></a>).</p>
 <div class="figure align-default" id="waterfall-example">
 <a class="reference internal image-reference" href="../_images/xgb_waterfall_low_probability.jpg"><img alt="../_images/xgb_waterfall_low_probability.jpg" src="../_images/xgb_waterfall_low_probability.jpg" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An example of a Shap <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) slow arrival-to-scan time (138 mins), low stroke severity (NIHSS 2), and 3 the hospital attended.</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">¶</a></p>
@@ -431,19 +431,19 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
 <h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XG-Boost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model" title="Permalink to this headline">¶</a></h3>
-<p>When an XG-Boost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:</p>
+<p>We trained an XG-Boost model to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis…</p>
 <ol class="simple">
-<li><p><em>Disability level (Rankin) before stroke</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.</p></li>
-<li><p><em>Stroke severity (NIHSS) on arrival</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.</p></li>
-<li><p><em>Stroke onset time type (precise vs. estimated)</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.</p></li>
-<li><p><em>Time from onset to arrival at hospital</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.</p></li>
-<li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.</p></li>
+<li><p>With increasing disability before stroke.</p></li>
+<li><p>In milder strokes.</p></li>
+<li><p>When stroke onset time had been estimated (rather than known precisely).</p></li>
+<li><p>With longer onset-to-arrival times.</p></li>
+<li><p>With longer arrival-to-scan times.</p></li>
 </ol>
 </div>
 </div>
 <div class="section" id="conclusions">
 <h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
-<p><em>Explainable machine learning</em> techniques give significant insight into models prediction clinical decision-making. At a global level, Shap allows for an understanding of the relationship between feature values and the model prediction, and at an individual level Shap allows for an understanding of the most influential features in any single prediction.</p>
+<p><em>Explainable machine learning</em> techniques give significant insight into models prediction clinical decision-making. At an overall level, Shap allows for an understanding of the relationship between feature values and the model prediction, and at an individual level Shap allows for an understanding of the most influential features in any single prediction.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>

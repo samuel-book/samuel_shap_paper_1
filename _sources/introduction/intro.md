@@ -34,9 +34,9 @@ A basic depiction of machine learning models trained to predict use of thromboly
 
 There are many different types of machine learning (here we use one called *XG-Boost*), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call a *black box* model - that is we give it some information, and it makes a prediction, but we don't know *why* it made that particular prediction. 
 
-*Explainable Machine Learning* seeks to be able to communicate why models make the prediction they do. We seek to understand, and communicate, the general patterns that the model is making (sometimes we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (sometimes we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how a sure can we be of the model's predictions - both generally and for any particular prediction.
+*Explainable Machine Learning* seeks to be able to communicate *why* a model make the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (sometimes we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (sometimes we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how sure we can be of the model's predictions - both generally and for any particular prediction.
 
-In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor *explainable machine learning* output to different audience's wishes?
+In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, carers, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor *explainable machine learning* output to the wished of different audiences?
 
 (*Explainable machine learning* may also be known as *Explainable ML*, *Explainable artificial intelligence*, or *Explainable AI*).
 
@@ -44,7 +44,7 @@ In this project we are very much on a journey - discovering what different peopl
 
 In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. 
 
-In order to make the model easier to explain we found the most important features that would predict whether a patient received thrombolysis or not. We found that with 8 features we could get accuracy that was very close to using all available features. These 8 features were:
+In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 8 features we could get accuracy that was very close to using *all* available features. These 8 features were:
 
 * *S2BrainImagingTime_min*: Time from arrival at hospital to scan
 * *S2StrokeType_Infarction*: Stroke type: clot ('infarction') or bleed ('haemorrhage')
@@ -57,13 +57,13 @@ In order to make the model easier to explain we found the most important feature
 
 Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XG-Boost models using all available features.
 
-In order to explain model predictions we turned to a method called Shapley values, which we describe below.
+In order to explain model predictions we used a method called Shapley values, which are described below.
 
 ### What are Shapley values?
 
 > Shapley values (or *Shap* values)are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.
 
-Or, imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:
+Imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:
 
 * There are 8 possible combinations of players (including no-one turning up).
 
@@ -79,11 +79,11 @@ The five most influential features predicting whether thrombolysis would be give
 
 1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
 2. *Time from arrival at hospital to time brain imaging was performed*: Predicted probability of using thrombolysis reduced with increasing time to scan.
-3. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low at low NIHSS, rose with increasing NIHSS with a plateau at about NIHSS of 10-20, and then reduced with higher NIHSS.
-4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis is increased with a precisely known  onset.
+3. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low with very mild strokes,rose with increasing severity with a plateau at about NIHSS of 10-20, and then reduced with the most severe strokes.
+4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis increased with a precisely known  onset.
 5. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
 
-Shap plots may be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
+Shap plots could be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
 
 :::{figure-md} waterfall_example
 <img src="./images/xgb_waterfall_low_probability.jpg" width="800">
@@ -93,17 +93,18 @@ An example of a Shap *waterfall* plot showing the most influential features in i
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XG-Boost model
 
-When an XG-Boost model was trained to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis, the five most influential features were:
+We trained an XG-Boost model to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
 
-1. *Disability level (Rankin) before stroke*: lower thrombolysing units had a lower predicted probability of using thrombolysis with increasing disability before stroke.
-2. *Stroke severity (NIHSS) on arrival*: lower thrombolysing units had a lower predicted probability of using thrombolysis with lower stroke severity.
-3. *Stroke onset time type (precise vs. estimated)*: lower thrombolysing units had a lower predicted probability of using thrombolysis when the stroke onset time had been estimated.
-4. *Time from onset to arrival at hospital*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer onset-to-arrival times.
-5. *Time from arrival at hospital to time brain imaging was performed*: lower thrombolysing units had a lower predicted probability of using thrombolysis with longer arrival-to-scan times.
+1. With increasing disability before stroke.
+2. In milder strokes.
+3. When stroke onset time had been estimated (rather than known precisely).
+4. With longer onset-to-arrival times.
+5. With longer arrival-to-scan times.
+
 
 ## Conclusions
 
-*Explainable machine learning* techniques give significant insight into models prediction clinical decision-making. At a global level, Shap allows for an understanding of the relationship between feature values and the model prediction, and at an individual level Shap allows for an understanding of the most influential features in any single prediction.
+*Explainable machine learning* techniques give significant insight into models prediction clinical decision-making. At an overall level, Shap allows for an understanding of the relationship between feature values and the model prediction, and at an individual level Shap allows for an understanding of the most influential features in any single prediction.
 
 
 
