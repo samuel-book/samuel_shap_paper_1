@@ -1,4 +1,4 @@
-## Gloassary of technical terms
+# Gloassary of technical terms
 
 * *Receiver operating characteristic (ROC) curve*: this is a visual tool (in the form of a graph) that shows the tradeoff of choosing different *threshold* values for turning a probability into a classification. It is used to find the threshold value that best balances the number of false alarms with number of undetected positives.
 
