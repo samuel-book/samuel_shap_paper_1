@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Measuring accuracy of k-fold models &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>Measuring accuracy of XGBoost models &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -131,7 +131,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Measuring accuracy of k-fold models
+   Measuring accuracy of XGBoost models
   </a>
  </li>
  <li class="toctree-l1">
@@ -298,9 +298,31 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-definitions-see">
+     For definitions see ***
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
@@ -318,8 +340,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import data
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -332,16 +359,11 @@ title="Print to PDF"
      Calculate accuracy measures
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-intersect">
-     Line intersect
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-model-k-fold">
-   Fit model (k-fold)
+  <a class="reference internal nav-link" href="#fit-model">
+   Fit model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -360,8 +382,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identify-cross-over-of-sensitivity-and-specificity">
-     Identify cross-over of sensitivity and specificity
+    <a class="reference internal nav-link" href="#identify-cross-over-point-on-sensitivity-specificity-curve">
+     Identify cross-over point on sensitivity-specificity curve
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -397,7 +419,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -410,7 +432,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Measuring accuracy of k-fold models</h1>
+                <h1>Measuring accuracy of XGBoost models</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -421,9 +443,31 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-definitions-see">
+     For definitions see ***
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
@@ -441,8 +485,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import data
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -455,16 +504,11 @@ title="Print to PDF"
      Calculate accuracy measures
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-intersect">
-     Line intersect
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-model-k-fold">
-   Fit model (k-fold)
+  <a class="reference internal nav-link" href="#fit-model">
+   Fit model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -483,8 +527,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identify-cross-over-of-sensitivity-and-specificity">
-     Identify cross-over of sensitivity and specificity
+    <a class="reference internal nav-link" href="#identify-cross-over-point-on-sensitivity-specificity-curve">
+     Identify cross-over point on sensitivity-specificity curve
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -520,7 +564,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -534,19 +578,33 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="measuring-accuracy-of-k-fold-models">
-<h1>Measuring accuracy of k-fold models<a class="headerlink" href="#measuring-accuracy-of-k-fold-models" title="Permalink to this headline">#</a></h1>
-<p>This notebook measures the accuracy an XGBoost model based on 8 features:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="measuring-accuracy-of-xgboost-models">
+<h1>Measuring accuracy of XGBoost models<a class="headerlink" href="#measuring-accuracy-of-xgboost-models" title="Permalink to this headline">#</a></h1>
+<p>(using stratified 5-fold cross validation, and a model with 8 features)</p>
+<section id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+<p>We have decided to simplify our model by using 8 independent features to predict which patients recieve thrombolysis. These are: arrival-to-scan time, infarction, stroke severity, precise onset time, prior disability level, stroke team, use of AF anticoagulents, and onset-to-arrival time. This gives a good balance of performance (in terms of ROC AUC, achieving 99.1% of what can be obtained with all 84 features) and model complexity.</p>
+<p>There are many other ways in which to report model performance - in this notebook we will report on a range of these. The overall model accuracy is 84.7%, so just over 8 out of 10 instances will have a correct prediction. The model is also well calibrated (for example, all of the patients that a model predicts 40% probability for, 40% of them did recieve it).</p>
+</section>
+<section id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+<p>XGBoost models were trained on stratified k-fold cross-validation data. The 8 features in the model are:</p>
 <ul class="simple">
-<li><p>S2BrainImagingTime_min</p></li>
-<li><p>S2StrokeType_Infarction</p></li>
-<li><p>S2NihssArrival</p></li>
-<li><p>S1OnsetTimeType_Precise</p></li>
-<li><p>S2RankinBeforeStroke</p></li>
-<li><p>StrokeTeam</p></li>
-<li><p>AFAnticoagulent_Yes</p></li>
-<li><p>S1OnsetToArrival_min</p></li>
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
 </ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
+</ul>
+<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+</section>
 <section id="aims">
 <h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -558,6 +616,19 @@ title="Print to PDF"
 <li><p>Examine learning curves</p></li>
 <li><p>Check model calibration.</p></li>
 </ul>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Overall accuracy = 84.7% (88.3 for those 69% samples with at least 80% confidence of model)</p></li>
+<li><p>Using nominal threshold (50% probability), specificity (89.4%) is greater than sensitivity (74.1%)</p></li>
+<li><p>The model can achieve 83.7% sensitivity and specificity simultaneously</p></li>
+<li><p>ROC AUC = 0.916</p></li>
+<li><p>The model is well calibrated</p></li>
+</ul>
+<section id="for-definitions-see">
+<h3>For definitions see ***<a class="headerlink" href="#for-definitions-see" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 <section id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
@@ -580,6 +651,8 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 
 <span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">RandomOverSampler</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
 </pre></div>
 </div>
 </div>
@@ -614,8 +687,20 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">#</a></h2>
+<section id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">feature_name_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
 <p>Data has previously been split into 5 stratified k-fold splits.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -626,20 +711,24 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise empty lists</span>
+<span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
-<span class="c1"># Load features (and add S2Thrombolysis)</span>
+<span class="c1"># Read in the names of the selected features for the model</span>
 <span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/feature_selection.csv&#39;</span><span class="p">)</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
-<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
+<span class="c1"># And add the target feature name: S2Thrombolysis</span>
+<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;S2Thrombolysis&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;train_</span><span class="si">{0}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
     <span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+    <span class="n">train</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">feature_name_dict</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">train_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
     <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;test_</span><span class="si">{0}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
     <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">feature_name_dict</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">test_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -760,35 +849,10 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="line-intersect">
-<h3>Line intersect<a class="headerlink" href="#line-intersect" title="Permalink to this headline">#</a></h3>
-<p>Used to find point of sensitivity-specificity curve where sensitivity = specificity.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_intersect</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Returns the point of intersection of the lines passing through a2,a1 and b2,b1.</span>
-<span class="sd">    a1: [x, y] a point on the first line</span>
-<span class="sd">    a2: [x, y] another point on the first line</span>
-<span class="sd">    b1: [x, y] a point on the second line</span>
-<span class="sd">    b2: [x, y] another point on the second line</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">])</span>        <span class="c1"># s for stacked</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">s</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))))</span> <span class="c1"># h for homogeneous</span>
-    <span class="n">l1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>           <span class="c1"># get first line</span>
-    <span class="n">l2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>           <span class="c1"># get second line</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>          <span class="c1"># point of intersection</span>
-    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>                          <span class="c1"># lines are parallel</span>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="o">/</span><span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="fit-model-k-fold">
-<h2>Fit model (k-fold)<a class="headerlink" href="#fit-model-k-fold" title="Permalink to this headline">#</a></h2>
+<section id="fit-model">
+<h2>Fit model<a class="headerlink" href="#fit-model" title="Permalink to this headline">#</a></h2>
+<p>XGBoost models were trained on stratified k-fold cross-validation data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list to store models and calibarion threshold</span>
@@ -810,10 +874,10 @@ title="Print to PDF"
     <span class="n">test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="n">k_fold</span><span class="p">]</span>
     
     <span class="c1"># Get X and y</span>
-    <span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
-    <span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Thrombolysis&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Thrombolysis&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Thrombolysis&quot;</span><span class="p">]</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Thrombolysis&quot;</span><span class="p">]</span>
     
     <span class="c1"># Use oversampling if required</span>
     <span class="k">if</span> <span class="n">use_minority_oversampling</span><span class="p">:</span>
@@ -821,12 +885,12 @@ title="Print to PDF"
         <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">oversample</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>        
     
     <span class="c1"># One hot encode hospitals</span>
-    <span class="n">X_train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+    <span class="n">X_train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
     <span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_train_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">X_test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">X_test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
     <span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_test</span><span class="p">,</span> <span class="n">X_test_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
+    <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
     
     <span class="c1"># Define model</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -1322,7 +1386,7 @@ SD AUC: 0.0021
 </div>
 </div>
 </div>
-<p>Sensitivity-specificity curve:</p>
+<p>Calculate data for sensitivity-specificity curve:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_fold_sensitivity</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1357,7 +1421,7 @@ SD AUC: 0.0021
 </div>
 </div>
 </div>
-<p>Combined plot:</p>
+<p>Create a combined plot: ROC and sensitivity-specificity</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -1393,12 +1457,35 @@ SD AUC: 0.0021
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_29_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_29_0.png" />
+<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_28_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_28_0.png" />
 </div>
 </div>
 </section>
-<section id="identify-cross-over-of-sensitivity-and-specificity">
-<h3>Identify cross-over of sensitivity and specificity<a class="headerlink" href="#identify-cross-over-of-sensitivity-and-specificity" title="Permalink to this headline">#</a></h3>
+<section id="identify-cross-over-point-on-sensitivity-specificity-curve">
+<h3>Identify cross-over point on sensitivity-specificity curve<a class="headerlink" href="#identify-cross-over-point-on-sensitivity-specificity-curve" title="Permalink to this headline">#</a></h3>
+<p>Adjusting the classification threshold allows us to balance sensitivity (the proportion of patients receiving thrombolysis correctly identified) and specificity (the proportion of patients <em>not</em> receiving thrombolysis correctly identified). An increase in sensitivity causes a loss in specificity (and vice versa). Here we identify the pint where specificity and sensitivity hold the same value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_intersect</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Returns the point of intersection of the lines passing through a2,a1 and b2,b1.</span>
+<span class="sd">    a1: [x, y] a point on the first line</span>
+<span class="sd">    a2: [x, y] another point on the first line</span>
+<span class="sd">    b1: [x, y] a point on the second line</span>
+<span class="sd">    b2: [x, y] another point on the second line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">])</span>        <span class="c1"># s for stacked</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">s</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))))</span> <span class="c1"># h for homogeneous</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>           <span class="c1"># get first line</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>           <span class="c1"># get second line</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>          <span class="c1"># point of intersection</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>                          <span class="c1"># lines are parallel</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="o">/</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intersections</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1450,7 +1537,7 @@ SD intersection: 0.0035
 <span class="n">predicted_results</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">hospital_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">]))</span>
+    <span class="n">hospital_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]))</span>
     <span class="n">kfold_result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">]))))</span>
     <span class="n">observed_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">observed</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
     <span class="n">prob_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">predicted_proba</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
@@ -1534,10 +1621,11 @@ SD intersection: 0.0035
 </section>
 <section id="feature-importances">
 <h2>Feature Importances<a class="headerlink" href="#feature-importances" title="Permalink to this headline">#</a></h2>
-<p>Get Random Forest feature importances (average across k-fold results)</p>
+<p>Get XGBoost feature importances (average across k-fold results)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feature names</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span>
 
 <span class="c1"># Get average feature importance from k-fold</span>
 <span class="n">importances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_importance</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
@@ -1579,15 +1667,15 @@ SD intersection: 0.0035
   </thead>
   <tbody>
     <tr>
-      <th>S2StrokeType_Infarction</th>
+      <th>Infarction</th>
       <td>0.351191</td>
     </tr>
     <tr>
-      <th>AFAnticoagulent_Yes</th>
+      <th>Use of AF anticoagulents</th>
       <td>0.047361</td>
     </tr>
     <tr>
-      <th>S1OnsetTimeType_Precise</th>
+      <th>S1OnsetTimeType_Best estimate</th>
       <td>0.028215</td>
     </tr>
     <tr>
@@ -1595,11 +1683,11 @@ SD intersection: 0.0035
       <td>0.012756</td>
     </tr>
     <tr>
-      <th>S2NihssArrival</th>
+      <th>Stroke severity</th>
       <td>0.012489</td>
     </tr>
     <tr>
-      <th>S2RankinBeforeStroke</th>
+      <th>Prior disability level</th>
       <td>0.011771</td>
     </tr>
     <tr>
@@ -1607,7 +1695,7 @@ SD intersection: 0.0035
       <td>0.011207</td>
     </tr>
     <tr>
-      <th>S2BrainImagingTime_min</th>
+      <th>Arrival-to-scan time</th>
       <td>0.011024</td>
     </tr>
     <tr>
@@ -1682,7 +1770,7 @@ SD intersection: 0.0035
 </table>
 </div></div></div>
 </div>
-<p>Bar chart:</p>
+<p>Create a bar chart for the XGBoost feature importance values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up figure</span>
@@ -1894,7 +1982,6 @@ SD intersection: 0.0035
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-
 <span class="c1"># Plot predicted prob vs fraction psotive</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
@@ -1928,7 +2015,8 @@ SD intersection: 0.0035
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>  <span class="c1"># instantiate a second axes that shares the same x-axis</span>
+<span class="c1"># instantiate a second axes that shares the same x-axis</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>  
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">reliability_collated</span><span class="p">[</span><span class="s1">&#39;k-fold&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span>
     <span class="n">k_fold_result</span> <span class="o">=</span> <span class="n">reliability_collated</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
@@ -1986,7 +2074,7 @@ Accuracy: 0.883
 <h2>Check for predicted thrombolysis in test set<a class="headerlink" href="#check-for-predicted-thrombolysis-in-test-set" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">combined_test_set</span><span class="p">[</span><span class="s1">&#39;S2StrokeType_Infarction&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">combined_test_set</span><span class="p">[</span><span class="s1">&#39;Infarction&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
 <span class="n">haemorrhagic_test</span> <span class="o">=</span> <span class="n">model_predictions</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -2039,23 +2127,22 @@ Accuracy: 0.883
         <span class="n">test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         
         <span class="c1"># One hot encode hospitals</span>
-        <span class="n">train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+        <span class="n">train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
         <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">train_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+        <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
         <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">test</span><span class="p">,</span> <span class="n">test_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+        <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
         
         <span class="c1"># Sample from training data</span>
         <span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">train_size</span><span class="p">)</span>
 
         <span class="c1"># Get X and y</span>
-        <span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
-        <span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>        
-   
-    
+        <span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+        <span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>        
+       
         <span class="c1"># Define model</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
@@ -2113,8 +2200,8 @@ Accuracy: 0.883
 </div>
 </div>
 </section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Overall accuracy = 84.7% (88.3 for those 69% samples with at least 80% confidence of model)</p></li>
 <li><p>Using nominal threshold (50% probability), specificity (89.4%) is greater than sensitivity (74.1%)</p></li>
