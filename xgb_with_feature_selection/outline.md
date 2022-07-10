@@ -11,14 +11,11 @@ Experiments using an XGBoost classifier are performed after first reducing the n
 * AFAnticoagulent_Yes
 * S1OnsetToArrival_min
 
-Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:
-
-https://github.com/samuel-book/samuel_shap_paper_1
-
+Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XG-Boost models using all available features.
 
 ## XGBoost models
 
-XGBoost are a decision tree-based method for prediction.
+XGBoost is a decision tree-based method for prediction.
 
 We use *Shapley values* to provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.
 
@@ -36,14 +33,14 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * A very simple example of Shap values based on three people who may contribute to the scores of a pub quiz team.
 
 * *XGBoost feature selection*:
-    * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in ROC AUC score (8 were chosen).
+    * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in area under the ROC curve (ROC AUC) score. Eight were chosen.
 
 * *Check correlation between selected features*:
     * Check correlation between 8 features selected by feature selection.
     
 * *Assess accuracy of k-fold models*:
     * Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).
-    * Plot Receiver Operator Characteristic Curve and measure AUC.
+    * Plot receiver operator characteristic (ROC) curve and measure ROC AUC.
     * Identify cross-over point of sensitivity and specificity.
     * Save individual patient predictions.
     * Compare predicted and observed thrombolysis use at each hospital.
@@ -60,24 +57,24 @@ More information on the `shap` library, used to estimate Shapley values, may be 
         * Beeswarm plots
         * Waterfall plots
         * Scatter plots
-    * Show example of Shap waterfall plot as *probability* rather than *log odds ratio*.
+    * Show example of Shap waterfall plot as *probability* rather than *log-odds ratio*.
   
 * *A comparison of 10K cohort thrombolysis rates across hospitals*:
     * Train XGBoost model on all data except for a 10K set of patients
-    * Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot coding).
+    * Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot encoding).
 
 * *Compare local thrombolysis decisions with benchmark decisions*:
-    * Benchmark decisions are decisions made my the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.
+    * Benchmark decisions are decisions made by the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.
     * Get predicted thrombolysis decisions for all patients at the 30 benchmark hospitals.
     * Check similarity between local decisions and benchmark decisions.
     * Estimate thrombolysis use at each hospital if benchmark decisions made.
     * Save comparison of local and benchmark decisions.
     
 * *Predicting differences between local and benchmark decisions*:
-    * This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit. 
-    * Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be thrombolysed at a local unit.
+    * This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would be thrombolysed at a local unit. 
+    * Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would be thrombolysed at a local unit.
     * Get Shap values for predictions.
         * Check consistency of Shap values and XGBoost Importance across k-fold replications
         * Compare Shap values and XGBoost Importance
-        * Anlyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.
+        * Analyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.
         
