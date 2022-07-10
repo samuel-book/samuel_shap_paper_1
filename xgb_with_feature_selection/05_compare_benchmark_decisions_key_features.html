@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Predicting differences between local and benchmark decisions" href="06_predict_differences_between_local_and_benchmark_key_features.html" />
-    <link rel="prev" title="A comparison of 10K cohort thrombolysis rates across hospitals" href="04_compare_10k_cohort_key_features.html" />
+    <link rel="prev" title="A comparison of 10k cohort thrombolysis rates across hospitals" href="04_compare_10k_cohort_key_features.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -126,12 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_correlation.html">
-   Check correlation between selected features
+   Check correlation between features selected for the model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
-   Measuring accuracy of k-fold models
+   Measuring accuracy of XGBoost models
   </a>
  </li>
  <li class="toctree-l1">
@@ -141,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
-   A comparison of 10K cohort thrombolysis rates across hospitals
+   A comparison of 10k cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -495,23 +495,23 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>VKKDD9172T</th>
-      <td>0.446559</td>
-    </tr>
-    <tr>
-      <th>CNBGF2713O</th>
-      <td>0.423527</td>
-    </tr>
-    <tr>
-      <th>HPWIF9956L</th>
-      <td>0.410463</td>
+      <td>0.4610</td>
     </tr>
     <tr>
       <th>GKONI0110I</th>
-      <td>0.405789</td>
+      <td>0.4356</td>
     </tr>
     <tr>
-      <th>IAZKG9244A</th>
-      <td>0.398862</td>
+      <th>CNBGF2713O</th>
+      <td>0.4207</td>
+    </tr>
+    <tr>
+      <th>HPWIF9956L</th>
+      <td>0.4191</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>0.3981</td>
     </tr>
   </tbody>
 </table>
@@ -942,13 +942,13 @@ Run 5, accuracy: 0.844
       <th>AGNOF1041H</th>
       <td>307</td>
       <td>307.0</td>
-      <td>401.0</td>
+      <td>402.0</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
       <td>528</td>
       <td>512.0</td>
-      <td>565.0</td>
+      <td>556.0</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
@@ -960,7 +960,7 @@ Run 5, accuracy: 0.844
       <th>APXEE8191H</th>
       <td>130</td>
       <td>116.0</td>
-      <td>170.0</td>
+      <td>171.0</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
@@ -982,7 +982,7 @@ Run 5, accuracy: 0.844
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Change in thrombolysis with benchmark vote: 1.226
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Change in thrombolysis with benchmark vote: 1.221
 </pre></div>
 </div>
 </div>
@@ -1083,20 +1083,20 @@ Run 5, accuracy: 0.844
       <th>AGNOF1041H</th>
       <td>307</td>
       <td>307.0</td>
-      <td>401.0</td>
+      <td>402.0</td>
       <td>871</td>
       <td>0.352468</td>
-      <td>0.460390</td>
+      <td>0.461538</td>
       <td>False</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
       <td>528</td>
       <td>512.0</td>
-      <td>565.0</td>
+      <td>556.0</td>
       <td>1428</td>
       <td>0.369748</td>
-      <td>0.395658</td>
+      <td>0.389356</td>
       <td>True</td>
     </tr>
     <tr>
@@ -1113,10 +1113,10 @@ Run 5, accuracy: 0.844
       <th>APXEE8191H</th>
       <td>130</td>
       <td>116.0</td>
-      <td>170.0</td>
+      <td>171.0</td>
       <td>574</td>
       <td>0.226481</td>
-      <td>0.296167</td>
+      <td>0.297909</td>
       <td>False</td>
     </tr>
     <tr>
@@ -1255,7 +1255,7 @@ Run 5, accuracy: 0.844
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">A comparison of 10K cohort thrombolysis rates across hospitals</p>
+            <p class="prev-next-title">A comparison of 10k cohort thrombolysis rates across hospitals</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="06_predict_differences_between_local_and_benchmark_key_features.html" title="next page">

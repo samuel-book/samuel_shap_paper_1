@@ -126,12 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_correlation.html">
-   Check correlation between selected features
+   Check correlation between features selected for the model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
-   Measuring accuracy of k-fold models
+   Measuring accuracy of XGBoost models
   </a>
  </li>
  <li class="toctree-l1">
@@ -141,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
-   A comparison of 10K cohort thrombolysis rates across hospitals
+   A comparison of 10k cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1">
@@ -348,11 +348,10 @@ title="Print to PDF"
 <li><p>AFAnticoagulent_Yes</p></li>
 <li><p>S1OnsetToArrival_min</p></li>
 </ul>
-<p>Note: The GitHub repository also includes the same notebooks, but for XGBoost models using all available features:</p>
-<p><a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">https://github.com/samuel-book/samuel_shap_paper_1</a></p>
+<p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features.</p>
 <section id="xgboost-models">
 <h2>XGBoost models<a class="headerlink" href="#xgboost-models" title="Permalink to this headline">#</a></h2>
-<p>XGBoost are a decision tree-based method for prediction.</p>
+<p>XGBoost is a decision tree-based method for prediction.</p>
 <p>We use <em>Shapley values</em> to provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
 <p>Shapley values may be used across model types, and so provide a model-agnostic measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows black box models like neural networks to be explained, at least in part.</p>
 <p>For more on Shapley values in general see Chris Molner’s excellent book chapter:</p>
@@ -369,7 +368,7 @@ title="Print to PDF"
 </li>
 <li><p><em>XGBoost feature selection</em>:</p>
 <ul>
-<li><p>Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in ROC AUC score (8 were chosen).</p></li>
+<li><p>Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in area under the ROC curve (ROC AUC) score. Eight were chosen.</p></li>
 </ul>
 </li>
 <li><p><em>Check correlation between selected features</em>:</p>
@@ -380,7 +379,7 @@ title="Print to PDF"
 <li><p><em>Assess accuracy of k-fold models</em>:</p>
 <ul>
 <li><p>Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).</p></li>
-<li><p>Plot Receiver Operator Characteristic Curve and measure AUC.</p></li>
+<li><p>Plot receiver operator characteristic (ROC) curve and measure ROC AUC.</p></li>
 <li><p>Identify cross-over point of sensitivity and specificity.</p></li>
 <li><p>Save individual patient predictions.</p></li>
 <li><p>Compare predicted and observed thrombolysis use at each hospital.</p></li>
@@ -401,18 +400,18 @@ title="Print to PDF"
 <li><p>Scatter plots</p></li>
 </ul>
 </li>
-<li><p>Show example of Shap waterfall plot as <em>probability</em> rather than <em>log odds ratio</em>.</p></li>
+<li><p>Show example of Shap waterfall plot as <em>probability</em> rather than <em>log-odds ratio</em>.</p></li>
 </ul>
 </li>
 <li><p><em>A comparison of 10K cohort thrombolysis rates across hospitals</em>:</p>
 <ul>
 <li><p>Train XGBoost model on all data except for a 10K set of patients</p></li>
-<li><p>Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot encoding).</p></li>
 </ul>
 </li>
 <li><p><em>Compare local thrombolysis decisions with benchmark decisions</em>:</p>
 <ul>
-<li><p>Benchmark decisions are decisions made my the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.</p></li>
+<li><p>Benchmark decisions are decisions made by the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.</p></li>
 <li><p>Get predicted thrombolysis decisions for all patients at the 30 benchmark hospitals.</p></li>
 <li><p>Check similarity between local decisions and benchmark decisions.</p></li>
 <li><p>Estimate thrombolysis use at each hospital if benchmark decisions made.</p></li>
@@ -421,13 +420,13 @@ title="Print to PDF"
 </li>
 <li><p><em>Predicting differences between local and benchmark decisions</em>:</p>
 <ul>
-<li><p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit.</p></li>
-<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be thrombolysed at a local unit.</p></li>
+<li><p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would be thrombolysed at a local unit.</p></li>
+<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would be thrombolysed at a local unit.</p></li>
 <li><p>Get Shap values for predictions.</p>
 <ul>
 <li><p>Check consistency of Shap values and XGBoost Importance across k-fold replications</p></li>
 <li><p>Compare Shap values and XGBoost Importance</p></li>
-<li><p>Anlyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.</p></li>
+<li><p>Analyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.</p></li>
 </ul>
 </li>
 </ul>

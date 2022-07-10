@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>A comparison of 10K cohort thrombolysis rates across hospitals &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
+    <title>A comparison of 10k cohort thrombolysis rates across hospitals &#8212; Applying explainable machine learning to national stroke audit data to explore variation in decisions to use thrombolysis</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -126,12 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_correlation.html">
-   Check correlation between selected features
+   Check correlation between features selected for the model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
-   Measuring accuracy of k-fold models
+   Measuring accuracy of XGBoost models
   </a>
  </li>
  <li class="toctree-l1">
@@ -141,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   A comparison of 10K cohort thrombolysis rates across hospitals
+   A comparison of 10k cohort thrombolysis rates across hospitals
   </a>
  </li>
  <li class="toctree-l1">
@@ -298,9 +298,31 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims:
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-definitions-see">
+     For definitions see ***
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
@@ -313,20 +335,20 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data">
    Load data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combined-xgboost-model">
-   Combined XGBoost Model
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#train-model">
-     Train model
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate">
      Pass 10k cohort through all hospital models and get thrombolysis rate
@@ -334,7 +356,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
-     Plot thrombolysis rate of 10K cohort at each hospital
+     Plot thrombolysis rate of 10k cohort at each hospital
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -345,7 +367,17 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#plot-thrombolysis-rate-vs-unit-size">
+   Plot thrombolysis rate vs unit size
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-level-of-agreement-between-hospitals">
+   Compare level of agreement between hospitals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -358,7 +390,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A comparison of 10K cohort thrombolysis rates across hospitals</h1>
+                <h1>A comparison of 10k cohort thrombolysis rates across hospitals</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -369,9 +401,31 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aims">
    Aims:
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-definitions-see">
+     For definitions see ***
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
@@ -384,20 +438,20 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data">
    Load data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combined-xgboost-model">
-   Combined XGBoost Model
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#train-model">
-     Train model
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate">
      Pass 10k cohort through all hospital models and get thrombolysis rate
@@ -405,7 +459,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
-     Plot thrombolysis rate of 10K cohort at each hospital
+     Plot thrombolysis rate of 10k cohort at each hospital
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -416,7 +470,17 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#plot-thrombolysis-rate-vs-unit-size">
+   Plot thrombolysis rate vs unit size
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-level-of-agreement-between-hospitals">
+   Compare level of agreement between hospitals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -431,24 +495,53 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals">
-<h1>A comparison of 10K cohort thrombolysis rates across hospitals<a class="headerlink" href="#a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals" title="Permalink to this headline">#</a></h1>
-<p>This notebook compares the expected thrombolysis rate of a 10K cohort across 132 hospitals. The XGBoost model uses 8 features:</p>
+<h1>A comparison of 10k cohort thrombolysis rates across hospitals<a class="headerlink" href="#a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals" title="Permalink to this headline">#</a></h1>
+<section id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+<p>In response to stroke teams being told that they are performing differently from other, they often state that this is due to them having a different set of patients.</p>
+<p>This does have some truth to it. For example the hospitals in London will have younger patients, arriving sooner than compared to hospitals in more rural locations.</p>
+<p>In order to remove patient differences from results, a common 10k cohort of patients will be used with each of the hospital models. That way any difference is due to hospital factors, and not patient factors.</p>
+<p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45% across the 132 hospitals. The size of the hospital only accounted for 10% of the variation in thrombolysis use, and so there are other factors that account for the remaining 90%.</p>
+</section>
+<section id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+<p>An XGBoost model is trained on all but a 10k patient cohort, to predict which patient will recieve thrombolysis.The 10k patient cohort is then used in two ways: 1) as the test set for the model fitting process 2) as a common set of patients that are sent to each hospital in turn to obtain a thrombolysis rate that is comparable across hosptials which has any patient factors removed.</p>
+<p>The XGBoost model is fitted to all but 10k instances, and uses 8 features:</p>
 <ul class="simple">
-<li><p>S2BrainImagingTime_min</p></li>
-<li><p>S2StrokeType_Infarction</p></li>
-<li><p>S2NihssArrival</p></li>
-<li><p>S1OnsetTimeType_Precise</p></li>
-<li><p>S2RankinBeforeStroke</p></li>
-<li><p>StrokeTeam</p></li>
-<li><p>AFAnticoagulent_Yes</p></li>
-<li><p>S1OnsetToArrival_min</p></li>
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
 </ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
+</ul>
+<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+</section>
 <section id="aims">
 <h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Train XGBoost model on all data except for a 10K set of patients</p></li>
-<li><p>Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
+<li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Compare the thrombolysis rate across the 132 hospitals. This can be seen as comparing the hosptial effect, as the patient factors have been removed.</p></li>
+<li><p>Save thrombolysis rate at each hospital for the 10k patient cohort (for use in next notebook).</p></li>
 </ul>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing (84.7%, see notebook 02).</p></li>
+<li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
+<li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.</p></li>
+</ul>
+<section id="for-definitions-see">
+<h3>For definitions see ***<a class="headerlink" href="#for-definitions-see" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 <section id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
@@ -465,8 +558,11 @@ title="Print to PDF"
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">import</span> <span class="nn">json</span>
 </pre></div>
 </div>
 </div>
@@ -488,51 +584,73 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+<section id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_loc</span> <span class="o">=</span> <span class="s1">&#39;../data/kfold_5fold/&#39;</span>
-
-<span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-
-<span class="c1"># Load features (and add S2Thrombolysis)</span>
-<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/feature_selection.csv&#39;</span><span class="p">)</span>
-<span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
-<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;train_</span><span class="si">{0}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-    <span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
-    <span class="n">train_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
-    <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;test_</span><span class="si">{0}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-    <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
-    <span class="n">test_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">feature_name_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="combined-xgboost-model">
-<h2>Combined XGBoost Model<a class="headerlink" href="#combined-xgboost-model" title="Permalink to this headline">#</a></h2>
-<section id="train-model">
-<h3>Train model<a class="headerlink" href="#train-model" title="Permalink to this headline">#</a></h3>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+<p>10k cohort of patients in test data, rest in training data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_loc</span> <span class="o">=</span> <span class="s1">&#39;../data/10k_training_test/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_test.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read in the names of the selected features for the model</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/feature_selection.csv&#39;</span><span class="p">)</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
+<span class="c1"># And add the target feature name: S2Thrombolysis</span>
+<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="c1"># Select features</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+<span class="n">train</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">feature_name_dict</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+<span class="n">test</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">feature_name_dict</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Store admissions per hospital</span>
+<span class="n">df_admissions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df_admissions</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Admissions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-xgboost-model">
+<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
+<p>Train a XGBoost model on the 10k cohort train/test dataset</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get X and y</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
 
 <span class="c1"># One hot encode hospitals</span>
-<span class="n">X_train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+<span class="n">X_train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_train_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">X_test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_test</span><span class="p">,</span> <span class="n">X_test_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
+<span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
 
 <span class="c1"># Define model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -551,17 +669,17 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.8442392161279423
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.8414
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 <section id="pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate">
 <h3>Pass 10k cohort through all hospital models and get thrombolysis rate<a class="headerlink" href="#pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate" title="Permalink to this headline">#</a></h3>
+<p>For each hospital, set all of the 10k patients in the test set as attending that hospital, and calculate the thrombolysis rate. This will give a thrombolysis rate for each hospital with patient variation removed, and only hospital factors remaining.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]))</span>
 <span class="n">hospitals</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="n">thrombolysis_rate</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">single_predictions</span> <span class="o">=</span> <span class="p">[]</span>
@@ -569,7 +687,7 @@ title="Print to PDF"
 <span class="k">for</span> <span class="n">hospital</span> <span class="ow">in</span> <span class="n">hospitals</span><span class="p">:</span>
     
     <span class="c1"># Get test data without thrombolysis hospital or stroke team</span>
-    <span class="n">X_test_no_hosp</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="s1">&#39;StrokeTeam&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">X_test_no_hosp</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     
     <span class="c1"># Copy hospital dataframe and change hospital ID (after setting all to zero)</span>
     <span class="n">X_test_adjusted_hospital</span> <span class="o">=</span> <span class="n">X_test_hosp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -591,7 +709,18 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Sort by hospital 10K thrombolysis rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert individual predictions (a list of arrays) to a NumPy array, and transpose</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">single_predictions</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># Convert to DataFrame</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">patient_results</span><span class="p">)</span>
+<span class="n">patient_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./output/10k)individual_predictions.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sort by hospital 10k thrombolysis rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_by_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">hospitals</span><span class="p">)</span>
@@ -608,7 +737,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
-<h3>Plot thrombolysis rate of 10K cohort at each hospital<a class="headerlink" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital" title="Permalink to this headline">#</a></h3>
+<h3>Plot thrombolysis rate of 10k cohort at each hospital<a class="headerlink" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -621,7 +750,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_14_0.png" src="../_images/04_compare_10k_cohort_key_features_14_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_18_0.png" src="../_images/04_compare_10k_cohort_key_features_18_0.png" />
 </div>
 </div>
 </section>
@@ -642,21 +771,212 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.280
-StDev: 0.062
-Min: 0.101
-Max0.447
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.275
+StDev: 0.067
+Min: 0.096
+Max0.461
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<section id="plot-thrombolysis-rate-vs-unit-size">
+<h2>Plot thrombolysis rate vs unit size<a class="headerlink" href="#plot-thrombolysis-rate-vs-unit-size" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Join dataframes together (on index)</span>
+<span class="n">thrombolysis_by_hosp</span> <span class="o">=</span> <span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_admissions</span><span class="p">[</span><span class="s2">&quot;Admissions&quot;</span><span class="p">])</span>
+
+<span class="c1"># Setup data for chart</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Admissions&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Fit a regression line to the points</span>
+<span class="n">slr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">slr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">slr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">r_square</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Create scatter plot with regression line</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">slr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate (for 10k patient cohort)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Admissions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04_compare_10k_cohort_key_features_22_0.png" src="../_images/04_compare_10k_cohort_key_features_22_0.png" />
+</div>
+</div>
+</section>
+<section id="compare-level-of-agreement-between-hospitals">
+<h2>Compare level of agreement between hospitals<a class="headerlink" href="#compare-level-of-agreement-between-hospitals" title="Permalink to this headline">#</a></h2>
+<p>In this section we look at how many hospitals agree on whether to give each patient in the 10k cohort thrombolysis or not.</p>
+<p>Collating individual predictions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up data frame and get the number and percent hopsitals giving thrombolysis</span>
+<span class="n">agreement</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">patient_results</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Percent agree can be to give thrombolysis (p) or not (100-p)</span>
+<span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;percent_agree&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">100</span><span class="o">-</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]]</span>
+<span class="c1"># Add in whether thrombolysis was actually given</span>
+<span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Agreement on treatment </span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">xvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">p</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">])</span>\
+         <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">]</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">p</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">)</span>\
+         <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">]</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Thrombolysed&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">p</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">)</span>\
+         <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">]</span>
+      
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Not thrombolysed&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+         
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;% Hospitals that agree on given treatment&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proportion of patients&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+      
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./predictions/10k_individual_predictions.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04_compare_10k_cohort_key_features_27_0.png" src="../_images/04_compare_10k_cohort_key_features_27_0.png" />
+</div>
+</div>
+<p>Show statistics:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set percent of hospital to agree</span>
+<span class="n">xvals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
+
+<span class="c1"># Find proportion of patients with agreement for either treat/no-treat decsion</span>
+<span class="n">agree_all</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">p</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">])</span>\
+         <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">]</span>
+
+<span class="c1"># Find proportion of thrombolysed patients with agreement</span>
+<span class="n">agree_thromb</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">p</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">)</span>\
+         <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">]</span>
+
+<span class="c1"># Find proportion of non-thrombolysed patients with agreement</span>
+<span class="n">agree_non_thromb</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">p</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">)</span>\
+         <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">agreement</span><span class="p">[</span><span class="n">agreement</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">percent_agree</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span><span class="p">]</span>
+
+<span class="c1"># Put in DataFrame</span>
+<span class="n">results_agree</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">results_agree</span><span class="p">[</span><span class="s1">&#39;% Hospitals Agree&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xvals</span>
+<span class="n">results_agree</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;% Hospitals Agree&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">results_agree</span><span class="p">[</span><span class="s1">&#39;Any&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">agree_all</span>
+<span class="n">results_agree</span><span class="p">[</span><span class="s1">&#39;Patient thrombolysed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">agree_thromb</span>
+<span class="n">results_agree</span><span class="p">[</span><span class="s1">&#39;Patient not thrombolysed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">agree_non_thromb</span>
+<span class="n">results_agree</span> <span class="o">=</span> <span class="n">results_agree</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">results_agree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Any</th>
+      <th>Patient thrombolysed</th>
+      <th>Patient not thrombolysed</th>
+    </tr>
+    <tr>
+      <th>% Hospitals Agree</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>80</th>
+      <td>0.874</td>
+      <td>0.787</td>
+      <td>0.911</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>0.785</td>
+      <td>0.631</td>
+      <td>0.849</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.694</td>
+      <td>0.481</td>
+      <td>0.784</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In the table above, for example, 87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse.</p>
+</section>
+<section id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>The 10K cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing.</p></li>
-<li><p>The predicted thrombolysis use in the 10K cohort of patients ranged from 10% to 45%.</p></li>
+<li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing.</p></li>
+<li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
+<li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.</p></li>
+</ul>
+<p>It is easier to find majority agreement on who not to thrombolyse than who to thrombolyse. For example:</p>
+<ul class="simple">
+<li><p>87.4% of all patients have a treatment decision that is agreed by 80% hospitals</p></li>
+<li><p>Of those who were not given thrombolysis, 84.1% had agreement by 80% hospitals</p></li>
+<li><p>Of those who were given thrombolysis, 78.8% had agreement by 80% hospitals</p></li>
 </ul>
 </section>
 </section>
