@@ -1,4 +1,4 @@
-# Gloassary of technical terms
+# Glossary of technical terms
 
 ## Receiver operating characteristic (ROC) curve
 
