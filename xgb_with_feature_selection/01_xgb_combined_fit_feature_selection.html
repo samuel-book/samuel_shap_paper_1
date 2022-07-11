@@ -559,7 +559,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature  1: S2BrainImagingTime_min, AUC: 0.715
 Feature  2: S2StrokeType_Infarction, AUC: 0.792
 Feature  3: S2NihssArrival, AUC: 0.850
-Feature  4: S1OnsetTimeType_Best estimate, AUC: 0.875
+Feature  4: S1OnsetTimeType_Precise, AUC: 0.875
 Feature  5: S2RankinBeforeStroke, AUC: 0.890
 Feature  6: StrokeTeam, AUC: 0.903
 Feature  7: AFAnticoagulent_Yes, AUC: 0.914
@@ -574,13 +574,13 @@ Feature 15: Loc, AUC: 0.921
 Feature 16: S2NewAFDiagnosis_No, AUC: 0.921
 Feature 17: S1AdmissionHour_18:00 to 20:59, AUC: 0.922
 Feature 18: S1OnsetInHospital_Yes, AUC: 0.922
-Feature 19: S1OnsetTimeType_Not known, AUC: 0.922
-Feature 20: S1OnsetTimeType_Precise, AUC: 0.922
-Feature 21: S1Ethnicity_Mixed, AUC: 0.922
-Feature 22: S1OnsetDateType_Precise, AUC: 0.922
-Feature 23: AFAnticoagulentVitK_No, AUC: 0.922
-Feature 24: AFAntiplatelet_No but, AUC: 0.922
-Feature 25: S1Ethnicity_Black, AUC: 0.922
+Feature 19: S1Ethnicity_Mixed, AUC: 0.922
+Feature 20: S1OnsetDateType_Precise, AUC: 0.922
+Feature 21: AFAnticoagulentVitK_No, AUC: 0.922
+Feature 22: AFAntiplatelet_No but, AUC: 0.922
+Feature 23: S1Ethnicity_Black, AUC: 0.922
+Feature 24: S2NewAFDiagnosis_Yes, AUC: 0.922
+Feature 25: AFAnticoagulentHeparin_Yes, AUC: 0.922
 </pre></div>
 </div>
 </div>
@@ -647,7 +647,7 @@ Feature 25: S1Ethnicity_Black, AUC: 0.922
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>S1OnsetTimeType_Best estimate</td>
+      <td>S1OnsetTimeType_Precise</td>
       <td>0.874870</td>
       <td>0.002517</td>
     </tr>
@@ -752,51 +752,51 @@ Feature 25: S1Ethnicity_Black, AUC: 0.922
     <tr>
       <th>18</th>
       <td>19</td>
-      <td>S1OnsetTimeType_Not known</td>
-      <td>0.921730</td>
-      <td>0.002421</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>20</td>
-      <td>S1OnsetTimeType_Precise</td>
-      <td>0.921730</td>
-      <td>0.002421</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>21</td>
       <td>S1Ethnicity_Mixed</td>
       <td>0.921684</td>
       <td>0.002376</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>22</td>
+      <th>19</th>
+      <td>20</td>
       <td>S1OnsetDateType_Precise</td>
       <td>0.921683</td>
       <td>0.002392</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>23</td>
+      <th>20</th>
+      <td>21</td>
       <td>AFAnticoagulentVitK_No</td>
       <td>0.921822</td>
       <td>0.002344</td>
     </tr>
     <tr>
-      <th>23</th>
-      <td>24</td>
+      <th>21</th>
+      <td>22</td>
       <td>AFAntiplatelet_No but</td>
       <td>0.921853</td>
       <td>0.002163</td>
     </tr>
     <tr>
-      <th>24</th>
-      <td>25</td>
+      <th>22</th>
+      <td>23</td>
       <td>S1Ethnicity_Black</td>
       <td>0.921984</td>
       <td>0.002208</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>S2NewAFDiagnosis_Yes</td>
+      <td>0.922160</td>
+      <td>0.002563</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>AFAnticoagulentHeparin_Yes</td>
+      <td>0.922228</td>
+      <td>0.002528</td>
     </tr>
   </tbody>
 </table>
