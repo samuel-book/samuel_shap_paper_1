@@ -1,6 +1,7 @@
 format: jb-book
 root: introduction/intro
 chapters:
+- file: glossary
 - file: xgb_with_feature_selection/outline
 - file: shap_worked_example
 - file: xgb_with_feature_selection/01_xgb_combined_fit_feature_selection
