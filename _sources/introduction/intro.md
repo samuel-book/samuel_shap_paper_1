@@ -90,7 +90,7 @@ Shap plots could be used to explain predictions of any individual patient (e.g. 
 :::{figure-md} waterfall_example
 <img src="./images/xgb_waterfall_low_probability.jpg" width="800">
 
-An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) slow arrival-to-scan time (138 mins), low stroke severity (NIHSS 2), and 3 the hospital attended.
+An example of a Shap *waterfall* plot showing the most influential features in influencing the model's prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).
 :::
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XG-Boost model
