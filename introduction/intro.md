@@ -95,7 +95,7 @@ An example of a Shap *waterfall* plot showing the most influential features in i
 
 ### Predicting *differences* in thrombolysis use between hospitals with an XG-Boost model
 
-We trained an XG-Boost model to predict different choices in thrombolysis between units with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
+We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
 
 1. With increasing disability before stroke.
 2. In milder strokes.
