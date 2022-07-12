@@ -1,0 +1,63 @@
+Item,Description
+StrokeTeam,Pseudonymised SSNAP Routinely Admitting team unique identifier
+PatientUID,Pseudonymised patient unique identifier
+Pathway,"Total number of team transfers, excluding community teams"
+S1AgeOnArrival,Age on arrival aggregated to 5 year bands
+MoreEqual80y,Whether the patient is >= 80 years old at the moment of the stroke
+S1Gender,Gender
+S1Ethnicity,"Patient Ethnicity. Aggregated to White, Black, Mixed, Asian and Other"
+S1OnsetInHospital,Whether the patient was already an inpatient at the time of stroke
+S1OnsetToArrival_min,"Time from symptom onset to arrival at hospital in minutes, where known and if out of hospital stroke"
+S1OnsetDateType,"Whether the date of onset given is precise, best estimate or if the stroke occurred while sleep"
+S1OnsetTimeType,"Whether the time of symptom onset given is precise, best estimate, not known"
+S1ArriveByAmbulance,Whether the patient arrived by ambulance
+S1AdmissionHour,"Hour of arrival, aggregates to 3 hour epochs"
+S1AdmissionDay,Day of week at the moment of admission
+S1AdmissionQuarter,Year quarter (Q1: Jan-Mar; Q2:April-Jun; Q3: Jul-Sept; Q4: Oct-Dec)
+S1AdmissionYear,Year of admission
+CongestiveHeartFailure,Comorbidbities: Pre-Stroke Congestive Heart Failure
+Hypertension,Comorbidbities: Pre-Stroke Systemic Hypertension
+AtrialFibrillation,"Comorbidities: Pre-Stroke Atrial Fibrillation (persistent, permanent, or paroxysmal)"
+Diabetes,Comorbidities: Pre-Stroke Diabetes Mellitus
+StrokeTIA,Comorbidities: Pre-Stroke history of stroke or Transient Ischaemic Attack (TIA)
+AFAntiplatelet,"Only available if ""Yes"" to Atrial Fibrillation (Q2.1.3). Whether the patient was on antiplatelet medication prior to admission                              "
+AFAnticoagulent,"Prior to 01-Dec-2017: Only available if ""Yes"" to Atrial Fibrillation (Q2.1.3); From 01-Dec-2017: available even if patient is not in Atrial Fibrillation prior to admission. Whether the patient was on anticoagulant medication prior to admission"
+AFAnticoagulentVitK,"If the patient was receiving anticoagulant medication, was it vitamin K antagonists"
+AFAnticoagulentDOAC,"If the patient was receiving anticoagulant medication, was it direct oral anticoagulants (DOACs)"
+AFAnticoagulentHeparin,"If the patient was receiving anticoagulant medication, was it Heparin"
+S2INR,Patient's International Normalised ratio (INR) on arrival at hospital (available since 01-Dec-2017)
+S2INRHigh,INR was greater than 10 on arrival at hospital (available since 01-Dec-2017)
+S2INRNK,INR not checked (available since 01-Dec-2017)
+S2NewAFDiagnosis,Whether a new diagnosis of Atrial Fibrillation was made on admission
+S2RankinBeforeStroke,Patient's modified Rankin Scale score before this stroke (Higher values indicate more disability)
+S2NihssArrival,National Institutes of Health Stroke Scale score on arrival at hospital
+Loc,National Institutes of Health Stroke Scale Item 1a Level of Consciousness (higher values indicate more severe deficit)
+LocQuestions,National Institutes of Health Stroke Scale Item 1b Level of Consciousness Questions (higher values indicate more severe deficit)
+LocCommands,National Institutes of Health Stroke Scale Item 1c Level of Consciousness Commands (higher values indicate more severe deficit)
+BestGaze,National Institutes of Health Stroke Scale Item 2 Best Gaze (higher values indicate more severe deficit)
+Visual,National Institutes of Health Stroke Scale Item 3 Visual Fields (higher values indicate more severe deficit)
+FacialPalsy,National Institutes of Health Stroke Scale Item 4 Facial Paresis (higher values indicate more severe deficit)
+MotorArmLeft,National Institutes of Health Stroke Scale Item 5a Motor Arm - Left (higher values indicate more severe deficit)
+MotorArmRight,National Institutes of Health Stroke Scale Item 5b Motor Arm - Right (higher values indicate more severe deficit)
+MotorLegLeft,National Institutes of Health Stroke Scale Item 6a Motor Leg - Left (higher values indicate more severe deficit)
+MotorLegRight,National Institutes of Health Stroke Scale Item 6b Motor Leg - Right (higher values indicate more severe deficit)
+LimbAtaxia,National Institutes of Health Stroke Scale Item 7 Limb Ataxia (higher values indicate more severe deficit)
+Sensory,National Institutes of Health Stroke Scale Item 8 Sensory (higher values indicate more severe deficit)
+BestLanguage,National Institutes of Health Stroke Scale Item 9 Best Language (higher values indicate more severe deficit)
+Dysarthria,National Institutes of Health Stroke Scale Item 10 Dysarthria (higher values indicate more severe deficit)
+ExtinctionInattention,National Institutes of Health Stroke Scale Item 11 Extinction and Inattention (higher values indicate more severe deficit)
+S2BrainImagingTime_min,"Time from Clock Start to brain scan. In minutes. ""Clock Start"" is used throughout SSNAP reporting to refer to the date and time of arrival at first hospital for newly arrived patients, or to the date and time of symptom onset if patient already in hospital at the time of their stroke."
+S2StrokeType,Whether the stroke type was infarction or primary intracerebral haemorrhage
+S2Thrombolysis,Whether the patient was given thrombolysis (clot busting medication)
+Haemorrhagic,"If the answer to question 2.6 was ""no but"", the reason was Haemorrhagic stroke"
+TimeWindow,"If the answer to question 2.6 was ""no but"", the reason was Age"
+Comorbidity,"If the answer to question 2.6 was ""no but"", the reason was Co-morbidity"
+Medication,"If the answer to question 2.6 was ""no but"", the reason was Medication"
+Refusal,"If the answer to question 2.6 was ""no but"", the reason was Refusal"
+Age,"If the answer to question 2.6 was ""no but"", the reason was Age"
+Improving,"If the answer to question 2.6 was ""no but"", the reason was Symptoms Improving"
+TooMildSevere,"If the answer to question 2.6 was ""no but"", the reason was Stroke too mild or too severe"
+TimeUnknownWakeUp,"If the answer to question 2.6 was ""no but"", the reason was Symptom onset time unknown/wake-up stroke"
+OtherMedical,"If the answer to question 2.6 was ""no but"", the reason was Other medical reason"
+S2ThrombolysisTime_min,"Time from Clock Start to thrombolysis. In minutes. ""Clock Start"" is used throughout SSNAP reporting to refer to the date and time of arrival at first hospital for newly arrived patients, or to the date and time of symptom onset if patient already in hospital at the time of their stroke."
+S2TIAInLastMonth,Whether the patient had a Transient Ischaemic Attack during the last month. Item from the SSNAP comprehensive dataset questions (not mandatory)
