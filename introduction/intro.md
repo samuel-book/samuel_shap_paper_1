@@ -103,13 +103,13 @@ We trained an XG-Boost model to predict different choices in thrombolysis betwee
 4. With longer onset-to-arrival times.
 5. With longer arrival-to-scan times.
 
-We can visualise the general effects of these features, using Shap in several ways. Firstly we can show the average effect of each feature as a violin plot ({numref}`Figure {number} <shap_violin>`), which shows the spread of the size of Shap values for each feature. In this type of plot we ignore the direction of the Shap value - that is we ignore whether a value is positive or negative; Shap values of -3 or +3 would both have an effect size of 3.
+We can visualise the general effects of these features, using Shap in several ways. Firstly we can show the average effect of each feature as a violin plot ({numref}`Figure {number} <shap_violin>`), which shows the spread of the size of average Shap values for each feature when measured in five different experiments (to understand how reproducible our measurement of Shap values are). In this type of plot we ignore the direction of the Shap value - that is we ignore whether a value is positive or negative; Shap values of -3 or +3 would both have an effect size of 3.
 
 
 :::{figure-md} shap_violin
 <img src="./images/decision_comparison_shap_violin_key_features.jpg" width="450">
 
-A *violin plot* showing how much each feature affects the model prediction. The shape of the *violin* shows the spread of the size of Shap values for each feature - where the violin is wider, there are more data points around that value. The end bars show the lowest and highest values, and the middle bar shows the *median* value, that is the middle number if all the Shap values were sorted in order.
+A *violin plot* showing how much each feature affects the model prediction, as shown by the average (mean) Shap value. We measure this in five sepraate experiements. The shape of the *violin* shows the spread of the size of Shap values for each feature over the five experiments - where the violin is wider, there are more data points around that value. The end bars show the lowest and highest values, and the middle bar shows the *median* value, that is the middle number if all the five average Shap values were sorted in order.
 :::
 
 A second way to visualise the effects of the features is to plot a *beeswarm* plot ({numref}`Figure {number} <shap_beeswarm>`). In this case we plot all the individual Shap values, along with an indicator of the feature value.
