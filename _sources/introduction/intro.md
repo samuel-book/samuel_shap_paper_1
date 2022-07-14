@@ -127,6 +127,7 @@ We may examine each feature in more detail using a violin plot again, though thi
 <img src="./images/xgb_prediciting_difference_shap_violin_Stroke severity.jpg" width="600">
 
 A violin plot showing the individual Shap values for each level of stroke severity (NIHSS on arrival). 
+:::
 
 ## Conclusions
 
