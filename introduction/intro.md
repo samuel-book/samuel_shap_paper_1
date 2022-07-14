@@ -116,7 +116,7 @@ A second way to visualise the effects of the features is to plot a *beeswarm* pl
 
 
 :::{figure-md} shap_beeswarm
-<img src="./images/xgb_decision_comparison_beeswarm_key_features.jpg" width="600">
+<img src="./images/xgb_decision_comparison_beeswarm_key_features.jpg" width="800">
 
 A *beeswarm plot* of Shap values, along with feature value (shown by the colour of the point) for all features. Black or blue points have low feature value (e.g. low prior disability level), and yellow/red/grey points have high feature value (e.g. high prior disability level), with green points being in th emiddle of the range of feature values. A negative Shap value pushes the model towards saying that patient *would not* receive thrombolysis, and a positive Shap vales pushes the model towards saying that patient *would* receive thrombolysis.
 :::
