@@ -124,7 +124,7 @@ A *beeswarm plot* of Shap values, along with feature value (shown by the colour 
 We may examine each feature in more detail using a violin plot again, though this time we draw a violin for level of one feature. {numref}`Figure {number} <shap_compare_violin>` shows a violin plot for Shap values for each level of stroke severity.
 
 :::{figure-md} shap_compare_violin
-<img src="./images/xgb_prediciting_difference_shap_violin_S2NihssArrival.jpg.jpg" width="600">
+<img src="./images/xgb_prediciting_difference_shap_violin_S2NihssArrival.jpg" width="600">
 
 A violin plot showing the individual Shap values for each level of stroke severity (NIHSS on arrival). 
 
