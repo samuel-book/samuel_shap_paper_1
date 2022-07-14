@@ -107,7 +107,7 @@ We can visualise the general effects of these features, using Shap in several wa
 
 
 :::{figure-md} shap_violin
-<img src="./images/decision_comparison_shap_violin_key_features.jpg" width="400">
+<img src="./images/decision_comparison_shap_violin_key_features.jpg" width="450">
 
 A *violin plot* showing how much each feature affects the model prediction. The shape of the *violin* shows the spread of the size of Shap values for each feature - where the violin is woder that are more data points around that value. The end bars show the lowest and highest, and the middle bars shows the *median*, that is the middle number if all the Shap values were sorted in order.
 :::
