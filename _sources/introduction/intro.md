@@ -85,12 +85,12 @@ The five most influential features predicting whether thrombolysis would be give
 4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis increased with a precisely known  onset.
 5. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
 
-{numref}`Figure {number} <shap__scatter>` shows a scatter plot of Shap values for six features.
+{numref}`Figure {number} <shap_violin>` shows a violin plot of Shap values for six features.
 
-:::{figure-md} shap__scatter
-<img src="./images/xgb_thrombolysis_shap_scatter.jpg" width="800">
+:::{figure-md} shap_violin
+<img src="./images/xgb_thrombolysis_shap_violin.jpg" width="800">
 
-A scatter plot showing the individual Shap values for six features. A positive Shap vales pushes the model towards saying that patient would *would* receive thrombolysis. A negative Shap vales pushes the model towards saying that patient would would *not* receive thrombolysis.
+A violin plot showing the individual Shap values for six features. The shape of the *violin* shows the spread of the size of Shap values for each feature value. A positive Shap vales pushes the model towards saying that patient would *would* receive thrombolysis. A negative Shap vales pushes the model towards saying that patient would would *not* receive thrombolysis.
 :::
 
 Shap plots can also be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
@@ -130,12 +130,12 @@ A second way to visualise the effects of the features is to plot a *beeswarm* pl
 A *beeswarm plot* of Shap values, along with feature value (shown by the colour of the point) for all features. Black or blue points have low feature value (e.g. low prior disability level), and yellow/red/grey points have high feature value (e.g. high prior disability level), with green points being in the middle of the range of feature values. A positive Shap vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative Shap vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
 :::
 
-We may examine each feature in more detail using scatter plots for each feature ({numref}`Figure {number} <shap_compare_scatter>`) 
+We may examine each feature in more detail using violin plots for each feature ({numref}`Figure {number} <shap_compare_violin>`) 
 
-:::{figure-md} shap_compare_scatter
-<img src="./images/xgb_prediciting_difference_shap_scatter.jpg" width="800">
+:::{figure-md} shap_compare_violin
+<img src="./images/xgb_predicting_difference_shap_violin.jpg" width="800">
 
-A scatter plot showing the individual Shap values for six features. A positive Shap vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative Shap vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
+A violin plot showing the individual Shap values for six features. The shape of the *violin* shows the spread of the size of Shap values for each feature value. A positive Shap vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative Shap vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
 :::
 
 
