@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Predicting differences between local and benchmark decisions &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -155,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Predicting differences between local and benchmark decisions
+   Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would
   </a>
  </li>
 </ul>
@@ -371,8 +371,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-top-10-shap-and-importances">
-     Compare top 10 Shap and importances
+    <a class="reference internal nav-link" href="#compare-shap-and-importances">
+     Compare Shap and importances
     </a>
    </li>
   </ul>
@@ -388,13 +388,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis">
-     Plot Waterfall and decision plot plots for instances with low or high probability of receiving thrombolysis
+    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
+     Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features">
-     Show the relationship between feature value and Shap value for top 5 influential features.
+    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
+     Show the relationship between feature value and Shap value for influential features.
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -430,7 +430,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Predicting differences between local and benchmark decisions</h1>
+                <h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -510,8 +510,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-top-10-shap-and-importances">
-     Compare top 10 Shap and importances
+    <a class="reference internal nav-link" href="#compare-shap-and-importances">
+     Compare Shap and importances
     </a>
    </li>
   </ul>
@@ -527,13 +527,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis">
-     Plot Waterfall and decision plot plots for instances with low or high probability of receiving thrombolysis
+    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
+     Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features">
-     Show the relationship between feature value and Shap value for top 5 influential features.
+    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
+     Show the relationship between feature value and Shap value for influential features.
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -570,9 +570,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="predicting-differences-between-local-and-benchmark-decisions">
-<h1>Predicting differences between local and benchmark decisions<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions" title="Permalink to this headline">#</a></h1>
-<p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit. The XGBoost model used to make predictions uses 8 features:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would">
+<h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would" title="Permalink to this headline">#</a></h1>
+<p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We take all those patients who are predicted to be given thrombolysis by the majority of the benchmark hospitals, and predict when the decision would be different at low thrombolysing hospitals.</p>
+<p>The XGBoost model used to make predictions uses 8 features:</p>
 <ul class="simple">
 <li><p>S2BrainImagingTime_min</p></li>
 <li><p>S2StrokeType_Infarction</p></li>
@@ -585,8 +586,8 @@ title="Print to PDF"
 </ul>
 <p>Aims:</p>
 <ul class="simple">
-<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be thrombolysed at a local unit.</p></li>
-<li><p>Investigate model predictions using Shap</p></li>
+<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be <em>not</em> be thrombolysed at a local unit.</p></li>
+<li><p>Investigate model predictions using Shap.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1255,8 +1256,12 @@ title="Print to PDF"
 <span class="n">mask</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
 <span class="n">restricted_data</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
+<span class="c1"># Label those that are different</span>
+<span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;different_decision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="c1"># Remove columnds not to be used in model</span>
 <span class="n">cols_to_drop</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;benchmark_yes_observed_no&#39;</span><span class="p">,</span> <span class="s1">&#39;predicted_thrombolysis&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;majority_vote&#39;</span><span class="p">,</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span>
+               <span class="s1">&#39;majority_vote&#39;</span><span class="p">,</span> <span class="s1">&#39;observed&#39;</span><span class="p">,</span> <span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
 <span class="n">restricted_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">cols_to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1295,7 +1300,7 @@ title="Print to PDF"
       <th>Stroke team</th>
       <th>Use of AF anticoagulents</th>
       <th>Onset-to-arrival time</th>
-      <th>Thrombolysis</th>
+      <th>different_decision</th>
     </tr>
   </thead>
   <tbody>
@@ -1309,7 +1314,7 @@ title="Print to PDF"
       <td>SQGXB9559U</td>
       <td>0</td>
       <td>71.0</td>
-      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>28</th>
@@ -1321,7 +1326,7 @@ title="Print to PDF"
       <td>DQKFO8183I</td>
       <td>0</td>
       <td>149.0</td>
-      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>91</th>
@@ -1333,7 +1338,7 @@ title="Print to PDF"
       <td>OUXUZ1084Q</td>
       <td>0</td>
       <td>122.0</td>
-      <td>0</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>159</th>
@@ -1345,7 +1350,7 @@ title="Print to PDF"
       <td>IATJE0497S</td>
       <td>0</td>
       <td>78.0</td>
-      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>161</th>
@@ -1357,7 +1362,7 @@ title="Print to PDF"
       <td>DANAH4615Q</td>
       <td>0</td>
       <td>160.0</td>
-      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1381,7 +1386,7 @@ title="Print to PDF"
       <td>LGNPK4211W</td>
       <td>0</td>
       <td>46.0</td>
-      <td>0</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>88698</th>
@@ -1393,7 +1398,7 @@ title="Print to PDF"
       <td>ISIZF6614O</td>
       <td>0</td>
       <td>109.0</td>
-      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>88740</th>
@@ -1405,7 +1410,7 @@ title="Print to PDF"
       <td>NFBUF0424E</td>
       <td>0</td>
       <td>67.0</td>
-      <td>0</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>88758</th>
@@ -1417,7 +1422,7 @@ title="Print to PDF"
       <td>ISIZF6614O</td>
       <td>0</td>
       <td>89.0</td>
-      <td>0</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>88783</th>
@@ -1429,7 +1434,7 @@ title="Print to PDF"
       <td>SQGXB9559U</td>
       <td>0</td>
       <td>119.0</td>
-      <td>1</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
@@ -1439,8 +1444,8 @@ title="Print to PDF"
 <p>Set up X, Y and train/test split.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;different_decision&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;different_decision&#39;</span><span class="p">]</span>
 <span class="c1"># Remove hospital ID</span>
 <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -1515,11 +1520,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.658
-Run 2, accuracy: 0.691
-Run 3, accuracy: 0.696
-Run 4, accuracy: 0.671
-Run 5, accuracy: 0.662
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.675
+Run 2, accuracy: 0.659
+Run 3, accuracy: 0.699
+Run 4, accuracy: 0.656
+Run 5, accuracy: 0.669
 </pre></div>
 </div>
 </div>
@@ -1577,14 +1582,6 @@ Run 5, accuracy: 0.662
   <tbody>
     <tr>
       <th>observed_positive_rate</th>
-      <td>0.530271</td>
-      <td>0.530271</td>
-      <td>0.530271</td>
-      <td>0.530825</td>
-      <td>0.529781</td>
-    </tr>
-    <tr>
-      <th>observed_negative_rate</th>
       <td>0.469729</td>
       <td>0.469729</td>
       <td>0.469729</td>
@@ -1592,132 +1589,140 @@ Run 5, accuracy: 0.662
       <td>0.470219</td>
     </tr>
     <tr>
+      <th>observed_negative_rate</th>
+      <td>0.530271</td>
+      <td>0.530271</td>
+      <td>0.530271</td>
+      <td>0.530825</td>
+      <td>0.529781</td>
+    </tr>
+    <tr>
       <th>predicted_positive_rate</th>
-      <td>0.492693</td>
-      <td>0.534447</td>
-      <td>0.518789</td>
-      <td>0.502612</td>
-      <td>0.493208</td>
+      <td>0.395616</td>
+      <td>0.349687</td>
+      <td>0.390397</td>
+      <td>0.384535</td>
+      <td>0.410658</td>
     </tr>
     <tr>
       <th>predicted_negative_rate</th>
-      <td>0.507307</td>
-      <td>0.465553</td>
-      <td>0.481211</td>
-      <td>0.497388</td>
-      <td>0.506792</td>
+      <td>0.604384</td>
+      <td>0.650313</td>
+      <td>0.609603</td>
+      <td>0.615465</td>
+      <td>0.589342</td>
     </tr>
     <tr>
       <th>accuracy</th>
-      <td>0.657620</td>
-      <td>0.691023</td>
-      <td>0.696242</td>
-      <td>0.670846</td>
-      <td>0.662487</td>
+      <td>0.675365</td>
+      <td>0.658664</td>
+      <td>0.699374</td>
+      <td>0.656217</td>
+      <td>0.668757</td>
     </tr>
     <tr>
       <th>precision</th>
-      <td>0.690678</td>
-      <td>0.707031</td>
-      <td>0.718310</td>
-      <td>0.700624</td>
-      <td>0.694915</td>
+      <td>0.683377</td>
+      <td>0.683582</td>
+      <td>0.716578</td>
+      <td>0.663043</td>
+      <td>0.669211</td>
     </tr>
     <tr>
       <th>recall</th>
-      <td>0.641732</td>
-      <td>0.712598</td>
-      <td>0.702756</td>
-      <td>0.663386</td>
-      <td>0.646943</td>
+      <td>0.575556</td>
+      <td>0.508889</td>
+      <td>0.595556</td>
+      <td>0.543430</td>
+      <td>0.584444</td>
     </tr>
     <tr>
       <th>f1</th>
-      <td>0.665306</td>
-      <td>0.709804</td>
-      <td>0.710448</td>
-      <td>0.681496</td>
-      <td>0.670072</td>
+      <td>0.624849</td>
+      <td>0.583439</td>
+      <td>0.650485</td>
+      <td>0.597307</td>
+      <td>0.623962</td>
     </tr>
     <tr>
       <th>sensitivity</th>
-      <td>0.641732</td>
-      <td>0.712598</td>
-      <td>0.702756</td>
-      <td>0.663386</td>
-      <td>0.646943</td>
+      <td>0.575556</td>
+      <td>0.508889</td>
+      <td>0.595556</td>
+      <td>0.543430</td>
+      <td>0.584444</td>
     </tr>
     <tr>
       <th>specificity</th>
-      <td>0.675556</td>
-      <td>0.666667</td>
-      <td>0.688889</td>
-      <td>0.679287</td>
-      <td>0.680000</td>
+      <td>0.763780</td>
+      <td>0.791339</td>
+      <td>0.791339</td>
+      <td>0.755906</td>
+      <td>0.743590</td>
     </tr>
     <tr>
       <th>positive_likelihood</th>
-      <td>1.977942</td>
-      <td>2.137795</td>
-      <td>2.258858</td>
-      <td>2.068474</td>
-      <td>2.021696</td>
+      <td>2.436519</td>
+      <td>2.438826</td>
+      <td>2.854172</td>
+      <td>2.226309</td>
+      <td>2.279333</td>
     </tr>
     <tr>
       <th>negative_likelihood</th>
-      <td>0.530331</td>
-      <td>0.431102</td>
-      <td>0.431483</td>
-      <td>0.495540</td>
-      <td>0.519202</td>
+      <td>0.555716</td>
+      <td>0.620608</td>
+      <td>0.511089</td>
+      <td>0.604004</td>
+      <td>0.558851</td>
     </tr>
     <tr>
       <th>false_positive_rate</th>
-      <td>0.324444</td>
-      <td>0.333333</td>
-      <td>0.311111</td>
-      <td>0.320713</td>
-      <td>0.320000</td>
+      <td>0.236220</td>
+      <td>0.208661</td>
+      <td>0.208661</td>
+      <td>0.244094</td>
+      <td>0.256410</td>
     </tr>
     <tr>
       <th>false_negative_rate</th>
-      <td>0.358268</td>
-      <td>0.287402</td>
-      <td>0.297244</td>
-      <td>0.336614</td>
-      <td>0.353057</td>
+      <td>0.424444</td>
+      <td>0.491111</td>
+      <td>0.404444</td>
+      <td>0.456570</td>
+      <td>0.415556</td>
     </tr>
     <tr>
       <th>true_positive_rate</th>
-      <td>0.641732</td>
-      <td>0.712598</td>
-      <td>0.702756</td>
-      <td>0.663386</td>
-      <td>0.646943</td>
+      <td>0.575556</td>
+      <td>0.508889</td>
+      <td>0.595556</td>
+      <td>0.543430</td>
+      <td>0.584444</td>
     </tr>
     <tr>
       <th>true_negative_rate</th>
-      <td>0.675556</td>
-      <td>0.666667</td>
-      <td>0.688889</td>
-      <td>0.679287</td>
-      <td>0.680000</td>
+      <td>0.763780</td>
+      <td>0.791339</td>
+      <td>0.791339</td>
+      <td>0.755906</td>
+      <td>0.743590</td>
     </tr>
     <tr>
       <th>positive_predictive_value</th>
-      <td>0.690678</td>
-      <td>0.707031</td>
-      <td>0.718310</td>
-      <td>0.700624</td>
-      <td>0.694915</td>
+      <td>0.683377</td>
+      <td>0.683582</td>
+      <td>0.716578</td>
+      <td>0.663043</td>
+      <td>0.669211</td>
     </tr>
     <tr>
       <th>negative_predictive_value</th>
-      <td>0.625514</td>
-      <td>0.672646</td>
-      <td>0.672451</td>
-      <td>0.640756</td>
-      <td>0.630928</td>
+      <td>0.670121</td>
+      <td>0.645265</td>
+      <td>0.688356</td>
+      <td>0.651952</td>
+      <td>0.668440</td>
     </tr>
   </tbody>
 </table>
@@ -1792,150 +1797,150 @@ Run 5, accuracy: 0.662
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.530284</td>
       <td>0.469716</td>
-      <td>0.508350</td>
-      <td>0.491650</td>
-      <td>0.675644</td>
-      <td>0.702312</td>
-      <td>0.673483</td>
-      <td>0.687425</td>
-      <td>0.673483</td>
-      <td>0.678080</td>
-      <td>2.092953</td>
-      <td>0.481532</td>
-      <td>0.321920</td>
-      <td>0.326517</td>
-      <td>0.673483</td>
-      <td>0.678080</td>
-      <td>0.702312</td>
-      <td>0.648459</td>
+      <td>0.530284</td>
+      <td>0.386179</td>
+      <td>0.613821</td>
+      <td>0.671675</td>
+      <td>0.683158</td>
+      <td>0.561575</td>
+      <td>0.616009</td>
+      <td>0.561575</td>
+      <td>0.769190</td>
+      <td>2.447032</td>
+      <td>0.570054</td>
+      <td>0.230810</td>
+      <td>0.438425</td>
+      <td>0.561575</td>
+      <td>0.769190</td>
+      <td>0.683158</td>
+      <td>0.664827</td>
     </tr>
     <tr>
       <th>std</th>
       <td>0.000370</td>
       <td>0.000370</td>
-      <td>0.018009</td>
-      <td>0.018009</td>
-      <td>0.017189</td>
-      <td>0.010853</td>
-      <td>0.032409</td>
-      <td>0.021543</td>
-      <td>0.032409</td>
-      <td>0.008041</td>
-      <td>0.110045</td>
-      <td>0.047551</td>
-      <td>0.008041</td>
-      <td>0.032409</td>
-      <td>0.032409</td>
-      <td>0.008041</td>
-      <td>0.010853</td>
-      <td>0.022659</td>
+      <td>0.022586</td>
+      <td>0.022586</td>
+      <td>0.017303</td>
+      <td>0.020714</td>
+      <td>0.035278</td>
+      <td>0.026175</td>
+      <td>0.035278</td>
+      <td>0.021461</td>
+      <td>0.246365</td>
+      <td>0.043348</td>
+      <td>0.021461</td>
+      <td>0.035278</td>
+      <td>0.035278</td>
+      <td>0.021461</td>
+      <td>0.020714</td>
+      <td>0.016905</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.529781</td>
       <td>0.469175</td>
-      <td>0.492693</td>
-      <td>0.465553</td>
-      <td>0.657620</td>
-      <td>0.690678</td>
-      <td>0.641732</td>
-      <td>0.665306</td>
-      <td>0.641732</td>
-      <td>0.666667</td>
-      <td>1.977942</td>
-      <td>0.431102</td>
-      <td>0.311111</td>
-      <td>0.287402</td>
-      <td>0.641732</td>
-      <td>0.666667</td>
-      <td>0.690678</td>
-      <td>0.625514</td>
+      <td>0.529781</td>
+      <td>0.349687</td>
+      <td>0.589342</td>
+      <td>0.656217</td>
+      <td>0.663043</td>
+      <td>0.508889</td>
+      <td>0.583439</td>
+      <td>0.508889</td>
+      <td>0.743590</td>
+      <td>2.226309</td>
+      <td>0.511089</td>
+      <td>0.208661</td>
+      <td>0.404444</td>
+      <td>0.508889</td>
+      <td>0.743590</td>
+      <td>0.663043</td>
+      <td>0.645265</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>0.530271</td>
       <td>0.469729</td>
-      <td>0.493208</td>
-      <td>0.481211</td>
-      <td>0.662487</td>
-      <td>0.694915</td>
-      <td>0.646943</td>
-      <td>0.670072</td>
-      <td>0.646943</td>
-      <td>0.675556</td>
-      <td>2.021696</td>
-      <td>0.431483</td>
-      <td>0.320000</td>
-      <td>0.297244</td>
-      <td>0.646943</td>
-      <td>0.675556</td>
-      <td>0.694915</td>
-      <td>0.630928</td>
+      <td>0.530271</td>
+      <td>0.384535</td>
+      <td>0.604384</td>
+      <td>0.658664</td>
+      <td>0.669211</td>
+      <td>0.543430</td>
+      <td>0.597307</td>
+      <td>0.543430</td>
+      <td>0.755906</td>
+      <td>2.279333</td>
+      <td>0.555716</td>
+      <td>0.208661</td>
+      <td>0.415556</td>
+      <td>0.543430</td>
+      <td>0.755906</td>
+      <td>0.669211</td>
+      <td>0.651952</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.530271</td>
       <td>0.469729</td>
-      <td>0.502612</td>
-      <td>0.497388</td>
-      <td>0.670846</td>
-      <td>0.700624</td>
-      <td>0.663386</td>
-      <td>0.681496</td>
-      <td>0.663386</td>
-      <td>0.679287</td>
-      <td>2.068474</td>
-      <td>0.495540</td>
-      <td>0.320713</td>
-      <td>0.336614</td>
-      <td>0.663386</td>
-      <td>0.679287</td>
-      <td>0.700624</td>
-      <td>0.640756</td>
+      <td>0.530271</td>
+      <td>0.390397</td>
+      <td>0.609603</td>
+      <td>0.668757</td>
+      <td>0.683377</td>
+      <td>0.575556</td>
+      <td>0.623962</td>
+      <td>0.575556</td>
+      <td>0.763780</td>
+      <td>2.436519</td>
+      <td>0.558851</td>
+      <td>0.236220</td>
+      <td>0.424444</td>
+      <td>0.575556</td>
+      <td>0.763780</td>
+      <td>0.683377</td>
+      <td>0.668440</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>0.530271</td>
       <td>0.469729</td>
-      <td>0.518789</td>
-      <td>0.506792</td>
-      <td>0.691023</td>
-      <td>0.707031</td>
-      <td>0.702756</td>
-      <td>0.709804</td>
-      <td>0.702756</td>
-      <td>0.680000</td>
-      <td>2.137795</td>
-      <td>0.519202</td>
-      <td>0.324444</td>
-      <td>0.353057</td>
-      <td>0.702756</td>
-      <td>0.680000</td>
-      <td>0.707031</td>
-      <td>0.672451</td>
+      <td>0.530271</td>
+      <td>0.395616</td>
+      <td>0.615465</td>
+      <td>0.675365</td>
+      <td>0.683582</td>
+      <td>0.584444</td>
+      <td>0.624849</td>
+      <td>0.584444</td>
+      <td>0.791339</td>
+      <td>2.438826</td>
+      <td>0.604004</td>
+      <td>0.244094</td>
+      <td>0.456570</td>
+      <td>0.584444</td>
+      <td>0.791339</td>
+      <td>0.683582</td>
+      <td>0.670121</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>0.530825</td>
       <td>0.470219</td>
-      <td>0.534447</td>
-      <td>0.507307</td>
-      <td>0.696242</td>
-      <td>0.718310</td>
-      <td>0.712598</td>
-      <td>0.710448</td>
-      <td>0.712598</td>
-      <td>0.688889</td>
-      <td>2.258858</td>
-      <td>0.530331</td>
-      <td>0.333333</td>
-      <td>0.358268</td>
-      <td>0.712598</td>
-      <td>0.688889</td>
-      <td>0.718310</td>
-      <td>0.672646</td>
+      <td>0.530825</td>
+      <td>0.410658</td>
+      <td>0.650313</td>
+      <td>0.699374</td>
+      <td>0.716578</td>
+      <td>0.595556</td>
+      <td>0.650485</td>
+      <td>0.595556</td>
+      <td>0.791339</td>
+      <td>2.854172</td>
+      <td>0.620608</td>
+      <td>0.256410</td>
+      <td>0.491111</td>
+      <td>0.595556</td>
+      <td>0.791339</td>
+      <td>0.716578</td>
+      <td>0.688356</td>
     </tr>
   </tbody>
 </table>
@@ -1972,8 +1977,8 @@ Run 5, accuracy: 0.662
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean AUC: 0.7271
-SD AUC: 0.0158
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean AUC: 0.7287
+SD AUC: 0.0151
 </pre></div>
 </div>
 </div>
@@ -2109,8 +2114,8 @@ SD AUC: 0.0158
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean intersection: 0.6772
-SD intersection: 0.0133
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean intersection: 0.6790
+SD intersection: 0.0087
 </pre></div>
 </div>
 </div>
@@ -2292,39 +2297,39 @@ Completed 5 of 5
   <tbody>
     <tr>
       <th>Precise onset time</th>
-      <td>0.372726</td>
-      <td>0.410977</td>
-      <td>0.423405</td>
+      <td>0.370800</td>
+      <td>0.400156</td>
+      <td>0.427411</td>
     </tr>
     <tr>
       <th>Use of AF anticoagulents</th>
-      <td>0.223079</td>
-      <td>0.238576</td>
-      <td>0.276714</td>
+      <td>0.203292</td>
+      <td>0.233975</td>
+      <td>0.262270</td>
     </tr>
     <tr>
       <th>Prior disability level</th>
-      <td>0.163903</td>
-      <td>0.183379</td>
-      <td>0.196325</td>
+      <td>0.169925</td>
+      <td>0.181223</td>
+      <td>0.191138</td>
     </tr>
     <tr>
       <th>Stroke severity</th>
-      <td>0.077793</td>
-      <td>0.081011</td>
-      <td>0.090417</td>
+      <td>0.080350</td>
+      <td>0.085697</td>
+      <td>0.094082</td>
     </tr>
     <tr>
       <th>Arrival-to-scan time</th>
-      <td>0.043173</td>
-      <td>0.044716</td>
-      <td>0.047084</td>
+      <td>0.045687</td>
+      <td>0.047999</td>
+      <td>0.053037</td>
     </tr>
     <tr>
       <th>Onset-to-arrival time</th>
-      <td>0.040286</td>
-      <td>0.041661</td>
-      <td>0.044221</td>
+      <td>0.042610</td>
+      <td>0.045147</td>
+      <td>0.048935</td>
     </tr>
     <tr>
       <th>Infarction</th>
@@ -2366,8 +2371,8 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_49_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_49_0.png" />
 </div>
 </div>
-<section id="compare-top-10-shap-and-importances">
-<h3>Compare top 10 Shap and importances<a class="headerlink" href="#compare-top-10-shap-and-importances" title="Permalink to this headline">#</a></h3>
+<section id="compare-shap-and-importances">
+<h3>Compare Shap and importances<a class="headerlink" href="#compare-shap-and-importances" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compare_shap_importance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -2478,33 +2483,33 @@ Completed 5 of 5
   <tbody>
     <tr>
       <th>Stroke severity</th>
-      <td>0.503784</td>
-      <td>0.081011</td>
+      <td>0.514122</td>
+      <td>0.085697</td>
     </tr>
     <tr>
       <th>Prior disability level</th>
-      <td>0.443493</td>
-      <td>0.183379</td>
+      <td>0.461407</td>
+      <td>0.181223</td>
     </tr>
     <tr>
       <th>Precise onset time</th>
-      <td>0.369657</td>
-      <td>0.410977</td>
+      <td>0.388713</td>
+      <td>0.400156</td>
     </tr>
     <tr>
       <th>Arrival-to-scan time</th>
-      <td>0.286047</td>
-      <td>0.044716</td>
+      <td>0.299908</td>
+      <td>0.047999</td>
     </tr>
     <tr>
       <th>Onset-to-arrival time</th>
-      <td>0.239312</td>
-      <td>0.041661</td>
+      <td>0.245725</td>
+      <td>0.045147</td>
     </tr>
     <tr>
       <th>Use of AF anticoagulents</th>
-      <td>0.079252</td>
-      <td>0.238576</td>
+      <td>0.083516</td>
+      <td>0.233975</td>
     </tr>
     <tr>
       <th>Infarction</th>
@@ -2583,34 +2588,18 @@ Completed 5 of 5
 </div>
 </div>
 </section>
-<section id="plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis">
-<h3>Plot Waterfall and decision plot plots for instances with low or high probability of receiving thrombolysis<a class="headerlink" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis" title="Permalink to this headline">#</a></h3>
+<section id="plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
+<h3>Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision<a class="headerlink" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision" title="Permalink to this headline">#</a></h3>
 <p>Waterfall plot and decision plots are alternative ways of plotting the influence of features for individual cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the location of an example each of low and high probablility</span>
-<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>An example with low probability of receiving thrombolysis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
-                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/xgb_decision_comparison_waterfall_low_key_features.jpg&#39;</span><span class="p">,</span> 
-            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" />
-</div>
-</div>
-<p>An example with high probability of receiving thrombolysis.</p>
+<p>An example with high probability of a low thrombolysing unit making deciding not to give thrombolysis to a patient when the benchmark hospitals would.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
@@ -2622,21 +2611,21 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" />
 </div>
 </div>
 </section>
-<section id="show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features">
-<h3>Show the relationship between feature value and Shap value for top 5 influential features.<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features" title="Permalink to this headline">#</a></h3>
+<section id="show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
+<h3>Show the relationship between feature value and Shap value for influential features.<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features" title="Permalink to this headline">#</a></h3>
 <section id="show-shap-as-a-scatter-plot">
 <h4>Show Shap as a scatter plot<a class="headerlink" href="#show-shap-as-a-scatter-plot" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
 
-<span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">feat_to_show</span><span class="p">:</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feat_to_show</span><span class="p">):</span>    
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">],</span> <span class="n">x_jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
                        <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     
@@ -2645,18 +2634,17 @@ Completed 5 of 5
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">feature_values</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">feature_values</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">)</span>    
     
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SHAP value (log odds) for</span><span class="se">\n</span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s1">&#39;output/xgb_prediciting_difference_shap_scatter_</span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
-         <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/xgb_prediciting_difference_shap_scatter.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_0.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_1.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_1.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_2.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_2.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_3.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_3.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_4.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_4.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_64_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_64_0.png" />
 </div>
 </div>
 </section>
@@ -2689,7 +2677,7 @@ Completed 5 of 5
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
 
 <span class="c1"># for each feature, prepare the data for the violin plot.</span>
 <span class="c1"># data either already in categories, or if there&#39;s more than 50 unique values</span>
@@ -2758,11 +2746,13 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_0.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_1.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_1.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_2.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_2.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_3.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_3.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_4.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_4.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_1.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_1.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_2.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_2.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_3.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_3.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_4.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_4.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_5.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_5.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_6.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_6.png" />
 </div>
 </div>
 </section>
@@ -2788,29 +2778,12 @@ Completed 5 of 5
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the location of an example each of low and high probablility</span>
 
-<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>An example with low probability of receiving thrombolysis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
-                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="s1">&#39;output/xgb_decision_comparison_waterfall_low_probability_key_features.jpg&#39;</span><span class="p">,</span> 
-    <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_74_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_74_0.png" />
-</div>
-</div>
-<p>An example with high probability of receiving thrombolysis.</p>
+<p>An example with high probability of a low thrombolysing unit making deciding not to give thrombolysis to a patient when the benchmark hospitals would.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
@@ -2823,14 +2796,14 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_76_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_76_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_72_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_72_0.png" />
 </div>
 </div>
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>We can predict those that will receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 68% accuracy (AUC 0.737).</p></li>
+<li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 68% accuracy (AUC 0.729).</p></li>
 <li><p>The five most important distinguishing features are:</p>
 <ul>
 <li><p>Stroke severity</p></li>

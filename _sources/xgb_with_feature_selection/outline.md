@@ -71,8 +71,8 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * Save comparison of local and benchmark decisions.
     
 * *Predicting differences between local and benchmark decisions*:
-    * This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would be thrombolysed at a local unit. 
-    * Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would be thrombolysed at a local unit.
+    * This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would *not* be thrombolysed at a local unit. 
+    * Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would *not* be thrombolysed at a local unit.
     * Get Shap values for predictions.
         * Check consistency of Shap values and XGBoost Importance across k-fold replications
         * Compare Shap values and XGBoost Importance

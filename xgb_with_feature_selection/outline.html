@@ -156,7 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_predict_differences_between_local_and_benchmark_key_features.html">
-   Predicting differences between local and benchmark decisions
+   Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would
   </a>
  </li>
 </ul>
@@ -425,8 +425,8 @@ title="Print to PDF"
 </li>
 <li><p><em>Predicting differences between local and benchmark decisions</em>:</p>
 <ul>
-<li><p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would be thrombolysed at a local unit.</p></li>
-<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would be thrombolysed at a local unit.</p></li>
+<li><p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would <em>not</em> be thrombolysed at a local unit.</p></li>
+<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would <em>not</em> be thrombolysed at a local unit.</p></li>
 <li><p>Get Shap values for predictions.</p>
 <ul>
 <li><p>Check consistency of Shap values and XGBoost Importance across k-fold replications</p></li>
