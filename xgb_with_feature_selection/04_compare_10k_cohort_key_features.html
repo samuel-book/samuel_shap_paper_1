@@ -642,7 +642,7 @@ title="Print to PDF"
 <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
 
 <span class="c1"># Define model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># Fit model</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -653,12 +653,27 @@ title="Print to PDF"
 
 <span class="c1"># Show accuracy</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.8414
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.841
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate receiver operating characteristic curve area under curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_probs</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC ACUC: </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC ACUC: 0.913
 </pre></div>
 </div>
 </div>
@@ -739,7 +754,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_18_0.png" src="../_images/04_compare_10k_cohort_key_features_18_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_20_0.png" src="../_images/04_compare_10k_cohort_key_features_20_0.png" />
 </div>
 </div>
 </section>
@@ -806,7 +821,7 @@ Max0.461
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_22_0.png" src="../_images/04_compare_10k_cohort_key_features_22_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_24_0.png" src="../_images/04_compare_10k_cohort_key_features_24_0.png" />
 </div>
 </div>
 </section>
@@ -866,7 +881,7 @@ Max0.461
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_27_0.png" src="../_images/04_compare_10k_cohort_key_features_27_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_29_0.png" src="../_images/04_compare_10k_cohort_key_features_29_0.png" />
 </div>
 </div>
 <p>Show statistics:</p>
