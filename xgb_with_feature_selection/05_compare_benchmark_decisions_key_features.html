@@ -245,6 +245,21 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data-on-predicted-10k-corhort-thrombolysis-use-at-each-hospital">
    Load data on predicted 10K corhort thrombolysis use at each hospital
   </a>
@@ -268,6 +283,18 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#count-number-thrombolysed-at-each-hospital-compared-with-benchmark">
    Count number thrombolysed at each hospital compared with benchmark
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-all-hospitals">
+     Estimate change in thrombolysis rate if benchmark decisions used at all hospitals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used">
+     Estimate change in thrombolysis rate at bottom 30 thrombolysing hospitals if benchmark decisions used
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#add-patient-counts-at-units-and-calculate-thrombolysis-rate">
@@ -280,7 +307,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -305,6 +332,21 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data-on-predicted-10k-corhort-thrombolysis-use-at-each-hospital">
    Load data on predicted 10K corhort thrombolysis use at each hospital
   </a>
@@ -328,6 +370,18 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#count-number-thrombolysed-at-each-hospital-compared-with-benchmark">
    Count number thrombolysed at each hospital compared with benchmark
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-all-hospitals">
+     Estimate change in thrombolysis rate if benchmark decisions used at all hospitals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used">
+     Estimate change in thrombolysis rate at bottom 30 thrombolysing hospitals if benchmark decisions used
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#add-patient-counts-at-units-and-calculate-thrombolysis-rate">
@@ -340,7 +394,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -355,25 +409,39 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="compare-local-thrombolysis-decisions-with-benchmark-decisions">
 <h1>Compare local thrombolysis decisions with benchmark decisions<a class="headerlink" href="#compare-local-thrombolysis-decisions-with-benchmark-decisions" title="Permalink to this headline">¶</a></h1>
-<p>This notebook compares the local thrombolysis decisions with those expected at the majority of a 30-hospital set of benchmark hospitals. The XGBoost model uses 8 features:</p>
+<div class="section" id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">¶</a></h2>
+<p>This notebook compares local thrombolysis decisions with those expected at the majority of a 30-hospital set of benchmark hospitals.</p>
+<p>The XGBoost model uses 8 features:</p>
 <ul class="simple">
-<li><p>S2BrainImagingTime_min</p></li>
-<li><p>S2StrokeType_Infarction</p></li>
-<li><p>S2NihssArrival</p></li>
-<li><p>S1OnsetTimeType_Precise</p></li>
-<li><p>S2RankinBeforeStroke</p></li>
-<li><p>StrokeTeam</p></li>
-<li><p>AFAnticoagulent_Yes</p></li>
-<li><p>S1OnsetToArrival_min</p></li>
+<li><p>Arrival-to-scan time</p></li>
+<li><p>Infarction</p></li>
+<li><p>Stroke severity</p></li>
+<li><p>Precise onset time</p></li>
+<li><p>Prior disability level</p></li>
+<li><p>Stroke team</p></li>
+<li><p>Use of AF anticoagulants</p></li>
+<li><p>Onset-to-arrival time</p></li>
 </ul>
-<p>Benchmark decisions are decisions made at the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.</p>
-<p>Aims:</p>
+<p>Benchmark decisions are decisions made at the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients (a set of 10,000 patients that is passed through the models of decision-making at each hospital).</p>
+<p>If benchmark decisions were used at all hopsitals, then thrombolysis use would increase 22%. Thrombolysis use at the bottom 30 thrombolsying hospitals would increase 63%.</p>
+</div>
+<div class="section" id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Predict thrombolysis use of 10K cohort of patients at all 132 hospitals.</p></li>
 <li><p>Get predicted thrombolysis decisions for all patients at the 30 benchmark hospitals.</p></li>
 <li><p>Check similarity between local decisions and benchmark decisions.</p></li>
 <li><p>Estimate thrombolysis use at each hospital if benchmark decisions made.</p></li>
 <li><p>Save comparison of local and benchmark decisions.</p></li>
+</ul>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>82.8% decisions are identical between local and benchmark decisions.</p></li>
+<li><p>Thrombolysis use would be increased 22.6% if benchmark decisions were made at all hospitals.</p></li>
+<li><p>The ration of benchmark:local thrombolysis use was 0.7 to 2.2.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -392,6 +460,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -467,6 +536,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_30_hopsitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">bottom_30_hopsitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -919,17 +989,43 @@ Run 5, accuracy: 0.844
 </table>
 </div></div></div>
 </div>
+<div class="section" id="estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-all-hospitals">
+<h3>Estimate change in thrombolysis rate if benchmark decisions used at all hospitals<a class="headerlink" href="#estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-all-hospitals" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> 
           <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Change in thrombolysis with benchmark vote: </span><span class="si">{</span><span class="n">change</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">percent_change</span> <span class="o">=</span> <span class="p">(</span><span class="n">change</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent change in thrombolysis with benchmark vote: &#39;</span>\
+       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">percent_change</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Change in thrombolysis with benchmark vote: 1.221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent change in thrombolysis with benchmark vote: 22.1%
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used">
+<h3>Estimate change in thrombolysis rate at bottom 30 thrombolysing hospitals if benchmark decisions used<a class="headerlink" href="#estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">thrombolysis_counts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bottom_30_hopsitals</span><span class="p">][</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> 
+          <span class="n">thrombolysis_counts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bottom_30_hopsitals</span><span class="p">][</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="n">percent_change</span> <span class="o">=</span> <span class="p">(</span><span class="n">change</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent increase in thrombolysis at bottom 30 hospitals with &#39;</span>\
+       <span class="sa">f</span><span class="s1">&#39;benchmark decisions: </span><span class="si">{</span><span class="n">percent_change</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent increase in thrombolysis at bottom 30 hospitals with benchmark decisions: 63.1%
 </pre></div>
 </div>
 </div>
@@ -947,7 +1043,8 @@ Run 5, accuracy: 0.844
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_compare_benchmark_decisions_key_features_25_0.png" src="../_images/05_compare_benchmark_decisions_key_features_25_0.png" />
+<img alt="../_images/05_compare_benchmark_decisions_key_features_28_0.png" src="../_images/05_compare_benchmark_decisions_key_features_28_0.png" />
+</div>
 </div>
 </div>
 </div>
@@ -1136,7 +1233,7 @@ Run 5, accuracy: 0.844
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_compare_benchmark_decisions_key_features_32_0.png" src="../_images/05_compare_benchmark_decisions_key_features_32_0.png" />
+<img alt="../_images/05_compare_benchmark_decisions_key_features_35_0.png" src="../_images/05_compare_benchmark_decisions_key_features_35_0.png" />
 </div>
 </div>
 </div>
@@ -1161,8 +1258,8 @@ Run 5, accuracy: 0.844
 </div>
 </div>
 </div>
-<div class="section" id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>82.9% decisions are identical between local and benchmark decisions.</p></li>
 <li><p>Thrombolysis use would be increased 22.6% if benchmark decisions were made at all hospitals.</p></li>
