@@ -1,14 +1,23 @@
 format: jb-book
 root: introduction/intro
-chapters:
-- file: glossary
-- file: xgb_with_feature_selection/outline
-- file: shap_worked_example
-- file: xgb_with_feature_selection/01_xgb_combined_fit_feature_selection
-- file: xgb_with_feature_selection/07_correlation
-- file: xgb_with_feature_selection/02_xgb_combined_fit_accuracy_key_features
-- file: xgb_with_feature_selection/03_xgb_combined_shap_key_features
-- file: xgb_with_feature_selection/04_compare_10k_cohort_key_features
-- file: xgb_with_feature_selection/05_compare_benchmark_decisions_key_features
-- file: xgb_with_feature_selection/06_predict_differences_between_local_and_benchmark_key_features
+parts:
+- caption: General content
+  chapters:
+  - file: glossary
+  - file: xgb_with_feature_selection/outline
+  - file: shap_worked_example
+- caption: Predicting thrombolysis use and explaining the predictions with Shap
+  chapters:
+  - file: xgb_with_feature_selection/01_xgb_combined_fit_feature_selection
+  - file: xgb_with_feature_selection/07_correlation
+  - file: xgb_with_feature_selection/02_xgb_combined_fit_accuracy_key_features
+  - file: xgb_with_feature_selection/03_xgb_combined_shap_key_features
+- caption: Comparing thrombolysis decisions between hospitals
+  chapters:
+  - file: xgb_with_feature_selection/04_compare_10k_cohort_key_features
+  - file: xgb_with_feature_selection/05_compare_benchmark_decisions_key_features
+  - file: xgb_with_feature_selection/06_predict_differences_between_local_and_benchmark_key_features
+  - file: xgb_with_feature_selection/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
+  - file: xgb_with_feature_selection/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
+
 

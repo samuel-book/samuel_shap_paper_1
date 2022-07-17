@@ -64,14 +64,14 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot encoding).
 
 * *Compare local thrombolysis decisions with benchmark decisions*:
-    * Benchmark decisions are decisions made by the majority of the top 30 hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.
+    * Benchmark decisions are decisions made by the majority of the top 30 thrombolysing hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.
     * Get predicted thrombolysis decisions for all patients at the 30 benchmark hospitals.
     * Check similarity between local decisions and benchmark decisions.
     * Estimate thrombolysis use at each hospital if benchmark decisions made.
     * Save comparison of local and benchmark decisions.
     
 * *Predicting differences between local and benchmark decisions*:
-    * This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would *not* be thrombolysed at a local unit. 
+    * We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would *not* be thrombolysed at the bottom 30 thrombolysing hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.. 
     * Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would *not* be thrombolysed at a local unit.
     * Get Shap values for predictions.
         * Check consistency of Shap values and XGBoost Importance across k-fold replications
@@ -82,7 +82,6 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * Plot SHAP values for the top and bottom 30 hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.
     
 * *Plotting thrombolysis rate by feature value for low and high thrombolysing hospitals*:
-    * Plot the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals.
-
+    * Plot the relationships between feature values and thrombolysis use for the top and bottom 30 thrombolysing hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.
      
         
