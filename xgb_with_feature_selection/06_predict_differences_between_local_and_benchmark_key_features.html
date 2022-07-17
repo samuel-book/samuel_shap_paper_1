@@ -93,7 +93,12 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<ul class="current nav bd-sidenav">
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General content
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
    Glossary of technical terms
@@ -109,6 +114,13 @@ const thebe_selector_output = ".output, .cell_output"
    A simple worked example of Shap
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Predicting thrombolysis use and explaining the predictions with Shap
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
    XGBoost feature selection
@@ -129,6 +141,13 @@ const thebe_selector_output = ".output, .cell_output"
    Explaining XGBoost model predictions with Shapley values
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Comparing thrombolysis decisions between hospitals
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
    A comparison of 10k cohort thrombolysis rates across hospitals
@@ -147,11 +166,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.html">
    Comparing Shap values between high and low thrombolysing hospitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units..html">
-   Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
   </a>
  </li>
 </ul>
@@ -226,6 +240,21 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#function-to-calculate-accuracy-measures">
    Function to calculate accuracy measures
   </a>
@@ -241,13 +270,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis">
-   Identify hospitals where benchmark decision would lead to at least 50% higher thrombolysis
+  <a class="reference internal nav-link" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
+   Load data on predicted 10k cohort thrombolysis use at each hospital
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-top30-thrombolysis">
-   Build a model to distinguish between local and top30 thrombolysis
+  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
+   Build a model to distinguish between local and benchmark thrombolysis
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -341,7 +370,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -366,6 +395,21 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#function-to-calculate-accuracy-measures">
    Function to calculate accuracy measures
   </a>
@@ -381,13 +425,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis">
-   Identify hospitals where benchmark decision would lead to at least 50% higher thrombolysis
+  <a class="reference internal nav-link" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
+   Load data on predicted 10k cohort thrombolysis use at each hospital
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-top30-thrombolysis">
-   Build a model to distinguish between local and top30 thrombolysis
+  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
+   Build a model to distinguish between local and benchmark thrombolysis
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -481,7 +525,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -496,22 +540,50 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would">
 <h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would" title="Permalink to this headline">¶</a></h1>
-<p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We take all those patients who are predicted to be given thrombolysis by the majority of the benchmark hospitals, and predict when the decision would be different at low thrombolysing hospitals.</p>
-<p>The XGBoost model used to make predictions uses 8 features:</p>
+<div class="section" id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">¶</a></h2>
+<p>In this experiment we compare decisions between the top and bottom 30 hospitals (as ranked by the predicted thrombolysis use in the same 10k cohort of patients). We take those patients would would be given thrombolysis by the majority of the top 30 thombolysing hospitals (we also call these ‘benchmark’ hospitals), and predict when the bottom 30 hospitals would make a different decision (i.e. decide <em>not</em> to thrombolyse).</p>
+<p>The XGBoost model used to make these predictions uses 8 features:</p>
 <ul class="simple">
-<li><p>S2BrainImagingTime_min</p></li>
-<li><p>S2StrokeType_Infarction</p></li>
-<li><p>S2NihssArrival</p></li>
-<li><p>S1OnsetTimeType_Precise</p></li>
-<li><p>S2RankinBeforeStroke</p></li>
-<li><p>StrokeTeam</p></li>
-<li><p>AFAnticoagulent_Yes</p></li>
-<li><p>S1OnsetToArrival_min</p></li>
+<li><p>Arrival-to-scan time</p></li>
+<li><p>Infarction</p></li>
+<li><p>Stroke severity</p></li>
+<li><p>Precise onset time</p></li>
+<li><p>Prior disability level</p></li>
+<li><p>Stroke team</p></li>
+<li><p>Use of AF anticoagulants</p></li>
+<li><p>Onset-to-arrival time</p></li>
 </ul>
-<p>Aims:</p>
+<p>We find that low thrombolysing hospitals are less likely to give thrombolysis to patients with:</p>
+<ul class="simple">
+<li><p>Low or very high stroke severity</p></li>
+<li><p>An estimated (not precise) stroke onset time</p></li>
+<li><p>Prior disability</p></li>
+<li><p>A longer arrival-to-scan time</p></li>
+<li><p>A longer inset-to-arrival time</p></li>
+<li><p>Use of of AF anticoagulants</p></li>
+</ul>
+</div>
+<div class="section" id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be <em>not</em> be thrombolysed at a local unit.</p></li>
 <li><p>Investigate model predictions using Shap.</p></li>
+</ul>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.733).</p></li>
+<li><p>The five most important distinguishing features are:</p>
+<ul>
+<li><p>Stroke severity</p></li>
+<li><p>Prior disability level</p></li>
+<li><p>Precise onset time</p></li>
+<li><p>Arrival-to-scan time</p></li>
+<li><p>Onset-to-arrival time</p></li>
+</ul>
+</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -534,6 +606,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">shap</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1059,116 +1132,30 @@ const thebe_selector_output = ".output, .cell_output"
 </div></div></div>
 </div>
 </div>
-<div class="section" id="identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis">
-<h2>Identify hospitals where benchmark decision would lead to at least 50% higher thrombolysis<a class="headerlink" href="#identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
+<h2>Load data on predicted 10k cohort thrombolysis use at each hospital<a class="headerlink" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital" title="Permalink to this headline">¶</a></h2>
+<p>Use the hospitals thrombolysis rate on the same set of 10k patients to select the 30 hospitals with the lowest thrombolysis rates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_counts</span> <span class="o">=</span> <span class="p">(</span><span class="n">thrombolysis_decision_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
-        <span class="s1">&#39;predicted_proba&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-<span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;benchmark_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> \
-    <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_by_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./output/10k_thrombolysis_rate_by_hosp_key_features.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;stroke_team&#39;</span><span class="p">)</span>
+<span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;benchmark_ratio&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">1.5</span>
-
-<span class="n">low_thrombolysing_hospitals_df</span> <span class="o">=</span> <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">low_thrombolysing_hospitals_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
-    <span class="s1">&#39;benchmark_ratio&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low_thrombolysing_hospitals_df</span> <span class="o">=</span> <span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">low_thrombolysing_hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">low_thrombolysing_hospitals_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-
-
-<span class="n">low_thrombolysing_hospitals_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>observed</th>
-      <th>predicted_thrombolysis</th>
-      <th>majority_vote</th>
-      <th>benchmark_yes_observed_no</th>
-      <th>benchmark_ratio</th>
-    </tr>
-    <tr>
-      <th>unit</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>HZMLX7970T</th>
-      <td>34</td>
-      <td>28.0</td>
-      <td>80.0</td>
-      <td>49</td>
-      <td>2.352941</td>
-    </tr>
-    <tr>
-      <th>LFPMM4706C</th>
-      <td>21</td>
-      <td>7.0</td>
-      <td>46.0</td>
-      <td>29</td>
-      <td>2.190476</td>
-    </tr>
-    <tr>
-      <th>LZAYM7611L</th>
-      <td>40</td>
-      <td>23.0</td>
-      <td>86.0</td>
-      <td>55</td>
-      <td>2.150000</td>
-    </tr>
-    <tr>
-      <th>XPABC1435F</th>
-      <td>36</td>
-      <td>39.0</td>
-      <td>76.0</td>
-      <td>41</td>
-      <td>2.111111</td>
-    </tr>
-    <tr>
-      <th>LECHF1024T</th>
-      <td>114</td>
-      <td>110.0</td>
-      <td>230.0</td>
-      <td>128</td>
-      <td>2.017544</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </div>
-<div class="section" id="build-a-model-to-distinguish-between-local-and-top30-thrombolysis">
-<h2>Build a model to distinguish between local and top30 thrombolysis<a class="headerlink" href="#build-a-model-to-distinguish-between-local-and-top30-thrombolysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
+<h2>Build a model to distinguish between local and benchmark thrombolysis<a class="headerlink" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict data to low thrombolysing hospitals and benchmark = yes and observed = no</span>
@@ -1265,6 +1252,18 @@ const thebe_selector_output = ".output, .cell_output"
       <td>True</td>
     </tr>
     <tr>
+      <th>154</th>
+      <td>21.0</td>
+      <td>1</td>
+      <td>5.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>WJHSV5358P</td>
+      <td>0</td>
+      <td>62.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
       <th>159</th>
       <td>2.0</td>
       <td>1</td>
@@ -1274,18 +1273,6 @@ const thebe_selector_output = ".output, .cell_output"
       <td>IATJE0497S</td>
       <td>0</td>
       <td>78.0</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>161</th>
-      <td>8.0</td>
-      <td>1</td>
-      <td>4.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>DANAH4615Q</td>
-      <td>0</td>
-      <td>160.0</td>
       <td>False</td>
     </tr>
     <tr>
@@ -1362,7 +1349,7 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
   </tbody>
 </table>
-<p>4788 rows × 9 columns</p>
+<p>5293 rows × 9 columns</p>
 </div></div></div>
 </div>
 <p>Show proportion of patients where the decision would differ between the low thrombolysing hospitals and the benchmark majority vote.</p>
@@ -1374,7 +1361,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion with predicted different decision: 0.470
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion with predicted different decision: 0.462
 </pre></div>
 </div>
 </div>
@@ -1458,11 +1445,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.675
-Run 2, accuracy: 0.659
-Run 3, accuracy: 0.699
-Run 4, accuracy: 0.656
-Run 5, accuracy: 0.669
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.664
+Run 2, accuracy: 0.670
+Run 3, accuracy: 0.684
+Run 4, accuracy: 0.664
+Run 5, accuracy: 0.683
 </pre></div>
 </div>
 </div>
@@ -1520,147 +1507,147 @@ Run 5, accuracy: 0.669
   <tbody>
     <tr>
       <th>observed_positive_rate</th>
-      <td>0.469729</td>
-      <td>0.469729</td>
-      <td>0.469729</td>
-      <td>0.469175</td>
-      <td>0.470219</td>
+      <td>0.461756</td>
+      <td>0.461756</td>
+      <td>0.461756</td>
+      <td>0.461248</td>
+      <td>0.461248</td>
     </tr>
     <tr>
       <th>observed_negative_rate</th>
-      <td>0.530271</td>
-      <td>0.530271</td>
-      <td>0.530271</td>
-      <td>0.530825</td>
-      <td>0.529781</td>
+      <td>0.538244</td>
+      <td>0.538244</td>
+      <td>0.538244</td>
+      <td>0.538752</td>
+      <td>0.538752</td>
     </tr>
     <tr>
       <th>predicted_positive_rate</th>
-      <td>0.395616</td>
-      <td>0.349687</td>
-      <td>0.390397</td>
-      <td>0.384535</td>
-      <td>0.410658</td>
+      <td>0.393768</td>
+      <td>0.351275</td>
+      <td>0.373938</td>
+      <td>0.360113</td>
+      <td>0.375236</td>
     </tr>
     <tr>
       <th>predicted_negative_rate</th>
-      <td>0.604384</td>
-      <td>0.650313</td>
-      <td>0.609603</td>
-      <td>0.615465</td>
-      <td>0.589342</td>
+      <td>0.606232</td>
+      <td>0.648725</td>
+      <td>0.626062</td>
+      <td>0.639887</td>
+      <td>0.624764</td>
     </tr>
     <tr>
       <th>accuracy</th>
-      <td>0.675365</td>
-      <td>0.658664</td>
-      <td>0.699374</td>
-      <td>0.656217</td>
-      <td>0.668757</td>
+      <td>0.663834</td>
+      <td>0.670444</td>
+      <td>0.683664</td>
+      <td>0.664461</td>
+      <td>0.683365</td>
     </tr>
     <tr>
       <th>precision</th>
-      <td>0.683377</td>
-      <td>0.683582</td>
-      <td>0.716578</td>
-      <td>0.663043</td>
-      <td>0.669211</td>
+      <td>0.659472</td>
+      <td>0.688172</td>
+      <td>0.694444</td>
+      <td>0.674541</td>
+      <td>0.692695</td>
     </tr>
     <tr>
       <th>recall</th>
-      <td>0.575556</td>
-      <td>0.508889</td>
-      <td>0.595556</td>
-      <td>0.543430</td>
-      <td>0.584444</td>
+      <td>0.562372</td>
+      <td>0.523517</td>
+      <td>0.562372</td>
+      <td>0.526639</td>
+      <td>0.563525</td>
     </tr>
     <tr>
       <th>f1</th>
-      <td>0.624849</td>
-      <td>0.583439</td>
-      <td>0.650485</td>
-      <td>0.597307</td>
-      <td>0.623962</td>
+      <td>0.607064</td>
+      <td>0.594657</td>
+      <td>0.621469</td>
+      <td>0.591484</td>
+      <td>0.621469</td>
     </tr>
     <tr>
       <th>sensitivity</th>
-      <td>0.575556</td>
-      <td>0.508889</td>
-      <td>0.595556</td>
-      <td>0.543430</td>
-      <td>0.584444</td>
+      <td>0.562372</td>
+      <td>0.523517</td>
+      <td>0.562372</td>
+      <td>0.526639</td>
+      <td>0.563525</td>
     </tr>
     <tr>
       <th>specificity</th>
-      <td>0.763780</td>
-      <td>0.791339</td>
-      <td>0.791339</td>
-      <td>0.755906</td>
-      <td>0.743590</td>
+      <td>0.750877</td>
+      <td>0.796491</td>
+      <td>0.787719</td>
+      <td>0.782456</td>
+      <td>0.785965</td>
     </tr>
     <tr>
       <th>positive_likelihood</th>
-      <td>2.436519</td>
-      <td>2.438826</td>
-      <td>2.854172</td>
-      <td>2.226309</td>
-      <td>2.279333</td>
+      <td>2.257409</td>
+      <td>2.572456</td>
+      <td>2.649191</td>
+      <td>2.420842</td>
+      <td>2.632861</td>
     </tr>
     <tr>
       <th>negative_likelihood</th>
-      <td>0.555716</td>
-      <td>0.620608</td>
-      <td>0.511089</td>
-      <td>0.604004</td>
-      <td>0.558851</td>
+      <td>0.582822</td>
+      <td>0.598227</td>
+      <td>0.555563</td>
+      <td>0.604968</td>
+      <td>0.555337</td>
     </tr>
     <tr>
       <th>false_positive_rate</th>
-      <td>0.236220</td>
-      <td>0.208661</td>
-      <td>0.208661</td>
-      <td>0.244094</td>
-      <td>0.256410</td>
+      <td>0.249123</td>
+      <td>0.203509</td>
+      <td>0.212281</td>
+      <td>0.217544</td>
+      <td>0.214035</td>
     </tr>
     <tr>
       <th>false_negative_rate</th>
-      <td>0.424444</td>
-      <td>0.491111</td>
-      <td>0.404444</td>
-      <td>0.456570</td>
-      <td>0.415556</td>
+      <td>0.437628</td>
+      <td>0.476483</td>
+      <td>0.437628</td>
+      <td>0.473361</td>
+      <td>0.436475</td>
     </tr>
     <tr>
       <th>true_positive_rate</th>
-      <td>0.575556</td>
-      <td>0.508889</td>
-      <td>0.595556</td>
-      <td>0.543430</td>
-      <td>0.584444</td>
+      <td>0.562372</td>
+      <td>0.523517</td>
+      <td>0.562372</td>
+      <td>0.526639</td>
+      <td>0.563525</td>
     </tr>
     <tr>
       <th>true_negative_rate</th>
-      <td>0.763780</td>
-      <td>0.791339</td>
-      <td>0.791339</td>
-      <td>0.755906</td>
-      <td>0.743590</td>
+      <td>0.750877</td>
+      <td>0.796491</td>
+      <td>0.787719</td>
+      <td>0.782456</td>
+      <td>0.785965</td>
     </tr>
     <tr>
       <th>positive_predictive_value</th>
-      <td>0.683377</td>
-      <td>0.683582</td>
-      <td>0.716578</td>
-      <td>0.663043</td>
-      <td>0.669211</td>
+      <td>0.659472</td>
+      <td>0.688172</td>
+      <td>0.694444</td>
+      <td>0.674541</td>
+      <td>0.692695</td>
     </tr>
     <tr>
       <th>negative_predictive_value</th>
-      <td>0.670121</td>
-      <td>0.645265</td>
-      <td>0.688356</td>
-      <td>0.651952</td>
-      <td>0.668440</td>
+      <td>0.666667</td>
+      <td>0.660844</td>
+      <td>0.677225</td>
+      <td>0.658789</td>
+      <td>0.677761</td>
     </tr>
   </tbody>
 </table>
@@ -1735,150 +1722,150 @@ Run 5, accuracy: 0.669
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.469716</td>
-      <td>0.530284</td>
-      <td>0.386179</td>
-      <td>0.613821</td>
-      <td>0.671675</td>
-      <td>0.683158</td>
-      <td>0.561575</td>
-      <td>0.616009</td>
-      <td>0.561575</td>
-      <td>0.769190</td>
-      <td>2.447032</td>
-      <td>0.570054</td>
-      <td>0.230810</td>
-      <td>0.438425</td>
-      <td>0.561575</td>
-      <td>0.769190</td>
-      <td>0.683158</td>
-      <td>0.664827</td>
+      <td>0.461553</td>
+      <td>0.538447</td>
+      <td>0.370866</td>
+      <td>0.629134</td>
+      <td>0.673154</td>
+      <td>0.681865</td>
+      <td>0.547685</td>
+      <td>0.607229</td>
+      <td>0.547685</td>
+      <td>0.780702</td>
+      <td>2.506552</td>
+      <td>0.579383</td>
+      <td>0.219298</td>
+      <td>0.452315</td>
+      <td>0.547685</td>
+      <td>0.780702</td>
+      <td>0.681865</td>
+      <td>0.668257</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.000370</td>
-      <td>0.000370</td>
-      <td>0.022586</td>
-      <td>0.022586</td>
-      <td>0.017303</td>
-      <td>0.020714</td>
-      <td>0.035278</td>
-      <td>0.026175</td>
-      <td>0.035278</td>
-      <td>0.021461</td>
-      <td>0.246365</td>
-      <td>0.043348</td>
-      <td>0.021461</td>
-      <td>0.035278</td>
-      <td>0.035278</td>
-      <td>0.021461</td>
-      <td>0.020714</td>
-      <td>0.016905</td>
+      <td>0.000279</td>
+      <td>0.000279</td>
+      <td>0.016221</td>
+      <td>0.016221</td>
+      <td>0.009804</td>
+      <td>0.014751</td>
+      <td>0.020672</td>
+      <td>0.014244</td>
+      <td>0.020672</td>
+      <td>0.017456</td>
+      <td>0.165878</td>
+      <td>0.023276</td>
+      <td>0.017456</td>
+      <td>0.020672</td>
+      <td>0.020672</td>
+      <td>0.017456</td>
+      <td>0.014751</td>
+      <td>0.008914</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.469175</td>
-      <td>0.529781</td>
-      <td>0.349687</td>
-      <td>0.589342</td>
-      <td>0.656217</td>
-      <td>0.663043</td>
-      <td>0.508889</td>
-      <td>0.583439</td>
-      <td>0.508889</td>
-      <td>0.743590</td>
-      <td>2.226309</td>
-      <td>0.511089</td>
-      <td>0.208661</td>
-      <td>0.404444</td>
-      <td>0.508889</td>
-      <td>0.743590</td>
-      <td>0.663043</td>
-      <td>0.645265</td>
+      <td>0.461248</td>
+      <td>0.538244</td>
+      <td>0.351275</td>
+      <td>0.606232</td>
+      <td>0.663834</td>
+      <td>0.659472</td>
+      <td>0.523517</td>
+      <td>0.591484</td>
+      <td>0.523517</td>
+      <td>0.750877</td>
+      <td>2.257409</td>
+      <td>0.555337</td>
+      <td>0.203509</td>
+      <td>0.436475</td>
+      <td>0.523517</td>
+      <td>0.750877</td>
+      <td>0.659472</td>
+      <td>0.658789</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>0.469729</td>
-      <td>0.530271</td>
-      <td>0.384535</td>
-      <td>0.604384</td>
-      <td>0.658664</td>
-      <td>0.669211</td>
-      <td>0.543430</td>
-      <td>0.597307</td>
-      <td>0.543430</td>
-      <td>0.755906</td>
-      <td>2.279333</td>
-      <td>0.555716</td>
-      <td>0.208661</td>
-      <td>0.415556</td>
-      <td>0.543430</td>
-      <td>0.755906</td>
-      <td>0.669211</td>
-      <td>0.651952</td>
+      <td>0.461248</td>
+      <td>0.538244</td>
+      <td>0.360113</td>
+      <td>0.624764</td>
+      <td>0.664461</td>
+      <td>0.674541</td>
+      <td>0.526639</td>
+      <td>0.594657</td>
+      <td>0.526639</td>
+      <td>0.782456</td>
+      <td>2.420842</td>
+      <td>0.555563</td>
+      <td>0.212281</td>
+      <td>0.437628</td>
+      <td>0.526639</td>
+      <td>0.782456</td>
+      <td>0.674541</td>
+      <td>0.660844</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.469729</td>
-      <td>0.530271</td>
-      <td>0.390397</td>
-      <td>0.609603</td>
-      <td>0.668757</td>
-      <td>0.683377</td>
-      <td>0.575556</td>
-      <td>0.623962</td>
-      <td>0.575556</td>
-      <td>0.763780</td>
-      <td>2.436519</td>
-      <td>0.558851</td>
-      <td>0.236220</td>
-      <td>0.424444</td>
-      <td>0.575556</td>
-      <td>0.763780</td>
-      <td>0.683377</td>
-      <td>0.668440</td>
+      <td>0.461756</td>
+      <td>0.538244</td>
+      <td>0.373938</td>
+      <td>0.626062</td>
+      <td>0.670444</td>
+      <td>0.688172</td>
+      <td>0.562372</td>
+      <td>0.607064</td>
+      <td>0.562372</td>
+      <td>0.785965</td>
+      <td>2.572456</td>
+      <td>0.582822</td>
+      <td>0.214035</td>
+      <td>0.437628</td>
+      <td>0.562372</td>
+      <td>0.785965</td>
+      <td>0.688172</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>0.469729</td>
-      <td>0.530271</td>
-      <td>0.395616</td>
-      <td>0.615465</td>
-      <td>0.675365</td>
-      <td>0.683582</td>
-      <td>0.584444</td>
-      <td>0.624849</td>
-      <td>0.584444</td>
-      <td>0.791339</td>
-      <td>2.438826</td>
-      <td>0.604004</td>
-      <td>0.244094</td>
-      <td>0.456570</td>
-      <td>0.584444</td>
-      <td>0.791339</td>
-      <td>0.683582</td>
-      <td>0.670121</td>
+      <td>0.461756</td>
+      <td>0.538752</td>
+      <td>0.375236</td>
+      <td>0.639887</td>
+      <td>0.683365</td>
+      <td>0.692695</td>
+      <td>0.562372</td>
+      <td>0.621469</td>
+      <td>0.562372</td>
+      <td>0.787719</td>
+      <td>2.632861</td>
+      <td>0.598227</td>
+      <td>0.217544</td>
+      <td>0.473361</td>
+      <td>0.562372</td>
+      <td>0.787719</td>
+      <td>0.692695</td>
+      <td>0.677225</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>0.470219</td>
-      <td>0.530825</td>
-      <td>0.410658</td>
-      <td>0.650313</td>
-      <td>0.699374</td>
-      <td>0.716578</td>
-      <td>0.595556</td>
-      <td>0.650485</td>
-      <td>0.595556</td>
-      <td>0.791339</td>
-      <td>2.854172</td>
-      <td>0.620608</td>
-      <td>0.256410</td>
-      <td>0.491111</td>
-      <td>0.595556</td>
-      <td>0.791339</td>
-      <td>0.716578</td>
-      <td>0.688356</td>
+      <td>0.461756</td>
+      <td>0.538752</td>
+      <td>0.393768</td>
+      <td>0.648725</td>
+      <td>0.683664</td>
+      <td>0.694444</td>
+      <td>0.563525</td>
+      <td>0.621469</td>
+      <td>0.563525</td>
+      <td>0.796491</td>
+      <td>2.649191</td>
+      <td>0.604968</td>
+      <td>0.249123</td>
+      <td>0.476483</td>
+      <td>0.563525</td>
+      <td>0.796491</td>
+      <td>0.694444</td>
+      <td>0.677761</td>
     </tr>
   </tbody>
 </table>
@@ -1915,8 +1902,8 @@ Run 5, accuracy: 0.669
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean AUC: 0.7287
-SD AUC: 0.0151
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean AUC: 0.7329
+SD AUC: 0.0086
 </pre></div>
 </div>
 </div>
@@ -2052,8 +2039,8 @@ SD AUC: 0.0151
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean intersection: 0.6790
-SD intersection: 0.0087
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean intersection: 0.6764
+SD intersection: 0.0063
 </pre></div>
 </div>
 </div>
@@ -2235,39 +2222,39 @@ Completed 5 of 5
   <tbody>
     <tr>
       <th>Precise onset time</th>
-      <td>0.370800</td>
-      <td>0.400156</td>
-      <td>0.427411</td>
+      <td>0.392276</td>
+      <td>0.427986</td>
+      <td>0.441626</td>
     </tr>
     <tr>
       <th>Use of AF anticoagulents</th>
-      <td>0.203292</td>
-      <td>0.233975</td>
-      <td>0.262270</td>
+      <td>0.202440</td>
+      <td>0.215143</td>
+      <td>0.226029</td>
     </tr>
     <tr>
       <th>Prior disability level</th>
-      <td>0.169925</td>
-      <td>0.181223</td>
-      <td>0.191138</td>
+      <td>0.164072</td>
+      <td>0.171589</td>
+      <td>0.180174</td>
     </tr>
     <tr>
       <th>Stroke severity</th>
-      <td>0.080350</td>
-      <td>0.085697</td>
-      <td>0.094082</td>
+      <td>0.084191</td>
+      <td>0.096703</td>
+      <td>0.102428</td>
     </tr>
     <tr>
       <th>Arrival-to-scan time</th>
-      <td>0.045687</td>
-      <td>0.047999</td>
-      <td>0.053037</td>
+      <td>0.046916</td>
+      <td>0.051572</td>
+      <td>0.056909</td>
     </tr>
     <tr>
       <th>Onset-to-arrival time</th>
-      <td>0.042610</td>
-      <td>0.045147</td>
-      <td>0.048935</td>
+      <td>0.042045</td>
+      <td>0.045115</td>
+      <td>0.050731</td>
     </tr>
     <tr>
       <th>Infarction</th>
@@ -2421,33 +2408,33 @@ Completed 5 of 5
   <tbody>
     <tr>
       <th>Stroke severity</th>
-      <td>0.514122</td>
-      <td>0.085697</td>
+      <td>0.515694</td>
+      <td>0.096703</td>
     </tr>
     <tr>
       <th>Prior disability level</th>
-      <td>0.461407</td>
-      <td>0.181223</td>
+      <td>0.436681</td>
+      <td>0.171589</td>
     </tr>
     <tr>
       <th>Precise onset time</th>
-      <td>0.388713</td>
-      <td>0.400156</td>
+      <td>0.401897</td>
+      <td>0.427986</td>
     </tr>
     <tr>
       <th>Arrival-to-scan time</th>
-      <td>0.299908</td>
-      <td>0.047999</td>
+      <td>0.304198</td>
+      <td>0.051572</td>
     </tr>
     <tr>
       <th>Onset-to-arrival time</th>
-      <td>0.245725</td>
-      <td>0.045147</td>
+      <td>0.230033</td>
+      <td>0.045115</td>
     </tr>
     <tr>
       <th>Use of AF anticoagulents</th>
-      <td>0.083516</td>
-      <td>0.233975</td>
+      <td>0.079052</td>
+      <td>0.215143</td>
     </tr>
     <tr>
       <th>Infarction</th>
@@ -2735,10 +2722,10 @@ Completed 5 of 5
 </div>
 </div>
 </div>
-<div class="section" id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 68% accuracy (AUC 0.729).</p></li>
+<li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.733).</p></li>
 <li><p>The five most important distinguishing features are:</p>
 <ul>
 <li><p>Stroke severity</p></li>
