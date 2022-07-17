@@ -29,8 +29,12 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 
 ## Notebooks in this section
 
+### General example of Shap
+
 * *A simple worked example of Shap*:
     * A very simple example of Shap values based on three people who may contribute to the scores of a pub quiz team.
+
+### Predicting thrombolysis use and explaining the predictions with Shap
 
 * *XGBoost feature selection*:
     * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in area under the ROC curve (ROC AUC) score. Eight were chosen.
@@ -46,7 +50,6 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     * Compare predicted and observed thrombolysis use at each hospital.
     * Check model calibration.
     
-
 * *Explaining XGBoost model predictions with Shapley values*:
     * Fit XGBoost model to k-fold train/test splits.
     * Get Shap values for each k-fold split.
@@ -58,6 +61,8 @@ More information on the `shap` library, used to estimate Shapley values, may be 
         * Waterfall plots
         * Scatter plots
     * Show example of Shap waterfall plot as *probability* rather than *log-odds ratio*.
+    
+### Comparing thrombolysis decisions between hospitals
   
 * *A comparison of 10K cohort thrombolysis rates across hospitals*:
     * Train XGBoost model on all data except for a 10K set of patients
