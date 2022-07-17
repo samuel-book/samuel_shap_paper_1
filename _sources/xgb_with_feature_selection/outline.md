@@ -78,3 +78,11 @@ More information on the `shap` library, used to estimate Shapley values, may be 
         * Compare Shap values and XGBoost Importance
         * Analyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.
         
+* *Comparing Shap values between high and low thrombolysing hospitals*:
+    * Plot SHAP values for the top and bottom 30 hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.
+    
+* *Plotting thrombolysis rate by feature value for low and high thrombolysing hospitals*:
+    * Plot the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals.
+
+     
+        
