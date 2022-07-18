@@ -3,8 +3,8 @@ root: introduction/intro
 parts:
 - caption: Introductory content
   chapters:
-  - file: glossary
   - file: xgb_with_feature_selection/outline
+  - file: glossary
   - file: introduction/odds_prob
   - file: shap_worked_example
 - caption: Predicting thrombolysis use and explaining the predictions with Shap
