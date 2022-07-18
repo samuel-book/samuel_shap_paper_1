@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comparing Shap values between high and low thrombolysing hospitals &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -37,13 +39,12 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -61,21 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -84,10 +71,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
@@ -100,15 +86,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../introduction/intro.html">
-                    Introduction
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introductory content
  </span>
@@ -196,17 +181,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -214,128 +194,61 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/xgb_with_feature_selection/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/xgb_with_feature_selection/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plain-english-summary">
    Plain English summary
@@ -405,11 +318,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Comparing Shap values between high and low thrombolysing hospitals</h1>
@@ -495,19 +409,18 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="comparing-shap-values-between-high-and-low-thrombolysing-hospitals">
-<h1>Comparing Shap values between high and low thrombolysing hospitals<a class="headerlink" href="#comparing-shap-values-between-high-and-low-thrombolysing-hospitals" title="Permalink to this headline">#</a></h1>
-<section id="plain-english-summary">
-<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="comparing-shap-values-between-high-and-low-thrombolysing-hospitals">
+<h1>Comparing Shap values between high and low thrombolysing hospitals<a class="headerlink" href="#comparing-shap-values-between-high-and-low-thrombolysing-hospitals" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">¶</a></h2>
 <p>It has become apparent that hospitals are making different clinical decisions, and it is not just the patient group that is accounting for the difference in thrombolysis rates between hosptials. Here we create two groups of hospitals: those that have a high propensity to thrombolyse, and those that have a low propensity to thrombolyse. Comparing the SHAP values between these two hospital groups shows that …. Trying to pick apart what factors the diff hospital groups are using to make their different decisions.</p>
 <p>low and high hosptials have same general pattern, but thrshoelds for it are different. Nothing dramatic about who they thrombolyse, just that less likely to thrombolyse across variaous categories. Are the NIHSS going to be pulled apart more in bootom than middle.</p>
-</section>
-<section id="model-and-data">
-<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">¶</a></h2>
 <p>XGBoost models were trained on stratified k-fold cross-validation data. The 8 features in the model are:</p>
 <ul class="simple">
 <li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
@@ -526,22 +439,22 @@ title="Print to PDF"
 <p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
 <p>The Python library SHAP was applied to the first k-fold model to obtain a SHAP value for each feature, for each instance. SHAP values are in the same units as the model output, so for XGBoost this is in log odds-ratio.</p>
 <p>A single SHAP value per feature was obtained by taking the mean of the absolute values across all instances.</p>
-</section>
-<section id="a-note-on-shap-values">
-<h2>A note on Shap values<a class="headerlink" href="#a-note-on-shap-values" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="a-note-on-shap-values">
+<h2>A note on Shap values<a class="headerlink" href="#a-note-on-shap-values" title="Permalink to this headline">¶</a></h2>
 <p>Shap values are usually reported as <em>log odds shifts</em> in model predictions. For a description of the relationships between probability, odds, and Shap values (log odds shifts) see <a class="reference internal" href="../introduction/odds_prob.html"><span class="doc std std-doc">here</span></a>.</p>
-</section>
-<section id="aims">
-<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="aims">
+<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Identify top 30 and bottom 30 hosptials judged by the 10k cohort dataset</p></li>
 <li><p>Fit XGBoost model to each of the 5 k-fold train/test splits.</p></li>
 <li><p>Get SHAP values for the first k-fold split.</p></li>
 <li><p>Plot SHAP values for two features (NIHSS and mRS) for the top 30 and bottom 30 hospitals.</p></li>
 </ul>
-</section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>There was good consiency of SHAP values and importances across 5 k-fold replications.</p></li>
 <li><p>There was a reasonable correlation between SHAP and feature importance values, but also some differences in the rank order of importance.
@@ -566,14 +479,14 @@ The five most influential features as judged by SHAP were:</p>
 <li><p>Beeswarm, waterfall, and scatter plots all help elucidate the relationship between feature values and SHAP value.</p></li>
 <li><p>Plotting SHAP values as probabilities are more understandable than plotting as log odds-ratios, but can distort the relative importance of features overall.</p></li>
 </ul>
-<section id="note-on-shap-version-0-40">
-<h3>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">#</a></h3>
+<div class="section" id="note-on-shap-version-0-40">
+<h3>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">¶</a></h3>
 <p>Installed using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code></p>
 <p>There is a bug in the waterfall plot where <code class="docutils literal notranslate"><span class="pre">show=False</span></code> (required to save plot) fails. To correct this find the <code class="docutils literal notranslate"><span class="pre">_waterfall.py</span></code> file in the shap library (e.g. in <code class="docutils literal notranslate"><span class="pre">anaconda/envs/samuel2/lib/python3.8/site-packages/shap/plots</span></code>, and search/replace all <code class="docutils literal notranslate"><span class="pre">pl.</span></code> to <code class="docutils literal notranslate"><span class="pre">plt.</span></code>, and replace initial import of <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">pl</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>.</p>
-</section>
-</section>
-<section id="load-packages">
-<h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="load-packages">
+<h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -594,9 +507,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="create-output-folders-if-needed">
-<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="create-output-folders-if-needed">
+<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models&#39;</span>
@@ -606,9 +519,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="read-in-json-file">
-<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">¶</a></h2>
 <p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -618,9 +531,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
-<h2>Load data on predicted 10k cohort thrombolysis use at each hospital<a class="headerlink" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
+<h2>Load data on predicted 10k cohort thrombolysis use at each hospital<a class="headerlink" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital" title="Permalink to this headline">¶</a></h2>
 <p>Use the hospitals thrombolysis rate on the same set of 10k patients to select the 30 hospitals with the highest thrombolysis rates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -698,9 +611,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="load-shap-data-for-first-k-fold-model">
-<h2>Load SHAP data for first k-fold model<a class="headerlink" href="#load-shap-data-for-first-k-fold-model" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="load-shap-data-for-first-k-fold-model">
+<h2>Load SHAP data for first k-fold model<a class="headerlink" href="#load-shap-data-for-first-k-fold-model" title="Permalink to this headline">¶</a></h2>
 <p>Use explainer to access the feature names (explainer.data_feature_names) and shap_values_extended to access the data values and SHAP values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -716,9 +629,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="plot-shap-values-for-the-top-and-bottom-30-hospitals">
-<h2>Plot SHAP values for the top and bottom 30 hospitals<a class="headerlink" href="#plot-shap-values-for-the-top-and-bottom-30-hospitals" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="plot-shap-values-for-the-top-and-bottom-30-hospitals">
+<h2>Plot SHAP values for the top and bottom 30 hospitals<a class="headerlink" href="#plot-shap-values-for-the-top-and-bottom-30-hospitals" title="Permalink to this headline">¶</a></h2>
 <p>Put data into Dataframe. Select the 30 top and 30 bottom hospitals. Plot the SHAP values for the two features for the hospital groups.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1742,9 +1655,9 @@ The five most influential features as judged by SHAP were:</p>
 <img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_20_1.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_20_1.png" />
 </div>
 </div>
-</section>
-<section id="split-by-whether-recieve-thrombolysis">
-<h2>Split by whether recieve thrombolysis<a class="headerlink" href="#split-by-whether-recieve-thrombolysis" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="split-by-whether-recieve-thrombolysis">
+<h2>Split by whether recieve thrombolysis<a class="headerlink" href="#split-by-whether-recieve-thrombolysis" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
@@ -1810,8 +1723,8 @@ The five most influential features as judged by SHAP were:</p>
 <img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_22_3.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_22_3.png" />
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1835,11 +1748,9 @@ The five most influential features as judged by SHAP were:</p>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="06_predict_differences_between_local_and_benchmark_key_features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1855,28 +1766,24 @@ The five most influential features as judged by SHAP were:</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kerry Pearn & Michael Allen<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Kerry Pearn & Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>
