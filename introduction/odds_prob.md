@@ -1,10 +1,10 @@
 # Probability, odds, and Shap values (log odds shifts)
 
-Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this probability of rain.
+Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.
 
 In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
 
-This is made a little more complicated for us because Shap usually outputs a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -05 to -5) are, as that is a common range of Shap values that we will see in our models.
+This is made a little more complicated for us because Shap is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of Shap values that we will see in our models.
 
 ## Probability
 
@@ -12,11 +12,11 @@ We will take the example that Shap reports that a model's base probability predi
 
 ## Odds
 
-Probability expresses the chance of something happening as the number of positive occurrence as a fraction of all outcomes.
+*Probability* expresses the chance of something happening as the number of positive occurrences as a fraction of all occurrences (i.e. the number of patients receiving thrombolysis as a fraction of the total number of patients).
 
-Odds express the chance of something happening as the ratio of the positive (i.e. receiving thrombolysis), and negative ( (i.e. *not* receiving thrombolysis) classes.
+*Odds* express the chance of something happening as the ratio of the number of positive occurrences (i.e. receiving thrombolysis) to the number of negative occurrences (i.e. *not* receiving thrombolysis).
 
-If we have probability prediction of 0.25 would receive thrombolysis, that would mean 1 in 4 of those patients receive thrombolysis. Or, expressed as odds, for every patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal, 0.333.
+If we have probability prediction of 0.25 would receive thrombolysis, that would mean 1 in 4 of those patients receive thrombolysis. Expressed as odds, for every one patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal (1 divided by 3), 0.333.
 
 Odds (O) and probability (P) may be converted with the following equations:
 
@@ -26,7 +26,7 @@ Odds (O) and probability (P) may be converted with the following equations:
 
 ## Log odds shifts
 
-Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 1 to 5 give.
+Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 0.5 to 5 give (we will look at positive and negative Shap values).
 
 Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the 'Shap value') is usually given in 'log odds' (the logarithm of the odds value). For the mathematically inclined, we use the natural log (*ln*).
 
@@ -34,16 +34,18 @@ Let's look at some Shap values (log odds) and see how much they change the odds 
 
 First we'll look at the shift in odds the Shap values give. This is calculated as *shift = exp(Shap)*
 
-| Shap (log odds) | Shift (multiply original odds) |
-|-----------------|--------------------------------|
-| 0.5             | 1.65                           |
-| 1               | 2.72                           |
-| 2               | 7.39                           |
-| 3               | 20.1                           |
-| 4               | 54.6                           |
-| 5               | 148                            |
+| Shap (log odds) | Shift in odds (multiply original odds) |
+|-----------------|----------------------------------------|
+| 0.5             | 1.65                                   |
+| 1               | 2.72                                   |
+| 2               | 7.39                                   |
+| 3               | 20.1                                   |
+| 4               | 54.6                                   |
+| 5               | 148                                    |
 
-### Positive Shap values - worked example
+### Positive Shap values: worked example
+
+Now let us work through an example of starting with a known *probability*, converting that to *odds*, applying a Shap *log odds shift* for a particular feature, and converting back to *probability* after we have applied the influence of that feature.
 
 Here are the effects of those shifts on our baseline probability of 0.25.
 
@@ -58,7 +60,7 @@ Here are the effects of those shifts on our baseline probability of 0.25.
 
 So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
 
-### Negative Shap values - worked example
+### Negative Shap values: worked example
 
 If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
@@ -73,7 +75,7 @@ If we have a negative Shap value then odds are reduced (a Shap of -1 will lead t
 
 So, for example, a Shap value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
 
-### Observation Shap values
+### Observations about Shap values
 
 We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
 
