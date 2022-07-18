@@ -342,12 +342,12 @@ title="Print to PDF"
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#positive-shap-values-worked-example">
-     Positive Shap values - worked example
+     Positive Shap values: worked example
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#negative-shap-values-worked-example">
-     Negative Shap values - worked example
+     Negative Shap values: worked example
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -393,12 +393,12 @@ title="Print to PDF"
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#positive-shap-values-worked-example">
-     Positive Shap values - worked example
+     Positive Shap values: worked example
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#negative-shap-values-worked-example">
-     Negative Shap values - worked example
+     Negative Shap values: worked example
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -420,32 +420,32 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="probability-odds-and-shap-values-log-odds-shifts">
 <h1>Probability, odds, and Shap values (log odds shifts)<a class="headerlink" href="#probability-odds-and-shap-values-log-odds-shifts" title="Permalink to this headline">#</a></h1>
-<p>Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this probability of rain.</p>
+<p>Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.</p>
 <p>In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as ‘Is their stroke caused by a clot or a bleed?’) adjusts our prediction of whether they will receive thrombolysis or not.</p>
-<p>This is made a little more complicated for us because Shap usually outputs a <em>log odds shift</em>. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -05 to -5) are, as that is a common range of Shap values that we will see in our models.</p>
+<p>This is made a little more complicated for us because Shap is usually reported as a <em>log odds shift</em>. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of Shap values that we will see in our models.</p>
 <section id="probability">
 <h2>Probability<a class="headerlink" href="#probability" title="Permalink to this headline">#</a></h2>
 <p>We will take the example that Shap reports that a model’s base probability prediction, before the contribution of features is 0.25, or a 25% probability of receiving thrombolysis; that is 1 in 4 patients with this prediction would be expected to receive thrombolysis.</p>
 </section>
 <section id="odds">
 <h2>Odds<a class="headerlink" href="#odds" title="Permalink to this headline">#</a></h2>
-<p>Probability expresses the chance of something happening as the number of positive occurrence as a fraction of all outcomes.</p>
-<p>Odds express the chance of something happening as the ratio of the positive (i.e. receiving thrombolysis), and negative ( (i.e. <em>not</em> receiving thrombolysis) classes.</p>
-<p>If we have probability prediction of 0.25 would receive thrombolysis, that would mean 1 in 4 of those patients receive thrombolysis. Or, expressed as odds, for every patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal, 0.333.</p>
+<p><em>Probability</em> expresses the chance of something happening as the number of positive occurrences as a fraction of all occurrences (i.e. the number of patients receiving thrombolysis as a fraction of the total number of patients).</p>
+<p><em>Odds</em> express the chance of something happening as the ratio of the number of positive occurrences (i.e. receiving thrombolysis) to the number of negative occurrences (i.e. <em>not</em> receiving thrombolysis).</p>
+<p>If we have probability prediction of 0.25 would receive thrombolysis, that would mean 1 in 4 of those patients receive thrombolysis. Expressed as odds, for every one patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal (1 divided by 3), 0.333.</p>
 <p>Odds (O) and probability (P) may be converted with the following equations:</p>
 <p>(1) O = P / (1 - P)</p>
 <p>(2) P = O / (1 + O)</p>
 </section>
 <section id="log-odds-shifts">
 <h2>Log odds shifts<a class="headerlink" href="#log-odds-shifts" title="Permalink to this headline">#</a></h2>
-<p>Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 1 to 5 give.</p>
+<p>Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 0.5 to 5 give (we will look at positive and negative Shap values).</p>
 <p>Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the ‘Shap value’) is usually given in ‘log odds’ (the logarithm of the odds value). For the mathematically inclined, we use the natural log (<em>ln</em>).</p>
 <p>Let’s look at some Shap values (log odds) and see how much they change the odds of receiving thrombolysis.</p>
 <p>First we’ll look at the shift in odds the Shap values give. This is calculated as <em>shift = exp(Shap)</em></p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Shap (log odds)</p></th>
-<th class="head"><p>Shift (multiply original odds)</p></th>
+<th class="head"><p>Shift in odds (multiply original odds)</p></th>
 </tr>
 </thead>
 <tbody>
@@ -470,7 +470,8 @@ title="Print to PDF"
 </tbody>
 </table>
 <section id="positive-shap-values-worked-example">
-<h3>Positive Shap values - worked example<a class="headerlink" href="#positive-shap-values-worked-example" title="Permalink to this headline">#</a></h3>
+<h3>Positive Shap values: worked example<a class="headerlink" href="#positive-shap-values-worked-example" title="Permalink to this headline">#</a></h3>
+<p>Now let us work through an example of starting with a known <em>probability</em>, converting that to <em>odds</em>, applying a Shap <em>log odds shift</em> for a particular feature, and converting back to <em>probability</em> after we have applied the influence of that feature.</p>
 <p>Here are the effects of those shifts on our baseline probability of 0.25.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -530,7 +531,7 @@ title="Print to PDF"
 <p>So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.</p>
 </section>
 <section id="negative-shap-values-worked-example">
-<h3>Negative Shap values - worked example<a class="headerlink" href="#negative-shap-values-worked-example" title="Permalink to this headline">#</a></h3>
+<h3>Negative Shap values: worked example<a class="headerlink" href="#negative-shap-values-worked-example" title="Permalink to this headline">#</a></h3>
 <p>If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):</p>
 <table class="colwidths-auto table">
 <thead>
