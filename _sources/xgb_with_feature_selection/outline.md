@@ -29,10 +29,15 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 
 ## Notebooks in this section
 
-### General example of SHAP
+### General examples of SHAP
+
+* *Probability, odds, and SHAP values (log odds shifts)*:
+    * Comparing probabilities and odds.
+    * Showing how SHAP shows us how much odds and probabilities change
 
 * *A simple worked example of Shapley values*:
     * A very simple example of Shapley values based on three people who may contribute to the scores of a pub quiz team.
+    * A quick demonstration of the SHAP library to estimate Shapley values.
 
 ### Predicting thrombolysis use and explaining the predictions with SHAP
 
