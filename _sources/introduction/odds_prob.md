@@ -43,7 +43,7 @@ First we'll look at the shift in odds the Shap values give. This is calculated a
 | 4               | 54.6                           |
 | 5               | 148                            |
 
-### Positive Shap values
+### Positive Shap values - worked example
 
 Here are the effects of those shifts on our baseline probability of 0.25.
 
@@ -58,7 +58,7 @@ Here are the effects of those shifts on our baseline probability of 0.25.
 
 So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
 
-### Positive Shap values
+### Negative Shap values - worked example
 
 If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
