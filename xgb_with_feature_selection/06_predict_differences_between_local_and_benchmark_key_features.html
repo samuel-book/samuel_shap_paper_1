@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -37,13 +39,12 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -61,21 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -84,10 +71,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
@@ -100,15 +86,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../introduction/intro.html">
-                    Introduction
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introductory content
  </span>
@@ -121,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../introduction/odds_prob.html">
-   Probability, odds and Shap log odds
+   Probability, odds, and Shap values (log odds shifts)
   </a>
  </li>
  <li class="toctree-l1">
@@ -196,17 +181,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -214,131 +194,69 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/xgb_with_feature_selection/06_predict_differences_between_local_and_benchmark_key_features.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/xgb_with_feature_selection/06_predict_differences_between_local_and_benchmark_key_features.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plain-english-summary">
    Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-on-shap-values">
+   A note on Shap values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -473,11 +391,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would</h1>
@@ -493,6 +412,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plain-english-summary">
    Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-on-shap-values">
+   A note on Shap values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -631,14 +555,13 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would">
-<h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would" title="Permalink to this headline">#</a></h1>
-<section id="plain-english-summary">
-<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would">
+<h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">¶</a></h2>
 <p>In this experiment we compare decisions between the top and bottom 30 hospitals (as ranked by the predicted thrombolysis use in the same 10k cohort of patients). We take those patients would would be given thrombolysis by the majority of the top 30 thombolysing hospitals (we also call these ‘benchmark’ hospitals), and predict when the bottom 30 hospitals would make a different decision (i.e. decide <em>not</em> to thrombolyse).</p>
 <p>The XGBoost model used to make these predictions uses 8 features:</p>
 <ul class="simple">
@@ -660,16 +583,20 @@ title="Print to PDF"
 <li><p>A longer inset-to-arrival time</p></li>
 <li><p>Use of of AF anticoagulants</p></li>
 </ul>
-</section>
-<section id="aims">
-<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="a-note-on-shap-values">
+<h2>A note on Shap values<a class="headerlink" href="#a-note-on-shap-values" title="Permalink to this headline">¶</a></h2>
+<p>Shap values are usually reported as <em>log odds shifts</em> in model predictions. For a description of the relationships between probability, odds, and Shap values (log odds shifts) see <a class="reference internal" href="../introduction/odds_prob.html"><span class="doc std std-doc">here</span></a>.</p>
+</div>
+<div class="section" id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be <em>not</em> be thrombolysed at a local unit.</p></li>
 <li><p>Investigate model predictions using Shap.</p></li>
 </ul>
-</section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.733).</p></li>
 <li><p>The five most important distinguishing features are:</p>
@@ -706,9 +633,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="function-to-calculate-accuracy-measures">
-<h2>Function to calculate accuracy measures<a class="headerlink" href="#function-to-calculate-accuracy-measures" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="function-to-calculate-accuracy-measures">
+<h2>Function to calculate accuracy measures<a class="headerlink" href="#function-to-calculate-accuracy-measures" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
@@ -818,9 +745,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="read-in-json-file">
-<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">¶</a></h2>
 <p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -830,9 +757,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_decision_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -1228,9 +1155,9 @@ title="Print to PDF"
 <p>88792 rows × 13 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
-<h2>Load data on predicted 10k cohort thrombolysis use at each hospital<a class="headerlink" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
+<h2>Load data on predicted 10k cohort thrombolysis use at each hospital<a class="headerlink" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital" title="Permalink to this headline">¶</a></h2>
 <p>Use the hospitals thrombolysis rate on the same set of 10k patients to select the 30 hospitals with the lowest thrombolysis rates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1250,9 +1177,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
-<h2>Build a model to distinguish between local and benchmark thrombolysis<a class="headerlink" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
+<h2>Build a model to distinguish between local and benchmark thrombolysis<a class="headerlink" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict data to low thrombolysing hospitals and benchmark = yes and observed = no</span>
@@ -1551,8 +1478,8 @@ Run 5, accuracy: 0.683
 </div>
 </div>
 </div>
-<section id="accuracy-measures">
-<h3>Accuracy measures<a class="headerlink" href="#accuracy-measures" title="Permalink to this headline">#</a></h3>
+<div class="section" id="accuracy-measures">
+<h3>Accuracy measures<a class="headerlink" href="#accuracy-measures" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list for results</span>
@@ -1968,9 +1895,9 @@ Run 5, accuracy: 0.683
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="receiver-operator-characteristic-and-sensitivity-specificity-curves">
-<h3>Receiver Operator Characteristic and Sensitivity-Specificity Curves<a class="headerlink" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="receiver-operator-characteristic-and-sensitivity-specificity-curves">
+<h3>Receiver Operator Characteristic and Sensitivity-Specificity Curves<a class="headerlink" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves" title="Permalink to this headline">¶</a></h3>
 <p>Receiver Operator Characteristic Curve:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2078,9 +2005,9 @@ SD AUC: 0.0086
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_35_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_35_0.png" />
 </div>
 </div>
-</section>
-<section id="identify-cross-over-of-sensitivity-and-specificity">
-<h3>Identify cross-over of sensitivity and specificity<a class="headerlink" href="#identify-cross-over-of-sensitivity-and-specificity" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="identify-cross-over-of-sensitivity-and-specificity">
+<h3>Identify cross-over of sensitivity and specificity<a class="headerlink" href="#identify-cross-over-of-sensitivity-and-specificity" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_intersect</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
@@ -2142,13 +2069,13 @@ SD intersection: 0.0063
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="shap-values">
-<h2>Shap values<a class="headerlink" href="#shap-values" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="shap-values">
+<h2>Shap values<a class="headerlink" href="#shap-values" title="Permalink to this headline">¶</a></h2>
 <p>We will look into detailed Shap values for the first train/test split.</p>
-<section id="get-shap-values">
-<h3>Get Shap values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">#</a></h3>
+<div class="section" id="get-shap-values">
+<h3>Get Shap values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_fold_shap_values_extended</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2180,9 +2107,9 @@ Completed 5 of 5
 </div>
 </div>
 </div>
-</section>
-<section id="get-average-shap-values-for-each-k-fold">
-<h3>Get average Shap values for each k-fold<a class="headerlink" href="#get-average-shap-values-for-each-k-fold" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="get-average-shap-values-for-each-k-fold">
+<h3>Get average Shap values for each k-fold<a class="headerlink" href="#get-average-shap-values-for-each-k-fold" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_values_mean_kfold</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2203,9 +2130,9 @@ Completed 5 of 5
 </div>
 </div>
 </div>
-</section>
-<section id="examine-consistency-across-top-shap-values-mean-shap">
-<h3>Examine consistency across top Shap values (mean |Shap|)<a class="headerlink" href="#examine-consistency-across-top-shap-values-mean-shap" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="examine-consistency-across-top-shap-values-mean-shap">
+<h3>Examine consistency across top Shap values (mean |Shap|)<a class="headerlink" href="#examine-consistency-across-top-shap-values-mean-shap" title="Permalink to this headline">¶</a></h3>
 <p>‘Raw’ Shap values from XGBoost model are log odds ratios.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2254,10 +2181,10 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_46_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_46_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="examine-consitency-of-feature-importances">
-<h2>Examine consitency of feature importances<a class="headerlink" href="#examine-consitency-of-feature-importances" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="examine-consitency-of-feature-importances">
+<h2>Examine consitency of feature importances<a class="headerlink" href="#examine-consitency-of-feature-importances" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build df for k fold values</span>
@@ -2393,8 +2320,8 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_51_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_51_0.png" />
 </div>
 </div>
-<section id="compare-shap-and-importances">
-<h3>Compare Shap and importances<a class="headerlink" href="#compare-shap-and-importances" title="Permalink to this headline">#</a></h3>
+<div class="section" id="compare-shap-and-importances">
+<h3>Compare Shap and importances<a class="headerlink" href="#compare-shap-and-importances" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compare_shap_importance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -2565,10 +2492,10 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_55_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_55_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="further-analysis-of-one-k-fold">
-<h2>Further analysis of one k-fold<a class="headerlink" href="#further-analysis-of-one-k-fold" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="further-analysis-of-one-k-fold">
+<h2>Further analysis of one k-fold<a class="headerlink" href="#further-analysis-of-one-k-fold" title="Permalink to this headline">¶</a></h2>
 <p>Having established that Shap values have good consistency across k-fold replictaes, here we show more detail on Shap using the first k_fold replicate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2587,8 +2514,8 @@ Completed 5 of 5
 </div>
 </div>
 </div>
-<section id="beeswarm-plot">
-<h3>Beeswarm plot<a class="headerlink" href="#beeswarm-plot" title="Permalink to this headline">#</a></h3>
+<div class="section" id="beeswarm-plot">
+<h3>Beeswarm plot<a class="headerlink" href="#beeswarm-plot" title="Permalink to this headline">¶</a></h3>
 <p>A Beeswarm plot shows all points. The feature value for each point is shown by the colour, and its position indicates the Shap value for that instance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2609,9 +2536,9 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_59_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_59_0.png" />
 </div>
 </div>
-</section>
-<section id="plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
-<h3>Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision<a class="headerlink" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
+<h3>Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision<a class="headerlink" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision" title="Permalink to this headline">¶</a></h3>
 <p>Waterfall plot and decision plots are alternative ways of plotting the influence of features for individual cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2636,11 +2563,11 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" />
 </div>
 </div>
-</section>
-<section id="show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
-<h3>Show the relationship between feature value and Shap value for influential features.<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features" title="Permalink to this headline">#</a></h3>
-<section id="show-shap-as-a-scatter-plot">
-<h4>Show Shap as a scatter plot<a class="headerlink" href="#show-shap-as-a-scatter-plot" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
+<h3>Show the relationship between feature value and Shap value for influential features.<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="show-shap-as-a-scatter-plot">
+<h4>Show Shap as a scatter plot<a class="headerlink" href="#show-shap-as-a-scatter-plot" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
@@ -2669,9 +2596,9 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_66_0.png" />
 </div>
 </div>
-</section>
-<section id="show-shap-as-a-violin-plot">
-<h4>Show Shap as a violin plot<a class="headerlink" href="#show-shap-as-a-violin-plot" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="show-shap-as-a-violin-plot">
+<h4>Show Shap as a violin plot<a class="headerlink" href="#show-shap-as-a-violin-plot" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_ax</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">category_list</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -2779,11 +2706,11 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_69_0.png" />
 </div>
 </div>
-</section>
-</section>
-</section>
-<section id="showing-waterfall-plots-using-probability-values">
-<h2>Showing waterfall plots using probability values<a class="headerlink" href="#showing-waterfall-plots-using-probability-values" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+</div>
+<div class="section" id="showing-waterfall-plots-using-probability-values">
+<h2>Showing waterfall plots using probability values<a class="headerlink" href="#showing-waterfall-plots-using-probability-values" title="Permalink to this headline">¶</a></h2>
 <p>Though Shap values for XGBoost most accurately describe the effect on log odds ratio of classification, it may be easier for people to understand influence of features using probabilities. Here we plot waterfall plots using probabilities.</p>
 <p>A disadvantage of this method is that it distorts the influence of features someone - those features pushing the probability down from a low level to an even lower level get ‘squashed’ in apparent importance. This distortion is avoided when plotting log odds ratio, but at the cost of using an output that is poorly understandable by many.</p>
 <div class="cell docutils container">
@@ -2823,9 +2750,9 @@ Completed 5 of 5
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_74_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_74_0.png" />
 </div>
 </div>
-</section>
-<section id="id1">
-<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.733).</p></li>
 <li><p>The five most important distinguishing features are:</p>
@@ -2838,8 +2765,8 @@ Completed 5 of 5
 </ul>
 </li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -2863,11 +2790,9 @@ Completed 5 of 5
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="05_compare_benchmark_decisions_key_features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2883,28 +2808,24 @@ Completed 5 of 5
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kerry Pearn & Michael Allen<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Kerry Pearn & Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>
