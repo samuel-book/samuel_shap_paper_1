@@ -56,6 +56,8 @@ Here are the effects of those shifts on our baseline probability of 0.25.
 | 0.25 (25%) | 0.333      | 4    | 54.6               | 18.2      | 0.9479 (94.8%) |
 | 0.25 (25%) | 0.333      | 5    | 148                | 49.5      | 0.9802 (98.0%) |
 
+So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
+
 ### Positive Shap values
 
 If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
@@ -67,11 +69,13 @@ If we have a negative Shap value then odds are reduced (a Shap of -1 will lead t
 | 0.25 (25%) | 0.333      | -2   | 0.1353             | 0.0451    | 0.0432 (4.32%) |
 | 0.25 (25%) | 0.333      | -3   | 0.0498             | 0.0166    | 0.0163 (1.63%) |
 | 0.25 (25%) | 0.333      | -4   | 0.0183             | 0.0061    | 0.0061 (0.61%) |
-| 0.25 (25%) | 0.333      | -5   | 0.0067             | 0.0022    | 0.0022 (0.22%  |
+| 0.25 (25%) | 0.333      | -5   | 0.0067             | 0.0022    | 0.0022 (0.22%) |
+
+So, for example, a Shap value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
 
 ### Observation Shap values
 
-We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a noticeable change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
+We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
 
 
 
