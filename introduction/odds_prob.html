@@ -339,6 +339,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#log-odds-shifts">
    Log odds shifts
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positive-shap-values">
+     Positive Shap values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Positive Shap values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observation-shap-values">
+     Observation Shap values
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -373,6 +390,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#log-odds-shifts">
    Log odds shifts
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positive-shap-values">
+     Positive Shap values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Positive Shap values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observation-shap-values">
+     Observation Shap values
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -430,6 +464,8 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
+<section id="positive-shap-values">
+<h3>Positive Shap values<a class="headerlink" href="#positive-shap-values" title="Permalink to this headline">#</a></h3>
 <p>Here are the effects of those shifts on our baseline probability of 0.25.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -438,47 +474,57 @@ title="Print to PDF"
 <th class="head"><p>Shap</p></th>
 <th class="head"><p>Shift (multiply O)</p></th>
 <th class="head"><p>Shifted O</p></th>
-<th class="head"><p>Shifted P</p></th>
+<th class="head"><p>Shifted P (%)</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0.25</p></td>
+<tr class="row-even"><td><p>0.25 (25%)</p></td>
+<td><p>0.333</p></td>
+<td><p>0.5</p></td>
+<td><p>1.6487</p></td>
+<td><p>0.5496</p></td>
+<td><p>0.3547 (35.5%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>1</p></td>
-<td><p>2.72</p></td>
-<td><p>0.906</p></td>
-<td><p>0.475</p></td>
+<td><p>2.7183</p></td>
+<td><p>0.9061</p></td>
+<td><p>0.4754 (47.5%)</p></td>
 </tr>
-<tr class="row-odd"><td><p>0.25</p></td>
+<tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>2</p></td>
-<td><p>7.39</p></td>
-<td><p>2.463</p></td>
-<td><p>0.711</p></td>
+<td><p>7.3891</p></td>
+<td><p>2.4630</p></td>
+<td><p>0.7112 (71.1%)</p></td>
 </tr>
-<tr class="row-even"><td><p>0.25</p></td>
+<tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>3</p></td>
-<td><p>20.09</p></td>
-<td><p>6.695</p></td>
-<td><p>0.870</p></td>
+<td><p>20.0855</p></td>
+<td><p>6.6952</p></td>
+<td><p>0.8700 (87.0%)</p></td>
 </tr>
-<tr class="row-odd"><td><p>0.25</p></td>
+<tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>4</p></td>
-<td><p>54.60</p></td>
-<td><p>18.199</p></td>
-<td><p>0.948</p></td>
+<td><p>54.5982</p></td>
+<td><p>18.1994</p></td>
+<td><p>0.9479 (94.8%)</p></td>
 </tr>
-<tr class="row-even"><td><p>0.25</p></td>
+<tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>5</p></td>
-<td><p>148.41</p></td>
-<td><p>49.471</p></td>
-<td><p>0.980</p></td>
+<td><p>148.4132</p></td>
+<td><p>49.4711</p></td>
+<td><p>0.9802 (98.0%)</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="id1">
+<h3>Positive Shap values<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):</p>
 <table class="colwidths-auto table">
 <thead>
@@ -491,44 +537,55 @@ title="Print to PDF"
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0.25</p></td>
+<tr class="row-even"><td><p>0.25 (25%)</p></td>
+<td><p>0.333</p></td>
+<td><p>-0.5</p></td>
+<td><p>0.6065</p></td>
+<td><p>0.2022</p></td>
+<td><p>0.1682 (16.8%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>-1</p></td>
 <td><p>0.3679</p></td>
 <td><p>0.1226</p></td>
-<td><p>0.1092</p></td>
+<td><p>0.1092 (10.9%)</p></td>
 </tr>
-<tr class="row-odd"><td><p>0.25</p></td>
+<tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>-2</p></td>
 <td><p>0.1353</p></td>
 <td><p>0.0451</p></td>
-<td><p>0.0432</p></td>
+<td><p>0.0432 (4.32%)</p></td>
 </tr>
-<tr class="row-even"><td><p>0.25</p></td>
+<tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>-3</p></td>
 <td><p>0.0498</p></td>
 <td><p>0.0166</p></td>
-<td><p>0.0163</p></td>
+<td><p>0.0163 (1.63%)</p></td>
 </tr>
-<tr class="row-odd"><td><p>0.25</p></td>
+<tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>-4</p></td>
 <td><p>0.0183</p></td>
 <td><p>0.0061</p></td>
-<td><p>0.0061</p></td>
+<td><p>0.0061 (0.61%)</p></td>
 </tr>
-<tr class="row-even"><td><p>0.25</p></td>
+<tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>-5</p></td>
 <td><p>0.0067</p></td>
 <td><p>0.0022</p></td>
-<td><p>0.0022</p></td>
+<td><p>0.0022 (0.22%</p></td>
 </tr>
 </tbody>
 </table>
-<p>We begin to get some intuition on Shap values. A Shap value of 1 (or -1) leads to a noticeable change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.</p>
+</section>
+<section id="observation-shap-values">
+<h3>Observation Shap values<a class="headerlink" href="#observation-shap-values" title="Permalink to this headline">#</a></h3>
+<p>We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a noticeable change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.</p>
+</section>
 </section>
 </section>
 

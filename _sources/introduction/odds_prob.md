@@ -38,28 +38,37 @@ First we'll look at the shift the Shap values give. This is calculated as *shift
 | 4               | 54.6                           |
 | 5               | 148                            |
 
+### Positive Shap values
+
 Here are the effects of those shifts on our baseline probability of 0.25.
 
-| Starting P | Starting O | Shap | Shift (multiply O) | Shifted O | Shifted P |
-|------------|------------|------|--------------------|-----------|-----------|
-| 0.25       | 0.333      | 1    | 2.72               | 0.906     | 0.475     |
-| 0.25       | 0.333      | 2    | 7.39               | 2.463     | 0.711     |
-| 0.25       | 0.333      | 3    | 20.09              | 6.695     | 0.870     |
-| 0.25       | 0.333      | 4    | 54.60              | 18.199    | 0.948     |
-| 0.25       | 0.333      | 5    | 148.41             | 49.471    | 0.980     |
+| Starting P | Starting O | Shap | Shift (multiply O) | Shifted O |  Shifted P (%) |
+|------------|------------|------|--------------------|-----------|----------------|
+| 0.25 (25%) | 0.333      | 0.5  | 1.6487             | 0.5496    | 0.3547 (35.5%) |
+| 0.25 (25%) | 0.333      | 1    | 2.7183             | 0.9061    | 0.4754 (47.5%) |
+| 0.25 (25%) | 0.333      | 2    | 7.3891             | 2.4630    | 0.7112 (71.1%) |
+| 0.25 (25%) | 0.333      | 3    | 20.0855            | 6.6952    | 0.8700 (87.0%) |
+| 0.25 (25%) | 0.333      | 4    | 54.5982            | 18.1994   | 0.9479 (94.8%) |
+| 0.25 (25%) | 0.333      | 5    | 148.4132           | 49.4711   | 0.9802 (98.0%) |
 
+### Positive Shap values
 
 If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
-| Starting P | Starting O | Shap | Shift (multiply O) | Shifted O | Shifted P |
-|------------|------------|------|--------------------|-----------|-----------|
-| 0.25       | 0.333      | -1   | 0.3679             | 0.1226    | 0.1092    |
-| 0.25       | 0.333      | -2   | 0.1353             | 0.0451    | 0.0432    |
-| 0.25       | 0.333      | -3   | 0.0498             | 0.0166    | 0.0163    |
-| 0.25       | 0.333      | -4   | 0.0183             | 0.0061    | 0.0061    |
-| 0.25       | 0.333      | -5   | 0.0067             | 0.0022    | 0.0022    |
+| Starting P | Starting O | Shap | Shift (multiply O) | Shifted O |   Shifted P    |
+|------------|------------|------|--------------------|-----------|----------------|
+| 0.25 (25%) | 0.333      | -0.5 | 0.6065             | 0.2022    | 0.1682 (16.8%) |
+| 0.25 (25%) | 0.333      | -1   | 0.3679             | 0.1226    | 0.1092 (10.9%) |
+| 0.25 (25%) | 0.333      | -2   | 0.1353             | 0.0451    | 0.0432 (4.32%) |
+| 0.25 (25%) | 0.333      | -3   | 0.0498             | 0.0166    | 0.0163 (1.63%) |
+| 0.25 (25%) | 0.333      | -4   | 0.0183             | 0.0061    | 0.0061 (0.61%) |
+| 0.25 (25%) | 0.333      | -5   | 0.0067             | 0.0022    | 0.0022 (0.22%  |
 
-We begin to get some intuition on Shap values. A Shap value of 1 (or -1) leads to a noticeable change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
+### Observation Shap values
+
+We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a noticeable change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
+
+
 
 
 
