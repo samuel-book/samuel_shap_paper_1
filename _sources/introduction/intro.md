@@ -63,7 +63,7 @@ In order to explain model predictions we used a method called Shapley values, wh
 
 ### What are Shapley values?
 
-> Shapley values (or *SHAP*, SHapley Additive exPlanations, values)are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.
+> Shapley values (or *SHAP*, SHapley Additive exPlanations, values, which is a particular method of estimating Shapley values) are *'the average expected marginal contribution of one player after all possible combinations have been considered'*.
 
 Imagine a pub quiz team with up to 3 people. Any number of people may actually turn up on the night:
 
@@ -112,7 +112,7 @@ We trained an XG-Boost model to predict different choices in thrombolysis betwee
 5. With longer arrival-to-scan times.
 6. When patient is on anticoagulants for atrial fibrillation.
 
-We can visualise the general effects of these features, using SHAP in several ways. Firstly we can show the average effect of each feature as a violin plot ({numref}`Figure {number} <diff_SHAP_violin>`), which shows the spread of the size of average SHAP values for each feature when measured in five different experiments (to understand how reproducible our measurement of SHAP values are). In this type of plot we ignore the direction of the SHAP value - that is we ignore whether a value is positive or negative; SHAP values of -3 or +3 would both have an effect size of 3.
+We can visualise the general effects of these features, using SHAP in several ways. Firstly we can show the average effect of each feature as a violin plot ({numref}`figure {number} <diff_SHAP_violin>`), which shows the spread of the size of average SHAP values for each feature when measured in five different experiments (to understand how reproducible our measurement of SHAP values are). In this type of plot we ignore the direction of the SHAP value - that is we ignore whether a value is positive or negative; SHAP values of -3 or +3 would both have an effect size of 3.
 
 
 :::{figure-md} diff_SHAP_violin

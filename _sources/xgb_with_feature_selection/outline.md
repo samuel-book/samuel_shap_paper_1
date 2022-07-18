@@ -17,7 +17,7 @@ Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1
 
 XGBoost is a decision tree-based method for prediction.
 
-We use *Shapley values* to provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.
+We use *Shapley values* (or SHAP values, which is a particular method of estimating Shapley values) to provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.
 
 Shapley values may be used across model types, and so provide a model-agnostic measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows black box models like neural networks to be explained, at least in part.
 
@@ -29,12 +29,12 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 
 ## Notebooks in this section
 
-### General example of Shap
+### General example of SHAP
 
-* *A simple worked example of Shap*:
-    * A very simple example of Shap values based on three people who may contribute to the scores of a pub quiz team.
+* *A simple worked example of Shapley values*:
+    * A very simple example of Shapley values based on three people who may contribute to the scores of a pub quiz team.
 
-### Predicting thrombolysis use and explaining the predictions with Shap
+### Predicting thrombolysis use and explaining the predictions with SHAP
 
 * *XGBoost feature selection*:
     * Select up to 25 features using forward feature selection. Features are selected sequentially, choosing the feature that leads to most improvement in area under the ROC curve (ROC AUC) score. Eight were chosen.
@@ -52,15 +52,15 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     
 * *Explaining XGBoost model predictions with Shapley values*:
     * Fit XGBoost model to k-fold train/test splits.
-    * Get Shap values for each k-fold split.
-    * Examine consistency of Shap values across k-fold splits.
+    * Get SHAP values for each k-fold split.
+    * Examine consistency of SHAP values across k-fold splits.
     * Examine consistency of XGBoost Importance across k-fold splits.
-    * Compare Shap values and XGBoost Importance.
-    * Further analyse Shap values with:
+    * Compare SHAP values and XGBoost Importance.
+    * Further analyse SHAP values with:
         * Beeswarm plots
         * Waterfall plots
         * Scatter plots
-    * Show example of Shap waterfall plot as *probability* rather than *log-odds ratio*.
+    * Show example of SHAP waterfall plot as *probability* rather than *log-odds ratio*.
     
 ### Comparing thrombolysis decisions between hospitals
   
@@ -78,12 +78,12 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 * *Predicting differences between local and benchmark decisions*:
     * We build a model to predict those patients, out of patients who would be thrombolysed by the majority of the benchmark hospitals, who would *not* be thrombolysed at the bottom 30 thrombolysing hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.. 
     * Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients would *not* be thrombolysed at a local unit.
-    * Get Shap values for predictions.
-        * Check consistency of Shap values and XGBoost Importance across k-fold replications
-        * Compare Shap values and XGBoost Importance
-        * Analyse relationship between features and Shap values with beeswarm, waterfall, and scatter plots.
+    * Get SHAP values for predictions.
+        * Check consistency of SHAP values and XGBoost Importance across k-fold replications
+        * Compare SHAP values and XGBoost Importance
+        * Analyse relationship between features and SHAP values with beeswarm, waterfall, and scatter plots.
         
-* *Comparing Shap values between high and low thrombolysing hospitals*:
+* *Comparing SHAP values between high and low thrombolysing hospitals*:
     * Plot SHAP values for the top and bottom 30 hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.
     
 * *Plotting thrombolysis rate by feature value for low and high thrombolysing hospitals*:

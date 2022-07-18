@@ -2,7 +2,7 @@
 
 Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.
 
-In our stroke thrombolysis model, SHAP (SHapley Additive exPlanations) values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
+In our stroke thrombolysis model, SHAP values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
 
 This is made a little more complicated for us because SHAP is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant SHAP values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of SHAP values that we will see in our models.
 
