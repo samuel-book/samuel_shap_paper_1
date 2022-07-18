@@ -2,7 +2,7 @@
 
 Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.
 
-In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
+In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
 
 This is made a little more complicated for us because Shap is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of Shap values that we will see in our models.
 
@@ -45,7 +45,7 @@ First we'll look at the shift in odds the Shap values give. This is calculated a
 
 ### Positive Shap values: worked example
 
-Now let us work through an example of starting with a known *probability*, converting that to *odds*, applying a Shap *log odds shift* for a particular feature, and converting back to *probability* after we have applied the influence of that feature.
+Now let us work through an example of starting with a known baseline *probability* (before we consider what we know about a particular patient feature), converting that to *odds*, applying a Shap *log odds shift* for that particular feature, and converting back to *probability* after we have applied the influence of that feature.
 
 Here are the effects of those shifts on our baseline probability of 0.25.
 
@@ -78,6 +78,8 @@ So, for example, a Shap value of -0.5 for one particular feature tells us that t
 ### Observations about Shap values
 
 We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
+
+Everything we know about a patient (the patient 'features') may shift the predicted probability of receiving thrombolysis. Each patient feature will have it's own Shap value depending on the value of that feature. *Stroke severity*, for example, may be in the range 0-42, and the Shap value will depend on the value of the feature. The final predicted probability of receiving thrombolysis will be the model baseline prediction (the predicted probability of receiving thrombolysis before anything is known about a patient) and the sum of the influences of each of the features.
 
 
 

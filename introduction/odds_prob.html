@@ -421,7 +421,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="probability-odds-and-shap-values-log-odds-shifts">
 <h1>Probability, odds, and Shap values (log odds shifts)<a class="headerlink" href="#probability-odds-and-shap-values-log-odds-shifts" title="Permalink to this headline">#</a></h1>
 <p>Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.</p>
-<p>In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as ‘Is their stroke caused by a clot or a bleed?’) adjusts our prediction of whether they will receive thrombolysis or not.</p>
+<p>In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as the patient <em>feature</em>, ‘Is their stroke caused by a clot or a bleed?’) adjusts our prediction of whether they will receive thrombolysis or not.</p>
 <p>This is made a little more complicated for us because Shap is usually reported as a <em>log odds shift</em>. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of Shap values that we will see in our models.</p>
 <section id="probability">
 <h2>Probability<a class="headerlink" href="#probability" title="Permalink to this headline">#</a></h2>
@@ -471,7 +471,7 @@ title="Print to PDF"
 </table>
 <section id="positive-shap-values-worked-example">
 <h3>Positive Shap values: worked example<a class="headerlink" href="#positive-shap-values-worked-example" title="Permalink to this headline">#</a></h3>
-<p>Now let us work through an example of starting with a known <em>probability</em>, converting that to <em>odds</em>, applying a Shap <em>log odds shift</em> for a particular feature, and converting back to <em>probability</em> after we have applied the influence of that feature.</p>
+<p>Now let us work through an example of starting with a known baseline <em>probability</em> (before we consider what we know about a particular patient feature), converting that to <em>odds</em>, applying a Shap <em>log odds shift</em> for that particular feature, and converting back to <em>probability</em> after we have applied the influence of that feature.</p>
 <p>Here are the effects of those shifts on our baseline probability of 0.25.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -593,6 +593,7 @@ title="Print to PDF"
 <section id="observations-about-shap-values">
 <h3>Observations about Shap values<a class="headerlink" href="#observations-about-shap-values" title="Permalink to this headline">#</a></h3>
 <p>We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.</p>
+<p>Everything we know about a patient (the patient ‘features’) may shift the predicted probability of receiving thrombolysis. Each patient feature will have it’s own Shap value depending on the value of that feature. <em>Stroke severity</em>, for example, may be in the range 0-42, and the Shap value will depend on the value of the feature. The final predicted probability of receiving thrombolysis will be the model baseline prediction (the predicted probability of receiving thrombolysis before anything is known about a patient) and the sum of the influences of each of the features.</p>
 </section>
 </section>
 </section>
