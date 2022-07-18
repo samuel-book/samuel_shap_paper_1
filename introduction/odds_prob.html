@@ -437,9 +437,9 @@ title="Print to PDF"
 <section id="log-odds-shifts">
 <h2>Log odds shifts<a class="headerlink" href="#log-odds-shifts" title="Permalink to this headline">#</a></h2>
 <p>Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 1 to 5 give.</p>
-<p>Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the ‘Shap value’) is usually given in log odds. For the mathematically inclined, we use the natural log (ln).</p>
-<p>Let’s look at three Shap values (log odds) and see how much they change the probability of receiving thrombolysis.</p>
-<p>First we’ll look at the shift the Shap values give. This is calculated as <em>shift = exp(Shap)</em></p>
+<p>Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the ‘Shap value’) is usually given in ‘log odds’ (the logarithm of the odds value). For the mathematically inclined, we use the natural log (<em>ln</em>).</p>
+<p>Let’s look at some Shap values (log odds) and see how much they change the odds of receiving thrombolysis.</p>
+<p>First we’ll look at the shift in odds the Shap values give. This is calculated as <em>shift = exp(Shap)</em></p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Shap (log odds)</p></th>
@@ -447,19 +447,22 @@ title="Print to PDF"
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1</p></td>
+<tr class="row-even"><td><p>0.5</p></td>
+<td><p>1.65</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
 <td><p>2.72</p></td>
 </tr>
-<tr class="row-odd"><td><p>2</p></td>
+<tr class="row-even"><td><p>2</p></td>
 <td><p>7.39</p></td>
 </tr>
-<tr class="row-even"><td><p>3</p></td>
+<tr class="row-odd"><td><p>3</p></td>
 <td><p>20.1</p></td>
 </tr>
-<tr class="row-odd"><td><p>4</p></td>
+<tr class="row-even"><td><p>4</p></td>
 <td><p>54.6</p></td>
 </tr>
-<tr class="row-even"><td><p>5</p></td>
+<tr class="row-odd"><td><p>5</p></td>
 <td><p>148</p></td>
 </tr>
 </tbody>
@@ -481,43 +484,43 @@ title="Print to PDF"
 <tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>0.5</p></td>
-<td><p>1.6487</p></td>
-<td><p>0.5496</p></td>
+<td><p>1.65</p></td>
+<td><p>0.550</p></td>
 <td><p>0.3547 (35.5%)</p></td>
 </tr>
 <tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>1</p></td>
-<td><p>2.7183</p></td>
-<td><p>0.9061</p></td>
+<td><p>2.72</p></td>
+<td><p>0.907</p></td>
 <td><p>0.4754 (47.5%)</p></td>
 </tr>
 <tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>2</p></td>
-<td><p>7.3891</p></td>
-<td><p>2.4630</p></td>
+<td><p>7.39</p></td>
+<td><p>2.46</p></td>
 <td><p>0.7112 (71.1%)</p></td>
 </tr>
 <tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>3</p></td>
-<td><p>20.0855</p></td>
-<td><p>6.6952</p></td>
+<td><p>20.1</p></td>
+<td><p>6.70</p></td>
 <td><p>0.8700 (87.0%)</p></td>
 </tr>
 <tr class="row-even"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>4</p></td>
-<td><p>54.5982</p></td>
-<td><p>18.1994</p></td>
+<td><p>54.6</p></td>
+<td><p>18.2</p></td>
 <td><p>0.9479 (94.8%)</p></td>
 </tr>
 <tr class="row-odd"><td><p>0.25 (25%)</p></td>
 <td><p>0.333</p></td>
 <td><p>5</p></td>
-<td><p>148.4132</p></td>
-<td><p>49.4711</p></td>
+<td><p>148</p></td>
+<td><p>49.5</p></td>
 <td><p>0.9802 (98.0%)</p></td>
 </tr>
 </tbody>

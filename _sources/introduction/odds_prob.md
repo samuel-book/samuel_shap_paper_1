@@ -24,14 +24,15 @@ Odds (O) and probability (P) may be converted with the following equations:
 
 Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 1 to 5 give.
 
-Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the 'Shap value') is usually given in log odds. For the mathematically inclined, we use the natural log (ln).
+Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the 'Shap value') is usually given in 'log odds' (the logarithm of the odds value). For the mathematically inclined, we use the natural log (*ln*).
 
-Let's look at three Shap values (log odds) and see how much they change the probability of receiving thrombolysis. 
+Let's look at some Shap values (log odds) and see how much they change the odds of receiving thrombolysis. 
 
-First we'll look at the shift the Shap values give. This is calculated as *shift = exp(Shap)*
+First we'll look at the shift in odds the Shap values give. This is calculated as *shift = exp(Shap)*
 
 | Shap (log odds) | Shift (multiply original odds) |
 |-----------------|--------------------------------|
+| 0.5             | 1.65                           |
 | 1               | 2.72                           |
 | 2               | 7.39                           |
 | 3               | 20.1                           |
@@ -44,12 +45,12 @@ Here are the effects of those shifts on our baseline probability of 0.25.
 
 | Starting P | Starting O | Shap | Shift (multiply O) | Shifted O |  Shifted P (%) |
 |------------|------------|------|--------------------|-----------|----------------|
-| 0.25 (25%) | 0.333      | 0.5  | 1.6487             | 0.5496    | 0.3547 (35.5%) |
-| 0.25 (25%) | 0.333      | 1    | 2.7183             | 0.9061    | 0.4754 (47.5%) |
-| 0.25 (25%) | 0.333      | 2    | 7.3891             | 2.4630    | 0.7112 (71.1%) |
-| 0.25 (25%) | 0.333      | 3    | 20.0855            | 6.6952    | 0.8700 (87.0%) |
-| 0.25 (25%) | 0.333      | 4    | 54.5982            | 18.1994   | 0.9479 (94.8%) |
-| 0.25 (25%) | 0.333      | 5    | 148.4132           | 49.4711   | 0.9802 (98.0%) |
+| 0.25 (25%) | 0.333      | 0.5  | 1.65               | 0.550     | 0.3547 (35.5%) |
+| 0.25 (25%) | 0.333      | 1    | 2.72               | 0.907     | 0.4754 (47.5%) |
+| 0.25 (25%) | 0.333      | 2    | 7.39               | 2.46      | 0.7112 (71.1%) |
+| 0.25 (25%) | 0.333      | 3    | 20.1               | 6.70      | 0.8700 (87.0%) |
+| 0.25 (25%) | 0.333      | 4    | 54.6               | 18.2      | 0.9479 (94.8%) |
+| 0.25 (25%) | 0.333      | 5    | 148                | 49.5      | 0.9802 (98.0%) |
 
 ### Positive Shap values
 
