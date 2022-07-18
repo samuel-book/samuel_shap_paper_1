@@ -527,6 +527,7 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
+<p>So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.</p>
 </section>
 <section id="id1">
 <h3>Positive Shap values<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
@@ -582,14 +583,15 @@ title="Print to PDF"
 <td><p>-5</p></td>
 <td><p>0.0067</p></td>
 <td><p>0.0022</p></td>
-<td><p>0.0022 (0.22%</p></td>
+<td><p>0.0022 (0.22%)</p></td>
 </tr>
 </tbody>
 </table>
+<p>So, for example, a Shap value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.</p>
 </section>
 <section id="observation-shap-values">
 <h3>Observation Shap values<a class="headerlink" href="#observation-shap-values" title="Permalink to this headline">#</a></h3>
-<p>We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a noticeable change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.</p>
+<p>We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.</p>
 </section>
 </section>
 </section>
