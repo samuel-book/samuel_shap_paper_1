@@ -4,8 +4,8 @@ parts:
 - caption: Introductory content
   chapters:
   - file: glossary
-  - file: introduction/odds_prob
   - file: xgb_with_feature_selection/outline
+  - file: introduction/odds_prob
   - file: shap_worked_example
 - caption: Predicting thrombolysis use and explaining the predictions with Shap
   chapters:
