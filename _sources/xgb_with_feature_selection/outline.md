@@ -29,6 +29,9 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 
 ## Notebooks in this section
 
+*Glossary of technical terms*:
+    * A glossary of technical terms used throughout this online book.
+
 ### General examples of SHAP
 
 * *Probability, odds, and SHAP values (log odds shifts)*:
