@@ -85,8 +85,8 @@ The example below shows how six patient features change the model prediction of 
 | Stroke type = infarction         | 1.8  | 6.050 | 2.00  | 67%         |
 | Stroke severity (NIHSS) = 20     | 1.5  | 4.482 | 8.95  | 90%         |
 | Prior disability (mRS) = 3       | -0.7 | 0.497 | 4.44  | 82%         |
-| Arrival-to-scan time (mins) = 30 | 0.5  | 1.649 | 7.33  | 88%         |
-| Precise onset time = Yes         | 0.6  | 1.822 | 13.35 | 93%         |
+| Precise onset time = Yes         | 0.6  | 1.822 | 8.10  | 89%         |
+| Arrival-to-scan time (mins) = 30 | 0.5  | 1.649 | 13.35 | 93%         |
 | Use of AF anticoagulants = No    | 0.3  | 1.350 | 18.02 | 95%         |
 
 ### Observations about SHAP values
