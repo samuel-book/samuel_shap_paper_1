@@ -1,4 +1,4 @@
-# Outline
+# Outline of notebooks
 
 Experiments using an XGBoost classifier are performed after first reducing the number of features using feature selection. The features selected were:
 
