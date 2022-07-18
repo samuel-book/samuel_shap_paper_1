@@ -336,8 +336,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#log-odds-shifts">
-   Log odds shifts
+  <a class="reference internal nav-link" href="#shap-values-log-odds-shifts">
+   Shap values: log odds shifts
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -387,8 +387,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#log-odds-shifts">
-   Log odds shifts
+  <a class="reference internal nav-link" href="#shap-values-log-odds-shifts">
+   Shap values: log odds shifts
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -436,8 +436,8 @@ title="Print to PDF"
 <p>(1) O = P / (1 - P)</p>
 <p>(2) P = O / (1 + O)</p>
 </section>
-<section id="log-odds-shifts">
-<h2>Log odds shifts<a class="headerlink" href="#log-odds-shifts" title="Permalink to this headline">#</a></h2>
+<section id="shap-values-log-odds-shifts">
+<h2>Shap values: log odds shifts<a class="headerlink" href="#shap-values-log-odds-shifts" title="Permalink to this headline">#</a></h2>
 <p>Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 0.5 to 5 give (we will look at positive and negative Shap values).</p>
 <p>Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the ‘Shap value’) is usually given in ‘log odds’ (the logarithm of the odds value). For the mathematically inclined, we use the natural log (<em>ln</em>).</p>
 <p>Let’s look at some Shap values (log odds) and see how much they change the odds of receiving thrombolysis.</p>

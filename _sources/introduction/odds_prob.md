@@ -24,7 +24,7 @@ Odds (O) and probability (P) may be converted with the following equations:
 
 (2) P = O / (1 + O)
 
-## Log odds shifts
+## Shap values: log odds shifts
 
 Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 0.5 to 5 give (we will look at positive and negative Shap values).
 
