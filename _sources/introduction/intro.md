@@ -93,6 +93,14 @@ The five most influential features predicting whether thrombolysis would be give
 A violin plot showing the individual SHAP values for six features. The shape of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would *would* receive thrombolysis. A negative SHAP value pushes the model towards saying that patient would would *not* receive thrombolysis.
 :::
 
+Each patient also has a SHAP value for the hospital they attend, which may increase or reduce the model's predicted probability of that patient receiving thrombolysis. {numref}`Figure {number} <hospital-SHAP>` shows the spread of average SHAP values for each hospital. The average SHAP for each hospital ranges from about -1.3 to +1.3.
+
+:::{figure-md} hospital-SHAP
+<img src="./images/hosp_shap_hist.jpg" width="450">
+
+A histogram showing the distribution of average SHAP values for each hospital.
+:::
+
 SHAP plots can also be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
 
 :::{figure-md} waterfall_example
