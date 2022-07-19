@@ -49,14 +49,14 @@ Now let us work through an example of starting with a known baseline *probabilit
 
 Here are the effects of those shifts on our baseline probability of 0.25.
 
-| Starting P | Starting O<br>P / (1 - P) | SHAP | Shift in odds<br>exp(SHAP) | Shifted O<br>O * Shift | Shifted P (%)<br>O / (1 + O) |
-|------------|---------------------------|------|----------------------------|------------------------|------------------------------|
-| 0.25 (25%) | 0.333                     | 0.5  | 1.65                       | 0.550                  | 0.3547 (35.5%)               |
-| 0.25 (25%) | 0.333                     | 1    | 2.72                       | 0.907                  | 0.4754 (47.5%)               |
-| 0.25 (25%) | 0.333                     | 2    | 7.39                       | 2.46                   | 0.7112 (71.1%)               |
-| 0.25 (25%) | 0.333                     | 3    | 20.1                       | 6.70                   | 0.8700 (87.0%)               |
-| 0.25 (25%) | 0.333                     | 4    | 54.6                       | 18.2                   | 0.9479 (94.8%)               |
-| 0.25 (25%) | 0.333                     | 5    | 148                        | 49.5                   | 0.9802 (98.0%)               |
+| Starting P | Starting O<br>(P / (1 - P)) | SHAP | Shift in odds<br>(exp(SHAP)) | Shifted O<br>(O * Shift) | Shifted P (%)<br>(O / (1 + O)) |
+|------------|-----------------------------|------|------------------------------|--------------------------|--------------------------------|
+| 0.25 (25%) | 0.333                       | 0.5  | 1.65                         | 0.550                    | 0.3547 (35.5%)                 |
+| 0.25 (25%) | 0.333                       | 1    | 2.72                         | 0.907                    | 0.4754 (47.5%)                 |
+| 0.25 (25%) | 0.333                       | 2    | 7.39                         | 2.46                     | 0.7112 (71.1%)                 |
+| 0.25 (25%) | 0.333                       | 3    | 20.1                         | 6.70                     | 0.8700 (87.0%)                 |
+| 0.25 (25%) | 0.333                       | 4    | 54.6                         | 18.2                     | 0.9479 (94.8%)                 |
+| 0.25 (25%) | 0.333                       | 5    | 148                          | 49.5                     | 0.9802 (98.0%)                 |
 
 
 So, for example, a SHAP value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
@@ -65,14 +65,14 @@ So, for example, a SHAP value of 0.5 for one particular feature tells us that th
 
 If we have a negative SHAP value then odds are reduced (a SHAP of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
-| Starting P | Starting O<br>P / (1 - P) | SHAP | Shift in odds<br>exp(SHAP) | Shifted O<br>O * Shift | Shifted P (%)<br>O / (1 + O) |
-|------------|---------------------------|------|----------------------------|------------------------|------------------------------|
-| 0.25 (25%) | 0.333                     | -0.5 | 0.6065                     | 0.2022                 | 0.1682 (16.8%)               |
-| 0.25 (25%) | 0.333                     | -1   | 0.3679                     | 0.1226                 | 0.1092 (10.9%)               |
-| 0.25 (25%) | 0.333                     | -2   | 0.1353                     | 0.0451                 | 0.0432 (4.32%)               |
-| 0.25 (25%) | 0.333                     | -3   | 0.0498                     | 0.0166                 | 0.0163 (1.63%)               |
-| 0.25 (25%) | 0.333                     | -4   | 0.0183                     | 0.0061                 | 0.0061 (0.61%)               |
-| 0.25 (25%) | 0.333                     | -5   | 0.0067                     | 0.0022                 | 0.0022 (0.22%)               |
+| Starting P | Starting O<br>(P / (1 - P)) | SHAP | Shift in odds<br>(exp(SHAP)) | Shifted O<br>(O * Shift) | Shifted P (%)<br>(O / (1 + O)) |
+|------------|-----------------------------|------|------------------------------|--------------------------|--------------------------------|
+| 0.25 (25%) | 0.333                       | -0.5 | 0.6065                       | 0.2022                   | 0.1682 (16.8%)                 |
+| 0.25 (25%) | 0.333                       | -1   | 0.3679                       | 0.1226                   | 0.1092 (10.9%)                 |
+| 0.25 (25%) | 0.333                       | -2   | 0.1353                       | 0.0451                   | 0.0432 (4.32%)                 |
+| 0.25 (25%) | 0.333                       | -3   | 0.0498                       | 0.0166                   | 0.0163 (1.63%)                 |
+| 0.25 (25%) | 0.333                       | -4   | 0.0183                       | 0.0061                   | 0.0061 (0.61%)                 |
+| 0.25 (25%) | 0.333                       | -5   | 0.0067                       | 0.0022                   | 0.0022 (0.22%)                 |
 
 So, for example, a SHAP value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
 
@@ -80,15 +80,15 @@ So, for example, a SHAP value of -0.5 for one particular feature tells us that t
 
 The example below shows how six patient features change the model prediction of a patient receiving thrombolysis, from a baseline of 25% (with nothing known about the patient) to 95% after the contribution of six features. The relative contribution of each feature is made clear by its SHAP value. SHAP are additive in their effects; for example if one feature has a SHAP of +1.5, the influence of that feature on the model prediction would be exactly cancelled out by three other features with SHAP values of -0.5.
 
-| Patient feature and value        | SHAP | Shift | Odds  | Probability |
-|----------------------------------|------|-------|-------|-------------|
-| Base odds                        | N/A  | N/A   | 0.33  | 25%         |
-| Stroke type = infarction         | 1.8  | 6.050 | 2.00  | 67%         |
-| Stroke severity (NIHSS) = 20     | 1.5  | 4.482 | 8.95  | 90%         |
-| Prior disability (mRS) = 3       | -0.7 | 0.497 | 4.44  | 82%         |
-| Precise onset time = Yes         | 0.6  | 1.822 | 8.10  | 89%         |
-| Arrival-to-scan time (mins) = 30 | 0.5  | 1.649 | 13.35 | 93%         |
-| Use of AF anticoagulants = No    | 0.3  | 1.350 | 18.02 | 95%         |
+| Patient feature and value        | SHAP | Shift<br>(exp(SHAP)) | Odds<br>(Previous odds * Shift) | Probability<br>(O / (1 + O) |
+|----------------------------------|------|----------------------|---------------------------------|-----------------------------|
+| Base odds                        | N/A  | N/A                  | 0.33                            | 25%                         |
+| Stroke type = infarction         | 1.8  | 6.05                 | 2                               | 67%                         |
+| Stroke severity (NIHSS) = 20     | 1.5  | 4.482                | 8.95                            | 90%                         |
+| Prior disability (mRS) = 3       | -0.7 | 0.497                | 4.44                            | 82%                         |
+| Precise onset time = Yes         | 0.6  | 1.822                | 8.1                             | 89%                         |
+| Arrival-to-scan time (mins) = 30 | 0.5  | 1.649                | 13.35                           | 93%                         |
+| Use of AF anticoagulants = No    | 0.3  | 1.35                 | 18.02                           | 95%                         |
 
 ### Observations about SHAP values
 
