@@ -43,24 +43,29 @@ First we'll look at the shift in odds the SHAP values give. This is calculated a
 | 4               | 54.6                                   |
 | 5               | 148                                    |
 
-### Positive SHAP values: worked example
+### Positive SHAP values: examples of how SHAP change odds and probabilities
 
 Now let us work through an example of starting with a known baseline *probability* (before we consider what we know about a particular patient feature), converting that to *odds*, applying a SHAP *log odds shift* for that particular feature, and converting back to *probability* after we have applied the influence of that feature.
 
 Here are the effects of those shifts on our baseline probability of 0.25.
 
-| Starting P | Starting O | SHAP | Shift (multiply O) | Shifted O |  Shifted P (%) |
-|------------|------------|------|--------------------|-----------|----------------|
-| 0.25 (25%) | 0.333      | 0.5  | 1.65               | 0.550     | 0.3547 (35.5%) |
-| 0.25 (25%) | 0.333      | 1    | 2.72               | 0.907     | 0.4754 (47.5%) |
-| 0.25 (25%) | 0.333      | 2    | 7.39               | 2.46      | 0.7112 (71.1%) |
-| 0.25 (25%) | 0.333      | 3    | 20.1               | 6.70      | 0.8700 (87.0%) |
-| 0.25 (25%) | 0.333      | 4    | 54.6               | 18.2      | 0.9479 (94.8%) |
-| 0.25 (25%) | 0.333      | 5    | 148                | 49.5      | 0.9802 (98.0%) |
+| Starting P | Starting O [1] | SHAP | Shift in odds [2] | Shifted O [3] | Shifted P (%) [4] |
+|------------|----------------|------|-------------------|---------------|-------------------|
+| 0.25 (25%) | 0.333          | 0.5  | 1.65              | 0.550         | 0.3547 (35.5%)    |
+| 0.25 (25%) | 0.333          | 1    | 2.72              | 0.907         | 0.4754 (47.5%)    |
+| 0.25 (25%) | 0.333          | 2    | 7.39              | 2.46          | 0.7112 (71.1%)    |
+| 0.25 (25%) | 0.333          | 3    | 20.1              | 6.70          | 0.8700 (87.0%)    |
+| 0.25 (25%) | 0.333          | 4    | 54.6              | 18.2          | 0.9479 (94.8%)    |
+| 0.25 (25%) | 0.333          | 5    | 148               | 49.5          | 0.9802 (98.0%)    |
+
+[1] P / (1 - P)
+[2] exp(SHAP)
+[3] O * Shift
+[4] O / (1 + O
 
 So, for example, a SHAP value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
 
-### Negative SHAP values: worked example
+### Negative SHAP values: examples of how SHAP change odds and probabilities
 
 If we have a negative SHAP value then odds are reduced (a SHAP of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
@@ -74,6 +79,20 @@ If we have a negative SHAP value then odds are reduced (a SHAP of -1 will lead t
 | 0.25 (25%) | 0.333      | -5   | 0.0067             | 0.0022    | 0.0022 (0.22%) |
 
 So, for example, a SHAP value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
+
+## A worked example in predicting use of thrombolysis in stroke
+
+The example below shows how six patient features change the model prediction of a patient receiving thrombolysis, from a baseline of 25% (with nothing known about the patient) to 95% after the contribution of six features. The relative contribution of each feature is made clear by its SHAP value. SHAP are additive in their effects.
+
+| Patient feature and value        | SHAP | Shift | Odds  | Probability |
+|----------------------------------|------|-------|-------|-------------|
+| Base odds                        | N/A  | N/A   | 0.33  | 25%         |
+| Stroke type = infarction         | 1.8  | 6.050 | 2.00  | 67%         |
+| Stroke severity (NIHSS) = 20     | 1.5  | 4.482 | 8.95  | 90%         |
+| Prior disability (mRS) = 3       | -0.7 | 0.497 | 4.44  | 82%         |
+| Precise onset time = Yes         | 0.6  | 1.822 | 8.10  | 89%         |
+| Arrival-to-scan time (mins) = 30 | 0.5  | 1.649 | 13.35 | 93%         |
+| Use of AF anticoagulants = No    | 0.3  | 1.350 | 18.02 | 95%         |
 
 ### Observations about SHAP values
 
