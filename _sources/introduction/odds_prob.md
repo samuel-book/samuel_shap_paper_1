@@ -78,7 +78,7 @@ So, for example, a SHAP value of -0.5 for one particular feature tells us that t
 
 ## A worked example in predicting use of thrombolysis in stroke
 
-The example below shows how six patient features change the model prediction of a patient receiving thrombolysis, from a baseline of 25% (with nothing known about the patient) to 95% after the contribution of six features. The relative contribution of each feature is made clear by its SHAP value. SHAP are additive in their effects.
+The example below shows how six patient features change the model prediction of a patient receiving thrombolysis, from a baseline of 25% (with nothing known about the patient) to 95% after the contribution of six features. The relative contribution of each feature is made clear by its SHAP value. SHAP are additive in their effects; for example if one feature has a SHAP of +1.5, the influence of that feature on the model prediction would be exactly cancelled out by three other features with SHAP values of -0.5.
 
 | Patient feature and value        | SHAP | Shift | Odds  | Probability |
 |----------------------------------|------|-------|-------|-------------|
