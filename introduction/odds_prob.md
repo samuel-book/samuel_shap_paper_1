@@ -49,14 +49,19 @@ Now let us work through an example of starting with a known baseline *probabilit
 
 Here are the effects of those shifts on our baseline probability of 0.25.
 
-| Starting P | Starting O | SHAP | Shift (multiply O) | Shifted O |  Shifted P (%) |
-|------------|------------|------|--------------------|-----------|----------------|
-| 0.25 (25%) | 0.333      | 0.5  | 1.65               | 0.550     | 0.3547 (35.5%) |
-| 0.25 (25%) | 0.333      | 1    | 2.72               | 0.907     | 0.4754 (47.5%) |
-| 0.25 (25%) | 0.333      | 2    | 7.39               | 2.46      | 0.7112 (71.1%) |
-| 0.25 (25%) | 0.333      | 3    | 20.1               | 6.70      | 0.8700 (87.0%) |
-| 0.25 (25%) | 0.333      | 4    | 54.6               | 18.2      | 0.9479 (94.8%) |
-| 0.25 (25%) | 0.333      | 5    | 148                | 49.5      | 0.9802 (98.0%) |
+| Starting P | Starting O [1] | SHAP | Shift in odds [2] | Shifted O [3] | Shifted P (%) [4] |
+|------------|----------------|------|-------------------|---------------|-------------------|
+| 0.25 (25%) | 0.333          | 0.5  | 1.65              | 0.550         | 0.3547 (35.5%)    |
+| 0.25 (25%) | 0.333          | 1    | 2.72              | 0.907         | 0.4754 (47.5%)    |
+| 0.25 (25%) | 0.333          | 2    | 7.39              | 2.46          | 0.7112 (71.1%)    |
+| 0.25 (25%) | 0.333          | 3    | 20.1              | 6.70          | 0.8700 (87.0%)    |
+| 0.25 (25%) | 0.333          | 4    | 54.6              | 18.2          | 0.9479 (94.8%)    |
+| 0.25 (25%) | 0.333          | 5    | 148               | 49.5          | 0.9802 (98.0%)    |
+
+[1] P / (1 - P)
+[2] exp(SHAP)
+[3] O * Shift
+[4] O / (1 + O
 
 So, for example, a SHAP value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
 
