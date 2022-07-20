@@ -17,7 +17,7 @@ Stroke is a common cause of adult disability. Most strokes (about four out of fi
 Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend ({numref}`figure {number} <thrombolysis_hist>`). 
 
 :::{figure-md} thrombolysis_hist
-<img src="./images/thrombolysis_by_hospital.png" width="450">
+<img src="./images/thrombolysis_by_hospital.jpg" width="450">
 Variation in thrombolysis use across hospitals in England and Wales 2016-2018. 
 :::
 
