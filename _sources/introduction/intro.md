@@ -18,6 +18,7 @@ Expert opinion is that about one in five patients should receive thrombolysis, a
 
 :::{figure-md} thrombolysis_hist
 <img src="./images/thrombolysis_by_hospital.jpg" width="450">
+
 Variation in thrombolysis use across hospitals in England and Wales 2016-2018. 
 :::
 
