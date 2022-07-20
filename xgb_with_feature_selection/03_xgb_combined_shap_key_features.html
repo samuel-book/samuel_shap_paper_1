@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Explaining XGBoost model predictions with SHAP values &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -37,13 +39,12 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -61,21 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -84,10 +71,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
@@ -100,15 +86,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../introduction/intro.html">
-                    Introduction
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introductory content
  </span>
@@ -196,17 +181,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -214,128 +194,61 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/xgb_with_feature_selection/03_xgb_combined_shap_key_features.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/xgb_with_feature_selection/03_xgb_combined_shap_key_features.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plain-english-summary">
    Plain English summary
@@ -469,11 +382,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Explaining XGBoost model predictions with SHAP values</h1>
@@ -623,25 +537,24 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="explaining-xgboost-model-predictions-with-shap-values">
-<h1>Explaining XGBoost model predictions with SHAP values<a class="headerlink" href="#explaining-xgboost-model-predictions-with-shap-values" title="Permalink to this headline">#</a></h1>
-<section id="plain-english-summary">
-<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="explaining-xgboost-model-predictions-with-shap-values">
+<h1>Explaining XGBoost model predictions with SHAP values<a class="headerlink" href="#explaining-xgboost-model-predictions-with-shap-values" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">¶</a></h2>
 <p>Machine learning models often do not offer an easy way to determine how they have arrived at a prediction, and have been referred to as a “black box”.</p>
 <p>Even with our simplified model with 8 features, the model algorithm does not report how it has arrived at a prediction. SHAP values report the average contribution a feature has on the models outcome, across all possible combination of inputs. SHAP values are calculated externally from the model. We will use them to explore what influence each feature has on the models prediction - they can either show information for an individual instance (see which feature pulls the outcome in which direction), or for the global case for the full set of instances.</p>
 <p>On an instance level, waterfall plots clearly show the feature contribution to the models prediction. Overall, the SHAP values rank the five most influential features as: stroke type, arrival-to-scan time, stroke severity, precise onset time, prior disability level. Each hospital also has a SHAP value of its own. On a global level beeswarm and scatter plots all help to explain the relationship between feature values and model prediction.</p>
 <p>The model does provide a measure of feature importance. We found that there is a reasonable similarity between the feature importance and the SHAP values, but with some differences in the ranked order. Both the SHAP values and feature importance values have good consistency across the 5 k-fold splits.</p>
-</section>
-<section id="a-note-on-shap-values">
-<h2>A note on SHAP values<a class="headerlink" href="#a-note-on-shap-values" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="a-note-on-shap-values">
+<h2>A note on SHAP values<a class="headerlink" href="#a-note-on-shap-values" title="Permalink to this headline">¶</a></h2>
 <p>SHAP values are usually reported as <em>log odds shifts</em> in model predictions. For a description of the relationships between probability, odds, and SHAP values (log odds shifts) see <a class="reference internal" href="../introduction/odds_prob.html"><span class="doc std std-doc">here</span></a>.</p>
-</section>
-<section id="model-and-data">
-<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">¶</a></h2>
 <p>XGBoost models were trained on stratified k-fold cross-validation data. The 8 features in the model are:</p>
 <ul class="simple">
 <li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
@@ -660,9 +573,9 @@ title="Print to PDF"
 <p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
 <p>The Python library SHAP was applied to each of the 5 fitted models (one per kfold) to obtain a SHAP value for each feature, for each instance. SHAP values are in the same units as the model output, so for XGBoost this is in log odds-ratio.</p>
 <p>A single SHAP value per feature (to compare with the feature importance value) was obtained by taking the mean of the absolute values across all instances. Then for both cases (feature importance and SHAP) take the median across the 5 kfolds.</p>
-</section>
-<section id="aims">
-<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="aims">
+<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Fit XGBoost model to each of the 5 k-fold train/test splits.</p></li>
 <li><p>Get SHAP values for each k-fold split.</p></li>
@@ -679,9 +592,9 @@ title="Print to PDF"
 </li>
 <li><p>Show an example of plotting SHSP values in a waterfall plot as probabilities rather than log odds-ratio.</p></li>
 </ul>
-</section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>There was good consistency of SHAP values and importances across 5 k-fold replications.</p></li>
 <li><p>There was a reasonable correlation between SHAP and feature importance values, but also some differences in the rank order of importance.
@@ -707,14 +620,14 @@ The five most influential features as judged by SHAP were:</p>
 <li><p>Plotting SHAP values as probabilities are more understandable than plotting as log odds-ratios, but can distort the relative importance of features overall.</p></li>
 <li><p>There is a strong relationship between the hospitals thrombolysis rate (for 10K patient cohort) and the hospitals SHAP value. An R-squared value of 0.861 suggests that the model relies mostly on the hospital SHAP value to adjust individual hospital thrombolysis predictions, but that those hospitals share the same general patterns of juding patient and pathway characteristics.</p></li>
 </ul>
-<section id="note-on-shap-version-0-40">
-<h3>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">#</a></h3>
+<div class="section" id="note-on-shap-version-0-40">
+<h3>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">¶</a></h3>
 <p>Installed using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code></p>
 <p>There is a bug in the waterfall plot where <code class="docutils literal notranslate"><span class="pre">show=False</span></code> (required to save plot) fails. To correct this find the <code class="docutils literal notranslate"><span class="pre">_waterfall.py</span></code> file in the shap library (e.g. in <code class="docutils literal notranslate"><span class="pre">anaconda/envs/samuel2/lib/python3.8/site-packages/shap/plots</span></code>, and search/replace all <code class="docutils literal notranslate"><span class="pre">pl.</span></code> to <code class="docutils literal notranslate"><span class="pre">plt.</span></code>, and replace initial import of <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">pl</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>.</p>
-</section>
-</section>
-<section id="load-packages">
-<h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="load-packages">
+<h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -737,9 +650,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="create-output-folders-if-needed">
-<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="create-output-folders-if-needed">
+<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models&#39;</span>
@@ -749,9 +662,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="read-in-json-file">
-<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">¶</a></h2>
 <p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -761,9 +674,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>Data has previously been split into 5 stratified k-fold splits.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -800,9 +713,9 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="fit-xgboost-model">
-<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="fit-xgboost-model">
+<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">¶</a></h2>
 <p>Fit XGBoost model for each k-fold training/test split, and get feature importance values (a value per feature, per model from each k-fold split)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -889,14 +802,14 @@ Accuracy k-fold 5: 0.844
 </div>
 </div>
 </div>
-</section>
-<section id="shap-values">
-<h2>SHAP values<a class="headerlink" href="#shap-values" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="shap-values">
+<h2>SHAP values<a class="headerlink" href="#shap-values" title="Permalink to this headline">¶</a></h2>
 <p>We will use the shap library: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
 <p>‘Raw’ SHAP values from XGBoost model are log odds ratios.
 A SHAP value is returned for each feature, for each instance, for each model (one per k-fold)</p>
-<section id="get-shap-values">
-<h3>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">#</a></h3>
+<div class="section" id="get-shap-values">
+<h3>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_shap_values</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Otherwise load SHAP values</span>
@@ -940,31 +853,31 @@ A SHAP value is returned for each feature, for each instance, for each model (on
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17547/17759 [00:21&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17085/17759 [00:22&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 1 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17403/17759 [00:21&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17524/17759 [00:21&lt;00:00]        
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 2 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17734/17758 [00:21&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17106/17758 [00:20&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 3 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17075/17758 [00:19&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17593/17758 [00:20&lt;00:00]        
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 4 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17076/17758 [00:20&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 16999/17758 [00:19&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 5 of 5
@@ -972,9 +885,9 @@ A SHAP value is returned for each feature, for each instance, for each model (on
 </div>
 </div>
 </div>
-</section>
-<section id="get-average-shap-values-for-each-k-fold">
-<h3>Get average SHAP values for each k-fold<a class="headerlink" href="#get-average-shap-values-for-each-k-fold" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="get-average-shap-values-for-each-k-fold">
+<h3>Get average SHAP values for each k-fold<a class="headerlink" href="#get-average-shap-values-for-each-k-fold" title="Permalink to this headline">¶</a></h3>
 <p>For each k-fold split, calculate the mean SHAP value for each feature (across all instances).
 The mean is calculated in three ways:</p>
 <ul class="simple">
@@ -1003,9 +916,9 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="examine-consistency-of-shap-values-across-k-fold-splits">
-<h3>Examine consistency of SHAP values across k-fold splits<a class="headerlink" href="#examine-consistency-of-shap-values-across-k-fold-splits" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="examine-consistency-of-shap-values-across-k-fold-splits">
+<h3>Examine consistency of SHAP values across k-fold splits<a class="headerlink" href="#examine-consistency-of-shap-values-across-k-fold-splits" title="Permalink to this headline">¶</a></h3>
 <p>A model is fitted to each k-fold split, and SHAP values are obtained for each model. This next section assesses the range of SHAP values (mean |SHAP|) for each feature across the k-fold splits.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1293,9 +1206,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_26_0.png" src="../_images/03_xgb_combined_shap_key_features_26_0.png" />
 </div>
 </div>
-</section>
-<section id="examine-the-consitency-of-feature-importances-across-k-fold-splits">
-<h3>Examine the consitency of feature importances across k-fold splits<a class="headerlink" href="#examine-the-consitency-of-feature-importances-across-k-fold-splits" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="examine-the-consitency-of-feature-importances-across-k-fold-splits">
+<h3>Examine the consitency of feature importances across k-fold splits<a class="headerlink" href="#examine-the-consitency-of-feature-importances-across-k-fold-splits" title="Permalink to this headline">¶</a></h3>
 <p>XGBoost algorithm provides a metrc per feature called “feature importance”.</p>
 <p>A model is fitted to each k-fold split, and feature importance values are obtained for each model. This next section assesses the range of feature importance values for each feature across the k-fold splits.</p>
 <div class="cell docutils container">
@@ -1458,9 +1371,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_35_0.png" src="../_images/03_xgb_combined_shap_key_features_35_0.png" />
 </div>
 </div>
-</section>
-<section id="compare-top-10-shap-and-feature-importance-values">
-<h3>Compare top 10 SHAP and feature importance values<a class="headerlink" href="#compare-top-10-shap-and-feature-importance-values" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="compare-top-10-shap-and-feature-importance-values">
+<h3>Compare top 10 SHAP and feature importance values<a class="headerlink" href="#compare-top-10-shap-and-feature-importance-values" title="Permalink to this headline">¶</a></h3>
 <p>Compare the features (and their values) that make the top 10 when selected by either SHAP values, or feature importance values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1605,10 +1518,10 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_39_0.png" src="../_images/03_xgb_combined_shap_key_features_39_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="shap-values-in-more-detail-using-the-first-k-fold">
-<h2>SHAP values in more detail, using the first k-fold<a class="headerlink" href="#shap-values-in-more-detail-using-the-first-k-fold" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="shap-values-in-more-detail-using-the-first-k-fold">
+<h2>SHAP values in more detail, using the first k-fold<a class="headerlink" href="#shap-values-in-more-detail-using-the-first-k-fold" title="Permalink to this headline">¶</a></h2>
 <p>Having established that SHAP values have good consistency across k-fold splits, here we show more detail on SHAP using the first k-fold split.</p>
 <p>First, get the key values from the first k fold split</p>
 <div class="cell docutils container">
@@ -1627,8 +1540,8 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 </div>
-<section id="view-the-global-case-beeswarm-plot">
-<h3>View the global case: Beeswarm plot<a class="headerlink" href="#view-the-global-case-beeswarm-plot" title="Permalink to this headline">#</a></h3>
+<div class="section" id="view-the-global-case-beeswarm-plot">
+<h3>View the global case: Beeswarm plot<a class="headerlink" href="#view-the-global-case-beeswarm-plot" title="Permalink to this headline">¶</a></h3>
 <p>A Beeswarm plot shows data for all instances.</p>
 <p>The feature value for each point is shown by the colour, and its position indicates the SHAP value for that instance.</p>
 <p>Beeswarm plots are used to get a global picture of how the feature value interacts with it’s SHAP value.</p>
@@ -1651,9 +1564,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_43_0.png" src="../_images/03_xgb_combined_shap_key_features_43_0.png" />
 </div>
 </div>
-</section>
-<section id="view-the-individual-case-waterfall-plots">
-<h3>View the individual case: Waterfall plots<a class="headerlink" href="#view-the-individual-case-waterfall-plots" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="view-the-individual-case-waterfall-plots">
+<h3>View the individual case: Waterfall plots<a class="headerlink" href="#view-the-individual-case-waterfall-plots" title="Permalink to this headline">¶</a></h3>
 <p>(showing log odds ratio)</p>
 <p>Waterfall plots are ways of plotting the influence of features for individual cases. Here we show them for two instances: one with low, and one with high probability of receiving thrombolysis.</p>
 <p>Note: A decision plot is an alternative method of showing the same data. For further information see here:
@@ -1698,9 +1611,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_49_0.png" src="../_images/03_xgb_combined_shap_key_features_49_0.png" />
 </div>
 </div>
-</section>
-<section id="id1">
-<h3>View the individual case: Waterfall plots<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>View the individual case: Waterfall plots<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>(showing probabilities)</p>
 <p>Though SHAP values for XGBoost most accurately describe the effect on log odds ratio of classification, it may be easier for people to understand influence of features using probabilities. Here we plot the same waterfall plots using probabilities.</p>
 <p>A disadvantage of this method is that it distorts the influence of features somewhat - those features pushing the probability down from a low level to an even lower level get ‘squashed’ in apparent importance. This distortion is avoided when plotting log odds ratio, but at the cost of using an output that is poorly understandable by many.</p>
@@ -1718,7 +1631,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17155/17759 [00:27&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17681/17759 [00:31&lt;00:00]        
 </pre></div>
 </div>
 </div>
@@ -1755,9 +1668,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_55_0.png" src="../_images/03_xgb_combined_shap_key_features_55_0.png" />
 </div>
 </div>
-</section>
-<section id="show-the-relationship-between-feature-value-and-shap-value-for-the-top-6-influential-features">
-<h3>Show the relationship between feature value and SHAP value for the top 6 influential features<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-the-top-6-influential-features" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="show-the-relationship-between-feature-value-and-shap-value-for-the-top-6-influential-features">
+<h3>Show the relationship between feature value and SHAP value for the top 6 influential features<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-the-top-6-influential-features" title="Permalink to this headline">¶</a></h3>
 <p>(as SHAP plots scatter)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1791,9 +1704,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_57_0.png" src="../_images/03_xgb_combined_shap_key_features_57_0.png" />
 </div>
 </div>
-</section>
-<section id="show-the-relationship-between-feature-value-and-shap-value-for-the-top-5-influential-features">
-<h3>Show the relationship between feature value and SHAP value for the top 5 influential features<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-the-top-5-influential-features" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="show-the-relationship-between-feature-value-and-shap-value-for-the-top-5-influential-features">
+<h3>Show the relationship between feature value and SHAP value for the top 5 influential features<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-the-top-5-influential-features" title="Permalink to this headline">¶</a></h3>
 <p>(as violin plots)</p>
 <p>Resource:
 <a class="reference external" href="https://towardsdatascience.com/binning-records-on-a-continuous-variable-with-pandas-cut-and-qcut-5d7c8e11d7b0">https://towardsdatascience.com/binning-records-on-a-continuous-variable-with-pandas-cut-and-qcut-5d7c8e11d7b0</a>
@@ -1905,9 +1818,9 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_60_0.png" src="../_images/03_xgb_combined_shap_key_features_60_0.png" />
 </div>
 </div>
-</section>
-<section id="compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate">
-<h3>Compare SHAP value for the hospital feature, and the predicted 10k thrombolysis rate<a class="headerlink" href="#compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate">
+<h3>Compare SHAP value for the hospital feature, and the predicted 10k thrombolysis rate<a class="headerlink" href="#compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate" title="Permalink to this headline">¶</a></h3>
 <p>The hospital feature is one hot encoded, so there is a SHAP value per stroke team. We will use this to create two plots:</p>
 <ol class="simple">
 <li><p>histogram of the frequency of the SHAP value for the hospital feature</p></li>
@@ -1916,7 +1829,10 @@ The mean is calculated in three ways:</p>
 <p>First, create the data for these two plots by calculating a SHAP value for each hospital (use only the first k-fold test set, and take the mean of the SHAP values for the instances for each hospital’s own patients). Then join with the hospitals 10k thrombolysis rate data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in thrombolysis rate on 10K cohort</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list for storing patient data and hospital SHAP</span>
+<span class="n">feature_data_with_shap</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Read in thrombolysis rate on 10K cohort</span>
 <span class="n">hospital_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="s1">&#39;./output/10k_thrombolysis_rate_by_hosp_key_features.csv&#39;</span><span class="p">)</span>
 
@@ -1943,8 +1859,12 @@ The mean is calculated in three ways:</p>
     <span class="n">stroke_team_shap</span> <span class="o">=</span> <span class="n">stroke_team_shap_all_features</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span>
     <span class="c1"># Get mean</span>
     <span class="n">mean_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stroke_team_shap</span><span class="p">)</span>
-    <span class="c1"># Store</span>
+    <span class="c1"># Store mean</span>
     <span class="n">stroke_team_mean_shap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_shap</span><span class="p">)</span>
+    <span class="c1"># Get and store feature data and add SHAP</span>
+    <span class="n">feature_data</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;Hospital_SHAP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_team_shap</span>
+    <span class="n">feature_data_with_shap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_data</span><span class="p">)</span>
 
 <span class="c1"># Create dataframe with mean SHAP values for each team</span>
 <span class="n">temp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">features</span><span class="p">[</span><span class="mi">7</span><span class="p">:])</span>
@@ -1953,92 +1873,14 @@ The mean is calculated in three ways:</p>
 <span class="c1"># Join two dataframes using their index</span>
 <span class="n">hospital_data</span> <span class="o">=</span> <span class="n">temp_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hospital_data</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
 <span class="n">hospital_data</span>
+
+<span class="c1"># Concatenate and save feature_data_with_shap</span>
+<span class="n">feature_data_with_shap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">feature_data_with_shap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">feature_data_with_shap</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s1">&#39;./predictions/feature_data_with_hospital_shap.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>SHAP</th>
-      <th>Thrombolysis rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>team_AGNOF1041H</th>
-      <td>-0.016342</td>
-      <td>0.2956</td>
-    </tr>
-    <tr>
-      <th>team_AKCGO9726K</th>
-      <td>0.536124</td>
-      <td>0.3471</td>
-    </tr>
-    <tr>
-      <th>team_AOBTM3098N</th>
-      <td>-0.346190</td>
-      <td>0.2285</td>
-    </tr>
-    <tr>
-      <th>team_APXEE8191H</th>
-      <td>-0.030854</td>
-      <td>0.2778</td>
-    </tr>
-    <tr>
-      <th>team_ATDID5461S</th>
-      <td>0.337461</td>
-      <td>0.3052</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>team_YPKYH1768F</th>
-      <td>-0.232467</td>
-      <td>0.2574</td>
-    </tr>
-    <tr>
-      <th>team_YQMZV4284N</th>
-      <td>-0.004133</td>
-      <td>0.3035</td>
-    </tr>
-    <tr>
-      <th>team_ZBVSO0975W</th>
-      <td>-0.472060</td>
-      <td>0.2088</td>
-    </tr>
-    <tr>
-      <th>team_ZHCLE1578P</th>
-      <td>0.120851</td>
-      <td>0.3100</td>
-    </tr>
-    <tr>
-      <th>team_ZRRCV7012C</th>
-      <td>-0.494459</td>
-      <td>0.2178</td>
-    </tr>
-  </tbody>
-</table>
-<p>132 rows × 2 columns</p>
-</div></div></div>
 </div>
 <p>Plot histogram of the frequency of the SHAP value for the hospital feature</p>
 <div class="cell docutils container">
@@ -2094,10 +1936,10 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_66_0.png" src="../_images/03_xgb_combined_shap_key_features_66_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="id2">
-<h2>Observations<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Observations<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>There was good consistency of SHAP values and importances across 5 k-fold replications.</p></li>
 <li><p>There was a reasonable correlation between SHAP and importance values, but also some differences in the rank order of importance.
@@ -2123,8 +1965,8 @@ The five most influential features as judged by SHAP were:</p>
 <li><p>Plotting SHAP values as probabilities are more understandable than plotting as log odds-ratios, but can distort the relative importance of features overall.</p></li>
 <li><p>There is a strong relationship between the hospitals thrombolysis rate (for 10K patient cohort) and the hospitals SHAP value. An R-squared value of 0.861 suggests that the model relies mostly on the hospital SHAP value to adjust individual hospital thrombolysis predictions, but that those hospitals share the same general patterns of juding patient and pathway characteristics.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -2148,11 +1990,9 @@ The five most influential features as judged by SHAP were:</p>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="02_xgb_combined_fit_accuracy_key_features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2168,28 +2008,24 @@ The five most influential features as judged by SHAP were:</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kerry Pearn & Michael Allen<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Kerry Pearn & Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

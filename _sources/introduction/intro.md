@@ -14,7 +14,12 @@ Kerry Pearn, Martin James & Michael Allen
 
 Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called *thrombolysis*. Thrombolysis improves stroke outcomes overall, with more people being able to carry out their normal daily activities. There is, however, a small risk of a bleed in the brain, which is fatal in about 1 in 50 patients receiving thrombolysis, with the risk bing highest in those with the most severe strokes. Overall, thrombolysis does not increase risk of death, as the risk of death from a bleed is balanced out by the benefits of thrombolysis to others. Clinicians, patients, and carers, must however consider both benefits and risks of thrombolysis when deciding on whether to use it.
 
-Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend.
+Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend ({numref}`figure {number} <thrombolysis_hist>`). 
+
+:::{figure-md} thrombolysis_hist
+<img src="./images/thrombolysis_by_hospital.png" width="450">
+Variation in thrombolysis use across hospitals in England and Wales 2016-2018. 
+:::
 
 In a previous project, [SAMueL-1](https://samuel-book.github.io/samuel-1/introduction/intro.html), we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital. This allowed us to investigate what differences in treatment are likely to be due to differences between patients, and what differences in treatment were likely to be due to differences between hospitals.
 
@@ -91,14 +96,6 @@ The five most influential features predicting whether thrombolysis would be give
 <img src="./images/xgb_thrombolysis_shap_violin.jpg" width="800">
 
 A violin plot showing the individual SHAP values for six features. The shape of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would *would* receive thrombolysis. A negative SHAP value pushes the model towards saying that patient would would *not* receive thrombolysis.
-:::
-
-Each patient also has a SHAP value for the hospital they attend, which may increase or reduce the model's predicted probability of that patient receiving thrombolysis. {numref}`Figure {number} <hospital-SHAP>` shows the spread of average SHAP values for each hospital. The average SHAP for each hospital ranges from about -1.3 to +1.3.
-
-:::{figure-md} hospital-SHAP
-<img src="./images/hosp_shap_hist.jpg" width="450">
-
-A histogram showing the distribution of average SHAP values for each hospital.
 :::
 
 SHAP plots can also be used to explain predictions of any individual patient (e.g. {numref}`Figure {number} <waterfall_example>`). 
