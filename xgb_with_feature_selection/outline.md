@@ -41,6 +41,9 @@ More information on the `shap` library, used to estimate Shapley values, may be 
 * *A simple worked example of Shapley values*:
     * A very simple example of Shapley values based on three people who may contribute to the scores of a pub quiz team.
     * A quick demonstration of the SHAP library to estimate Shapley values.
+    
+* *Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case*
+	* Demonstrating SHAP and SAHP interaction values with a four-feature model of survival on board the Titanic.
 
 ### Predicting thrombolysis use and explaining the predictions with SHAP
 
@@ -96,5 +99,7 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     
 * *Plotting thrombolysis rate by feature value for low and high thrombolysing hospitals*:
     * Plot the relationships between feature values and thrombolysis use for the top and bottom 30 thrombolysing hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.
+
+ 
      
         
