@@ -14,7 +14,13 @@ Kerry Pearn, Martin James & Michael Allen
 
 Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called *thrombolysis*. Thrombolysis improves stroke outcomes overall, with more people being able to carry out their normal daily activities. There is, however, a small risk of a bleed in the brain, which is fatal in about 1 in 50 patients receiving thrombolysis, with the risk bing highest in those with the most severe strokes. Overall, thrombolysis does not increase risk of death, as the risk of death from a bleed is balanced out by the benefits of thrombolysis to others. Clinicians, patients, and carers, must however consider both benefits and risks of thrombolysis when deciding on whether to use it.
 
-Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend.
+Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend ({numref}`figure {number} <thrombolysis_hist>`). 
+
+:::{figure-md} thrombolysis_hist
+<img src="./images/thrombolysis_by_hospital.jpg" width="450">
+
+Variation in thrombolysis use across hospitals in England and Wales 2016-2018. 
+:::
 
 In a previous project, [SAMueL-1](https://samuel-book.github.io/samuel-1/introduction/intro.html), we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital. This allowed us to investigate what differences in treatment are likely to be due to differences between patients, and what differences in treatment were likely to be due to differences between hospitals.
 
@@ -105,8 +111,8 @@ An example of a SHAP *waterfall* plot showing the most influential features in i
 
 We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
 
-1. With increasing disability before stroke.
-2. In milder, or very severe, strokes.
+1. In milder, or very severe, strokes.
+2. With increasing disability before stroke.
 3. When stroke onset time had been estimated (rather than known precisely).
 4. With longer onset-to-arrival times.
 5. With longer arrival-to-scan times.
@@ -135,7 +141,7 @@ We may examine each feature in more detail using violin plots for each feature (
 :::{figure-md} SHAP_compare_violin
 <img src="./images/xgb_predicting_difference_shap_violin.jpg" width="800">
 
-A violin plot showing the individual SHAP values for six features. The shap of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
+A violin plot showing the individual SHAP values for six features. The shape of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that the patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
 :::
 
 
