@@ -111,8 +111,8 @@ An example of a SHAP *waterfall* plot showing the most influential features in i
 
 We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
 
-1. With increasing disability before stroke.
-2. In milder, or very severe, strokes.
+1. In milder, or very severe, strokes.
+2. With increasing disability before stroke.
 3. When stroke onset time had been estimated (rather than known precisely).
 4. With longer onset-to-arrival times.
 5. With longer arrival-to-scan times.
@@ -141,7 +141,7 @@ We may examine each feature in more detail using violin plots for each feature (
 :::{figure-md} SHAP_compare_violin
 <img src="./images/xgb_predicting_difference_shap_violin.jpg" width="800">
 
-A violin plot showing the individual SHAP values for six features. The shap of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
+A violin plot showing the individual SHAP values for six features. The shape of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that the patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
 :::
 
 
