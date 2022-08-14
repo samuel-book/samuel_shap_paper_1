@@ -9,6 +9,7 @@ dependencies:
   - pip
   - pandas
   - python=3.8
+  - seaborn
   - scikit-learn
   - tensorflow-gpu=2.4
   - xgboost=1.5
