@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>Predicting differences between local and benchmark decisions &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -185,7 +185,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would
+   Predicting differences between local and benchmark decisions
   </a>
  </li>
  <li class="toctree-l1">
@@ -196,6 +196,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_compare_10k_cohort_thromb_rate_with_shap_value.html">
+   A comparison of 10K cohort thrombolysis rates vs SHAP values across hospitals
   </a>
  </li>
 </ul>
@@ -342,33 +347,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plain-english-summary">
-   Plain English summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-note-on-shap-values">
-   A note on Shap values
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims">
-   Aims
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
-   Observations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#function-to-calculate-accuracy-measures">
    Function to calculate accuracy measures
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#read-in-json-file">
-   Read in JSON file
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -377,18 +357,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
-   Load data on predicted 10k cohort thrombolysis use at each hospital
+  <a class="reference internal nav-link" href="#identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis">
+   Identify hospitals where benchmark decision would lead to at least 50% higher thrombolysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
-   Build a model to distinguish between local and benchmark thrombolysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-a-model-per-hospital-store-all-results-as-if-one-model">
-   Create a model per hospital, store all results as if one model
+  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-top30-thrombolysis">
+   Build a model to distinguish between local and top30 thrombolysis
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -436,8 +411,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-shap-and-importances">
-     Compare Shap and importances
+    <a class="reference internal nav-link" href="#compare-top-10-shap-and-importances">
+     Compare top 10 Shap and importances
     </a>
    </li>
   </ul>
@@ -453,26 +428,14 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
-     Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision
+    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis">
+     Plot Waterfall and decision plot plots for instances with low or high probability of receiving thrombolysis
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
-     Show the relationship between feature value and Shap value for influential features.
+    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features">
+     Show the relationship between feature value and Shap value for top 5 influential features.
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#show-shap-as-a-scatter-plot">
-       Show Shap as a scatter plot
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#show-shap-as-a-violin-plot">
-       Show Shap as a violin plot
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -482,7 +445,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#observations">
    Observations
   </a>
  </li>
@@ -495,7 +458,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would</h1>
+                <h1>Predicting differences between local and benchmark decisions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -506,33 +469,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plain-english-summary">
-   Plain English summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-note-on-shap-values">
-   A note on Shap values
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims">
-   Aims
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
-   Observations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#function-to-calculate-accuracy-measures">
    Function to calculate accuracy measures
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#read-in-json-file">
-   Read in JSON file
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -541,18 +479,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
-   Load data on predicted 10k cohort thrombolysis use at each hospital
+  <a class="reference internal nav-link" href="#identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis">
+   Identify hospitals where benchmark decision would lead to at least 50% higher thrombolysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
-   Build a model to distinguish between local and benchmark thrombolysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-a-model-per-hospital-store-all-results-as-if-one-model">
-   Create a model per hospital, store all results as if one model
+  <a class="reference internal nav-link" href="#build-a-model-to-distinguish-between-local-and-top30-thrombolysis">
+   Build a model to distinguish between local and top30 thrombolysis
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -600,8 +533,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-shap-and-importances">
-     Compare Shap and importances
+    <a class="reference internal nav-link" href="#compare-top-10-shap-and-importances">
+     Compare top 10 Shap and importances
     </a>
    </li>
   </ul>
@@ -617,26 +550,14 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
-     Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision
+    <a class="reference internal nav-link" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis">
+     Plot Waterfall and decision plot plots for instances with low or high probability of receiving thrombolysis
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
-     Show the relationship between feature value and Shap value for influential features.
+    <a class="reference internal nav-link" href="#show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features">
+     Show the relationship between feature value and Shap value for top 5 influential features.
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#show-shap-as-a-scatter-plot">
-       Show Shap as a scatter plot
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#show-shap-as-a-violin-plot">
-       Show Shap as a violin plot
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -646,7 +567,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#observations">
    Observations
   </a>
  </li>
@@ -660,56 +581,23 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would">
-<h1>Predicting differences between local and benchmark decisions: Identifying patients that low thrombolsying units would not give thrombolysis to whereas the majority of benchmark hospitals would<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions-identifying-patients-that-low-thrombolsying-units-would-not-give-thrombolysis-to-whereas-the-majority-of-benchmark-hospitals-would" title="Permalink to this headline">#</a></h1>
-<section id="plain-english-summary">
-<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
-<p>In this experiment we compare decisions between the top and bottom 30 hospitals (as ranked by the predicted thrombolysis use in the same 10k cohort of patients). We take those patients would would be given thrombolysis by the majority of the top 30 thombolysing hospitals (we also call these ‘benchmark’ hospitals), and predict when the bottom 30 hospitals would make a different decision (i.e. decide <em>not</em> to thrombolyse).</p>
-<p>The XGBoost model used to make these predictions uses 8 features:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="predicting-differences-between-local-and-benchmark-decisions">
+<h1>Predicting differences between local and benchmark decisions<a class="headerlink" href="#predicting-differences-between-local-and-benchmark-decisions" title="Permalink to this headline">#</a></h1>
+<p>This experiment focuses on hospitals who would give thrombolysis to at least 50% more patients if the majority vote of 30 benchmark hospitals were applied. We build a model to predict those patients, out of patients who will be thrombolysed by the majority of the benchmark hospitals, who will thrombolysed at a local unit. The XGBoost model used to make predictions uses 8 features:</p>
 <ul class="simple">
-<li><p>Arrival-to-scan time</p></li>
-<li><p>Infarction</p></li>
-<li><p>Stroke severity</p></li>
-<li><p>Precise onset time</p></li>
-<li><p>Prior disability level</p></li>
-<li><p>Stroke team</p></li>
-<li><p>Use of AF anticoagulants</p></li>
-<li><p>Onset-to-arrival time</p></li>
+<li><p>S2BrainImagingTime_min</p></li>
+<li><p>S2StrokeType_Infarction</p></li>
+<li><p>S2NihssArrival</p></li>
+<li><p>S1OnsetTimeType_Precise</p></li>
+<li><p>S2RankinBeforeStroke</p></li>
+<li><p>StrokeTeam</p></li>
+<li><p>AFAnticoagulent_Yes</p></li>
+<li><p>S1OnsetToArrival_min</p></li>
 </ul>
-<p>We find that low thrombolysing hospitals are less likely to give thrombolysis to patients with:</p>
+<p>Aims:</p>
 <ul class="simple">
-<li><p>Low or very high stroke severity</p></li>
-<li><p>An estimated (not precise) stroke onset time</p></li>
-<li><p>Prior disability</p></li>
-<li><p>A longer arrival-to-scan time</p></li>
-<li><p>A longer inset-to-arrival time</p></li>
-<li><p>Use of of AF anticoagulants</p></li>
-</ul>
-</section>
-<section id="a-note-on-shap-values">
-<h2>A note on Shap values<a class="headerlink" href="#a-note-on-shap-values" title="Permalink to this headline">#</a></h2>
-<p>Shap values are usually reported as <em>log odds shifts</em> in model predictions. For a description of the relationships between probability, odds, and Shap values (log odds shifts) see <a class="reference internal" href="../introduction/odds_prob.html"><span class="doc std std-doc">here</span></a>.</p>
-</section>
-<section id="aims">
-<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be <em>not</em> be thrombolysed at a local unit.</p></li>
-<li><p>Investigate model predictions using Shap.</p></li>
-</ul>
-</section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.733).</p></li>
-<li><p>The five most important distinguishing features are:</p>
-<ul>
-<li><p>Stroke severity</p></li>
-<li><p>Prior disability level</p></li>
-<li><p>Precise onset time</p></li>
-<li><p>Arrival-to-scan time</p></li>
-<li><p>Onset-to-arrival time</p></li>
-</ul>
-</li>
+<li><p>Of all those patients thrombolysed by benchmark decision, build an XGBoost model to predict which patients, would be thrombolysed at a local unit.</p></li>
+<li><p>Investigate model predictions using Shap</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -729,13 +617,11 @@ title="Print to PDF"
 
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">shap</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 <section id="function-to-calculate-accuracy-measures">
 <h2>Function to calculate accuracy measures<a class="headerlink" href="#function-to-calculate-accuracy-measures" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -848,18 +734,6 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="read-in-json-file">
-<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
-<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
-    <span class="n">feature_name_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -870,114 +744,12 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_decision_data</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Stroke team</th>
-      <th>Observed thrombolysis</th>
-      <th>Majority vote</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>TXHRP7672C</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>SQGXB9559U</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>LFPMM4706C</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>MHMYL4920B</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>EQZZZ5658G</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>88787</th>
-      <td>OYASQ1316D</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>88788</th>
-      <td>SMVTP6284P</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>88789</th>
-      <td>RDVPJ0375X</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>88790</th>
-      <td>FAJKD7118X</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>88791</th>
-      <td>QWKRA8499D</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>88792 rows × 3 columns</p>
-</div></div></div>
-</div>
 <p>Add label where benchmark = 1, but observed = 0</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;benchmark_yes_observed_no&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;Majority vote&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>
-    <span class="p">(</span><span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;Observed thrombolysis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1007,9 +779,11 @@ title="Print to PDF"
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Stroke team</th>
-      <th>Observed thrombolysis</th>
-      <th>Majority vote</th>
+      <th>unit</th>
+      <th>observed</th>
+      <th>predicted_thrombolysis</th>
+      <th>predicted_proba</th>
+      <th>majority_vote</th>
       <th>benchmark_yes_observed_no</th>
     </tr>
   </thead>
@@ -1018,39 +792,51 @@ title="Print to PDF"
       <th>0</th>
       <td>TXHRP7672C</td>
       <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>0.880155</td>
+      <td>1.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>1</th>
       <td>SQGXB9559U</td>
       <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>0.627783</td>
+      <td>1.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>2</th>
       <td>LFPMM4706C</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.042199</td>
+      <td>0.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>3</th>
       <td>MHMYL4920B</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.000084</td>
+      <td>0.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>4</th>
       <td>EQZZZ5658G</td>
       <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>0.916311</td>
+      <td>1.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>...</th>
+      <td>...</td>
+      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -1060,40 +846,50 @@ title="Print to PDF"
       <th>88787</th>
       <td>OYASQ1316D</td>
       <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>0.917107</td>
+      <td>1.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>88788</th>
       <td>SMVTP6284P</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.023144</td>
+      <td>0.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>88789</th>
       <td>RDVPJ0375X</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.089444</td>
+      <td>0.0</td>
       <td>False</td>
     </tr>
     <tr>
       <th>88790</th>
       <td>FAJKD7118X</td>
       <td>0</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>0.615767</td>
+      <td>1.0</td>
       <td>True</td>
     </tr>
     <tr>
       <th>88791</th>
       <td>QWKRA8499D</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.160670</td>
+      <td>0.0</td>
       <td>False</td>
     </tr>
   </tbody>
 </table>
-<p>88792 rows × 4 columns</p>
+<p>88792 rows × 6 columns</p>
 </div></div></div>
 </div>
 <p>Combine with feature data for patients.</p>
@@ -1101,14 +897,13 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="s1">&#39;./predictions/test_features_collated_key_features.csv&#39;</span><span class="p">)</span>
-<span class="n">feature_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">feature_name_dict</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;benchmark_yes_observed_no&#39;</span><span class="p">]</span> <span class="o">=</span> \
     <span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;benchmark_yes_observed_no&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
-<span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;Majority vote&#39;</span><span class="p">]</span> <span class="o">=</span> \
-    <span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;Majority vote&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
-<span class="c1">#feature_data[&#39;predicted_thrombolysis&#39;] = \</span>
-<span class="c1">#    thrombolysis_decision_data[&#39;predicted_thrombolysis&#39;] </span>
-<span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;Observed thrombolysis&#39;</span><span class="p">]</span>
+<span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
+<span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;predicted_thrombolysis&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;predicted_thrombolysis&#39;</span><span class="p">]</span> 
+<span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">thrombolysis_decision_data</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1138,17 +933,18 @@ title="Print to PDF"
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Arrival-to-scan time</th>
-      <th>Infarction</th>
-      <th>Stroke severity</th>
-      <th>Precise onset time</th>
-      <th>Prior disability level</th>
-      <th>Stroke team</th>
-      <th>Use of AF anticoagulents</th>
-      <th>Onset-to-arrival time</th>
-      <th>Thrombolysis</th>
+      <th>S2BrainImagingTime_min</th>
+      <th>S2StrokeType_Infarction</th>
+      <th>S2NihssArrival</th>
+      <th>S1OnsetTimeType_Precise</th>
+      <th>S2RankinBeforeStroke</th>
+      <th>StrokeTeam</th>
+      <th>AFAnticoagulent_Yes</th>
+      <th>S1OnsetToArrival_min</th>
+      <th>S2Thrombolysis</th>
       <th>benchmark_yes_observed_no</th>
-      <th>Majority vote</th>
+      <th>majority_vote</th>
+      <th>predicted_thrombolysis</th>
       <th>observed</th>
     </tr>
   </thead>
@@ -1165,7 +961,8 @@ title="Print to PDF"
       <td>186.0</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -1180,7 +977,8 @@ title="Print to PDF"
       <td>71.0</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -1195,7 +993,8 @@ title="Print to PDF"
       <td>67.0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -1210,7 +1009,8 @@ title="Print to PDF"
       <td>86.0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -1225,11 +1025,13 @@ title="Print to PDF"
       <td>83.0</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1</td>
     </tr>
     <tr>
       <th>...</th>
+      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -1255,7 +1057,8 @@ title="Print to PDF"
       <td>140.0</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -1270,7 +1073,8 @@ title="Print to PDF"
       <td>189.0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -1285,7 +1089,8 @@ title="Print to PDF"
       <td>154.0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -1300,7 +1105,8 @@ title="Print to PDF"
       <td>77.0</td>
       <td>0</td>
       <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -1315,55 +1121,139 @@ title="Print to PDF"
       <td>77.0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
     </tr>
   </tbody>
 </table>
-<p>88792 rows × 12 columns</p>
+<p>88792 rows × 13 columns</p>
 </div></div></div>
 </div>
 </section>
-<section id="load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital">
-<h2>Load data on predicted 10k cohort thrombolysis use at each hospital<a class="headerlink" href="#load-data-on-predicted-10k-cohort-thrombolysis-use-at-each-hospital" title="Permalink to this headline">#</a></h2>
-<p>Use the hospitals thrombolysis rate on the same set of 10k patients to select the 30 hospitals with the lowest thrombolysis rates.</p>
+<section id="identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis">
+<h2>Identify hospitals where benchmark decision would lead to at least 50% higher thrombolysis<a class="headerlink" href="#identify-hospitals-where-benchmark-decision-would-lead-to-at-least-50-higher-thrombolysis" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_by_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="s1">&#39;./output/10k_thrombolysis_rate_by_hosp_key_features.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;stroke_team&#39;</span><span class="p">)</span>
-<span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
-    <span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_counts</span> <span class="o">=</span> <span class="p">(</span><span class="n">thrombolysis_decision_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+        <span class="s1">&#39;predicted_proba&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;benchmark_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low_thrombolysing_hospitals_df</span> <span class="o">=</span> <span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="s1">&#39;benchmark_ratio&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">1.5</span>
+
+<span class="n">low_thrombolysing_hospitals_df</span> <span class="o">=</span> <span class="n">thrombolysis_counts</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">low_thrombolysing_hospitals_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="s1">&#39;benchmark_ratio&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
 <span class="n">low_thrombolysing_hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">low_thrombolysing_hospitals_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+
+<span class="n">low_thrombolysing_hospitals_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>observed</th>
+      <th>predicted_thrombolysis</th>
+      <th>majority_vote</th>
+      <th>benchmark_yes_observed_no</th>
+      <th>benchmark_ratio</th>
+    </tr>
+    <tr>
+      <th>unit</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HZMLX7970T</th>
+      <td>34</td>
+      <td>28.0</td>
+      <td>80.0</td>
+      <td>49</td>
+      <td>2.352941</td>
+    </tr>
+    <tr>
+      <th>LFPMM4706C</th>
+      <td>21</td>
+      <td>7.0</td>
+      <td>46.0</td>
+      <td>29</td>
+      <td>2.190476</td>
+    </tr>
+    <tr>
+      <th>LZAYM7611L</th>
+      <td>40</td>
+      <td>23.0</td>
+      <td>86.0</td>
+      <td>55</td>
+      <td>2.150000</td>
+    </tr>
+    <tr>
+      <th>XPABC1435F</th>
+      <td>36</td>
+      <td>39.0</td>
+      <td>76.0</td>
+      <td>41</td>
+      <td>2.111111</td>
+    </tr>
+    <tr>
+      <th>LECHF1024T</th>
+      <td>114</td>
+      <td>110.0</td>
+      <td>230.0</td>
+      <td>128</td>
+      <td>2.017544</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
-<section id="build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis">
-<h2>Build a model to distinguish between local and benchmark thrombolysis<a class="headerlink" href="#build-a-model-to-distinguish-between-local-and-benchmark-thrombolysis" title="Permalink to this headline">#</a></h2>
+<section id="build-a-model-to-distinguish-between-local-and-top30-thrombolysis">
+<h2>Build a model to distinguish between local and top30 thrombolysis<a class="headerlink" href="#build-a-model-to-distinguish-between-local-and-top30-thrombolysis" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict data to low thrombolysing hospitals and benchmark = yes</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict data to low thrombolysing hospitals and benchmark = yes and observed = no</span>
 
-<span class="n">mask</span> <span class="o">=</span> <span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">low_thrombolysing_hospitals</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">low_thrombolysing_hospitals</span><span class="p">)</span>
 <span class="n">restricted_data</span> <span class="o">=</span> <span class="n">feature_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
 <span class="c1"># Get only patients thrombolysed in top 30</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;Majority vote&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;majority_vote&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
 <span class="n">restricted_data</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
-<span class="c1"># Label those that are different</span>
-<span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;different_decision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="c1"># Remove columns not to be used in model</span>
-<span class="n">cols_to_drop</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;benchmark_yes_observed_no&#39;</span><span class="p">,</span> <span class="s1">&#39;Majority vote&#39;</span><span class="p">,</span> <span class="s1">&#39;observed&#39;</span><span class="p">,</span> <span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+<span class="n">cols_to_drop</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;benchmark_yes_observed_no&#39;</span><span class="p">,</span> <span class="s1">&#39;predicted_thrombolysis&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;majority_vote&#39;</span><span class="p">,</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span>
 <span class="n">restricted_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">cols_to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1394,15 +1284,15 @@ title="Print to PDF"
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Arrival-to-scan time</th>
-      <th>Infarction</th>
-      <th>Stroke severity</th>
-      <th>Precise onset time</th>
-      <th>Prior disability level</th>
-      <th>Stroke team</th>
-      <th>Use of AF anticoagulents</th>
-      <th>Onset-to-arrival time</th>
-      <th>different_decision</th>
+      <th>S2BrainImagingTime_min</th>
+      <th>S2StrokeType_Infarction</th>
+      <th>S2NihssArrival</th>
+      <th>S1OnsetTimeType_Precise</th>
+      <th>S2RankinBeforeStroke</th>
+      <th>StrokeTeam</th>
+      <th>AFAnticoagulent_Yes</th>
+      <th>S1OnsetToArrival_min</th>
+      <th>S2Thrombolysis</th>
     </tr>
   </thead>
   <tbody>
@@ -1416,7 +1306,7 @@ title="Print to PDF"
       <td>SQGXB9559U</td>
       <td>0</td>
       <td>71.0</td>
-      <td>False</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>28</th>
@@ -1428,7 +1318,7 @@ title="Print to PDF"
       <td>DQKFO8183I</td>
       <td>0</td>
       <td>149.0</td>
-      <td>False</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>91</th>
@@ -1440,19 +1330,7 @@ title="Print to PDF"
       <td>OUXUZ1084Q</td>
       <td>0</td>
       <td>122.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>154</th>
-      <td>21.0</td>
-      <td>1</td>
-      <td>5.0</td>
-      <td>1</td>
       <td>0</td>
-      <td>WJHSV5358P</td>
-      <td>0</td>
-      <td>62.0</td>
-      <td>False</td>
     </tr>
     <tr>
       <th>159</th>
@@ -1464,7 +1342,19 @@ title="Print to PDF"
       <td>IATJE0497S</td>
       <td>0</td>
       <td>78.0</td>
-      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>161</th>
+      <td>8.0</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>DANAH4615Q</td>
+      <td>0</td>
+      <td>160.0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1488,7 +1378,7 @@ title="Print to PDF"
       <td>LGNPK4211W</td>
       <td>0</td>
       <td>46.0</td>
-      <td>True</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>88698</th>
@@ -1500,7 +1390,7 @@ title="Print to PDF"
       <td>ISIZF6614O</td>
       <td>0</td>
       <td>109.0</td>
-      <td>False</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>88740</th>
@@ -1512,7 +1402,7 @@ title="Print to PDF"
       <td>NFBUF0424E</td>
       <td>0</td>
       <td>67.0</td>
-      <td>True</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>88758</th>
@@ -1524,7 +1414,7 @@ title="Print to PDF"
       <td>ISIZF6614O</td>
       <td>0</td>
       <td>89.0</td>
-      <td>True</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>88783</th>
@@ -1536,64 +1426,32 @@ title="Print to PDF"
       <td>SQGXB9559U</td>
       <td>0</td>
       <td>119.0</td>
-      <td>False</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
-<p>5293 rows × 9 columns</p>
+<p>4788 rows × 9 columns</p>
 </div></div></div>
 </div>
-<p>Show proportion of patients where the decision would differ between the low thrombolysing hospitals and the benchmark majority vote.</p>
+<p>Set up X, Y and train/test split.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prop_diff</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;different_decision&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion with predicted different decision: </span><span class="si">{</span><span class="n">prop_diff</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion with predicted different decision: 0.462
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="create-a-model-per-hospital-store-all-results-as-if-one-model">
-<h2>Create a model per hospital, store all results as if one model<a class="headerlink" href="#create-a-model-per-hospital-store-all-results-as-if-one-model" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospitals</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hospitals</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;SQGXB9559U&#39; &#39;DQKFO8183I&#39; &#39;OUXUZ1084Q&#39; &#39;WJHSV5358P&#39; &#39;IATJE0497S&#39;
- &#39;DANAH4615Q&#39; &#39;NZNML2841Q&#39; &#39;XQAGA4299B&#39; &#39;AOBTM3098N&#39; &#39;HYNBH3271L&#39;
- &#39;LECHF1024T&#39; &#39;ISXKM9668U&#39; &#39;ISIZF6614O&#39; &#39;NFBUF0424E&#39; &#39;LGNPK4211W&#39;
- &#39;BICAW1125K&#39; &#39;IYJHY1440E&#39; &#39;ZBVSO0975W&#39; &#39;YEXCH8391J&#39; &#39;IUMNL9626U&#39;
- &#39;LFPMM4706C&#39; &#39;IDHVL2894N&#39; &#39;BBXPQ0212O&#39; &#39;XPABC1435F&#39; &#39;HZMLX7970T&#39;
- &#39;LZAYM7611L&#39; &#39;ZRRCV7012C&#39; &#39;TKRKH4920C&#39; &#39;VVDIY0129H&#39; &#39;HYCCK3082L&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">]</span>
+<span class="c1"># Remove hospital ID</span>
+<span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;StrokeTeam&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list to store models and calibration threshold</span>
-<span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="c1"># Set up lists for observed and predicted</span>
-<span class="n">observed</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">predicted</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">hospital_instances</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">model_description</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">shap_values_extended_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">shap_values_list</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># KP these were in the kfold loop, but bring out so not get overwritten</span>
 <span class="c1"># Set up list to store models</span>
 <span class="n">model_kfold</span> <span class="o">=</span> <span class="p">[]</span>
+
 <span class="c1"># Set up lists for k-fold fits</span>
 <span class="n">observed_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">predicted_proba_kfold</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1602,86 +1460,63 @@ title="Print to PDF"
 <span class="n">X_test_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">y_train_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">y_test_kfold</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Set up list for feature importances</span>
 <span class="n">importances_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 
-
-<span class="k">for</span> <span class="n">hospital</span> <span class="ow">in</span>  <span class="n">hospitals</span><span class="p">:</span>
-    <span class="c1"># Extract the data for this single hospital</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">hospital</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">restricted_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-    <span class="c1"># Remove hospital ID</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># store count of hospitals, for histogram</span>
-    <span class="n">hospital_instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-    <span class="c1"># Initialise empty lists</span>
-    <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-
-    <span class="c1"># Set up X, Y and train/test split.</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;different_decision&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;different_decision&#39;</span><span class="p">]</span>
+<span class="c1"># Loop through the k-fold splits</span>
+<span class="n">k_fold</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">k_fold</span> <span class="o">+=</span> <span class="mi">1</span>
     
-    <span class="c1"># define the stratified split</span>
-    <span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># Get X and Y train/test</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    
+    <span class="n">X_train_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_test_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_train_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_test_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
 
-    <span class="c1"># Loop through the k-fold splits</span>
-    <span class="n">k_fold</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">k_fold</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="c1"># Get X and Y train/test</span>
-        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
-        <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
-        
-        <span class="n">X_train_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-        <span class="n">X_test_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-        <span class="n">y_train_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
-        <span class="n">y_test_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
-
-        <span class="c1"># Define model</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
-            <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
-            <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-            <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> 
-            <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-
-        <span class="c1"># Fit model</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>    
-        <span class="n">model_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-
-        <span class="c1"># Get predicted probabilities</span>
-        <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">predicted_proba_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_probs</span><span class="p">)</span>
-        <span class="n">observed_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
-
-        <span class="c1"># Get feature importances</span>
-        <span class="n">importance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
-        <span class="n">importances_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">importance</span><span class="p">)</span>
-
-        <span class="c1"># Get class</span>
-        <span class="n">true_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
-        <span class="n">y_class</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
-        <span class="n">y_class</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_class</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
-        <span class="n">predicted_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_class</span><span class="p">)</span>
-
-<span class="n">observed_kfold_flattened</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">xs</span> <span class="ow">in</span> <span class="n">observed_kfold</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
-<span class="n">predicted_kfold_flattened</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">xs</span> <span class="ow">in</span> <span class="n">predicted_kfold</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
-
-<span class="c1"># necessary for the accuracy calculation below to work</span>
-<span class="n">observed_kfold_flattened</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observed_kfold_flattened</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
-<span class="n">predicted_kfold_flattened</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predicted_kfold_flattened</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
-
-<span class="c1"># Print accuracy</span>
-<span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">observed_kfold_flattened</span> <span class="o">==</span> <span class="n">predicted_kfold_flattened</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span>
-    <span class="sa">f</span><span class="s1">&#39;All hospitals, all kfolds. Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># Define model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+        <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+        <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> 
+        <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    
+    <span class="c1"># Fit model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>    
+    <span class="n">model_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    
+    <span class="c1"># Get predicted probabilities</span>
+    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">predicted_proba_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_probs</span><span class="p">)</span>
+    <span class="n">observed_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+    
+    <span class="c1"># Get feature importances</span>
+    <span class="n">importance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
+    <span class="n">importances_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">importance</span><span class="p">)</span>
+    
+    <span class="c1"># Get class</span>
+    <span class="n">true_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="n">y_class</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
+    <span class="n">y_class</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_class</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
+    <span class="n">predicted_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_class</span><span class="p">)</span>
+    
+    <span class="c1"># Print accuracy</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_class</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Run </span><span class="si">{</span><span class="n">k_fold</span><span class="si">}</span><span class="s1">, accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>All hospitals, all kfolds. Accuracy: 0.628
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.658
+Run 2, accuracy: 0.691
+Run 3, accuracy: 0.696
+Run 4, accuracy: 0.671
+Run 5, accuracy: 0.662
 </pre></div>
 </div>
 </div>
@@ -1739,147 +1574,147 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>observed_positive_rate</th>
-      <td>0.461756</td>
-      <td>0.461756</td>
-      <td>0.461756</td>
-      <td>0.461248</td>
-      <td>0.461248</td>
+      <td>0.530271</td>
+      <td>0.530271</td>
+      <td>0.530271</td>
+      <td>0.530825</td>
+      <td>0.529781</td>
     </tr>
     <tr>
       <th>observed_negative_rate</th>
-      <td>0.538244</td>
-      <td>0.538244</td>
-      <td>0.538244</td>
-      <td>0.538752</td>
-      <td>0.538752</td>
+      <td>0.469729</td>
+      <td>0.469729</td>
+      <td>0.469729</td>
+      <td>0.469175</td>
+      <td>0.470219</td>
     </tr>
     <tr>
       <th>predicted_positive_rate</th>
-      <td>0.393768</td>
-      <td>0.351275</td>
-      <td>0.373938</td>
-      <td>0.360113</td>
-      <td>0.375236</td>
+      <td>0.492693</td>
+      <td>0.534447</td>
+      <td>0.518789</td>
+      <td>0.502612</td>
+      <td>0.493208</td>
     </tr>
     <tr>
       <th>predicted_negative_rate</th>
-      <td>0.606232</td>
-      <td>0.648725</td>
-      <td>0.626062</td>
-      <td>0.639887</td>
-      <td>0.624764</td>
+      <td>0.507307</td>
+      <td>0.465553</td>
+      <td>0.481211</td>
+      <td>0.497388</td>
+      <td>0.506792</td>
     </tr>
     <tr>
       <th>accuracy</th>
-      <td>0.663834</td>
-      <td>0.670444</td>
-      <td>0.683664</td>
-      <td>0.664461</td>
-      <td>0.683365</td>
+      <td>0.657620</td>
+      <td>0.691023</td>
+      <td>0.696242</td>
+      <td>0.670846</td>
+      <td>0.662487</td>
     </tr>
     <tr>
       <th>precision</th>
-      <td>0.659472</td>
-      <td>0.688172</td>
-      <td>0.694444</td>
-      <td>0.674541</td>
-      <td>0.692695</td>
+      <td>0.690678</td>
+      <td>0.707031</td>
+      <td>0.718310</td>
+      <td>0.700624</td>
+      <td>0.694915</td>
     </tr>
     <tr>
       <th>recall</th>
-      <td>0.562372</td>
-      <td>0.523517</td>
-      <td>0.562372</td>
-      <td>0.526639</td>
-      <td>0.563525</td>
+      <td>0.641732</td>
+      <td>0.712598</td>
+      <td>0.702756</td>
+      <td>0.663386</td>
+      <td>0.646943</td>
     </tr>
     <tr>
       <th>f1</th>
-      <td>0.607064</td>
-      <td>0.594657</td>
-      <td>0.621469</td>
-      <td>0.591484</td>
-      <td>0.621469</td>
+      <td>0.665306</td>
+      <td>0.709804</td>
+      <td>0.710448</td>
+      <td>0.681496</td>
+      <td>0.670072</td>
     </tr>
     <tr>
       <th>sensitivity</th>
-      <td>0.562372</td>
-      <td>0.523517</td>
-      <td>0.562372</td>
-      <td>0.526639</td>
-      <td>0.563525</td>
+      <td>0.641732</td>
+      <td>0.712598</td>
+      <td>0.702756</td>
+      <td>0.663386</td>
+      <td>0.646943</td>
     </tr>
     <tr>
       <th>specificity</th>
-      <td>0.750877</td>
-      <td>0.796491</td>
-      <td>0.787719</td>
-      <td>0.782456</td>
-      <td>0.785965</td>
+      <td>0.675556</td>
+      <td>0.666667</td>
+      <td>0.688889</td>
+      <td>0.679287</td>
+      <td>0.680000</td>
     </tr>
     <tr>
       <th>positive_likelihood</th>
-      <td>2.257409</td>
-      <td>2.572456</td>
-      <td>2.649191</td>
-      <td>2.420842</td>
-      <td>2.632861</td>
+      <td>1.977942</td>
+      <td>2.137795</td>
+      <td>2.258858</td>
+      <td>2.068474</td>
+      <td>2.021696</td>
     </tr>
     <tr>
       <th>negative_likelihood</th>
-      <td>0.582822</td>
-      <td>0.598227</td>
-      <td>0.555563</td>
-      <td>0.604968</td>
-      <td>0.555337</td>
+      <td>0.530331</td>
+      <td>0.431102</td>
+      <td>0.431483</td>
+      <td>0.495540</td>
+      <td>0.519202</td>
     </tr>
     <tr>
       <th>false_positive_rate</th>
-      <td>0.249123</td>
-      <td>0.203509</td>
-      <td>0.212281</td>
-      <td>0.217544</td>
-      <td>0.214035</td>
+      <td>0.324444</td>
+      <td>0.333333</td>
+      <td>0.311111</td>
+      <td>0.320713</td>
+      <td>0.320000</td>
     </tr>
     <tr>
       <th>false_negative_rate</th>
-      <td>0.437628</td>
-      <td>0.476483</td>
-      <td>0.437628</td>
-      <td>0.473361</td>
-      <td>0.436475</td>
+      <td>0.358268</td>
+      <td>0.287402</td>
+      <td>0.297244</td>
+      <td>0.336614</td>
+      <td>0.353057</td>
     </tr>
     <tr>
       <th>true_positive_rate</th>
-      <td>0.562372</td>
-      <td>0.523517</td>
-      <td>0.562372</td>
-      <td>0.526639</td>
-      <td>0.563525</td>
+      <td>0.641732</td>
+      <td>0.712598</td>
+      <td>0.702756</td>
+      <td>0.663386</td>
+      <td>0.646943</td>
     </tr>
     <tr>
       <th>true_negative_rate</th>
-      <td>0.750877</td>
-      <td>0.796491</td>
-      <td>0.787719</td>
-      <td>0.782456</td>
-      <td>0.785965</td>
+      <td>0.675556</td>
+      <td>0.666667</td>
+      <td>0.688889</td>
+      <td>0.679287</td>
+      <td>0.680000</td>
     </tr>
     <tr>
       <th>positive_predictive_value</th>
-      <td>0.659472</td>
-      <td>0.688172</td>
-      <td>0.694444</td>
-      <td>0.674541</td>
-      <td>0.692695</td>
+      <td>0.690678</td>
+      <td>0.707031</td>
+      <td>0.718310</td>
+      <td>0.700624</td>
+      <td>0.694915</td>
     </tr>
     <tr>
       <th>negative_predictive_value</th>
-      <td>0.666667</td>
-      <td>0.660844</td>
-      <td>0.677225</td>
-      <td>0.658789</td>
-      <td>0.677761</td>
+      <td>0.625514</td>
+      <td>0.672646</td>
+      <td>0.672451</td>
+      <td>0.640756</td>
+      <td>0.630928</td>
     </tr>
   </tbody>
 </table>
@@ -1954,150 +1789,150 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.461553</td>
-      <td>0.538447</td>
-      <td>0.370866</td>
-      <td>0.629134</td>
-      <td>0.673154</td>
-      <td>0.681865</td>
-      <td>0.547685</td>
-      <td>0.607229</td>
-      <td>0.547685</td>
-      <td>0.780702</td>
-      <td>2.506552</td>
-      <td>0.579383</td>
-      <td>0.219298</td>
-      <td>0.452315</td>
-      <td>0.547685</td>
-      <td>0.780702</td>
-      <td>0.681865</td>
-      <td>0.668257</td>
+      <td>0.530284</td>
+      <td>0.469716</td>
+      <td>0.508350</td>
+      <td>0.491650</td>
+      <td>0.675644</td>
+      <td>0.702312</td>
+      <td>0.673483</td>
+      <td>0.687425</td>
+      <td>0.673483</td>
+      <td>0.678080</td>
+      <td>2.092953</td>
+      <td>0.481532</td>
+      <td>0.321920</td>
+      <td>0.326517</td>
+      <td>0.673483</td>
+      <td>0.678080</td>
+      <td>0.702312</td>
+      <td>0.648459</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.000279</td>
-      <td>0.000279</td>
-      <td>0.016221</td>
-      <td>0.016221</td>
-      <td>0.009804</td>
-      <td>0.014751</td>
-      <td>0.020672</td>
-      <td>0.014244</td>
-      <td>0.020672</td>
-      <td>0.017456</td>
-      <td>0.165878</td>
-      <td>0.023276</td>
-      <td>0.017456</td>
-      <td>0.020672</td>
-      <td>0.020672</td>
-      <td>0.017456</td>
-      <td>0.014751</td>
-      <td>0.008914</td>
+      <td>0.000370</td>
+      <td>0.000370</td>
+      <td>0.018009</td>
+      <td>0.018009</td>
+      <td>0.017189</td>
+      <td>0.010853</td>
+      <td>0.032409</td>
+      <td>0.021543</td>
+      <td>0.032409</td>
+      <td>0.008041</td>
+      <td>0.110045</td>
+      <td>0.047551</td>
+      <td>0.008041</td>
+      <td>0.032409</td>
+      <td>0.032409</td>
+      <td>0.008041</td>
+      <td>0.010853</td>
+      <td>0.022659</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.461248</td>
-      <td>0.538244</td>
-      <td>0.351275</td>
-      <td>0.606232</td>
-      <td>0.663834</td>
-      <td>0.659472</td>
-      <td>0.523517</td>
-      <td>0.591484</td>
-      <td>0.523517</td>
-      <td>0.750877</td>
-      <td>2.257409</td>
-      <td>0.555337</td>
-      <td>0.203509</td>
-      <td>0.436475</td>
-      <td>0.523517</td>
-      <td>0.750877</td>
-      <td>0.659472</td>
-      <td>0.658789</td>
+      <td>0.529781</td>
+      <td>0.469175</td>
+      <td>0.492693</td>
+      <td>0.465553</td>
+      <td>0.657620</td>
+      <td>0.690678</td>
+      <td>0.641732</td>
+      <td>0.665306</td>
+      <td>0.641732</td>
+      <td>0.666667</td>
+      <td>1.977942</td>
+      <td>0.431102</td>
+      <td>0.311111</td>
+      <td>0.287402</td>
+      <td>0.641732</td>
+      <td>0.666667</td>
+      <td>0.690678</td>
+      <td>0.625514</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>0.461248</td>
-      <td>0.538244</td>
-      <td>0.360113</td>
-      <td>0.624764</td>
-      <td>0.664461</td>
-      <td>0.674541</td>
-      <td>0.526639</td>
-      <td>0.594657</td>
-      <td>0.526639</td>
-      <td>0.782456</td>
-      <td>2.420842</td>
-      <td>0.555563</td>
-      <td>0.212281</td>
-      <td>0.437628</td>
-      <td>0.526639</td>
-      <td>0.782456</td>
-      <td>0.674541</td>
-      <td>0.660844</td>
+      <td>0.530271</td>
+      <td>0.469729</td>
+      <td>0.493208</td>
+      <td>0.481211</td>
+      <td>0.662487</td>
+      <td>0.694915</td>
+      <td>0.646943</td>
+      <td>0.670072</td>
+      <td>0.646943</td>
+      <td>0.675556</td>
+      <td>2.021696</td>
+      <td>0.431483</td>
+      <td>0.320000</td>
+      <td>0.297244</td>
+      <td>0.646943</td>
+      <td>0.675556</td>
+      <td>0.694915</td>
+      <td>0.630928</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.461756</td>
-      <td>0.538244</td>
-      <td>0.373938</td>
-      <td>0.626062</td>
-      <td>0.670444</td>
-      <td>0.688172</td>
-      <td>0.562372</td>
-      <td>0.607064</td>
-      <td>0.562372</td>
-      <td>0.785965</td>
-      <td>2.572456</td>
-      <td>0.582822</td>
-      <td>0.214035</td>
-      <td>0.437628</td>
-      <td>0.562372</td>
-      <td>0.785965</td>
-      <td>0.688172</td>
-      <td>0.666667</td>
+      <td>0.530271</td>
+      <td>0.469729</td>
+      <td>0.502612</td>
+      <td>0.497388</td>
+      <td>0.670846</td>
+      <td>0.700624</td>
+      <td>0.663386</td>
+      <td>0.681496</td>
+      <td>0.663386</td>
+      <td>0.679287</td>
+      <td>2.068474</td>
+      <td>0.495540</td>
+      <td>0.320713</td>
+      <td>0.336614</td>
+      <td>0.663386</td>
+      <td>0.679287</td>
+      <td>0.700624</td>
+      <td>0.640756</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>0.461756</td>
-      <td>0.538752</td>
-      <td>0.375236</td>
-      <td>0.639887</td>
-      <td>0.683365</td>
-      <td>0.692695</td>
-      <td>0.562372</td>
-      <td>0.621469</td>
-      <td>0.562372</td>
-      <td>0.787719</td>
-      <td>2.632861</td>
-      <td>0.598227</td>
-      <td>0.217544</td>
-      <td>0.473361</td>
-      <td>0.562372</td>
-      <td>0.787719</td>
-      <td>0.692695</td>
-      <td>0.677225</td>
+      <td>0.530271</td>
+      <td>0.469729</td>
+      <td>0.518789</td>
+      <td>0.506792</td>
+      <td>0.691023</td>
+      <td>0.707031</td>
+      <td>0.702756</td>
+      <td>0.709804</td>
+      <td>0.702756</td>
+      <td>0.680000</td>
+      <td>2.137795</td>
+      <td>0.519202</td>
+      <td>0.324444</td>
+      <td>0.353057</td>
+      <td>0.702756</td>
+      <td>0.680000</td>
+      <td>0.707031</td>
+      <td>0.672451</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>0.461756</td>
-      <td>0.538752</td>
-      <td>0.393768</td>
-      <td>0.648725</td>
-      <td>0.683664</td>
-      <td>0.694444</td>
-      <td>0.563525</td>
-      <td>0.621469</td>
-      <td>0.563525</td>
-      <td>0.796491</td>
-      <td>2.649191</td>
-      <td>0.604968</td>
-      <td>0.249123</td>
-      <td>0.476483</td>
-      <td>0.563525</td>
-      <td>0.796491</td>
-      <td>0.694444</td>
-      <td>0.677761</td>
+      <td>0.530825</td>
+      <td>0.470219</td>
+      <td>0.534447</td>
+      <td>0.507307</td>
+      <td>0.696242</td>
+      <td>0.718310</td>
+      <td>0.712598</td>
+      <td>0.710448</td>
+      <td>0.712598</td>
+      <td>0.688889</td>
+      <td>2.258858</td>
+      <td>0.530331</td>
+      <td>0.333333</td>
+      <td>0.358268</td>
+      <td>0.712598</td>
+      <td>0.688889</td>
+      <td>0.718310</td>
+      <td>0.672646</td>
     </tr>
   </tbody>
 </table>
@@ -2134,8 +1969,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean AUC: 0.7329
-SD AUC: 0.0086
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean AUC: 0.7271
+SD AUC: 0.0158
 </pre></div>
 </div>
 </div>
@@ -2210,7 +2045,7 @@ SD AUC: 0.0086
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_36_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_36_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_31_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_31_0.png" />
 </div>
 </div>
 </section>
@@ -2271,8 +2106,8 @@ SD AUC: 0.0086
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean intersection: 0.6764
-SD intersection: 0.0063
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean intersection: 0.6772
+SD intersection: 0.0133
 </pre></div>
 </div>
 </div>
@@ -2378,15 +2213,14 @@ Completed 5 of 5
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mean |Shap value| (log odds)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/decision_comparison_shap_violin_key_features.jpg&#39;</span><span class="p">,</span>
-            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;|Shap| (log odds ratio)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/decision_comparison_shap_violin_key_features.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_47_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_47_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_42_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_42_0.png" />
 </div>
 </div>
 </section>
@@ -2453,43 +2287,43 @@ Completed 5 of 5
   </thead>
   <tbody>
     <tr>
-      <th>Precise onset time</th>
-      <td>0.392276</td>
-      <td>0.427986</td>
-      <td>0.441626</td>
+      <th>S1OnsetTimeType_Precise</th>
+      <td>0.372726</td>
+      <td>0.410977</td>
+      <td>0.423405</td>
     </tr>
     <tr>
-      <th>Use of AF anticoagulents</th>
-      <td>0.202440</td>
-      <td>0.215143</td>
-      <td>0.226029</td>
+      <th>AFAnticoagulent_Yes</th>
+      <td>0.223079</td>
+      <td>0.238576</td>
+      <td>0.276714</td>
     </tr>
     <tr>
-      <th>Prior disability level</th>
-      <td>0.164072</td>
-      <td>0.171589</td>
-      <td>0.180174</td>
+      <th>S2RankinBeforeStroke</th>
+      <td>0.163903</td>
+      <td>0.183379</td>
+      <td>0.196325</td>
     </tr>
     <tr>
-      <th>Stroke severity</th>
-      <td>0.084191</td>
-      <td>0.096703</td>
-      <td>0.102428</td>
+      <th>S2NihssArrival</th>
+      <td>0.077793</td>
+      <td>0.081011</td>
+      <td>0.090417</td>
     </tr>
     <tr>
-      <th>Arrival-to-scan time</th>
-      <td>0.046916</td>
-      <td>0.051572</td>
-      <td>0.056909</td>
+      <th>S2BrainImagingTime_min</th>
+      <td>0.043173</td>
+      <td>0.044716</td>
+      <td>0.047084</td>
     </tr>
     <tr>
-      <th>Onset-to-arrival time</th>
-      <td>0.042045</td>
-      <td>0.045115</td>
-      <td>0.050731</td>
+      <th>S1OnsetToArrival_min</th>
+      <td>0.040286</td>
+      <td>0.041661</td>
+      <td>0.044221</td>
     </tr>
     <tr>
-      <th>Infarction</th>
+      <th>S2StrokeType_Infarction</th>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
@@ -2518,18 +2352,17 @@ Completed 5 of 5
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Importance&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/decision_comparison_importance_violin_key_features.jpg&#39;</span><span class="p">,</span>
-            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/decision_comparison_importance_violin_key_features.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_52_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_52_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_47_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_47_0.png" />
 </div>
 </div>
-<section id="compare-shap-and-importances">
-<h3>Compare Shap and importances<a class="headerlink" href="#compare-shap-and-importances" title="Permalink to this headline">#</a></h3>
+<section id="compare-top-10-shap-and-importances">
+<h3>Compare top 10 Shap and importances<a class="headerlink" href="#compare-top-10-shap-and-importances" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compare_shap_importance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -2565,38 +2398,38 @@ Completed 5 of 5
   <tbody>
     <tr>
       <th>0</th>
-      <td>Stroke severity</td>
-      <td>Precise onset time</td>
+      <td>S2NihssArrival</td>
+      <td>S1OnsetTimeType_Precise</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Prior disability level</td>
-      <td>Use of AF anticoagulents</td>
+      <td>S2RankinBeforeStroke</td>
+      <td>AFAnticoagulent_Yes</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Precise onset time</td>
-      <td>Prior disability level</td>
+      <td>S1OnsetTimeType_Precise</td>
+      <td>S2RankinBeforeStroke</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Arrival-to-scan time</td>
-      <td>Stroke severity</td>
+      <td>S2BrainImagingTime_min</td>
+      <td>S2NihssArrival</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Onset-to-arrival time</td>
-      <td>Arrival-to-scan time</td>
+      <td>S1OnsetToArrival_min</td>
+      <td>S2BrainImagingTime_min</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Use of AF anticoagulents</td>
-      <td>Onset-to-arrival time</td>
+      <td>AFAnticoagulent_Yes</td>
+      <td>S1OnsetToArrival_min</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Infarction</td>
-      <td>Infarction</td>
+      <td>S2StrokeType_Infarction</td>
+      <td>S2StrokeType_Infarction</td>
     </tr>
   </tbody>
 </table>
@@ -2639,37 +2472,37 @@ Completed 5 of 5
   </thead>
   <tbody>
     <tr>
-      <th>Stroke severity</th>
-      <td>0.515694</td>
-      <td>0.096703</td>
+      <th>S2NihssArrival</th>
+      <td>0.503784</td>
+      <td>0.081011</td>
     </tr>
     <tr>
-      <th>Prior disability level</th>
-      <td>0.436681</td>
-      <td>0.171589</td>
+      <th>S2RankinBeforeStroke</th>
+      <td>0.443493</td>
+      <td>0.183379</td>
     </tr>
     <tr>
-      <th>Precise onset time</th>
-      <td>0.401897</td>
-      <td>0.427986</td>
+      <th>S1OnsetTimeType_Precise</th>
+      <td>0.369657</td>
+      <td>0.410977</td>
     </tr>
     <tr>
-      <th>Arrival-to-scan time</th>
-      <td>0.304198</td>
-      <td>0.051572</td>
+      <th>S2BrainImagingTime_min</th>
+      <td>0.286047</td>
+      <td>0.044716</td>
     </tr>
     <tr>
-      <th>Onset-to-arrival time</th>
-      <td>0.230033</td>
-      <td>0.045115</td>
+      <th>S1OnsetToArrival_min</th>
+      <td>0.239312</td>
+      <td>0.041661</td>
     </tr>
     <tr>
-      <th>Use of AF anticoagulents</th>
-      <td>0.079052</td>
-      <td>0.215143</td>
+      <th>AFAnticoagulent_Yes</th>
+      <td>0.079252</td>
+      <td>0.238576</td>
     </tr>
     <tr>
-      <th>Infarction</th>
+      <th>S2StrokeType_Infarction</th>
       <td>0.000000</td>
       <td>0.000000</td>
     </tr>
@@ -2697,7 +2530,7 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_56_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_56_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_51_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_51_0.png" />
 </div>
 </div>
 </section>
@@ -2741,22 +2574,38 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_60_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_60_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_55_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_55_0.png" />
 </div>
 </div>
 </section>
-<section id="plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision">
-<h3>Plot Waterfall and decision plot plots for instances with low or high probability of making a different decision<a class="headerlink" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-making-a-different-decision" title="Permalink to this headline">#</a></h3>
+<section id="plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis">
+<h3>Plot Waterfall and decision plot plots for instances with low or high probability of receiving thrombolysis<a class="headerlink" href="#plot-waterfall-and-decision-plot-plots-for-instances-with-low-or-high-probability-of-receiving-thrombolysis" title="Permalink to this headline">#</a></h3>
 <p>Waterfall plot and decision plots are alternative ways of plotting the influence of features for individual cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the location of an example each of low and high probablility</span>
+<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>An example with high probability of a low thrombolysing unit making deciding not to give thrombolysis to a patient when the benchmark hospitals would.</p>
+<p>An example with low probability of receiving thrombolysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
+                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/xgb_decision_comparison_waterfall_low_key_features.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_59_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_59_0.png" />
+</div>
+</div>
+<p>An example with high probability of receiving thrombolysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
@@ -2768,169 +2617,29 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_64_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_64_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" />
 </div>
 </div>
 </section>
-<section id="show-the-relationship-between-feature-value-and-shap-value-for-influential-features">
-<h3>Show the relationship between feature value and Shap value for influential features.<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-influential-features" title="Permalink to this headline">#</a></h3>
-<section id="show-shap-as-a-scatter-plot">
-<h4>Show Shap as a scatter plot<a class="headerlink" href="#show-shap-as-a-scatter-plot" title="Permalink to this headline">#</a></h4>
+<section id="show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features">
+<h3>Show the relationship between feature value and Shap value for top 5 influential features.<a class="headerlink" href="#show-the-relationship-between-feature-value-and-shap-value-for-top-5-influential-features" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feat_to_show</span><span class="p">):</span>    
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">],</span> <span class="n">x_jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
-                       <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    
-    <span class="c1"># Add line at Shap = 0</span>
-    <span class="n">feature_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">)</span>    
-    
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SHAP value (log odds) for</span><span class="se">\n</span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
-    
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/xgb_prediciting_difference_shap_scatter.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
-    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">feat_to_show</span><span class="p">:</span>
+    <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">],</span> <span class="n">x_jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_67_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_1.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_1.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_2.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_2.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_3.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_3.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_4.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_4.png" />
 </div>
 </div>
-</section>
-<section id="show-shap-as-a-violin-plot">
-<h4>Show Shap as a violin plot<a class="headerlink" href="#show-shap-as-a-violin-plot" title="Permalink to this headline">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_ax</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">category_list</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    ax [matplotlib axis object] = matplotlib axis object</span>
-<span class="sd">    category_list [list] = used for the xtick labels (the grouping of the data)</span>
-<span class="sd">    rotation [integer] = xtick label rotation</span>
-<span class="sd">    feat [string] = used in the axis label, the feature that is being plotted</span>
-<span class="sd">    </span>
-<span class="sd">    resource: </span>
-<span class="sd">    https://matplotlib.org/3.1.0/gallery/statistics/customized_violin.html</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># Set the axes ranges and axes labels</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">category_list</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.75</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shap values for </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Feature values for </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">top_10_shap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
-
-<span class="c1"># Get shap min and max (to put all charts on same scale)</span>
-<span class="n">shap_min</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-<span class="n">shap_max</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
-<span class="c1"># for each feature, prepare the data for the violin plot.</span>
-<span class="c1"># data either already in categories, or if there&#39;s more than 50 unique values</span>
-<span class="c1"># for a feature then assume it needs to be binned, and a violin for each bin</span>
-<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feat_to_show</span><span class="p">):</span>    
-    <span class="n">feature_data</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">feature_shap</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-
-    <span class="c1"># if feature has more that 50 unique values, then assume it needs to be </span>
-    <span class="c1"># binned (other assume they are unique categories)</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">feature_data</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
-        <span class="c1"># bin the data, create a violin per bin</span>
-        
-        <span class="c1"># settings for the plot</span>
-        <span class="n">rotation</span> <span class="o">=</span> <span class="mi">45</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="mi">30</span>
-        <span class="n">n_bins</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">((</span><span class="n">feature_data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">/</span><span class="n">step</span><span class="p">))</span>
-        
-        <span class="c1"># create list of bin values</span>
-        <span class="n">bin_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)]</span>
-        <span class="n">bin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-
-        <span class="c1"># create list of bins (the unique categories)</span>
-        <span class="n">category_list</span> <span class="o">=</span>  <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
-        <span class="n">category_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">+&#39;</span><span class="p">)</span>
-
-        <span class="c1"># bin the feature data</span>
-        <span class="n">feature_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">feature_data</span><span class="p">,</span> <span class="n">bin_list</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">category_list</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># create a violin per unique value</span>
-        
-        <span class="c1"># settings for the plot</span>
-        <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span>
-        
-        <span class="c1"># create list of unique categories in the feature data</span>
-        <span class="n">category_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">feature_data</span><span class="p">)</span>
-        <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">category_list</span><span class="p">]</span>
-
-    <span class="c1"># create a list, each entry contains the corresponsing Shap value for that </span>
-    <span class="c1"># category (or bin). A violin will represent each list.    </span>
-    <span class="n">shap_per_category</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">category_list</span><span class="p">:</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">feature_data</span> <span class="o">==</span> <span class="n">category</span>
-        <span class="n">shap_per_category</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_shap</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
-
-    <span class="c1"># create violin plot</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">,</span> <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>    
-    
-    <span class="c1"># Add line at Shap = 0</span>
-    <span class="n">feature_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_values</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">)</span>   
-
-    <span class="c1"># customise the axes</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">set_ax</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">category_list</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-    
-    <span class="c1"># Adjust stroke severity tickmarks</span>
-    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s1">&#39;Stroke severity&#39;</span><span class="p">:</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">category_list</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
-            
-    <span class="c1"># Add title</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span> 
-    
-    <span class="c1"># Set ylims</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">shap_min</span> <span class="o">-</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">shap_max</span> <span class="o">+</span> <span class="mf">0.4</span><span class="p">)</span>
-    
-    <span class="c1"># Add direction of SHAP on first chart</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;Negative SHAP pushes model to</span><span class="se">\n</span><span class="s2">same decision as benchmark&quot;</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">shap_min</span> <span class="o">-</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
-        <span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;Positive SHAP pushes model to</span><span class="se">\n</span><span class="s2">different decision from benchmark&quot;</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">shap_max</span> <span class="o">-</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
-        
-        
-    
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s1">&#39;output/xgb_predicting_difference_shap_violin.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
-     <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_70_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_70_0.png" />
-</div>
-</div>
-</section>
 </section>
 </section>
 <section id="showing-waterfall-plots-using-probability-values">
@@ -2940,11 +2649,11 @@ Completed 5 of 5
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up explainer using typical feature values from training set</span>
-<span class="n">explainer_prob</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">model_output</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">model_output</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
 
 <span class="c1"># Get Shapley values along with base and features</span>
-<span class="n">shap_values_extended_prob</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_extended_prob</span><span class="o">.</span><span class="n">values</span>
+<span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
 </div>
@@ -2953,15 +2662,32 @@ Completed 5 of 5
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the location of an example each of low and high probablility</span>
 
+<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_prob</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>An example with high probability of a low thrombolysing unit making deciding not to give thrombolysis to a patient when the benchmark hospitals would.</p>
+<p>An example with low probability of receiving thrombolysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended_prob</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
+                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="s1">&#39;output/xgb_decision_comparison_waterfall_low_probability_key_features.jpg&#39;</span><span class="p">,</span> 
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_68_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_68_0.png" />
+</div>
+</div>
+<p>An example with high probability of receiving thrombolysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
                            <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
     <span class="s1">&#39;output/xgb_decision_comparison_waterfall_high_probability_key_features.jpg&#39;</span><span class="p">,</span> 
@@ -2971,21 +2697,21 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_75_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_75_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_70_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_70_0.png" />
 </div>
 </div>
 </section>
-<section id="id1">
-<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>We can predict those that will <em>not</em> receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.733).</p></li>
+<li><p>We can predict those that will receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 68% accuracy (AUC 0.737).</p></li>
 <li><p>The five most important distinguishing features are:</p>
 <ul>
-<li><p>Stroke severity</p></li>
-<li><p>Prior disability level</p></li>
-<li><p>Precise onset time</p></li>
-<li><p>Arrival-to-scan time</p></li>
-<li><p>Onset-to-arrival time</p></li>
+<li><p>S2NihssArrival</p></li>
+<li><p>S2RankinBeforeStroke</p></li>
+<li><p>S1OnsetTimeType_Precise</p></li>
+<li><p>S2BrainImagingTime_min</p></li>
+<li><p>S1OnsetToArrival_min</p></li>
 </ul>
 </li>
 </ul>
