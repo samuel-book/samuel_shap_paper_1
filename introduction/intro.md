@@ -107,6 +107,18 @@ SHAP plots can also be used to explain predictions of any individual patient (e.
 An example of a SHAP *waterfall* plot showing the most influential features in influencing the model's prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).
 :::
 
+### Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
+
+We can assess each hospital's *'propensity to use thrombolysis'* by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.
+
+When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model ({numref}`Figure {number} <shap_vs_10k>`), we find a very strong correlation (R-squared = 0.861). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
+
+:::{figure-md} shap_vs_10k
+<img src="./images/shap_vs_10k.jpg" width="800">
+
+A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort,
+:::
+
 ### Predicting *differences* in thrombolysis use between hospitals with an XG-Boost model
 
 We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
