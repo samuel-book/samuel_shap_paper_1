@@ -114,7 +114,7 @@ We can assess each hospital's *'propensity to use thrombolysis'* by passing the 
 When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model ({numref}`Figure {number} <shap_vs_10k>`), we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
 
 :::{figure-md} shap_vs_10k
-<img src="./images/shap_vs_10k.jpg" width="800">
+<img src="./images/shap_vs_10k.jpg" width="450">
 
 A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort,
 :::
