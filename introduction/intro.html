@@ -376,6 +376,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
+     Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
      Predicting
      <em>
@@ -449,6 +454,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">
      Predicting thrombolysis use with an XG-Boost model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
+     Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -572,6 +582,17 @@ title="Print to PDF"
 </figcaption>
 </figure>
 </section>
+<section id="comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
+<h3>Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients<a class="headerlink" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients" title="Permalink to this headline">#</a></h3>
+<p>We can assess each hospital’s <em>‘propensity to use thrombolysis’</em> by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.</p>
+<p>When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model (<a class="reference internal" href="#shap-vs-10k"><span class="std std-numref">Figure 5</span></a>), we find a very strong correlation (R-squared = 0.861). This helps to validate average hospital SHAP being used as a measure of a hospital’s <em>‘propensity to use thrombolysis’</em>.</p>
+<figure class="align-default" id="shap-vs-10k">
+<a class="reference internal image-reference" href="../_images/shap_vs_10k.jpg"><img alt="../_images/shap_vs_10k.jpg" src="../_images/shap_vs_10k.jpg" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort,</span><a class="headerlink" href="#shap-vs-10k" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 <section id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
 <h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XG-Boost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model" title="Permalink to this headline">#</a></h3>
 <p>We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis…</p>
@@ -583,25 +604,25 @@ title="Print to PDF"
 <li><p>With longer arrival-to-scan times.</p></li>
 <li><p>When patient is on anticoagulants for atrial fibrillation.</p></li>
 </ol>
-<p>We can visualise the general effects of these features, using SHAP in several ways. Firstly we can show the average effect of each feature as a violin plot (<a class="reference internal" href="#diff-shap-violin"><span class="std std-numref">figure 5</span></a>), which shows the spread of the size of average SHAP values for each feature when measured in five different experiments (to understand how reproducible our measurement of SHAP values are). In this type of plot we ignore the direction of the SHAP value - that is we ignore whether a value is positive or negative; SHAP values of -3 or +3 would both have an effect size of 3.</p>
+<p>We can visualise the general effects of these features, using SHAP in several ways. Firstly we can show the average effect of each feature as a violin plot (<a class="reference internal" href="#diff-shap-violin"><span class="std std-numref">figure 6</span></a>), which shows the spread of the size of average SHAP values for each feature when measured in five different experiments (to understand how reproducible our measurement of SHAP values are). In this type of plot we ignore the direction of the SHAP value - that is we ignore whether a value is positive or negative; SHAP values of -3 or +3 would both have an effect size of 3.</p>
 <figure class="align-default" id="diff-shap-violin">
 <a class="reference internal image-reference" href="../_images/decision_comparison_shap_violin_key_features.jpg"><img alt="../_images/decision_comparison_shap_violin_key_features.jpg" src="../_images/decision_comparison_shap_violin_key_features.jpg" style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">A <em>violin plot</em> showing how much each feature affects the model prediction, as shown by the average (mean) SHAP value. We measure this in five separate experiments. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature over the five experiments - where the violin is wider, there are more data points around that value. The end bars show the lowest and highest values, and the middle bar shows the <em>median</em> value, that is the middle number if all the five average SHAP values were sorted in order.</span><a class="headerlink" href="#diff-shap-violin" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A <em>violin plot</em> showing how much each feature affects the model prediction, as shown by the average (mean) SHAP value. We measure this in five separate experiments. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature over the five experiments - where the violin is wider, there are more data points around that value. The end bars show the lowest and highest values, and the middle bar shows the <em>median</em> value, that is the middle number if all the five average SHAP values were sorted in order.</span><a class="headerlink" href="#diff-shap-violin" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>A second way to visualise the effects of the features is to plot a <em>beeswarm</em> plot (<a class="reference internal" href="#shap-beeswarm"><span class="std std-numref">Figure 6</span></a>). In this case we plot all the individual SHAP values, along with an indicator of the feature value.</p>
+<p>A second way to visualise the effects of the features is to plot a <em>beeswarm</em> plot (<a class="reference internal" href="#shap-beeswarm"><span class="std std-numref">Figure 7</span></a>). In this case we plot all the individual SHAP values, along with an indicator of the feature value.</p>
 <figure class="align-default" id="shap-beeswarm">
 <a class="reference internal image-reference" href="../_images/xgb_decision_comparison_beeswarm_key_features.jpg"><img alt="../_images/xgb_decision_comparison_beeswarm_key_features.jpg" src="../_images/xgb_decision_comparison_beeswarm_key_features.jpg" style="width: 800px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A <em>beeswarm plot</em> of SHAP values, along with feature value (shown by the colour of the point) for all features. Black or blue points have low feature value (e.g. low prior disability level), and yellow/red/grey points have high feature value (e.g. high prior disability level), with green points being in the middle of the range of feature values. A positive SHAP vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would <em>not</em> receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient <em>would</em> receive thrombolysis.</span><a class="headerlink" href="#shap-beeswarm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">A <em>beeswarm plot</em> of SHAP values, along with feature value (shown by the colour of the point) for all features. Black or blue points have low feature value (e.g. low prior disability level), and yellow/red/grey points have high feature value (e.g. high prior disability level), with green points being in the middle of the range of feature values. A positive SHAP vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would <em>not</em> receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient <em>would</em> receive thrombolysis.</span><a class="headerlink" href="#shap-beeswarm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>We may examine each feature in more detail using violin plots for each feature (<a class="reference internal" href="#shap-compare-violin"><span class="std std-numref">Figure 7</span></a>)</p>
+<p>We may examine each feature in more detail using violin plots for each feature (<a class="reference internal" href="#shap-compare-violin"><span class="std std-numref">Figure 8</span></a>)</p>
 <figure class="align-default" id="shap-compare-violin">
 <a class="reference internal image-reference" href="../_images/xgb_predicting_difference_shap_violin.jpg"><img alt="../_images/xgb_predicting_difference_shap_violin.jpg" src="../_images/xgb_predicting_difference_shap_violin.jpg" style="width: 800px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">A violin plot showing the individual SHAP values for six features. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that the patient would have different treatment to the benchmark hospitals, that is the patient would <em>not</em> receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient <em>would</em> receive thrombolysis.</span><a class="headerlink" href="#shap-compare-violin" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">A violin plot showing the individual SHAP values for six features. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that the patient would have different treatment to the benchmark hospitals, that is the patient would <em>not</em> receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient <em>would</em> receive thrombolysis.</span><a class="headerlink" href="#shap-compare-violin" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
