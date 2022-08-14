@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>A comparison of 10k cohort thrombolysis rates across hospitals &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   A comparison of 10k cohort thrombolysis rates across hospitals
+   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
   </a>
  </li>
  <li class="toctree-l1">
@@ -196,11 +196,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_compare_10k_cohort_thromb_rate_with_shap_value.html">
-   A comparison of 10K cohort thrombolysis rates vs SHAP values across hospitals
   </a>
  </li>
 </ul>
@@ -367,6 +362,26 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
    Import libraries
   </a>
@@ -419,7 +434,24 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate">
+   Compare SHAP value for the hospital feature, and the predicted 10k thrombolysis rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-shap-model">
+     Fit SHAP model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-average-shap-for-each-hopsital-from-test-set-shap-values">
+     Get average SHAP for each hopsital (from test set SHAP values)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
    Observations
   </a>
  </li>
@@ -432,7 +464,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A comparison of 10k cohort thrombolysis rates across hospitals</h1>
+                <h1>A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -463,6 +495,26 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
    Import libraries
   </a>
@@ -515,7 +567,24 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate">
+   Compare SHAP value for the hospital feature, and the predicted 10k thrombolysis rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-shap-model">
+     Fit SHAP model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-average-shap-for-each-hopsital-from-test-set-shap-values">
+     Get average SHAP for each hopsital (from test set SHAP values)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
    Observations
   </a>
  </li>
@@ -529,14 +598,15 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals">
-<h1>A comparison of 10k cohort thrombolysis rates across hospitals<a class="headerlink" href="#a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals-and-comparison-with-hospital-shap-values">
+<h1>A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values<a class="headerlink" href="#a-comparison-of-10k-cohort-thrombolysis-rates-across-hospitals-and-comparison-with-hospital-shap-values" title="Permalink to this headline">#</a></h1>
 <section id="plain-english-summary">
 <h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
 <p>In response to stroke teams being told that they are performing differently from other, they often state that this is due to them having a different set of patients.</p>
 <p>This does have some truth to it. For example the hospitals in London will have younger patients, arriving sooner than compared to hospitals in more rural locations.</p>
 <p>In order to remove patient differences from results, a common 10k cohort of patients will be used with each of the hospital models. That way any difference is due to hospital factors, and not patient factors.</p>
 <p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45% across the 132 hospitals. The size of the hospital only accounted for 10% of the variation in thrombolysis use, and so there are other factors that account for the remaining 90%.</p>
+<p>We find that predicted 10k thrombolysis use correlates very highly with average hopsital SHAP values.</p>
 </section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
@@ -564,11 +634,56 @@ title="Print to PDF"
 <li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
 <li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
 <li><p>Compare the thrombolysis rate across the 132 hospitals. This can be seen as comparing the hosptial effect, as the patient factors have been removed.</p></li>
+<li><p>Compare 10k thrombolysis use with average hopsital SHAP.</p></li>
 <li><p>Save thrombolysis rate at each hospital for the 10k patient cohort (for use in next notebook).</p></li>
 </ul>
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing (84.7%, see notebook 02).</p></li>
+<li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
+<li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.# A comparison of 10k cohort thrombolysis rates across hospitals</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>Plain English summary<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>In response to stroke teams being told that they are performing differently from other, they often state that this is due to them having a different set of patients.</p>
+<p>This does have some truth to it. For example the hospitals in London will have younger patients, arriving sooner than compared to hospitals in more rural locations.</p>
+<p>In order to remove patient differences from results, a common 10k cohort of patients will be used with each of the hospital models. That way any difference is due to hospital factors, and not patient factors.</p>
+<p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45% across the 132 hospitals. The size of the hospital only accounted for 10% of the variation in thrombolysis use, and so there are other factors that account for the remaining 90%.</p>
+</section>
+<section id="id2">
+<h2>Model and data<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>An XGBoost model is trained on all but a 10k patient cohort, to predict which patient will recieve thrombolysis.The 10k patient cohort is then used in two ways: 1) as the test set for the model fitting process 2) as a common set of patients that are sent to each hospital in turn to obtain a thrombolysis rate that is comparable across hosptials which has any patient factors removed.</p>
+<p>The XGBoost model is fitted to all but 10k instances, and uses 8 features:</p>
+<ul class="simple">
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+</ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
+</ul>
+<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+</section>
+<section id="id3">
+<h2>Aims:<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
+<li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Compare the thrombolysis rate across the 132 hospitals. This can be seen as comparing the hosptial effect, as the patient factors have been removed.</p></li>
+<li><p>Save thrombolysis rate at each hospital for the 10k patient cohort (for use in next notebook).</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>Observations<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing (84.7%, see notebook 02).</p></li>
 <li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
@@ -587,6 +702,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">shap</span>
 
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
@@ -1016,8 +1132,128 @@ Max0.461
 </div>
 <p>In the table above, for example, 87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse.</p>
 </section>
-<section id="id1">
-<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<section id="compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate">
+<h2>Compare SHAP value for the hospital feature, and the predicted 10k thrombolysis rate<a class="headerlink" href="#compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate" title="Permalink to this headline">#</a></h2>
+<p>The hospital feature is one hot encoded, so there is a SHAP value per stroke team. We will use this to create two plots:</p>
+<ol class="simple">
+<li><p>histogram of the frequency of the SHAP value for the hospital feature</p></li>
+<li><p>scatter plot of SHAP value vs thrombolysis rate (on 10K cohort) for each hospital</p></li>
+</ol>
+<section id="fit-shap-model">
+<h3>Fit SHAP model<a class="headerlink" href="#fit-shap-model" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up explainer using the model and feature values from training set</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+<span class="c1"># Get (and store) Shapley values along with base and feature values</span>
+<span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 9855/10000 [00:18&lt;00:00]        
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-average-shap-for-each-hopsital-from-test-set-shap-values">
+<h3>Get average SHAP for each hopsital (from test set SHAP values)<a class="headerlink" href="#get-average-shap-for-each-hopsital-from-test-set-shap-values" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stroke_teams</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]))</span>
+<span class="n">hospital_mean_shaps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">test_stroke_team</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">stroke_team</span> <span class="ow">in</span> <span class="n">stroke_teams</span><span class="p">:</span>
+    <span class="c1"># Identify rows in test data that match each stroke team</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">test_stroke_team</span> <span class="o">==</span> <span class="n">stroke_team</span>
+    <span class="n">stroke_team_shap_all_features</span> <span class="o">=</span> <span class="n">shap_values</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="c1"># Get column index for stroke_team_in_shap</span>
+    <span class="n">feature_name</span> <span class="o">=</span> <span class="s1">&#39;team_&#39;</span> <span class="o">+</span> <span class="n">stroke_team</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+    <span class="c1"># Get SHAP values for hospital</span>
+    <span class="n">stroke_team_shap</span> <span class="o">=</span> <span class="n">stroke_team_shap_all_features</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span>
+    <span class="c1"># Get mean</span>
+    <span class="n">mean_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stroke_team_shap</span><span class="p">)</span>
+    <span class="c1"># Store mean</span>
+    <span class="n">hospital_mean_shaps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_shap</span><span class="p">)</span>
+    
+<span class="n">hospital_shap_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">stroke_teams</span><span class="p">)</span>
+<span class="n">hospital_shap_df</span><span class="p">[</span><span class="s1">&#39;mean SHAP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hospital_mean_shaps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Combine with 10k thrombolysis rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thrombolysis_by_hosp</span> <span class="o">=</span> <span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">hospital_shap_df</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot histogram of average hospital SHAP.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histogram</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s2">&quot;mean SHAP&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.51</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;SHAP value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/hosp_shap_hist.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04_compare_10k_cohort_key_features_41_0.png" src="../_images/04_compare_10k_cohort_key_features_41_0.png" />
+</div>
+</div>
+<p>Plot scatter plot of comparison between average hospital SHAP and predicted 10k thrombolysis use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot scatter plot</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s2">&quot;mean SHAP&quot;</span><span class="p">]</span>
+
+<span class="c1"># Fit a regression line to the points</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
+    <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">r_square</span> <span class="o">=</span> <span class="n">r_value</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
+
+<span class="c1"># Create scatter plot with regression line</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1">p: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.36</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate (for 10K patient cohort)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;SHAP value (mean)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/scatter_plot_hosp_shap_vs_10k_thrombolysis.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04_compare_10k_cohort_key_features_43_0.png" src="../_images/04_compare_10k_cohort_key_features_43_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2>Observations<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing.</p></li>
 <li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
@@ -1029,7 +1265,8 @@ Max0.461
 <li><p>Of those who were not given thrombolysis, 84.1% had agreement by 80% hospitals</p></li>
 <li><p>Of those who were given thrombolysis, 78.8% had agreement by 80% hospitals</p></li>
 </ul>
-<p>Thrombolysis rate of 10k cohort correlates with unit size.</p>
+<p>Thrombolysis rate of 10k cohort correlates weakly with unit size.</p>
+<p>10k thrombolysis rate correlates closely with average hospital SHAP value.</p>
 </section>
 </section>
 

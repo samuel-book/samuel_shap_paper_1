@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="A comparison of 10k cohort thrombolysis rates across hospitals" href="04_compare_10k_cohort_key_features.html" />
+    <link rel="next" title="A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values" href="04_compare_10k_cohort_key_features.html" />
     <link rel="prev" title="Measuring accuracy of XGBoost models" href="02_xgb_combined_fit_accuracy_key_features.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
-   A comparison of 10k cohort thrombolysis rates across hospitals
+   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
   </a>
  </li>
  <li class="toctree-l1">
@@ -196,11 +196,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_compare_10k_cohort_thromb_rate_with_shap_value.html">
-   A comparison of 10K cohort thrombolysis rates vs SHAP values across hospitals
   </a>
  </li>
 </ul>
@@ -370,13 +365,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#observations">
    Observations
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#note-on-shap-version-0-40">
-     Note on shap version 0.40:
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-packages">
@@ -520,13 +508,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#observations">
    Observations
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#note-on-shap-version-0-40">
-     Note on shap version 0.40:
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-packages">
@@ -717,11 +698,6 @@ The five most influential features as judged by SHAP were:</p>
 <li><p>Plotting SHAP values as probabilities are more understandable than plotting as log odds-ratios, but can distort the relative importance of features overall.</p></li>
 <li><p>There is a strong relationship between the hospitals thrombolysis rate (for 10K patient cohort) and the hospitals SHAP value. An R-squared value of 0.861 suggests that the model relies mostly on the hospital SHAP value to adjust individual hospital thrombolysis predictions, but that those hospitals share the same general patterns of juding patient and pathway characteristics.</p></li>
 </ul>
-<section id="note-on-shap-version-0-40">
-<h3>Note on shap version 0.40:<a class="headerlink" href="#note-on-shap-version-0-40" title="Permalink to this headline">#</a></h3>
-<p>Installed using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code></p>
-<p>There is a bug in the waterfall plot where <code class="docutils literal notranslate"><span class="pre">show=False</span></code> (required to save plot) fails. To correct this find the <code class="docutils literal notranslate"><span class="pre">_waterfall.py</span></code> file in the shap library (e.g. in <code class="docutils literal notranslate"><span class="pre">anaconda/envs/samuel2/lib/python3.8/site-packages/shap/plots</span></code>, and search/replace all <code class="docutils literal notranslate"><span class="pre">pl.</span></code> to <code class="docutils literal notranslate"><span class="pre">plt.</span></code>, and replace initial import of <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">pl</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>.</p>
-</section>
 </section>
 <section id="load-packages">
 <h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">#</a></h2>
@@ -1305,7 +1281,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_26_0.png" src="../_images/03_xgb_combined_shap_key_features_26_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_25_0.png" src="../_images/03_xgb_combined_shap_key_features_25_0.png" />
 </div>
 </div>
 </section>
@@ -1470,7 +1446,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_35_0.png" src="../_images/03_xgb_combined_shap_key_features_35_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_34_0.png" src="../_images/03_xgb_combined_shap_key_features_34_0.png" />
 </div>
 </div>
 </section>
@@ -1617,7 +1593,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_39_0.png" src="../_images/03_xgb_combined_shap_key_features_39_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_38_0.png" src="../_images/03_xgb_combined_shap_key_features_38_0.png" />
 </div>
 </div>
 </section>
@@ -1663,7 +1639,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_43_0.png" src="../_images/03_xgb_combined_shap_key_features_43_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_42_0.png" src="../_images/03_xgb_combined_shap_key_features_42_0.png" />
 </div>
 </div>
 </section>
@@ -1695,7 +1671,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_47_0.png" src="../_images/03_xgb_combined_shap_key_features_47_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_46_0.png" src="../_images/03_xgb_combined_shap_key_features_46_0.png" />
 </div>
 </div>
 <p>An waterfall plot example with high probability of receiving thrombolysis (showing log odds ratio).</p>
@@ -1710,7 +1686,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_49_0.png" src="../_images/03_xgb_combined_shap_key_features_49_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_48_0.png" src="../_images/03_xgb_combined_shap_key_features_48_0.png" />
 </div>
 </div>
 </section>
@@ -1751,7 +1727,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_53_0.png" src="../_images/03_xgb_combined_shap_key_features_53_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_52_0.png" src="../_images/03_xgb_combined_shap_key_features_52_0.png" />
 </div>
 </div>
 <p>An waterfall plot example with high probability of receiving thrombolysis (showing probabilities).</p>
@@ -1767,7 +1743,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_55_0.png" src="../_images/03_xgb_combined_shap_key_features_55_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_54_0.png" src="../_images/03_xgb_combined_shap_key_features_54_0.png" />
 </div>
 </div>
 </section>
@@ -1803,7 +1779,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_57_0.png" src="../_images/03_xgb_combined_shap_key_features_57_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_56_0.png" src="../_images/03_xgb_combined_shap_key_features_56_0.png" />
 </div>
 </div>
 </section>
@@ -1917,7 +1893,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_60_0.png" src="../_images/03_xgb_combined_shap_key_features_60_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_59_0.png" src="../_images/03_xgb_combined_shap_key_features_59_0.png" />
 </div>
 </div>
 </section>
@@ -2074,7 +2050,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_65_0.png" src="../_images/03_xgb_combined_shap_key_features_65_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_64_0.png" src="../_images/03_xgb_combined_shap_key_features_64_0.png" />
 </div>
 </div>
 </section>
@@ -2145,7 +2121,7 @@ The five most influential features as judged by SHAP were:</p>
     <a class='right-next' id="next-link" href="04_compare_10k_cohort_key_features.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">A comparison of 10k cohort thrombolysis rates across hospitals</p>
+        <p class="prev-next-title">A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
