@@ -111,7 +111,7 @@ An example of a SHAP *waterfall* plot showing the most influential features in i
 
 We can assess each hospital's *'propensity to use thrombolysis'* by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.
 
-When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model ({numref}`Figure {number} <shap_vs_10k>`), we find a very strong correlation (R-squared = 0.861). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
+When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model ({numref}`Figure {number} <shap_vs_10k>`), we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
 
 :::{figure-md} shap_vs_10k
 <img src="./images/shap_vs_10k.jpg" width="800">

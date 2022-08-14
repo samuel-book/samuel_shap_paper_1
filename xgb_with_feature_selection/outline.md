@@ -75,9 +75,10 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     
 ### Comparing thrombolysis decisions between hospitals
   
-* *A comparison of 10K cohort thrombolysis rates across hospitals*:
-    * Train XGBoost model on all data except for a 10K set of patients
+* *A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values*:
+    * Train XGBoost model on all data except for a 10K set of patients.
     * Predict use of thrombolysis in 10K cohort at each of 132 hospitals (by changing hospital one-hot encoding).
+    * Compare mean hospital SHAP for each hopsital with the predicted 10K cohort thrombolysis rate for each hospital.
 
 * *Compare local thrombolysis decisions with benchmark decisions*:
     * Benchmark decisions are decisions made by the majority of the top 30 thrombolysing hospitals as judged by their expected thrombolysis use in a standard 10K cohort of patients.
@@ -99,10 +100,3 @@ More information on the `shap` library, used to estimate Shapley values, may be 
     
 * *Plotting thrombolysis rate by feature value for low and high thrombolysing hospitals*:
     * Plot the relationships between feature values and thrombolysis use for the top and bottom 30 thrombolysing hospitals, as assessed by the predicted thrombolysis use in the 10k cohort set.
-    
-* *A comparison of 10K cohort thrombolysis rates vs SHAP values across hospitals*:
-    * Compare mean hospital SHAP for each hopsital with the predicted 10K cohort thrombolysis rate for each hospital.
-
- 
-     
-        
