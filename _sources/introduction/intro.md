@@ -1,6 +1,6 @@
-# Introduction
+# Using explainable machine learning to understand variation in thrombolysis practice
 
-*Using explainable machine learning to understand variation in thrombolysis practice* (part of the NIHR *SAMueL*, Stroke Audit Machine Learning, project).
+Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project.
 
 Kerry Pearn, Martin James & Michael Allen
 
