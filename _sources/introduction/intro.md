@@ -1,14 +1,6 @@
-# Using explainable machine learning to understand variation in thrombolysis practice
+# Summary and outline
 
 Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project.
-
-Kerry Pearn, Martin James & Michael Allen
-
-```{epigraph}
-"Your decision to treat or not treat … That’s the difficult part. That’s the grey area where everyone does a different thing."
-
--- Stroke Consultant during interviews for SAMueL
-```
 
 ## Background
 
