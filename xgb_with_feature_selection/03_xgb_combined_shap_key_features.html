@@ -115,12 +115,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
+  <a class="reference internal" href="../key_notebooks/outline.html">
    Outline of notebooks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../glossary.html">
+  <a class="reference internal" href="../introduction/glossary.html">
    Glossary of technical terms
   </a>
  </li>
@@ -130,12 +130,12 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../shap_worked_example.html">
+  <a class="reference internal" href="../introduction/shap_worked_example.html">
    A simple worked example of Shap
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
    Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
   </a>
  </li>
@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
+  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -879,10 +879,10 @@ The five most influential features as judged by SHAP were:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy k-fold 1: 0.846
-Accuracy k-fold 2: 0.853
+Accuracy k-fold 2: 0.852
 Accuracy k-fold 3: 0.845
-Accuracy k-fold 4: 0.849
-Accuracy k-fold 5: 0.844
+Accuracy k-fold 4: 0.851
+Accuracy k-fold 5: 0.845
 </pre></div>
 </div>
 </div>
@@ -943,31 +943,31 @@ A SHAP value is returned for each feature, for each instance, for each model (on
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17473/17759 [00:19&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17004/17759 [00:16&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 1 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17123/17759 [00:19&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16920/17759 [00:16&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 2 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17471/17758 [00:19&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 94%|=================== | 16759/17758 [00:16&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 3 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17637/17758 [00:18&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 94%|=================== | 16677/17758 [00:15&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 4 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17667/17758 [00:18&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16811/17758 [00:15&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 5 of 5
@@ -1058,43 +1058,43 @@ The mean is calculated in three ways:</p>
   <tbody>
     <tr>
       <th>Arrival-to-scan time</th>
-      <td>1.244143</td>
-      <td>1.161219</td>
-      <td>1.050302</td>
-      <td>1.045449</td>
-      <td>1.015622</td>
+      <td>1.272838</td>
+      <td>1.141527</td>
+      <td>1.072901</td>
+      <td>1.036587</td>
+      <td>0.991221</td>
     </tr>
     <tr>
       <th>Infarction</th>
-      <td>2.259876</td>
-      <td>2.219784</td>
-      <td>2.136264</td>
-      <td>2.167213</td>
-      <td>2.145942</td>
+      <td>2.263161</td>
+      <td>2.219258</td>
+      <td>2.189087</td>
+      <td>2.139960</td>
+      <td>2.137928</td>
     </tr>
     <tr>
       <th>Stroke severity</th>
-      <td>0.971404</td>
-      <td>0.897691</td>
-      <td>0.997946</td>
-      <td>0.952578</td>
-      <td>0.984440</td>
+      <td>0.964179</td>
+      <td>0.879851</td>
+      <td>0.999413</td>
+      <td>0.924342</td>
+      <td>0.982445</td>
     </tr>
     <tr>
       <th>Precise onset time</th>
-      <td>0.644974</td>
-      <td>0.599893</td>
-      <td>0.577417</td>
-      <td>0.612413</td>
-      <td>0.608663</td>
+      <td>0.646009</td>
+      <td>0.622288</td>
+      <td>0.578402</td>
+      <td>0.643105</td>
+      <td>0.626567</td>
     </tr>
     <tr>
       <th>Prior disability level</th>
-      <td>0.464659</td>
-      <td>0.469118</td>
-      <td>0.485589</td>
-      <td>0.471484</td>
-      <td>0.438499</td>
+      <td>0.440325</td>
+      <td>0.472402</td>
+      <td>0.446956</td>
+      <td>0.460535</td>
+      <td>0.457284</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1106,43 +1106,43 @@ The mean is calculated in three ways:</p>
     </tr>
     <tr>
       <th>team_YPKYH1768F</th>
-      <td>0.001261</td>
-      <td>0.002096</td>
-      <td>0.001029</td>
-      <td>0.000489</td>
-      <td>0.000941</td>
+      <td>0.001563</td>
+      <td>0.002454</td>
+      <td>0.000919</td>
+      <td>0.000747</td>
+      <td>0.000822</td>
     </tr>
     <tr>
       <th>team_YQMZV4284N</th>
-      <td>0.001066</td>
-      <td>0.001439</td>
-      <td>0.001043</td>
-      <td>0.000956</td>
-      <td>0.000903</td>
+      <td>0.001366</td>
+      <td>0.001495</td>
+      <td>0.001462</td>
+      <td>0.001239</td>
+      <td>0.001023</td>
     </tr>
     <tr>
       <th>team_ZBVSO0975W</th>
-      <td>0.002313</td>
-      <td>0.005012</td>
-      <td>0.006502</td>
-      <td>0.001933</td>
-      <td>0.008406</td>
+      <td>0.002660</td>
+      <td>0.006396</td>
+      <td>0.007842</td>
+      <td>0.002191</td>
+      <td>0.014337</td>
     </tr>
     <tr>
       <th>team_ZHCLE1578P</th>
-      <td>0.007511</td>
-      <td>0.002956</td>
-      <td>0.006738</td>
-      <td>0.003115</td>
-      <td>0.005115</td>
+      <td>0.009272</td>
+      <td>0.003238</td>
+      <td>0.006076</td>
+      <td>0.003216</td>
+      <td>0.005388</td>
     </tr>
     <tr>
       <th>team_ZRRCV7012C</th>
-      <td>0.013411</td>
-      <td>0.011068</td>
-      <td>0.004028</td>
-      <td>0.005991</td>
-      <td>0.012702</td>
+      <td>0.012300</td>
+      <td>0.012389</td>
+      <td>0.004540</td>
+      <td>0.005213</td>
+      <td>0.013794</td>
     </tr>
   </tbody>
 </table>
@@ -1194,33 +1194,33 @@ The mean is calculated in three ways:</p>
   <tbody>
     <tr>
       <th>Infarction</th>
-      <td>2.136264</td>
-      <td>2.167213</td>
-      <td>2.259876</td>
+      <td>2.137928</td>
+      <td>2.189087</td>
+      <td>2.263161</td>
     </tr>
     <tr>
       <th>Arrival-to-scan time</th>
-      <td>1.015622</td>
-      <td>1.050302</td>
-      <td>1.244143</td>
+      <td>0.991221</td>
+      <td>1.072901</td>
+      <td>1.272838</td>
     </tr>
     <tr>
       <th>Stroke severity</th>
-      <td>0.897691</td>
-      <td>0.971404</td>
-      <td>0.997946</td>
+      <td>0.879851</td>
+      <td>0.964179</td>
+      <td>0.999413</td>
     </tr>
     <tr>
       <th>Precise onset time</th>
-      <td>0.577417</td>
-      <td>0.608663</td>
-      <td>0.644974</td>
+      <td>0.578402</td>
+      <td>0.626567</td>
+      <td>0.646009</td>
     </tr>
     <tr>
       <th>Prior disability level</th>
-      <td>0.438499</td>
-      <td>0.469118</td>
-      <td>0.485589</td>
+      <td>0.440325</td>
+      <td>0.457284</td>
+      <td>0.472402</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1229,34 +1229,34 @@ The mean is calculated in three ways:</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>team_WSFVN0229E</th>
-      <td>0.000000</td>
-      <td>0.000439</td>
-      <td>0.001835</td>
-    </tr>
-    <tr>
-      <th>team_APXEE8191H</th>
-      <td>0.000336</td>
-      <td>0.000425</td>
-      <td>0.008395</td>
+      <th>team_YEXCH8391J</th>
+      <td>0.000202</td>
+      <td>0.000492</td>
+      <td>0.000558</td>
     </tr>
     <tr>
       <th>team_WSNTP4114A</th>
-      <td>0.000213</td>
-      <td>0.000422</td>
-      <td>0.000613</td>
+      <td>0.000127</td>
+      <td>0.000482</td>
+      <td>0.000603</td>
+    </tr>
+    <tr>
+      <th>team_LLPWF6176Z</th>
+      <td>0.000328</td>
+      <td>0.000467</td>
+      <td>0.001016</td>
     </tr>
     <tr>
       <th>team_QTELJ8888W</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.002636</td>
+      <td>0.000281</td>
+      <td>0.000344</td>
+      <td>0.002794</td>
     </tr>
     <tr>
       <th>team_JXJYG0100P</th>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000215</td>
+      <td>0.000218</td>
     </tr>
   </tbody>
 </table>
@@ -1359,33 +1359,33 @@ The mean is calculated in three ways:</p>
   <tbody>
     <tr>
       <th>Infarction</th>
-      <td>0.342151</td>
-      <td>0.347804</td>
-      <td>0.368849</td>
+      <td>0.357013</td>
+      <td>0.371319</td>
+      <td>0.386716</td>
     </tr>
     <tr>
       <th>Use of AF anticoagulents</th>
-      <td>0.039643</td>
-      <td>0.047754</td>
-      <td>0.056500</td>
+      <td>0.033750</td>
+      <td>0.041364</td>
+      <td>0.049644</td>
     </tr>
     <tr>
       <th>Precise onset time</th>
-      <td>0.025313</td>
-      <td>0.027453</td>
-      <td>0.031848</td>
+      <td>0.020439</td>
+      <td>0.031628</td>
+      <td>0.034492</td>
     </tr>
     <tr>
-      <th>team_MHMYL4920B</th>
-      <td>0.011515</td>
-      <td>0.012891</td>
-      <td>0.013842</td>
+      <th>Arrival-to-scan time</th>
+      <td>0.010298</td>
+      <td>0.011918</td>
+      <td>0.015598</td>
     </tr>
     <tr>
-      <th>Stroke severity</th>
-      <td>0.011592</td>
-      <td>0.012466</td>
-      <td>0.013186</td>
+      <th>team_GKONI0110I</th>
+      <td>0.010588</td>
+      <td>0.011799</td>
+      <td>0.012874</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1394,34 +1394,34 @@ The mean is calculated in three ways:</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>team_VVDIY0129H</th>
-      <td>0.000413</td>
-      <td>0.001124</td>
-      <td>0.002185</td>
-    </tr>
-    <tr>
-      <th>team_FWHZZ0143J</th>
-      <td>0.000470</td>
-      <td>0.000582</td>
-      <td>0.002095</td>
+      <th>team_IWINL6248B</th>
+      <td>0.000679</td>
+      <td>0.000895</td>
+      <td>0.001657</td>
     </tr>
     <tr>
       <th>team_WSFVN0229E</th>
-      <td>0.000000</td>
-      <td>0.000362</td>
-      <td>0.002803</td>
+      <td>0.000564</td>
+      <td>0.000857</td>
+      <td>0.001602</td>
+    </tr>
+    <tr>
+      <th>team_VVDIY0129H</th>
+      <td>0.000342</td>
+      <td>0.000688</td>
+      <td>0.001398</td>
     </tr>
     <tr>
       <th>team_QTELJ8888W</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.001831</td>
+      <td>0.000527</td>
+      <td>0.000627</td>
+      <td>0.001266</td>
     </tr>
     <tr>
       <th>team_JXJYG0100P</th>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.001120</td>
+      <td>0.001430</td>
     </tr>
   </tbody>
 </table>
@@ -1509,72 +1509,72 @@ The mean is calculated in three ways:</p>
     <tr>
       <th>0</th>
       <td>Infarction</td>
-      <td>2.167213</td>
+      <td>2.189087</td>
       <td>Infarction</td>
-      <td>0.347804</td>
+      <td>0.371319</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Arrival-to-scan time</td>
-      <td>1.050302</td>
+      <td>1.072901</td>
       <td>Use of AF anticoagulents</td>
-      <td>0.047754</td>
+      <td>0.041364</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Stroke severity</td>
-      <td>0.971404</td>
+      <td>0.964179</td>
       <td>Precise onset time</td>
-      <td>0.027453</td>
+      <td>0.031628</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Precise onset time</td>
-      <td>0.608663</td>
-      <td>team_MHMYL4920B</td>
-      <td>0.012891</td>
+      <td>0.626567</td>
+      <td>Arrival-to-scan time</td>
+      <td>0.011918</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Prior disability level</td>
-      <td>0.469118</td>
-      <td>Stroke severity</td>
-      <td>0.012466</td>
+      <td>0.457284</td>
+      <td>team_GKONI0110I</td>
+      <td>0.011799</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Use of AF anticoagulents</td>
-      <td>0.351979</td>
-      <td>Prior disability level</td>
-      <td>0.011766</td>
+      <td>0.357708</td>
+      <td>team_MHMYL4920B</td>
+      <td>0.011670</td>
     </tr>
     <tr>
       <th>6</th>
       <td>Onset-to-arrival time</td>
-      <td>0.305040</td>
-      <td>Arrival-to-scan time</td>
-      <td>0.011375</td>
+      <td>0.298715</td>
+      <td>Stroke severity</td>
+      <td>0.010911</td>
     </tr>
     <tr>
       <th>7</th>
       <td>team_VKKDD9172T</td>
-      <td>0.034521</td>
-      <td>team_GKONI0110I</td>
-      <td>0.010816</td>
+      <td>0.032926</td>
+      <td>team_QWKRA8499D</td>
+      <td>0.010305</td>
     </tr>
     <tr>
       <th>8</th>
       <td>team_IYJHY1440E</td>
-      <td>0.027590</td>
-      <td>team_LECHF1024T</td>
-      <td>0.010366</td>
+      <td>0.027960</td>
+      <td>Prior disability level</td>
+      <td>0.009946</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>team_XDAFB7350M</td>
-      <td>0.021129</td>
-      <td>team_XKAWN3771U</td>
-      <td>0.010366</td>
+      <td>team_AKCGO9726K</td>
+      <td>0.020890</td>
+      <td>team_LECHF1024T</td>
+      <td>0.009817</td>
     </tr>
   </tbody>
 </table>
@@ -1721,7 +1721,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17443/17759 [00:23&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17707/17759 [00:19&lt;00:00]        
 </pre></div>
 </div>
 </div>
@@ -1790,9 +1790,6 @@ The mean is calculated in three ways:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_56_0.png" src="../_images/03_xgb_combined_shap_key_features_56_0.png" />
-</div>
 </div>
 </section>
 <section id="show-the-relationship-between-feature-value-and-shap-value-for-the-top-5-influential-features">
@@ -1853,7 +1850,7 @@ The mean is calculated in three ways:</p>
         <span class="n">bin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 
         <span class="c1"># create list of bins (the unique categories)</span>
-        <span class="n">category_list</span> <span class="o">=</span>  <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
         <span class="n">category_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">+&#39;</span><span class="p">)</span>
 
         <span class="c1"># bin the feature data</span>
@@ -1903,9 +1900,6 @@ The mean is calculated in three ways:</p>
  <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_xgb_combined_shap_key_features_59_0.png" src="../_images/03_xgb_combined_shap_key_features_59_0.png" />
 </div>
 </div>
 </section>
@@ -1989,27 +1983,27 @@ The mean is calculated in three ways:</p>
     <tr>
       <th>0</th>
       <td>AGNOF1041H</td>
-      <td>-0.016342</td>
+      <td>-0.019864</td>
     </tr>
     <tr>
       <th>1</th>
       <td>AKCGO9726K</td>
-      <td>0.536124</td>
+      <td>0.604445</td>
     </tr>
     <tr>
       <th>2</th>
       <td>AOBTM3098N</td>
-      <td>-0.346190</td>
+      <td>-0.363720</td>
     </tr>
     <tr>
       <th>3</th>
       <td>APXEE8191H</td>
-      <td>-0.030854</td>
+      <td>-0.082091</td>
     </tr>
     <tr>
       <th>4</th>
       <td>ATDID5461S</td>
-      <td>0.337461</td>
+      <td>0.272465</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2019,27 +2013,27 @@ The mean is calculated in three ways:</p>
     <tr>
       <th>127</th>
       <td>YPKYH1768F</td>
-      <td>-0.232467</td>
+      <td>-0.433759</td>
     </tr>
     <tr>
       <th>128</th>
       <td>YQMZV4284N</td>
-      <td>-0.004133</td>
+      <td>-0.110632</td>
     </tr>
     <tr>
       <th>129</th>
       <td>ZBVSO0975W</td>
-      <td>-0.472060</td>
+      <td>-0.517433</td>
     </tr>
     <tr>
       <th>130</th>
       <td>ZHCLE1578P</td>
-      <td>0.120851</td>
+      <td>0.158479</td>
     </tr>
     <tr>
       <th>131</th>
       <td>ZRRCV7012C</td>
-      <td>-0.494459</td>
+      <td>-0.397642</td>
     </tr>
   </tbody>
 </table>
@@ -2063,6 +2057,8 @@ The mean is calculated in three ways:</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/03_xgb_combined_shap_key_features_64_0.png" src="../_images/03_xgb_combined_shap_key_features_64_0.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_64_1.png" src="../_images/03_xgb_combined_shap_key_features_64_1.png" />
+<img alt="../_images/03_xgb_combined_shap_key_features_64_2.png" src="../_images/03_xgb_combined_shap_key_features_64_2.png" />
 </div>
 </div>
 </section>

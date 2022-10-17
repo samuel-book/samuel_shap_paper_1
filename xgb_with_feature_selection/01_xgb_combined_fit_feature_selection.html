@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Check correlation between features selected for the model" href="07_correlation.html" />
-    <link rel="prev" title="Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case." href="90_shap_interactions_on_titanic.html" />
+    <link rel="prev" title="Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case." href="../key_notebooks/90_shap_interactions_on_titanic.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,12 +115,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
+  <a class="reference internal" href="../key_notebooks/outline.html">
    Outline of notebooks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../glossary.html">
+  <a class="reference internal" href="../introduction/glossary.html">
    Glossary of technical terms
   </a>
  </li>
@@ -130,12 +130,12 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../shap_worked_example.html">
+  <a class="reference internal" href="../introduction/shap_worked_example.html">
    A simple worked example of Shap
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
    Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
   </a>
  </li>
@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
+  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -694,31 +694,31 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature  1: S2BrainImagingTime_min, AUC: 0.715
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature  1: S2BrainImagingTime_min, AUC: 0.716
 Feature  2: S2StrokeType_Infarction, AUC: 0.792
-Feature  3: S2NihssArrival, AUC: 0.850
-Feature  4: S1OnsetTimeType_Precise, AUC: 0.875
-Feature  5: S2RankinBeforeStroke, AUC: 0.890
-Feature  6: StrokeTeam, AUC: 0.903
+Feature  3: S2NihssArrival, AUC: 0.851
+Feature  4: S1OnsetTimeType_Precise, AUC: 0.876
+Feature  5: S2RankinBeforeStroke, AUC: 0.892
+Feature  6: StrokeTeam, AUC: 0.904
 Feature  7: AFAnticoagulent_Yes, AUC: 0.914
 Feature  8: S1OnsetToArrival_min, AUC: 0.916
-Feature  9: S1OnsetDateType_Stroke during sleep, AUC: 0.917
-Feature 10: BestLanguage, AUC: 0.918
-Feature 11: MoreEqual80y_Yes, AUC: 0.919
-Feature 12: LocQuestions, AUC: 0.920
-Feature 13: StrokeTIA_Yes, AUC: 0.920
-Feature 14: LimbAtaxia, AUC: 0.921
-Feature 15: Loc, AUC: 0.921
-Feature 16: S2NewAFDiagnosis_No, AUC: 0.921
-Feature 17: S1AdmissionHour_18:00 to 20:59, AUC: 0.922
-Feature 18: S1OnsetInHospital_Yes, AUC: 0.922
+Feature  9: S1OnsetDateType_Stroke during sleep, AUC: 0.918
+Feature 10: S1AgeOnArrival, AUC: 0.919
+Feature 11: BestLanguage, AUC: 0.919
+Feature 12: Loc, AUC: 0.921
+Feature 13: S2NewAFDiagnosis_missing, AUC: 0.921
+Feature 14: LocQuestions, AUC: 0.921
+Feature 15: S2NewAFDiagnosis_No, AUC: 0.922
+Feature 16: MoreEqual80y_Yes, AUC: 0.922
+Feature 17: S1OnsetInHospital_Yes, AUC: 0.922
+Feature 18: AFAnticoagulentHeparin_Yes, AUC: 0.922
 Feature 19: S1Ethnicity_Mixed, AUC: 0.922
-Feature 20: S1OnsetDateType_Precise, AUC: 0.922
-Feature 21: AFAnticoagulentVitK_No, AUC: 0.922
-Feature 22: AFAntiplatelet_No but, AUC: 0.922
-Feature 23: S1Ethnicity_Black, AUC: 0.922
-Feature 24: S2NewAFDiagnosis_Yes, AUC: 0.922
-Feature 25: AFAnticoagulentHeparin_Yes, AUC: 0.922
+Feature 20: S1AdmissionYear_2018, AUC: 0.921
+Feature 21: StrokeTIA_Yes, AUC: 0.922
+Feature 22: FacialPalsy, AUC: 0.922
+Feature 23: S1AdmissionYear_2016, AUC: 0.922
+Feature 24: S1AdmissionHour_03:00 to 05:59, AUC: 0.922
+Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
 </pre></div>
 </div>
 </div>
@@ -765,176 +765,176 @@ Feature 25: AFAnticoagulentHeparin_Yes, AUC: 0.922
       <th>0</th>
       <td>1</td>
       <td>S2BrainImagingTime_min</td>
-      <td>0.715332</td>
-      <td>0.003247</td>
+      <td>0.715514</td>
+      <td>0.002985</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>S2StrokeType_Infarction</td>
-      <td>0.791939</td>
-      <td>0.003900</td>
+      <td>0.791975</td>
+      <td>0.003633</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>S2NihssArrival</td>
-      <td>0.849530</td>
-      <td>0.002800</td>
+      <td>0.851464</td>
+      <td>0.003224</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>S1OnsetTimeType_Precise</td>
-      <td>0.874870</td>
-      <td>0.002517</td>
+      <td>0.876139</td>
+      <td>0.002768</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
       <td>S2RankinBeforeStroke</td>
-      <td>0.890313</td>
-      <td>0.002097</td>
+      <td>0.891932</td>
+      <td>0.001871</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
       <td>StrokeTeam</td>
-      <td>0.903222</td>
-      <td>0.002272</td>
+      <td>0.903527</td>
+      <td>0.001867</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
       <td>AFAnticoagulent_Yes</td>
-      <td>0.913876</td>
-      <td>0.001896</td>
+      <td>0.914268</td>
+      <td>0.001937</td>
     </tr>
     <tr>
       <th>7</th>
       <td>8</td>
       <td>S1OnsetToArrival_min</td>
-      <td>0.915791</td>
-      <td>0.002128</td>
+      <td>0.916209</td>
+      <td>0.002419</td>
     </tr>
     <tr>
       <th>8</th>
       <td>9</td>
       <td>S1OnsetDateType_Stroke during sleep</td>
-      <td>0.917436</td>
-      <td>0.002507</td>
+      <td>0.918073</td>
+      <td>0.002414</td>
     </tr>
     <tr>
       <th>9</th>
       <td>10</td>
-      <td>BestLanguage</td>
-      <td>0.918334</td>
-      <td>0.002303</td>
+      <td>S1AgeOnArrival</td>
+      <td>0.919025</td>
+      <td>0.001784</td>
     </tr>
     <tr>
       <th>10</th>
       <td>11</td>
-      <td>MoreEqual80y_Yes</td>
-      <td>0.919070</td>
-      <td>0.002541</td>
+      <td>BestLanguage</td>
+      <td>0.919400</td>
+      <td>0.001927</td>
     </tr>
     <tr>
       <th>11</th>
       <td>12</td>
-      <td>LocQuestions</td>
-      <td>0.919606</td>
-      <td>0.002315</td>
+      <td>Loc</td>
+      <td>0.920818</td>
+      <td>0.002257</td>
     </tr>
     <tr>
       <th>12</th>
       <td>13</td>
-      <td>StrokeTIA_Yes</td>
-      <td>0.920283</td>
-      <td>0.002848</td>
+      <td>S2NewAFDiagnosis_missing</td>
+      <td>0.920907</td>
+      <td>0.001824</td>
     </tr>
     <tr>
       <th>13</th>
       <td>14</td>
-      <td>LimbAtaxia</td>
-      <td>0.920590</td>
-      <td>0.002754</td>
+      <td>LocQuestions</td>
+      <td>0.921268</td>
+      <td>0.002333</td>
     </tr>
     <tr>
       <th>14</th>
       <td>15</td>
-      <td>Loc</td>
-      <td>0.920646</td>
-      <td>0.002748</td>
+      <td>S2NewAFDiagnosis_No</td>
+      <td>0.921635</td>
+      <td>0.002136</td>
     </tr>
     <tr>
       <th>15</th>
       <td>16</td>
-      <td>S2NewAFDiagnosis_No</td>
-      <td>0.921448</td>
-      <td>0.002273</td>
+      <td>MoreEqual80y_Yes</td>
+      <td>0.921635</td>
+      <td>0.002136</td>
     </tr>
     <tr>
       <th>16</th>
       <td>17</td>
-      <td>S1AdmissionHour_18:00 to 20:59</td>
-      <td>0.921730</td>
-      <td>0.002421</td>
+      <td>S1OnsetInHospital_Yes</td>
+      <td>0.921635</td>
+      <td>0.002136</td>
     </tr>
     <tr>
       <th>17</th>
       <td>18</td>
-      <td>S1OnsetInHospital_Yes</td>
-      <td>0.921730</td>
-      <td>0.002421</td>
+      <td>AFAnticoagulentHeparin_Yes</td>
+      <td>0.921624</td>
+      <td>0.002413</td>
     </tr>
     <tr>
       <th>18</th>
       <td>19</td>
       <td>S1Ethnicity_Mixed</td>
-      <td>0.921684</td>
-      <td>0.002376</td>
+      <td>0.921668</td>
+      <td>0.002360</td>
     </tr>
     <tr>
       <th>19</th>
       <td>20</td>
-      <td>S1OnsetDateType_Precise</td>
-      <td>0.921683</td>
-      <td>0.002392</td>
+      <td>S1AdmissionYear_2018</td>
+      <td>0.921392</td>
+      <td>0.002231</td>
     </tr>
     <tr>
       <th>20</th>
       <td>21</td>
-      <td>AFAnticoagulentVitK_No</td>
-      <td>0.921822</td>
-      <td>0.002344</td>
+      <td>StrokeTIA_Yes</td>
+      <td>0.921841</td>
+      <td>0.003094</td>
     </tr>
     <tr>
       <th>21</th>
       <td>22</td>
-      <td>AFAntiplatelet_No but</td>
-      <td>0.921853</td>
-      <td>0.002163</td>
+      <td>FacialPalsy</td>
+      <td>0.922316</td>
+      <td>0.002825</td>
     </tr>
     <tr>
       <th>22</th>
       <td>23</td>
-      <td>S1Ethnicity_Black</td>
-      <td>0.921984</td>
-      <td>0.002208</td>
+      <td>S1AdmissionYear_2016</td>
+      <td>0.922291</td>
+      <td>0.002666</td>
     </tr>
     <tr>
       <th>23</th>
       <td>24</td>
-      <td>S2NewAFDiagnosis_Yes</td>
-      <td>0.922160</td>
-      <td>0.002563</td>
+      <td>S1AdmissionHour_03:00 to 05:59</td>
+      <td>0.922467</td>
+      <td>0.002340</td>
     </tr>
     <tr>
       <th>24</th>
       <td>25</td>
-      <td>AFAnticoagulentHeparin_Yes</td>
-      <td>0.922228</td>
-      <td>0.002528</td>
+      <td>AFAnticoagulentVitK_Yes</td>
+      <td>0.922612</td>
+      <td>0.002591</td>
     </tr>
   </tbody>
 </table>
@@ -1072,7 +1072,7 @@ Feature 25: AFAnticoagulentHeparin_Yes, AUC: 0.922
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="90_shap_interactions_on_titanic.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../key_notebooks/90_shap_interactions_on_titanic.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
