@@ -3,11 +3,11 @@ root: introduction/intro
 parts:
 - caption: Introductory content
   chapters:
-  - file: xgb_with_feature_selection/outline
-  - file: glossary
+  - file: key_notebooks/outline
+  - file: introduction/glossary
   - file: introduction/odds_prob
-  - file: shap_worked_example
-  - file: xgb_with_feature_selection/90_shap_interactions_on_titanic
+  - file: introduction/shap_worked_example
+  - file: key_notebooks/90_shap_interactions_on_titanic
 - caption: Predicting thrombolysis use and explaining the predictions with Shap
   chapters:
   - file: xgb_with_feature_selection/01_xgb_combined_fit_feature_selection
@@ -23,4 +23,4 @@ parts:
   - file: xgb_with_feature_selection/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
 - caption: Appendix
   chapters:
-  - file: xgb_with_feature_selection/91_learning_rate_optimisation
+  - file: key_notebooks/91_learning_rate_optimisation
