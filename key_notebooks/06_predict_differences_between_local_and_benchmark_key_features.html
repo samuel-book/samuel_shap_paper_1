@@ -1766,7 +1766,7 @@ Run 5, accuracy: 0.689
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_results</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_results</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -1789,193 +1789,213 @@ Run 5, accuracy: 0.689
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>observed_positive_rate</th>
-      <th>observed_negative_rate</th>
-      <th>predicted_positive_rate</th>
-      <th>predicted_negative_rate</th>
-      <th>accuracy</th>
-      <th>precision</th>
-      <th>recall</th>
-      <th>f1</th>
-      <th>sensitivity</th>
-      <th>specificity</th>
-      <th>positive_likelihood</th>
-      <th>negative_likelihood</th>
-      <th>false_positive_rate</th>
-      <th>false_negative_rate</th>
-      <th>true_positive_rate</th>
-      <th>true_negative_rate</th>
-      <th>positive_predictive_value</th>
-      <th>negative_predictive_value</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>count</th>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-      <td>5.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
+      <th>observed_positive_rate</th>
+      <td>5.0</td>
       <td>0.526215</td>
-      <td>0.473785</td>
-      <td>0.492462</td>
-      <td>0.507538</td>
-      <td>0.675443</td>
-      <td>0.704881</td>
-      <td>0.659548</td>
-      <td>0.681260</td>
-      <td>0.659548</td>
-      <td>0.693109</td>
-      <td>2.170494</td>
-      <td>0.492673</td>
-      <td>0.306891</td>
-      <td>0.340452</td>
-      <td>0.659548</td>
-      <td>0.693109</td>
-      <td>0.704881</td>
-      <td>0.647289</td>
-    </tr>
-    <tr>
-      <th>std</th>
       <td>0.000478</td>
-      <td>0.000478</td>
-      <td>0.018403</td>
-      <td>0.018403</td>
-      <td>0.026553</td>
-      <td>0.027149</td>
-      <td>0.032767</td>
-      <td>0.027370</td>
-      <td>0.032767</td>
-      <td>0.031707</td>
-      <td>0.271977</td>
-      <td>0.060450</td>
-      <td>0.031707</td>
-      <td>0.032767</td>
-      <td>0.032767</td>
-      <td>0.031707</td>
-      <td>0.027149</td>
-      <td>0.027760</td>
-    </tr>
-    <tr>
-      <th>min</th>
       <td>0.525478</td>
-      <td>0.473461</td>
-      <td>0.462845</td>
-      <td>0.491507</td>
-      <td>0.635881</td>
-      <td>0.666667</td>
-      <td>0.616935</td>
-      <td>0.640838</td>
-      <td>0.616935</td>
-      <td>0.656951</td>
-      <td>1.798387</td>
-      <td>0.422478</td>
-      <td>0.264574</td>
-      <td>0.298387</td>
-      <td>0.616935</td>
-      <td>0.656951</td>
-      <td>0.666667</td>
-      <td>0.606625</td>
-    </tr>
-    <tr>
-      <th>25%</th>
       <td>0.525981</td>
-      <td>0.473461</td>
-      <td>0.487261</td>
-      <td>0.495228</td>
-      <td>0.662778</td>
-      <td>0.686975</td>
-      <td>0.641129</td>
-      <td>0.672840</td>
-      <td>0.641129</td>
-      <td>0.666667</td>
-      <td>1.977823</td>
-      <td>0.458728</td>
-      <td>0.293722</td>
-      <td>0.321212</td>
-      <td>0.641129</td>
-      <td>0.666667</td>
-      <td>0.686975</td>
-      <td>0.638116</td>
+      <td>0.526539</td>
+      <td>0.526539</td>
+      <td>0.526539</td>
     </tr>
     <tr>
-      <th>50%</th>
-      <td>0.526539</td>
+      <th>observed_negative_rate</th>
+      <td>5.0</td>
+      <td>0.473785</td>
+      <td>0.000478</td>
       <td>0.473461</td>
-      <td>0.498938</td>
-      <td>0.501062</td>
-      <td>0.685775</td>
-      <td>0.714894</td>
-      <td>0.659274</td>
-      <td>0.682403</td>
-      <td>0.659274</td>
-      <td>0.700224</td>
-      <td>2.264315</td>
-      <td>0.487977</td>
-      <td>0.299776</td>
-      <td>0.340726</td>
-      <td>0.659274</td>
-      <td>0.700224</td>
-      <td>0.714894</td>
-      <td>0.648221</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>0.526539</td>
+      <td>0.473461</td>
+      <td>0.473461</td>
       <td>0.474019</td>
-      <td>0.504772</td>
-      <td>0.512739</td>
-      <td>0.688960</td>
-      <td>0.726514</td>
-      <td>0.678788</td>
-      <td>0.696373</td>
-      <td>0.678788</td>
-      <td>0.706278</td>
-      <td>2.388697</td>
-      <td>0.511089</td>
-      <td>0.333333</td>
-      <td>0.358871</td>
-      <td>0.678788</td>
-      <td>0.706278</td>
-      <td>0.726514</td>
-      <td>0.663136</td>
+      <td>0.474522</td>
     </tr>
     <tr>
-      <th>max</th>
-      <td>0.526539</td>
-      <td>0.474522</td>
+      <th>predicted_positive_rate</th>
+      <td>5.0</td>
+      <td>0.492462</td>
+      <td>0.018403</td>
+      <td>0.462845</td>
+      <td>0.487261</td>
+      <td>0.498938</td>
+      <td>0.504772</td>
       <td>0.508493</td>
+    </tr>
+    <tr>
+      <th>predicted_negative_rate</th>
+      <td>5.0</td>
+      <td>0.507538</td>
+      <td>0.018403</td>
+      <td>0.491507</td>
+      <td>0.495228</td>
+      <td>0.501062</td>
+      <td>0.512739</td>
       <td>0.537155</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>5.0</td>
+      <td>0.675443</td>
+      <td>0.026553</td>
+      <td>0.635881</td>
+      <td>0.662778</td>
+      <td>0.685775</td>
+      <td>0.688960</td>
       <td>0.703822</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>5.0</td>
+      <td>0.704881</td>
+      <td>0.027149</td>
+      <td>0.666667</td>
+      <td>0.686975</td>
+      <td>0.714894</td>
+      <td>0.726514</td>
       <td>0.729358</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>5.0</td>
+      <td>0.659548</td>
+      <td>0.032767</td>
+      <td>0.616935</td>
+      <td>0.641129</td>
+      <td>0.659274</td>
+      <td>0.678788</td>
       <td>0.701613</td>
+    </tr>
+    <tr>
+      <th>f1</th>
+      <td>5.0</td>
+      <td>0.681260</td>
+      <td>0.027370</td>
+      <td>0.640838</td>
+      <td>0.672840</td>
+      <td>0.682403</td>
+      <td>0.696373</td>
       <td>0.713846</td>
+    </tr>
+    <tr>
+      <th>sensitivity</th>
+      <td>5.0</td>
+      <td>0.659548</td>
+      <td>0.032767</td>
+      <td>0.616935</td>
+      <td>0.641129</td>
+      <td>0.659274</td>
+      <td>0.678788</td>
       <td>0.701613</td>
+    </tr>
+    <tr>
+      <th>specificity</th>
+      <td>5.0</td>
+      <td>0.693109</td>
+      <td>0.031707</td>
+      <td>0.656951</td>
+      <td>0.666667</td>
+      <td>0.700224</td>
+      <td>0.706278</td>
       <td>0.735426</td>
+    </tr>
+    <tr>
+      <th>positive_likelihood</th>
+      <td>5.0</td>
+      <td>2.170494</td>
+      <td>0.271977</td>
+      <td>1.798387</td>
+      <td>1.977823</td>
+      <td>2.264315</td>
+      <td>2.388697</td>
       <td>2.423250</td>
+    </tr>
+    <tr>
+      <th>negative_likelihood</th>
+      <td>5.0</td>
+      <td>0.492673</td>
+      <td>0.060450</td>
+      <td>0.422478</td>
+      <td>0.458728</td>
+      <td>0.487977</td>
+      <td>0.511089</td>
       <td>0.583095</td>
+    </tr>
+    <tr>
+      <th>false_positive_rate</th>
+      <td>5.0</td>
+      <td>0.306891</td>
+      <td>0.031707</td>
+      <td>0.264574</td>
+      <td>0.293722</td>
+      <td>0.299776</td>
+      <td>0.333333</td>
       <td>0.343049</td>
+    </tr>
+    <tr>
+      <th>false_negative_rate</th>
+      <td>5.0</td>
+      <td>0.340452</td>
+      <td>0.032767</td>
+      <td>0.298387</td>
+      <td>0.321212</td>
+      <td>0.340726</td>
+      <td>0.358871</td>
       <td>0.383065</td>
+    </tr>
+    <tr>
+      <th>true_positive_rate</th>
+      <td>5.0</td>
+      <td>0.659548</td>
+      <td>0.032767</td>
+      <td>0.616935</td>
+      <td>0.641129</td>
+      <td>0.659274</td>
+      <td>0.678788</td>
       <td>0.701613</td>
+    </tr>
+    <tr>
+      <th>true_negative_rate</th>
+      <td>5.0</td>
+      <td>0.693109</td>
+      <td>0.031707</td>
+      <td>0.656951</td>
+      <td>0.666667</td>
+      <td>0.700224</td>
+      <td>0.706278</td>
       <td>0.735426</td>
+    </tr>
+    <tr>
+      <th>positive_predictive_value</th>
+      <td>5.0</td>
+      <td>0.704881</td>
+      <td>0.027149</td>
+      <td>0.666667</td>
+      <td>0.686975</td>
+      <td>0.714894</td>
+      <td>0.726514</td>
       <td>0.729358</td>
+    </tr>
+    <tr>
+      <th>negative_predictive_value</th>
+      <td>5.0</td>
+      <td>0.647289</td>
+      <td>0.027760</td>
+      <td>0.606625</td>
+      <td>0.638116</td>
+      <td>0.648221</td>
+      <td>0.663136</td>
       <td>0.680346</td>
     </tr>
   </tbody>
