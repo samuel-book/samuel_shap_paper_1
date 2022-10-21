@@ -115,7 +115,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
+  <a class="reference internal" href="../key_notebooks/outline.html">
    Outline of notebooks
   </a>
  </li>
@@ -135,7 +135,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
    Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
   </a>
  </li>
@@ -198,11 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -211,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
+  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -299,7 +294,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/key_notebooks/04_compare_10k_cohort_key_features.ipynb"
+        <a href="../_sources/xgb_with_feature_selection/04_compare_10k_cohort_key_features.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -364,17 +359,37 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims">
-   Aims:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-and-data">
    Model and data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
    Observations
   </a>
  </li>
@@ -414,8 +429,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-stats-for-predicted-10k-thrombolysis-rates-across-hospitals">
-     Show stats for predicted 10K thrombolysis rates across hospitals
+    <a class="reference internal nav-link" href="#show-stats">
+     Show stats
     </a>
    </li>
   </ul>
@@ -448,7 +463,7 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#id5">
    Observations
   </a>
  </li>
@@ -477,17 +492,37 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims">
-   Aims:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-and-data">
    Model and data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
    Observations
   </a>
  </li>
@@ -527,8 +562,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-stats-for-predicted-10k-thrombolysis-rates-across-hospitals">
-     Show stats for predicted 10K thrombolysis rates across hospitals
+    <a class="reference internal nav-link" href="#show-stats">
+     Show stats
     </a>
    </li>
   </ul>
@@ -561,7 +596,7 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#id5">
    Observations
   </a>
  </li>
@@ -585,16 +620,6 @@ title="Print to PDF"
 <p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45% across the 132 hospitals. The size of the hospital only accounted for 10% of the variation in thrombolysis use, and so there are other factors that account for the remaining 90%.</p>
 <p>We find that predicted 10k thrombolysis use correlates very highly with average hopsital SHAP values.</p>
 </section>
-<section id="aims">
-<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
-<li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
-<li><p>Compare the thrombolysis rate across the 132 hospitals. This can be seen as comparing the hosptial effect, as the patient factors have been removed.</p></li>
-<li><p>Compare 10k thrombolysis use with average hopsital SHAP.</p></li>
-<li><p>Save thrombolysis rate at each hospital for the 10k patient cohort (for use in next notebook).</p></li>
-</ul>
-</section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
 <p>An XGBoost model is trained on all but a 10k patient cohort, to predict which patient will recieve thrombolysis.The 10k patient cohort is then used in two ways: 1) as the test set for the model fitting process 2) as a common set of patients that are sent to each hospital in turn to obtain a thrombolysis rate that is comparable across hosptials which has any patient factors removed.</p>
@@ -615,21 +640,67 @@ title="Print to PDF"
 </ul>
 <p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
 </section>
+<section id="aims">
+<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
+<li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Compare the thrombolysis rate across the 132 hospitals. This can be seen as comparing the hosptial effect, as the patient factors have been removed.</p></li>
+<li><p>Compare 10k thrombolysis use with average hopsital SHAP.</p></li>
+<li><p>Save thrombolysis rate at each hospital for the 10k patient cohort (for use in next notebook).</p></li>
+</ul>
+</section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>The 10k cohort model had an accuracy of 84.6%, in line with accuracy from k-fold testing (84.6%).</p></li>
+<li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing (84.7%, see notebook 02).</p></li>
 <li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
-<li><p>Only 9% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate. 9% of the variance in unit thrombolysis rate may be explained by unit admission numbers. Predicted 10k thrombolysis rate for 300 - 1,200 admissions per year is 25.6% - 31.7% (a 24% increase).</p></li>
+<li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.# A comparison of 10k cohort thrombolysis rates across hospitals</p></li>
 </ul>
-<p>It is easier to find majority agreement on who not to thrombolyse than who to thrombolyse. For example:</p>
+</section>
+<section id="id1">
+<h2>Plain English summary<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>In response to stroke teams being told that they are performing differently from other, they often state that this is due to them having a different set of patients.</p>
+<p>This does have some truth to it. For example the hospitals in London will have younger patients, arriving sooner than compared to hospitals in more rural locations.</p>
+<p>In order to remove patient differences from results, a common 10k cohort of patients will be used with each of the hospital models. That way any difference is due to hospital factors, and not patient factors.</p>
+<p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45% across the 132 hospitals. The size of the hospital only accounted for 10% of the variation in thrombolysis use, and so there are other factors that account for the remaining 90%.</p>
+</section>
+<section id="id2">
+<h2>Model and data<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>An XGBoost model is trained on all but a 10k patient cohort, to predict which patient will recieve thrombolysis.The 10k patient cohort is then used in two ways: 1) as the test set for the model fitting process 2) as a common set of patients that are sent to each hospital in turn to obtain a thrombolysis rate that is comparable across hosptials which has any patient factors removed.</p>
+<p>The XGBoost model is fitted to all but 10k instances, and uses 8 features:</p>
 <ul class="simple">
-<li><p>88.0% of all patients have a treatment decision that is agreed by 80% hospitals</p></li>
-<li><p>Of those who were not given thrombolysis, 85.2% had agreement by 80% hospitals</p></li>
-<li><p>Of those who were given thrombolysis, 79.6% had agreement by 80% hospitals</p></li>
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
 </ul>
-<p>Thrombolysis rate of 10k cohort correlates weakly with unit size.</p>
-<p>10k thrombolysis rate correlates closely with average hospital SHAP value.</p>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
+</ul>
+<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+</section>
+<section id="id3">
+<h2>Aims:<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
+<li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Compare the thrombolysis rate across the 132 hospitals. This can be seen as comparing the hosptial effect, as the patient factors have been removed.</p></li>
+<li><p>Save thrombolysis rate at each hospital for the 10k patient cohort (for use in next notebook).</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>Observations<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing (84.7%, see notebook 02).</p></li>
+<li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
+<li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.</p></li>
+</ul>
 </section>
 <section id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
@@ -718,10 +789,6 @@ title="Print to PDF"
 <span class="c1"># Store admissions per hospital</span>
 <span class="n">df_admissions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">df_admissions</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Admissions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Save truncated data</span>
-<span class="n">train</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_key_features_train.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">test</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_key_features_test.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -763,7 +830,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.846
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.841
 </pre></div>
 </div>
 </div>
@@ -778,7 +845,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC ACUC: 0.914
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC ACUC: 0.913
 </pre></div>
 </div>
 </div>
@@ -863,8 +930,8 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="show-stats-for-predicted-10k-thrombolysis-rates-across-hospitals">
-<h3>Show stats for predicted 10K thrombolysis rates across hospitals<a class="headerlink" href="#show-stats-for-predicted-10k-thrombolysis-rates-across-hospitals" title="Permalink to this headline">#</a></h3>
+<section id="show-stats">
+<h3>Show stats<a class="headerlink" href="#show-stats" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">])</span>
@@ -880,10 +947,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.276
-StDev: 0.066
-Min: 0.086
-Max0.477
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.275
+StDev: 0.067
+Min: 0.096
+Max0.461
 </pre></div>
 </div>
 </div>
@@ -892,7 +959,6 @@ Max0.477
 </section>
 <section id="plot-thrombolysis-rate-vs-unit-size">
 <h2>Plot thrombolysis rate vs unit size<a class="headerlink" href="#plot-thrombolysis-rate-vs-unit-size" title="Permalink to this headline">#</a></h2>
-<p>In order to investigate how much of the difference in thrombolysis rates may be explained by differences in unit size (e.g. if larger units have a higher propensity to use thrombolysis), we perform a regression analysis of predicted 10K thrombolysis rate against the number of admissions to each unit.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Join dataframes together (on index)</span>
@@ -930,33 +996,6 @@ Max0.477
 <img alt="../_images/04_compare_10k_cohort_key_features_24_0.png" src="../_images/04_compare_10k_cohort_key_features_24_0.png" />
 </div>
 </div>
-<p>Show predicted 10k thrombolysis use for varying admission numbers:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predicted_300_admissions</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="mi">300</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
-<span class="n">predicted_600_admissions</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="mi">600</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
-<span class="n">predicted_900_admissions</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="mi">900</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
-<span class="n">predicted_1200_admissions</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1200</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Predicted thrombolysis rate by admission numbers:&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;300 admissions/year = </span><span class="si">{</span><span class="n">predicted_300_admissions</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;600 admissions/year = </span><span class="si">{</span><span class="n">predicted_600_admissions</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;900 admissions/year = </span><span class="si">{</span><span class="n">predicted_900_admissions</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;1200 admissions/year = </span><span class="si">{</span><span class="n">predicted_1200_admissions</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted thrombolysis rate by admission numbers:
-300 admissions/year = 0.256
-600 admissions/year = 0.276
-900 admissions/year = 0.296
-1200 admissions/year = 0.317
-</pre></div>
-</div>
-</div>
-</div>
-<p>9% of the variance in unit thrombolysis rate may be explained by unit admission numbers. Predicted 10k thrombolysis rate for 300 - 1,200 admissions per year is 25.6% - 31.7% (a 24% increase).</p>
 </section>
 <section id="compare-level-of-agreement-between-hospitals">
 <h2>Compare level of agreement between hospitals<a class="headerlink" href="#compare-level-of-agreement-between-hospitals" title="Permalink to this headline">#</a></h2>
@@ -1014,7 +1053,7 @@ Max0.477
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_32_0.png" src="../_images/04_compare_10k_cohort_key_features_32_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_29_0.png" src="../_images/04_compare_10k_cohort_key_features_29_0.png" />
 </div>
 </div>
 <p>Show statistics:</p>
@@ -1083,21 +1122,21 @@ Max0.477
   <tbody>
     <tr>
       <th>80</th>
-      <td>0.880</td>
-      <td>0.796</td>
-      <td>0.915</td>
+      <td>0.874</td>
+      <td>0.787</td>
+      <td>0.911</td>
     </tr>
     <tr>
       <th>90</th>
-      <td>0.788</td>
-      <td>0.637</td>
-      <td>0.852</td>
+      <td>0.785</td>
+      <td>0.631</td>
+      <td>0.849</td>
     </tr>
     <tr>
       <th>95</th>
-      <td>0.692</td>
-      <td>0.483</td>
-      <td>0.780</td>
+      <td>0.694</td>
+      <td>0.481</td>
+      <td>0.784</td>
     </tr>
   </tbody>
 </table>
@@ -1125,7 +1164,7 @@ Max0.477
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 9459/10000 [00:13&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 9855/10000 [00:18&lt;00:00]        
 </pre></div>
 </div>
 </div>
@@ -1185,7 +1224,7 @@ Max0.477
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_44_0.png" src="../_images/04_compare_10k_cohort_key_features_44_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_41_0.png" src="../_images/04_compare_10k_cohort_key_features_41_0.png" />
 </div>
 </div>
 <p>Plot scatter plot of comparison between average hospital SHAP and predicted 10k thrombolysis use.</p>
@@ -1220,23 +1259,23 @@ Max0.477
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04_compare_10k_cohort_key_features_46_0.png" src="../_images/04_compare_10k_cohort_key_features_46_0.png" />
+<img alt="../_images/04_compare_10k_cohort_key_features_43_0.png" src="../_images/04_compare_10k_cohort_key_features_43_0.png" />
 </div>
 </div>
 </section>
 </section>
-<section id="id1">
-<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<section id="id5">
+<h2>Observations<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>The 10k cohort model had an accuracy of 84.6%, in line with accuracy from k-fold testing (84.6%).</p></li>
+<li><p>The 10k cohort model had an accuracy of 85.2%, in line with accuracy from k-fold testing.</p></li>
 <li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
-<li><p>Only 9% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate. 9% of the variance in unit thrombolysis rate may be explained by unit admission numbers. Predicted 10k thrombolysis rate for 300 - 1,200 admissions per year is 25.6% - 31.7% (a 24% increase).</p></li>
+<li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.</p></li>
 </ul>
 <p>It is easier to find majority agreement on who not to thrombolyse than who to thrombolyse. For example:</p>
 <ul class="simple">
-<li><p>88.0% of all patients have a treatment decision that is agreed by 80% hospitals</p></li>
-<li><p>Of those who were not given thrombolysis, 85.2% had agreement by 80% hospitals</p></li>
-<li><p>Of those who were given thrombolysis, 79.6% had agreement by 80% hospitals</p></li>
+<li><p>87.4% of all patients have a treatment decision that is agreed by 80% hospitals</p></li>
+<li><p>Of those who were not given thrombolysis, 84.1% had agreement by 80% hospitals</p></li>
+<li><p>Of those who were given thrombolysis, 78.8% had agreement by 80% hospitals</p></li>
 </ul>
 <p>Thrombolysis rate of 10k cohort correlates weakly with unit size.</p>
 <p>10k thrombolysis rate correlates closely with average hospital SHAP value.</p>
@@ -1256,7 +1295,7 @@ Max0.477
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./key_notebooks"
+            path: "./xgb_with_feature_selection"
         },
         predefinedOutput: true
     }

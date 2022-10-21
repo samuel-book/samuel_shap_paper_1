@@ -115,7 +115,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
+  <a class="reference internal" href="../key_notebooks/outline.html">
    Outline of notebooks
   </a>
  </li>
@@ -135,7 +135,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
    Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
   </a>
  </li>
@@ -198,11 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -211,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
+  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -299,7 +294,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/key_notebooks/03_xgb_combined_shap_key_features.ipynb"
+        <a href="../_sources/xgb_with_feature_selection/03_xgb_combined_shap_key_features.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -948,31 +943,31 @@ A SHAP value is returned for each feature, for each instance, for each model (on
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17337/17759 [00:16&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|=================== | 17004/17759 [00:16&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 1 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17138/17759 [00:16&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16920/17759 [00:16&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 2 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16926/17758 [00:16&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 94%|=================== | 16759/17758 [00:16&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 3 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16909/17758 [00:16&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 94%|=================== | 16677/17758 [00:15&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 4 of 5
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16842/17758 [00:16&lt;00:00]       
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|=================== | 16811/17758 [00:15&lt;00:00]       
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 5 of 5
@@ -1726,7 +1721,7 @@ The mean is calculated in three ways:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17507/17759 [00:19&lt;00:00]        
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|===================| 17707/17759 [00:19&lt;00:00]        
 </pre></div>
 </div>
 </div>
@@ -1855,11 +1850,11 @@ The mean is calculated in three ways:</p>
         <span class="n">bin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 
         <span class="c1"># create list of bins (the unique categories)</span>
-        <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
         <span class="n">category_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">+&#39;</span><span class="p">)</span>
 
         <span class="c1"># bin the feature data</span>
-        <span class="n">feature_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">feature_data</span><span class="p">,</span> <span class="n">bin_list</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">category_list</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">feature_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">feature_data</span><span class="p">,</span> <span class="n">bin_list</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">category_list</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># create a violin per unique value</span>
@@ -2110,7 +2105,7 @@ The five most influential features as judged by SHAP were:</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./key_notebooks"
+            path: "./xgb_with_feature_selection"
         },
         predefinedOutput: true
     }

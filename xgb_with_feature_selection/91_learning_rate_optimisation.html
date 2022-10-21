@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Investigating the effect of patient features by varying feature values" href="20_synthetic_patients.html" />
+    <link rel="prev" title="Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -119,7 +119,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/glossary.html">
+  <a class="reference internal" href="../glossary.html">
    Glossary of technical terms
   </a>
  </li>
@@ -129,7 +129,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/shap_worked_example.html">
+  <a class="reference internal" href="../shap_worked_example.html">
    A simple worked example of Shap
   </a>
  </li>
@@ -195,11 +195,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values
   </a>
  </li>
 </ul>
@@ -298,7 +293,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/key_notebooks/91_learning_rate_optimisation.ipynb"
+        <a href="../_sources/xgb_with_feature_selection/91_learning_rate_optimisation.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -358,6 +353,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-output-folders-if-needed">
    Create output folders if needed
   </a>
@@ -407,6 +407,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-output-folders-if-needed">
    Create output folders if needed
   </a>
@@ -451,13 +456,8 @@ title="Print to PDF"
 <p>As hospital ID is encoded as one-hot, and there are 132 hospitals, it is possible that the effect of hospitals ID becomes ‘regularised out’. Learning rate in XGBoost acts as a regulariser. The lower the learning rate the less weight new trees have, and so the model becomes more regularised (less likely to overfit).</p>
 <p>Here we optimise the learning rate to maximise accuracy while maintaining the f=effect of hospital ID.</p>
 <p>A learning rate of 0.5 is selected.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Import libraries</span>
-</pre></div>
-</div>
-</div>
-</div>
+<section id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -478,6 +478,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="create-output-folders-if-needed">
 <h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -584,9 +585,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Learning rate: 0.1. Accuracy: 0.844
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Learning rate: 0.1. Accuracy: 0.845
 Learning rate: 0.25. Accuracy: 0.845
-Learning rate: 0.5. Accuracy: 0.846
+Learning rate: 0.5. Accuracy: 0.841
 Learning rate: 0.75. Accuracy: 0.840
 Learning rate: 1.0. Accuracy: 0.833
 </pre></div>
@@ -665,35 +666,35 @@ Learning rate: 1.0. Accuracy: 0.833
   <tbody>
     <tr>
       <th>Mean</th>
-      <td>0.275126</td>
-      <td>0.275690</td>
-      <td>0.275913</td>
-      <td>0.279098</td>
-      <td>0.280470</td>
+      <td>0.274593</td>
+      <td>0.274926</td>
+      <td>0.275314</td>
+      <td>0.278934</td>
+      <td>0.279054</td>
     </tr>
     <tr>
       <th>StdDev</th>
-      <td>0.028786</td>
-      <td>0.053104</td>
-      <td>0.065875</td>
-      <td>0.068129</td>
-      <td>0.068621</td>
+      <td>0.029284</td>
+      <td>0.052894</td>
+      <td>0.066630</td>
+      <td>0.068437</td>
+      <td>0.068819</td>
     </tr>
     <tr>
       <th>Min</th>
-      <td>0.176100</td>
-      <td>0.117700</td>
-      <td>0.086000</td>
-      <td>0.088100</td>
-      <td>0.110000</td>
+      <td>0.178700</td>
+      <td>0.124400</td>
+      <td>0.095500</td>
+      <td>0.086600</td>
+      <td>0.098700</td>
     </tr>
     <tr>
       <th>Max</th>
-      <td>0.383600</td>
-      <td>0.456000</td>
-      <td>0.477000</td>
-      <td>0.480600</td>
-      <td>0.499900</td>
+      <td>0.384300</td>
+      <td>0.449100</td>
+      <td>0.461000</td>
+      <td>0.497900</td>
+      <td>0.461300</td>
     </tr>
   </tbody>
 </table>
@@ -724,7 +725,7 @@ Learning rate: 1.0. Accuracy: 0.833
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./key_notebooks"
+            path: "./xgb_with_feature_selection"
         },
         predefinedOutput: true
     }
@@ -738,11 +739,11 @@ Learning rate: 1.0. Accuracy: 0.833
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="20_synthetic_patients.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Investigating the effect of patient features by varying feature values</p>
+            <p class="prev-next-title">Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals</p>
         </div>
     </a>
 </div>

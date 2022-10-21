@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html" />
-    <link rel="prev" title="Predicting differences between local and benchmark decisions" href="06_predict_differences_between_local_and_benchmark_key_features.html" />
+    <link rel="prev" title="Predicting differences between local and benchmark decisions" href="../key_notebooks/06_predict_differences_between_local_and_benchmark_key_features.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,7 +115,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
+  <a class="reference internal" href="../key_notebooks/outline.html">
    Outline of notebooks
   </a>
  </li>
@@ -135,7 +135,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
    Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
   </a>
  </li>
@@ -147,22 +147,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
+  <a class="reference internal" href="../key_notebooks/01_xgb_combined_fit_feature_selection.html">
    XGBoost feature selection
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07_correlation.html">
+  <a class="reference internal" href="../key_notebooks/07_correlation.html">
    Check correlation between features selected for the model
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
+  <a class="reference internal" href="../key_notebooks/02_xgb_combined_fit_accuracy_key_features.html">
    Measuring accuracy of XGBoost models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_xgb_combined_shap_key_features.html">
+  <a class="reference internal" href="../key_notebooks/03_xgb_combined_shap_key_features.html">
    Explaining XGBoost model predictions with SHAP values
   </a>
  </li>
@@ -174,17 +174,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
+  <a class="reference internal" href="../key_notebooks/04_compare_10k_cohort_key_features.html">
    A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="05_compare_benchmark_decisions_key_features.html">
+  <a class="reference internal" href="../key_notebooks/05_compare_benchmark_decisions_key_features.html">
    Compare local thrombolysis decisions with benchmark decisions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06_predict_differences_between_local_and_benchmark_key_features.html">
+  <a class="reference internal" href="../key_notebooks/06_predict_differences_between_local_and_benchmark_key_features.html">
    Predicting differences between local and benchmark decisions
   </a>
  </li>
@@ -198,11 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -211,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
+  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -299,7 +294,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/key_notebooks/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.ipynb"
+        <a href="../_sources/xgb_with_feature_selection/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -445,11 +440,6 @@ title="Print to PDF"
    Plot for Arrival-to-scan time
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Observations
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -554,11 +544,6 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plot-for-arrival-to-scan-time">
    Plot for Arrival-to-scan time
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Observations
   </a>
  </li>
 </ul>
@@ -711,23 +696,23 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>VKKDD9172T</th>
-      <td>0.4770</td>
-    </tr>
-    <tr>
-      <th>CNBGF2713O</th>
-      <td>0.4260</td>
-    </tr>
-    <tr>
-      <th>HPWIF9956L</th>
-      <td>0.4140</td>
+      <td>0.4610</td>
     </tr>
     <tr>
       <th>GKONI0110I</th>
-      <td>0.4127</td>
+      <td>0.4356</td>
     </tr>
     <tr>
-      <th>TPXYE0168D</th>
-      <td>0.4026</td>
+      <th>CNBGF2713O</th>
+      <td>0.4207</td>
+    </tr>
+    <tr>
+      <th>HPWIF9956L</th>
+      <td>0.4191</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>0.3981</td>
     </tr>
   </tbody>
 </table>
@@ -824,13 +809,13 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>0</th>
-      <td>15.0</td>
+      <td>17.0</td>
       <td>1.0</td>
       <td>14.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>185.0</td>
+      <td>186.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -854,7 +839,7 @@ title="Print to PDF"
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>70.0</td>
+      <td>71.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -872,13 +857,13 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>2</th>
-      <td>140.0</td>
+      <td>138.0</td>
       <td>1.0</td>
       <td>2.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>65.0</td>
+      <td>67.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -896,13 +881,13 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>3</th>
-      <td>20.0</td>
+      <td>21.0</td>
       <td>0.0</td>
       <td>11.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>85.0</td>
+      <td>86.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -920,13 +905,13 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>4</th>
-      <td>10.0</td>
+      <td>8.0</td>
       <td>1.0</td>
       <td>16.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>85.0</td>
+      <td>83.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -968,7 +953,7 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>17754</th>
-      <td>10.0</td>
+      <td>8.0</td>
       <td>1.0</td>
       <td>4.0</td>
       <td>1.0</td>
@@ -998,7 +983,7 @@ title="Print to PDF"
       <td>0.0</td>
       <td>3.0</td>
       <td>0.0</td>
-      <td>210.0</td>
+      <td>208.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1022,7 +1007,7 @@ title="Print to PDF"
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>235.0</td>
+      <td>236.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1040,13 +1025,13 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>17757</th>
-      <td>15.0</td>
+      <td>16.0</td>
       <td>1.0</td>
       <td>10.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>35.0</td>
+      <td>34.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1064,7 +1049,7 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>17758</th>
-      <td>25.0</td>
+      <td>23.0</td>
       <td>1.0</td>
       <td>10.0</td>
       <td>1.0</td>
@@ -1146,123 +1131,123 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.659584</td>
-      <td>1.750308</td>
-      <td>1.556947</td>
-      <td>0.553028</td>
-      <td>0.403178</td>
-      <td>0.265841</td>
-      <td>-0.418665</td>
-      <td>0.005511</td>
-      <td>-0.003154</td>
+      <td>1.665572</td>
+      <td>1.764335</td>
+      <td>1.519817</td>
+      <td>0.533487</td>
+      <td>0.516871</td>
+      <td>0.261582</td>
+      <td>-0.351841</td>
+      <td>0.006454</td>
+      <td>-0.000906</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.010989</td>
+      <td>0.012956</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.008613</td>
-      <td>0.005172</td>
+      <td>-0.005460</td>
+      <td>0.007542</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.987696</td>
-      <td>1.724934</td>
-      <td>0.741824</td>
-      <td>0.557185</td>
-      <td>0.737015</td>
-      <td>0.297115</td>
-      <td>0.091786</td>
-      <td>-0.005519</td>
-      <td>-0.002807</td>
+      <td>1.042294</td>
+      <td>1.674223</td>
+      <td>0.856954</td>
+      <td>0.567241</td>
+      <td>0.615244</td>
+      <td>0.261544</td>
+      <td>-0.050369</td>
+      <td>-0.002464</td>
+      <td>-0.002205</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.007597</td>
+      <td>0.014900</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.005982</td>
-      <td>0.008882</td>
+      <td>-0.006770</td>
+      <td>0.008916</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-0.471356</td>
-      <td>1.313659</td>
-      <td>-1.108230</td>
-      <td>0.515802</td>
-      <td>0.500291</td>
-      <td>0.215990</td>
-      <td>0.625150</td>
-      <td>-0.005519</td>
-      <td>-0.004373</td>
+      <td>-0.826964</td>
+      <td>1.314690</td>
+      <td>-1.217614</td>
+      <td>0.609297</td>
+      <td>0.652299</td>
+      <td>0.212339</td>
+      <td>0.475219</td>
+      <td>-0.002121</td>
+      <td>-0.005571</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.007608</td>
+      <td>0.014900</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.002188</td>
-      <td>0.007532</td>
+      <td>0.000129</td>
+      <td>0.008393</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.618781</td>
-      <td>-7.858331</td>
-      <td>0.651798</td>
-      <td>0.310834</td>
-      <td>0.222588</td>
-      <td>0.115596</td>
-      <td>0.073555</td>
-      <td>-0.006010</td>
-      <td>-0.001306</td>
+      <td>0.516566</td>
+      <td>-7.852724</td>
+      <td>0.652316</td>
+      <td>0.334562</td>
+      <td>0.286924</td>
+      <td>0.083673</td>
+      <td>-0.004301</td>
+      <td>0.000162</td>
+      <td>0.000863</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.013506</td>
+      <td>0.017112</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.008903</td>
-      <td>0.008503</td>
+      <td>-0.006360</td>
+      <td>0.008215</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.592241</td>
-      <td>1.793487</td>
-      <td>1.450292</td>
-      <td>0.547778</td>
-      <td>0.468315</td>
-      <td>0.227931</td>
-      <td>0.108492</td>
-      <td>0.008333</td>
-      <td>-0.001594</td>
+      <td>1.597652</td>
+      <td>1.797345</td>
+      <td>1.430198</td>
+      <td>0.551891</td>
+      <td>0.520666</td>
+      <td>0.206812</td>
+      <td>0.149001</td>
+      <td>0.014654</td>
+      <td>0.000492</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.006197</td>
+      <td>0.017112</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.001956</td>
-      <td>0.009016</td>
+      <td>-0.003191</td>
+      <td>0.008034</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1290,123 +1275,123 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>17754</th>
-      <td>1.451806</td>
-      <td>1.601706</td>
-      <td>0.124520</td>
-      <td>0.853562</td>
-      <td>0.585670</td>
-      <td>0.196389</td>
-      <td>0.140145</td>
-      <td>-0.001063</td>
-      <td>-0.004512</td>
+      <td>1.450873</td>
+      <td>1.646119</td>
+      <td>0.159537</td>
+      <td>0.893681</td>
+      <td>0.592578</td>
+      <td>0.227030</td>
+      <td>-0.014525</td>
+      <td>-0.000794</td>
+      <td>-0.001883</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.011598</td>
+      <td>0.011911</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.003152</td>
-      <td>0.005102</td>
+      <td>-0.003646</td>
+      <td>0.005996</td>
     </tr>
     <tr>
       <th>17755</th>
-      <td>0.616346</td>
-      <td>1.420287</td>
-      <td>1.073549</td>
-      <td>-1.008946</td>
-      <td>-0.627327</td>
-      <td>0.184221</td>
-      <td>-0.874949</td>
-      <td>0.000206</td>
-      <td>-0.005371</td>
+      <td>0.327505</td>
+      <td>1.435369</td>
+      <td>0.858219</td>
+      <td>-0.925355</td>
+      <td>-0.411963</td>
+      <td>0.139809</td>
+      <td>-0.969236</td>
+      <td>0.003032</td>
+      <td>-0.000350</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.013085</td>
+      <td>0.012956</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.002680</td>
-      <td>0.015260</td>
+      <td>-0.008049</td>
+      <td>0.013558</td>
     </tr>
     <tr>
       <th>17756</th>
-      <td>-0.888380</td>
-      <td>1.170054</td>
-      <td>-0.800685</td>
-      <td>-0.871547</td>
-      <td>-0.016539</td>
-      <td>0.244769</td>
-      <td>-2.092169</td>
-      <td>0.008276</td>
-      <td>-0.003880</td>
+      <td>-0.835297</td>
+      <td>1.215644</td>
+      <td>-0.853170</td>
+      <td>-0.755055</td>
+      <td>-0.054575</td>
+      <td>0.254649</td>
+      <td>-2.016223</td>
+      <td>0.004402</td>
+      <td>-0.008321</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.008244</td>
+      <td>0.015529</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.006901</td>
-      <td>0.006431</td>
+      <td>0.001583</td>
+      <td>0.007954</td>
     </tr>
     <tr>
       <th>17757</th>
-      <td>1.198561</td>
-      <td>1.804080</td>
-      <td>1.138067</td>
-      <td>0.462017</td>
-      <td>0.513485</td>
-      <td>0.234707</td>
-      <td>0.143493</td>
-      <td>0.012737</td>
-      <td>-0.001308</td>
+      <td>1.188463</td>
+      <td>1.760321</td>
+      <td>1.185057</td>
+      <td>0.486597</td>
+      <td>0.581963</td>
+      <td>0.170620</td>
+      <td>0.500511</td>
+      <td>0.007738</td>
+      <td>-0.000324</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.007721</td>
+      <td>0.008683</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.012215</td>
-      <td>0.007452</td>
+      <td>-0.013498</td>
+      <td>0.007206</td>
     </tr>
     <tr>
       <th>17758</th>
-      <td>1.048186</td>
-      <td>1.748649</td>
-      <td>0.866337</td>
-      <td>0.544353</td>
-      <td>0.456075</td>
-      <td>0.233763</td>
-      <td>-0.005014</td>
-      <td>0.000020</td>
-      <td>-0.001306</td>
+      <td>1.234641</td>
+      <td>1.749588</td>
+      <td>0.820623</td>
+      <td>0.555529</td>
+      <td>0.406468</td>
+      <td>0.227709</td>
+      <td>-0.020579</td>
+      <td>0.002986</td>
+      <td>-0.000084</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.009643</td>
+      <td>0.012956</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.011285</td>
-      <td>0.005236</td>
+      <td>-0.006360</td>
+      <td>0.007542</td>
     </tr>
   </tbody>
 </table>
@@ -1769,15 +1754,6 @@ Store their stroke team name.</p>
 </div>
 </div>
 </section>
-<section id="id1">
-<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Low and high thrombolysing hosptials have the same general pattern: that a patient is more likely to recieve thromboylsis if they have a mid-level stroke severity.</p></li>
-<li><p>The more cautious hospitals are even less likely to thrombolyse mild and severe strokes, are more likely to thrombolyse mid-level strokes.</p></li>
-<li><p>The wider the net for including hospitals into the two groups (9 vs 30) the less pronounced the difference.</p></li>
-<li><p>Dividing the patients into did/did not receive thrombolysis shows for those.</p></li>
-</ul>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1793,7 +1769,7 @@ Store their stroke team name.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./key_notebooks"
+            path: "./xgb_with_feature_selection"
         },
         predefinedOutput: true
     }
@@ -1807,7 +1783,7 @@ Store their stroke team name.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="06_predict_differences_between_local_and_benchmark_key_features.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../key_notebooks/06_predict_differences_between_local_and_benchmark_key_features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>

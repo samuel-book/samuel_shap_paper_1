@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Predicting differences between local and benchmark decisions" href="06_predict_differences_between_local_and_benchmark_key_features.html" />
-    <link rel="prev" title="A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values" href="04_compare_10k_cohort_key_features.html" />
+    <link rel="prev" title="A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values" href="../key_notebooks/04_compare_10k_cohort_key_features.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,7 +115,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
+  <a class="reference internal" href="../key_notebooks/outline.html">
    Outline of notebooks
   </a>
  </li>
@@ -135,7 +135,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
    Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
   </a>
  </li>
@@ -147,7 +147,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
+  <a class="reference internal" href="../key_notebooks/01_xgb_combined_fit_feature_selection.html">
    XGBoost feature selection
   </a>
  </li>
@@ -157,12 +157,12 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
+  <a class="reference internal" href="../key_notebooks/02_xgb_combined_fit_accuracy_key_features.html">
    Measuring accuracy of XGBoost models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_xgb_combined_shap_key_features.html">
+  <a class="reference internal" href="../key_notebooks/03_xgb_combined_shap_key_features.html">
    Explaining XGBoost model predictions with SHAP values
   </a>
  </li>
@@ -174,7 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
+  <a class="reference internal" href="../key_notebooks/04_compare_10k_cohort_key_features.html">
    A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
   </a>
  </li>
@@ -198,11 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -211,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
+  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -299,7 +294,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/key_notebooks/05_compare_benchmark_decisions_key_features.ipynb"
+        <a href="../_sources/xgb_with_feature_selection/05_compare_benchmark_decisions_key_features.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -553,8 +548,8 @@ title="Print to PDF"
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>82.9% decisions are identical between local and benchmark decisions.</p></li>
-<li><p>Thrombolysis use would be increased 22.4% if benchmark decisions were made at all hospitals. The lowest 30 units would, together, have 64% increased thrombolysis rates by following benchmark decisions.</p></li>
+<li><p>82.8% decisions are identical between local and benchmark decisions.</p></li>
+<li><p>Thrombolysis use would be increased 22.6% if benchmark decisions were made at all hospitals.</p></li>
 <li><p>The ration of benchmark:local thrombolysis use was 0.7 to 2.2.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -625,23 +620,23 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>VKKDD9172T</th>
-      <td>0.4770</td>
-    </tr>
-    <tr>
-      <th>CNBGF2713O</th>
-      <td>0.4260</td>
-    </tr>
-    <tr>
-      <th>HPWIF9956L</th>
-      <td>0.4140</td>
+      <td>0.4610</td>
     </tr>
     <tr>
       <th>GKONI0110I</th>
-      <td>0.4127</td>
+      <td>0.4356</td>
     </tr>
     <tr>
-      <th>TPXYE0168D</th>
-      <td>0.4026</td>
+      <th>CNBGF2713O</th>
+      <td>0.4207</td>
+    </tr>
+    <tr>
+      <th>HPWIF9956L</th>
+      <td>0.4191</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>0.3981</td>
     </tr>
   </tbody>
 </table>
@@ -746,10 +741,10 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.846
-Run 2, accuracy: 0.852
+Run 2, accuracy: 0.853
 Run 3, accuracy: 0.845
-Run 4, accuracy: 0.851
-Run 5, accuracy: 0.845
+Run 4, accuracy: 0.849
+Run 5, accuracy: 0.844
 </pre></div>
 </div>
 </div>
@@ -958,7 +953,7 @@ Run 5, accuracy: 0.845
       <td>TXHRP7672C</td>
       <td>1</td>
       <td>1.0</td>
-      <td>0.851281</td>
+      <td>0.880155</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -966,7 +961,7 @@ Run 5, accuracy: 0.845
       <td>SQGXB9559U</td>
       <td>1</td>
       <td>1.0</td>
-      <td>0.678180</td>
+      <td>0.627783</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -974,7 +969,7 @@ Run 5, accuracy: 0.845
       <td>LFPMM4706C</td>
       <td>0</td>
       <td>0.0</td>
-      <td>0.049836</td>
+      <td>0.042199</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -982,7 +977,7 @@ Run 5, accuracy: 0.845
       <td>MHMYL4920B</td>
       <td>0</td>
       <td>0.0</td>
-      <td>0.000119</td>
+      <td>0.000084</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -990,7 +985,7 @@ Run 5, accuracy: 0.845
       <td>EQZZZ5658G</td>
       <td>1</td>
       <td>1.0</td>
-      <td>0.897710</td>
+      <td>0.916311</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1016,7 +1011,7 @@ Run 5, accuracy: 0.845
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion same decision 0.829
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion same decision 0.828
 </pre></div>
 </div>
 </div>
@@ -1072,32 +1067,32 @@ Run 5, accuracy: 0.845
     <tr>
       <th>AGNOF1041H</th>
       <td>307</td>
-      <td>314.0</td>
-      <td>409.0</td>
+      <td>307.0</td>
+      <td>402.0</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
       <td>528</td>
-      <td>502.0</td>
-      <td>573.0</td>
+      <td>512.0</td>
+      <td>556.0</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
       <td>128</td>
-      <td>130.0</td>
-      <td>199.0</td>
+      <td>127.0</td>
+      <td>200.0</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
       <td>130</td>
-      <td>119.0</td>
-      <td>173.0</td>
+      <td>116.0</td>
+      <td>171.0</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
       <td>75</td>
-      <td>72.0</td>
-      <td>91.0</td>
+      <td>74.0</td>
+      <td>92.0</td>
     </tr>
   </tbody>
 </table>
@@ -1118,7 +1113,7 @@ Run 5, accuracy: 0.845
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent change in thrombolysis with benchmark vote: 22.4%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent change in thrombolysis with benchmark vote: 22.1%
 </pre></div>
 </div>
 </div>
@@ -1139,7 +1134,7 @@ Run 5, accuracy: 0.845
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent increase in thrombolysis at bottom 30 hospitals with benchmark decisions: 63.5%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent increase in thrombolysis at bottom 30 hospitals with benchmark decisions: 63.1%
 </pre></div>
 </div>
 </div>
@@ -1240,51 +1235,51 @@ Run 5, accuracy: 0.845
     <tr>
       <th>AGNOF1041H</th>
       <td>307</td>
-      <td>314.0</td>
-      <td>409.0</td>
+      <td>307.0</td>
+      <td>402.0</td>
       <td>871</td>
       <td>0.352468</td>
-      <td>0.469575</td>
+      <td>0.461538</td>
       <td>False</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
       <td>528</td>
-      <td>502.0</td>
-      <td>573.0</td>
+      <td>512.0</td>
+      <td>556.0</td>
       <td>1428</td>
       <td>0.369748</td>
-      <td>0.401261</td>
+      <td>0.389356</td>
       <td>True</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
       <td>128</td>
-      <td>130.0</td>
-      <td>199.0</td>
+      <td>127.0</td>
+      <td>200.0</td>
       <td>585</td>
       <td>0.218803</td>
-      <td>0.340171</td>
+      <td>0.341880</td>
       <td>False</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
       <td>130</td>
-      <td>119.0</td>
-      <td>173.0</td>
+      <td>116.0</td>
+      <td>171.0</td>
       <td>574</td>
       <td>0.226481</td>
-      <td>0.301394</td>
+      <td>0.297909</td>
       <td>False</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
       <td>75</td>
-      <td>72.0</td>
-      <td>91.0</td>
+      <td>74.0</td>
+      <td>92.0</td>
       <td>312</td>
       <td>0.240385</td>
-      <td>0.291667</td>
+      <td>0.294872</td>
       <td>False</td>
     </tr>
   </tbody>
@@ -1376,7 +1371,7 @@ Run 5, accuracy: 0.845
 <h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>82.9% decisions are identical between local and benchmark decisions.</p></li>
-<li><p>Thrombolysis use would be increased 22.4% if benchmark decisions were made at all hospitals. The lowest 30 units would, together, have 64% increased thrombolysis rates by following benchmark decisions.</p></li>
+<li><p>Thrombolysis use would be increased 22.6% if benchmark decisions were made at all hospitals.</p></li>
 <li><p>The ration of benchmark:local thrombolysis use was 0.7 to 2.2.</p></li>
 </ul>
 </section>
@@ -1395,7 +1390,7 @@ Run 5, accuracy: 0.845
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./key_notebooks"
+            path: "./xgb_with_feature_selection"
         },
         predefinedOutput: true
     }
@@ -1409,7 +1404,7 @@ Run 5, accuracy: 0.845
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="04_compare_10k_cohort_key_features.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../key_notebooks/04_compare_10k_cohort_key_features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
