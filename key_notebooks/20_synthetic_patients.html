@@ -359,6 +359,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
    Import libraries
   </a>
@@ -384,8 +389,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixing-patient-values">
-   Mixing patient values
+  <a class="reference internal nav-link" href="#examples-of-patient-values">
+   Examples of patient values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-interactions-with-stroke-severity">
+   Show interactions with stroke severity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Observations
   </a>
  </li>
 </ul>
@@ -408,6 +423,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-libraries">
    Import libraries
   </a>
@@ -433,8 +453,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixing-patient-values">
-   Mixing patient values
+  <a class="reference internal nav-link" href="#examples-of-patient-values">
+   Examples of patient values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-interactions-with-stroke-severity">
+   Show interactions with stroke severity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Observations
   </a>
  </li>
 </ul>
@@ -465,6 +495,13 @@ title="Print to PDF"
 <li><p>Prior disability level = 0-5</p></li>
 <li><p>Precise onset time = 0-1</p></li>
 </ul>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>There are interactions between features in the number of hopsitals that would give patients thrombolysis.</p></li>
+<li><p>Changing three features individually (stroke severity NIHSS=5, pre-stroke disablity =2, estimated stroke onset) have minor effects alone, but when combined only 8 out of 132 hopsitals (6.2%) are predicted to give thrombolysis to that patient.</p></li>
+</ul>
+</section>
 <section id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -692,8 +729,9 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="mixing-patient-values">
-<h2>Mixing patient values<a class="headerlink" href="#mixing-patient-values" title="Permalink to this headline">#</a></h2>
+<section id="examples-of-patient-values">
+<h2>Examples of patient values<a class="headerlink" href="#examples-of-patient-values" title="Permalink to this headline">#</a></h2>
+<p>Base patient.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -703,17 +741,143 @@ title="Print to PDF"
 
 <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent of hospitals that would give thrombolsysis: 6.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 8
+Percent of hospitals that would give thrombolsysis: 6.1
 </pre></div>
 </div>
 </div>
 </div>
-<p>Show interactions with stroke severity.</p>
+<p>Base patient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 8
+Percent of hospitals that would give thrombolsysis: 6.1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Stroke severity (NIHSS) = 5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 124
+Percent of hospitals that would give thrombolsysis: 93.9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Prior disability leve (mRS) = 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 128
+Percent of hospitals that would give thrombolsysis: 97.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estimated stroke onset time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 110
+Percent of hospitals that would give thrombolsysis: 83.3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Combined NIHSS = 5, pre-stroke mRS = 2, estimated stroke onset time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 8
+Percent of hospitals that would give thrombolsysis: 6.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-interactions-with-stroke-severity">
+<h2>Show interactions with stroke severity<a class="headerlink" href="#show-interactions-with-stroke-severity" title="Permalink to this headline">#</a></h2>
+<p>Show effect of varying NIHSS with:</p>
+<ul class="simple">
+<li><p>No other changes</p></li>
+<li><p>Pre-stroke disability (mRS) = 2</p></li>
+<li><p>Estimated stroke onset time</p></li>
+<li><p>Pre-stroke disability (mRS) = 2, and estimated stroke onset time</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Base patient</span>
@@ -786,8 +950,8 @@ title="Print to PDF"
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">),</span>
-    <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.12</span><span class="p">),</span>
+    <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/synthetic_patient_interactions.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -795,9 +959,16 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20_synthetic_patients_18_0.png" src="../_images/20_synthetic_patients_18_0.png" />
+<img alt="../_images/20_synthetic_patients_29_0.png" src="../_images/20_synthetic_patients_29_0.png" />
 </div>
 </div>
+</section>
+<section id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>There are interactions between features in the number of hopsitals that would give patients thrombolysis.</p></li>
+<li><p>Changing three features individually (stroke severity NIHSS=5, pre-stroke disablity =2, estimated stroke onset) have minor effects alone, but when combined only 8 out of 132 hopsitals (6.2%) are predicted to give thrombolysis to that patient.</p></li>
+</ul>
 </section>
 </section>
 
