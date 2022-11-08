@@ -136,7 +136,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="90_shap_interactions_on_titanic.html">
-   Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
+   Examining interactions between features with SHAP interactions
   </a>
  </li>
 </ul>
@@ -627,7 +627,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="measuring-accuracy-of-xgboost-models">
 <h1>Measuring accuracy of XGBoost models<a class="headerlink" href="#measuring-accuracy-of-xgboost-models" title="Permalink to this headline">#</a></h1>
-<p>(using stratified 5-fold cross validation, and a model with 8 features)</p>
+<p>(using stratified 5-fold cross validation, and a model with 10 features)</p>
 <section id="plain-english-summary">
 <h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
 <p>We have decided to simplify our model by using 8 independent features to predict which patients recieve thrombolysis. These are: arrival-to-scan time, infarction, stroke severity, precise onset time, prior disability level, stroke team, use of AF anticoagulents, and onset-to-arrival time. This gives a good balance of performance (in terms of ROC AUC, achieving 99.1% of what can be obtained with all 84 features) and model complexity.</p>
@@ -645,12 +645,14 @@ title="Print to PDF"
 <li><p>Stroke team: Stroke team attended</p></li>
 <li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
 <li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
 <p>And one target feature:</p>
 <ul class="simple">
 <li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
 </ul>
-<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+<p>The 10 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
 </section>
 <section id="aims">
 <h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
@@ -667,7 +669,7 @@ title="Print to PDF"
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Overall accuracy = 84.8% (88.3 for those 69% samples with at least 80% confidence of model)</p></li>
+<li><p>Overall accuracy = 84.8% (88.4 for those 69% samples with at least 80% confidence of model)</p></li>
 <li><p>Using nominal threshold (50% probability), specificity (89.4%) is greater than sensitivity (73.8%)</p></li>
 <li><p>The model can achieve 83.8% sensitivity and specificity simultaneously</p></li>
 <li><p>ROC AUC = 0.916</p></li>
@@ -1178,7 +1180,7 @@ Run 4, accuracy: 0.845
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_results</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_results</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1201,213 +1203,193 @@ Run 4, accuracy: 0.845
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
+      <th>observed_positive_rate</th>
+      <th>observed_negative_rate</th>
+      <th>predicted_positive_rate</th>
+      <th>predicted_negative_rate</th>
+      <th>accuracy</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>sensitivity</th>
+      <th>specificity</th>
+      <th>positive_likelihood</th>
+      <th>negative_likelihood</th>
+      <th>false_positive_rate</th>
+      <th>false_negative_rate</th>
+      <th>true_positive_rate</th>
+      <th>true_negative_rate</th>
+      <th>positive_predictive_value</th>
+      <th>negative_predictive_value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>observed_positive_rate</th>
-      <td>5.0</td>
+      <th>count</th>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
       <td>0.295714</td>
-      <td>0.000211</td>
-      <td>0.295472</td>
-      <td>0.295529</td>
-      <td>0.295737</td>
-      <td>0.295867</td>
-      <td>0.295963</td>
-    </tr>
-    <tr>
-      <th>observed_negative_rate</th>
-      <td>5.0</td>
       <td>0.704286</td>
-      <td>0.000211</td>
-      <td>0.704037</td>
-      <td>0.704133</td>
-      <td>0.704263</td>
-      <td>0.704471</td>
-      <td>0.704528</td>
-    </tr>
-    <tr>
-      <th>predicted_positive_rate</th>
-      <td>5.0</td>
       <td>0.292921</td>
-      <td>0.001993</td>
-      <td>0.290388</td>
-      <td>0.291852</td>
-      <td>0.292488</td>
-      <td>0.294853</td>
-      <td>0.295022</td>
-    </tr>
-    <tr>
-      <th>predicted_negative_rate</th>
-      <td>5.0</td>
       <td>0.707079</td>
-      <td>0.001993</td>
-      <td>0.704978</td>
-      <td>0.705147</td>
-      <td>0.707512</td>
-      <td>0.708148</td>
-      <td>0.709612</td>
-    </tr>
-    <tr>
-      <th>accuracy</th>
-      <td>5.0</td>
       <td>0.847869</td>
-      <td>0.003372</td>
-      <td>0.844577</td>
-      <td>0.845365</td>
-      <td>0.846444</td>
-      <td>0.851109</td>
-      <td>0.851850</td>
-    </tr>
-    <tr>
-      <th>precision</th>
-      <td>5.0</td>
       <td>0.745114</td>
-      <td>0.006714</td>
-      <td>0.738159</td>
-      <td>0.738691</td>
-      <td>0.745201</td>
-      <td>0.750674</td>
-      <td>0.752846</td>
-    </tr>
-    <tr>
-      <th>recall</th>
-      <td>5.0</td>
       <td>0.738053</td>
-      <td>0.005039</td>
-      <td>0.731164</td>
-      <td>0.735630</td>
-      <td>0.737564</td>
-      <td>0.742950</td>
-      <td>0.742955</td>
-    </tr>
-    <tr>
-      <th>f1</th>
-      <td>5.0</td>
       <td>0.741559</td>
-      <td>0.005306</td>
-      <td>0.736892</td>
-      <td>0.738116</td>
-      <td>0.738127</td>
-      <td>0.746792</td>
-      <td>0.747868</td>
-    </tr>
-    <tr>
-      <th>sensitivity</th>
-      <td>5.0</td>
       <td>0.738053</td>
-      <td>0.005039</td>
-      <td>0.731164</td>
-      <td>0.735630</td>
-      <td>0.737564</td>
-      <td>0.742950</td>
-      <td>0.742955</td>
-    </tr>
-    <tr>
-      <th>specificity</th>
-      <td>5.0</td>
       <td>0.893979</td>
-      <td>0.003346</td>
-      <td>0.890355</td>
-      <td>0.890576</td>
-      <td>0.894905</td>
-      <td>0.896483</td>
-      <td>0.897577</td>
-    </tr>
-    <tr>
-      <th>positive_likelihood</th>
-      <td>5.0</td>
       <td>6.967544</td>
-      <td>0.247120</td>
-      <td>6.709203</td>
-      <td>6.740444</td>
-      <td>6.957190</td>
-      <td>7.177066</td>
-      <td>7.253817</td>
-    </tr>
-    <tr>
-      <th>negative_likelihood</th>
-      <td>5.0</td>
       <td>0.293024</td>
-      <td>0.006250</td>
-      <td>0.286376</td>
-      <td>0.286732</td>
-      <td>0.294681</td>
-      <td>0.296926</td>
-      <td>0.300407</td>
-    </tr>
-    <tr>
-      <th>false_positive_rate</th>
-      <td>5.0</td>
       <td>0.106021</td>
-      <td>0.003346</td>
-      <td>0.102423</td>
-      <td>0.103517</td>
-      <td>0.105095</td>
-      <td>0.109424</td>
-      <td>0.109645</td>
-    </tr>
-    <tr>
-      <th>false_negative_rate</th>
-      <td>5.0</td>
       <td>0.261947</td>
-      <td>0.005039</td>
-      <td>0.257045</td>
-      <td>0.257050</td>
-      <td>0.262436</td>
-      <td>0.264370</td>
-      <td>0.268836</td>
-    </tr>
-    <tr>
-      <th>true_positive_rate</th>
-      <td>5.0</td>
       <td>0.738053</td>
-      <td>0.005039</td>
-      <td>0.731164</td>
-      <td>0.735630</td>
-      <td>0.737564</td>
-      <td>0.742950</td>
-      <td>0.742955</td>
-    </tr>
-    <tr>
-      <th>true_negative_rate</th>
-      <td>5.0</td>
       <td>0.893979</td>
-      <td>0.003346</td>
-      <td>0.890355</td>
-      <td>0.890576</td>
-      <td>0.894905</td>
-      <td>0.896483</td>
-      <td>0.897577</td>
-    </tr>
-    <tr>
-      <th>positive_predictive_value</th>
-      <td>5.0</td>
       <td>0.745114</td>
-      <td>0.006714</td>
-      <td>0.738159</td>
-      <td>0.738691</td>
-      <td>0.745201</td>
-      <td>0.750674</td>
-      <td>0.752846</td>
+      <td>0.890448</td>
     </tr>
     <tr>
-      <th>negative_predictive_value</th>
-      <td>5.0</td>
-      <td>0.890448</td>
+      <th>std</th>
+      <td>0.000211</td>
+      <td>0.000211</td>
+      <td>0.001993</td>
+      <td>0.001993</td>
+      <td>0.003372</td>
+      <td>0.006714</td>
+      <td>0.005039</td>
+      <td>0.005306</td>
+      <td>0.005039</td>
+      <td>0.003346</td>
+      <td>0.247120</td>
+      <td>0.006250</td>
+      <td>0.003346</td>
+      <td>0.005039</td>
+      <td>0.005039</td>
+      <td>0.003346</td>
+      <td>0.006714</td>
       <td>0.002140</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.295472</td>
+      <td>0.704037</td>
+      <td>0.290388</td>
+      <td>0.704978</td>
+      <td>0.844577</td>
+      <td>0.738159</td>
+      <td>0.731164</td>
+      <td>0.736892</td>
+      <td>0.731164</td>
+      <td>0.890355</td>
+      <td>6.709203</td>
+      <td>0.286376</td>
+      <td>0.102423</td>
+      <td>0.257045</td>
+      <td>0.731164</td>
+      <td>0.890355</td>
+      <td>0.738159</td>
       <td>0.887875</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.295529</td>
+      <td>0.704133</td>
+      <td>0.291852</td>
+      <td>0.705147</td>
+      <td>0.845365</td>
+      <td>0.738691</td>
+      <td>0.735630</td>
+      <td>0.738116</td>
+      <td>0.735630</td>
+      <td>0.890576</td>
+      <td>6.740444</td>
+      <td>0.286732</td>
+      <td>0.103517</td>
+      <td>0.257050</td>
+      <td>0.735630</td>
+      <td>0.890576</td>
+      <td>0.738691</td>
       <td>0.889075</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.295737</td>
+      <td>0.704263</td>
+      <td>0.292488</td>
+      <td>0.707512</td>
+      <td>0.846444</td>
+      <td>0.745201</td>
+      <td>0.737564</td>
+      <td>0.738127</td>
+      <td>0.737564</td>
+      <td>0.894905</td>
+      <td>6.957190</td>
+      <td>0.294681</td>
+      <td>0.105095</td>
+      <td>0.262436</td>
+      <td>0.737564</td>
+      <td>0.894905</td>
+      <td>0.745201</td>
       <td>0.890007</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.295867</td>
+      <td>0.704471</td>
+      <td>0.294853</td>
+      <td>0.708148</td>
+      <td>0.851109</td>
+      <td>0.750674</td>
+      <td>0.742950</td>
+      <td>0.746792</td>
+      <td>0.742950</td>
+      <td>0.896483</td>
+      <td>7.177066</td>
+      <td>0.296926</td>
+      <td>0.109424</td>
+      <td>0.264370</td>
+      <td>0.742950</td>
+      <td>0.896483</td>
+      <td>0.750674</td>
       <td>0.892630</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.295963</td>
+      <td>0.704528</td>
+      <td>0.295022</td>
+      <td>0.709612</td>
+      <td>0.851850</td>
+      <td>0.752846</td>
+      <td>0.742955</td>
+      <td>0.747868</td>
+      <td>0.742955</td>
+      <td>0.897577</td>
+      <td>7.253817</td>
+      <td>0.300407</td>
+      <td>0.109645</td>
+      <td>0.268836</td>
+      <td>0.742955</td>
+      <td>0.897577</td>
+      <td>0.752846</td>
       <td>0.892653</td>
     </tr>
   </tbody>
@@ -1735,7 +1717,7 @@ SD intersection: 0.0031
       <td>0.373361</td>
     </tr>
     <tr>
-      <th>Use of AF anticoagulents</th>
+      <th>Use of AF anticoagulants</th>
       <td>0.040884</td>
     </tr>
     <tr>
@@ -2239,8 +2221,8 @@ Accuracy: 0.884
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_training_size</span><span class="p">,</span> <span class="n">k_fold_accuracy</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Training set size (full range)&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Training set size&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy)&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 
 <span class="c1"># Focus on first 5000</span>
@@ -2248,7 +2230,7 @@ Accuracy: 0.884
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_training_size</span><span class="p">,</span> <span class="n">k_fold_accuracy</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
 
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Training set size (50 - 5,000)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Training set size&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
@@ -2267,7 +2249,7 @@ Accuracy: 0.884
 <section id="id1">
 <h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Overall accuracy = 84.8% (88.3 for those 69% samples with at least 80% confidence of model)</p></li>
+<li><p>Overall accuracy = 84.8% (88.4 for those 69% samples with at least 80% confidence of model)</p></li>
 <li><p>Using nominal threshold (50% probability), specificity (89.4%) is greater than sensitivity (73.8%)</p></li>
 <li><p>The model can achieve 83.8% sensitivity and specificity simultaneously</p></li>
 <li><p>ROC AUC = 0.916</p></li>

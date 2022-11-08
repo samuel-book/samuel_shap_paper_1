@@ -136,7 +136,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="90_shap_interactions_on_titanic.html">
-   Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
+   Examining interactions between features with SHAP interactions
   </a>
  </li>
 </ul>
@@ -515,7 +515,7 @@ title="Print to PDF"
 </section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
-<p>Using the full dataset, calculate the correlation between each of these 7 features:</p>
+<p>Using the full dataset, calculate the correlation between each of these 9 features:</p>
 <ul class="simple">
 <li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
 <li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
@@ -524,8 +524,10 @@ title="Print to PDF"
 <li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
 <li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
 <li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
-<p>The 7 features included were chosen sequentially as having the single best improvement in the XGBoost model performance (using the ROC AUC), excluding the stroke team feature.</p>
+<p>The 9 features included were chosen sequentially as having the single best improvement in the XGBoost model performance (using the ROC AUC), excluding the stroke team feature.</p>
 </section>
 <section id="aim">
 <h2>Aim<a class="headerlink" href="#aim" title="Permalink to this headline">#</a></h2>
@@ -535,7 +537,7 @@ title="Print to PDF"
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
-<p>There are only very weak correlations between the selected features with no R-squared being greater than 0.05.</p>
+<p>There are only very weak correlations between the selected features with no R-squared being greater than 0.15, and all but two being lower than 0.05.</p>
 </section>
 <section id="import-libraries">
 <h2>import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
@@ -582,7 +584,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in the names of the selected features for the model</span>
-<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/feature_selection.csv&#39;</span><span class="p">)</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
 
@@ -697,6 +699,16 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
+      <th>Age</th>
+      <td>Prior disability level</td>
+      <td>0.1462</td>
+    </tr>
+    <tr>
+      <th>Onset during sleep</th>
+      <td>Precise onset time</td>
+      <td>0.0784</td>
+    </tr>
+    <tr>
       <th>Stroke severity</th>
       <td>Prior disability level</td>
       <td>0.0454</td>
@@ -707,9 +719,19 @@ title="Print to PDF"
       <td>0.0386</td>
     </tr>
     <tr>
-      <th>Onset-to-arrival time</th>
-      <td>Precise onset time</td>
+      <th>Precise onset time</th>
+      <td>Onset-to-arrival time</td>
       <td>0.0344</td>
+    </tr>
+    <tr>
+      <th>Stroke severity</th>
+      <td>Age</td>
+      <td>0.0268</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>Use of AF anticoagulants</td>
+      <td>0.0207</td>
     </tr>
     <tr>
       <th>Stroke severity</th>
@@ -722,12 +744,27 @@ title="Print to PDF"
       <td>0.0131</td>
     </tr>
     <tr>
+      <th>Age</th>
+      <td>Precise onset time</td>
+      <td>0.0090</td>
+    </tr>
+    <tr>
       <th>Prior disability level</th>
-      <td>Use of AF anticoagulents</td>
+      <td>Use of AF anticoagulants</td>
       <td>0.0070</td>
     </tr>
     <tr>
-      <th>Use of AF anticoagulents</th>
+      <th>Onset during sleep</th>
+      <td>Onset-to-arrival time</td>
+      <td>0.0043</td>
+    </tr>
+    <tr>
+      <th>Onset-to-arrival time</th>
+      <td>Age</td>
+      <td>0.0039</td>
+    </tr>
+    <tr>
+      <th>Use of AF anticoagulants</th>
       <td>Infarction</td>
       <td>0.0033</td>
     </tr>
@@ -737,24 +774,29 @@ title="Print to PDF"
       <td>0.0022</td>
     </tr>
     <tr>
-      <th>Arrival-to-scan time</th>
-      <td>Precise onset time</td>
+      <th>Precise onset time</th>
+      <td>Arrival-to-scan time</td>
       <td>0.0021</td>
     </tr>
     <tr>
-      <th>Stroke severity</th>
-      <td>Use of AF anticoagulents</td>
+      <th>Use of AF anticoagulants</th>
+      <td>Stroke severity</td>
       <td>0.0019</td>
     </tr>
     <tr>
-      <th>Stroke severity</th>
-      <td>Arrival-to-scan time</td>
+      <th>Arrival-to-scan time</th>
+      <td>Stroke severity</td>
       <td>0.0019</td>
     </tr>
     <tr>
       <th>Precise onset time</th>
-      <td>Use of AF anticoagulents</td>
+      <td>Use of AF anticoagulants</td>
       <td>0.0016</td>
+    </tr>
+    <tr>
+      <th>Stroke severity</th>
+      <td>Onset during sleep</td>
+      <td>0.0011</td>
     </tr>
     <tr>
       <th>Infarction</th>
@@ -762,34 +804,29 @@ title="Print to PDF"
       <td>0.0007</td>
     </tr>
     <tr>
-      <th>Precise onset time</th>
-      <td>Infarction</td>
-      <td>0.0006</td>
-    </tr>
-    <tr>
-      <th>Arrival-to-scan time</th>
-      <td>Onset-to-arrival time</td>
-      <td>0.0004</td>
-    </tr>
-    <tr>
-      <th>Onset-to-arrival time</th>
-      <td>Use of AF anticoagulents</td>
-      <td>0.0001</td>
-    </tr>
-    <tr>
-      <th>Prior disability level</th>
-      <td>Arrival-to-scan time</td>
-      <td>0.0001</td>
+      <th>Infarction</th>
+      <td>Onset during sleep</td>
+      <td>0.0007</td>
     </tr>
     <tr>
       <th>Infarction</th>
-      <td>Prior disability level</td>
-      <td>0.0000</td>
+      <td>Precise onset time</td>
+      <td>0.0006</td>
     </tr>
     <tr>
-      <th>Use of AF anticoagulents</th>
+      <th>Onset-to-arrival time</th>
       <td>Arrival-to-scan time</td>
-      <td>0.0000</td>
+      <td>0.0004</td>
+    </tr>
+    <tr>
+      <th>Arrival-to-scan time</th>
+      <td>Prior disability level</td>
+      <td>0.0001</td>
+    </tr>
+    <tr>
+      <th>Onset-to-arrival time</th>
+      <td>Use of AF anticoagulants</td>
+      <td>0.0001</td>
     </tr>
     <tr>
       <th>Stroke severity</th>
@@ -797,8 +834,48 @@ title="Print to PDF"
       <td>0.0000</td>
     </tr>
     <tr>
+      <th>Arrival-to-scan time</th>
+      <td>Age</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Use of AF anticoagulants</th>
+      <td>Onset during sleep</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Prior disability level</th>
+      <td>Onset during sleep</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
       <th>Infarction</th>
+      <td>Age</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Use of AF anticoagulants</th>
       <td>Arrival-to-scan time</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Onset during sleep</th>
+      <td>Arrival-to-scan time</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Arrival-to-scan time</th>
+      <td>Infarction</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>Onset during sleep</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>Prior disability level</th>
+      <td>Infarction</td>
       <td>0.0000</td>
     </tr>
   </tbody>
@@ -808,7 +885,7 @@ title="Print to PDF"
 </section>
 <section id="id1">
 <h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>There are only very weak correlations between the selected features with no R-squared being greater than 0.05.</p>
+<p>There are only very weak correlations between the selected features with no R-squared being greater than 0.15, and all but two being lower than 0.05.</p>
 </section>
 </section>
 
