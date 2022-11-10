@@ -44,7 +44,7 @@ appears OK, update `master`.
 
 Run this from the branch where you want the file to end up:
 
-`git checkout otherbranch myfile.txt`
+git restore --source otherbranch path/to/myfile.txt
 
 ## To check which branch you are on, change branches, or create a branch
 
