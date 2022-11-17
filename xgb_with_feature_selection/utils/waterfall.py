@@ -268,69 +268,59 @@ def waterfall(shap_values, max_display=10, show=True, y_reverse=False):
 
     # Set up the different values to use depending on if f(x) is at top or bottom
     # Code uses ax.twiny() which takes the opposite position of the axis, so to switch the location of f(x) and E(f(x)) need to swap the order they are created.
-    if y_reverse:
-        ax2_value = base_values + values.sum()
-        ax2_ticklabels = ["$f(x)$", "$ = "+format_value(fx, "%0.03f")+"$"]
-        ax2_loc1 = -10/72.
-        ax2_loc2 = 12/72.
-        ax2_loc3 = -15/72.
-        ax2_loc4 = -15/72.
 
-        ax3_value = base_values
-        ax3_ticklabels = ["\n$E[f(X)]$", "\n$ = "+format_value(base_values, "%0.03f")+"$"]
-        ax3_loc1 = -20/72.
-        ax3_loc2 = 22/72.
-        ax3_loc3 = 0
-        ax3_loc4 = 0
+    if y_reverse:
+        ax2_dict = {"value": base_values + values.sum(),
+                    "ticklabels": ["$f(x)$", "$ = "+format_value(fx, "%0.03f")+"$"],        
+                    "loc1": -10/72., "loc2": 12/72., "loc3": -15/72., "loc4": -15/72.}
+
+        ax3_dict = {"value": base_values, 
+                    "ticklabels": ["\n$E[f(X)]$", "\n$ = "+format_value(base_values, "%0.03f")+"$"], 
+                    "loc1": -20/72., "loc2": 22/72., "loc3": 0, "loc4": 0}
+        
     else:
-        ax2_value = base_values
-        ax2_ticklabels = ["\n$E[f(X)]$", "\n$ = "+format_value(base_values, "%0.03f")+"$"]
-        ax2_loc1 = -20/72.
-        ax2_loc2 = 22/72.
-        ax2_loc3 = 0
-        ax2_loc4 = -1/72.
+        ax2_dict = {"value": base_values, 
+                    "ticklabels": ["\n$E[f(X)]$", "\n$ = "+format_value(base_values, "%0.03f")+"$"], 
+                    "loc1": -20/72., "loc2": 22/72., "loc3": 0, "loc4": -1/72.}
         
-        ax3_value = base_values + values.sum()
-        ax3_ticklabels = ["$f(x)$", "$ = "+format_value(fx, "%0.03f")+"$"]
-        ax3_loc1 = -10/72.
-        ax3_loc2 = 12/72.
-        ax3_loc3 = 0
-        ax3_loc4 = 0
-        
-    # draw the f(X) tick mark
+        ax3_dict = {"value": base_values + values.sum(), 
+                    "ticklabels": ["$f(x)$", "$ = "+format_value(fx, "%0.03f")+"$"], 
+                    "loc1": -10/72., "loc2": 12/72., "loc3": 0, "loc4": 0}
+
+    # draw the top tick mark (either f(X) or E(f(x)) depending on y_reverse)
     xmin, xmax = ax.get_xlim()
     ax2 = ax.twiny()
     ax2.set_xlim(xmin, xmax)
-    ax2.set_xticks([ax2_value, ax2_value + 1e-8]) # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
+    ax2.set_xticks([ax2_dict["value"], ax2_dict["value"] + 1e-8]) # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
     # The 1e-8 is so matplotlib 3.3 doesn't try and collapse the ticks
-    ax2.set_xticklabels(ax2_ticklabels, fontsize=12, ha="left")
+    ax2.set_xticklabels(ax2_dict["ticklabels"], fontsize=12, ha="left")
     ax2.spines['right'].set_visible(False)
     ax2.spines['top'].set_visible(False)
     ax2.spines['left'].set_visible(False)
 
-    # draw the E(f(x)) tick mark
+    # draw the bottom tick mark (either f(X) or E(f(x)) depending on y_reverse)
     ax3 = ax2.twiny()
     ax3.set_xlim(xmin, xmax)
     # The 1e-8 is so matplotlib 3.3 doesn't try and collapse the ticks
-    ax3.set_xticks([ax3_value, ax3_value + 1e-8])  # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
-    ax3.set_xticklabels(ax3_ticklabels, fontsize=12, ha="left") # ha is horizontal alignment
-    # adjust the position of the f(X) = x.xx label
+    ax3.set_xticks([ax3_dict["value"], ax3_dict["value"] + 1e-8])  # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
+    ax3.set_xticklabels(ax3_dict["ticklabels"], fontsize=12, ha="left") # ha is horizontal alignment
+    # adjust the position of the bottom label (either f(X) or E(f(x)) depending on y_reverse)
     tick_labels = ax3.xaxis.get_majorticklabels()
     tick_labels[0].set_transform(tick_labels[0].get_transform(
-    ) + matplotlib.transforms.ScaledTranslation(ax3_loc1, ax3_loc3, fig.dpi_scale_trans))
+    ) + matplotlib.transforms.ScaledTranslation(ax3_dict["loc1"], ax3_dict["loc3"], fig.dpi_scale_trans))
     tick_labels[1].set_transform(tick_labels[1].get_transform(
-    ) + matplotlib.transforms.ScaledTranslation(ax3_loc2, ax3_loc4, fig.dpi_scale_trans))
+    ) + matplotlib.transforms.ScaledTranslation(ax3_dict["loc2"], ax3_dict["loc4"], fig.dpi_scale_trans))
     tick_labels[1].set_color("#999999")
     ax3.spines['right'].set_visible(False)
     ax3.spines['top'].set_visible(False)
     ax3.spines['left'].set_visible(False)
 
-    # adjust the position of the f(X) = x.xx label
+    # adjust the position of the top label (either f(X) or E(f(x)) depending on y_reverse)
     tick_labels = ax2.xaxis.get_majorticklabels()
     tick_labels[0].set_transform(tick_labels[0].get_transform(
-    ) + matplotlib.transforms.ScaledTranslation(ax2_loc1, ax2_loc3, fig.dpi_scale_trans))
+    ) + matplotlib.transforms.ScaledTranslation(ax2_dict["loc1"], ax2_dict["loc3"], fig.dpi_scale_trans))
     tick_labels[1].set_transform(tick_labels[1].get_transform(
-    ) + matplotlib.transforms.ScaledTranslation(ax2_loc2, ax2_loc4, fig.dpi_scale_trans))
+    ) + matplotlib.transforms.ScaledTranslation(ax2_dict["loc2"], ax2_dict["loc4"], fig.dpi_scale_trans))
     tick_labels[1].set_color("#999999")
 
     # color the y tick labels that have the feature values as gray
