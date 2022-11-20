@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case. &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>Examining interactions between features with SHAP interactions &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="XGBoost feature selection" href="01_xgb_combined_fit_feature_selection.html" />
-    <link rel="prev" title="A simple worked example of Shap" href="../shap_worked_example.html" />
+    <link rel="prev" title="A simple worked example of Shap" href="../introduction/shap_worked_example.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,12 +115,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Outline of notebooks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../glossary.html">
+  <a class="reference internal" href="../introduction/glossary.html">
    Glossary of technical terms
   </a>
  </li>
@@ -130,13 +125,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../shap_worked_example.html">
+  <a class="reference internal" href="../introduction/shap_worked_example.html">
    A simple worked example of Shap
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
+   Examining interactions between features with SHAP interactions
   </a>
  </li>
 </ul>
@@ -196,6 +191,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_synthetic_patients.html">
+   Investigating the effect of patient features by varying feature values
   </a>
  </li>
 </ul>
@@ -294,7 +294,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/xgb_with_feature_selection/90_shap_interactions_on_titanic.ipynb"
+        <a href="../_sources/key_notebooks_redundant/90_shap_interactions_on_titanic.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -355,12 +355,17 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
+   Examining interactions between features with SHAP interactions
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plain-english-summary">
      Plain English summary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-of-interactions-that-we-will-see">
+     Examples of interactions that we will see
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -460,8 +465,20 @@ title="Print to PDF"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-main-effect-of-male-male">
-       SHAP main effect of male-male
+      <a class="reference internal nav-link" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">
+       SHAP main effect of the
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         male
+        </span>
+       </code>
+       feature (also called
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         male:male
+        </span>
+       </code>
+       in SHAP interactions)
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
@@ -477,12 +494,12 @@ title="Print to PDF"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
+      <a class="reference internal nav-link" href="#shap-main-effect-of-male-male">
        SHAP main effect of male-male
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
+      <a class="reference internal nav-link" href="#id1">
        SHAP interaction of male-Pclass
       </a>
      </li>
@@ -506,7 +523,7 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id2">
      Observations
     </a>
    </li>
@@ -521,7 +538,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.</h1>
+                <h1>Examining interactions between features with SHAP interactions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -533,12 +550,17 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
+   Examining interactions between features with SHAP interactions
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plain-english-summary">
      Plain English summary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-of-interactions-that-we-will-see">
+     Examples of interactions that we will see
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -638,8 +660,20 @@ title="Print to PDF"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-main-effect-of-male-male">
-       SHAP main effect of male-male
+      <a class="reference internal nav-link" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">
+       SHAP main effect of the
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         male
+        </span>
+       </code>
+       feature (also called
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         male:male
+        </span>
+       </code>
+       in SHAP interactions)
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
@@ -655,12 +689,12 @@ title="Print to PDF"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
+      <a class="reference internal nav-link" href="#shap-main-effect-of-male-male">
        SHAP main effect of male-male
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
+      <a class="reference internal nav-link" href="#id1">
        SHAP interaction of male-Pclass
       </a>
      </li>
@@ -684,7 +718,7 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id2">
      Observations
     </a>
    </li>
@@ -700,17 +734,33 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="describing-model-predictions-using-shap-values-and-shap-interactions-using-titanic-survival-as-an-example-use-case">
-<h1>Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.<a class="headerlink" href="#describing-model-predictions-using-shap-values-and-shap-interactions-using-titanic-survival-as-an-example-use-case" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="examining-interactions-between-features-with-shap-interactions">
+<h1>Examining interactions between features with SHAP interactions<a class="headerlink" href="#examining-interactions-between-features-with-shap-interactions" title="Permalink to this headline">#</a></h1>
+<p>WARNING!! SHAP interactions are powerful, but can be complicated. Make sure you have a good understanding of general SHAP values first. Shap interactions are not for beginners!</p>
 <section id="plain-english-summary">
 <h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
-<p>When fitting a machine learning model to data to make a prediction, it is now possible, with the use of the SHAP library, to allocate contributions of the prediction onto the feature values. This means that we can now turn these black box methods into transparent models and describe what the model used to obtain it’s prediction.</p>
-<p>SHAP values are calculated for each feature of each instance for a fitted model. In addition there is the SHAP base value which is the same value for all of the instances. The base value represents the models best guess for any instance without any extra knowledge about the instance (this can also be thought of as the “expected value”). It is possible to obtain the models prediction of an instance by taking the sum of the SHAP base value and each of the SHAP values for the features. This allows the prediction from a model to be transparant, and we can rank the features by their importance in determining the prediction for each instance.</p>
-<p>In our previous notebooks (03_xgb_combined_shap_key_features.ipynb) we saw that a feature with the same value in multiple instances (such as all of the patients that attend hospital A), the feature (Hospital A) does not necessarily have the same SHAP value in all of those instances. This means that the feature value alone is not a clear indication of the impact it will have on the prediction - this is due to there being feature interactions, such that SHAP values for a feature are influenced by the other feature values. This means that SHAP values are instance dependent (as they are also capturing the interactions between pairs of feature values). The SHAP values therefore are in turn made up of a main effect (what is due to the feature value, the standalone effect) and also the interactions with the other features (a value per feature pairings).</p>
+<p>When fitting a machine learning model to data to make a prediction, it is now possible, with the use of the SHAP library, to identify contributions to the prediction by each feature in an example. This means that we can now turn these black box methods into transparent models and describe what the model used to obtain its prediction.</p>
+<p>SHAP values are calculated for each feature of each instance for a fitted model. In addition there is the SHAP base value which is the same value for all of the instances. The base value represents the model’s prediction for any instance without any extra knowledge about the instance (this can also be thought of as the “expected value” before any feature data is known). It is possible to obtain the models prediction of an instance by taking the sum of the SHAP base value and each of the SHAP values for the features. This allows the prediction from a model to be transparent, and we can rank the features by their importance in determining the prediction for each instance.</p>
+<p>The overall SHAP value depends on both the main effect of a feature’s value, and any interactions with other features. This means that two different examples may have different SHAP values for a feature even if they both have the same feature value.</p>
 <p>[Note: In this notebook we will refer to the parts of the SHAP value consistently as base value, main effect, and interactions, where the term SHAP feature value refers to the sum of the main effect and interactions].</p>
-<p>SHAP values are in the same units as the model output (for XGBoost these are in log odds).</p>
+<p>SHAP values are in the same units as the model output (for XGBoost these are usually in log odds unless we specify we want to see probabilities.).</p>
 <p>Here we fit an XGBoost model to the Titanic dataset, to predict whether a passenger survives from the values of four features (gender, age, ticket class, number of siblings). We calculate the SHAP values (base, main effect and feature interactions) of this fitted model and show the most useful way (that we have found) to present all of these values in order to gain the most insight into how the model is working. At present this is using a grid of SHAP dependency plots.</p>
 <p>This notebook is based on the blog <a class="reference external" href="https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a">https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</a></p>
+</section>
+<section id="examples-of-interactions-that-we-will-see">
+<h2>Examples of interactions that we will see<a class="headerlink" href="#examples-of-interactions-that-we-will-see" title="Permalink to this headline">#</a></h2>
+<p>As an example to show what SHAP interactions can reveal:</p>
+<ul class="simple">
+<li><p>Being male reduces your chances of survival</p></li>
+<li><p>Being third class reduces your chance of survival</p></li>
+<li><p>But the effect of being male is strongest for first and second class passengers, and less for third class passengers - so the SHAP interaction strengthens the (negative) effect of being male especially for first and second class passengers, and reduces the effect of being male for third class passengers,</p></li>
+</ul>
+<p>A second example is:</p>
+<ul class="simple">
+<li><p>Being female improves your chances of survival</p></li>
+<li><p>Being young improves your chances of survival</p></li>
+<li><p>But male children also got to lifeboats first, so or children the effect of being male is cancelled out - so we get a positive SHAP intersaction of being male and young, and a negative interaction of being female and young.</p></li>
+</ul>
 </section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
@@ -738,7 +788,7 @@ title="Print to PDF"
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>SHAP interactions are awesome!</p></li>
+<li><p>SHAP interactions are awesome! But they may take some time to digest.</p></li>
 <li><p>Viewing them as a grid of SHAP dependency plots clearly shows the overall relationships that the model uses to derive it’s predictions for the whole dataset.</p></li>
 </ul>
 </section>
@@ -765,7 +815,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/miniconda3/envs/samuel2/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/miniconda3/envs/samuel/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
   from pandas import MultiIndex, Int64Index
 </pre></div>
 </div>
@@ -845,7 +895,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </section>
 <section id="fit-xgboost-model">
 <h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
-<p>We will fit a model to all of the data (rather than train/test splits used to assess accuracy).</p>
+<p>Here will fit a model to all of the data (rather than train/test splits used to assess accuracy).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -854,7 +904,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10:13:52] WARNING: /tmp/abs_40obctay9q/croots/recipe/xgboost-split_1659548945886/work/src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11:45:47] WARNING: /tmp/abs_40obctay9q/croots/recipe/xgboost-split_1659548945886/work/src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
 </pre></div>
 </div>
 <div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBClassifier(base_score=0.5, booster=&#x27;gbtree&#x27;, colsample_bylevel=1,
@@ -862,7 +912,7 @@ By convention our features are called <code class="docutils literal notranslate"
               gamma=0, gpu_id=-1, importance_type=None,
               interaction_constraints=&#x27;&#x27;, learning_rate=0.300000012,
               max_delta_step=0, max_depth=6, min_child_weight=1, missing=nan,
-              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=20,
+              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=36,
               num_parallel_tree=1, predictor=&#x27;auto&#x27;, random_state=42,
               reg_alpha=0, reg_lambda=1, scale_pos_weight=1, subsample=1,
               tree_method=&#x27;exact&#x27;, validate_parameters=1, verbosity=None)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">XGBClassifier</label><div class="sk-toggleable__content"><pre>XGBClassifier(base_score=0.5, booster=&#x27;gbtree&#x27;, colsample_bylevel=1,
@@ -870,7 +920,7 @@ By convention our features are called <code class="docutils literal notranslate"
               gamma=0, gpu_id=-1, importance_type=None,
               interaction_constraints=&#x27;&#x27;, learning_rate=0.300000012,
               max_delta_step=0, max_depth=6, min_child_weight=1, missing=nan,
-              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=20,
+              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=36,
               num_parallel_tree=1, predictor=&#x27;auto&#x27;, random_state=42,
               reg_alpha=0, reg_lambda=1, scale_pos_weight=1, subsample=1,
               tree_method=&#x27;exact&#x27;, validate_parameters=1, verbosity=None)</pre></div></div></div></div></div></div></div>
@@ -901,7 +951,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </section>
 <section id="get-shap-values">
 <h2>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">#</a></h2>
-<p>TreeExplainer is a fast and exact method to estimate SHAP values for tree models and ensembles of trees.
+<p><code class="docutils literal notranslate"><span class="pre">TreeExplainer</span></code> is a fast and exact method to estimate SHAP values for tree models and ensembles of trees.
 Using this we can calculate the SHAP values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -916,11 +966,11 @@ Using this we can calculate the SHAP values.</p>
 </div>
 </div>
 <p>The explainer returns the base value which is the same value for all instances [shap_value.base_values], the shap values per feature [shap_value.values]. It also returns the feature dataset values [shap_values.data]. You can (sometimes!) access the feature names from the explainer [explainer.data_feature_names].</p>
-<p>Let’s take a look at the data held for the first instance:</p>
+<p>Let’s take a look at the <code class="docutils literal notranslate"><span class="pre">shap_values</span></code> data held for the first instance:</p>
 <ul class="simple">
-<li><p>.values has the SHAP value for each of the four features.</p></li>
-<li><p>.base_values has the best guess value without knowing anything about the instance.</p></li>
-<li><p>.data has each of the feature values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.values</span></code> has the SHAP value for each of the four features.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.base_values</span></code> has the model’s base estimate without knowing anything about the instance (the feature SHAP values will be added to this).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.data</span></code> has each of the feature values</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -956,11 +1006,11 @@ array([ 1.,  3., 22.,  1.])
 </div>
 <section id="view-shap-values-using-beeswarm-plot">
 <h3>View SHAP values using beeswarm plot<a class="headerlink" href="#view-shap-values-using-beeswarm-plot" title="Permalink to this headline">#</a></h3>
-<p>The beeswarm plot gives a good visual representation of the general SHAP value pattern for the whole dataset.</p>
-<p>Each feature is shown on a separate row. It shows the distribution of the SHAP values for each feature. The colour represents the feature data value, and the shape of the data points represent the distribution of the features SHAP values (with a bulge representing a larger number of points, and a thin row representing fewer points). A SHAP value less than 0 (as seen on the x-axis) contributes to the likelihood that the passenger will not survive, whereas a SHAP value greater than 0 contributes to the likelihood that the passenger will survive.</p>
-<p>The actual predction of whether a passenger will survive is the sum of each of the SHAP feature values and the SHAP base value.</p>
-<p>Here we see that the first line on the beeswarm represents the feature male. A red data points represents a high data value (a male passenger), and a blue datapoint represents a low data value (a female passenger). Being male contributes to the likelihood that they will not survive, whereas being female contributes to the likelihood that they will survive. Female passengers can have a stronger contribution to the outcome (up to +4) than compared to the males (down to -2).</p>
-<p>The third line on the beeswarm represents the feature Age. A red data points represents a high data value (an old passenger), a purple datapoint represents a mid point (a middle aged passenger) and a blue datapoint represents a child. The older the passenger the stronger the contribution to the likelihood that they will not survive, the younger the passenger the stronger the contribution to the likelihood that they will survive. There are more datapoints around the 0 SHAP value (which are coloured purple, and so represent the middle aged passengers) than at the extremes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">beeswarm</span></code> plot gives a good visual representation of the general SHAP value pattern for the whole dataset.</p>
+<p>Each feature is shown on a separate row. It shows the distribution of the SHAP values for each feature. The colour represents the feature data value, and the shape of the data points represent the distribution of the feature’s SHAP values (with a bulge representing a larger number of points, and a thin row representing fewer points). A SHAP value less than 0 (as seen on the x-axis) reduces the likelihood that the passenger will survive, whereas a SHAP value greater than 0 increases the likelihood that the passenger will survive.</p>
+<p>The actual prediction of whether a passenger will survive is the sum of each of the SHAP feature values and the SHAP base value.</p>
+<p>Here we see that the first line on the beeswarm represents the feature <code class="docutils literal notranslate"><span class="pre">male</span></code>. A red data points represents a high data value (a male passenger), and a blue datapoint represents a low data value (a female passenger). Being male reduces the chances of survival, whereas being female imporves those chances. Female passengers can have a stronger contribution to the outcome (up to +4) than compared to the males (down to -2).</p>
+<p>The third line on the beeswarm represents the feature <code class="docutils literal notranslate"><span class="pre">Age</span></code>. A red data points represents a high data value (an older passenger), a purple datapoint represents a mid point (a middle aged passenger) and a blue datapoint represents a child. The older the passenger the stronger the contribution to the likelihood that they will not survive, the younger the passenger the stronger the contribution to the likelihood that they will survive. There are more datapoints around the 0 SHAP value (which are coloured purple, and so represent the middle aged passengers) than at the extremes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">beeswarm</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -975,7 +1025,7 @@ array([ 1.,  3., 22.,  1.])
 </section>
 <section id="get-shap-interaction-values">
 <h2>Get SHAP interaction values<a class="headerlink" href="#get-shap-interaction-values" title="Permalink to this headline">#</a></h2>
-<p>Use the TreeExplainer to also calculate the SHAP main effect and SHAP interaction values (the sum of which give the SHAP values for each feature).</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">TreeExplainer</span></code> to also calculate the SHAP main effect and SHAP interaction values (the sum of which give the SHAP values for each feature).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get SHAP interaction values</span>
@@ -984,8 +1034,8 @@ array([ 1.,  3., 22.,  1.])
 </div>
 </div>
 </div>
-<p>SHAP interaction values have a matrix of values (per pair of features) per instance.<br />
-In this case, each of the 891 instances has a 4x4 matrix of SHAP interaction values (with the SHAP main effect on the diagonal positions).</p>
+<p><code class="docutils literal notranslate"><span class="pre">shap_interaction</span></code> values have a matrix of values (per pair of features) per instance.</p>
+<p>In this case, each of the 891 instances has a 4x4 matrix of SHAP interaction values (with the SHAP main effect on the diagonal positions).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_interaction</span><span class="o">.</span><span class="n">shape</span>
@@ -998,7 +1048,8 @@ In this case, each of the 891 instances has a 4x4 matrix of SHAP interaction val
 </div>
 </div>
 </div>
-<p>Show SHAP interation matrix (with main effect on the diagonal positions) for the first instance. Notice how the SHAP interation for pairs of features are symmetrical across the diagonal.</p>
+<p>Show <code class="docutils literal notranslate"><span class="pre">shap_interaction</span></code> matrix (with main effect on the diagonal positions) for the first instance. Notice how the SHAP interation for pairs of features are symmetrical across the diagonal.</p>
+<p>The interaction between two features is therefore split between the symmetrical pairs, e.g. <code class="docutils literal notranslate"><span class="pre">age:male</span></code> and <code class="docutils literal notranslate"><span class="pre">male:age</span></code> will each hold half of the total interaction between age and being male.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_interaction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1017,8 +1068,8 @@ In this case, each of the 891 instances has a 4x4 matrix of SHAP interaction val
 </div>
 <section id="shap-interaction-matrix-show-mean-absolute-values">
 <h3>SHAP interaction matrix: show mean absolute values<a class="headerlink" href="#shap-interaction-matrix-show-mean-absolute-values" title="Permalink to this headline">#</a></h3>
-<p>Here we see the absolute mean of the SHAP interaction values for all of the instances.<br />
-The values on the diagonal show the main effect for the feature, and the other values show the SHAP interaction for pairs of features (these are symetrical across the diagonal)</p>
+<p>Here we see the absolute mean of the SHAP interaction values for all of the instances.</p>
+<p>The values on the diagonal show the main effect for the feature, and the other values show the SHAP interaction for pairs of features (note again that these are symetrical across the diagonal, with <code class="docutils literal notranslate"><span class="pre">male:Age</span></code> having the same value as <code class="docutils literal notranslate"><span class="pre">Age:male</span></code>, and the total SHAP interaction between age and being male being the sum of these two symmetrical pairs).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_abs_interactions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -1090,7 +1141,7 @@ The values on the diagonal show the main effect for the feature, and the other v
 </section>
 <section id="the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
 <h3>The proportion of SHAP that is from the interactions: calculated from the absolute mean<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean" title="Permalink to this headline">#</a></h3>
-<p>Looking at all of the instances together, what proportion of the SHAP value comes from the SHAP interations</p>
+<p>Looking at all of the instances together, what proportion of the SHAP value comes from the SHAP interations?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_shap</span> <span class="o">=</span> <span class="n">mean_abs_interactions</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1115,7 +1166,7 @@ The proportion of the SHAP values coming from the main effects are: 0.600
 </section>
 <section id="the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values">
 <h3>The proportion of SHAP that is from the interactions: calculated per instance from the absolute values<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values" title="Permalink to this headline">#</a></h3>
-<p>Looking at each instances, what proportion of the SHAP value comes from the SHAP interations. Show the range of proportions (one per instance) as a histogram.</p>
+<p>Looking at each instances, what proportion of the SHAP value comes from the SHAP interations. Show the range of proportions (one per instance) as a histogram?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sum the absolute interaction matrix per instance</span>
@@ -1152,6 +1203,7 @@ The proportion of the SHAP values coming from the main effects are: 0.600
 <section id="shap-interaction-matrix-represented-as-histograms">
 <h3>SHAP interaction matrix: represented as histograms<a class="headerlink" href="#shap-interaction-matrix-represented-as-histograms" title="Permalink to this headline">#</a></h3>
 <p>Show the distribution of all of the instance values for each SHAP interation and SHAP main effect.</p>
+<p>These plots help to show us, as at individual passenger level, the strength of the interactions between different features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span><span class="s2">&quot;SibSp&quot;</span><span class="p">]</span>
@@ -1164,9 +1216,7 @@ The proportion of the SHAP values coming from the main effects are: 0.600
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">):</span>    
         <span class="n">axes</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">shap_interaction</span><span class="p">[:,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
-        <span class="n">ylims</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
-        <span class="c1"># Store if greater than found so far</span>
-        <span class="n">y_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_max</span><span class="p">,</span> <span class="n">ylims</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
 <span class="c1"># Don&#39;t display plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
@@ -1183,13 +1233,28 @@ The proportion of the SHAP values coming from the main effects are: 0.600
         <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">shap_interaction</span><span class="p">[:,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SHAP interaction value from </span><span class="si">{</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">features</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of instances&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Make all the axes have the same limits</span>
+
+<span class="c1">## Find min and max of all subplots</span>
+<span class="n">x_minimums</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span> <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">]</span>
+<span class="n">x_maximums</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span> <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">]</span>
+<span class="n">y_maximums</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">())</span> <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">]</span>
+<span class="n">min_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_minimums</span><span class="p">)</span>
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_maximums</span><span class="p">)</span>
+<span class="n">max_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_maximums</span><span class="p">)</span>
+
+<span class="c1">## Set same x_lim min and max for each subplot</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_y</span><span class="p">)</span>
+
         
 <span class="n">fig</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1">#fig.subplots_adjust(hspace=0.4, wspace=0.9)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1413,6 +1478,7 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="histogram-of-total-shap">
 <h1>Histogram of total SHAP<a class="headerlink" href="#histogram-of-total-shap" title="Permalink to this headline">#</a></h1>
+<p>Here we show a histogram for total SHAP values for all passengers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">total_shap_per_instance</span><span class="p">)</span>
@@ -1420,8 +1486,6 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of instances&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Count of instances with total SHAP values (base + main effects + feature interactions)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="c1">#plt.savefig(&#39;./output/scatter_plot_hosp_shap_vs_10k_thrombolysis.jpg&#39;, dpi=300,</span>
-<span class="c1">#    bbox_inches=&#39;tight&#39;, pad_inches=0.2)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1433,14 +1497,14 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 <section id="how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots">
 <h2>How the SHAP main effect (or interaction) varies across the instances: using violin plots<a class="headerlink" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots" title="Permalink to this headline">#</a></h2>
-<section id="shap-main-effect-of-male-male">
-<h3>SHAP main effect of male-male<a class="headerlink" href="#shap-main-effect-of-male-male" title="Permalink to this headline">#</a></h3>
-<p>For this example lets focus on the feature “male”. This feature has two possible values: males (1) and females (0).</p>
+<section id="shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">
+<h3>SHAP main effect of the <code class="docutils literal notranslate"><span class="pre">male</span></code> feature (also called <code class="docutils literal notranslate"><span class="pre">male:male</span></code> in SHAP interactions)<a class="headerlink" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions" title="Permalink to this headline">#</a></h3>
+<p>For this example lets focus on the feature <code class="docutils literal notranslate"><span class="pre">male</span></code>. This feature has two possible values: males (<code class="docutils literal notranslate"><span class="pre">male</span></code>=1) and females (<code class="docutils literal notranslate"><span class="pre">male</span></code>=0).</p>
 <p>From the histogram in the matrix showing the main effect for the feature male, we can see that there are ~550 instances with a male main effect of about -1, and ~300 instances with a male main effect of about 2.</p>
 <p>From this we can not see which of these instances are which gender (male or female).</p>
 <p>Here we will plot this same data using a violin plot, a violin for each gender.</p>
-<p>We can see from the violin plot that the main effect (male-male) is quite different depending on whether the instance is male (a negative SHAP main effect value) or female (a positive SHAP main effect value).</p>
-<p>This means that the feature will contribute a strong likelihood of survival if the instance is female, and a mid-strong likelihood of not surviving if the instance is male. This matches the story that we took from the beeswarm plot of the SHAP values, however as we have now extracted just the main effect the violin plot is showing a distinct effect for gender. That means that the points on the beeswarm that join up these two distinct groups are from the feature ilst.index(x)nteractions - they “muddy” the relationship (blur the edges, say) between the feature value and SHAP value.</p>
+<p>We can see from the violin plot that the main effect (<code class="docutils literal notranslate"><span class="pre">male-male</span></code>) is quite different depending on whether the instance is male (a negative SHAP main effect value) or female (a positive SHAP main effect value).</p>
+<p>This means that the feature will contribute a stronger likelihood of survival if the instance is female, and a poorer likelihood of not surviving if the instance is male. This matches the story that we took from the beeswarm plot of the SHAP values, however as we have now extracted just the main effect the violin plot is showing a distinct effect for gender, before adding in any interactions with other features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_violin_shap_interaction</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">shap_interaction</span><span class="p">,</span> <span class="n">main_feature</span><span class="p">,</span> 
@@ -1538,10 +1602,12 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 <section id="shap-interaction-of-male-pclass">
 <h3>SHAP interaction of male-Pclass<a class="headerlink" href="#shap-interaction-of-male-pclass" title="Permalink to this headline">#</a></h3>
 <p>We can also see the range of the SHAP interaction value between the features male-Pclass (divided by the male categories).</p>
-<p>This shows that for females the SHAP interaction value between male-Pclass ranges from -0.6 to 0.9, and for males it has a smaller range (-0.6 to 0.3). Since this is in addition to the main effect (for which all females had a strong likelihood to survive), for some females their likelihood for surviving is further increased, whereas for others their likelihood for surviving is reduced - but never enough to have a likelihood of not surviving. Remember that we’d need to add on all of the other SHAP interations to get the likelihood of surviving for females.</p>
+<p>Because interactions are symmetrical, and the interaction is split between the symmetrical pairs (<code class="docutils literal notranslate"><span class="pre">male:PClass</span></code> and <code class="docutils literal notranslate"><span class="pre">Pclass-male</span></code>) here will will double the values to get the sum of the symmetrical interactions.</p>
+<p>This shows that for females the SHAP interaction value between male-Pclass ranges from -1.2 to 1.8, and for males it has a smaller range (-1.1 to 0.6). Since this is in addition to the main effect (for which all females had a strong likelihood to survive), for some females their likelihood for surviving is further increased, whereas for others their likelihood for surviving is reduced - but never enough to have a likelihood of not surviving. Remember that we’d need to add on all of the other SHAP interations to get the likelihood of surviving for females.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_violin_shap_interaction</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">shap_interaction</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="s2">&quot;Pclass&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Double the SHAP interaction value here to get the sum of symmetrical interaction pairs</span>
+<span class="n">plot_violin_shap_interaction</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">shap_interaction</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="s2">&quot;Pclass&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1555,8 +1621,8 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </section>
 <section id="how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots">
 <h2>How the SHAP main effect (or interaction) varies across the instances: using dependence plots<a class="headerlink" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots" title="Permalink to this headline">#</a></h2>
-<section id="id1">
-<h3>SHAP main effect of male-male<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<section id="shap-main-effect-of-male-male">
+<h3>SHAP main effect of male-male<a class="headerlink" href="#shap-main-effect-of-male-male" title="Permalink to this headline">#</a></h3>
 <p>We can see from the violin plot that the main effect (male-male) is quite different depending on whether the instance is male (a negative SHAP main effect value) or female (a positive SHAP main effect value).</p>
 <p>This means that the feature will contribute a strong likelihood of survival if the instance is female, and a mid-strong likelihood of not surviving if the instance is male.</p>
 <p>A dependence plot of the same data that’s in the violin plot will represent it as individual points, instead of as a distribution. Doing so, it will plot all of the points on two points on the x axis: 0 for female, and 1 for male. A lot of information is lost due to overlap. To see more detail we add some jitter to the x-axis to spread the points out and so we cna get a sense of the density of the points in relation to the y value.</p>
@@ -1587,11 +1653,12 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 </section>
-<section id="id2">
-<h3>SHAP interaction of male-Pclass<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id1">
+<h3>SHAP interaction of male-Pclass<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>A hinderence of using a violin plot to show the data for the SHAP interaction of a feature pair is that we can only show one of the feature values (on the x axis).</p>
 <p>When using a dependence plot to show the data for the SHAP interaction of a feature pairing we can display both of the feature values: the point location on the x axis shows the value of one of the features, and the colour of the point shows the value of the other feature.</p>
-<p>Note: The SHAP interaction for feature pairings (e.g. male-Pclass) is splt between male-Pclass and Pclass-male. The total SHAP interaction is therefore 2* the individual interactions. We could multiply the interation by 2 to get the full SHAP interaction. Here we will plot both permutations and acknowledge that it’s the sum of the pair (LHS shows columns as male and colour as Pclass. RHS shows columns as Pclass and colour as male). Each graph contains the exact same data points, and it is possible to match up the identical block of data points across the graphs. For example the purple points in the LHS graph represent the Pclass 2, and we can see that for these points they have a positive SHAP interaction value for female (x-axis 0) and negative SHAP interaction value for male (x-axis 1). We can see these two blocks of purple points in the RHS graph, with both blocks now aligned on the x-axis with value 2, and now coloured blue for female (with positive SHAP interaction value) or red for male (with negative SHAP interaction value).</p>
+<p>Note: SHAP’s built in <code class="docutils literal notranslate"><span class="pre">dependence_plot</span></code> already doubles interaction values to account for symetrical pairs (e.g. <code class="docutils literal notranslate"><span class="pre">male-Pclass</span></code> and <code class="docutils literal notranslate"><span class="pre">Pclass-male</span></code>).</p>
+<p>The plot on the left shows columns as <code class="docutils literal notranslate"><span class="pre">male</span></code> and colour as <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>. The plot on the right is the same data, but showing columns as <code class="docutils literal notranslate"><span class="pre">Pclass</span></code> and colour as <code class="docutils literal notranslate"><span class="pre">male</span></code>. It is possible to match up the identical block of data points across the graphs. For example the purple points in the LHS graph represent the Pclass 2, and we can see that for these points they have a positive SHAP interaction value for female (x-axis 0) and negative SHAP interaction value for male (x-axis 1). We can see these two blocks of purple points in the RHS graph, with both blocks now aligned on the x-axis with value 2, and now coloured blue for female (with positive SHAP interaction value) or red for male (with negative SHAP interaction value).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -1636,17 +1703,18 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 <section id="grid-of-shap-dependence-plots">
 <h2>Grid of SHAP dependence plots<a class="headerlink" href="#grid-of-shap-dependence-plots" title="Permalink to this headline">#</a></h2>
 <p>We will now show all of the SHAP interaction values in a grid of plots: each row and column represents a feature.</p>
-<p>The diagonal graphs show the SHAP main effect for each feature. The SHAP interactions between features are off the diagonal, these are split symetrically (eg. age-male == male-age).</p>
-<p>The SHAP main effect for feature male is shown in the top left (position [0, 0]). As already discussed, this shows that when the feature value is female, this has a strong contribution to the models prediction that the passenger will survive. And when this feature value is male there is a mid-strong contribution that the passenger will not survive.</p>
+<p>NOTE: Remeber that the buils in SHAP <code class="docutils literal notranslate"><span class="pre">dependence_plot</span></code> double interaction values to account for symmetrical pairs, so looking at either pair will show the full interaction.</p>
+<p>The diagonal graphs show the SHAP main effect for each feature. The SHAP interactions between features are off the diagonal, these are split symetrically (eg. <code class="docutils literal notranslate"><span class="pre">age-male</span></code> = <code class="docutils literal notranslate"><span class="pre">male-age</span></code>).</p>
+<p>The SHAP main effect for feature <code class="docutils literal notranslate"><span class="pre">male</span></code> is shown in the top left (position [0, 0]). As already discussed, this shows that when the feature value is female, this has a strong contribution to the models prediction that the passenger will survive. And when this feature value is male there is a mid-strong contribution that the passenger will not survive.</p>
 <p>The plot in position [1,1] shows the SHAP main effect for class. This shows that first class contributes a strong likelihood to survive, second class does not have much contribution, and third class contributes a strong likelihood not to survive.</p>
-<p>But on top of these main effects we can see the contributon from the interation of these features. This is shown in positions [0, 1] and [1, 0]. The SHAP interaction between male and Pclass, and Pclass and male.</p>
-<p>Graph in grid position [0, 1] (first row, second column) shows the SHAP interaction between male and Pclass, the data has been split into columns by the value of the gender feature (female on left, male on right), and the colour represents the class feature (first class = blue, second class = purple, third class = red). The value represents the contribution to the likelihood of this passenger surviving due to this combination of values - this is in addition to the main effect that we saw in the top left.</p>
-<p>It can be seen that passengers in first or second class further increase the likelihood of survival for females, and not surviving for males, as the SHAP interation value is in the same sign to the SHAP main effect: A female passenger in first or second class will increase the likelihood of survival from the models prediction, and so will further help your survival in addition to the fact that you are female (as we saw in the SHAP main effect); similarly a male passenger in first or second class will increase the likelihood of not surviving, and so will further contribute to the likelihood that you will not survive, in addition to the fact that you are male (as we saw in the SHAP main effect).
-However the converse is true for passengers in third class, as the SHAP interaction value is in the opposite sign to the SHAP main effect. A female passenger in third class will have a negative contribution to the survival (but remember that the main effect for female is a strong likelihood to survive), and if you are male in third class this combination will have a positive contribution to your survival (but remember that the main effect for male is a mid-strong likelihood to not survive).</p>
+<p>But on top of these main effects we can see the contributon from the interation of these features. This is shown in positions [0, 1] and [1, 0]. The SHAP interaction between <code class="docutils literal notranslate"><span class="pre">male</span></code> and <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>, and <code class="docutils literal notranslate"><span class="pre">Pclass</span></code> and <code class="docutils literal notranslate"><span class="pre">male</span></code>.</p>
+<p>The plot in grid position [0, 1] (first row, second column) shows the SHAP interaction between <code class="docutils literal notranslate"><span class="pre">male</span></code> and <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>, the data has been split into columns by the value of the gender feature (female on left, male on right), and the colour represents the class feature (first class = blue, second class = purple, third class = red). The value represents the contribution to the likelihood of this passenger surviving due to this combination of values - this is in addition to the main effect that we saw in the top left.</p>
+<p>It can be seen that passengers in first or second class further increase the likelihood of survival for females, and not surviving for males, as the SHAP interation value is in the same sign to the SHAP main effect: A female passenger in first or second class will increase the likelihood of survival from the models prediction, and so will further help your survival in addition to the fact that you are female (as we saw in the SHAP main effect); similarly a male passenger in first or second class will increase the likelihood of not surviving, and so will further contribute to the likelihood that you will not survive, in addition to the fact that you are male (as we saw in the SHAP main effect).</p>
+<p>However the converse is true for passengers in third class, as the SHAP interaction value is in the opposite sign to the SHAP main effect. A female passenger in third class will have a negative contribution to the survival (but remember that the main effect for female is a strong likelihood to survive), and if you are male in third class this combination will have a positive contribution to your survival (but remember that the main effect for male is a mid-strong likelihood to not survive).</p>
 <p>The grid of dependency graphs are a mirror image across the diagonal. Meaning that the same data is shown in position [0,1] as in [1,0] just with the feature being displayed in the column or by colour is switched over.</p>
-<p>Looking at the graph in position [1, 0] (second row, first column) shows the identical SHAP interation values for the features male - PClass, as we have just discussed above. Now the columns are per class (first, second, third) and the colour is by gender (male, female). Here we see that for first and second class females contributes that there is a mid likelihood to not survive, whereas if male then contributes a positive likelihood to survive. But that this is opposite for third class, where is it the females (red) with a positive likelihood to survive. This is also on top of the main effect from Pclass.</p>
-<p>Resources used to make the grid of dependence plots: <a class="reference external" href="https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots">https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots</a> <br />
-(for future reference, but not yet used here: <a class="reference external" href="https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d">https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d</a>)</p>
+<p>Looking at the graph in position [1, 0] (second row, first column) shows the identical SHAP interation values for the features <code class="docutils literal notranslate"><span class="pre">male</span></code> - <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>, as we have just discussed above. Now the columns are per class (first, second, third) and the colour is by gender (male, female). Here we see that for first and second class females contributes that there is a mid likelihood to not survive, whereas if male then contributes a positive likelihood to survive. But that this is opposite for third class, where is it the females (red) with a positive likelihood to survive. This is also on top of the main effect from <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>.</p>
+<p>Resources used to make the grid of dependence plots: <a class="reference external" href="https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots">https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots</a> \</p>
+<p>(for future reference, but not yet used here: <a class="reference external" href="https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d">https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d</a>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span><span class="s2">&quot;SibSp&quot;</span><span class="p">]</span>
@@ -1705,8 +1773,8 @@ However the converse is true for passengers in third class, as the SHAP interact
 </div>
 </section>
 </section>
-<section id="id3">
-<h2>Observations<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<section id="id2">
+<h2>Observations<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>SHAP interactions are awesome!</p></li>
 <li><p>Viewing them as a grid of SHAP dependency plots clearly shows the overall relationships that the model uses to derive it’s predictions for the whole dataset.</p></li>
@@ -1727,7 +1795,7 @@ However the converse is true for passengers in third class, as the SHAP interact
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./xgb_with_feature_selection"
+            path: "./key_notebooks_redundant"
         },
         predefinedOutput: true
     }
@@ -1741,7 +1809,7 @@ However the converse is true for passengers in third class, as the SHAP interact
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../shap_worked_example.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../introduction/shap_worked_example.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>

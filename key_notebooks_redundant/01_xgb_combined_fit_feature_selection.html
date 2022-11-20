@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Check correlation between features selected for the model" href="07_correlation.html" />
-    <link rel="prev" title="Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case." href="../key_notebooks/90_shap_interactions_on_titanic.html" />
+    <link rel="prev" title="Examining interactions between features with SHAP interactions" href="90_shap_interactions_on_titanic.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,11 +115,6 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../key_notebooks/outline.html">
-   Outline of notebooks
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../introduction/glossary.html">
    Glossary of technical terms
   </a>
@@ -135,8 +130,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../key_notebooks/90_shap_interactions_on_titanic.html">
-   Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.
+  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+   Examining interactions between features with SHAP interactions
   </a>
  </li>
 </ul>
@@ -198,6 +193,11 @@ const thebe_selector_output = ".output, .cell_output"
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_synthetic_patients.html">
+   Investigating the effect of patient features by varying feature values
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../key_notebooks/91_learning_rate_optimisation.html">
+  <a class="reference internal" href="91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
  </li>
@@ -294,7 +294,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/xgb_with_feature_selection/01_xgb_combined_fit_feature_selection.ipynb"
+        <a href="../_sources/key_notebooks_redundant/01_xgb_combined_fit_feature_selection.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -527,8 +527,8 @@ title="Print to PDF"
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
-<p>Eight features are able to provide a ROC AUC of 0.917 out of a maximum of 0.922. These features are also independent of each other.</p>
-<p>Our best model with 1, 2, 8 &amp; 84 features had a ROC AUC of 0.715, 0.792, 0.917 &amp; 0.922.</p>
+<p>Ten features are able to provide a ROC AUC of 0.919 out of a maximum of 0.922. These features are also largely independent of each other.</p>
+<p>Our best model with 1, 2, 10 &amp; 84 features had a ROC AUC of 0.715, 0.792, 0.919 &amp; 0.922.</p>
 </section>
 <section id="import-libraries">
 <h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
@@ -998,9 +998,11 @@ Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
     <span class="s2">&quot;S1OnsetTimeType_Precise&quot;</span><span class="p">:</span> <span class="s2">&quot;Precise onset time&quot;</span><span class="p">,</span>
     <span class="s2">&quot;S2RankinBeforeStroke&quot;</span><span class="p">:</span> <span class="s2">&quot;Prior disability level&quot;</span><span class="p">,</span>
     <span class="s2">&quot;StrokeTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;Stroke team&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;AFAnticoagulent_Yes&quot;</span><span class="p">:</span> <span class="s2">&quot;Use of AF anticoagulents&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AFAnticoagulent_Yes&quot;</span><span class="p">:</span> <span class="s2">&quot;Use of AF anticoagulants&quot;</span><span class="p">,</span>
     <span class="s2">&quot;S1OnsetToArrival_min&quot;</span><span class="p">:</span> <span class="s2">&quot;Onset-to-arrival time&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;S2Thrombolysis&quot;</span><span class="p">:</span> <span class="s2">&quot;Thrombolysis&quot;</span>
+    <span class="s2">&quot;S2Thrombolysis&quot;</span><span class="p">:</span> <span class="s2">&quot;Thrombolysis&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;S1OnsetDateType_Stroke during sleep&quot;</span><span class="p">:</span><span class="s2">&quot;Onset during sleep&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;S1AgeOnArrival&quot;</span><span class="p">:</span><span class="s2">&quot;Age&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1018,8 +1020,8 @@ Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
 </section>
 <section id="id1">
 <h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>Eight features are able to provide a ROC AUC of 0.915 out of a maximum of 0.922. These features are also independent of each other (see the next section <em>Check correlation between selected features</em> that confirms this).</p>
-<p>These 8 features are:</p>
+<p>Eight features are able to provide a ROC AUC of 0.919 out of a maximum of 0.922. These features are also largely independent of each other (see the next section <em>Check correlation between selected features</em> that confirms this).</p>
+<p>These 10 features are:</p>
 <ul class="simple">
 <li><p>S2BrainImagingTime_min: Time from arrival at hospital to scan (mins)</p></li>
 <li><p>S2StrokeType_Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
@@ -1029,6 +1031,8 @@ Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
 <li><p>StrokeTeam: Hospital attended</p></li>
 <li><p>AFAnticoagulent_Yes: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
 <li><p>S1OnsetToArrival_min: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>S1OnsetDateType_Stroke during sleep: Did stroke occur in sleep?</p></li>
+<li><p>S1AgeOnArrival: Age (as middle of 5 year age bands)</p></li>
 </ul>
 <p>Columns will be renamed to use these plain English terms in the dataframe in the onwards notebooks:</p>
 <ul class="simple">
@@ -1038,9 +1042,11 @@ Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
 <li><p>“S1OnsetTimeType_Precise”: “Precise onset time”</p></li>
 <li><p>“S2RankinBeforeStroke”: “Prior disability level”</p></li>
 <li><p>“StrokeTeam”: “Stroke team”</p></li>
-<li><p>“AFAnticoagulent_Yes”: “Use of AF anticoagulents”</p></li>
+<li><p>“AFAnticoagulent_Yes”: “Use of AF anticoagulants”</p></li>
 <li><p>“S1OnsetToArrival_min”: “Onset-to-arrival time”</p></li>
 <li><p>“S2Thrombolysis”: “Thrombolysis”</p></li>
+<li><p>“S1OnsetDateType_Stroke during sleep”:”Onset during sleep”,</p></li>
+<li><p>“S1AgeOnArrival”:”Age”</p></li>
 </ul>
 </section>
 </section>
@@ -1058,7 +1064,7 @@ Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./xgb_with_feature_selection"
+            path: "./key_notebooks_redundant"
         },
         predefinedOutput: true
     }
@@ -1072,11 +1078,11 @@ Feature 25: AFAnticoagulentVitK_Yes, AUC: 0.923
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../key_notebooks/90_shap_interactions_on_titanic.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="90_shap_interactions_on_titanic.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Describing model predictions, using SHAP values and SHAP interactions: Using Titanic survival as an example use case.</p>
+            <p class="prev-next-title">Examining interactions between features with SHAP interactions</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="07_correlation.html" title="next page">
