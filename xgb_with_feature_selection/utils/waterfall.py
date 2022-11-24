@@ -10,7 +10,8 @@ from .labels import labels
 from .general import safe_isinstance, format_value
 from . import colors
 
-# 221116 KP add argument to function waterfall (y_reverse=True) that reverses the y axis (expected value at top, predicted value at bottom)
+# 221116 Added argument (y_reverse) to function waterfall that reverses the y axis when set to True
+# (y_reverse = True: Expected value at top of y axis, Predicted value at bottom of y axis)
 
 # TODO: If we make a JS version of this plot then we could let users click on a bar and then see the dependence
 # plot that is associated with that feature get overlayed on the plot...it would quickly allow users to answer
@@ -33,6 +34,9 @@ def waterfall(shap_values, max_display=10, show=True, y_reverse=False):
     show : bool
         Whether matplotlib.pyplot.show() is called before returning. Setting this to False allows the plot
         to be customized further after it has been created.
+    y_reverse : bool
+        Determines placement of expected value & predicted value on y axis. Setting this to True reverses the 
+        y axis and puts expected value at top of y axis, and predicted value at bottom of y axis.
     """
 
     # Turn off interactive plot
@@ -266,44 +270,50 @@ def waterfall(shap_values, max_display=10, show=True, y_reverse=False):
     ax.tick_params(labelsize=13)
     #plt.xlabel("\nModel output", fontsize=12)
 
-    # Set up the different values to use depending on if f(x) is at top or bottom
-    # Code uses ax.twiny() which takes the opposite position of the axis, so to switch the location of f(x) and E(f(x)) need to swap the order they are created.
-
+    # Set up the two dictionaries depending on if f(x) or E(f(x)) is at top or bottom.
+    # ax2_dict contains the details for the top, ax3_dict contains the details for the bottom.
+    # The code used to place these two labels uses ax.twiny() which takes the opposite position of the given axis.
+    # In order to switch the location of f(x) and E(f(x)) (by setting y_reverse=True) the code swaps the order 
+    # that their respective axis is created.
     if y_reverse:
+        # bottom of y axis: f(x)
         ax2_dict = {"value": base_values + values.sum(),
                     "ticklabels": ["$f(x)$", "$ = "+format_value(fx, "%0.03f")+"$"],        
                     "loc1": -10/72., "loc2": 12/72., "loc3": -15/72., "loc4": -15/72.}
-
+        # top of y axis: E(f(x))
         ax3_dict = {"value": base_values, 
                     "ticklabels": ["\n$E[f(X)]$", "\n$ = "+format_value(base_values, "%0.03f")+"$"], 
                     "loc1": -20/72., "loc2": 22/72., "loc3": 0, "loc4": 0}
         
     else:
+        # bottom of y axis: E(f(x))
         ax2_dict = {"value": base_values, 
                     "ticklabels": ["\n$E[f(X)]$", "\n$ = "+format_value(base_values, "%0.03f")+"$"], 
                     "loc1": -20/72., "loc2": 22/72., "loc3": 0, "loc4": -1/72.}
-        
+        # top of y axis: f(x)
         ax3_dict = {"value": base_values + values.sum(), 
                     "ticklabels": ["$f(x)$", "$ = "+format_value(fx, "%0.03f")+"$"], 
                     "loc1": -10/72., "loc2": 12/72., "loc3": 0, "loc4": 0}
 
-    # draw the top tick mark (either f(X) or E(f(x)) depending on y_reverse)
+    # draw the bottom tick mark (either f(X) or E(f(x)) depending on y_reverse)
     xmin, xmax = ax.get_xlim()
     ax2 = ax.twiny()
     ax2.set_xlim(xmin, xmax)
-    ax2.set_xticks([ax2_dict["value"], ax2_dict["value"] + 1e-8]) # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
     # The 1e-8 is so matplotlib 3.3 doesn't try and collapse the ticks
+    # provide two locations as using two tick labels (one for "f(x)" and one for "= value")
+    ax2.set_xticks([ax2_dict["value"], ax2_dict["value"] + 1e-8])
     ax2.set_xticklabels(ax2_dict["ticklabels"], fontsize=12, ha="left")
     ax2.spines['right'].set_visible(False)
     ax2.spines['top'].set_visible(False)
     ax2.spines['left'].set_visible(False)
 
-    # draw the bottom tick mark (either f(X) or E(f(x)) depending on y_reverse)
+    # draw the top tick mark (either f(X) or E(f(x)) depending on y_reverse)
     ax3 = ax2.twiny()
     ax3.set_xlim(xmin, xmax)
     # The 1e-8 is so matplotlib 3.3 doesn't try and collapse the ticks
-    ax3.set_xticks([ax3_dict["value"], ax3_dict["value"] + 1e-8])  # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
-    ax3.set_xticklabels(ax3_dict["ticklabels"], fontsize=12, ha="left") # ha is horizontal alignment
+    # provide two locations as using two tick labels (one for "f(x)" and one for "= value"
+    ax3.set_xticks([ax3_dict["value"], ax3_dict["value"] + 1e-8])  
+    ax3.set_xticklabels(ax3_dict["ticklabels"], fontsize=12, ha="left")
     # adjust the position of the bottom label (either f(X) or E(f(x)) depending on y_reverse)
     tick_labels = ax3.xaxis.get_majorticklabels()
     tick_labels[0].set_transform(tick_labels[0].get_transform(
@@ -339,4 +349,3 @@ def waterfall(shap_values, max_display=10, show=True, y_reverse=False):
         plt.show()
     else:
         return plt.gcf()
-
