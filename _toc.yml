@@ -3,25 +3,25 @@ root: introduction/intro
 parts:
 - caption: Introductory content
   chapters:
-  - file: key_notebooks/outline
+  - file: key_notebooks_redundant/outline
   - file: introduction/glossary
   - file: introduction/odds_prob
   - file: introduction/shap_worked_example
-  - file: key_notebooks/90_shap_interactions_on_titanic
+  - file: xgb_10_features/90_shap_interactions_on_titanic
 - caption: Predicting thrombolysis use and explaining the predictions with Shap
   chapters:
-  - file: key_notebooks/01_xgb_combined_fit_feature_selection
-  - file: key_notebooks/07_correlation
-  - file: key_notebooks/02_xgb_combined_fit_accuracy_key_features
-  - file: key_notebooks/03_xgb_combined_shap_key_features
+  - file: xgb_10_features/01_xgb_combined_fit_feature_selection
+  - file: key_notebooks_redundant/07_correlation
+  - file: xgb_10_features/02_xgb_combined_fit_accuracy_key_features
+  - file: key_notebooks_redundant/03_xgb_combined_shap_key_features
 - caption: Comparing thrombolysis decisions between hospitals
   chapters:
-  - file: key_notebooks/04_compare_10k_cohort_key_features
-  - file: key_notebooks/05_compare_benchmark_decisions_key_features
-  - file: key_notebooks/06_predict_differences_between_local_and_benchmark_key_features
-  - file: key_notebooks/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
-  - file: key_notebooks/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
-  - file: key_notebooks/20_synthetic_patients
+  - file: key_notebooks_redundant/04_compare_10k_cohort_key_features
+  - file: key_notebooks_redundant/05_compare_benchmark_decisions_key_features
+  - file: key_notebooks_redundant/06_predict_differences_between_local_and_benchmark_key_features
+  - file: key_notebooks_redundant/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
+  - file: key_notebooks_redundant/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
+  - file: key_notebooks_redundant/20_synthetic_patients
 - caption: Appendix
   chapters:
-  - file: key_notebooks/91_learning_rate_optimisation
+  - file: key_notebooks_redundant/91_learning_rate_optimisation
