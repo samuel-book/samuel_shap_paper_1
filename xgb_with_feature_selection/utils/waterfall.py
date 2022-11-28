@@ -17,7 +17,7 @@ from . import colors
 # plot that is associated with that feature get overlayed on the plot...it would quickly allow users to answer
 # why a feature is pushing down or up. Perhaps the best way to do this would be with an ICE plot hanging off
 # of the bar...
-def waterfall(shap_values, max_display=10, show=True, y_reverse=False):
+def waterfall(shap_values, max_display=10, show=True, y_reverse=False, ax=None, title=None,):
     """ Plots an explantion of a single prediction as a waterfall plot.
     The SHAP value of a feature represents the impact of the evidence provided by that feature on the model's
     output. The waterfall plot is designed to visually display how the SHAP values (evidence) of each feature
@@ -39,6 +39,8 @@ def waterfall(shap_values, max_display=10, show=True, y_reverse=False):
         y axis and puts expected value at top of y axis, and predicted value at bottom of y axis.
     """
 
+        if title==None:
+        title = "The effects of each feature for the prediction of a single instance"
     # Turn off interactive plot
     if show is False:
         plt.ioff()
