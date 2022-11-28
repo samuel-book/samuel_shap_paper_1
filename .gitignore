@@ -16,4 +16,6 @@ temp/
 # Ignore PyCharm files
 .idea
 
+# Ignore cache files (stored in this folder)
+**/__pycache__/
 
