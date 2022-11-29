@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values" href="../key_notebooks_redundant/04_compare_10k_cohort_key_features.html" />
+    <link rel="next" title="Explaining XGBoost model predictions with SHAP values" href="03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html" />
     <link rel="prev" title="Measuring accuracy of XGBoost models" href="02_xgb_combined_fit_accuracy_key_features.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -163,6 +163,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+   Explaining XGBoost model predictions with SHAP values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">
    Explaining XGBoost model predictions with SHAP values
   </a>
  </li>
@@ -680,7 +685,7 @@ We can learn that SHAP values rank the five most influential features as: stroke
 <ul class="simple">
 <li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
 </ul>
-<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+<p>The 10 features included in the model (to predict whether a patient will receive thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
 <p>The Python library SHAP was applied to each of the 5 fitted models (one per kfold) to obtain a SHAP value for each feature, for each instance. SHAP values are in the same units as the model output, so for XGBoost this is in log odds-ratio.</p>
 <p>A single SHAP value per feature (to compare with the feature importance value) was obtained by taking the mean of the absolute values across all instances. Then for both cases (feature importance and SHAP) take the median across the 5 kfolds.</p>
 </section>
@@ -2141,10 +2146,10 @@ The mean is calculated in three ways:</p>
             <p class="prev-next-title">Measuring accuracy of XGBoost models</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../key_notebooks_redundant/04_compare_10k_cohort_key_features.html" title="next page">
+    <a class='right-next' id="next-link" href="03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values</p>
+        <p class="prev-next-title">Explaining XGBoost model predictions with SHAP values</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
