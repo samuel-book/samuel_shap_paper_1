@@ -1,8 +1,9 @@
-name: samuel2
+name: samuel
 channels:
   - defaults
   - conda-forge
 dependencies:
+  - jupyter
   - jupyterlab
   - matplotlib=3.4
   - numpy
@@ -17,6 +18,6 @@ dependencies:
     - graphviz
     - imbalanced-learn
     - pydot
-    - shap
+    - shap==0.41
     - optuna
-    - ppscore
+    - torch
