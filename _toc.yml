@@ -24,4 +24,5 @@ parts:
   - file: key_notebooks_redundant/20_synthetic_patients
 - caption: Appendix
   chapters:
+  - file: xgb_10_features/50_bagging_variation 
   - file: key_notebooks_redundant/91_learning_rate_optimisation
