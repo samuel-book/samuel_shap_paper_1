@@ -507,8 +507,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="evaluating-variation-in-model-predictions-and-predicted-10k-thrombolysis-rate-using-bootstrap-models">
 <h1>Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models<a class="headerlink" href="#evaluating-variation-in-model-predictions-and-predicted-10k-thrombolysis-rate-using-bootstrap-models" title="Permalink to this headline">#</a></h1>
 <p>Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.</p>
-<p>We apply two bootstrap methods, In the traditional method we fit multiple models to bootstrapped samples of the trainign set (random sampling with replacement).</p>
-<p>In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Drichlet distibution (see <a class="reference external" href="https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148">https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</a>).</p>
+<p>We apply two bootstrap methods, In the traditional method we fit multiple models to bootstrapped samples of the training set (random sampling with replacement).</p>
+<p>In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Dirichlet distribution (see <a class="reference external" href="https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148">https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</a>).</p>
 <p>These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05. The average standard deviation in predicting the hospital’s expected thrombolysis rate is 0.015-0.02.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
