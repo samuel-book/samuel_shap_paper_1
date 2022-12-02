@@ -509,7 +509,7 @@ title="Print to PDF"
 <p>Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.</p>
 <p>We apply two bootstrap methods, In the traditional method we fit multiple models to bootstrapped samples of the training set (random sampling with replacement).</p>
 <p>In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Dirichlet distribution (see <a class="reference external" href="https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148">https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</a>).</p>
-<p>These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05. The average standard deviation in predicting the hospital’s expected thrombolysis rate is 0.015-0.02.</p>
+<p>These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05, but this ranges from about 0.01 to 0.12 dependening on the predicted probability (with greatest variance around 50% predicted probability of receiving thrombolysis). The average standard deviation in predicting the hospital’s expected thrombolysis rate is 0.015-0.02.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -541,7 +541,7 @@ title="Print to PDF"
 <p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/01_feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
     <span class="n">feature_name_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -566,7 +566,7 @@ title="Print to PDF"
 
 <span class="c1"># Read in the names of the selected features for the model</span>
 <span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/feature_selection.csv&#39;</span><span class="p">)</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/01_feature_selection.csv&#39;</span><span class="p">)</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
 <span class="c1"># And add the target feature name: S2Thrombolysis</span>
 <span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
@@ -715,15 +715,15 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.839
-Accuracy set 1: 0.840
+Accuracy set 1: 0.846
 Accuracy set 2: 0.841
-Accuracy set 3: 0.844
-Accuracy set 4: 0.845
-Accuracy set 5: 0.841
+Accuracy set 3: 0.845
+Accuracy set 4: 0.840
+Accuracy set 5: 0.840
 Accuracy set 6: 0.841
-Accuracy set 7: 0.843
-Accuracy set 8: 0.839
-Accuracy set 9: 0.844
+Accuracy set 7: 0.842
+Accuracy set 8: 0.842
+Accuracy set 9: 0.842
 </pre></div>
 </div>
 </div>
@@ -732,6 +732,7 @@ Accuracy set 9: 0.844
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_predictions</span><span class="p">)</span>
+<span class="n">prediction_mean</span> <span class="o">=</span> <span class="n">all_predictions</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">prediction_std</span> <span class="o">=</span> <span class="n">all_predictions</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">mean_std</span> <span class="o">=</span> <span class="n">prediction_std</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean standard deviation of bootstrap replicates </span><span class="si">{</span><span class="n">mean_std</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -742,6 +743,33 @@ Accuracy set 9: 0.844
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.053
 </pre></div>
 </div>
+</div>
+</div>
+<p>Show relationship between probability of receiving thrombolysis, and variation in predicted probability over bootstrapped models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up data frame of results</span>
+<span class="n">patient_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">patient_predictions</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction_mean</span>
+<span class="n">patient_predictions</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction_std</span>
+<span class="c1"># Bin mean probability of receiving thrombolysis</span>
+<span class="n">patient_predictions</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">prediction_mean</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>
+<span class="c1"># Calculat emean results by bin</span>
+<span class="n">pivot</span> <span class="o">=</span> <span class="n">patient_predictions</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bin&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">],</span> <span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicited probability of receiving thrombolysis&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Standard deviation of prredicted probability</span><span class="se">\n</span><span class="s1">over bootstrapped models&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/50_bagging_variation_20_0.png" src="../_images/50_bagging_variation_20_0.png" />
 </div>
 </div>
 <section id="id2">
@@ -841,68 +869,68 @@ Accuracy set 9: 0.844
   <tbody>
     <tr>
       <th>AGNOF1041H</th>
-      <td>0.3108</td>
-      <td>0.2872</td>
-      <td>0.2970</td>
-      <td>0.2736</td>
-      <td>0.3149</td>
-      <td>0.2888</td>
-      <td>0.2888</td>
-      <td>0.2815</td>
-      <td>0.2756</td>
-      <td>0.3018</td>
+      <td>0.3015</td>
+      <td>0.3066</td>
+      <td>0.3400</td>
+      <td>0.3181</td>
+      <td>0.2969</td>
+      <td>0.2858</td>
+      <td>0.3352</td>
+      <td>0.3197</td>
+      <td>0.3090</td>
+      <td>0.3196</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
-      <td>0.3289</td>
-      <td>0.3386</td>
-      <td>0.3162</td>
-      <td>0.3274</td>
-      <td>0.3370</td>
-      <td>0.3160</td>
-      <td>0.3085</td>
-      <td>0.3355</td>
-      <td>0.3508</td>
-      <td>0.3612</td>
+      <td>0.3414</td>
+      <td>0.3155</td>
+      <td>0.3492</td>
+      <td>0.3629</td>
+      <td>0.3122</td>
+      <td>0.3187</td>
+      <td>0.3410</td>
+      <td>0.3446</td>
+      <td>0.3361</td>
+      <td>0.3577</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
-      <td>0.2608</td>
-      <td>0.2371</td>
-      <td>0.2382</td>
-      <td>0.2489</td>
-      <td>0.2307</td>
-      <td>0.2428</td>
-      <td>0.2417</td>
-      <td>0.2349</td>
-      <td>0.2533</td>
-      <td>0.2343</td>
+      <td>0.2458</td>
+      <td>0.2515</td>
+      <td>0.2466</td>
+      <td>0.2304</td>
+      <td>0.2477</td>
+      <td>0.2186</td>
+      <td>0.2420</td>
+      <td>0.2221</td>
+      <td>0.2550</td>
+      <td>0.2252</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
-      <td>0.2580</td>
-      <td>0.2709</td>
-      <td>0.2682</td>
-      <td>0.2966</td>
-      <td>0.2925</td>
-      <td>0.2906</td>
-      <td>0.2797</td>
-      <td>0.2874</td>
-      <td>0.2902</td>
-      <td>0.2877</td>
+      <td>0.2827</td>
+      <td>0.2839</td>
+      <td>0.2741</td>
+      <td>0.2561</td>
+      <td>0.2909</td>
+      <td>0.2802</td>
+      <td>0.3045</td>
+      <td>0.2768</td>
+      <td>0.3002</td>
+      <td>0.2544</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
-      <td>0.3208</td>
-      <td>0.2860</td>
-      <td>0.3123</td>
-      <td>0.3566</td>
-      <td>0.3056</td>
-      <td>0.3079</td>
-      <td>0.2862</td>
-      <td>0.3212</td>
-      <td>0.3023</td>
-      <td>0.2817</td>
+      <td>0.2679</td>
+      <td>0.2807</td>
+      <td>0.3033</td>
+      <td>0.2936</td>
+      <td>0.2997</td>
+      <td>0.3169</td>
+      <td>0.3361</td>
+      <td>0.3106</td>
+      <td>0.3290</td>
+      <td>0.2788</td>
     </tr>
   </tbody>
 </table>
@@ -965,7 +993,7 @@ Accuracy set 9: 0.844
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/50_bagging_variation_27_0.png" src="../_images/50_bagging_variation_27_0.png" />
+<img alt="../_images/50_bagging_variation_29_0.png" src="../_images/50_bagging_variation_29_0.png" />
 </div>
 </div>
 <p>Plot mean and stanbdard deviation</p>
@@ -997,7 +1025,7 @@ Accuracy set 9: 0.844
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/50_bagging_variation_29_0.png" src="../_images/50_bagging_variation_29_0.png" />
+<img alt="../_images/50_bagging_variation_31_0.png" src="../_images/50_bagging_variation_31_0.png" />
 </div>
 </div>
 </section>
@@ -1047,15 +1075,15 @@ Accuracy set 9: 0.844
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.840
-Accuracy set 1: 0.847
-Accuracy set 2: 0.843
-Accuracy set 3: 0.848
-Accuracy set 4: 0.841
-Accuracy set 5: 0.843
-Accuracy set 6: 0.847
-Accuracy set 7: 0.846
-Accuracy set 8: 0.842
-Accuracy set 9: 0.842
+Accuracy set 1: 0.840
+Accuracy set 2: 0.846
+Accuracy set 3: 0.843
+Accuracy set 4: 0.845
+Accuracy set 5: 0.845
+Accuracy set 6: 0.843
+Accuracy set 7: 0.840
+Accuracy set 8: 0.841
+Accuracy set 9: 0.845
 </pre></div>
 </div>
 </div>
@@ -1074,6 +1102,33 @@ Accuracy set 9: 0.842
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.051
 </pre></div>
 </div>
+</div>
+</div>
+<p>Show relationship between probability of receiving thrombolysis, and variation in predicted probability over bootstrapped models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up data frame of results</span>
+<span class="n">patient_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">patient_predictions</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction_mean</span>
+<span class="n">patient_predictions</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction_std</span>
+<span class="c1"># Bin mean probability of receiving thrombolysis</span>
+<span class="n">patient_predictions</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">prediction_mean</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>
+<span class="c1"># Calculat emean results by bin</span>
+<span class="n">pivot</span> <span class="o">=</span> <span class="n">patient_predictions</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bin&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">],</span> <span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicited probability of receiving thrombolysis&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Standard deviation of prredicted probability</span><span class="se">\n</span><span class="s1">over bootstrapped models&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/50_bagging_variation_37_0.png" src="../_images/50_bagging_variation_37_0.png" />
 </div>
 </div>
 <section id="id3">
@@ -1173,68 +1228,68 @@ Accuracy set 9: 0.842
   <tbody>
     <tr>
       <th>AGNOF1041H</th>
-      <td>0.2848</td>
-      <td>0.3010</td>
-      <td>0.2969</td>
-      <td>0.2811</td>
-      <td>0.3237</td>
-      <td>0.3031</td>
-      <td>0.2851</td>
-      <td>0.2967</td>
-      <td>0.3371</td>
-      <td>0.2595</td>
+      <td>0.2830</td>
+      <td>0.3177</td>
+      <td>0.2832</td>
+      <td>0.2810</td>
+      <td>0.2838</td>
+      <td>0.2784</td>
+      <td>0.3106</td>
+      <td>0.2785</td>
+      <td>0.2899</td>
+      <td>0.2703</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
-      <td>0.3365</td>
-      <td>0.3625</td>
-      <td>0.3341</td>
-      <td>0.3299</td>
-      <td>0.3311</td>
-      <td>0.3218</td>
-      <td>0.3317</td>
-      <td>0.3280</td>
-      <td>0.3481</td>
-      <td>0.3358</td>
+      <td>0.3369</td>
+      <td>0.3375</td>
+      <td>0.3371</td>
+      <td>0.3393</td>
+      <td>0.3492</td>
+      <td>0.3296</td>
+      <td>0.3489</td>
+      <td>0.3364</td>
+      <td>0.3241</td>
+      <td>0.3153</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
-      <td>0.2429</td>
-      <td>0.2322</td>
-      <td>0.2415</td>
-      <td>0.2104</td>
-      <td>0.2416</td>
-      <td>0.2588</td>
-      <td>0.2395</td>
-      <td>0.2638</td>
-      <td>0.2424</td>
-      <td>0.2463</td>
+      <td>0.2567</td>
+      <td>0.2341</td>
+      <td>0.2226</td>
+      <td>0.2370</td>
+      <td>0.2413</td>
+      <td>0.2615</td>
+      <td>0.2275</td>
+      <td>0.2457</td>
+      <td>0.2136</td>
+      <td>0.2471</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
-      <td>0.2939</td>
-      <td>0.2679</td>
-      <td>0.2714</td>
-      <td>0.2713</td>
-      <td>0.2649</td>
-      <td>0.2741</td>
-      <td>0.2807</td>
-      <td>0.2569</td>
-      <td>0.2820</td>
-      <td>0.3067</td>
+      <td>0.2775</td>
+      <td>0.2895</td>
+      <td>0.2805</td>
+      <td>0.2823</td>
+      <td>0.2857</td>
+      <td>0.2634</td>
+      <td>0.2862</td>
+      <td>0.2879</td>
+      <td>0.2851</td>
+      <td>0.2936</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
-      <td>0.3438</td>
-      <td>0.3601</td>
-      <td>0.3558</td>
-      <td>0.3008</td>
-      <td>0.2929</td>
-      <td>0.3060</td>
-      <td>0.3442</td>
-      <td>0.3086</td>
-      <td>0.3104</td>
-      <td>0.2826</td>
+      <td>0.3134</td>
+      <td>0.2964</td>
+      <td>0.2932</td>
+      <td>0.2956</td>
+      <td>0.3019</td>
+      <td>0.3089</td>
+      <td>0.3165</td>
+      <td>0.3041</td>
+      <td>0.3138</td>
+      <td>0.2964</td>
     </tr>
   </tbody>
 </table>
@@ -1271,7 +1326,7 @@ Accuracy set 9: 0.842
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.016
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.015
 </pre></div>
 </div>
 </div>
@@ -1297,7 +1352,7 @@ Accuracy set 9: 0.842
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/50_bagging_variation_42_0.png" src="../_images/50_bagging_variation_42_0.png" />
+<img alt="../_images/50_bagging_variation_46_0.png" src="../_images/50_bagging_variation_46_0.png" />
 </div>
 </div>
 <p>Plot mean and stanbdard deviation</p>
@@ -1329,7 +1384,7 @@ Accuracy set 9: 0.842
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/50_bagging_variation_44_0.png" src="../_images/50_bagging_variation_44_0.png" />
+<img alt="../_images/50_bagging_variation_48_0.png" src="../_images/50_bagging_variation_48_0.png" />
 </div>
 </div>
 </section>
