@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates" href="91_learning_rate_optimisation.html" />
+    <link rel="next" title="Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models" href="../xgb_10_features/50_bagging_variation.html" />
     <link rel="prev" title="Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -211,6 +211,11 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../xgb_10_features/50_bagging_variation.html">
+   Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="91_learning_rate_optimisation.html">
    Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
   </a>
@@ -359,6 +364,16 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#observations">
    Observations
   </a>
@@ -369,8 +384,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-output-folders-if-needed">
    Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -379,8 +404,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-xgboost-model">
-   Fit XGBoost model
+  <a class="reference internal nav-link" href="#load-xgboost-model">
+   Load XGBoost model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-shap-model">
+   Load SHAP model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -423,6 +453,16 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#observations">
    Observations
   </a>
@@ -433,8 +473,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-output-folders-if-needed">
    Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -443,8 +493,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-xgboost-model">
-   Fit XGBoost model
+  <a class="reference internal nav-link" href="#load-xgboost-model">
+   Load XGBoost model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-shap-model">
+   Load SHAP model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -479,6 +534,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="investigating-the-effect-of-patient-features-by-varying-feature-values">
 <h1>Investigating the effect of patient features by varying feature values<a class="headerlink" href="#investigating-the-effect-of-patient-features-by-varying-feature-values" title="Permalink to this headline">#</a></h1>
+<section id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
 <p>In this notebook we start with a ‘base patient’ who has features that are favourable to use of thrombolysis:</p>
 <ul class="simple">
 <li><p>Onset to arrival = 80 mins</p></li>
@@ -504,6 +561,26 @@ title="Print to PDF"
 <li><p>Base patient, but estimated stroke onset time: 84 (64%)</p></li>
 <li><p>Base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 3 (2.3%)</p></li>
 </ul>
+</section>
+<section id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+<p>XGBoost models were trained on stratified k-fold cross-validation data. The 8 features in the model are:</p>
+<ul class="simple">
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+</ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
+</ul>
+<p>The 8 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+</section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -533,6 +610,51 @@ title="Print to PDF"
 
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
 <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># So can load package from a parallel folder</span>
+<span class="c1">#import sys</span>
+<span class="c1"># caution: path[0] is reserved for script path (or &#39;&#39; in REPL)</span>
+<span class="c1">#sys.path.insert(1, &#39;../xgb_with_feature_selection&#39;)</span>
+<span class="c1">#import utils</span>
+
+<span class="c1">#import ../xgb_with_feature_selection/utils</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="c1">#from ..xgb_with_feature_selection/utils import waterfall</span>
+
+<span class="c1">#from application.app.folder.file import func_name</span>
+
+<span class="c1">#export PYTHONPATH=/path/to/parent  # linux/macOS</span>
+
+<span class="c1"># Import from a relative path</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="c1"># Get current working directory (absolute path)</span>
+<span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="c1"># Define path to where package is (this goes up one directory)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">cwd</span> <span class="o">+</span> <span class="s1">&#39;/../xgb_with_feature_selection/&#39;</span>
+<span class="c1"># Add path so Python will look here</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="c1"># We can now import the helper module</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">waterfall</span>
+<span class="c1"># Force package to be reloaded</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">waterfall</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;utils.waterfall&#39; from &#39;/home/kerry/Documents/GitHub/samuel_shap_paper_1/key_notebooks_redundant/../xgb_with_feature_selection/utils/waterfall.py&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_key_features</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_key_features</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;20_synthetic&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -554,6 +676,19 @@ title="Print to PDF"
 </div>
 </div>
 </section>
+<section id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../xgb_with_feature_selection/output/&quot;</span>
+          <span class="s2">&quot;01_feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">dict_feature_name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
 <p>10k cohort of patients in test data, rest in training data</p>
@@ -567,17 +702,30 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
-<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_key_features_train.csv&#39;</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_key_features_test.csv&#39;</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_test.csv&#39;</span><span class="p">)</span>
 <span class="n">synthetic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_key_features_synthetic.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read in the names of the selected features for the model</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../xgb_with_feature_selection/output/&#39;</span>
+                           <span class="s1">&#39;01_feature_selection.csv&#39;</span><span class="p">)</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_key_features</span><span class="p">]</span>
+<span class="c1"># And add the target feature name: S2Thrombolysis</span>
+<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;S2Thrombolysis&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extract just the key features, and rename</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+<span class="n">train</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dict_feature_name</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+<span class="n">test</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dict_feature_name</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="fit-xgboost-model">
-<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
-<p>Train a XGBoost model on the 10k cohort train/test dataset</p>
+<section id="load-xgboost-model">
+<h2>Load XGBoost model<a class="headerlink" href="#load-xgboost-model" title="Permalink to this headline">#</a></h2>
+<p>Load the XGBoost model that was trained on the 10k cohort train/test dataset (in notebook 04_compare_10k_cohort_key_features.ipynb).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get X and y</span>
@@ -594,15 +742,16 @@ title="Print to PDF"
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_test</span><span class="p">,</span> <span class="n">X_test_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
 
-<span class="c1"># Define model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../xgb_with_feature_selection/saved_models/&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;04_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_10k_cohort.p&#39;</span><span class="p">)</span>
 
-<span class="c1"># Fit model</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># Load models</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 
 <span class="c1"># Get predicted probabilities and class</span>
-<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>\
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
 
 <span class="c1"># Show accuracy</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
@@ -611,7 +760,24 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.846
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.841
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-shap-model">
+<h2>Load SHAP model<a class="headerlink" href="#load-shap-model" title="Permalink to this headline">#</a></h2>
+<p>Load the SHAP explainer model (this was set up using the model and feature values from training set). To be used later to create waterfall plots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up method to estimate SHAP values for tree models and ensembles of trees</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../xgb_with_feature_selection/output/&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;04_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_10k_cohort_shap_explainer_object.p&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load SHAP explainer</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+    <span class="n">explainer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -642,7 +808,7 @@ title="Print to PDF"
 <span class="n">y_synthetic</span> <span class="o">=</span> <span class="n">synthetic</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
 <span class="n">X_synthetic_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_synthetic</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
 <span class="n">X_synthetic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_synthetic</span><span class="p">,</span> <span class="n">X_synthetic_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">X_synthetic</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">X_synthetic</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -654,8 +820,8 @@ title="Print to PDF"
 <span class="k">for</span> <span class="n">stroke_sev</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
     <span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_sev</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">number_thrombolysing_NIHSS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
 <span class="c1"># Adjust Prior disability</span>
@@ -663,8 +829,8 @@ title="Print to PDF"
 <span class="k">for</span> <span class="n">mrs</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mrs</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">number_thrombolysing_mrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
 <span class="c1"># Adjust precise onset time</span>
@@ -672,8 +838,8 @@ title="Print to PDF"
 <span class="k">for</span> <span class="n">precise_onset</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
     <span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">precise_onset</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">number_thrombolysing_precise_onset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -683,7 +849,6 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">number_hopsitals</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hospitals</span><span class="p">)</span>
-
 
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x1</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">number_thrombolysing_NIHSS</span><span class="p">))</span>
@@ -728,13 +893,14 @@ title="Print to PDF"
 <span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/synthetic_patients.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_IVT_rate_vs_feature_values.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20_synthetic_patients_13_0.png" src="../_images/20_synthetic_patients_13_0.png" />
+<img alt="../_images/20_synthetic_patients_19_0.png" src="../_images/20_synthetic_patients_19_0.png" />
 </div>
 </div>
 </section>
@@ -744,8 +910,8 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
 <span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 <span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -754,41 +920,69 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 130
-Percent of hospitals that would give thrombolsysis: 98.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 132
+Percent of hospitals that would give thrombolsysis: 100.0
 </pre></div>
 </div>
 </div>
 </div>
-<p>Stroke severity (NIHSS) = 5.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
-<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
-<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 120
-Percent of hospitals that would give thrombolsysis: 90.9
-</pre></div>
-</div>
-</div>
-</div>
-<p>Prior disability leve (mRS) = 2.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">return_indices_for_min_median_max_value_of_array</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
 
-<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+    <span class="n">median_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">hospital_index_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hospital_index_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ranks</span><span class="o">.</span><span class="n">argmin</span><span class="p">())</span>
+    <span class="n">hospital_index_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ranks</span><span class="o">==</span><span class="n">median_position</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">hospital_index_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ranks</span><span class="o">.</span><span class="n">argmax</span><span class="p">())</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">hospital_index_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show waterfall plots of the patient attending three hospitals: lowest, medium and highest likelihood to give thrombolysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Locate the three hospitals for lowest, mid and highest likelihood to give IVT</span>
+<span class="n">hospital_index_list</span> <span class="o">=</span> <span class="n">return_indices_for_min_median_max_value_of_array</span><span class="p">(</span><span class="n">y_prob</span><span class="p">)</span>
+
+<span class="c1"># Calculate the shap_values for the patient going to the low, mid, high hospital</span>
+<span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_adjusted</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">hospital_index_list</span><span class="p">])</span>
+
+<span class="c1"># Setup list for titles</span>
+<span class="n">title_text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;mid&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">]</span>
+
+<span class="c1"># For just the hospital want to plot</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hospital_index_list</span><span class="p">)):</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">waterfall</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">h</span><span class="p">],</span>
+                               <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="c1">#, y_reverse=True)</span>
+    
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_waterfall_logodds_&#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title_text</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="si">}</span><span class="s1">.jpg&#39;</span><span class="p">,</span> 
+                <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/20_synthetic_patients_25_0.png" src="../_images/20_synthetic_patients_25_0.png" />
+<img alt="../_images/20_synthetic_patients_25_1.png" src="../_images/20_synthetic_patients_25_1.png" />
+<img alt="../_images/20_synthetic_patients_25_2.png" src="../_images/20_synthetic_patients_25_2.png" />
+</div>
+</div>
+<p>Stroke severity (NIHSS) = 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
 <span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 <span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -797,8 +991,30 @@ Percent of hospitals that would give thrombolsysis: 90.9
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 126
-Percent of hospitals that would give thrombolsysis: 95.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 112
+Percent of hospitals that would give thrombolsysis: 84.8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Prior disability level (mRS) = 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hospitals that would give thrombolsysis: </span><span class="si">{</span><span class="n">percent</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 116
+Percent of hospitals that would give thrombolsysis: 87.9
 </pre></div>
 </div>
 </div>
@@ -809,8 +1025,8 @@ Percent of hospitals that would give thrombolsysis: 95.5
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
 <span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 <span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -819,8 +1035,8 @@ Percent of hospitals that would give thrombolsysis: 95.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 84
-Percent of hospitals that would give thrombolsysis: 63.6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 103
+Percent of hospitals that would give thrombolsysis: 78.0
 </pre></div>
 </div>
 </div>
@@ -833,8 +1049,8 @@ Percent of hospitals that would give thrombolsysis: 63.6
 <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
 <span class="n">percent</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 <span class="n">count</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of hospitals giving thrombolysis: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -843,8 +1059,8 @@ Percent of hospitals that would give thrombolsysis: 63.6
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 3
-Percent of hospitals that would give thrombolsysis: 2.3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hospitals giving thrombolysis: 2
+Percent of hospitals that would give thrombolsysis: 1.5
 </pre></div>
 </div>
 </div>
@@ -866,8 +1082,8 @@ Percent of hospitals that would give thrombolsysis: 2.3
 <span class="k">for</span> <span class="n">stroke_sev</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
     <span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_sev</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">control</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
 <span class="c1"># Pre-stroke disability = 2</span>
@@ -876,8 +1092,8 @@ Percent of hospitals that would give thrombolsysis: 2.3
     <span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_sev</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">disability</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
 <span class="c1"># Estimated stroke onset</span>
@@ -886,8 +1102,8 @@ Percent of hospitals that would give thrombolsysis: 2.3
     <span class="n">X_adjusted</span> <span class="o">=</span> <span class="n">X_synthetic</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_sev</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">estimated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
 <span class="c1"># Estimated stroke onset + Pre-stroke disability = 2</span>
@@ -897,8 +1113,8 @@ Percent of hospitals that would give thrombolsysis: 2.3
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">X_adjusted</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_sev</span>
-    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
     <span class="n">disability_estimated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -934,13 +1150,13 @@ Percent of hospitals that would give thrombolsysis: 2.3
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.12</span><span class="p">),</span>
     <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/synthetic_patient_interactions.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_interactions.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20_synthetic_patients_27_0.png" src="../_images/20_synthetic_patients_27_0.png" />
+<img alt="../_images/20_synthetic_patients_36_0.png" src="../_images/20_synthetic_patients_36_0.png" />
 </div>
 </div>
 </section>
@@ -994,10 +1210,10 @@ Percent of hospitals that would give thrombolsysis: 2.3
             <p class="prev-next-title">Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="91_learning_rate_optimisation.html" title="next page">
+    <a class='right-next' id="next-link" href="../xgb_10_features/50_bagging_variation.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</p>
+        <p class="prev-next-title">Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
