@@ -26,4 +26,18 @@
 * ROC AUC = 0.918
 * The model is well calibrated
 
+## Notebook 03: General SHAP
 
+The five most influential features as judged by SHAP were:
+
+* Stroke type
+* Arrival-to-scan time
+* Stroke severity (NIHSS)
+* Stroke onset time type (precise vs. estimated)
+* Disability level (Rankin) before stroke
+
+SHAP values were consistent across k-fold splits
+
+Contains examples of waterfall plots (odds and probabilities)
+Scatter plots and violin plots
+SHAP values for hospitals for patients attending each hopsital
