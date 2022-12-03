@@ -14,6 +14,7 @@ parts:
   - file: xgb_10_features/07_correlation
   - file: xgb_10_features/02_xgb_combined_fit_accuracy_key_features
   - file: xgb_10_features/03_xgb_combined_shap_key_features
+  - file: xgb_10_features/03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals
 - caption: Comparing thrombolysis decisions between hospitals
   chapters:
   - file: key_notebooks_redundant/04_compare_10k_cohort_key_features
