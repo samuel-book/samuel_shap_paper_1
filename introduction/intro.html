@@ -403,6 +403,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ho-wmuch-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
+     Ho wmuch of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
      Predicting
      <em>
@@ -481,6 +486,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
      Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ho-wmuch-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
+     Ho wmuch of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -606,9 +616,12 @@ title="Print to PDF"
 <figure class="align-default" id="shap-vs-10k">
 <a class="reference internal image-reference" href="../_images/shap_vs_10k.jpg"><img alt="../_images/shap_vs_10k.jpg" src="../_images/shap_vs_10k.jpg" style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort,</span><a class="headerlink" href="#shap-vs-10k" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.</span><a class="headerlink" href="#shap-vs-10k" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="ho-wmuch-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
+<h3>Ho wmuch of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?<a class="headerlink" href="#ho-wmuch-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value" title="Permalink to this headline">#</a></h3>
 <p>We can also look at how a hospital’s SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital’s SHAP value explains 58% of the variance in thrombolysis rate of patients (<a class="reference internal" href="#hosp-shap"><span class="std std-numref">Figure 6</span></a>). This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).</p>
 <figure class="align-default" id="hosp-shap">
 <a class="reference internal image-reference" href="../_images/hospital_shap_own_patients.jpg"><img alt="../_images/hospital_shap_own_patients.jpg" src="../_images/hospital_shap_own_patients.jpg" style="width: 450px;" /></a>
