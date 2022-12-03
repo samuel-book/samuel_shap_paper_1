@@ -44,20 +44,18 @@ In this project we are very much on a journey - discovering what different peopl
 
 In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. 
 
-In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using *all* available features. These 10 features were:
+In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 8 features we could get accuracy that was very close to using *all* available features. These 8 features were:
 
-* Arrival-to-scan time: Time from arrival at hospital to scan (mins)
-* Infarction: Stroke type (1 = infarction, 0 = haemorrhage)
-* Stroke severity: Stroke severity (NIHSS) on arrival
-* Precise onset time: Onset time type (1 = precise, 0 = best estimate)
-* Prior disability level: Disability level (modified Rankin Scale) before stroke
-* Stroke team: Stroke team attended
-* Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)
-* Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)
-* Onset during sleep: Did stroke occur in sleep?
-* Age: Age (as middle of 5 year age bands)
+* *S2BrainImagingTime_min*: Time from arrival at hospital to scan
+* *S2StrokeType_Infarction*: Stroke type: clot ('infarction') or bleed ('haemorrhage')
+* *S2NihssArrival*: Stroke severity (National Institutes of Health Stroke Scale; NIHSS) on arrival
+* *S1OnsetTimeType_Precise*: Is stroke onset time known precisely (or estimated)
+* *S2RankinBeforeStroke*: Disability level (modified Rankin Scale) *before* stroke
+* *StrokeTeam*: Hospital ID
+* *AFAnticoagulent_Yes*: Patient on anticoagulant therapy for atrial fibrillation
+* *S1OnsetToArrival_min*: Time from stroke onset to arrival at hospital
 
-Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XG-Boost models using all available features, and also just the first 8 of the 10 selected features.
+Note: The [GitHub repository](https://github.com/samuel-book/samuel_shap_paper_1) also includes XG-Boost models using all available features.
 
 In order to explain model predictions we used a method called Shapley values, which are described below.
 
@@ -77,7 +75,7 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ### Predicting thrombolysis use with an XG-Boost model
 
-Excluding which hospital a patient attended, the five most influential features predicting whether thrombolysis would be given or not were (in order of importance):
+The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):
 
 1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
 2. *Time from arrival at hospital to time brain imaging was performed*: Predicted probability of using thrombolysis reduced with increasing time to scan.
