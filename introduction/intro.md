@@ -75,13 +75,19 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ### Predicting thrombolysis use with an XG-Boost model
 
-The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):
+Looking at patterns oh SHAP values reveals the following:
 
-1. *Stroke type (infarction vs. haemorrhage)*: Use of thrombolysis depended on it being an infarction (clot).
-2. *Time from arrival at hospital to time brain imaging was performed*: Predicted probability of using thrombolysis reduced with increasing time to scan.
-3. *Stroke severity (NIHSS) on arrival*: Predicted probability of using thrombolysis was low with very mild strokes,rose with increasing severity with a plateau at about NIHSS of 10-20, and then reduced with the most severe strokes.
-4. *Stroke onset time type (precise vs. estimated)*: Predicted probability of using thrombolysis increased with a precisely known  onset.
-5. *Disability level (Rankin) before stroke*: Predicted probability of using thrombolysis reduced with increasing disability before stroke.
+* Stroke type: As expected,  the SHAP values for stroke types effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
+
+* Arrival-to-scan time: The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.
+
+* Stroke severity (NIHSS): The odds of receiving thrombolysis i slowest at NIHSS 0, rises and peaks at NIHSS 15-25, and then falls again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis is 30-35 fold.
+
+* Stroke onset time type (precise vs. estimated): The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time.
+
+* Disability level (Rankin) before stroke. The odds of receiving thrombolysis falls about 5 fold between mRS 0 and 5.
+
+* The hospital SHAP values ranges from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). 
 
 {numref}`Figure {number} <SHAP_violin>` shows a violin plot of SHAP values for six features.
 
