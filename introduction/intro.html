@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../key_notebooks_redundant/04_compare_10k_cohort_key_features.html">
+  <a class="reference internal" href="../xgb_10_features/04_compare_10k_cohort_key_features.html">
    A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
   </a>
  </li>
@@ -556,18 +556,20 @@ title="Print to PDF"
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
 <p>In this study we used a machine learning method called <em>XG-Boost</em> to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions.</p>
-<p>In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 8 features we could get accuracy that was very close to using <em>all</em> available features. These 8 features were:</p>
+<p>In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using <em>all</em> available features. These 10 features were:</p>
 <ul class="simple">
-<li><p><em>S2BrainImagingTime_min</em>: Time from arrival at hospital to scan</p></li>
-<li><p><em>S2StrokeType_Infarction</em>: Stroke type: clot (‘infarction’) or bleed (‘haemorrhage’)</p></li>
-<li><p><em>S2NihssArrival</em>: Stroke severity (National Institutes of Health Stroke Scale; NIHSS) on arrival</p></li>
-<li><p><em>S1OnsetTimeType_Precise</em>: Is stroke onset time known precisely (or estimated)</p></li>
-<li><p><em>S2RankinBeforeStroke</em>: Disability level (modified Rankin Scale) <em>before</em> stroke</p></li>
-<li><p><em>StrokeTeam</em>: Hospital ID</p></li>
-<li><p><em>AFAnticoagulent_Yes</em>: Patient on anticoagulant therapy for atrial fibrillation</p></li>
-<li><p><em>S1OnsetToArrival_min</em>: Time from stroke onset to arrival at hospital</p></li>
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
-<p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features.</p>
+<p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features, and also just the first 8 of the 10 selected features.</p>
 <p>In order to explain model predictions we used a method called Shapley values, which are described below.</p>
 <section id="what-are-shapley-values">
 <h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">#</a></h3>
@@ -586,7 +588,7 @@ title="Print to PDF"
 <h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">#</a></h2>
 <section id="predicting-thrombolysis-use-with-an-xg-boost-model">
 <h3>Predicting thrombolysis use with an XG-Boost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xg-boost-model" title="Permalink to this headline">#</a></h3>
-<p>The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):</p>
+<p>Excluding which hospital a patient attended, the five most influential features predicting whether thrombolysis would be given or not were (in order of importance):</p>
 <ol class="simple">
 <li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
 <li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: Predicted probability of using thrombolysis reduced with increasing time to scan.</p></li>
