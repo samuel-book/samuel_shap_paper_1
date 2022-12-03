@@ -2121,6 +2121,22 @@ The mean is calculated in three ways:</p>
 <img alt="../_images/03_xgb_combined_shap_key_features_69_0.png" src="../_images/03_xgb_combined_shap_key_features_69_0.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stroke_team_mean_shap</span><span class="p">)</span>
+<span class="n">std_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">stroke_team_mean_shap</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean hospital SHAP: </span><span class="si">{</span><span class="n">mean_shap</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean hospital SHAP: </span><span class="si">{</span><span class="n">std_shap</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean hospital SHAP: -0.017
+Mean hospital SHAP: 0.521
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>

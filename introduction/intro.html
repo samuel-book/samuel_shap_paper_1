@@ -586,14 +586,15 @@ title="Print to PDF"
 <h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">#</a></h2>
 <section id="predicting-thrombolysis-use-with-an-xg-boost-model">
 <h3>Predicting thrombolysis use with an XG-Boost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xg-boost-model" title="Permalink to this headline">#</a></h3>
-<p>The five most influential features predicting whether thrombolysis would be given or not were (in order of importance):</p>
-<ol class="simple">
-<li><p><em>Stroke type (infarction vs. haemorrhage)</em>: Use of thrombolysis depended on it being an infarction (clot).</p></li>
-<li><p><em>Time from arrival at hospital to time brain imaging was performed</em>: Predicted probability of using thrombolysis reduced with increasing time to scan.</p></li>
-<li><p><em>Stroke severity (NIHSS) on arrival</em>: Predicted probability of using thrombolysis was low with very mild strokes,rose with increasing severity with a plateau at about NIHSS of 10-20, and then reduced with the most severe strokes.</p></li>
-<li><p><em>Stroke onset time type (precise vs. estimated)</em>: Predicted probability of using thrombolysis increased with a precisely known  onset.</p></li>
-<li><p><em>Disability level (Rankin) before stroke</em>: Predicted probability of using thrombolysis reduced with increasing disability before stroke.</p></li>
-</ol>
+<p>Looking at patterns oh SHAP values reveals the following:</p>
+<ul class="simple">
+<li><p>Stroke type: As expected,  the SHAP values for stroke types effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.</p></li>
+<li><p>Arrival-to-scan time: The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.</p></li>
+<li><p>Stroke severity (NIHSS): The odds of receiving thrombolysis i slowest at NIHSS 0, rises and peaks at NIHSS 15-25, and then falls again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis is 30-35 fold.</p></li>
+<li><p>Stroke onset time type (precise vs. estimated): The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time.</p></li>
+<li><p>Disability level (Rankin) before stroke. The odds of receiving thrombolysis falls about 5 fold between mRS 0 and 5.</p></li>
+<li><p>The hospital SHAP values ranges from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis).</p></li>
+</ul>
 <p><a class="reference internal" href="#shap-violin"><span class="std std-numref">Figure 3</span></a> shows a violin plot of SHAP values for six features.</p>
 <figure class="align-default" id="shap-violin">
 <a class="reference internal image-reference" href="../_images/xgb_thrombolysis_shap_violin.jpg"><img alt="../_images/xgb_thrombolysis_shap_violin.jpg" src="../_images/xgb_thrombolysis_shap_violin.jpg" style="width: 800px;" /></a>
