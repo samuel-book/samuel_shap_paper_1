@@ -7,6 +7,7 @@
 * 10 features ROC 0.919
 
 10 features are:
+
 * Arrival-to-scan time: Time from arrival at hospital to scan (mins)
 * Infarction: Stroke type (1 = infarction, 0 = haemorrhage)
 * Stroke severity: Stroke severity (NIHSS) on arrival
@@ -30,11 +31,17 @@
 
 The five most influential features as judged by SHAP were:
 
-* Stroke type - 8 fold difference in log odds effectively eliminates any chance of thrombolysis.
-* Arrival-to-scan time - log odds reduces by about 3 over the first 100 minutes (a 20 fold reduction in odds)
-* Stroke severity (NIHSS) - peaks at NIHSS 15-25. Difference between min and max about 3.5 log odds = 30-35 fold difference in odds.
-* Stroke onset time type (precise vs. estimated) - 1.2 difference in log odds, about 3 fold difference
-* Disability level (Rankin) before stroke. About 1.7 log odds difference between mRS 0 and 5, a 5 fold difference in odds
+* Stroke type - there is a difference of about 8 in log odds of receiving thrombolysis between infarction and haemorrhagic stroke. As expected this, effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
+
+* Arrival-to-scan time: The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes (SHAP log odds difference ~3).
+
+* Stroke severity (NIHSS): The odds of receiving thrombolysis peaks at NIHSS 15-25. The difference between minimum (at NIHSS 0) and maximum (at 15-25) odds of receiving thrombolysis is 30-35 (SHAP log odds difference ~3.5)
+
+* Stroke onset time type (precise vs. estimated): The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time (SHAP log odds difference ~1.2). 
+
+* Disability level (Rankin) before stroke. The odds of receiving thrombolysis falls about 5 fold between mRS 0 and 5 (SHAP log odds difference ~1.7).
+
+* The hospital SHAP values ranges from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). 
 
 SHAP values were consistent across k-fold splits
 
@@ -42,7 +49,6 @@ Contains examples of waterfall plots (odds and probabilities)
 Scatter plots and violin plots
 SHAP values for hospitals for patients attending each hospital
 
-Range of hospital SHAP -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). Standard Deviation is 0.52 (representing a 2.8 fold difference in odds with +/- 1SD).
 
 ## Notebook 03a: Isolation of hospital 
 
