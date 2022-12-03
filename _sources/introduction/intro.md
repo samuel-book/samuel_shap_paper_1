@@ -111,6 +111,8 @@ When we compare this 10k thrombolysis rate to the average hospital SHAP model in
 A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.
 :::
 
+We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hopsitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
+
 ### How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value? 
 
 We can also look at how a hospital's SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital's SHAP value explains 58% of the variance in thrombolysis rate of patients ({numref}`Figure {number} <hosp_shap>`). This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).
