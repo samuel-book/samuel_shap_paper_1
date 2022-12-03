@@ -30,14 +30,24 @@
 
 The five most influential features as judged by SHAP were:
 
-* Stroke type
-* Arrival-to-scan time
-* Stroke severity (NIHSS)
-* Stroke onset time type (precise vs. estimated)
-* Disability level (Rankin) before stroke
+* Stroke type - 8 fold difference in log odds effectively eliminates any chance of thrombolysis.
+* Arrival-to-scan time - log odds reduces by about 3 over the first 100 minutes (a 20 fold reduction in odds)
+* Stroke severity (NIHSS) - peaks at NIHSS 15-25. Difference between min and max about 3.5 log odds = 30-35 fold difference in odds.
+* Stroke onset time type (precise vs. estimated) - 1.2 difference in log odds, about 3 fold difference
+* Disability level (Rankin) before stroke. About 1.7 log odds difference between mRS 0 and 5, a 5 fold difference in odds
 
 SHAP values were consistent across k-fold splits
 
 Contains examples of waterfall plots (odds and probabilities)
 Scatter plots and violin plots
-SHAP values for hospitals for patients attending each hopsital
+SHAP values for hospitals for patients attending each hospital
+
+Range of hospital SHAP -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). Standard Deviation is 0.52 (representing a 2.8 fold difference in odds with +/- 1SD).
+
+## Notebook 03a: Isolation of hospital 
+
+* Hospital SHAP values also contain all zero values of one-hot encoded hospital attendence, so there is a need to isolate the patients attending each hopsital to calulate a hospital SHAP.
+
+* 58% of the variability in hospital thrombolysis rate can be explained by the SHAP value for the one-hot encoded hospital feature (the median of those instances that attend the hospital).
+
+
