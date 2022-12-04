@@ -384,6 +384,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data">
    Load data
   </a>
@@ -508,6 +513,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#function-to-calculate-accuracy-measures">
    Function to calculate accuracy measures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -656,6 +666,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
+<span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -669,6 +680,11 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
 
 <span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="c1"># Import local package</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">waterfall</span>
+<span class="c1"># Force package to be reloaded</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">waterfall</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -781,6 +797,18 @@ title="Print to PDF"
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;negative_predictive_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">negative_predictive_value</span>
     
     <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_of_features_to_use</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;06&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -2158,14 +2186,14 @@ SD AUC: 0.0121
 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/06_decision_comparison_roc_sens_spec_key_features.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_decision_comparison_roc_sens_spec_key_features.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_31_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_31_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_33_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_33_0.png" />
 </div>
 </div>
 </section>
@@ -2334,13 +2362,13 @@ Completed 5 of 5
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;|Shap| (log odds ratio)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/06_decision_comparison_shap_violin_key_features.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_decision_comparison_shap_violin_key_features.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_42_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_42_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_44_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_44_0.png" />
 </div>
 </div>
 </section>
@@ -2490,7 +2518,7 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_47_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_47_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_49_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_49_0.png" />
 </div>
 </div>
 <section id="compare-top-10-shap-and-importances">
@@ -2675,14 +2703,14 @@ Completed 5 of 5
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Importance&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="s1">&#39;output/06_decision_comparison_shap_importance_correlation_key_features.jpg&#39;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_decision_comparison_shap_importance_correlation_key_features.jpg&#39;</span><span class="p">,</span>
     <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_51_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_51_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_53_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_53_0.png" />
 </div>
 </div>
 </section>
@@ -2726,7 +2754,7 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_55_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_55_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_57_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_57_0.png" />
 </div>
 </div>
 </section>
@@ -2745,31 +2773,31 @@ Completed 5 of 5
 <p>An example with low probability of receiving thrombolysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
-                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/06_xgb_decision_comparison_waterfall_low_key_features.jpg&#39;</span><span class="p">,</span> 
-            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_59_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_59_0.png" />
-</div>
-</div>
-<p>An example with high probability of receiving thrombolysis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
-                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output/06_xgb_decision_comparison_waterfall_high_key_features.jpg&#39;</span><span class="p">,</span>
-            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">waterfall</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
+                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">y_reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_xgb_decision_comparison_waterfall_low_key_features.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">y_reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_61_0.png" />
+</div>
+</div>
+<p>An example with high probability of receiving thrombolysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">waterfall</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
+                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">y_reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_xgb_decision_comparison_waterfall_high_key_features.jpg&#39;</span><span class="p">,</span>
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">y_reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" />
 </div>
 </div>
 </section>
@@ -2785,11 +2813,11 @@ Completed 5 of 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_0.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_1.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_1.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_2.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_2.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_3.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_3.png" />
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_4.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_63_4.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_0.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_1.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_1.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_2.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_2.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_3.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_3.png" />
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_4.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_65_4.png" />
 </div>
 </div>
 </section>
@@ -2823,26 +2851,10 @@ Completed 5 of 5
 <p>An example with low probability of receiving thrombolysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
-                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">waterfall</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span>
+                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">y_reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="s1">&#39;output/06_xgb_decision_comparison_waterfall_low_probability_key_features.jpg&#39;</span><span class="p">,</span> 
-    <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_68_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_68_0.png" />
-</div>
-</div>
-<p>An example with high probability of receiving thrombolysis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
-                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="s1">&#39;output/06_xgb_decision_comparison_waterfall_high_probability_key_features.jpg&#39;</span><span class="p">,</span> 
+    <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_xgb_decision_comparison_waterfall_low_probability_key_features.jpg&#39;</span><span class="p">,</span> 
     <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -2850,6 +2862,22 @@ Completed 5 of 5
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_70_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_70_0.png" />
+</div>
+</div>
+<p>An example with high probability of receiving thrombolysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">waterfall</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span>
+                           <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">y_reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_xgb_decision_comparison_waterfall_high_probability_key_features.jpg&#39;</span><span class="p">,</span> 
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06_predict_differences_between_local_and_benchmark_key_features_72_0.png" src="../_images/06_predict_differences_between_local_and_benchmark_key_features_72_0.png" />
 </div>
 </div>
 </section>

@@ -965,7 +965,7 @@ Using this we can calculate the SHAP values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate SHAP values if required, otherwsie load previously calculated SHAP values</span>
-<span class="n">calculate_shap_values</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Otherwise load SHAP values</span>
+<span class="n">calculate_shap_values</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Otherwise load SHAP values</span>
 
 <span class="c1"># Initialise empty lists</span>
 <span class="n">shap_values_extended_kfold</span> <span class="o">=</span> <span class="p">[]</span>
@@ -988,6 +988,13 @@ Using this we can calculate the SHAP values.</p>
         <span class="n">shap_values_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shap_values</span><span class="p">)</span>        
 
         <span class="c1"># Save using pickle</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/&#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_values_explainer_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">explainer</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+            
+
         <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/&#39;</span>
                     <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_values_extended_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
@@ -1004,6 +1011,38 @@ Using this we can calculate the SHAP values.</p>
             <span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
             <span class="n">shap_values_extended_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">)</span>
             <span class="n">shap_values_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17426/17759 [00:33&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 1 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|===================| 17570/17759 [00:33&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 2 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17342/17758 [00:33&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 3 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|===================| 17479/17758 [00:32&lt;00:00]        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 4 of 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 17263/17758 [00:32&lt;00:00]       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Completed 5 of 5
 </pre></div>
 </div>
 </div>

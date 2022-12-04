@@ -719,15 +719,15 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.839
-Accuracy set 1: 0.846
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.845
+Accuracy set 1: 0.844
 Accuracy set 2: 0.841
 Accuracy set 3: 0.845
-Accuracy set 4: 0.840
-Accuracy set 5: 0.840
-Accuracy set 6: 0.841
-Accuracy set 7: 0.842
-Accuracy set 8: 0.842
+Accuracy set 4: 0.841
+Accuracy set 5: 0.844
+Accuracy set 6: 0.837
+Accuracy set 7: 0.845
+Accuracy set 8: 0.843
 Accuracy set 9: 0.842
 </pre></div>
 </div>
@@ -765,10 +765,11 @@ Accuracy set 9: 0.842
 <span class="c1"># Plot</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">],</span> <span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">],</span> <span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicited probability of receiving thrombolysis&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Standard deviation of prredicted probability</span><span class="se">\n</span><span class="s1">over bootstrapped models&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/50_bootstrap_prediction_sd.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -874,68 +875,68 @@ Accuracy set 9: 0.842
   <tbody>
     <tr>
       <th>AGNOF1041H</th>
-      <td>0.3015</td>
-      <td>0.3066</td>
-      <td>0.3400</td>
-      <td>0.3181</td>
-      <td>0.2969</td>
-      <td>0.2858</td>
-      <td>0.3352</td>
-      <td>0.3197</td>
-      <td>0.3090</td>
-      <td>0.3196</td>
+      <td>0.2949</td>
+      <td>0.2936</td>
+      <td>0.3316</td>
+      <td>0.3437</td>
+      <td>0.3023</td>
+      <td>0.2960</td>
+      <td>0.2667</td>
+      <td>0.3313</td>
+      <td>0.2958</td>
+      <td>0.3058</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
-      <td>0.3414</td>
-      <td>0.3155</td>
-      <td>0.3492</td>
-      <td>0.3629</td>
-      <td>0.3122</td>
-      <td>0.3187</td>
-      <td>0.3410</td>
-      <td>0.3446</td>
-      <td>0.3361</td>
-      <td>0.3577</td>
+      <td>0.3512</td>
+      <td>0.3169</td>
+      <td>0.3614</td>
+      <td>0.3307</td>
+      <td>0.3470</td>
+      <td>0.3407</td>
+      <td>0.3245</td>
+      <td>0.3530</td>
+      <td>0.3310</td>
+      <td>0.3513</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
-      <td>0.2458</td>
-      <td>0.2515</td>
-      <td>0.2466</td>
-      <td>0.2304</td>
-      <td>0.2477</td>
-      <td>0.2186</td>
-      <td>0.2420</td>
-      <td>0.2221</td>
-      <td>0.2550</td>
-      <td>0.2252</td>
+      <td>0.2218</td>
+      <td>0.2425</td>
+      <td>0.2287</td>
+      <td>0.2651</td>
+      <td>0.2433</td>
+      <td>0.2256</td>
+      <td>0.2275</td>
+      <td>0.2329</td>
+      <td>0.2360</td>
+      <td>0.2347</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
-      <td>0.2827</td>
-      <td>0.2839</td>
-      <td>0.2741</td>
-      <td>0.2561</td>
-      <td>0.2909</td>
-      <td>0.2802</td>
-      <td>0.3045</td>
-      <td>0.2768</td>
-      <td>0.3002</td>
-      <td>0.2544</td>
+      <td>0.2742</td>
+      <td>0.2868</td>
+      <td>0.2759</td>
+      <td>0.2879</td>
+      <td>0.2641</td>
+      <td>0.2696</td>
+      <td>0.2801</td>
+      <td>0.2551</td>
+      <td>0.2853</td>
+      <td>0.2872</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
-      <td>0.2679</td>
-      <td>0.2807</td>
-      <td>0.3033</td>
-      <td>0.2936</td>
-      <td>0.2997</td>
-      <td>0.3169</td>
-      <td>0.3361</td>
-      <td>0.3106</td>
-      <td>0.3290</td>
-      <td>0.2788</td>
+      <td>0.2989</td>
+      <td>0.2740</td>
+      <td>0.3076</td>
+      <td>0.3286</td>
+      <td>0.2995</td>
+      <td>0.2843</td>
+      <td>0.3200</td>
+      <td>0.3031</td>
+      <td>0.3201</td>
+      <td>0.3346</td>
     </tr>
   </tbody>
 </table>
@@ -1017,7 +1018,7 @@ Accuracy set 9: 0.842
     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bootstrap models&#39;</span><span class="p">,</span>
     <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">single_fit_values</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Single fit&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">single_fit_values</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Single fit&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hospital&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted 10k thrombolysis rate&#39;</span><span class="p">)</span>
@@ -1025,6 +1026,7 @@ Accuracy set 9: 0.842
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/50_bootstrap_10k_sd.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1079,16 +1081,16 @@ Accuracy set 9: 0.842
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.840
-Accuracy set 1: 0.840
-Accuracy set 2: 0.846
-Accuracy set 3: 0.843
-Accuracy set 4: 0.845
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.846
+Accuracy set 1: 0.842
+Accuracy set 2: 0.847
+Accuracy set 3: 0.846
+Accuracy set 4: 0.843
 Accuracy set 5: 0.845
-Accuracy set 6: 0.843
-Accuracy set 7: 0.840
-Accuracy set 8: 0.841
-Accuracy set 9: 0.845
+Accuracy set 6: 0.845
+Accuracy set 7: 0.846
+Accuracy set 8: 0.844
+Accuracy set 9: 0.844
 </pre></div>
 </div>
 </div>
@@ -1124,10 +1126,11 @@ Accuracy set 9: 0.845
 <span class="c1"># Plot</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">],</span> <span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;mean_prob&#39;</span><span class="p">],</span> <span class="n">pivot</span><span class="p">[</span><span class="s1">&#39;std_prob&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicited probability of receiving thrombolysis&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Standard deviation of prredicted probability</span><span class="se">\n</span><span class="s1">over bootstrapped models&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/50_bayesian_bootstrap_prediction_sd.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1233,68 +1236,68 @@ Accuracy set 9: 0.845
   <tbody>
     <tr>
       <th>AGNOF1041H</th>
-      <td>0.2830</td>
-      <td>0.3177</td>
-      <td>0.2832</td>
-      <td>0.2810</td>
-      <td>0.2838</td>
-      <td>0.2784</td>
-      <td>0.3106</td>
-      <td>0.2785</td>
-      <td>0.2899</td>
-      <td>0.2703</td>
+      <td>0.2974</td>
+      <td>0.3168</td>
+      <td>0.2879</td>
+      <td>0.2939</td>
+      <td>0.2726</td>
+      <td>0.3079</td>
+      <td>0.2824</td>
+      <td>0.3307</td>
+      <td>0.3211</td>
+      <td>0.2790</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
-      <td>0.3369</td>
-      <td>0.3375</td>
-      <td>0.3371</td>
-      <td>0.3393</td>
-      <td>0.3492</td>
-      <td>0.3296</td>
-      <td>0.3489</td>
-      <td>0.3364</td>
-      <td>0.3241</td>
-      <td>0.3153</td>
+      <td>0.3218</td>
+      <td>0.3255</td>
+      <td>0.3447</td>
+      <td>0.3308</td>
+      <td>0.3388</td>
+      <td>0.3347</td>
+      <td>0.3412</td>
+      <td>0.3463</td>
+      <td>0.3610</td>
+      <td>0.3563</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
-      <td>0.2567</td>
-      <td>0.2341</td>
-      <td>0.2226</td>
-      <td>0.2370</td>
-      <td>0.2413</td>
-      <td>0.2615</td>
-      <td>0.2275</td>
-      <td>0.2457</td>
-      <td>0.2136</td>
-      <td>0.2471</td>
+      <td>0.2570</td>
+      <td>0.2423</td>
+      <td>0.2380</td>
+      <td>0.2531</td>
+      <td>0.2514</td>
+      <td>0.2452</td>
+      <td>0.2364</td>
+      <td>0.2429</td>
+      <td>0.2334</td>
+      <td>0.2450</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
-      <td>0.2775</td>
-      <td>0.2895</td>
-      <td>0.2805</td>
-      <td>0.2823</td>
-      <td>0.2857</td>
-      <td>0.2634</td>
-      <td>0.2862</td>
-      <td>0.2879</td>
-      <td>0.2851</td>
-      <td>0.2936</td>
+      <td>0.2629</td>
+      <td>0.2874</td>
+      <td>0.2744</td>
+      <td>0.2669</td>
+      <td>0.2915</td>
+      <td>0.2864</td>
+      <td>0.2466</td>
+      <td>0.2870</td>
+      <td>0.2662</td>
+      <td>0.2441</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
-      <td>0.3134</td>
-      <td>0.2964</td>
-      <td>0.2932</td>
-      <td>0.2956</td>
-      <td>0.3019</td>
-      <td>0.3089</td>
-      <td>0.3165</td>
-      <td>0.3041</td>
-      <td>0.3138</td>
-      <td>0.2964</td>
+      <td>0.3374</td>
+      <td>0.3351</td>
+      <td>0.3051</td>
+      <td>0.3323</td>
+      <td>0.2803</td>
+      <td>0.3045</td>
+      <td>0.3115</td>
+      <td>0.3274</td>
+      <td>0.3178</td>
+      <td>0.2847</td>
     </tr>
   </tbody>
 </table>
@@ -1331,7 +1334,7 @@ Accuracy set 9: 0.845
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.015
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.016
 </pre></div>
 </div>
 </div>
@@ -1376,7 +1379,7 @@ Accuracy set 9: 0.845
     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bootstrap models&#39;</span><span class="p">,</span>
     <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">single_fit_values</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Single fit&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">single_fit_values</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Single fit&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hospital&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted 10k thrombolysis rate&#39;</span><span class="p">)</span>
@@ -1384,6 +1387,7 @@ Accuracy set 9: 0.845
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/50_bayesian_bootstrap_10k_sd.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
