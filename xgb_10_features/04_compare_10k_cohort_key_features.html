@@ -646,6 +646,7 @@ title="Print to PDF"
 <li><p>The predicted thrombolysis use in the 10k cohort of patients ranged from 10% to 45%.</p></li>
 <li><p>Only 10% of the variability in 10k hospital thrombolysis rate can be explained by the hospital admission rate.</p></li>
 <li><p>Nearly 92% of the variability in 10k hospital thrombolysis rate can be explained by the average hospital SHAP value.</p></li>
+<li><p>There is more agreement on who should not receive thrombolysis than who should receive thrombolysis: 87.7% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 79.0% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.5% of patients have 80% of hospitals agree not to thrombolyse.</p></li>
 </ul>
 </section>
 <section id="import-libraries">
@@ -912,7 +913,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">thrombolysis_rate</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted 10k cohort thrombolysis rate&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -971,13 +972,13 @@ Max0.453
 <span class="c1"># Create scatter plot with regression line</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1">p: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
-         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Admissions&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Modelled thrombolysis rate (for 10k patient cohort)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted 10k cohort thrombolysis rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
     <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_hospital_size_10k_thrombolysis.jpg&#39;</span><span class="p">,</span> 
@@ -1138,7 +1139,7 @@ Max0.453
 </table>
 </div></div></div>
 </div>
-<p>In the table above, for example, 87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse.</p>
+<p>In the table above, for example, 87.7% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 79.0% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.5% of patients have 80% of hospitals agree not to thrombolyse.</p>
 </section>
 <section id="compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate">
 <h2>Compare SHAP value for the hospital feature, and the predicted 10k thrombolysis rate<a class="headerlink" href="#compare-shap-value-for-the-hospital-feature-and-the-predicted-10k-thrombolysis-rate" title="Permalink to this headline">#</a></h2>
@@ -1192,8 +1193,8 @@ Max0.453
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.6 ms, sys: 7.88 ms, total: 21.5 ms
-Wall time: 21 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 18 ms, sys: 15.7 ms, total: 33.7 ms
+Wall time: 32.6 ms
 </pre></div>
 </div>
 </div>
@@ -1276,7 +1277,7 @@ Wall time: 21 ms
 <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R squared = </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">1.55</span><span class="p">,</span> <span class="mf">0.42</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
          <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate (for 10K patient cohort)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted 10k cohort thrombolysis rate&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;SHAP value (mean of hospital population)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
@@ -1303,12 +1304,7 @@ Wall time: 21 ms
 <li><p>Only 10% of the variability in hospital thrombolysis rate can be explained by the hospital admission rate.</p></li>
 <li><p>Nearly 92% of the variability in 10k hospital thrombolysis rate can be explained by the average hospital SHAP value.</p></li>
 </ul>
-<p>It is easier to find majority agreement on who not to thrombolyse than who to thrombolyse. For example:</p>
-<ul class="simple">
-<li><p>87.4% of all patients have a treatment decision that is agreed by 80% hospitals</p></li>
-<li><p>Of those who were not given thrombolysis, 84.1% had agreement by 80% hospitals</p></li>
-<li><p>Of those who were given thrombolysis, 78.8% had agreement by 80% hospitals</p></li>
-</ul>
+<p>It is easier to find majority agreement on who not to thrombolyse than who to thrombolyse. There is more agreement on who should not receive thrombolysis than who should receive thrombolysis: 87.7% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 79.0% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.5% of patients have 80% of hospitals agree not to thrombolyse.</p>
 <p>Thrombolysis rate of 10k cohort correlates weakly with unit size.</p>
 <p>10k thrombolysis rate correlates closely with average hospital SHAP value.</p>
 </section>
