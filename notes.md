@@ -70,6 +70,7 @@ Across all the hopsitals SHAP values and SHAP main effect have approx the same m
 * 10k thrombolysis rate correlates closely with hospital SHAP value: 92% of the variance in 10k thrombolysis rate is explained by hospital SHAP
 * There is more agreement on who should not receive thrombolysis than who should receive thrombolysis: 87.7% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 79.0% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.5% of patients have 80% of hospitals agree not to thrombolyse. 
 
+## Notebook 05
 
 
 
