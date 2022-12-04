@@ -72,6 +72,10 @@ Across all the hopsitals SHAP values and SHAP main effect have approx the same m
 
 ## Notebook 05
 
+* 83.3% decisions are identical between local and benchmark decisions.
+* Thrombolysis use would be increased 20.7% if benchmark decisions were made at all hospitals.
+* The ratio of benchmark:local thrombolysis use was 0.7 to 2.1.
+
 
 
 
