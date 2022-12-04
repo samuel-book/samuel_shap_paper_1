@@ -52,8 +52,28 @@ SHAP values for hospitals for patients attending each hospital
 
 ## Notebook 03a: Isolation of hospital 
 
-* Hospital SHAP values also contain all zero values of one-hot encoded hospital attendence, so there is a need to isolate the patients attending each hopsital to calulate a hospital SHAP.
+* Hospital SHAP values also contain all zero values of one-hot encoded hospital attendence, so there is a need to isolate the patients attending each hospital to calulate a hospital SHAP.
 
-* 58% of the variability in hospital thrombolysis rate can be explained by the SHAP value for the one-hot encoded hospital feature (the median of those instances that attend the hospital).
+## Notebook 03b: Isolation of hospital, but main SHAP effect only
+
+## Notebook 03c: General notebook on hospital SHAP
+
+* 58% of the variability in hospital thrombolysis rate can be explained by the SHAP value for the one-hot encoded hospital feature (the median of those instances that attend the hospital); 56% of the variance may be explained by the SHAP main effect.
+
+Across all the hopsitals SHAP values and SHAP main effect have approx the same median and quartiles, but the full SHAP (with interactions) have a larger range. For each hospital the full SHAP has significantly larger range (inc IQR_ than the main effect).
+
+## Notebook 04 - 10k thrombolysis and SHAP
+
+* Predict thrombolysis rate for 10k cohort across hospitals
+* Thrombolysis rates vary from 10% to 45% across hospitals
+* 10% of the variance in 10k thrombolysis rate can be explained by hospital size
+* 10k thrombolysis rate correlates closely with hospital SHAP value: 92% of the variance in 10k thrombolysis rate is explained by hospital SHAP
+* There is more agreement on who should not receive thrombolysis than who should receive thrombolysis: 87.7% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 79.0% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.5% of patients have 80% of hospitals agree not to thrombolyse. 
+
+
+
+
+
+
 
 
