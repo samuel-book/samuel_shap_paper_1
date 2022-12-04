@@ -70,11 +70,21 @@ Across all the hopsitals SHAP values and SHAP main effect have approx the same m
 * 10k thrombolysis rate correlates closely with hospital SHAP value: 92% of the variance in 10k thrombolysis rate is explained by hospital SHAP
 * There is more agreement on who should not receive thrombolysis than who should receive thrombolysis: 87.7% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 79.0% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.5% of patients have 80% of hospitals agree not to thrombolyse. 
 
-## Notebook 05
+## Notebook 05  - compare local and benchmark decisions
 
 * 83.3% decisions are identical between local and benchmark decisions.
 * Thrombolysis use would be increased 20.7% if benchmark decisions were made at all hospitals.
 * The ratio of benchmark:local thrombolysis use was 0.7 to 2.1.
+
+## Notebook 06 - Predicting differences between local and benchmark decisions
+
+* We can predict those that will receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.72).
+
+* The five most important distinguishing features are:
+  * Stroke severity
+  * Prior disability
+  * Precise onset time   * Arrival to scan time
+  * Onset to arrival time
 
 
 
