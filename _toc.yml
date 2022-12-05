@@ -20,8 +20,8 @@ parts:
   - file: xgb_10_features/04_compare_10k_cohort_key_features
   - file: xgb_10_features/05_compare_benchmark_decisions_key_features
   - file: xgb_10_features/06_predict_differences_between_local_and_benchmark_key_features
-  - file: key_notebooks_redundant/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
-  - file: key_notebooks_redundant/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
+  - file: xgb_10_features/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
+  - file: xgb_10_features/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
   - file: key_notebooks_redundant/20_synthetic_patients
 - caption: Appendix
   chapters:
