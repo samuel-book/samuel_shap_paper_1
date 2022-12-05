@@ -514,7 +514,7 @@ title="Print to PDF"
 <p>Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.</p>
 <p>We apply two bootstrap methods, In the traditional method we fit multiple models to bootstrapped samples of the training set (random sampling with replacement).</p>
 <p>In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Dirichlet distribution (see <a class="reference external" href="https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148">https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</a>).</p>
-<p>These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05, but this ranges from about 0.01 to 0.12 dependening on the predicted probability (with greatest variance around 50% predicted probability of receiving thrombolysis). The average standard deviation in predicting the hospital’s expected thrombolysis rate is 0.015-0.02.</p>
+<p>These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05, but this ranges from about 0.01 to 0.13 dependening on the predicted probability (with greatest variance around 50% predicted probability of receiving thrombolysis). The average standard deviation in predicting the hospital’s expected thrombolysis rate is 0.015-0.02.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -662,7 +662,7 @@ title="Print to PDF"
 <h2>Create bootstrap sampled training sets using standard bootstrapping<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">splits</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">splits</span> <span class="o">=</span> <span class="mi">30</span>
 </pre></div>
 </div>
 </div>
@@ -719,16 +719,36 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.845
-Accuracy set 1: 0.844
-Accuracy set 2: 0.841
-Accuracy set 3: 0.845
-Accuracy set 4: 0.841
-Accuracy set 5: 0.844
-Accuracy set 6: 0.837
-Accuracy set 7: 0.845
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.842
+Accuracy set 1: 0.842
+Accuracy set 2: 0.844
+Accuracy set 3: 0.840
+Accuracy set 4: 0.844
+Accuracy set 5: 0.843
+Accuracy set 6: 0.843
+Accuracy set 7: 0.844
 Accuracy set 8: 0.843
-Accuracy set 9: 0.842
+Accuracy set 9: 0.845
+Accuracy set 10: 0.842
+Accuracy set 11: 0.840
+Accuracy set 12: 0.841
+Accuracy set 13: 0.842
+Accuracy set 14: 0.841
+Accuracy set 15: 0.848
+Accuracy set 16: 0.843
+Accuracy set 17: 0.843
+Accuracy set 18: 0.842
+Accuracy set 19: 0.840
+Accuracy set 20: 0.848
+Accuracy set 21: 0.844
+Accuracy set 22: 0.843
+Accuracy set 23: 0.843
+Accuracy set 24: 0.842
+Accuracy set 25: 0.842
+Accuracy set 26: 0.839
+Accuracy set 27: 0.842
+Accuracy set 28: 0.844
+Accuracy set 29: 0.847
 </pre></div>
 </div>
 </div>
@@ -745,7 +765,7 @@ Accuracy set 9: 0.842
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.053
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.057
 </pre></div>
 </div>
 </div>
@@ -870,76 +890,143 @@ Accuracy set 9: 0.842
       <th>Thrombolysis rate</th>
       <th>Thrombolysis rate</th>
       <th>Thrombolysis rate</th>
+      <th>...</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>AGNOF1041H</th>
-      <td>0.2949</td>
-      <td>0.2936</td>
-      <td>0.3316</td>
-      <td>0.3437</td>
-      <td>0.3023</td>
-      <td>0.2960</td>
-      <td>0.2667</td>
-      <td>0.3313</td>
-      <td>0.2958</td>
-      <td>0.3058</td>
+      <td>0.3036</td>
+      <td>0.2957</td>
+      <td>0.3412</td>
+      <td>0.2900</td>
+      <td>0.2831</td>
+      <td>0.3231</td>
+      <td>0.2756</td>
+      <td>0.3103</td>
+      <td>0.2986</td>
+      <td>0.3276</td>
+      <td>...</td>
+      <td>0.2812</td>
+      <td>0.2813</td>
+      <td>0.2922</td>
+      <td>0.3132</td>
+      <td>0.3322</td>
+      <td>0.2906</td>
+      <td>0.2835</td>
+      <td>0.2789</td>
+      <td>0.2928</td>
+      <td>0.3384</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
-      <td>0.3512</td>
-      <td>0.3169</td>
-      <td>0.3614</td>
-      <td>0.3307</td>
-      <td>0.3470</td>
-      <td>0.3407</td>
-      <td>0.3245</td>
-      <td>0.3530</td>
-      <td>0.3310</td>
-      <td>0.3513</td>
+      <td>0.3498</td>
+      <td>0.3477</td>
+      <td>0.3098</td>
+      <td>0.3220</td>
+      <td>0.3457</td>
+      <td>0.3516</td>
+      <td>0.3439</td>
+      <td>0.3425</td>
+      <td>0.3355</td>
+      <td>0.3335</td>
+      <td>...</td>
+      <td>0.3394</td>
+      <td>0.3373</td>
+      <td>0.3335</td>
+      <td>0.3334</td>
+      <td>0.3294</td>
+      <td>0.3373</td>
+      <td>0.3256</td>
+      <td>0.3442</td>
+      <td>0.3263</td>
+      <td>0.3281</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
-      <td>0.2218</td>
-      <td>0.2425</td>
-      <td>0.2287</td>
-      <td>0.2651</td>
-      <td>0.2433</td>
-      <td>0.2256</td>
-      <td>0.2275</td>
-      <td>0.2329</td>
-      <td>0.2360</td>
-      <td>0.2347</td>
+      <td>0.2118</td>
+      <td>0.2453</td>
+      <td>0.2299</td>
+      <td>0.2398</td>
+      <td>0.2648</td>
+      <td>0.2227</td>
+      <td>0.2306</td>
+      <td>0.2537</td>
+      <td>0.2445</td>
+      <td>0.2369</td>
+      <td>...</td>
+      <td>0.2374</td>
+      <td>0.2125</td>
+      <td>0.2577</td>
+      <td>0.2542</td>
+      <td>0.2488</td>
+      <td>0.2281</td>
+      <td>0.2242</td>
+      <td>0.2428</td>
+      <td>0.2057</td>
+      <td>0.2573</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
-      <td>0.2742</td>
-      <td>0.2868</td>
-      <td>0.2759</td>
-      <td>0.2879</td>
-      <td>0.2641</td>
-      <td>0.2696</td>
-      <td>0.2801</td>
-      <td>0.2551</td>
-      <td>0.2853</td>
-      <td>0.2872</td>
+      <td>0.3134</td>
+      <td>0.2598</td>
+      <td>0.2806</td>
+      <td>0.2845</td>
+      <td>0.2684</td>
+      <td>0.2929</td>
+      <td>0.2676</td>
+      <td>0.2723</td>
+      <td>0.2873</td>
+      <td>0.2869</td>
+      <td>...</td>
+      <td>0.3138</td>
+      <td>0.2734</td>
+      <td>0.2688</td>
+      <td>0.2610</td>
+      <td>0.3030</td>
+      <td>0.3057</td>
+      <td>0.2961</td>
+      <td>0.3168</td>
+      <td>0.2598</td>
+      <td>0.2634</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
-      <td>0.2989</td>
-      <td>0.2740</td>
-      <td>0.3076</td>
-      <td>0.3286</td>
-      <td>0.2995</td>
-      <td>0.2843</td>
+      <td>0.3385</td>
+      <td>0.3204</td>
+      <td>0.2810</td>
+      <td>0.2876</td>
+      <td>0.2818</td>
+      <td>0.3545</td>
+      <td>0.2930</td>
+      <td>0.2738</td>
+      <td>0.2911</td>
+      <td>0.3191</td>
+      <td>...</td>
+      <td>0.2875</td>
+      <td>0.3199</td>
+      <td>0.3113</td>
+      <td>0.3432</td>
+      <td>0.3047</td>
+      <td>0.2710</td>
       <td>0.3200</td>
-      <td>0.3031</td>
-      <td>0.3201</td>
-      <td>0.3346</td>
+      <td>0.3525</td>
+      <td>0.3298</td>
+      <td>0.2978</td>
     </tr>
   </tbody>
 </table>
+<p>5 rows × 30 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -973,7 +1060,7 @@ Accuracy set 9: 0.842
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.018
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.017
 </pre></div>
 </div>
 </div>
@@ -1082,15 +1169,35 @@ Accuracy set 9: 0.842
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy set 0: 0.846
-Accuracy set 1: 0.842
-Accuracy set 2: 0.847
-Accuracy set 3: 0.846
+Accuracy set 1: 0.845
+Accuracy set 2: 0.845
+Accuracy set 3: 0.840
 Accuracy set 4: 0.843
-Accuracy set 5: 0.845
-Accuracy set 6: 0.845
-Accuracy set 7: 0.846
-Accuracy set 8: 0.844
-Accuracy set 9: 0.844
+Accuracy set 5: 0.843
+Accuracy set 6: 0.842
+Accuracy set 7: 0.844
+Accuracy set 8: 0.847
+Accuracy set 9: 0.843
+Accuracy set 10: 0.844
+Accuracy set 11: 0.845
+Accuracy set 12: 0.840
+Accuracy set 13: 0.844
+Accuracy set 14: 0.847
+Accuracy set 15: 0.842
+Accuracy set 16: 0.844
+Accuracy set 17: 0.848
+Accuracy set 18: 0.845
+Accuracy set 19: 0.845
+Accuracy set 20: 0.846
+Accuracy set 21: 0.845
+Accuracy set 22: 0.843
+Accuracy set 23: 0.845
+Accuracy set 24: 0.845
+Accuracy set 25: 0.842
+Accuracy set 26: 0.845
+Accuracy set 27: 0.842
+Accuracy set 28: 0.840
+Accuracy set 29: 0.840
 </pre></div>
 </div>
 </div>
@@ -1106,7 +1213,7 @@ Accuracy set 9: 0.844
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.051
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean standard deviation of bootstrap replicates 0.054
 </pre></div>
 </div>
 </div>
@@ -1231,76 +1338,143 @@ Accuracy set 9: 0.844
       <th>Thrombolysis rate</th>
       <th>Thrombolysis rate</th>
       <th>Thrombolysis rate</th>
+      <th>...</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
+      <th>Thrombolysis rate</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>AGNOF1041H</th>
-      <td>0.2974</td>
-      <td>0.3168</td>
-      <td>0.2879</td>
-      <td>0.2939</td>
-      <td>0.2726</td>
-      <td>0.3079</td>
-      <td>0.2824</td>
-      <td>0.3307</td>
-      <td>0.3211</td>
-      <td>0.2790</td>
+      <td>0.2982</td>
+      <td>0.2952</td>
+      <td>0.2805</td>
+      <td>0.2814</td>
+      <td>0.2899</td>
+      <td>0.2841</td>
+      <td>0.2732</td>
+      <td>0.2883</td>
+      <td>0.2944</td>
+      <td>0.2848</td>
+      <td>...</td>
+      <td>0.3146</td>
+      <td>0.2872</td>
+      <td>0.3263</td>
+      <td>0.2767</td>
+      <td>0.2944</td>
+      <td>0.2863</td>
+      <td>0.2915</td>
+      <td>0.3071</td>
+      <td>0.2948</td>
+      <td>0.3054</td>
     </tr>
     <tr>
       <th>AKCGO9726K</th>
-      <td>0.3218</td>
-      <td>0.3255</td>
-      <td>0.3447</td>
-      <td>0.3308</td>
-      <td>0.3388</td>
-      <td>0.3347</td>
-      <td>0.3412</td>
-      <td>0.3463</td>
-      <td>0.3610</td>
-      <td>0.3563</td>
+      <td>0.3236</td>
+      <td>0.3279</td>
+      <td>0.3325</td>
+      <td>0.3437</td>
+      <td>0.3303</td>
+      <td>0.3503</td>
+      <td>0.3098</td>
+      <td>0.3395</td>
+      <td>0.3322</td>
+      <td>0.3340</td>
+      <td>...</td>
+      <td>0.3454</td>
+      <td>0.3271</td>
+      <td>0.3145</td>
+      <td>0.3177</td>
+      <td>0.3239</td>
+      <td>0.3378</td>
+      <td>0.3538</td>
+      <td>0.3310</td>
+      <td>0.3482</td>
+      <td>0.3462</td>
     </tr>
     <tr>
       <th>AOBTM3098N</th>
+      <td>0.2413</td>
+      <td>0.2290</td>
+      <td>0.2536</td>
+      <td>0.2656</td>
+      <td>0.2451</td>
+      <td>0.2417</td>
+      <td>0.2496</td>
+      <td>0.2486</td>
+      <td>0.2493</td>
+      <td>0.2368</td>
+      <td>...</td>
       <td>0.2570</td>
-      <td>0.2423</td>
-      <td>0.2380</td>
-      <td>0.2531</td>
-      <td>0.2514</td>
-      <td>0.2452</td>
-      <td>0.2364</td>
-      <td>0.2429</td>
-      <td>0.2334</td>
-      <td>0.2450</td>
+      <td>0.2670</td>
+      <td>0.2421</td>
+      <td>0.2456</td>
+      <td>0.2398</td>
+      <td>0.2410</td>
+      <td>0.2209</td>
+      <td>0.2412</td>
+      <td>0.2196</td>
+      <td>0.2442</td>
     </tr>
     <tr>
       <th>APXEE8191H</th>
-      <td>0.2629</td>
-      <td>0.2874</td>
-      <td>0.2744</td>
-      <td>0.2669</td>
-      <td>0.2915</td>
-      <td>0.2864</td>
-      <td>0.2466</td>
-      <td>0.2870</td>
-      <td>0.2662</td>
-      <td>0.2441</td>
+      <td>0.2869</td>
+      <td>0.2812</td>
+      <td>0.2802</td>
+      <td>0.2626</td>
+      <td>0.2838</td>
+      <td>0.2693</td>
+      <td>0.2851</td>
+      <td>0.2856</td>
+      <td>0.2497</td>
+      <td>0.2883</td>
+      <td>...</td>
+      <td>0.3035</td>
+      <td>0.2604</td>
+      <td>0.2969</td>
+      <td>0.2715</td>
+      <td>0.2987</td>
+      <td>0.2788</td>
+      <td>0.2775</td>
+      <td>0.2822</td>
+      <td>0.2568</td>
+      <td>0.2866</td>
     </tr>
     <tr>
       <th>ATDID5461S</th>
-      <td>0.3374</td>
-      <td>0.3351</td>
-      <td>0.3051</td>
-      <td>0.3323</td>
-      <td>0.2803</td>
-      <td>0.3045</td>
-      <td>0.3115</td>
-      <td>0.3274</td>
-      <td>0.3178</td>
-      <td>0.2847</td>
+      <td>0.3067</td>
+      <td>0.3267</td>
+      <td>0.3161</td>
+      <td>0.2824</td>
+      <td>0.3103</td>
+      <td>0.2943</td>
+      <td>0.3534</td>
+      <td>0.3266</td>
+      <td>0.2929</td>
+      <td>0.3270</td>
+      <td>...</td>
+      <td>0.3072</td>
+      <td>0.3611</td>
+      <td>0.3041</td>
+      <td>0.3020</td>
+      <td>0.3201</td>
+      <td>0.2892</td>
+      <td>0.2917</td>
+      <td>0.3507</td>
+      <td>0.3336</td>
+      <td>0.3255</td>
     </tr>
   </tbody>
 </table>
+<p>5 rows × 30 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
