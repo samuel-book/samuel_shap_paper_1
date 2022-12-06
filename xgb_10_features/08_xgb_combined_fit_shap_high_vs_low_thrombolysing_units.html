@@ -441,6 +441,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boxplot-showing-the-average-shap-value-for-the-top-30-hospitals-and-the-bottom-30-hospitals">
+   Boxplot showing the average SHAP value for the top 30 hospitals, and the bottom 30 hospitals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plot-shap-values-for-stroke-severity-for-the-top-and-bottom-30-hospitals">
    Plot SHAP values for
    <em>
@@ -562,6 +567,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prepare-the-datasets">
    Prepare the datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boxplot-showing-the-average-shap-value-for-the-top-30-hospitals-and-the-bottom-30-hospitals">
+   Boxplot showing the average SHAP value for the top 30 hospitals, and the bottom 30 hospitals
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -692,7 +702,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_key_features</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_key_features</span><span class="si">}</span><span class="s1">_features&#39;</span>
-<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;08&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -794,6 +804,15 @@ title="Print to PDF"
   </tbody>
 </table>
 </div></div></div>
+</div>
+<p>Use the hospitals thrombolysis rate on the same set of 10k patients to select the 30 hospitals with the highest thrombolysis rates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_30_hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">bottom_30_hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1475,6 +1494,111 @@ title="Print to PDF"
 </div></div></div>
 </div>
 </section>
+<section id="boxplot-showing-the-average-shap-value-for-the-top-30-hospitals-and-the-bottom-30-hospitals">
+<h2>Boxplot showing the average SHAP value for the top 30 hospitals, and the bottom 30 hospitals<a class="headerlink" href="#boxplot-showing-the-average-shap-value-for-the-top-30-hospitals-and-the-bottom-30-hospitals" title="Permalink to this headline">#</a></h2>
+<p>For each group of hospitals (1. top 30 hospitals, and 2. bottom 30 hospitals - as defined by their IVT rate for the 10k patient cohort) show the range of average SHAP values for those instances that attend the hospital.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of the top 30 hospital feature names</span>
+<span class="n">top_30_hospital_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;team_&quot;</span> <span class="o">+</span> <span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">top_30_hospitals</span><span class="p">]</span>
+    
+<span class="c1"># Initiate list for average SHAP values (one per top 30 hospital) for</span>
+<span class="c1">#   instances that attend that stroke team</span>
+<span class="n">top_30_hosp_ave</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Through top hospitals</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">top_30_hospital_names</span><span class="p">:</span>
+    <span class="c1"># Calculate and store average SHAP value for each hospital</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">top_30_hosp_ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_shap_values</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    
+<span class="c1"># Repeat for bottom 30 hosptials</span>
+<span class="c1"># List of the bottom 30 hospital feature names</span>
+<span class="n">bottom_30_hospital_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;team_&quot;</span> <span class="o">+</span> <span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">bottom_30_hospitals</span><span class="p">]</span>
+
+<span class="c1"># Initiate list for average SHAP values (one per bottom 30 hospital) for</span>
+<span class="c1">#   instances that attend that stroke team</span>
+<span class="n">bottom_30_hosp_ave</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Through bottom hospitals</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">bottom_30_hospital_names</span><span class="p">:</span>
+    <span class="c1"># Calculate and store average SHAP value for each hospital</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">bottom_30_hosp_ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_shap_values</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_30_hosp_ave</span><span class="p">,</span>
+                <span class="n">bottom_30_hosp_ave</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create figure with 1 subplot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">c1</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">,</span>
+           <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Top 30 hospitals&quot;</span><span class="p">,</span><span class="s2">&quot;Bottom 30 hospitals&quot;</span><span class="p">],</span>
+           <span class="n">whis</span><span class="o">=</span><span class="mi">9999999</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">c3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">capprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">whiskerprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c2</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Average SHAP value (one-hot encoded hospital feature)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hospital group (based on ranked IVT rate of 10k cohort)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Range of average SHAP values for the top and bottom 30 hospitals&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add line at Shap = 0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;_hosp_shap_top_30_vs_bottom_30_boxplot.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
+            <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_23_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_23_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bottom_q1</span><span class="p">,</span> <span class="n">bottom_q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bottom_30_hosp_ave</span><span class="p">),</span> <span class="p">[</span><span class="mi">25</span> <span class="p">,</span><span class="mi">75</span><span class="p">])</span>
+<span class="n">top_q1</span><span class="p">,</span> <span class="n">top_q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">top_30_hosp_ave</span><span class="p">),</span> <span class="p">[</span><span class="mi">25</span> <span class="p">,</span><span class="mi">75</span><span class="p">])</span>
+<span class="n">mean_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">top_30_hosp_ave</span><span class="p">))</span>
+<span class="n">mean_bottom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bottom_30_hosp_ave</span><span class="p">))</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">mean_top</span> <span class="o">-</span> <span class="n">mean_bottom</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The top 30 hospitals have (on average) SHAP values for the one-hot &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;encoded hospital feature of between </span><span class="si">{</span><span class="n">top_q1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> to &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">top_q3</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (interquartile range). Compared to &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bottom_q1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">bottom_q3</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> for the &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;bottom hospitals.&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The mean top and bottom SHAP values are </span><span class="si">{</span><span class="n">mean_top</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">, and </span><span class="si">{</span><span class="n">mean_bottom</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">, a difference of </span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The top 30 hospitals have (on average) SHAP values for the one-hot encoded hospital feature of between 0.42 to 0.84 (interquartile range). Compared to -0.95 to -0.3 for the bottom hospitals.
+
+The mean top and bottom SHAP values are 0.67, and -0.64, a difference of 1.31.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="plot-shap-values-for-stroke-severity-for-the-top-and-bottom-30-hospitals">
 <h2>Plot SHAP values for <em>stroke severity</em> for the top and bottom 30 hospitals<a class="headerlink" href="#plot-shap-values-for-stroke-severity-for-the-top-and-bottom-30-hospitals" title="Permalink to this headline">#</a></h2>
 <p>Identify the top and bottom 30 hospitals with highest thrombolysis rates for the common set of 10k patients.
@@ -1583,7 +1707,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_25_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_25_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_31_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_31_0.png" />
 </div>
 </div>
 <p>Plot the SHAP values for stroke severity for the two hospital groups, split the patients by whether received thrombolysis.</p>
@@ -1613,7 +1737,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_27_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_27_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_33_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_33_0.png" />
 </div>
 </div>
 <p>Plot the 30 hosptials individually</p>
@@ -1703,7 +1827,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_30_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_30_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_36_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_36_0.png" />
 </div>
 </div>
 <p>Plot the 30 hosptials individually, split the patients by whether received thrombolysis.</p>
@@ -1720,8 +1844,8 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_32_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_32_0.png" />
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_32_1.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_32_1.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_38_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_38_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_38_1.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_38_1.png" />
 </div>
 </div>
 </section>
@@ -1733,6 +1857,80 @@ Store their stroke team name.</p>
 <span class="n">bottom_9_hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of the top 30 hospital feature names</span>
+<span class="n">top_9_hospital_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;team_&quot;</span> <span class="o">+</span> <span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">top_9_hospitals</span><span class="p">]</span>
+    
+<span class="c1"># Initiate list for average SHAP values (one per top 9 hospital) for</span>
+<span class="c1">#   instances that attend that stroke team</span>
+<span class="n">top_9_hosp_ave</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Through top hospitals</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">top_9_hospital_names</span><span class="p">:</span>
+    <span class="c1"># Calculate and store average SHAP value for each hospital</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">top_9_hosp_ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_shap_values</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    
+<span class="c1"># Repeat for bottom 9 hosptials</span>
+<span class="c1"># List of the bottom 9 hospital feature names</span>
+<span class="n">bottom_9_hospital_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;team_&quot;</span> <span class="o">+</span> <span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">bottom_9_hospitals</span><span class="p">]</span>
+
+<span class="c1"># Initiate list for average SHAP values (one per bottom 9 hospital) for</span>
+<span class="c1">#   instances that attend that stroke team</span>
+<span class="n">bottom_9_hosp_ave</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Through bottom hospitals</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">bottom_9_hospital_names</span><span class="p">:</span>
+    <span class="c1"># Calculate and store average SHAP value for each hospital</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">bottom_9_hosp_ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_shap_values</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_9_hosp_ave</span><span class="p">,</span> <span class="n">bottom_9_hosp_ave</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create figure with 1 subplot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">c1</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">,</span>
+           <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Top 9 hospitals&quot;</span><span class="p">,</span><span class="s2">&quot;Bottom 9 hospitals&quot;</span><span class="p">],</span>
+           <span class="n">whis</span><span class="o">=</span><span class="mi">9999999</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">c3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">capprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">whiskerprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
+           <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c2</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Average SHAP value (one-hot encoded hospital feature)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hospital group (based on ranked IVT rate of 10k cohort)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Range of average SHAP values for the top and bottom 30 hospitals&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add line at Shap = 0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">)</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;_hosp_shap_top_9_vs_bottom_9_boxplot.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
+            <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_0.png" />
 </div>
 </div>
 <p>Plot the SHAP values for stroke severity for the two hospital groups.</p>
@@ -1753,7 +1951,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_36_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_36_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_45_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_45_0.png" />
 </div>
 </div>
 <p>Plot the SHAP values for stroke severity for the two hospital groups, split the patients by whether received thrombolysis.</p>
@@ -1785,7 +1983,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_38_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_38_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_47_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_47_0.png" />
 </div>
 </div>
 <p>Plot the 9 hospitals individually</p>
@@ -1798,7 +1996,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_40_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_40_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_49_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_49_0.png" />
 </div>
 </div>
 <p>Plot the 9 hosptials individually, split the patients by whether received thrombolysis.</p>
@@ -1815,8 +2013,8 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_0.png" />
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_1.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_1.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_51_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_51_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_51_1.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_51_1.png" />
 </div>
 </div>
 </section>
@@ -1836,7 +2034,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_44_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_44_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_53_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_53_0.png" />
 </div>
 </div>
 </section>
@@ -1856,7 +2054,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_46_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_46_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_55_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_55_0.png" />
 </div>
 </div>
 </section>
@@ -1865,7 +2063,7 @@ Store their stroke team name.</p>
 <p>(limit the graph to 400 minutes)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="s1">&#39;Arrival-to-scan time&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">400</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="s1">&#39;Arrival-to-scan time&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">400</span>
 <span class="n">data_to_plot</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="n">shap_to_plot</span> <span class="o">=</span> <span class="n">df_shap_values</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
@@ -1880,7 +2078,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_48_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_48_0.png" />
+<img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_57_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_57_0.png" />
 </div>
 </div>
 </section>
