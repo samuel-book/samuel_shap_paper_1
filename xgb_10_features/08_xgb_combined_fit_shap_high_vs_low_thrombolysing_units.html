@@ -1526,8 +1526,7 @@ title="Print to PDF"
     <span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="n">bottom_30_hosp_ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_shap_values</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 
-<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_30_hosp_ave</span><span class="p">,</span>
-                <span class="n">bottom_30_hosp_ave</span><span class="p">]</span>
+<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_30_hosp_ave</span><span class="p">,</span> <span class="n">bottom_30_hosp_ave</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1543,7 +1542,7 @@ title="Print to PDF"
 <span class="n">c3</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">,</span>
            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Top 30 hospitals&quot;</span><span class="p">,</span><span class="s2">&quot;Bottom 30 hospitals&quot;</span><span class="p">],</span>
-           <span class="n">whis</span><span class="o">=</span><span class="mi">9999999</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">whis</span><span class="o">=</span><span class="mi">9999999</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">notch</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
            <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">c3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
            <span class="n">capprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
            <span class="n">whiskerprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
@@ -1904,7 +1903,7 @@ Store their stroke team name.</p>
 <span class="n">c3</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">,</span>
            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Top 9 hospitals&quot;</span><span class="p">,</span><span class="s2">&quot;Bottom 9 hospitals&quot;</span><span class="p">],</span>
-           <span class="n">whis</span><span class="o">=</span><span class="mi">9999999</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">notch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">whis</span><span class="o">=</span><span class="mi">9999999</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">notch</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
            <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">c3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
            <span class="n">capprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
            <span class="n">whiskerprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">),</span>
@@ -1931,6 +1930,32 @@ Store their stroke team name.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_0.png" src="../_images/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units_42_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bottom_q1</span><span class="p">,</span> <span class="n">bottom_q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bottom_9_hosp_ave</span><span class="p">),</span> <span class="p">[</span><span class="mi">25</span> <span class="p">,</span><span class="mi">75</span><span class="p">])</span>
+<span class="n">top_q1</span><span class="p">,</span> <span class="n">top_q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">top_9_hosp_ave</span><span class="p">),</span> <span class="p">[</span><span class="mi">25</span> <span class="p">,</span><span class="mi">75</span><span class="p">])</span>
+<span class="n">mean_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">top_9_hosp_ave</span><span class="p">))</span>
+<span class="n">mean_bottom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bottom_9_hosp_ave</span><span class="p">))</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">mean_top</span> <span class="o">-</span> <span class="n">mean_bottom</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The top 30 hospitals have (on average) SHAP values for the one-hot &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;encoded hospital feature of between </span><span class="si">{</span><span class="n">top_q1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> to &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">top_q3</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (interquartile range). Compared to &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bottom_q1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">bottom_q3</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> for the &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;bottom hospitals.&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The mean top and bottom SHAP values are </span><span class="si">{</span><span class="n">mean_top</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">, and </span><span class="si">{</span><span class="n">mean_bottom</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">, a difference of </span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The top 30 hospitals have (on average) SHAP values for the one-hot encoded hospital feature of between 0.83 to 1.16 (interquartile range). Compared to -1.14 to -0.86 for the bottom hospitals.
+
+The mean top and bottom SHAP values are 0.97, and -1.01, a difference of 1.98.
+</pre></div>
+</div>
 </div>
 </div>
 <p>Plot the SHAP values for stroke severity for the two hospital groups.</p>
