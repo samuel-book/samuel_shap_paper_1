@@ -670,10 +670,9 @@ title="Print to PDF"
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Low and high thrombolysing hosptials have the same general pattern: that a patient is more likely to recieve thromboylsis if they have a mid-level stroke severity.</p></li>
-<li><p>The more cautious hospitals have a more pronounced effect of the pattern … ???</p></li>
-<li><p>The wider the net for including hospitals into the two groups (9 vs 30) the less pronounced the difference.</p></li>
-<li><p>Dividing the patients into did/did not receive thrombolysis shows that… ???</p></li>
+<li><p>Low and high thrombolysing hosptials have the same general pattern: that a patient is more likely to recieve thromboylsis if they have a mid-level stroke severity. This is overlaid over different hospital SHAP values.</p></li>
+<li><p>There is an average diffeence in hospital SHAP of 1.31 between the top and bottom 30 hospitals, and 1.98 between the top and bottom 9 hospitals. These differences are equivalent to a difference in odds of receiving thrombolysis of 3.7 and 7.2 respectiviely.</p></li>
+<li><p>Lower thrombolysing hospitals have a more exagerrated effect of stroke severity, though other features such as disability before stroke, use of AF anticoagulants and arrival to scan time look similar.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1526,7 +1525,8 @@ title="Print to PDF"
     <span class="n">mask</span> <span class="o">=</span> <span class="n">df_data_values</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="n">bottom_30_hosp_ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_shap_values</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 
-<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_30_hosp_ave</span><span class="p">,</span> <span class="n">bottom_30_hosp_ave</span><span class="p">]</span>
+<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_30_hosp_ave</span><span class="p">,</span>
+                <span class="n">bottom_30_hosp_ave</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1940,7 +1940,7 @@ Store their stroke team name.</p>
 <span class="n">mean_bottom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bottom_9_hosp_ave</span><span class="p">))</span>
 <span class="n">diff</span> <span class="o">=</span> <span class="n">mean_top</span> <span class="o">-</span> <span class="n">mean_bottom</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The top 30 hospitals have (on average) SHAP values for the one-hot &quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The top 9 hospitals have (on average) SHAP values for the one-hot &quot;</span>
       <span class="sa">f</span><span class="s2">&quot;encoded hospital feature of between </span><span class="si">{</span><span class="n">top_q1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> to &quot;</span>
       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">top_q3</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (interquartile range). Compared to &quot;</span>
       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bottom_q1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">bottom_q3</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> for the &quot;</span>
@@ -1951,7 +1951,7 @@ Store their stroke team name.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The top 30 hospitals have (on average) SHAP values for the one-hot encoded hospital feature of between 0.83 to 1.16 (interquartile range). Compared to -1.14 to -0.86 for the bottom hospitals.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The top 9 hospitals have (on average) SHAP values for the one-hot encoded hospital feature of between 0.83 to 1.16 (interquartile range). Compared to -1.14 to -0.86 for the bottom hospitals.
 
 The mean top and bottom SHAP values are 0.97, and -1.01, a difference of 1.98.
 </pre></div>
