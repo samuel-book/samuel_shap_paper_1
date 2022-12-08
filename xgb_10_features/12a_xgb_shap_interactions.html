@@ -951,7 +951,7 @@ By convention our features are called <code class="docutils literal notranslate"
               gamma=0, gpu_id=-1, importance_type=None,
               interaction_constraints=&#x27;&#x27;, learning_rate=0.5, max_delta_step=0,
               max_depth=6, min_child_weight=1, missing=nan,
-              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=36,
+              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=20,
               num_parallel_tree=1, predictor=&#x27;auto&#x27;, random_state=42,
               reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=42,
               subsample=1, tree_method=&#x27;exact&#x27;, validate_parameters=1,
@@ -960,7 +960,7 @@ By convention our features are called <code class="docutils literal notranslate"
               gamma=0, gpu_id=-1, importance_type=None,
               interaction_constraints=&#x27;&#x27;, learning_rate=0.5, max_delta_step=0,
               max_depth=6, min_child_weight=1, missing=nan,
-              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=36,
+              monotone_constraints=&#x27;()&#x27;, n_estimators=100, n_jobs=20,
               num_parallel_tree=1, predictor=&#x27;auto&#x27;, random_state=42,
               reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=42,
               subsample=1, tree_method=&#x27;exact&#x27;, validate_parameters=1,
@@ -1036,8 +1036,8 @@ Using this we can calculate the SHAP values.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.42 s, sys: 188 ms, total: 3.61 s
-Wall time: 104 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 5.98 ms, sys: 83.2 ms, total: 89.2 ms
+Wall time: 102 ms
 </pre></div>
 </div>
 </div>
@@ -1176,8 +1176,8 @@ array([ 17. ,   1. ,  14. ,   1. ,   0. ,   0. , 186. ,   0. ,  47.5,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.6 ms, sys: 2.82 s, total: 2.82 s
-Wall time: 2.83 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 0 ns, sys: 2.46 s, total: 2.46 s
+Wall time: 2.81 s
 </pre></div>
 </div>
 </div>
@@ -1232,6 +1232,8 @@ The values on the diagonal show the main effect for the feature, and the other v
     <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="n">mean_abs_interactions</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mean_abs_interactions</span> <span class="o">=</span> <span class="n">mean_abs_interactions</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mean_abs_interactions</span>
 </pre></div>
 </div>
 </div>
@@ -1566,8 +1568,8 @@ The values on the diagonal show the main effect for the feature, and the other v
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The proportion of the SHAP values coming from the interactions are: 0.382
-The proportion of the SHAP values coming from the main effects are: 0.618
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The proportion of the SHAP values coming from the interactions are: 0.286
+The proportion of the SHAP values coming from the main effects are: 0.714
 </pre></div>
 </div>
 </div>
@@ -2239,6 +2241,8 @@ The model prediction for each instance can be arrived at by starting at the SHAP
     <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/12a_shap_interaction_</span><span class="si">{</span><span class="n">main_feature</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">interaction_feature</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
     <span class="k">return</span><span class="p">()</span>
 </pre></div>
@@ -2267,10 +2271,10 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
+<img alt="../_images/12a_xgb_shap_interactions_58_0.png" src="../_images/12a_xgb_shap_interactions_58_0.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>()
 </pre></div>
 </div>
-<img alt="../_images/12a_xgb_shap_interactions_58_1.png" src="../_images/12a_xgb_shap_interactions_58_1.png" />
 </div>
 </div>
 <p>Violin plots can only display the values for one of the features in a feature-pairing - by it’s placement on the x axis. In the violin plot above we can only see the value for the feature male, but not the value for the feature Pclass.</p>
