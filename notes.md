@@ -60,7 +60,7 @@ SHAP values for hospitals for patients attending each hospital
 
 * 58% of the variability in hospital thrombolysis rate can be explained by the SHAP value for the one-hot encoded hospital feature (the median of those instances that attend the hospital); 56% of the variance may be explained by the SHAP main effect.
 
-Across all the hopsitals SHAP values and SHAP main effect have approx the same median and quartiles, but the full SHAP (with interactions) have a larger range. For each hospital the full SHAP has significantly larger range (inc IQR_ than the main effect).
+Across all the hospitals SHAP values and SHAP main effect have approx the same median and quartiles, but the full SHAP (with interactions) have a larger range. For each hospital the full SHAP has significantly larger range (inc IQR_ than the main effect).
 
 ## Notebook 04 - 10k thrombolysis and SHAP
 
@@ -76,19 +76,71 @@ Across all the hopsitals SHAP values and SHAP main effect have approx the same m
 * Thrombolysis use would be increased 20.7% if benchmark decisions were made at all hospitals.
 * The ratio of benchmark:local thrombolysis use was 0.7 to 2.1.
 
-## Notebook 06 - Predicting differences between local and benchmark decisions
+## Notebook 07 - correlation between 10 features
+ * There are only very weak correlations between the selected features with no R-squared being greater than 0.15, and all but two being lower than 0.05.
 
-* We can predict those that will receive thrombolysis at a local unit, out of those who will be thrombolysed by the majority of the benchmark hospitals, with 67% accuracy (AUC 0.72).
+ ## Notebook 8 - compare SHAP on top/bottom 30 or 9 hospitals
 
-* The five most important distinguishing features are:
-  * Stroke severity
-  * Prior disability
-  * Precise onset time   * Arrival to scan time
-  * Onset to arrival time
+ * Low and high thrombolysing hosptials have the same general pattern: that a patient is more likely to recieve thromboylsis if they have a mid-level stroke severity. This is overlaid over different hospital SHAP values.
+* There is an average diffeence in hospital SHAP of 1.31 between the top and bottom 30 hospitals, and 1.98 between the top and bottom 9 hospitals. These differences are equivalent to a difference in odds of receiving thrombolysis of 3.7 and 7.2 respectiviely.
+* Lower thrombolysing hospitals have a more exagerrated effect of stroke severity, though other features such as disability before stroke, use of AF anticoagulants and arrival to scan time look similar.
 
+## Notebook 09 - Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
 
+* Thrombolysis use in low thrombolysing hospitals follows the same general relationship with feature values as the high thrombolysing hospitals, but thrombolysis is consistently lower.
 
+## Notebook 12a - Describing model predictions, using SHAP values and SHAP interactions
 
+* The proportions of SHAP values comings from the main effect and the interactions are 62% and 8% respectively.
+* Viewing them as a grid of SHAP dependency plots clearly shows the overall relationships that the model uses to derive it's predictions for the whole dataset.
+* Some key interactions are:
+  * If a stroke is haemorrhagic, then the interaction is such that the presence of haemorrhage cancels out other SHAP effects (i.e. stroke severity does not matter if the stroke is haemorrhagic).
+  * Likewise elsewhere we find that features that each give negative SHAP values alone have an interaction that attenuates the combines effect a little.
 
+## Notebook 12aa - Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time
 
+* The main effect of the *precise onset time* is that if onset time is known precicely then SHAP (log odds) is increased by 0.42, otherwise it is reduced by 0.85.
+* The interaction between the hopsital and precise onset time then adjusts this main effect. Some hopsitals strengthen the effect, and other hopsitals atenuate the effect.
 
+## Notebook 12ab - Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
+
+* The main effect of stroke severity is to signficantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).
+* The interaction between the hopsital and stroke severity then adjusts this main effect. Some hopsitals strengthen the effect, and other hopsitals atenuate the effect.
+
+## Notebook 12ac - Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with pre-stroke disability
+
+* The main effect of prior disability is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5).
+* The interaction between the hopsital and stroke severity time then adjusts this main effect. Some hopsitals strengthen the effect, and other hopsitals atenuate the effect.
+
+## Notebook 20 - Investigating the effect of patient features by varying feature values in artificial patients
+
+The number of hospitals giving thrombolysis:
+
+* Base patient: 132 (99%)
+* Base patient, but NIHSS = 5: 123 (93%)
+* Base patient, but pre-stroke disability = 2: 125 (95%)
+* Base patient, but estimated stroke onset time: 109 (83%)
+
+Combining two marginal features:
+
+* Base patient, but NIHSS = 5 and pre-stroke disability = 2: 78 (59%)
+* Base patient, but NIHSS = 5 and estimated stroke onset time: 30 (23%)
+* Base patient, but pre-stroke disability = 2 and estimated stroke onset time: 26 (20%)
+
+Combining three marginal features:
+
+* Base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 2 (1.5%)
+
+## Measuring model variation with bagging
+
+Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.
+
+We apply two bootstrap methods, In the traditional method we fit multiple models to bootstrapped samples of the training set (random sampling with replacement).
+
+In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Dirichlet distribution (see https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148).
+
+These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05, but this ranges from about 0.01 to 0.13 dependening on the predicted probability (with greatest variance around 50% predicted probability of receiving thrombolysis). The average standard deviation in predicting the hospital's expected thrombolysis rate is 0.015-0.02. 
+
+## Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
+
+A learning rate of 0.5 is selected to prevent over-regularisation of hopsital one-hot encoding
