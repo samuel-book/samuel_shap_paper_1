@@ -630,16 +630,18 @@ title="Print to PDF"
 </section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
-<p>XGBoost model was trained on all of the data (no test set used). The 8 features in the model are:</p>
+<p>XGBoost model was trained on all of the data (no test set used). The 10 features in the model are:</p>
 <ul class="simple">
 <li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
 <li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
 <li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
 <li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
 <li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
-<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (0 = No, 1 = Yes)</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
 <li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
-<li><p>Stroke team: Represented as one-hot encoded features</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
 <p>And one target feature:</p>
 <ul class="simple">
