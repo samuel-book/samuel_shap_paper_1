@@ -22,6 +22,7 @@ parts:
   - file: xgb_10_features/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
   - file: xgb_10_features/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
   - file: xgb_10_features/03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals
+  - file: xgb_10_features/12a_xgb_shap_interactions
   - file: xgb_10_features/12aa_xgb_shap_interactions_focus_on_onsettime
   - file: xgb_10_features/12ab_xgb_shap_interactions_focus_on_severity
   - file: xgb_10_features/12ac_xgb_shap_interactions_focus_on_disability
