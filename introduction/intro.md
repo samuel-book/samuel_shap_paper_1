@@ -130,41 +130,62 @@ A comparison of average hospital SHAP values with actual hospital thrombolysis u
 :::
 
 
-### Predicting *differences* in thrombolysis use between hospitals with an XG-Boost model
+### What do SHAP interactions reveal about differences between hospitals
 
-We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis...
+SHAP interactions show how one feature may modify the effect of another feature. We are especially interested in how an individual hospital may modify the general effects observed in the model, as this reveals patterns of decisions in individual hospitals. Below are three examples where hospitals make different decisions around stroke severity, disability before stroke, and whether stroke onset time is known precisely or not.
 
-1. In milder, or very severe, strokes.
-2. With increasing disability before stroke.
-3. When stroke onset time had been estimated (rather than known precisely).
-4. With longer onset-to-arrival times.
-5. With longer arrival-to-scan times.
-6. When patient is on anticoagulants for atrial fibrillation.
+#### Stroke severity
 
-We can visualise the general effects of these features, using SHAP in several ways. Firstly we can show the average effect of each feature as a violin plot ({numref}`figure {number} <diff_SHAP_violin>`), which shows the spread of the size of average SHAP values for each feature when measured in five different experiments (to understand how reproducible our measurement of SHAP values are). In this type of plot we ignore the direction of the SHAP value - that is we ignore whether a value is positive or negative; SHAP values of -3 or +3 would both have an effect size of 3.
+{numref}`Figure {number} <nihss_main>` shows the main effect of stroke severity is to significantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).
 
+:::{figure-md} nihss_main
+<img src="./images/12ab_nihss_main_effect.jpg" width="450">
 
-:::{figure-md} diff_SHAP_violin
-<img src="./images/decision_comparison_shap_violin_key_features.jpg" width="450">
-
-A *violin plot* showing how much each feature affects the model prediction, as shown by the average (mean) SHAP value. We measure this in five separate experiments. The shape of the *violin* shows the spread of the size of SHAP values for each feature over the five experiments - where the violin is wider, there are more data points around that value. The end bars show the lowest and highest values, and the middle bar shows the *median* value, that is the middle number if all the five average SHAP values were sorted in order.
+The main effect of stroke severity on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
 :::
 
-A second way to visualise the effects of the features is to plot a *beeswarm* plot ({numref}`Figure {number} <SHAP_beeswarm>`). In this case we plot all the individual SHAP values, along with an indicator of the feature value.
+Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. {numref}`Figure {number} <nihss_interaction>` shows two stroke teams with opposite effects, one that opposes the general effect of stroke severity, and one that strengthens it.
 
+:::{figure-md} nihss_interaction
+<img src="./images/12ab_stroke_severity_interaction_example.jpg" width="450">
 
-:::{figure-md} SHAP_beeswarm
-<img src="./images/xgb_decision_comparison_beeswarm_key_features.jpg" width="800">
-
-A *beeswarm plot* of SHAP values, along with feature value (shown by the colour of the point) for all features. Black or blue points have low feature value (e.g. low prior disability level), and yellow/red/grey points have high feature value (e.g. high prior disability level), with green points being in the middle of the range of feature values. A positive SHAP vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
+The interaction between stroke team and the SHAP value of stroke severity (the interaction value is added to the main stroke severity effect). *team_KECZG3964M* has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. *team_SMVTP6284P* strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.
 :::
 
-We may examine each feature in more detail using violin plots for each feature ({numref}`Figure {number} <SHAP_compare_violin>`) 
 
-:::{figure-md} SHAP_compare_violin
-<img src="./images/xgb_predicting_difference_shap_violin.jpg" width="800">
+#### Disability before stroke
 
-A violin plot showing the individual SHAP values for six features. The shape of the *violin* shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that the patient would have different treatment to the benchmark hospitals, that is the patient would *not* receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient *would* receive thrombolysis.
+{numref}`Figure {number} <mrs_main>` shows the main effect of prior disability - that is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5)
+
+:::{figure-md} mrs_main
+<img src="./images/12ac_prior_disability_level_main_effect.jpg" width="450">
+
+The main effect of pre-stroke disability on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
+:::
+
+Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. {numref}`Figure {number} <mrs_interaction>` shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.
+
+
+:::{figure-md} mrs_interaction
+<img src="./images/12ac_disability_interaction_example.jpg" width="450">
+
+The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). *team_AKCGO9726K* has a SHAP interaction that attenuates the general prior disability main effect. *team_XKAWN3771U* strengthens the main effect of pre-stroke disability - reducing the odss of receiving thrombolysis even futher for mild strokes.
+:::
+
+
+#### Stroke onset time
+
+The main effect of whether stroke onset time is known precisely or not is as follows (with SHAP giving the adjustment to the log odds of receiving thrombolysis):
+
+* If stroke onset time is known precisely: SHAP = +0.42
+* If stroke onset time is *not* known precisely: SHAP = -0.85
+
+Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. {numref}`Figure {number} <onset_interaction>` shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.
+
+:::{figure-md} onset_interaction
+<img src="./images/12aa_onset_time_type_interaction_example.jpg" width="450">
+
+The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). *team_HZNVT9936G* has interactions that strengthen the effect of *precise onset time* whereas *team_FAJKD7118X* has interactions values that attenuate the main effect of *precise onset time*
 :::
 
 
