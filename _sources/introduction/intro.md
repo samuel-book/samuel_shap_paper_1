@@ -169,7 +169,7 @@ Individual hospitals, in addition to having their own independent SHAP value, ma
 :::{figure-md} mrs_interaction
 <img src="./images/12ac_disability_interaction_example.jpg" width="450">
 
-The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). *team_XKAWN3771U* has a SHAP interaction that opposes the general prior disabilityt main effect. *team_AKCGO9726K* strengthens the main effect of stroke severity - reducing the odss of receiving thrombolysis even futher for mild strokes.
+The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). *team_AKCGO9726K* has a SHAP interaction that strengthens the general prior disability main effect. *team_XKAWN3771U* attenuates the main effect of stroke severity - reducing the odss of receiving thrombolysis even futher for mild strokes.
 :::
 
 
@@ -185,7 +185,7 @@ Individual hospitals, in addition to having their own independent SHAP value, ma
 :::{figure-md} onset_interaction
 <img src="./images/12aa_onset_time_type_interaction_example.jpg" width="450">
 
-The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). *team_HZNVT9936G* has interactions that strengthen the effect of *precise onset time* whereas *team_HZNVT9936G* has interactions values that attenuate the main effect of *precise onset time*
+The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). *team_HZNVT9936G* has interactions that strengthen the effect of *precise onset time* whereas *team_FAJKD7118X* has interactions values that attenuate the main effect of *precise onset time*
 :::
 
 
