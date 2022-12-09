@@ -423,13 +423,26 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
-     Predicting
-     <em>
-      differences
-     </em>
-     in thrombolysis use between hospitals with an XG-Boost model
+    <a class="reference internal nav-link" href="#what-do-shap-interactions-reveal-about-differences-between-hospitals">
+     What do SHAP interactions reveal about differences between hospitals
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stroke-severity">
+       Stroke severity
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#disability-before-stroke">
+       Disability before stroke
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stroke-onset-time">
+       Stroke onset time
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -509,13 +522,26 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
-     Predicting
-     <em>
-      differences
-     </em>
-     in thrombolysis use between hospitals with an XG-Boost model
+    <a class="reference internal nav-link" href="#what-do-shap-interactions-reveal-about-differences-between-hospitals">
+     What do SHAP interactions reveal about differences between hospitals
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stroke-severity">
+       Stroke severity
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#disability-before-stroke">
+       Disability before stroke
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stroke-onset-time">
+       Stroke onset time
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -647,38 +673,58 @@ title="Print to PDF"
 </figcaption>
 </figure>
 </section>
-<section id="predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model">
-<h3>Predicting <em>differences</em> in thrombolysis use between hospitals with an XG-Boost model<a class="headerlink" href="#predicting-differences-in-thrombolysis-use-between-hospitals-with-an-xg-boost-model" title="Permalink to this headline">#</a></h3>
-<p>We trained an XG-Boost model to predict different choices in thrombolysis between hospitals with a high or low propensity to use thrombolysis. Using this model we found that lower thrombolysing hospitals were less likely to give thrombolysis…</p>
-<ol class="simple">
-<li><p>In milder, or very severe, strokes.</p></li>
-<li><p>With increasing disability before stroke.</p></li>
-<li><p>When stroke onset time had been estimated (rather than known precisely).</p></li>
-<li><p>With longer onset-to-arrival times.</p></li>
-<li><p>With longer arrival-to-scan times.</p></li>
-<li><p>When patient is on anticoagulants for atrial fibrillation.</p></li>
-</ol>
-<p>We can visualise the general effects of these features, using SHAP in several ways. Firstly we can show the average effect of each feature as a violin plot (<a class="reference internal" href="#diff-shap-violin"><span class="std std-numref">figure 7</span></a>), which shows the spread of the size of average SHAP values for each feature when measured in five different experiments (to understand how reproducible our measurement of SHAP values are). In this type of plot we ignore the direction of the SHAP value - that is we ignore whether a value is positive or negative; SHAP values of -3 or +3 would both have an effect size of 3.</p>
-<figure class="align-default" id="diff-shap-violin">
-<a class="reference internal image-reference" href="../_images/decision_comparison_shap_violin_key_features.jpg"><img alt="../_images/decision_comparison_shap_violin_key_features.jpg" src="../_images/decision_comparison_shap_violin_key_features.jpg" style="width: 450px;" /></a>
+<section id="what-do-shap-interactions-reveal-about-differences-between-hospitals">
+<h3>What do SHAP interactions reveal about differences between hospitals<a class="headerlink" href="#what-do-shap-interactions-reveal-about-differences-between-hospitals" title="Permalink to this headline">#</a></h3>
+<p>SHAP interactions show how one feature may modify the effect of another feature. We are especially interested in how an individual hospital may modify the general effects observed in the model, as this reveals patterns of decisions in individual hospitals. Below are three examples where hospitals make different decisions around stroke severity, disability before stroke, and whether stroke onset time is known precisely or not.</p>
+<section id="stroke-severity">
+<h4>Stroke severity<a class="headerlink" href="#stroke-severity" title="Permalink to this headline">#</a></h4>
+<p><a class="reference internal" href="#nihss-main"><span class="std std-numref">Figure 7</span></a> shows the main effect of stroke severity is to significantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).</p>
+<figure class="align-default" id="nihss-main">
+<a class="reference internal image-reference" href="introduction/images/12ab_nihss_main_effect.jpg."><img alt="introduction/images/12ab_nihss_main_effect.jpg." src="introduction/images/12ab_nihss_main_effect.jpg." style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">A <em>violin plot</em> showing how much each feature affects the model prediction, as shown by the average (mean) SHAP value. We measure this in five separate experiments. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature over the five experiments - where the violin is wider, there are more data points around that value. The end bars show the lowest and highest values, and the middle bar shows the <em>median</em> value, that is the middle number if all the five average SHAP values were sorted in order.</span><a class="headerlink" href="#diff-shap-violin" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">The main effect of stroke severity on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).</span><a class="headerlink" href="#nihss-main" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>A second way to visualise the effects of the features is to plot a <em>beeswarm</em> plot (<a class="reference internal" href="#shap-beeswarm"><span class="std std-numref">Figure 8</span></a>). In this case we plot all the individual SHAP values, along with an indicator of the feature value.</p>
-<figure class="align-default" id="shap-beeswarm">
-<a class="reference internal image-reference" href="../_images/xgb_decision_comparison_beeswarm_key_features.jpg"><img alt="../_images/xgb_decision_comparison_beeswarm_key_features.jpg" src="../_images/xgb_decision_comparison_beeswarm_key_features.jpg" style="width: 800px;" /></a>
+<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <a class="reference internal" href="#nihss-interaction"><span class="std std-numref">Figure 8</span></a> shows two stroke teams with opposite effects, one that opposes the general effect of stroke severity, and one that strengthens it.</p>
+<figure class="align-default" id="nihss-interaction">
+<a class="reference internal image-reference" href="introduction/images/12ab_stroke_severity_interaction_example.jpg."><img alt="introduction/images/12ab_stroke_severity_interaction_example.jpg." src="introduction/images/12ab_stroke_severity_interaction_example.jpg." style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">A <em>beeswarm plot</em> of SHAP values, along with feature value (shown by the colour of the point) for all features. Black or blue points have low feature value (e.g. low prior disability level), and yellow/red/grey points have high feature value (e.g. high prior disability level), with green points being in the middle of the range of feature values. A positive SHAP vales pushes the model towards saying that patient would have different treatment to the benchmark hospitals, that is the patient would <em>not</em> receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient <em>would</em> receive thrombolysis.</span><a class="headerlink" href="#shap-beeswarm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">The interaction between stroke team and the SHAP value of stroke severity (the interaction value is added to the main stroke severity effect). <em>team_KECZG3964M</em> has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.</span><a class="headerlink" href="#nihss-interaction" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>We may examine each feature in more detail using violin plots for each feature (<a class="reference internal" href="#shap-compare-violin"><span class="std std-numref">Figure 9</span></a>)</p>
-<figure class="align-default" id="shap-compare-violin">
-<a class="reference internal image-reference" href="../_images/xgb_predicting_difference_shap_violin.jpg"><img alt="../_images/xgb_predicting_difference_shap_violin.jpg" src="../_images/xgb_predicting_difference_shap_violin.jpg" style="width: 800px;" /></a>
+</section>
+<section id="disability-before-stroke">
+<h4>Disability before stroke<a class="headerlink" href="#disability-before-stroke" title="Permalink to this headline">#</a></h4>
+<p><a class="reference internal" href="#mrs-main"><span class="std std-numref">Figure 9</span></a> shows the main effect of prior disability - that is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5)</p>
+<figure class="align-default" id="mrs-main">
+<a class="reference internal image-reference" href="introduction/images/12ac_priordisabilitylevel_main_effect.jpg."><img alt="introduction/images/12ac_priordisabilitylevel_main_effect.jpg." src="introduction/images/12ac_priordisabilitylevel_main_effect.jpg." style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">A violin plot showing the individual SHAP values for six features. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that the patient would have different treatment to the benchmark hospitals, that is the patient would <em>not</em> receive thrombolysis. A negative SHAP vales pushes the model towards saying that patient would have the same treatment to the benchmark hospitals, that is the patient <em>would</em> receive thrombolysis.</span><a class="headerlink" href="#shap-compare-violin" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">The main effect of pre-stroke disability on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).</span><a class="headerlink" href="#mrs-main" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <a class="reference internal" href="#mrs-interaction"><span class="std std-numref">Figure 10</span></a> shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.</p>
+<figure class="align-default" id="mrs-interaction">
+<a class="reference internal image-reference" href="introduction/images/12ac_disability_interaction_example.jpg."><img alt="introduction/images/12ac_disability_interaction_example.jpg." src="introduction/images/12ac_disability_interaction_example.jpg." style="width: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). <em>team_XKAWN3771U</em> has a SHAP interaction that opposes the general prior disabilityt main effect. <em>team_AKCGO9726K</em> strengthens the main effect of stroke severity - reducing the odss of receiving thrombolysis even futher for mild strokes.</span><a class="headerlink" href="#mrs-interaction" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="stroke-onset-time">
+<h4>Stroke onset time<a class="headerlink" href="#stroke-onset-time" title="Permalink to this headline">#</a></h4>
+<p>The main effect of whether stroke onset time is known precisely or not is as follows (with SHAP giving the adjustment to the log odds of receiving thrombolysis):</p>
+<ul class="simple">
+<li><p>If stroke onset time is known precisely: SHAP = +0.42</p></li>
+<li><p>If stroke onset time is <em>not</em> known precisely: SHAP = -0.85</p></li>
+</ul>
+<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <a class="reference internal" href="#onset-interaction"><span class="std std-numref">Figure 11</span></a> shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.</p>
+<figure class="align-default" id="onset-interaction">
+<a class="reference internal image-reference" href="introduction/images/12aa_onset_time_type_interaction_example.jpg."><img alt="introduction/images/12aa_onset_time_type_interaction_example.jpg." src="introduction/images/12aa_onset_time_type_interaction_example.jpg." style="width: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). <em>team_HZNVT9936G</em> has interactions that strengthen the effect of <em>precise onset time</em> whereas <em>team_HZNVT9936G</em> has interactions values that attenuate the main effect of <em>precise onset time</em></span><a class="headerlink" href="#onset-interaction" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 </section>
 </section>
 <section id="conclusions">

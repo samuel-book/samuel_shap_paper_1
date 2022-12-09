@@ -668,7 +668,7 @@ title="Print to PDF"
 <li><p>SHAP interactions are awesome!</p></li>
 <li><p>Viewing them as a grid of SHAP dependency plots clearly shows the overall relationships that the model uses to derive it’s predictions for the whole dataset, and allows us to see different patterns in different hopsitals.</p></li>
 <li><p>The main effect of stroke severity is to signficantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).</p></li>
-<li><p>The interaction between the hopsital and stroke severity time then adjusts this main effect. Some hopsitals strengthen the effect, and other hopsitals atenuate the effect.</p></li>
+<li><p>The interaction between the hopsital and stroke severity then adjusts this main effect. Some hopsitals strengthen the effect, and other hopsitals atenuate the effect.</p></li>
 </ul>
 </section>
 <section id="import-modules">
@@ -1418,7 +1418,7 @@ data value
 <ul class="simple">
 <li><p>The main effect of stroke severity is to signficantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).</p></li>
 <li><p><em>team_SMVTP6284P</em> has a higher general tendency to use thrombolysis than <em>team_KECZG3964M</em> (team main effect SHAP = 0.62 vs -0.19)</p></li>
-<li><p><em>team_KECZG3964M</em> has a SHAP interaction that opposes the general stroke servity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odss of receiving thrombolysis even futher for mild strokes.</p></li>
+<li><p><em>team_KECZG3964M</em> has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.</p></li>
 </ul>
 </section>
 </section>
