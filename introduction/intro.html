@@ -597,16 +597,18 @@ title="Print to PDF"
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
 <p>In this study we used a machine learning method called <em>XG-Boost</em> to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions.</p>
-<p>In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 8 features we could get accuracy that was very close to using <em>all</em> available features. These 8 features were:</p>
+<p>In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using <em>all</em> available features. These 10 features were:</p>
 <ul class="simple">
-<li><p><em>S2BrainImagingTime_min</em>: Time from arrival at hospital to scan</p></li>
-<li><p><em>S2StrokeType_Infarction</em>: Stroke type: clot (‘infarction’) or bleed (‘haemorrhage’)</p></li>
-<li><p><em>S2NihssArrival</em>: Stroke severity (National Institutes of Health Stroke Scale; NIHSS) on arrival</p></li>
-<li><p><em>S1OnsetTimeType_Precise</em>: Is stroke onset time known precisely (or estimated)</p></li>
-<li><p><em>S2RankinBeforeStroke</em>: Disability level (modified Rankin Scale) <em>before</em> stroke</p></li>
-<li><p><em>StrokeTeam</em>: Hospital ID</p></li>
-<li><p><em>AFAnticoagulent_Yes</em>: Patient on anticoagulant therapy for atrial fibrillation</p></li>
-<li><p><em>S1OnsetToArrival_min</em>: Time from stroke onset to arrival at hospital</p></li>
+<li><p><em>Arrival-to-scan time</em>: Time from arrival at hospital to scan (mins)</p></li>
+<li><p><em>Infarction</em>: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p><em>Stroke severity</em>: Stroke severity (NIHSS) on arrival</p></li>
+<li><p><em>Precise onset time</em>: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p><em>Prior disability level</em>: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p><em>Stroke team</em>: Stroke team attended</p></li>
+<li><p><em>Use of AF anticoagulents</em>: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p><em>Onset-to-arrival time</em>: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p><em>Onset during sleep</em>: Did stroke occur in sleep?</p></li>
+<li><p><em>Age</em>: Age (as middle of 5 year age bands)</p></li>
 </ul>
 <p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features.</p>
 <p>In order to explain model predictions we used a method called Shapley values, which are described below.</p>
