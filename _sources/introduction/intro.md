@@ -158,7 +158,7 @@ The interaction between stroke team and the SHAP value of stroke severity (the i
 {numref}`Figure {number} <mrs_main>` shows the main effect of prior disability - that is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5)
 
 :::{figure-md} mrs_main
-<img src="./images/12ac_prior_disability level_main_effect.jpg" width="450">
+<img src="./images/12ac_prior_disability_level_main_effect.jpg" width="450">
 
 The main effect of pre-stroke disability on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
 :::
