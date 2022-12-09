@@ -383,109 +383,102 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plain-english-summary">
-     Plain English summary
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-and-data">
-     Model and data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aims">
-     Aims
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-modules">
-     Import modules
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-output-folders-if-needed">
-     Create output folders if needed
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#read-in-json-file">
-     Read in JSON file
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     Load data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-xgboost-model">
-     Fit XGBoost model
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-     Divide into X (features) and y (labels)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-hot-encode-hospitals">
-     One hot encode hospitals
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Fit XGBoost model
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-values">
-     Get SHAP values
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-interaction-values">
-     Get SHAP interaction values
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-modules">
+   Import modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
+   Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-hot-encode-hospitals">
+   One hot encode hospitals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Fit XGBoost model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-shap-values">
+   Get SHAP values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-shap-interaction-values">
+   Get SHAP interaction values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#look-at-one-feature-stroke-severity">
    Look at one feature: ‘Stroke severity’
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#shap-interaction-matrix-show-mean-absolute-values">
      SHAP interaction matrix: show mean absolute values
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
      The proportion of SHAP that is from the interactions: calculated from the absolute mean
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shap-dependence-plots-for-the-chosen-feature">
-     SHAP dependence plots for the chosen feature
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-a-comparison-of-teams-with-different-interaction-direction">
-     Show a comparison of teams with different interaction direction
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shap-dependence-plots-for-the-chosen-feature">
+   SHAP dependence plots for the chosen feature
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-a-comparison-of-teams-with-different-interaction-direction">
+   Show a comparison of teams with different interaction direction
+  </a>
  </li>
 </ul>
 
@@ -506,109 +499,102 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plain-english-summary">
-     Plain English summary
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-and-data">
-     Model and data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aims">
-     Aims
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-modules">
-     Import modules
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-output-folders-if-needed">
-     Create output folders if needed
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#read-in-json-file">
-     Read in JSON file
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     Load data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-xgboost-model">
-     Fit XGBoost model
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-     Divide into X (features) and y (labels)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-hot-encode-hospitals">
-     One hot encode hospitals
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Fit XGBoost model
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-values">
-     Get SHAP values
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-interaction-values">
-     Get SHAP interaction values
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-modules">
+   Import modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
+   Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-hot-encode-hospitals">
+   One hot encode hospitals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Fit XGBoost model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-shap-values">
+   Get SHAP values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-shap-interaction-values">
+   Get SHAP interaction values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#look-at-one-feature-stroke-severity">
    Look at one feature: ‘Stroke severity’
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#shap-interaction-matrix-show-mean-absolute-values">
      SHAP interaction matrix: show mean absolute values
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
      The proportion of SHAP that is from the interactions: calculated from the absolute mean
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shap-dependence-plots-for-the-chosen-feature">
-     SHAP dependence plots for the chosen feature
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-a-comparison-of-teams-with-different-interaction-direction">
-     Show a comparison of teams with different interaction direction
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shap-dependence-plots-for-the-chosen-feature">
+   SHAP dependence plots for the chosen feature
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-a-comparison-of-teams-with-different-interaction-direction">
+   Show a comparison of teams with different interaction direction
+  </a>
  </li>
 </ul>
 
@@ -1091,9 +1077,8 @@ In this case, each of the 891 instances has a 4x4 matrix of SHAP interaction val
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="look-at-one-feature-stroke-severity">
-<h1>Look at one feature: ‘Stroke severity’<a class="headerlink" href="#look-at-one-feature-stroke-severity" title="Permalink to this headline">#</a></h1>
+<section id="look-at-one-feature-stroke-severity">
+<h2>Look at one feature: ‘Stroke severity’<a class="headerlink" href="#look-at-one-feature-stroke-severity" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chosen_feature</span> <span class="o">=</span> <span class="s1">&#39;Stroke severity&#39;</span>
@@ -1102,7 +1087,7 @@ In this case, each of the 891 instances has a 4x4 matrix of SHAP interaction val
 </div>
 </div>
 <section id="shap-interaction-matrix-show-mean-absolute-values">
-<h2>SHAP interaction matrix: show mean absolute values<a class="headerlink" href="#shap-interaction-matrix-show-mean-absolute-values" title="Permalink to this headline">#</a></h2>
+<h3>SHAP interaction matrix: show mean absolute values<a class="headerlink" href="#shap-interaction-matrix-show-mean-absolute-values" title="Permalink to this headline">#</a></h3>
 <p>Here we see the absolute mean of the SHAP interaction values for all of the instances.</p>
 <p>Show data for the feature Precise Onset Time. The value in the column “Precise onset time” shows the main effect for the feature, and the other values show the SHAP interaction for pairs of features.</p>
 <div class="cell docutils container">
@@ -1147,7 +1132,7 @@ Stroke severity              0.0
 </div>
 </section>
 <section id="the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
-<h2>The proportion of SHAP that is from the interactions: calculated from the absolute mean<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean" title="Permalink to this headline">#</a></h2>
+<h3>The proportion of SHAP that is from the interactions: calculated from the absolute mean<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean" title="Permalink to this headline">#</a></h3>
 <p>Looking at all of the instances together, what proportion of the SHAP value comes from the SHAP interations and what from the main effect (for the feature “Precise onset time”)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1171,6 +1156,7 @@ For feature &quot;Stroke severity&quot;, the proportion of the SHAP values comin
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="shap-dependence-plots-for-the-chosen-feature">
 <h2>SHAP dependence plots for the chosen feature<a class="headerlink" href="#shap-dependence-plots-for-the-chosen-feature" title="Permalink to this headline">#</a></h2>
