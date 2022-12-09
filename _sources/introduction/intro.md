@@ -139,7 +139,7 @@ SHAP interactions show how one feature may modify the effect of another feature.
 {numref}`Figure {number} <nihss_main>` shows the main effect of stroke severity is to significantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).
 
 :::{figure-md} nihss_main
-<img src="./images/12ab_nihss_main_effect.jpg." width="450">
+<img src="./images/12ab_nihss_main_effect.jpg" width="450">
 
 The main effect of stroke severity on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
 :::
@@ -147,7 +147,7 @@ The main effect of stroke severity on the odds of receiving thrombolysis (SHAP s
 Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. {numref}`Figure {number} <nihss_interaction>` shows two stroke teams with opposite effects, one that opposes the general effect of stroke severity, and one that strengthens it.
 
 :::{figure-md} nihss_interaction
-<img src="./images/12ab_stroke_severity_interaction_example.jpg." width="450">
+<img src="./images/12ab_stroke_severity_interaction_example.jpg" width="450">
 
 The interaction between stroke team and the SHAP value of stroke severity (the interaction value is added to the main stroke severity effect). *team_KECZG3964M* has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. *team_SMVTP6284P* strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.
 :::
@@ -158,7 +158,7 @@ The interaction between stroke team and the SHAP value of stroke severity (the i
 {numref}`Figure {number} <mrs_main>` shows the main effect of prior disability - that is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5)
 
 :::{figure-md} mrs_main
-<img src="./images/12ac_prior disability level_main_effect.jpg." width="450">
+<img src="./images/12ac_prior disability level_main_effect.jpg" width="450">
 
 The main effect of pre-stroke disability on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
 :::
@@ -167,7 +167,7 @@ Individual hospitals, in addition to having their own independent SHAP value, ma
 
 
 :::{figure-md} mrs_interaction
-<img src="./images/12ac_disability_interaction_example.jpg." width="450">
+<img src="./images/12ac_disability_interaction_example.jpg" width="450">
 
 The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). *team_XKAWN3771U* has a SHAP interaction that opposes the general prior disabilityt main effect. *team_AKCGO9726K* strengthens the main effect of stroke severity - reducing the odss of receiving thrombolysis even futher for mild strokes.
 :::
@@ -183,7 +183,7 @@ The main effect of whether stroke onset time is known precisely or not is as fol
 Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. {numref}`Figure {number} <onset_interaction>` shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.
 
 :::{figure-md} onset_interaction
-<img src="./images/12aa_onset_time_type_interaction_example.jpg." width="450">
+<img src="./images/12aa_onset_time_type_interaction_example.jpg" width="450">
 
 The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). *team_HZNVT9936G* has interactions that strengthen the effect of *precise onset time* whereas *team_HZNVT9936G* has interactions values that attenuate the main effect of *precise onset time*
 :::
