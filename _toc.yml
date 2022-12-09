@@ -19,7 +19,6 @@ parts:
   chapters:
   - file: xgb_10_features/04_compare_10k_cohort_key_features
   - file: xgb_10_features/05_compare_benchmark_decisions_key_features
-  - file: xgb_10_features/06_predict_differences_between_local_and_benchmark_key_features
   - file: xgb_10_features/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
   - file: xgb_10_features/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
   - file: xgb_10_features/03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals
