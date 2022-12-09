@@ -169,7 +169,7 @@ Individual hospitals, in addition to having their own independent SHAP value, ma
 :::{figure-md} mrs_interaction
 <img src="./images/12ac_disability_interaction_example.jpg" width="450">
 
-The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). *team_AKCGO9726K* has a SHAP interaction that strengthens the general prior disability main effect. *team_XKAWN3771U* attenuates the main effect of stroke severity - reducing the odss of receiving thrombolysis even futher for mild strokes.
+The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). *team_AKCGO9726K* has a SHAP interaction that attenuates the general prior disability main effect. *team_XKAWN3771U* strengthens the main effect of pre-stroke disability - reducing the odss of receiving thrombolysis even futher for mild strokes.
 :::
 
 
