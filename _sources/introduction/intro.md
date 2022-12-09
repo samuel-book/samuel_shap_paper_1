@@ -192,3 +192,5 @@ The interaction between stroke team and the SHAP value of precisely known onset 
 ## Conclusions
 
 *Explainable machine learning* techniques give significant insight into models prediction clinical decision-making. At an overall level, SHAP allows for an understanding of the relationship between feature values and the model prediction, and at an individual level SHAP allows for an understanding of the most influential features in any single prediction.
+
+SHAP interactions allow us to observe how individual hospitals show decisions that are the same as, or different to, the general patterns across hopsitals.
