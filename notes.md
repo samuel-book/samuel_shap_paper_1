@@ -131,7 +131,7 @@ Combining three marginal features:
 
 * Base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 2 (1.5%)
 
-## Measuring model variation with bagging
+## Notebook 20 - Measuring model variation with bagging
 
 Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.
 
@@ -141,6 +141,6 @@ In the Bayesian bootstrap method we fit multiple models, with the training set w
 
 These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05, but this ranges from about 0.01 to 0.13 dependening on the predicted probability (with greatest variance around 50% predicted probability of receiving thrombolysis). The average standard deviation in predicting the hospital's expected thrombolysis rate is 0.015-0.02. 
 
-## Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
+## Notebook 50 - Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
 
 A learning rate of 0.5 is selected to prevent over-regularisation of hopsital one-hot encoding
