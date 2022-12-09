@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Describing model predictions, using SHAP values and SHAP interactions" href="12a_xgb_shap_interactions.html" />
-    <link rel="prev" title="Explaining XGBoost model predictions with SHAP values" href="03_xgb_combined_shap_key_features.html" />
+    <link rel="next" title="Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time" href="12aa_xgb_shap_interactions_focus_on_onsettime.html" />
+    <link rel="prev" title="Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -145,7 +145,7 @@ const thebe_selector_output = ".output, .cell_output"
   Predicting thrombolysis use and explaining the predictions with Shap
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
    XGBoost feature selection
@@ -171,23 +171,13 @@ const thebe_selector_output = ".output, .cell_output"
    Explaining XGBoost model predictions with SHAP values
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Explaining XGBoost model predictions with SHAP values: Analysis of hopsital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12a_xgb_shap_interactions.html">
-   Describing model predictions, using SHAP values and SHAP interactions
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Comparing thrombolysis decisions between hospitals
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
    A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
@@ -211,6 +201,16 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
    Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Explaining XGBoost model predictions with SHAP values: Analysis of hopsital SHAP values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12aa_xgb_shap_interactions_focus_on_onsettime.html">
+   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time
   </a>
  </li>
  <li class="toctree-l1">
@@ -2258,17 +2258,17 @@ Number hospitals whose interquartile range is zero. Main effect: 4. Shap values:
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="03_xgb_combined_shap_key_features.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Explaining XGBoost model predictions with SHAP values</p>
+            <p class="prev-next-title">Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="12a_xgb_shap_interactions.html" title="next page">
+    <a class='right-next' id="next-link" href="12aa_xgb_shap_interactions_focus_on_onsettime.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Describing model predictions, using SHAP values and SHAP interactions</p>
+        <p class="prev-next-title">Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
