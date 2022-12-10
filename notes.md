@@ -131,6 +131,20 @@ Combining three marginal features:
 
 * Base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 2 (1.5%)
 
+## Notebook 15 - 10k cohort subgroups
+
+* When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients. 
+
+* The range of thrombolysis use across hopsitals in the other subgroups was as follows:
+  * All 10k patients: minimum = 10%, median = 28%, maxiumum = 45%
+  * NIHSS <5: : minimum = 0%, median = 6%, maxiumum = 25%
+  * No precise onset time: : minimum = 0%, median = 7%, maxiumum = 20%
+  * Prestroke mRS >2: : minimum = 0%, median = 11%, maxiumum = 38%
+
+* The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, showed quite high pairwise correlations (r-squared 0.45 to 0.62). The three subgorups also showed quite strong correlation with the expected thrombolysis rate across all 10k patients (r-squared 0.68 to 0.77)
+
+* Almost all stroke units show high expected thrombolysis in a set of 'ideal' thrombolysis patients, but vary in expected use in subgroups with low stroke severity, no precise onset time, or existing pre-stroke disability. If a stroke unit showed lower  thombolysis in one of these subgroups they also tended to show lower thrombolysis rates in the other subgroups - suggesting a shared caution in use of thrombolysis in 'less ideal' patients.
+
 ## Notebook 20 - Measuring model variation with bagging
 
 Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.
