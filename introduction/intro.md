@@ -119,7 +119,26 @@ When we compare this 10k thrombolysis rate to the average hospital SHAP model in
 A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.
 :::
 
-We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hopsitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
+We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
+
+### Comparing expected thrombolysis use in subgroups of a 10k cohort of patients
+
+We can break select subgroups from the 10k patient cohort. The subgroups selected were:
+
+* Mild stroke severity (NIHSS < 5)
+* No precise onset time
+* Existing pre-stroke disability (mRS > 2)
+* An 'ideal' thrombolysable patient: NIHSS 10-25, Arrival-to-scan time < 30 minutes, Stroke type = infarction, Precise onset time = True, Prior diability level (mRS) = 0, No use of AF anticoagulants, Onset-to-arrival time < 90 minutes, Age < 80 years, Onset during sleep = False
+
+When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.
+
+The three subgroups of milder strokes, no precise onset time, and pre-existing disability, showed reduced expected thrombolysis use across hospitals, but there was significant between-hospital variability ({numref}`Figure {number} <10k_violin>`) - with some hospitals expected to not thrombolyse any of these patients, and other hospitals expected to give 20-38% of these patients thrombolysis.
+
+:::{figure-md} 10k_violin
+<img src="./images/15_10k_subgroup_violin.jpg" width="450">
+
+A comparison of between-hospital range of thrombolysis use for subgroups of the 10k patient cohort, with thrombolysis use predicted for the same set of patients at all hospitals. 
+:::
 
 ### How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value? 
 
