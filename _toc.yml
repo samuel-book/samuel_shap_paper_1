@@ -4,7 +4,6 @@ parts:
 - caption: Introductory content
   chapters:
   - file: introduction/data
-  - file: introduction/glossary
   - file: introduction/odds_prob
   - file: introduction/shap_worked_example
   - file: xgb_10_features/90_shap_interactions_on_titanic
