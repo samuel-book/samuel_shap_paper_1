@@ -1,0 +1,2216 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compare local thrombolysis decisions with benchmark decisions" href="05_compare_benchmark_decisions_key_features.html" />
+    <link rel="prev" title="A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values" href="04_compare_10k_cohort_key_features.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Using explainable machine learning to understand variation in thrombolysis practice</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Summary and outline
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introductory content
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../key_notebooks_redundant/outline.html">
+   Outline of notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/data.html">
+   Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/glossary.html">
+   Glossary of technical terms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/odds_prob.html">
+   Probability, odds, and SHAP values (log odds shifts)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/shap_worked_example.html">
+   A simple worked example of Shap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
+   Examining interactions between features with SHAP interactions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Predicting thrombolysis use and explaining the predictions with Shap
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
+   XGBoost feature selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_correlation.html">
+   Check correlation between features selected for the model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
+   Measuring accuracy of XGBoost models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02a_xgb_combined_fit_most_thrombolysable_patients.html">
+   An anlysis of the characteristics of the most thrombolysable patient at each hopsital
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_xgb_combined_shap_key_features.html">
+   Explaining XGBoost model predictions with SHAP values
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Comparing thrombolysis decisions between hospitals
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
+   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_compare_benchmark_decisions_key_features.html">
+   Compare local thrombolysis decisions with benchmark decisions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.html">
+   Comparing Shap values between high and low thrombolysing hospitals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
+   Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">
+   Explaining XGBoost model predictions with SHAP values: Analysis of hopsital SHAP values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12a_xgb_shap_interactions.html">
+   Describing model predictions, using SHAP values and SHAP interactions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12aa_xgb_shap_interactions_focus_on_onsettime.html">
+   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12ab_xgb_shap_interactions_focus_on_severity.html">
+   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12ac_xgb_shap_interactions_focus_on_disability.html">
+   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with pre-stroke disability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_synthetic_patients.html">
+   Investigating the effect of patient features by varying feature values in artificial patients
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="50_bagging_variation.html">
+   Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="91_learning_rate_optimisation.html">
+   Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/xgb_10_features/15_10k_thrombolysis_subgroups.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
+   Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate">
+     Pass 10k cohort through all hospital models and get thrombolysis rate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-thrombolysis-use-in-groups-of-patients">
+   Get thrombolysis use in groups of patients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-a-summary-of-results">
+   Show a summary of results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-correlations-between-10k-subgroups">
+   Check correlations between 10k subgroups
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-results">
+   Save results
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
+   Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate">
+     Pass 10k cohort through all hospital models and get thrombolysis rate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-thrombolysis-use-in-groups-of-patients">
+   Get thrombolysis use in groups of patients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-a-summary-of-results">
+   Show a summary of results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-correlations-between-10k-subgroups">
+   Check correlations between 10k subgroups
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-results">
+   Save results
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="a-comparison-of-expected-10k-cohort-thrombolysis-rates-across-hospitals-subgroup-analysis">
+<h1>A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis<a class="headerlink" href="#a-comparison-of-expected-10k-cohort-thrombolysis-rates-across-hospitals-subgroup-analysis" title="Permalink to this headline">#</a></h1>
+<section id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+<p>We may predict the use of thrombolysis across hospitals if all hospital saw the same 10 thousand patients. We can also look at groups of those patients, representing ‘ideal’ thrombolysis candidates, milder strokes, strokes without a precisely known stroke onset time, or with existing pre-stroke disability.</p>
+<p>Almost all stroke units show high expected thrombolysis in a set of ‘ideal’ thrombolysis patients, but vary in expected use in subgroups with low stroke severity, no precise onset time, or existing pre-stroke disability. If a stroke unit showed lower  thombolysis in one of these subgroups they also tended to show lower thrombolysis rates in the other subgroups - suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p>
+</section>
+<section id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+<p>An XGBoost model is trained on all but a 10k patient cohort, to predict which patient will recieve thrombolysis.The 10k patient cohort is then used in two ways: 1) as the test set for the model fitting process 2) as a common set of patients that are sent to each hospital in turn to obtain a thrombolysis rate that is comparable across hospitals which has any patient factors removed.</p>
+<p>The XGBoost model is fitted to all but 10k instances, and uses 10 features:</p>
+<ul class="simple">
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
+</ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Recieve thrombolysis (1 = Yes, 0 = No)</p></li>
+</ul>
+<p>The 10 features included in the model (to predict whether a patient will recieve thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
+</section>
+<section id="aims">
+<h2>Aims:<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Train XGBoost model on all data except for a 10k set of patients</p></li>
+<li><p>Predict use of thrombolysis in the heldback 10k cohort of patients, at each of the 132 hospitals (by changing hospital one-hot coding).</p></li>
+<li><p>Predict use of thrombolysis in three sbgroups of patients:</p>
+<ul>
+<li><p>Mild stroke severity (NIHSS &lt; 5)</p></li>
+<li><p>No precise onset time</p></li>
+<li><p>Existing pre-stroke disability (mRS &gt; 2)</p></li>
+<li><p>An <em>ideal</em> thrombolysable patient:</p>
+<ul>
+<li><p>Stroke severity NIHSS in range 10-25</p></li>
+<li><p>Arrival-to-scan time &lt; 30 minutes</p></li>
+<li><p>Stroke type = infarction</p></li>
+<li><p>Precise onset time = True</p></li>
+<li><p>Prior diability level (mRS) = 0</p></li>
+<li><p>No use of AF anticoagulants</p></li>
+<li><p>Onset-to-arrival time &lt; 90 minutes</p></li>
+<li><p>Age &lt; 80 years</p></li>
+<li><p>Onset during sleep = False</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The 10k cohort may be grouped to show thrombolysis in particular groups</p></li>
+<li><p>Those hospitals with lower thrombolysis use, compared with their total thrombolysis use, in three subsets of patients (NIHSS &lt; 5, mRS &gt;2, no precise onset time) tend to have signficantly lower overal thrombolysis use in the full 10k patients.</p></li>
+<li><p>When testing the ‘ideal’ thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.</p></li>
+<li><p>The range of thrombolysis use across hopsitals in the other subgroups was as follows:</p>
+<ul>
+<li><p>All 10k patients: minimum = 10%, median = 28%, maxiumum = 45%</p></li>
+<li><p>NIHSS &lt;5: : minimum = 0%, median = 6%, maxiumum = 25%</p></li>
+<li><p>No precise onset time: : minimum = 0%, median = 7%, maxiumum = 20%</p></li>
+<li><p>Prestroke mRS &gt;2: : minimum = 0%, median = 11%, maxiumum = 38%</p></li>
+</ul>
+</li>
+<li><p>The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, showed quite high pairwise correlations (r-squared 0.45 to 0.62). The three subgorups also showed quite strong correlation with the expected thrombolysis rate across all 10k patients (r-squared 0.68 to 0.77)</p></li>
+<li><p>Almost all stroke units show high expected thrombolysis in a set of ‘ideal’ thrombolysis patients, but vary in expected use in subgroups with low stroke severity, no precise onset time, or existing pre-stroke disability. If a stroke unit showed lower  thombolysis in one of these subgroups they also tended to show lower thrombolysis rates in the other subgroups - suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p></li>
+</ul>
+</section>
+<section id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set model type (used in file save, e.g. xgb_combined_calibrated_oversampled)</span>
+<span class="n">number_key_features</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_key_features</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;04&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-output-folders-if-needed">
+<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./output&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./predictions&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/01_feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">dict_feature_name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+<p>10k cohort of patients in test data, rest in training data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_loc</span> <span class="o">=</span> <span class="s1">&#39;../data/10k_training_test/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;cohort_10000_test.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read in the names of the selected features for the model</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/01_feature_selection.csv&#39;</span><span class="p">)</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
+<span class="c1"># And add the target feature name: S2Thrombolysis</span>
+<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="c1"># Select features</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+<span class="n">train</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dict_feature_name</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+<span class="n">test</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dict_feature_name</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Store admissions per hospital</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_admissions</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">df_admissions</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Admissions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-xgboost-model">
+<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
+<p>Fit XGBoost model on the 10k cohort train/test dataset, and calculate model accuracy.</p>
+<p>Save models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit models (True), or load models (False)</span>
+<span class="n">fit_models</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Get X and y</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+
+<span class="c1"># One hot encode hospitals</span>
+<span class="n">X_train_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_train_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_test</span><span class="p">,</span> <span class="n">X_test_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
+
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_10k_cohort.p&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fit model</span>
+<span class="k">if</span> <span class="n">fit_models</span><span class="p">:</span>
+    <span class="c1"># Define model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Load models</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+
+<span class="c1"># Get predicted probabilities and class</span>
+<span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+
+<span class="c1"># Show accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.848
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate receiver operating characteristic curve area under curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_probs</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC ACUC: </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC ACUC: 0.915
+</pre></div>
+</div>
+</div>
+</div>
+<section id="pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate">
+<h3>Pass 10k cohort through all hospital models and get thrombolysis rate<a class="headerlink" href="#pass-10k-cohort-through-all-hospital-models-and-get-thrombolysis-rate" title="Permalink to this headline">#</a></h3>
+<p>For each hospital, set all of the 10k patients in the test set as attending that hospital, and calculate the thrombolysis rate. This will give a thrombolysis rate for each hospital with patient variation removed, and only hospital factors remaining.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]))</span>
+<span class="n">hospitals</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="n">thrombolysis_rate</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">single_predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># For each hospital</span>
+<span class="k">for</span> <span class="n">hospital</span> <span class="ow">in</span> <span class="n">hospitals</span><span class="p">:</span>
+    
+    <span class="c1"># Get test data without thrombolysis hospital or stroke team</span>
+    <span class="n">X_test_no_hosp</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Copy hospital dataframe and change hospital ID (after setting all to zero)</span>
+    <span class="n">X_test_adjusted_hospital</span> <span class="o">=</span> <span class="n">X_test_hosp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">X_test_adjusted_hospital</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">team</span> <span class="o">=</span> <span class="s2">&quot;team_&quot;</span> <span class="o">+</span> <span class="n">hospital</span>
+    <span class="n">X_test_adjusted_hospital</span><span class="p">[</span><span class="n">team</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="n">X_test_adjusted</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">X_test_no_hosp</span><span class="p">,</span> <span class="n">X_test_adjusted_hospital</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Get predicted probabilities and class</span>
+    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">thrombolysis_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    
+    <span class="c1"># Save predictions</span>
+    <span class="n">single_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert individual predictions (a list of arrays) to a NumPy array, and </span>
+<span class="c1">#   transpose</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">single_predictions</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># Convert to DataFrame</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">patient_results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">hospitals</span><span class="p">)</span>
+<span class="n">patient_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./predictions/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_10k_individual_&#39;</span>
+                       <span class="sa">f</span><span class="s1">&#39;predictions.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="get-thrombolysis-use-in-groups-of-patients">
+<h2>Get thrombolysis use in groups of patients<a class="headerlink" href="#get-thrombolysis-use-in-groups-of-patients" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span> <span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Arrival-to-scan time&#39;,
+ &#39;Infarction&#39;,
+ &#39;Stroke severity&#39;,
+ &#39;Precise onset time&#39;,
+ &#39;Prior disability level&#39;,
+ &#39;Stroke team&#39;,
+ &#39;Use of AF anticoagulants&#39;,
+ &#39;Onset-to-arrival time&#39;,
+ &#39;Onset during sleep&#39;,
+ &#39;Age&#39;,
+ &#39;Thrombolysis&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All patients</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;Ideal patients&#39;</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> 
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Arrival-to-scan time&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Infarction&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Use of AF anticoagulants&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Onset-to-arrival time&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Onset during sleep&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">85</span><span class="p">]:</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of hopsitals giving thrombolysis to at least </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> percent patients: </span><span class="si">{</span><span class="n">ans</span><span class="si">:</span><span class="s1">0.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 290.00
+Percent of hopsitals giving thrombolysis to at least 100 percent patients: 89.4
+Percent of hopsitals giving thrombolysis to at least 99 percent patients: 94.7
+Percent of hopsitals giving thrombolysis to at least 95 percent patients: 97.7
+Percent of hopsitals giving thrombolysis to at least 90 percent patients: 97.7
+Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mild stroke (NIHSS &lt; 5)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">5</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 3746.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># No precise onset time</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 3769.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prior disability</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 2028.00
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add ratios to ‘ideal’ patients</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5 norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;No precise onset norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2 norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show hospitals with low thrombolysis in mild stroke (compared with their own overall thrombolysis use).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NIHSS &lt; 5 norm&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>LGNPK4211W</th>
+      <td>14.45</td>
+      <td>96.896552</td>
+      <td>0.000000</td>
+      <td>0.716370</td>
+      <td>5.177515</td>
+      <td>0.000000</td>
+      <td>0.007393</td>
+      <td>0.053433</td>
+    </tr>
+    <tr>
+      <th>HZMLX7970T</th>
+      <td>11.49</td>
+      <td>87.241379</td>
+      <td>0.026695</td>
+      <td>1.193951</td>
+      <td>1.873767</td>
+      <td>0.000306</td>
+      <td>0.013686</td>
+      <td>0.021478</td>
+    </tr>
+    <tr>
+      <th>OUXUZ1084Q</th>
+      <td>12.95</td>
+      <td>99.310345</td>
+      <td>0.053390</td>
+      <td>0.610241</td>
+      <td>0.147929</td>
+      <td>0.000538</td>
+      <td>0.006145</td>
+      <td>0.001490</td>
+    </tr>
+    <tr>
+      <th>WJHSV5358P</th>
+      <td>22.39</td>
+      <td>100.000000</td>
+      <td>0.080085</td>
+      <td>7.720881</td>
+      <td>7.248521</td>
+      <td>0.000801</td>
+      <td>0.077209</td>
+      <td>0.072485</td>
+    </tr>
+    <tr>
+      <th>HYCCK3082L</th>
+      <td>16.41</td>
+      <td>100.000000</td>
+      <td>0.240256</td>
+      <td>2.387901</td>
+      <td>3.550296</td>
+      <td>0.002403</td>
+      <td>0.023879</td>
+      <td>0.035503</td>
+    </tr>
+    <tr>
+      <th>IATJE0497S</th>
+      <td>20.34</td>
+      <td>100.000000</td>
+      <td>0.266951</td>
+      <td>0.106129</td>
+      <td>8.629191</td>
+      <td>0.002670</td>
+      <td>0.001061</td>
+      <td>0.086292</td>
+    </tr>
+    <tr>
+      <th>LFPMM4706C</th>
+      <td>17.16</td>
+      <td>100.000000</td>
+      <td>0.320342</td>
+      <td>2.918546</td>
+      <td>5.424063</td>
+      <td>0.003203</td>
+      <td>0.029185</td>
+      <td>0.054241</td>
+    </tr>
+    <tr>
+      <th>LECHF1024T</th>
+      <td>14.78</td>
+      <td>85.172414</td>
+      <td>0.507208</td>
+      <td>3.900239</td>
+      <td>2.761341</td>
+      <td>0.005955</td>
+      <td>0.045792</td>
+      <td>0.032421</td>
+    </tr>
+    <tr>
+      <th>XQAGA4299B</th>
+      <td>23.14</td>
+      <td>99.655172</td>
+      <td>0.774159</td>
+      <td>4.616609</td>
+      <td>9.319527</td>
+      <td>0.007768</td>
+      <td>0.046326</td>
+      <td>0.093518</td>
+    </tr>
+    <tr>
+      <th>IUMNL9626U</th>
+      <td>20.58</td>
+      <td>100.000000</td>
+      <td>0.880940</td>
+      <td>5.624834</td>
+      <td>15.088757</td>
+      <td>0.008809</td>
+      <td>0.056248</td>
+      <td>0.150888</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show hospitals with high thrombolysis in mild stroke (compared with their own overall thrombolysis use).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NIHSS &lt; 5 norm&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TPXYE0168D</th>
+      <td>39.62</td>
+      <td>100.0</td>
+      <td>25.280299</td>
+      <td>6.102414</td>
+      <td>23.422091</td>
+      <td>0.252803</td>
+      <td>0.061024</td>
+      <td>0.234221</td>
+    </tr>
+    <tr>
+      <th>CNBGF2713O</th>
+      <td>40.93</td>
+      <td>100.0</td>
+      <td>22.423919</td>
+      <td>17.962324</td>
+      <td>27.465483</td>
+      <td>0.224239</td>
+      <td>0.179623</td>
+      <td>0.274655</td>
+    </tr>
+    <tr>
+      <th>HPWIF9956L</th>
+      <td>41.31</td>
+      <td>100.0</td>
+      <td>21.783235</td>
+      <td>12.549748</td>
+      <td>29.881657</td>
+      <td>0.217832</td>
+      <td>0.125497</td>
+      <td>0.298817</td>
+    </tr>
+    <tr>
+      <th>VKKDD9172T</th>
+      <td>45.27</td>
+      <td>100.0</td>
+      <td>21.623065</td>
+      <td>18.333776</td>
+      <td>38.412229</td>
+      <td>0.216231</td>
+      <td>0.183338</td>
+      <td>0.384122</td>
+    </tr>
+    <tr>
+      <th>GKONI0110I</th>
+      <td>41.32</td>
+      <td>100.0</td>
+      <td>18.579818</td>
+      <td>19.793049</td>
+      <td>24.506903</td>
+      <td>0.185798</td>
+      <td>0.197930</td>
+      <td>0.245069</td>
+    </tr>
+    <tr>
+      <th>HBFCN1575G</th>
+      <td>38.11</td>
+      <td>100.0</td>
+      <td>18.419648</td>
+      <td>11.753781</td>
+      <td>26.972387</td>
+      <td>0.184196</td>
+      <td>0.117538</td>
+      <td>0.269724</td>
+    </tr>
+    <tr>
+      <th>NTPQZ0829K</th>
+      <td>39.23</td>
+      <td>100.0</td>
+      <td>16.871329</td>
+      <td>19.872645</td>
+      <td>21.548323</td>
+      <td>0.168713</td>
+      <td>0.198726</td>
+      <td>0.215483</td>
+    </tr>
+    <tr>
+      <th>QWKRA8499D</th>
+      <td>38.82</td>
+      <td>100.0</td>
+      <td>15.776829</td>
+      <td>19.554258</td>
+      <td>25.394477</td>
+      <td>0.157768</td>
+      <td>0.195543</td>
+      <td>0.253945</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>38.94</td>
+      <td>100.0</td>
+      <td>15.616658</td>
+      <td>18.599098</td>
+      <td>25.197239</td>
+      <td>0.156167</td>
+      <td>0.185991</td>
+      <td>0.251972</td>
+    </tr>
+    <tr>
+      <th>XDAFB7350M</th>
+      <td>38.67</td>
+      <td>100.0</td>
+      <td>14.548852</td>
+      <td>19.978774</td>
+      <td>24.161736</td>
+      <td>0.145489</td>
+      <td>0.199788</td>
+      <td>0.241617</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show hospitals with low thrombolysis with no precise onset time (compared with their own overall thrombolysis use).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>IATJE0497S</th>
+      <td>20.34</td>
+      <td>100.000000</td>
+      <td>0.266951</td>
+      <td>0.106129</td>
+      <td>8.629191</td>
+      <td>0.002670</td>
+      <td>0.001061</td>
+      <td>0.086292</td>
+    </tr>
+    <tr>
+      <th>HZNVT9936G</th>
+      <td>32.06</td>
+      <td>100.000000</td>
+      <td>9.930593</td>
+      <td>0.451048</td>
+      <td>27.071006</td>
+      <td>0.099306</td>
+      <td>0.004510</td>
+      <td>0.270710</td>
+    </tr>
+    <tr>
+      <th>JADBS8258F</th>
+      <td>24.64</td>
+      <td>100.000000</td>
+      <td>5.552589</td>
+      <td>0.477580</td>
+      <td>8.579882</td>
+      <td>0.055526</td>
+      <td>0.004776</td>
+      <td>0.085799</td>
+    </tr>
+    <tr>
+      <th>OUXUZ1084Q</th>
+      <td>12.95</td>
+      <td>99.310345</td>
+      <td>0.053390</td>
+      <td>0.610241</td>
+      <td>0.147929</td>
+      <td>0.000538</td>
+      <td>0.006145</td>
+      <td>0.001490</td>
+    </tr>
+    <tr>
+      <th>LGNPK4211W</th>
+      <td>14.45</td>
+      <td>96.896552</td>
+      <td>0.000000</td>
+      <td>0.716370</td>
+      <td>5.177515</td>
+      <td>0.000000</td>
+      <td>0.007393</td>
+      <td>0.053433</td>
+    </tr>
+    <tr>
+      <th>HYNBH3271L</th>
+      <td>21.24</td>
+      <td>100.000000</td>
+      <td>3.737320</td>
+      <td>0.875564</td>
+      <td>4.930966</td>
+      <td>0.037373</td>
+      <td>0.008756</td>
+      <td>0.049310</td>
+    </tr>
+    <tr>
+      <th>LZAYM7611L</th>
+      <td>19.05</td>
+      <td>99.655172</td>
+      <td>1.788574</td>
+      <td>1.140886</td>
+      <td>7.199211</td>
+      <td>0.017948</td>
+      <td>0.011448</td>
+      <td>0.072241</td>
+    </tr>
+    <tr>
+      <th>HZMLX7970T</th>
+      <td>11.49</td>
+      <td>87.241379</td>
+      <td>0.026695</td>
+      <td>1.193951</td>
+      <td>1.873767</td>
+      <td>0.000306</td>
+      <td>0.013686</td>
+      <td>0.021478</td>
+    </tr>
+    <tr>
+      <th>TFSJP6914B</th>
+      <td>23.76</td>
+      <td>100.000000</td>
+      <td>5.659370</td>
+      <td>1.193951</td>
+      <td>7.692308</td>
+      <td>0.056594</td>
+      <td>0.011940</td>
+      <td>0.076923</td>
+    </tr>
+    <tr>
+      <th>IYJHY1440E</th>
+      <td>20.55</td>
+      <td>100.000000</td>
+      <td>2.269087</td>
+      <td>1.273547</td>
+      <td>5.621302</td>
+      <td>0.022691</td>
+      <td>0.012735</td>
+      <td>0.056213</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show hospitals with high thrombolysis with no precise onset time (compaerd with their own overall thrombolysis use).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XDAFB7350M</th>
+      <td>38.67</td>
+      <td>100.0</td>
+      <td>14.548852</td>
+      <td>19.978774</td>
+      <td>24.161736</td>
+      <td>0.145489</td>
+      <td>0.199788</td>
+      <td>0.241617</td>
+    </tr>
+    <tr>
+      <th>NTPQZ0829K</th>
+      <td>39.23</td>
+      <td>100.0</td>
+      <td>16.871329</td>
+      <td>19.872645</td>
+      <td>21.548323</td>
+      <td>0.168713</td>
+      <td>0.198726</td>
+      <td>0.215483</td>
+    </tr>
+    <tr>
+      <th>GKONI0110I</th>
+      <td>41.32</td>
+      <td>100.0</td>
+      <td>18.579818</td>
+      <td>19.793049</td>
+      <td>24.506903</td>
+      <td>0.185798</td>
+      <td>0.197930</td>
+      <td>0.245069</td>
+    </tr>
+    <tr>
+      <th>SMVTP6284P</th>
+      <td>36.34</td>
+      <td>100.0</td>
+      <td>7.848372</td>
+      <td>19.739984</td>
+      <td>27.958580</td>
+      <td>0.078484</td>
+      <td>0.197400</td>
+      <td>0.279586</td>
+    </tr>
+    <tr>
+      <th>QWKRA8499D</th>
+      <td>38.82</td>
+      <td>100.0</td>
+      <td>15.776829</td>
+      <td>19.554258</td>
+      <td>25.394477</td>
+      <td>0.157768</td>
+      <td>0.195543</td>
+      <td>0.253945</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>38.94</td>
+      <td>100.0</td>
+      <td>15.616658</td>
+      <td>18.599098</td>
+      <td>25.197239</td>
+      <td>0.156167</td>
+      <td>0.185991</td>
+      <td>0.251972</td>
+    </tr>
+    <tr>
+      <th>VKKDD9172T</th>
+      <td>45.27</td>
+      <td>100.0</td>
+      <td>21.623065</td>
+      <td>18.333776</td>
+      <td>38.412229</td>
+      <td>0.216231</td>
+      <td>0.183338</td>
+      <td>0.384122</td>
+    </tr>
+    <tr>
+      <th>IAZKG9244A</th>
+      <td>37.57</td>
+      <td>100.0</td>
+      <td>12.146289</td>
+      <td>18.333776</td>
+      <td>26.873767</td>
+      <td>0.121463</td>
+      <td>0.183338</td>
+      <td>0.268738</td>
+    </tr>
+    <tr>
+      <th>XKAWN3771U</th>
+      <td>36.13</td>
+      <td>100.0</td>
+      <td>12.306460</td>
+      <td>18.121518</td>
+      <td>14.003945</td>
+      <td>0.123065</td>
+      <td>0.181215</td>
+      <td>0.140039</td>
+    </tr>
+    <tr>
+      <th>CNBGF2713O</th>
+      <td>40.93</td>
+      <td>100.0</td>
+      <td>22.423919</td>
+      <td>17.962324</td>
+      <td>27.465483</td>
+      <td>0.224239</td>
+      <td>0.179623</td>
+      <td>0.274655</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show hospitals with low thrombolysis with pre-existing disabilty (compared with their own overall thrombolysis use).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>OUXUZ1084Q</th>
+      <td>12.95</td>
+      <td>99.310345</td>
+      <td>0.053390</td>
+      <td>0.610241</td>
+      <td>0.147929</td>
+      <td>0.000538</td>
+      <td>0.006145</td>
+      <td>0.001490</td>
+    </tr>
+    <tr>
+      <th>HZMLX7970T</th>
+      <td>11.49</td>
+      <td>87.241379</td>
+      <td>0.026695</td>
+      <td>1.193951</td>
+      <td>1.873767</td>
+      <td>0.000306</td>
+      <td>0.013686</td>
+      <td>0.021478</td>
+    </tr>
+    <tr>
+      <th>TKRKH4920C</th>
+      <td>21.09</td>
+      <td>97.931034</td>
+      <td>1.788574</td>
+      <td>3.024675</td>
+      <td>1.923077</td>
+      <td>0.018264</td>
+      <td>0.030886</td>
+      <td>0.019637</td>
+    </tr>
+    <tr>
+      <th>LECHF1024T</th>
+      <td>14.78</td>
+      <td>85.172414</td>
+      <td>0.507208</td>
+      <td>3.900239</td>
+      <td>2.761341</td>
+      <td>0.005955</td>
+      <td>0.045792</td>
+      <td>0.032421</td>
+    </tr>
+    <tr>
+      <th>YEXCH8391J</th>
+      <td>20.94</td>
+      <td>100.000000</td>
+      <td>1.815270</td>
+      <td>7.216768</td>
+      <td>2.859961</td>
+      <td>0.018153</td>
+      <td>0.072168</td>
+      <td>0.028600</td>
+    </tr>
+    <tr>
+      <th>BICAW1125K</th>
+      <td>21.50</td>
+      <td>100.000000</td>
+      <td>4.458089</td>
+      <td>3.687981</td>
+      <td>3.007890</td>
+      <td>0.044581</td>
+      <td>0.036880</td>
+      <td>0.030079</td>
+    </tr>
+    <tr>
+      <th>NZNML2841Q</th>
+      <td>22.64</td>
+      <td>100.000000</td>
+      <td>5.579285</td>
+      <td>2.785885</td>
+      <td>3.057199</td>
+      <td>0.055793</td>
+      <td>0.027859</td>
+      <td>0.030572</td>
+    </tr>
+    <tr>
+      <th>HYCCK3082L</th>
+      <td>16.41</td>
+      <td>100.000000</td>
+      <td>0.240256</td>
+      <td>2.387901</td>
+      <td>3.550296</td>
+      <td>0.002403</td>
+      <td>0.023879</td>
+      <td>0.035503</td>
+    </tr>
+    <tr>
+      <th>FAJKD7118X</th>
+      <td>24.31</td>
+      <td>100.000000</td>
+      <td>3.683930</td>
+      <td>11.382330</td>
+      <td>3.944773</td>
+      <td>0.036839</td>
+      <td>0.113823</td>
+      <td>0.039448</td>
+    </tr>
+    <tr>
+      <th>NFBUF0424E</th>
+      <td>23.64</td>
+      <td>100.000000</td>
+      <td>5.125467</td>
+      <td>3.953303</td>
+      <td>3.994083</td>
+      <td>0.051255</td>
+      <td>0.039533</td>
+      <td>0.039941</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show hospitals with high thrombolysis with pre-existing disabilty (compaerd with their own overall thrombolysis use).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>VKKDD9172T</th>
+      <td>45.27</td>
+      <td>100.0</td>
+      <td>21.623065</td>
+      <td>18.333776</td>
+      <td>38.412229</td>
+      <td>0.216231</td>
+      <td>0.183338</td>
+      <td>0.384122</td>
+    </tr>
+    <tr>
+      <th>HPWIF9956L</th>
+      <td>41.31</td>
+      <td>100.0</td>
+      <td>21.783235</td>
+      <td>12.549748</td>
+      <td>29.881657</td>
+      <td>0.217832</td>
+      <td>0.125497</td>
+      <td>0.298817</td>
+    </tr>
+    <tr>
+      <th>QQUVD2066Z</th>
+      <td>36.73</td>
+      <td>100.0</td>
+      <td>8.702616</td>
+      <td>14.804988</td>
+      <td>28.895464</td>
+      <td>0.087026</td>
+      <td>0.148050</td>
+      <td>0.288955</td>
+    </tr>
+    <tr>
+      <th>SMVTP6284P</th>
+      <td>36.34</td>
+      <td>100.0</td>
+      <td>7.848372</td>
+      <td>19.739984</td>
+      <td>27.958580</td>
+      <td>0.078484</td>
+      <td>0.197400</td>
+      <td>0.279586</td>
+    </tr>
+    <tr>
+      <th>CNBGF2713O</th>
+      <td>40.93</td>
+      <td>100.0</td>
+      <td>22.423919</td>
+      <td>17.962324</td>
+      <td>27.465483</td>
+      <td>0.224239</td>
+      <td>0.179623</td>
+      <td>0.274655</td>
+    </tr>
+    <tr>
+      <th>HZNVT9936G</th>
+      <td>32.06</td>
+      <td>100.0</td>
+      <td>9.930593</td>
+      <td>0.451048</td>
+      <td>27.071006</td>
+      <td>0.099306</td>
+      <td>0.004510</td>
+      <td>0.270710</td>
+    </tr>
+    <tr>
+      <th>HBFCN1575G</th>
+      <td>38.11</td>
+      <td>100.0</td>
+      <td>18.419648</td>
+      <td>11.753781</td>
+      <td>26.972387</td>
+      <td>0.184196</td>
+      <td>0.117538</td>
+      <td>0.269724</td>
+    </tr>
+    <tr>
+      <th>IAZKG9244A</th>
+      <td>37.57</td>
+      <td>100.0</td>
+      <td>12.146289</td>
+      <td>18.333776</td>
+      <td>26.873767</td>
+      <td>0.121463</td>
+      <td>0.183338</td>
+      <td>0.268738</td>
+    </tr>
+    <tr>
+      <th>QWKRA8499D</th>
+      <td>38.82</td>
+      <td>100.0</td>
+      <td>15.776829</td>
+      <td>19.554258</td>
+      <td>25.394477</td>
+      <td>0.157768</td>
+      <td>0.195543</td>
+      <td>0.253945</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>38.94</td>
+      <td>100.0</td>
+      <td>15.616658</td>
+      <td>18.599098</td>
+      <td>25.197239</td>
+      <td>0.156167</td>
+      <td>0.185991</td>
+      <td>0.251972</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;All&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hopsital&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proortion of 10k subgroup predicted to receive thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hopsital&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proortion of 10k subgroup predicted to receive thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_10k_thrombolysis_subgroups_42_0.png" src="../_images/15_10k_thrombolysis_subgroups_42_0.png" />
+</div>
+</div>
+</section>
+<section id="show-a-summary-of-results">
+<h2>Show a summary of results<a class="headerlink" href="#show-a-summary-of-results" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>NIHSS &lt; 5 norm</th>
+      <th>No precise onset norm</th>
+      <th>mRS &gt; 2 norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>132.000000</td>
+      <td>132.000000</td>
+      <td>132.000000</td>
+      <td>132.000000</td>
+      <td>132.000000</td>
+      <td>132.000000</td>
+      <td>132.000000</td>
+      <td>132.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>27.963636</td>
+      <td>99.469697</td>
+      <td>6.607452</td>
+      <td>7.915853</td>
+      <td>12.598246</td>
+      <td>0.066142</td>
+      <td>0.079321</td>
+      <td>0.126252</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>6.330286</td>
+      <td>2.974083</td>
+      <td>4.802008</td>
+      <td>5.047863</td>
+      <td>7.096859</td>
+      <td>0.047961</td>
+      <td>0.050326</td>
+      <td>0.070732</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>10.100000</td>
+      <td>72.068966</td>
+      <td>0.000000</td>
+      <td>0.106129</td>
+      <td>0.147929</td>
+      <td>0.000000</td>
+      <td>0.001061</td>
+      <td>0.001490</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>23.995000</td>
+      <td>100.000000</td>
+      <td>3.810731</td>
+      <td>4.119130</td>
+      <td>7.692308</td>
+      <td>0.038206</td>
+      <td>0.041589</td>
+      <td>0.076923</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>27.605000</td>
+      <td>100.000000</td>
+      <td>5.672718</td>
+      <td>7.123906</td>
+      <td>10.798817</td>
+      <td>0.056727</td>
+      <td>0.071239</td>
+      <td>0.107988</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>32.052500</td>
+      <td>100.000000</td>
+      <td>7.948478</td>
+      <td>10.984346</td>
+      <td>16.161243</td>
+      <td>0.079485</td>
+      <td>0.109843</td>
+      <td>0.161612</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>45.270000</td>
+      <td>100.000000</td>
+      <td>25.280299</td>
+      <td>19.978774</td>
+      <td>38.412229</td>
+      <td>0.252803</td>
+      <td>0.199788</td>
+      <td>0.384122</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="check-correlations-between-10k-subgroups">
+<h2>Check correlations between 10k subgroups<a class="headerlink" href="#check-correlations-between-10k-subgroups" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pairs_to_test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_to_test</span><span class="p">:</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
+        <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span><span class="n">results</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Correlation between </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">:&#39;</span>
+           <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">  r-squared = </span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">, p = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between All patients and NIHSS &lt; 5:
+  r-squared = 0.766, p = 0.000
+
+Correlation between All patients and No precise onset:
+  r-squared = 0.679, p = 0.000
+
+Correlation between All patients and mRS &gt; 2:
+  r-squared = 0.774, p = 0.000
+
+Correlation between NIHSS &lt; 5 and No precise onset:
+  r-squared = 0.445, p = 0.000
+
+Correlation between NIHSS &lt; 5 and mRS &gt; 2:
+  r-squared = 0.621, p = 0.000
+
+Correlation between No precise onset and mRS &gt; 2:
+  r-squared = 0.528, p = 0.000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-results">
+<h2>Save results<a class="headerlink" href="#save-results" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./output/15_10k_groups.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./xgb_10_features"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="04_compare_10k_cohort_key_features.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05_compare_benchmark_decisions_key_features.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compare local thrombolysis decisions with benchmark decisions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Kerry Pearn & Michael Allen<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
