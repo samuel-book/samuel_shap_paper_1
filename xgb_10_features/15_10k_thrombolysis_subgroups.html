@@ -1012,20 +1012,26 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </div>
 </div>
 </div>
-<p>Add ratios to ‘ideal’ patients</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5 norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span>
-<span class="n">results</span><span class="p">[</span><span class="s1">&#39;No precise onset norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span>
-<span class="n">results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2 norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Age</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 4230.00
 </pre></div>
 </div>
 </div>
 </div>
-<p>Show hospitals with low thrombolysis in mild stroke (compared with their own overall thrombolysis use).</p>
+<p>Show hospitals with low thrombolysis in mild stroke</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NIHSS &lt; 5 norm&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1053,9 +1059,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
@@ -1066,9 +1070,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.000000</td>
       <td>0.716370</td>
       <td>5.177515</td>
-      <td>0.000000</td>
-      <td>0.007393</td>
-      <td>0.053433</td>
+      <td>12.316785</td>
     </tr>
     <tr>
       <th>HZMLX7970T</th>
@@ -1077,9 +1079,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.026695</td>
       <td>1.193951</td>
       <td>1.873767</td>
-      <td>0.000306</td>
-      <td>0.013686</td>
-      <td>0.021478</td>
+      <td>8.416076</td>
     </tr>
     <tr>
       <th>OUXUZ1084Q</th>
@@ -1088,9 +1088,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.053390</td>
       <td>0.610241</td>
       <td>0.147929</td>
-      <td>0.000538</td>
-      <td>0.006145</td>
-      <td>0.001490</td>
+      <td>8.203310</td>
     </tr>
     <tr>
       <th>WJHSV5358P</th>
@@ -1099,9 +1097,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.080085</td>
       <td>7.720881</td>
       <td>7.248521</td>
-      <td>0.000801</td>
-      <td>0.077209</td>
-      <td>0.072485</td>
+      <td>17.990544</td>
     </tr>
     <tr>
       <th>HYCCK3082L</th>
@@ -1110,9 +1106,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.240256</td>
       <td>2.387901</td>
       <td>3.550296</td>
-      <td>0.002403</td>
-      <td>0.023879</td>
-      <td>0.035503</td>
+      <td>6.193853</td>
     </tr>
     <tr>
       <th>IATJE0497S</th>
@@ -1121,9 +1115,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.266951</td>
       <td>0.106129</td>
       <td>8.629191</td>
-      <td>0.002670</td>
-      <td>0.001061</td>
-      <td>0.086292</td>
+      <td>16.359338</td>
     </tr>
     <tr>
       <th>LFPMM4706C</th>
@@ -1132,9 +1124,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.320342</td>
       <td>2.918546</td>
       <td>5.424063</td>
-      <td>0.003203</td>
-      <td>0.029185</td>
-      <td>0.054241</td>
+      <td>11.962175</td>
     </tr>
     <tr>
       <th>LECHF1024T</th>
@@ -1143,9 +1133,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.507208</td>
       <td>3.900239</td>
       <td>2.761341</td>
-      <td>0.005955</td>
-      <td>0.045792</td>
-      <td>0.032421</td>
+      <td>10.732861</td>
     </tr>
     <tr>
       <th>XQAGA4299B</th>
@@ -1154,9 +1142,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.774159</td>
       <td>4.616609</td>
       <td>9.319527</td>
-      <td>0.007768</td>
-      <td>0.046326</td>
-      <td>0.093518</td>
+      <td>19.101655</td>
     </tr>
     <tr>
       <th>IUMNL9626U</th>
@@ -1165,18 +1151,16 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.880940</td>
       <td>5.624834</td>
       <td>15.088757</td>
-      <td>0.008809</td>
-      <td>0.056248</td>
-      <td>0.150888</td>
+      <td>19.290780</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Show hospitals with high thrombolysis in mild stroke (compared with their own overall thrombolysis use).</p>
+<p>Show hospitals with high thrombolysis in mild stroke.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NIHSS &lt; 5 norm&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1204,9 +1188,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
@@ -1217,9 +1199,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>25.280299</td>
       <td>6.102414</td>
       <td>23.422091</td>
-      <td>0.252803</td>
-      <td>0.061024</td>
-      <td>0.234221</td>
+      <td>32.742317</td>
     </tr>
     <tr>
       <th>CNBGF2713O</th>
@@ -1228,9 +1208,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>22.423919</td>
       <td>17.962324</td>
       <td>27.465483</td>
-      <td>0.224239</td>
-      <td>0.179623</td>
-      <td>0.274655</td>
+      <td>39.030733</td>
     </tr>
     <tr>
       <th>HPWIF9956L</th>
@@ -1239,9 +1217,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>21.783235</td>
       <td>12.549748</td>
       <td>29.881657</td>
-      <td>0.217832</td>
-      <td>0.125497</td>
-      <td>0.298817</td>
+      <td>36.619385</td>
     </tr>
     <tr>
       <th>VKKDD9172T</th>
@@ -1250,9 +1226,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>21.623065</td>
       <td>18.333776</td>
       <td>38.412229</td>
-      <td>0.216231</td>
-      <td>0.183338</td>
-      <td>0.384122</td>
+      <td>43.758865</td>
     </tr>
     <tr>
       <th>GKONI0110I</th>
@@ -1261,9 +1235,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>18.579818</td>
       <td>19.793049</td>
       <td>24.506903</td>
-      <td>0.185798</td>
-      <td>0.197930</td>
-      <td>0.245069</td>
+      <td>33.900709</td>
     </tr>
     <tr>
       <th>HBFCN1575G</th>
@@ -1272,9 +1244,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>18.419648</td>
       <td>11.753781</td>
       <td>26.972387</td>
-      <td>0.184196</td>
-      <td>0.117538</td>
-      <td>0.269724</td>
+      <td>32.009456</td>
     </tr>
     <tr>
       <th>NTPQZ0829K</th>
@@ -1283,9 +1253,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>16.871329</td>
       <td>19.872645</td>
       <td>21.548323</td>
-      <td>0.168713</td>
-      <td>0.198726</td>
-      <td>0.215483</td>
+      <td>32.813239</td>
     </tr>
     <tr>
       <th>QWKRA8499D</th>
@@ -1294,9 +1262,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>15.776829</td>
       <td>19.554258</td>
       <td>25.394477</td>
-      <td>0.157768</td>
-      <td>0.195543</td>
-      <td>0.253945</td>
+      <td>34.349882</td>
     </tr>
     <tr>
       <th>MHMYL4920B</th>
@@ -1305,9 +1271,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>15.616658</td>
       <td>18.599098</td>
       <td>25.197239</td>
-      <td>0.156167</td>
-      <td>0.185991</td>
-      <td>0.251972</td>
+      <td>33.404255</td>
     </tr>
     <tr>
       <th>XDAFB7350M</th>
@@ -1316,15 +1280,13 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>14.548852</td>
       <td>19.978774</td>
       <td>24.161736</td>
-      <td>0.145489</td>
-      <td>0.199788</td>
-      <td>0.241617</td>
+      <td>33.569740</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Show hospitals with low thrombolysis with no precise onset time (compared with their own overall thrombolysis use).</p>
+<p>Show hospitals with low thrombolysis with no precise onset time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1355,9 +1317,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
@@ -1368,9 +1328,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.266951</td>
       <td>0.106129</td>
       <td>8.629191</td>
-      <td>0.002670</td>
-      <td>0.001061</td>
-      <td>0.086292</td>
+      <td>16.359338</td>
     </tr>
     <tr>
       <th>HZNVT9936G</th>
@@ -1379,9 +1337,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>9.930593</td>
       <td>0.451048</td>
       <td>27.071006</td>
-      <td>0.099306</td>
-      <td>0.004510</td>
-      <td>0.270710</td>
+      <td>28.794326</td>
     </tr>
     <tr>
       <th>JADBS8258F</th>
@@ -1390,9 +1346,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>5.552589</td>
       <td>0.477580</td>
       <td>8.579882</td>
-      <td>0.055526</td>
-      <td>0.004776</td>
-      <td>0.085799</td>
+      <td>18.581560</td>
     </tr>
     <tr>
       <th>OUXUZ1084Q</th>
@@ -1401,9 +1355,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.053390</td>
       <td>0.610241</td>
       <td>0.147929</td>
-      <td>0.000538</td>
-      <td>0.006145</td>
-      <td>0.001490</td>
+      <td>8.203310</td>
     </tr>
     <tr>
       <th>LGNPK4211W</th>
@@ -1412,9 +1364,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.000000</td>
       <td>0.716370</td>
       <td>5.177515</td>
-      <td>0.000000</td>
-      <td>0.007393</td>
-      <td>0.053433</td>
+      <td>12.316785</td>
     </tr>
     <tr>
       <th>HYNBH3271L</th>
@@ -1423,9 +1373,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>3.737320</td>
       <td>0.875564</td>
       <td>4.930966</td>
-      <td>0.037373</td>
-      <td>0.008756</td>
-      <td>0.049310</td>
+      <td>14.397163</td>
     </tr>
     <tr>
       <th>LZAYM7611L</th>
@@ -1434,9 +1382,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>1.788574</td>
       <td>1.140886</td>
       <td>7.199211</td>
-      <td>0.017948</td>
-      <td>0.011448</td>
-      <td>0.072241</td>
+      <td>13.995272</td>
     </tr>
     <tr>
       <th>HZMLX7970T</th>
@@ -1445,9 +1391,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.026695</td>
       <td>1.193951</td>
       <td>1.873767</td>
-      <td>0.000306</td>
-      <td>0.013686</td>
-      <td>0.021478</td>
+      <td>8.416076</td>
     </tr>
     <tr>
       <th>TFSJP6914B</th>
@@ -1456,9 +1400,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>5.659370</td>
       <td>1.193951</td>
       <td>7.692308</td>
-      <td>0.056594</td>
-      <td>0.011940</td>
-      <td>0.076923</td>
+      <td>17.943262</td>
     </tr>
     <tr>
       <th>IYJHY1440E</th>
@@ -1467,15 +1409,13 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>2.269087</td>
       <td>1.273547</td>
       <td>5.621302</td>
-      <td>0.022691</td>
-      <td>0.012735</td>
-      <td>0.056213</td>
+      <td>16.004728</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Show hospitals with high thrombolysis with no precise onset time (compaerd with their own overall thrombolysis use).</p>
+<p>Show hospitals with high thrombolysis with no precise onset time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1506,9 +1446,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
@@ -1519,9 +1457,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>14.548852</td>
       <td>19.978774</td>
       <td>24.161736</td>
-      <td>0.145489</td>
-      <td>0.199788</td>
-      <td>0.241617</td>
+      <td>33.569740</td>
     </tr>
     <tr>
       <th>NTPQZ0829K</th>
@@ -1530,9 +1466,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>16.871329</td>
       <td>19.872645</td>
       <td>21.548323</td>
-      <td>0.168713</td>
-      <td>0.198726</td>
-      <td>0.215483</td>
+      <td>32.813239</td>
     </tr>
     <tr>
       <th>GKONI0110I</th>
@@ -1541,9 +1475,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>18.579818</td>
       <td>19.793049</td>
       <td>24.506903</td>
-      <td>0.185798</td>
-      <td>0.197930</td>
-      <td>0.245069</td>
+      <td>33.900709</td>
     </tr>
     <tr>
       <th>SMVTP6284P</th>
@@ -1552,9 +1484,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>7.848372</td>
       <td>19.739984</td>
       <td>27.958580</td>
-      <td>0.078484</td>
-      <td>0.197400</td>
-      <td>0.279586</td>
+      <td>33.404255</td>
     </tr>
     <tr>
       <th>QWKRA8499D</th>
@@ -1563,9 +1493,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>15.776829</td>
       <td>19.554258</td>
       <td>25.394477</td>
-      <td>0.157768</td>
-      <td>0.195543</td>
-      <td>0.253945</td>
+      <td>34.349882</td>
     </tr>
     <tr>
       <th>MHMYL4920B</th>
@@ -1574,9 +1502,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>15.616658</td>
       <td>18.599098</td>
       <td>25.197239</td>
-      <td>0.156167</td>
-      <td>0.185991</td>
-      <td>0.251972</td>
+      <td>33.404255</td>
     </tr>
     <tr>
       <th>VKKDD9172T</th>
@@ -1585,9 +1511,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>21.623065</td>
       <td>18.333776</td>
       <td>38.412229</td>
-      <td>0.216231</td>
-      <td>0.183338</td>
-      <td>0.384122</td>
+      <td>43.758865</td>
     </tr>
     <tr>
       <th>IAZKG9244A</th>
@@ -1596,9 +1520,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>12.146289</td>
       <td>18.333776</td>
       <td>26.873767</td>
-      <td>0.121463</td>
-      <td>0.183338</td>
-      <td>0.268738</td>
+      <td>32.907801</td>
     </tr>
     <tr>
       <th>XKAWN3771U</th>
@@ -1607,9 +1529,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>12.306460</td>
       <td>18.121518</td>
       <td>14.003945</td>
-      <td>0.123065</td>
-      <td>0.181215</td>
-      <td>0.140039</td>
+      <td>28.463357</td>
     </tr>
     <tr>
       <th>CNBGF2713O</th>
@@ -1618,15 +1538,13 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>22.423919</td>
       <td>17.962324</td>
       <td>27.465483</td>
-      <td>0.224239</td>
-      <td>0.179623</td>
-      <td>0.274655</td>
+      <td>39.030733</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Show hospitals with low thrombolysis with pre-existing disabilty (compared with their own overall thrombolysis use).</p>
+<p>Show hospitals with low thrombolysis with pre-existing disabilty.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1657,9 +1575,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
@@ -1670,9 +1586,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.053390</td>
       <td>0.610241</td>
       <td>0.147929</td>
-      <td>0.000538</td>
-      <td>0.006145</td>
-      <td>0.001490</td>
+      <td>8.203310</td>
     </tr>
     <tr>
       <th>HZMLX7970T</th>
@@ -1681,9 +1595,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.026695</td>
       <td>1.193951</td>
       <td>1.873767</td>
-      <td>0.000306</td>
-      <td>0.013686</td>
-      <td>0.021478</td>
+      <td>8.416076</td>
     </tr>
     <tr>
       <th>TKRKH4920C</th>
@@ -1692,9 +1604,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>1.788574</td>
       <td>3.024675</td>
       <td>1.923077</td>
-      <td>0.018264</td>
-      <td>0.030886</td>
-      <td>0.019637</td>
+      <td>15.295508</td>
     </tr>
     <tr>
       <th>LECHF1024T</th>
@@ -1703,9 +1613,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.507208</td>
       <td>3.900239</td>
       <td>2.761341</td>
-      <td>0.005955</td>
-      <td>0.045792</td>
-      <td>0.032421</td>
+      <td>10.732861</td>
     </tr>
     <tr>
       <th>YEXCH8391J</th>
@@ -1714,9 +1622,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>1.815270</td>
       <td>7.216768</td>
       <td>2.859961</td>
-      <td>0.018153</td>
-      <td>0.072168</td>
-      <td>0.028600</td>
+      <td>14.964539</td>
     </tr>
     <tr>
       <th>BICAW1125K</th>
@@ -1725,9 +1631,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>4.458089</td>
       <td>3.687981</td>
       <td>3.007890</td>
-      <td>0.044581</td>
-      <td>0.036880</td>
-      <td>0.030079</td>
+      <td>14.586288</td>
     </tr>
     <tr>
       <th>NZNML2841Q</th>
@@ -1736,9 +1640,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>5.579285</td>
       <td>2.785885</td>
       <td>3.057199</td>
-      <td>0.055793</td>
-      <td>0.027859</td>
-      <td>0.030572</td>
+      <td>16.382979</td>
     </tr>
     <tr>
       <th>HYCCK3082L</th>
@@ -1747,9 +1649,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>0.240256</td>
       <td>2.387901</td>
       <td>3.550296</td>
-      <td>0.002403</td>
-      <td>0.023879</td>
-      <td>0.035503</td>
+      <td>6.193853</td>
     </tr>
     <tr>
       <th>FAJKD7118X</th>
@@ -1758,9 +1658,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>3.683930</td>
       <td>11.382330</td>
       <td>3.944773</td>
-      <td>0.036839</td>
-      <td>0.113823</td>
-      <td>0.039448</td>
+      <td>17.446809</td>
     </tr>
     <tr>
       <th>NFBUF0424E</th>
@@ -1769,15 +1667,13 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>5.125467</td>
       <td>3.953303</td>
       <td>3.994083</td>
-      <td>0.051255</td>
-      <td>0.039533</td>
-      <td>0.039941</td>
+      <td>17.092199</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Show hospitals with high thrombolysis with pre-existing disabilty (compaerd with their own overall thrombolysis use).</p>
+<p>Show hospitals with high thrombolysis with pre-existing disabilty.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1808,9 +1704,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
@@ -1821,9 +1715,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>21.623065</td>
       <td>18.333776</td>
       <td>38.412229</td>
-      <td>0.216231</td>
-      <td>0.183338</td>
-      <td>0.384122</td>
+      <td>43.758865</td>
     </tr>
     <tr>
       <th>HPWIF9956L</th>
@@ -1832,9 +1724,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>21.783235</td>
       <td>12.549748</td>
       <td>29.881657</td>
-      <td>0.217832</td>
-      <td>0.125497</td>
-      <td>0.298817</td>
+      <td>36.619385</td>
     </tr>
     <tr>
       <th>QQUVD2066Z</th>
@@ -1843,9 +1733,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>8.702616</td>
       <td>14.804988</td>
       <td>28.895464</td>
-      <td>0.087026</td>
-      <td>0.148050</td>
-      <td>0.288955</td>
+      <td>33.451537</td>
     </tr>
     <tr>
       <th>SMVTP6284P</th>
@@ -1854,9 +1742,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>7.848372</td>
       <td>19.739984</td>
       <td>27.958580</td>
-      <td>0.078484</td>
-      <td>0.197400</td>
-      <td>0.279586</td>
+      <td>33.404255</td>
     </tr>
     <tr>
       <th>CNBGF2713O</th>
@@ -1865,9 +1751,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>22.423919</td>
       <td>17.962324</td>
       <td>27.465483</td>
-      <td>0.224239</td>
-      <td>0.179623</td>
-      <td>0.274655</td>
+      <td>39.030733</td>
     </tr>
     <tr>
       <th>HZNVT9936G</th>
@@ -1876,9 +1760,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>9.930593</td>
       <td>0.451048</td>
       <td>27.071006</td>
-      <td>0.099306</td>
-      <td>0.004510</td>
-      <td>0.270710</td>
+      <td>28.794326</td>
     </tr>
     <tr>
       <th>HBFCN1575G</th>
@@ -1887,9 +1769,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>18.419648</td>
       <td>11.753781</td>
       <td>26.972387</td>
-      <td>0.184196</td>
-      <td>0.117538</td>
-      <td>0.269724</td>
+      <td>32.009456</td>
     </tr>
     <tr>
       <th>IAZKG9244A</th>
@@ -1898,9 +1778,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>12.146289</td>
       <td>18.333776</td>
       <td>26.873767</td>
-      <td>0.121463</td>
-      <td>0.183338</td>
-      <td>0.268738</td>
+      <td>32.907801</td>
     </tr>
     <tr>
       <th>QWKRA8499D</th>
@@ -1909,9 +1787,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>15.776829</td>
       <td>19.554258</td>
       <td>25.394477</td>
-      <td>0.157768</td>
-      <td>0.195543</td>
-      <td>0.253945</td>
+      <td>34.349882</td>
     </tr>
     <tr>
       <th>MHMYL4920B</th>
@@ -1920,54 +1796,16 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>15.616658</td>
       <td>18.599098</td>
       <td>25.197239</td>
-      <td>0.156167</td>
-      <td>0.185991</td>
-      <td>0.251972</td>
+      <td>33.404255</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+<p>Show hospitals with low thrombolysis with age &gt; 80.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;All&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hopsital&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proportion of 10k subgroup predicted to receive thrombolysis&#39;</span><span class="p">)</span>
-
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hopsital&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proportion of 10k subgroup predicted to receive thrombolysis&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/15_10k_subgroup.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/15_10k_thrombolysis_subgroups_42_0.png" src="../_images/15_10k_thrombolysis_subgroups_42_0.png" />
-</div>
-</div>
-</section>
-<section id="show-a-summary-of-results">
-<h2>Show a summary of results<a class="headerlink" href="#show-a-summary-of-results" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1995,99 +1833,228 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <th>NIHSS &lt; 5</th>
       <th>No precise onset</th>
       <th>mRS &gt; 2</th>
-      <th>NIHSS &lt; 5 norm</th>
-      <th>No precise onset norm</th>
-      <th>mRS &gt; 2 norm</th>
+      <th>Age &gt; 80</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>count</th>
-      <td>132.000000</td>
-      <td>132.000000</td>
-      <td>132.000000</td>
-      <td>132.000000</td>
-      <td>132.000000</td>
-      <td>132.000000</td>
-      <td>132.000000</td>
-      <td>132.000000</td>
+      <th>HYCCK3082L</th>
+      <td>16.41</td>
+      <td>100.000000</td>
+      <td>0.240256</td>
+      <td>2.387901</td>
+      <td>3.550296</td>
+      <td>6.193853</td>
     </tr>
     <tr>
-      <th>mean</th>
-      <td>27.963636</td>
-      <td>99.469697</td>
-      <td>6.607452</td>
-      <td>7.915853</td>
-      <td>12.598246</td>
-      <td>0.066142</td>
-      <td>0.079321</td>
-      <td>0.126252</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>6.330286</td>
-      <td>2.974083</td>
-      <td>4.802008</td>
-      <td>5.047863</td>
-      <td>7.096859</td>
-      <td>0.047961</td>
-      <td>0.050326</td>
-      <td>0.070732</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>10.100000</td>
+      <th>XPABC1435F</th>
+      <td>10.10</td>
       <td>72.068966</td>
-      <td>0.000000</td>
-      <td>0.106129</td>
+      <td>1.174586</td>
+      <td>2.334837</td>
+      <td>4.388560</td>
+      <td>7.777778</td>
+    </tr>
+    <tr>
+      <th>OUXUZ1084Q</th>
+      <td>12.95</td>
+      <td>99.310345</td>
+      <td>0.053390</td>
+      <td>0.610241</td>
       <td>0.147929</td>
+      <td>8.203310</td>
+    </tr>
+    <tr>
+      <th>HZMLX7970T</th>
+      <td>11.49</td>
+      <td>87.241379</td>
+      <td>0.026695</td>
+      <td>1.193951</td>
+      <td>1.873767</td>
+      <td>8.416076</td>
+    </tr>
+    <tr>
+      <th>LECHF1024T</th>
+      <td>14.78</td>
+      <td>85.172414</td>
+      <td>0.507208</td>
+      <td>3.900239</td>
+      <td>2.761341</td>
+      <td>10.732861</td>
+    </tr>
+    <tr>
+      <th>BBXPQ0212O</th>
+      <td>20.79</td>
+      <td>100.000000</td>
+      <td>2.189002</td>
+      <td>2.600159</td>
+      <td>4.092702</td>
+      <td>11.394799</td>
+    </tr>
+    <tr>
+      <th>LFPMM4706C</th>
+      <td>17.16</td>
+      <td>100.000000</td>
+      <td>0.320342</td>
+      <td>2.918546</td>
+      <td>5.424063</td>
+      <td>11.962175</td>
+    </tr>
+    <tr>
+      <th>LGNPK4211W</th>
+      <td>14.45</td>
+      <td>96.896552</td>
       <td>0.000000</td>
-      <td>0.001061</td>
-      <td>0.001490</td>
+      <td>0.716370</td>
+      <td>5.177515</td>
+      <td>12.316785</td>
     </tr>
     <tr>
-      <th>25%</th>
-      <td>23.995000</td>
-      <td>100.000000</td>
-      <td>3.810731</td>
-      <td>4.119130</td>
-      <td>7.692308</td>
-      <td>0.038206</td>
-      <td>0.041589</td>
-      <td>0.076923</td>
+      <th>ISXKM9668U</th>
+      <td>15.21</td>
+      <td>97.241379</td>
+      <td>1.281367</td>
+      <td>3.396126</td>
+      <td>4.585799</td>
+      <td>12.860520</td>
     </tr>
     <tr>
-      <th>50%</th>
-      <td>27.605000</td>
-      <td>100.000000</td>
-      <td>5.672718</td>
-      <td>7.123906</td>
-      <td>10.798817</td>
-      <td>0.056727</td>
-      <td>0.071239</td>
-      <td>0.107988</td>
+      <th>LZAYM7611L</th>
+      <td>19.05</td>
+      <td>99.655172</td>
+      <td>1.788574</td>
+      <td>1.140886</td>
+      <td>7.199211</td>
+      <td>13.995272</td>
     </tr>
-    <tr>
-      <th>75%</th>
-      <td>32.052500</td>
-      <td>100.000000</td>
-      <td>7.948478</td>
-      <td>10.984346</td>
-      <td>16.161243</td>
-      <td>0.079485</td>
-      <td>0.109843</td>
-      <td>0.161612</td>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show hospitals with high thrombolysis with with age &gt; 80.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>All patients</th>
+      <th>Ideal</th>
+      <th>NIHSS &lt; 5</th>
+      <th>No precise onset</th>
+      <th>mRS &gt; 2</th>
+      <th>Age &gt; 80</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
-      <th>max</th>
-      <td>45.270000</td>
-      <td>100.000000</td>
-      <td>25.280299</td>
-      <td>19.978774</td>
+      <th>VKKDD9172T</th>
+      <td>45.27</td>
+      <td>100.0</td>
+      <td>21.623065</td>
+      <td>18.333776</td>
       <td>38.412229</td>
-      <td>0.252803</td>
-      <td>0.199788</td>
-      <td>0.384122</td>
+      <td>43.758865</td>
+    </tr>
+    <tr>
+      <th>CNBGF2713O</th>
+      <td>40.93</td>
+      <td>100.0</td>
+      <td>22.423919</td>
+      <td>17.962324</td>
+      <td>27.465483</td>
+      <td>39.030733</td>
+    </tr>
+    <tr>
+      <th>HPWIF9956L</th>
+      <td>41.31</td>
+      <td>100.0</td>
+      <td>21.783235</td>
+      <td>12.549748</td>
+      <td>29.881657</td>
+      <td>36.619385</td>
+    </tr>
+    <tr>
+      <th>QWKRA8499D</th>
+      <td>38.82</td>
+      <td>100.0</td>
+      <td>15.776829</td>
+      <td>19.554258</td>
+      <td>25.394477</td>
+      <td>34.349882</td>
+    </tr>
+    <tr>
+      <th>GKONI0110I</th>
+      <td>41.32</td>
+      <td>100.0</td>
+      <td>18.579818</td>
+      <td>19.793049</td>
+      <td>24.506903</td>
+      <td>33.900709</td>
+    </tr>
+    <tr>
+      <th>XDAFB7350M</th>
+      <td>38.67</td>
+      <td>100.0</td>
+      <td>14.548852</td>
+      <td>19.978774</td>
+      <td>24.161736</td>
+      <td>33.569740</td>
+    </tr>
+    <tr>
+      <th>QQUVD2066Z</th>
+      <td>36.73</td>
+      <td>100.0</td>
+      <td>8.702616</td>
+      <td>14.804988</td>
+      <td>28.895464</td>
+      <td>33.451537</td>
+    </tr>
+    <tr>
+      <th>SMVTP6284P</th>
+      <td>36.34</td>
+      <td>100.0</td>
+      <td>7.848372</td>
+      <td>19.739984</td>
+      <td>27.958580</td>
+      <td>33.404255</td>
+    </tr>
+    <tr>
+      <th>MHMYL4920B</th>
+      <td>38.94</td>
+      <td>100.0</td>
+      <td>15.616658</td>
+      <td>18.599098</td>
+      <td>25.197239</td>
+      <td>33.404255</td>
+    </tr>
+    <tr>
+      <th>IAZKG9244A</th>
+      <td>37.57</td>
+      <td>100.0</td>
+      <td>12.146289</td>
+      <td>18.333776</td>
+      <td>26.873767</td>
+      <td>32.907801</td>
     </tr>
   </tbody>
 </table>
@@ -2095,8 +2062,153 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal</span><span class="se">\n</span><span class="s1">patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS&lt;5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise</span><span class="se">\n</span><span class="s1">onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS&gt;2&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;All&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Ideal&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hopsital&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proportion of 10k subgroup predicted to receive thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Hopsital&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Proportion of 10k subgroup predicted to receive thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/15_10k_subgroup.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_10k_thrombolysis_subgroups_45_0.png" src="../_images/15_10k_thrombolysis_subgroups_45_0.png" />
+</div>
+</div>
+</section>
+<section id="show-a-summary-of-results">
+<h2>Show a summary of results<a class="headerlink" href="#show-a-summary-of-results" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>All patients</th>
+      <td>132.0</td>
+      <td>27.963636</td>
+      <td>6.330286</td>
+      <td>10.100000</td>
+      <td>23.995000</td>
+      <td>27.605000</td>
+      <td>32.052500</td>
+      <td>45.270000</td>
+    </tr>
+    <tr>
+      <th>Ideal</th>
+      <td>132.0</td>
+      <td>99.469697</td>
+      <td>2.974083</td>
+      <td>72.068966</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>NIHSS &lt; 5</th>
+      <td>132.0</td>
+      <td>6.607452</td>
+      <td>4.802008</td>
+      <td>0.000000</td>
+      <td>3.810731</td>
+      <td>5.672718</td>
+      <td>7.948478</td>
+      <td>25.280299</td>
+    </tr>
+    <tr>
+      <th>No precise onset</th>
+      <td>132.0</td>
+      <td>7.915853</td>
+      <td>5.047863</td>
+      <td>0.106129</td>
+      <td>4.119130</td>
+      <td>7.123906</td>
+      <td>10.984346</td>
+      <td>19.978774</td>
+    </tr>
+    <tr>
+      <th>mRS &gt; 2</th>
+      <td>132.0</td>
+      <td>12.598246</td>
+      <td>7.096859</td>
+      <td>0.147929</td>
+      <td>7.692308</td>
+      <td>10.798817</td>
+      <td>16.161243</td>
+      <td>38.412229</td>
+    </tr>
+    <tr>
+      <th>Age &gt; 80</th>
+      <td>132.0</td>
+      <td>22.466330</td>
+      <td>6.523119</td>
+      <td>6.193853</td>
+      <td>18.575650</td>
+      <td>21.938534</td>
+      <td>25.933806</td>
+      <td>43.758865</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal</span><span class="se">\n</span><span class="s1">patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS&lt;5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise</span><span class="se">\n</span><span class="s1">onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS&gt;2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&gt;80&#39;</span><span class="p">]</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2109,7 +2221,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_10k_thrombolysis_subgroups_45_0.png" src="../_images/15_10k_thrombolysis_subgroups_45_0.png" />
+<img alt="../_images/15_10k_thrombolysis_subgroups_48_0.png" src="../_images/15_10k_thrombolysis_subgroups_48_0.png" />
 </div>
 </div>
 </section>
