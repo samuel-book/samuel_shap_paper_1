@@ -20,6 +20,8 @@ There are general patterns of thrombolysis (clot-busting medication used to rest
     * Low stroke severity (e.g. NIHSS <5)
     * Stroke onset time not known precisely
     * The existence of pre-stroke disability
+    
+* Combinations of non-ideal features significantly suppress use of thrombolysis.
 
 ## Background
 
@@ -151,7 +153,7 @@ We can break select subgroups from the 10k patient cohort. The subgroups selecte
 
 When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.
 
-The three subgroups of milder strokes, no precise onset time, and pre-existing disability, showed reduced expected thrombolysis use across hospitals, but there was significant between-hospital variability ({numref}`Figure {number} <10k_violin>`) - with some hospitals expected to not thrombolyse any of these patients, and other hospitals expected to give 20-38% of these patients thrombolysis.
+The three subgroups of milder strokes, no precise onset time, and pre-existing disability, showed reduced expected thrombolysis use across hospitals, but there was significant between-hospital variability ({numref}`Figure {number} <10k_violin>`) - with some hospitals expected to not thrombolyse any of these patients, and other hospitals expected to give 20-38% of these patients thrombolysis. Combinations of non-ideal features significantly suppress use of thrombolysis.
 
 :::{figure-md} 10k_violin
 <img src="./images/15_10k_subgroup_violin.jpg" width="450">
