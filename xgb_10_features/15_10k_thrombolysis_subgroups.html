@@ -104,7 +104,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../introduction/intro.html">
-                    SAMueL: Summary and outline
+                    SAMueL: Summary and key work
                 </a>
             </li>
         </ul>
@@ -449,6 +449,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#get-thrombolysis-use-in-groups-of-patients">
    Get thrombolysis use in groups of patients
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-combinations">
+     Add combinations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-results">
+   Plot results
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#show-a-summary-of-results">
@@ -544,6 +556,18 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#get-thrombolysis-use-in-groups-of-patients">
    Get thrombolysis use in groups of patients
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-combinations">
+     Add combinations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-results">
+   Plot results
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -642,7 +666,7 @@ title="Print to PDF"
 </ul>
 </li>
 <li><p>The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, showed quite high pairwise correlations (r-squared 0.45 to 0.62). The three subgorups also showed quite strong correlation with the expected thrombolysis rate across all 10k patients (r-squared 0.68 to 0.77)</p></li>
-<li><p>Almost all stroke units show high expected thrombolysis in a set of ‘ideal’ thrombolysis patients, but vary in expected use in subgroups with low stroke severity, no precise onset time, or existing pre-stroke disability. If a stroke unit showed lower  thombolysis in one of these subgroups they also tended to show lower thrombolysis rates in the other subgroups - suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p></li>
+<li><p>Almost all stroke units show high expected thrombolysis in a set of ‘ideal’ thrombolysis patients, but vary in expected use in subgroups with low stroke severity, no precise onset time, or existing pre-stroke disability. If a stroke unit showed lower  thombolysis in one of these subgroups they also tended to show lower thrombolysis rates in the other subgroups - suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients. Combination of non-ideal features significantly surpress use of thrombolysis futher.</p></li>
 </ul>
 </section>
 <section id="import-libraries">
@@ -2050,6 +2074,81 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </table>
 </div></div></div>
 </div>
+<section id="add-combinations">
+<h3>Add combinations<a class="headerlink" href="#add-combinations" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mild stroke (NIHSS &lt; 5) and no precise onset</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> 
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS + Precise&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 1498.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mild stroke (NIHSS &lt; 5) and prestroke disability</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> 
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS + Disability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 499.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># No precise onset and prestroke disability</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> 
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Precise + Disability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 953.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NIHSS &lt; 5, No precise onset, and prestroke disability</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Precise onset time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> 
+        <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">included_patients</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Included patients: </span><span class="si">{</span><span class="n">included_patients</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;NIHSS + Precise + Disability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">patient_results</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Included patients: 261.00
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="plot-results">
+<h2>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -2083,7 +2182,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_10k_thrombolysis_subgroups_45_0.png" src="../_images/15_10k_thrombolysis_subgroups_45_0.png" />
+<img alt="../_images/15_10k_thrombolysis_subgroups_51_0.png" src="../_images/15_10k_thrombolysis_subgroups_51_0.png" />
 </div>
 </div>
 </section>
@@ -2191,19 +2290,66 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
       <td>25.933806</td>
       <td>43.758865</td>
     </tr>
+    <tr>
+      <th>NIHSS + Precise</th>
+      <td>132.0</td>
+      <td>0.560849</td>
+      <td>1.219220</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.066756</td>
+      <td>0.333778</td>
+      <td>6.408545</td>
+    </tr>
+    <tr>
+      <th>NIHSS + Disability</th>
+      <td>132.0</td>
+      <td>0.710512</td>
+      <td>1.906863</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.400802</td>
+      <td>13.226453</td>
+    </tr>
+    <tr>
+      <th>Precise + Disability</th>
+      <td>132.0</td>
+      <td>2.075583</td>
+      <td>3.062400</td>
+      <td>0.000000</td>
+      <td>0.104932</td>
+      <td>0.629591</td>
+      <td>3.147954</td>
+      <td>15.739769</td>
+    </tr>
+    <tr>
+      <th>NIHSS + Precise + Disability</th>
+      <td>132.0</td>
+      <td>0.078370</td>
+      <td>0.371978</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>2.681992</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal</span><span class="se">\n</span><span class="s1">patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS&lt;5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise</span><span class="se">\n</span><span class="s1">onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS&gt;2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&gt;80&#39;</span><span class="p">]</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NIHSS + Precise&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS + Disability&#39;</span><span class="p">,</span> <span class="s1">&#39;Precise + Disability&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS + Precise + Disability&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal</span><span class="se">\n</span><span class="s1">patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS&lt;5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise</span><span class="se">\n</span><span class="s1">onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS&gt;2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&gt;80&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;NIHSS +</span><span class="se">\n</span><span class="s1">No precise&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS +</span><span class="se">\n</span><span class="s1">mRS &gt;2&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise +</span><span class="se">\n</span><span class="s1">mRS&gt;2&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS + </span><span class="se">\n</span><span class="s1">No precise +</span><span class="se">\n</span><span class="s1">mRS &gt;2&#39;</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted thrombolysis use (%)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/15_10k_subgroup_violin.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -2211,7 +2357,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_10k_thrombolysis_subgroups_48_0.png" src="../_images/15_10k_thrombolysis_subgroups_48_0.png" />
+<img alt="../_images/15_10k_thrombolysis_subgroups_54_0.png" src="../_images/15_10k_thrombolysis_subgroups_54_0.png" />
 </div>
 </div>
 </section>
