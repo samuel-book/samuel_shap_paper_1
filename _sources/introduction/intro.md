@@ -1,4 +1,4 @@
-# SAMueL: Summary and outline
+# SAMueL: Summary and key work
 
 Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project.
 
