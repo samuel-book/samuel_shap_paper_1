@@ -3,7 +3,6 @@ root: introduction/intro
 parts:
 - caption: Introductory content
   chapters:
-  - file: key_notebooks_redundant/outline
   - file: introduction/data
   - file: introduction/glossary
   - file: introduction/odds_prob
