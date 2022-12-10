@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Summary and outline &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>SAMueL: Summary and outline &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -103,7 +103,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Summary and outline
+                    SAMueL: Summary and outline
                 </a>
             </li>
         </ul>
@@ -387,6 +387,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-very-short-summary">
+   A very short summary….
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#background">
    Background
   </a>
@@ -465,11 +470,6 @@ title="Print to PDF"
     </ul>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusions">
-   Conclusions
-  </a>
  </li>
 </ul>
 
@@ -480,7 +480,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Summary and outline</h1>
+                <h1>SAMueL: Summary and outline</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -490,6 +490,11 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-very-short-summary">
+   A very short summary….
+  </a>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#background">
    Background
@@ -569,11 +574,6 @@ title="Print to PDF"
     </ul>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusions">
-   Conclusions
-  </a>
  </li>
 </ul>
 
@@ -585,9 +585,27 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="summary-and-outline">
-<h1>Summary and outline<a class="headerlink" href="#summary-and-outline" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="samuel-summary-and-outline">
+<h1>SAMueL: Summary and outline<a class="headerlink" href="#samuel-summary-and-outline" title="Permalink to this headline">#</a></h1>
 <p>Part of the NIHR <em>SAMueL</em> (Stroke Audit Machine Learning) project.</p>
+<section id="a-very-short-summary">
+<h2>A very short summary….<a class="headerlink" href="#a-very-short-summary" title="Permalink to this headline">#</a></h2>
+<p>There are general patterns of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke) use. When we consider all hospitals together, we find:</p>
+<ul class="simple">
+<li><p>The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.</p></li>
+<li><p>The odds of receiving thrombolysis is lowest at NIHSS 0, rises and peaks at NIHSS 15-25, and then falls again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis is 35 fold.</p></li>
+<li><p>The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time.</p></li>
+<li><p>The odds of receiving thrombolysis falls about 5 fold with increasing pre-stroke disability</p></li>
+<li><p>There is a 15 fold difference in the odds of receiving thrombolysis between hospitals (difference between hospitals account for about 60% of the variance in use of thrombolysis for patients who turn up within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients is due to differences in patient populations).</p></li>
+<li><p>We can identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then find stroke units drop off in their enthusiasm to use thrombolysis (sometimes to zero), especially with patients with the following characteristics:</p>
+<ul>
+<li><p>Low stroke severity (e.g. NIHSS &lt;5)</p></li>
+<li><p>Stroke onset time not known precisely</p></li>
+<li><p>The existence of pre-stroke disability</p></li>
+</ul>
+</li>
+</ul>
+</section>
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called <em>thrombolysis</em>. Thrombolysis improves stroke outcomes overall, with more people being able to carry out their normal daily activities. There is, however, a small risk of a bleed in the brain, which is fatal in about 1 in 50 patients receiving thrombolysis, with the risk bing highest in those with the most severe strokes. Overall, thrombolysis does not increase risk of death, as the risk of death from a bleed is balanced out by the benefits of thrombolysis to others. Clinicians, patients, and carers, must however consider both benefits and risks of thrombolysis when deciding on whether to use it.</p>
@@ -771,11 +789,6 @@ title="Print to PDF"
 </figure>
 </section>
 </section>
-</section>
-<section id="conclusions">
-<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h2>
-<p><em>Explainable machine learning</em> techniques give significant insight into models prediction clinical decision-making. At an overall level, SHAP allows for an understanding of the relationship between feature values and the model prediction, and at an individual level SHAP allows for an understanding of the most influential features in any single prediction.</p>
-<p>SHAP interactions allow us to observe how individual hospitals show decisions that are the same as, or different to, the general patterns across hopsitals.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>

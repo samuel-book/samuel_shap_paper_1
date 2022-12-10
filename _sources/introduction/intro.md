@@ -1,6 +1,25 @@
-# Summary and outline
+# SAMueL: Summary and outline
 
 Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project.
+
+## A very short summary....
+
+There are general patterns of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke) use. When we consider all hospitals together, we find:
+
+* The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.
+
+* The odds of receiving thrombolysis is lowest at NIHSS 0, rises and peaks at NIHSS 15-25, and then falls again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis is 35 fold.
+
+* The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time.
+
+* The odds of receiving thrombolysis falls about 5 fold with increasing pre-stroke disability 
+
+* There is a 15 fold difference in the odds of receiving thrombolysis between hospitals (difference between hospitals account for about 60% of the variance in use of thrombolysis for patients who turn up within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients is due to differences in patient populations). 
+
+* We can identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then find stroke units drop off in their enthusiasm to use thrombolysis (sometimes to zero), especially with patients with the following characteristics:
+    * Low stroke severity (e.g. NIHSS <5)
+    * Stroke onset time not known precisely
+    * The existence of pre-stroke disability
 
 ## Background
 
@@ -209,9 +228,3 @@ Individual hospitals, in addition to having their own independent SHAP value, ma
 The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). *team_HZNVT9936G* has interactions that strengthen the effect of *precise onset time* whereas *team_FAJKD7118X* has interactions values that attenuate the main effect of *precise onset time*
 :::
 
-
-## Conclusions
-
-*Explainable machine learning* techniques give significant insight into models prediction clinical decision-making. At an overall level, SHAP allows for an understanding of the relationship between feature values and the model prediction, and at an individual level SHAP allows for an understanding of the most influential features in any single prediction.
-
-SHAP interactions allow us to observe how individual hospitals show decisions that are the same as, or different to, the general patterns across hopsitals.
