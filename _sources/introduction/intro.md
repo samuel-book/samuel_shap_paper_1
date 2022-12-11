@@ -6,7 +6,7 @@ Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaborat
 
 We built a machine learning model that learned which patients would receive thrombolysis at each hospital admitting emergency stroke patients. The model has 85% accuracy.
 
-We find general patterns of use of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke). When we looked for patterns of use across hospitals, we found:
+We found general patterns of use of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke). When we looked for patterns of use across hospitals, we found:
 
 * The odds of receiving thrombolysis reduced about 20 fold over the first 100 minutes of arrival to scan time.
 
