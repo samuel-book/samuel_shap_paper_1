@@ -168,7 +168,7 @@ When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expe
 :::{figure-md} subgroup
 <img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600">
 
-A comparison of between-hospital range of thrombolysis use for subgroups of the 10k patient cohort, with thrombolysis use predicted for the same set of patients at all hospitals. 
+A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hopsital.
 :::
 
 ### How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value? 
