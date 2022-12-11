@@ -16,7 +16,7 @@ There are general patterns of thrombolysis (clot-busting medication used to rest
 
 * There is a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals account for about 60% of the variance in use of thrombolysis for patients who turn up within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients is due to differences in patient populations between hospitals. 
 
-* We can identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then find stroke units drop off in their enthusiasm to use thrombolysis (sometimes to zero), especially with patients with the following characteristics:
+* In both observed (actual) data, and predicted use of thrombolysis, we can examine subgroups of patients. We can identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then find stroke units drop off in their enthusiasm to use thrombolysis (sometimes to zero), especially with patients with the following characteristics:
     * Low stroke severity (e.g. NIHSS <5)
     * Stroke onset time not known precisely
     * The existence of pre-stroke disability
@@ -144,7 +144,7 @@ We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 
 
 ### Comparing actual and predicted thrombolysis use in subgroups of patients
 
-We can select subgroups from the 10k patient cohort and the observed data (where we create subgroups of patients who attend each hospital). The subgroups selected were:
+We can select subgroups from the 10k patient cohort and the observed data (where we create subgroups of patients who attend each hospital and observed whetehr they were actually given thrombolysis or not). The subgroups selected were:
 
 * Mild stroke severity (NIHSS < 5)
 * No precise onset time
