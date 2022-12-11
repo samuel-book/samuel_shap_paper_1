@@ -142,21 +142,31 @@ A comparison of average hospital SHAP values with predicted hospital thrombolysi
 
 We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
 
-### Comparing expected thrombolysis use in subgroups of a 10k cohort of patients
+### Comparing actual and predicted thrombolysis use in subgroups of patients
 
-We can break select subgroups from the 10k patient cohort. The subgroups selected were:
+We can select subgroups from the 10k patient cohort and the observed data (where we create subgroups of patients who attend each hospital). The subgroups selected were:
 
 * Mild stroke severity (NIHSS < 5)
 * No precise onset time
 * Existing pre-stroke disability (mRS > 2)
 * An 'ideal' thrombolysable patient: NIHSS 10-25, Arrival-to-scan time < 30 minutes, Stroke type = infarction, Precise onset time = True, Prior diability level (mRS) = 0, No use of AF anticoagulants, Onset-to-arrival time < 90 minutes, Age < 80 years, Onset during sleep = False
 
+Note: When we use the predicted thrombolysis in the 10k cohort subgroups we are using the same patients at all hospitals. When we examine the observed ('real') data we must necessarily look at different patients in each hospital.
+
+The observed and predicted subgroup analysis show very similar general patterns ({numref}`Figure {number} <subgroup>`, with r-squared=0.95). The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
+
+The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.
+
+Some differences exist:
+
+The use of thrombolysi in ideal patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).
+
+The predicted results show a stronger effect of combining non-ideal features.
+
 When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.
 
-The three subgroups of milder strokes, no precise onset time, and pre-existing disability, showed reduced expected thrombolysis use across hospitals, but there was significant between-hospital variability ({numref}`Figure {number} <10k_violin>`) - with some hospitals expected to not thrombolyse any of these patients, and other hospitals expected to give 20-38% of these patients thrombolysis. Combinations of non-ideal features significantly suppress use of thrombolysis.
-
-:::{figure-md} 10k_violin
-<img src="./images/15_10k_subgroup_violin.jpg" width="450">
+:::{figure-md} subgroup
+<img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600">
 
 A comparison of between-hospital range of thrombolysis use for subgroups of the 10k patient cohort, with thrombolysis use predicted for the same set of patients at all hospitals. 
 :::
