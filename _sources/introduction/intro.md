@@ -4,9 +4,9 @@ Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaborat
 
 ## A very short summary....
 
-We built a machine learning model that learned which patients would receive thrombolysis at each hospital admitting emergency stroke patients. The model has 85% accuracy.
+Most strokes are caused by a clot stopping blood flow to a part of the brain. If a patient arrives at hospital soon enough, they may be suitable for treatment with clot-busting drugs. This is called *thrombolysis*. Hospitals vary very significantly in how much they use thrombolysis - from 5% to 25% of emergency stroke admissions. Our aim was to understand how much of this variation comes from differences in choices in when to use thrombolysis. To do this we built a machine learning model that learned which patients would receive thrombolysis at each hospital admitting emergency stroke patients. The model has 85% accuracy. We then use a technique called *SHAP* to understand this model, and by understanding the model we start to understand what shapes decisions to use thrombolysis in different hospitals in the real world. We can also use the model to ask "what treatment would this one patient likely receive if they attended different hospitals?
 
-We found general patterns of use of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke). When we looked for patterns of use across hospitals, we found:
+We found general patterns of use of thrombolysis. When we looked for patterns of use across hospitals, we found:
 
 * The odds of receiving thrombolysis reduced about 20 fold over the first 100 minutes of arrival to scan time.
 
