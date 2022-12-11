@@ -166,7 +166,8 @@ The predicted results show a stronger effect of combining non-ideal features.
 When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.
 
 :::{figure-md} subgroup
-<img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="450">
+<img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600">
+
 A comparison of between-hospital range of thrombolysis use for subgroups of the 10k patient cohort, with thrombolysis use predicted for the same set of patients at all hospitals. 
 :::
 
