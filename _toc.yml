@@ -18,6 +18,7 @@ parts:
   chapters:
   - file: xgb_10_features/04_compare_10k_cohort_key_features
   - file: xgb_10_features/15_10k_thrombolysis_subgroups
+  - file: xgb_10_features/15a_observed_thrombolysis_subgroup_analysis
   - file: xgb_10_features/05_compare_benchmark_decisions_key_features
   - file: xgb_10_features/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
   - file: xgb_10_features/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
