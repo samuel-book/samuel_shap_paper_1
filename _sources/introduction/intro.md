@@ -1,27 +1,29 @@
 # SAMueL: Summary and key work
 
-Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project.
+Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaboration with the Sentinel Stroke National Audit Program (SSNAP).
 
 ## A very short summary....
 
-There are general patterns of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke) use. When we consider all hospitals together, we find:
+We built a machine learning model that learned which patients would receive thrombolysis at each hospital admitting emergency stroke patients. The model has 85% accuracy.
 
-* The odds of receiving thrombolysis reduce about 20 fold over the first 100 minutes of arrival to scan time.
+We find general patterns of use of thrombolysis (clot-busting medication used to restore blood flow in the brain after stroke). When we looked for patterns of use across hospitals, we found:
 
-* When considering stroke severity, odds of receiving thrombolysis is lowest at NIHSS 0, rises and peaks at NIHSS 15-25, and then falls again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis is 35 fold.
+* The odds of receiving thrombolysis reduced about 20 fold over the first 100 minutes of arrival to scan time.
 
-* The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time.
+* When considering stroke severity, odds of receiving thrombolysis was lowest at NIHSS 0, rose and peaked at NIHSS 15-25, and then fell again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis was 35 fold.
 
-* The odds of receiving thrombolysis fall about 5 fold with increasing pre-stroke disability 
+* The odds of receiving thrombolysis was about 3 fold greater when the onset time was registered as being known precisely.
 
-* There is a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals account for about 60% of the variance in use of thrombolysis for patients who turn up within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients is due to differences in patient populations between hospitals. 
+* The odds of receiving thrombolysis fell about 5 fold with increasing pre-stroke disability (mRS 0 to 5). 
 
-* In both observed (actual) data, and predicted use of thrombolysis, we can examine subgroups of patients. We can identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then find stroke units drop off in their enthusiasm to use thrombolysis (sometimes to zero), especially with patients with the following characteristics:
+* There was a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals accounted for about 60% of the variance in use of thrombolysis for patients who arrived at hospital within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients was due to differences in patient populations between hospitals. 
+
+* In both observed (actual) data, and predicted use of thrombolysis, we examined subgroups of patients. We could identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then found groups of patients where hospitals would vary in their attitude to use of  thrombolysis, with some hopsitals not giving thrombolysis to any patients and other hopsitals giving thrombolysis to 30-40% of patients who arrived at hospital within 4 hours of known stroke onset time. Key groups were hospitals differed in their use of thrombolysis were:
     * Low stroke severity (e.g. NIHSS <5)
     * Stroke onset time not known precisely
     * The existence of pre-stroke disability
     
-* Combinations of non-ideal features significantly suppress use of thrombolysis.
+* Combinations of non-ideal features (e.g. NIHSS <5 *and* stroke onset time not known precisely) further suppressed use of thrombolysis.
 
 ## Background
 
