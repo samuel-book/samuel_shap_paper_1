@@ -114,9 +114,13 @@ The best model with 1, 2, 5, 10, 25 & all features (60 features before one-hot e
 * Onset during sleep: Did stroke occur in sleep?
 * Age: Age (as middle of 5 year age bands)
 
-The improvement in ROC AUC with increasing features is shown in the figure below.
+The improvement in ROC AUC with increasing features is shown in figure {numref}`figure {number} <thrombolysis_hist>`). .
 
-<img src="./images/01_feature_selection.jpg" width="800"/>
+:::{figure-md} thrombolysis_hist
+<img src="./images/01_feature_selection.jpg" width="450">
+
+Feature selection for an XGBoost model predicting use of thrombolysis. Each feature was selected sequentially by the best improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: ROC improvement with selection of 25 features. Right: ROC improvement with selection of first 10 features.
+:::
 
 ### Correlations within the 10 features
 
