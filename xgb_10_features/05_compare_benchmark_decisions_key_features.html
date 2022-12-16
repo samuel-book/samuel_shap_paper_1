@@ -251,6 +251,48 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Paper (Work In Progress)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/0_title.html">
+   Using explainable machine learning to understand variation in thrombolysis practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/1_introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/2_methods.html">
+   Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/3_results.html">
+   Results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/4_discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/5_references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/6_appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -469,6 +511,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-non-benchmark-hopsitals">
+     Estimate change in thrombolysis rate if benchmark decisions used at non-benchmark hopsitals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used">
      Estimate change in thrombolysis rate at bottom 30 thrombolysing hospitals if benchmark decisions used
     </a>
@@ -580,6 +627,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-non-benchmark-hopsitals">
+     Estimate change in thrombolysis rate if benchmark decisions used at non-benchmark hopsitals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used">
      Estimate change in thrombolysis rate at bottom 30 thrombolysing hospitals if benchmark decisions used
     </a>
@@ -660,7 +712,7 @@ title="Print to PDF"
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>83.3% decisions are identical between local and benchmark decisions.</p></li>
-<li><p>Thrombolysis use would be increased 20.7% if benchmark decisions were made at all hospitals.</p></li>
+<li><p>Thrombolysis use would be increased 31.2% at non-benchmark hopsitals if benchmark decisions were made at those hospitals. Overll, thrombolysis use, inclusing at the benechmark hopsitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysus rate) would be increased 60.2%.</p></li>
 <li><p>The ratio of benchmark:local thrombolysis use was 0.7 to 2.1.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1302,6 +1354,32 @@ Accuracy k-fold 5: 0.848
 </div>
 </div>
 </section>
+<section id="estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-non-benchmark-hopsitals">
+<h3>Estimate change in thrombolysis rate if benchmark decisions used at non-benchmark hopsitals<a class="headerlink" href="#estimate-change-in-thrombolysis-rate-if-benchmark-decisions-used-at-non-benchmark-hopsitals" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">non_benchmark</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">thrombolysis_by_hosp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">30</span><span class="p">:]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">numerator</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">thrombolysis_counts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">non_benchmark</span><span class="p">][</span><span class="s1">&#39;Benchmark majority vote&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="n">denum</span> <span class="o">=</span> <span class="n">thrombolysis_counts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">non_benchmark</span><span class="p">][</span><span class="s1">&#39;Observed IVT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denum</span><span class="p">)</span>
+<span class="n">percent_change</span> <span class="o">=</span> <span class="p">(</span><span class="n">change</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent increase in thrombolysis at non-benchmark hospitals with &#39;</span>\
+       <span class="sa">f</span><span class="s1">&#39;benchmark decisions: </span><span class="si">{</span><span class="n">percent_change</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percent increase in thrombolysis at non-benchmark hospitals with benchmark decisions: 31.2%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used">
 <h3>Estimate change in thrombolysis rate at bottom 30 thrombolysing hospitals if benchmark decisions used<a class="headerlink" href="#estimate-change-in-thrombolysis-rate-at-bottom-30-thrombolysing-hospitals-if-benchmark-decisions-used" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
@@ -1342,7 +1420,7 @@ Accuracy k-fold 5: 0.848
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_compare_benchmark_decisions_key_features_37_0.png" src="../_images/05_compare_benchmark_decisions_key_features_37_0.png" />
+<img alt="../_images/05_compare_benchmark_decisions_key_features_39_0.png" src="../_images/05_compare_benchmark_decisions_key_features_39_0.png" />
 </div>
 </div>
 </section>
@@ -1535,7 +1613,7 @@ Accuracy k-fold 5: 0.848
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_compare_benchmark_decisions_key_features_44_0.png" src="../_images/05_compare_benchmark_decisions_key_features_44_0.png" />
+<img alt="../_images/05_compare_benchmark_decisions_key_features_46_0.png" src="../_images/05_compare_benchmark_decisions_key_features_46_0.png" />
 </div>
 </div>
 </section>

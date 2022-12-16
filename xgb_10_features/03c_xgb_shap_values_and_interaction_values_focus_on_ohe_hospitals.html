@@ -251,6 +251,48 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Paper (Work In Progress)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/0_title.html">
+   Using explainable machine learning to understand variation in thrombolysis practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/1_introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/2_methods.html">
+   Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/3_results.html">
+   Results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/4_discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/5_references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../paper/6_appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -1313,8 +1355,8 @@ array([ 17. ,   1. ,  14. ,   1. ,   0. ,   0. , 186. ,   0. ,  47.5,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 0 ns, sys: 3.6 s, total: 3.6 s
-Wall time: 3.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 0 ns, sys: 3.58 s, total: 3.58 s
+Wall time: 3.67 s
 </pre></div>
 </div>
 </div>
@@ -2197,11 +2239,11 @@ Number hospitals whose interquartile range is zero. Main effect: 4. Shap values:
 <span class="n">y_pred2</span> <span class="o">=</span> <span class="n">intercept2</span> <span class="o">+</span> <span class="p">(</span><span class="n">x2</span> <span class="o">*</span> <span class="n">slope2</span><span class="p">)</span>
 
 <span class="c1"># Create scatter plot with regression line</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;SHAP value &quot;</span>
               <span class="s2">&quot;(median of the instances that attend the hospital)&quot;</span><span class="p">)</span>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Data &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>Results &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Probability, odds, and SHAP values (log odds shifts)" href="odds_prob.html" />
-    <link rel="prev" title="SAMueL: Summary and key work" href="intro.html" />
+    <link rel="next" title="Discussion" href="4_discussion.html" />
+    <link rel="prev" title="Methods" href="2_methods.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -103,7 +103,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
+                <a class="reference internal" href="../introduction/intro.html">
                     SAMueL: Summary and key work
                 </a>
             </li>
@@ -113,19 +113,19 @@ const thebe_selector_output = ".output, .cell_output"
   Introductory content
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/data.html">
    Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="odds_prob.html">
+  <a class="reference internal" href="../introduction/odds_prob.html">
    Probability, odds, and SHAP values (log odds shifts)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="shap_worked_example.html">
+  <a class="reference internal" href="../introduction/shap_worked_example.html">
    A simple worked example of Shap
   </a>
  </li>
@@ -256,39 +256,39 @@ const thebe_selector_output = ".output, .cell_output"
   Paper (Work In Progress)
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../paper/0_title.html">
+  <a class="reference internal" href="0_title.html">
    Using explainable machine learning to understand variation in thrombolysis practice
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../paper/1_introduction.html">
+  <a class="reference internal" href="1_introduction.html">
    Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../paper/2_methods.html">
+  <a class="reference internal" href="2_methods.html">
    Methods
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../paper/3_results.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Results
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../paper/4_discussion.html">
+  <a class="reference internal" href="4_discussion.html">
    Discussion
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../paper/5_references.html">
+  <a class="reference internal" href="5_references.html">
    References
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../paper/6_appendix.html">
+  <a class="reference internal" href="6_appendix.html">
    Appendix
   </a>
  </li>
@@ -343,6 +343,17 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -365,7 +376,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/introduction/data.md"
+        <a href="../_sources/paper/3_results.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -376,7 +387,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -425,56 +436,53 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-access">
-   Data access
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-fields">
-   Data Fields
+  <a class="reference internal nav-link" href="#feature-selection">
+   Feature selection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stroke-team">
-     Stroke Team
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-general">
-     Patient – general
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-pathway-information">
-     Patient – pathway information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-comorbidities">
-     Patient – comorbidities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-nih-stroke-scale">
-     Patient – NIH Stroke Scale
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-other-clinical-features">
-     Patient – other clinical features
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-thrombolysis-given">
-     Patient – thrombolysis given
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-reason-stated-for-not-giving-thrombolysis">
-     Patient – reason stated for not giving thrombolysis
+    <a class="reference internal nav-link" href="#correlations-within-the-10-features">
+     Correlations within the 10 features
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-accuracy">
+   Model accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explaining-model-predictions-with-shap">
+   Explaining model predictions with SHAP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#violin-plots-of-shap-values">
+     Violin plots of SHAP values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hospital-shap-values">
+     Hospital SHAP values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#waterfall-plots-for-individual-patient-predictions">
+     Waterfall plots for individual patient predictions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subgroup-analysis">
+   Subgroup analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benchmarking">
+   Benchmarking
+  </a>
  </li>
 </ul>
 
@@ -485,7 +493,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data</h1>
+                <h1>Results</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -496,56 +504,53 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-access">
-   Data access
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-fields">
-   Data Fields
+  <a class="reference internal nav-link" href="#feature-selection">
+   Feature selection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stroke-team">
-     Stroke Team
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-general">
-     Patient – general
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-pathway-information">
-     Patient – pathway information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-comorbidities">
-     Patient – comorbidities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-nih-stroke-scale">
-     Patient – NIH Stroke Scale
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-other-clinical-features">
-     Patient – other clinical features
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-thrombolysis-given">
-     Patient – thrombolysis given
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-reason-stated-for-not-giving-thrombolysis">
-     Patient – reason stated for not giving thrombolysis
+    <a class="reference internal nav-link" href="#correlations-within-the-10-features">
+     Correlations within the 10 features
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-accuracy">
+   Model accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explaining-model-predictions-with-shap">
+   Explaining model predictions with SHAP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#violin-plots-of-shap-values">
+     Violin plots of SHAP values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hospital-shap-values">
+     Hospital SHAP values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#waterfall-plots-for-individual-patient-predictions">
+     Waterfall plots for individual patient predictions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subgroup-analysis">
+   Subgroup analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benchmarking">
+   Benchmarking
+  </a>
  </li>
 </ul>
 
@@ -557,122 +562,115 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="data">
-<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h1>
-<section id="data-access">
-<h2>Data access<a class="headerlink" href="#data-access" title="Permalink to this headline">#</a></h2>
-<p>Data was obtained from the Sentinel Stroke National Audit (SSNAP [1]), managed through the Healthcare Quality Improvement Partnership (HQIP [2]). SSNAP has near-complete coverage of all acute stroke admissions in the UK (outside Scotland). All hospitals admitting acute stroke participate in the audit, and year-on-year comparison with Hospital Episode Statistics [3] confirms estimated case ascertainment of 95% of coded cases of acute stroke.</p>
-<p>The NHS Health Research Authority decision tool [4] was used to confirm that ethical approval was not required to access the data. Data access was authorised by HQIP (reference HQIP303).</p>
-<p>Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams in England and Wales between 2016 and 2018 (three full years).</p>
-<p>[1] <a class="reference external" href="https://www.strokeaudit.org/">https://www.strokeaudit.org/</a></p>
-<p>[2] <a class="reference external" href="https://www.hqip.org.uk/">https://www.hqip.org.uk/</a></p>
-<p>[3] <a class="reference external" href="https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics">https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics</a></p>
-<p>[4] <a class="reference external" href="http://www.hra-decisiontools.org.uk/research/">http://www.hra-decisiontools.org.uk/research/</a></p>
-</section>
-<section id="data-fields">
-<h2>Data Fields<a class="headerlink" href="#data-fields" title="Permalink to this headline">#</a></h2>
-<section id="stroke-team">
-<h3>Stroke Team<a class="headerlink" href="#stroke-team" title="Permalink to this headline">#</a></h3>
+  <section class="tex2jax_ignore mathjax_ignore" id="results">
+<h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h1>
+<section id="feature-selection">
+<h2>Feature selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">#</a></h2>
+<p>25 features were selected by identifying one feature at a time that led to greatest improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). ROC AUC was measured using stratified 5-fold cross validation.</p>
+<p>The best model with 1, 2, 5, 10, 25 &amp; all features (60 features before one-hot encoding of fields) had ROC AUCs of 0.715, 0.792, 0.891, 0.919, 0.923 &amp; 0.922. We selected 10 features for all subsequent work, which were:</p>
 <ul class="simple">
-<li><p>StrokeTeam: Pseudonymised SSNAP ‘routinely admitting team‘ unique identifier. For emergency care it is expected that each hospital has one stroke team (though post-72 hour care may be reported under a different team at that hospital).PatientUID: Pseudonymised patient unique identifier</p></li>
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulants: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
+<section id="correlations-within-the-10-features">
+<h3>Correlations within the 10 features<a class="headerlink" href="#correlations-within-the-10-features" title="Permalink to this headline">#</a></h3>
+<p>Correlations between the 10 features were measured using coefficients of determination (r-squared). All r-squared were less than 0.15, and all r-squared were less than 0.05 except 1) age and prior disability level (r-squared 0.146), and 2) onset during sleep and precise onset time (r-squared 0.078).</p>
 </section>
-<section id="patient-general">
-<h3>Patient – general<a class="headerlink" href="#patient-general" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="model-accuracy">
+<h2>Model accuracy<a class="headerlink" href="#model-accuracy" title="Permalink to this headline">#</a></h2>
+<p>Model accuracy was measured using stratified 5-fold cross validation. The key results are shown below.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>measurement</p></th>
+<th class="head"><p>mean</p></th>
+<th class="head"><p>std</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>actual positive rate</p></td>
+<td><p>0.296</p></td>
+<td><p>0.000</p></td>
+</tr>
+<tr class="row-odd"><td><p>actual negative rate</p></td>
+<td><p>0.704</p></td>
+<td><p>0.000</p></td>
+</tr>
+<tr class="row-even"><td><p>predicted positive rate</p></td>
+<td><p>0.294</p></td>
+<td><p>0.002</p></td>
+</tr>
+<tr class="row-odd"><td><p>predicted negative rate</p></td>
+<td><p>0.706</p></td>
+<td><p>0.002</p></td>
+</tr>
+<tr class="row-even"><td><p>accuracy</p></td>
+<td><p>0.850</p></td>
+<td><p>0.004</p></td>
+</tr>
+<tr class="row-odd"><td><p>sensitivity (recall)</p></td>
+<td><p>0.743</p></td>
+<td><p>0.004</p></td>
+</tr>
+<tr class="row-even"><td><p>specificity</p></td>
+<td><p>0.894</p></td>
+<td><p>0.004</p></td>
+</tr>
+<tr class="row-odd"><td><p>precision</p></td>
+<td><p>0.747</p></td>
+<td><p>0.007</p></td>
+</tr>
+<tr class="row-even"><td><p>ROC AUC</p></td>
+<td><p>0.918</p></td>
+<td><p>0.003</p></td>
+</tr>
+<tr class="row-odd"><td><p>Balanced sensitivity/specificity</p></td>
+<td><p>0.839</p></td>
+<td><p>0.003</p></td>
+</tr>
+</tbody>
+</table>
+<p>The appendix contains results for model validation of hospital thrombolysis curves, evaluation of variation in model prediction using bagging, learning rates, model calibration, and fine-tuning of model regularisation.</p>
+</section>
+<section id="explaining-model-predictions-with-shap">
+<h2>Explaining model predictions with SHAP<a class="headerlink" href="#explaining-model-predictions-with-shap" title="Permalink to this headline">#</a></h2>
+<section id="violin-plots-of-shap-values">
+<h3>Violin plots of SHAP values<a class="headerlink" href="#violin-plots-of-shap-values" title="Permalink to this headline">#</a></h3>
+<p>Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). Key observations are:</p>
 <ul class="simple">
-<li><p>Pathway: Total number of team transfers, excluding community teams</p></li>
-<li><p>S1AgeOnArrival: Age on arrival aggregated to 5 year bands</p></li>
-<li><p>MoreEqual80y: Whether the patient is &gt;= 80 years old at the moment of the stroke</p></li>
-<li><p>S1Gender: Gender</p></li>
-<li><p>S1Ethnicity: Patient Ethnicity. Aggregated to White, Black, Mixed, Asian and Other</p></li>
+<li><p>Stroke type: As expected,  the SHAP values for stroke types effectively eliminated any chance of receiving thrombolysis for non-ischaemic (haemorrhagic) stroke.</p></li>
+<li><p>Arrival-to-scan time: The odds of receiving thrombolysis reduced by about 20 fold over the first 100 minutes of arrival to scan time.</p></li>
+<li><p>Stroke severity (NIHSS): The odds of receiving thrombolysis was lowest at NIHSS 0, rose and peakws at NIHSS 15-25, and then fell again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis was 30-35 fold.</p></li>
+<li><p>Stroke onset time type (precise vs. estimated): The odds of receiving thrombolysis were about 3 fold greater for precise onset time than estimated onset time.</p></li>
+<li><p>Disability level (Rankin) before stroke. The odds of receiving thrombolysis fell about 5 fold between mRS 0 and 5.</p></li>
 </ul>
+<img src="../xgb_10_features/output/03_xgb_10_features_thrombolysis_shap_violin.jpg" width="800"/></section>
+<section id="hospital-shap-values">
+<h3>Hospital SHAP values<a class="headerlink" href="#hospital-shap-values" title="Permalink to this headline">#</a></h3>
+<p>When examining SHAP, we take the hospital SHAP values for patients attending each hospital (if we examined the hospital SHAP for all patients, it would be dominated by those not-attending each hospital (i.e. coded zero in the one-hot encoding). When we examine the hospital SHAP values only for patients attending each hospital, the hospital SHAP values ranged from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis).</p>
+<p>We compared the hospital SHAP value with the observed thrombolysis use at each hospital. Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582, suggesting that 58% (P&lt;0.0001) of the between-hospital variance in thrombolysis use may be explained by the hospitals’ SHAP values, that is the hospitals’ predisposition to use thrombolysis.</p>
+<img src="../xgb_10_features/output/03c_xgb_10_features_attended_hosp_shap_value.jpg" width="400"/>
+<p>When using the 10k cohort, changing the one-hot encoding to mimic all patients attending each of the 132 hospitals, we found that the median hospital SHAP value for the 10k patients correlated very closely with the predicted thrombolysis use in the 10k cohort at each hospital (r-squared = 0.947), confirming that the hospital SHAP is providing a key insight into ahopsital’s propensity to use thrombolysis.</p>
 </section>
-<section id="patient-pathway-information">
-<h3>Patient – pathway information<a class="headerlink" href="#patient-pathway-information" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>S1OnsetInHospital: Whether the patient was already an inpatient at the time of stroke</p></li>
-<li><p>S1OnsetToArrival_min: Time from symptom onset to arrival at hospital in minutes, where known and if out of hospital stroke</p></li>
-<li><p>S1OnsetDateType: Whether the date of onset given is precise, best estimate or if the stroke occurred while sleep</p></li>
-<li><p>S1OnsetTimeType: Whether the time of symptom onset given is precise, best estimate, not known</p></li>
-<li><p>S1ArriveByAmbulance: Whether the patient arrived by ambulance</p></li>
-<li><p>S1AdmissionHour: Hour of arrival, aggregates to 3 hour epochs</p></li>
-<li><p>S1AdmissionDay: Day of week at the moment of admission</p></li>
-<li><p>S1AdmissionQuarter: Year quarter (Q1: Jan-Mar; Q2:April-Jun; Q3: Jul-Sept; Q4: Oct-Dec)</p></li>
-<li><p>S1AdmissionYear: Year of admission</p></li>
-<li><p>S2BrainImagingTime_min: Time from Clock Start to brain scan. In minutes. “Clock Start” is used throughout SSNAP reporting to refer to the date and time of arrival at first hospital for newly arrived patients, or to the date and time of symptom onset if patient already in hospital at the time of their stroke.</p></li>
-<li><p>S2ThrombolysisTime_min: Time from Clock Start to thrombolysis. In minutes. “Clock Start” is used throughout SSNAP reporting to refer to the date and time of arrival at first hospital for newly arrived patients, or to the date and time of symptom onset if patient already in hospital at the time of their stroke.</p></li>
-</ul>
+<section id="waterfall-plots-for-individual-patient-predictions">
+<h3>Waterfall plots for individual patient predictions<a class="headerlink" href="#waterfall-plots-for-individual-patient-predictions" title="Permalink to this headline">#</a></h3>
+<p>Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive. The example shown below is for a patient with a low probability of receiving thrombolysis. The model starts with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features increase that base probability of receiving thrombolysis, those are onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features then reduce the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%.</p>
+<img src="../xgb_10_features/output/03_xgb_10_features_waterfall_probability_low.jpg" width="600"/></section>
 </section>
-<section id="patient-comorbidities">
-<h3>Patient – comorbidities<a class="headerlink" href="#patient-comorbidities" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>CongestiveHeartFailure: Pre-Stroke Congestive Heart Failure</p></li>
-<li><p>Hypertension: Pre-Stroke Systemic Hypertension</p></li>
-<li><p>AtrialFibrillation: Pre-Stroke Atrial Fibrillation (persistent, permanent, or paroxysmal)</p></li>
-<li><p>Diabetes: Comorbidities: Pre-Stroke Diabetes Mellitus</p></li>
-<li><p>StrokeTIA: Pre-Stroke history of stroke or Transient Ischaemic Attack (TIA)</p></li>
-<li><p>AFAntiplatelet: Only available if “Yes” to Atrial Fibrillation comorbidity. Whether the patient was on antiplatelet medication prior to admission</p></li>
-<li><p>AFAnticoagulent: Prior to 01-Dec-2017: Only available if “Yes” to Atrial Fibrillation comorbidity; From 01-Dec-2017: available even if patient is not in Atrial Fibrillation prior to admission. Whether the patient was on anticoagulant medication prior to admission</p></li>
-<li><p>AFAnticoagulentVitK: If the patient was receiving anticoagulant medication, was it vitamin K antagonists</p></li>
-<li><p>AFAnticoagulentDOAC: If the patient was receiving anticoagulant medication, was it direct oral anticoagulants (DOACs)</p></li>
-<li><p>AFAnticoagulentHeparin: If the patient was receiving anticoagulant medication, was it Heparin</p></li>
-</ul>
-</section>
-<section id="patient-nih-stroke-scale">
-<h3>Patient – NIH Stroke Scale<a class="headerlink" href="#patient-nih-stroke-scale" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>S2NihssArrival: National Institutes of Health Stroke Scale score on arrival at hospital</p></li>
-<li><p>BestGaze: National Institutes of Health Stroke Scale Item 2 Best Gaze (higher values indicate more severe deficit)</p></li>
-<li><p>BestLanguage: National Institutes of Health Stroke Scale Item 9 Best Language (higher values indicate more severe deficit)</p></li>
-<li><p>Dysarthria: National Institutes of Health Stroke Scale Item 10 Dysarthria (higher values indicate more severe deficit)</p></li>
-<li><p>ExtinctionInattention: National Institutes of Health Stroke Scale Item 11 Extinction and Inattention (higher values indicate more severe deficit)</p></li>
-<li><p>FacialPalsy: National Institutes of Health Stroke Scale Item 4 Facial Paresis (higher values indicate more severe deficit)</p></li>
-<li><p>LimbAtaxia: National Institutes of Health Stroke Scale Item 7 Limb Ataxia (higher values indicate more severe deficit)</p></li>
-<li><p>Loc: National Institutes of Health Stroke Scale Item 1a Level of Consciousness (higher values indicate more severe deficit)</p></li>
-<li><p>LocCommands: National Institutes of Health Stroke Scale Item 1c Level of Consciousness Commands (higher values indicate more severe deficit)</p></li>
-<li><p>LocQuestions: National Institutes of Health Stroke Scale Item 1b Level of Consciousness Questions (higher values indicate more severe deficit)</p></li>
-<li><p>MotorArmLeft: National Institutes of Health Stroke Scale Item 5a Motor Arm - Left (higher values indicate more severe deficit)</p></li>
-<li><p>MotorArmRight: National Institutes of Health Stroke Scale Item 5b Motor Arm - Right (higher values indicate more severe deficit)</p></li>
-<li><p>MotorLegLeft: National Institutes of Health Stroke Scale Item 6a Motor Leg - Left (higher values indicate more severe deficit)</p></li>
-<li><p>MotorLegRight: National Institutes of Health Stroke Scale Item 6b Motor Leg - Right (higher values indicate more severe deficit)</p></li>
-<li><p>Sensory: National Institutes of Health Stroke Scale Item 8 Sensory (higher values indicate more severe deficit)</p></li>
-<li><p>Visual: National Institutes of Health Stroke Scale Item 3 Visual Fields (higher values indicate more severe deficit)</p></li>
-</ul>
-</section>
-<section id="patient-other-clinical-features">
-<h3>Patient – other clinical features<a class="headerlink" href="#patient-other-clinical-features" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>S2INR: Patient’s International Normalised ratio (INR) on arrival at hospital (available since 01-Dec-2017)</p></li>
-<li><p>S2INRHigh: INR was greater than 10 on arrival at hospital (available since 01-Dec-2017)</p></li>
-<li><p>S2INRNK: INR not checked (available since 01-Dec-2017)</p></li>
-<li><p>S2NewAFDiagnosis: Whether a new diagnosis of Atrial Fibrillation was made on admission</p></li>
-<li><p>S2RankinBeforeStroke: Patient’s modified Rankin Scale score before this stroke (Higher values indicate more disability)</p></li>
-<li><p>S2StrokeType: Whether the stroke type was infarction or primary intracerebral haemorrhage</p></li>
-<li><p>S2TIAInLastMonth: Whether the patient had a Transient Ischaemic Attack during the last month. Item from the SSNAP comprehensive dataset questions (not mandatory)</p></li>
-</ul>
-</section>
-<section id="patient-thrombolysis-given">
-<h3>Patient – thrombolysis given<a class="headerlink" href="#patient-thrombolysis-given" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>S2Thrombolysis: Whether the patient was given thrombolysis (clot busting medication)</p></li>
-</ul>
-</section>
-<section id="patient-reason-stated-for-not-giving-thrombolysis">
-<h3>Patient – reason stated for not giving thrombolysis<a class="headerlink" href="#patient-reason-stated-for-not-giving-thrombolysis" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Age: If the answer to thrombolysis given was “no but”, the reason was Age</p></li>
-<li><p>Comorbidity: If the answer to thrombolysis given was “no but”, the reason was Co-morbidity</p></li>
-<li><p>Haemorrhagic: If the answer to thrombolysis given was “no but”, the reason was Haemorrhagic stroke</p></li>
-<li><p>Improving: If the answer to thrombolysis given was “no but”, the reason was Symptoms Improving</p></li>
-<li><p>Medication: If the answer to thrombolysis given was “no but”, the reason was Medication</p></li>
-<li><p>OtherMedical: If the answer to thrombolysis given was “no but”, the reason was Other medical reason</p></li>
-<li><p>Refusal: If the answer to thrombolysis given was “no but”, the reason was Refusal</p></li>
-<li><p>TimeUnknownWakeUp: If the answer to thrombolysis given was “no but”, the reason was Symptom onset time unknown/wake-up stroke</p></li>
-<li><p>TimeWindow: If the answer to thrombolysis given was “no but”, the reason was Age</p></li>
-<li><p>TooMildSevere: If the answer to thrombolysis given was “no but”, the reason was Stroke too mild or too severe</p></li>
-</ul>
-</section>
-</section>
+<section id="subgroup-analysis">
+<h2>Subgroup analysis<a class="headerlink" href="#subgroup-analysis" title="Permalink to this headline">#</a></h2>
+<img src="../xgb_10_features/output/15a_actual_vs_modelled_subgroup_violin.jpg" width="600"/></section>
+<section id="benchmarking">
+<h2>Benchmarking<a class="headerlink" href="#benchmarking" title="Permalink to this headline">#</a></h2>
+<img src="../xgb_10_features/output/05_benchmark_thrombolysis_key_features.jpg" width="400"/></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -688,7 +686,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./introduction"
+            path: "./paper"
         },
         predefinedOutput: true
     }
@@ -702,17 +700,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2_methods.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">SAMueL: Summary and key work</p>
+            <p class="prev-next-title">Methods</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="odds_prob.html" title="next page">
+    <a class='right-next' id="next-link" href="4_discussion.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Probability, odds, and SHAP values (log odds shifts)</p>
+        <p class="prev-next-title">Discussion</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
