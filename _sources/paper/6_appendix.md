@@ -184,6 +184,7 @@ The figure below shows the receiver operating characteristic curve, along with t
 
 :::{figure-md} roc_sens_spec
 <img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800">
+
 :::
 
 ### Validation of hospital thrombolysis use
