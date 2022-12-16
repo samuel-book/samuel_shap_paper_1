@@ -613,7 +613,7 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id2">
      Hospital and stroke severity interaction
     </a>
    </li>
@@ -838,7 +838,7 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id2">
      Hospital and stroke severity interaction
     </a>
    </li>
@@ -999,11 +999,11 @@ title="Print to PDF"
 <li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
 <li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
-<p>The improvement in ROC AUC with increasing features is shown in figure <a class="reference internal" href="#thrombolysis-hist"><span class="std std-numref">figure 13</span></a>). .</p>
-<figure class="align-default" id="thrombolysis-hist">
-<a class="reference internal image-reference" href="../_images/01_feature_selection.jpg"><img alt="../_images/01_feature_selection.jpg" src="../_images/01_feature_selection.jpg" style="width: 450px;" /></a>
+<p>The improvement in ROC AUC with increasing features is shown in figure <a class="reference internal" href="#id1"><span class="std std-numref">figure 13</span></a>).</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/01_feature_selection.jpg"><img alt="../_images/01_feature_selection.jpg" src="../_images/01_feature_selection.jpg" style="width: 800px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Feature selection for an XGBoost model predicting use of thrombolysis. Each feature was selected sequentially by the best improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: ROC improvement with selection of 25 features. Right: ROC improvement with selection of first 10 features.</span><a class="headerlink" href="#thrombolysis-hist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Feature selection for an XGBoost model predicting use of thrombolysis. Each feature was selected sequentially by the best improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: ROC improvement with selection of 25 features. Right: ROC improvement with selection of first 10 features.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="correlations-within-the-10-features">
@@ -1218,7 +1218,13 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-<p>The figure below shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.</p>
+<p>Figure <a class="reference internal" href="#roc-sens-spec"><span class="std std-numref">figure 14</span></a>). shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.</p>
+<figure class="align-default" id="roc-sens-spec">
+<a class="reference internal image-reference" href="../_images/02_xgb_10_features_roc_sens_spec.jpg"><img alt="../_images/02_xgb_10_features_roc_sens_spec.jpg" src="../_images/02_xgb_10_features_roc_sens_spec.jpg" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Accuracy of XGBoost model predicting use of thrombolysis. Left: Receiver Operating Characteristic curve. Right: Trade-off between sensitivity and specificity (the maximum sensitivity and specificity that may be achieved simultaneously is 0.839).</span><a class="headerlink" href="#roc-sens-spec" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <a class="reference internal image-reference" href="../_images/02_xgb_10_features_roc_sens_spec.jpg"><img alt="../_images/02_xgb_10_features_roc_sens_spec.jpg" src="../_images/02_xgb_10_features_roc_sens_spec.jpg" style="width: 800px;" /></a>
 <section id="validation-of-hospital-thrombolysis-use">
 <h3>Validation of hospital thrombolysis use<a class="headerlink" href="#validation-of-hospital-thrombolysis-use" title="Permalink to this headline">#</a></h3>
@@ -1603,8 +1609,8 @@ title="Print to PDF"
 <p><em>Team_TPXYE0168D</em> has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>Team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.</p>
 <a class="reference internal image-reference" href="../_images/12ab_stroke_severity_interaction_example1.jpg"><img alt="../_images/12ab_stroke_severity_interaction_example1.jpg" src="../_images/12ab_stroke_severity_interaction_example1.jpg" style="width: 600px;" /></a>
 </section>
-<section id="id1">
-<h3>Hospital and stroke severity interaction<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<section id="id2">
+<h3>Hospital and stroke severity interaction<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>The main effect of prior disability is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5).</p>
 <p><em>Team_XKAWN3771U</em> has a slighty higher general tendency to use thrombolysis than <em>Team_AKCGO9726K</em> (team main effect SHAP = 0.78 vs 0.45). <em>Team_XKAWN3771U</em> has a SHAP interaction that opposes the general prior disability main effect. <em>Team_AKCGO9726K</em> strengthens the main effect of pre-stroke disability - reducing the odds of receiving thrombolysis even further for mild strokes.</p>
 <a class="reference internal image-reference" href="../_images/12ac_disability_interaction_example1.jpg"><img alt="../_images/12ac_disability_interaction_example1.jpg" src="../_images/12ac_disability_interaction_example1.jpg" style="width: 600px;" /></a>

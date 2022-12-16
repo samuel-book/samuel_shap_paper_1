@@ -114,10 +114,10 @@ The best model with 1, 2, 5, 10, 25 & all features (60 features before one-hot e
 * Onset during sleep: Did stroke occur in sleep?
 * Age: Age (as middle of 5 year age bands)
 
-The improvement in ROC AUC with increasing features is shown in figure {numref}`figure {number} <thrombolysis_hist>`). .
+The improvement in ROC AUC with increasing features is shown in figure {numref}`figure {number} <feature_selection>`).
 
-:::{figure-md} thrombolysis_hist
-<img src="./images/01_feature_selection.jpg" width="450">
+:::{figure-md} feature_selection
+<img src="./images/01_feature_selection.jpg" width="800">
 
 Feature selection for an XGBoost model predicting use of thrombolysis. Each feature was selected sequentially by the best improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: ROC improvement with selection of 25 features. Right: ROC improvement with selection of first 10 features.
 :::
@@ -184,7 +184,13 @@ Model accuracy was measured using stratified 5-fold cross validation. The key re
 
 
 
-The figure below shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.
+Figure {numref}`figure {number} <roc_sens_spec>`). shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.
+
+:::{figure-md} roc_sens_spec
+<img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800">
+
+Accuracy of XGBoost model predicting use of thrombolysis. Left: Receiver Operating Characteristic curve. Right: Trade-off between sensitivity and specificity (the maximum sensitivity and specificity that may be achieved simultaneously is 0.839).
+:::
 
 <img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800"/>
 
