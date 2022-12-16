@@ -435,149 +435,135 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plain-english-summary">
-     Plain English summary
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
+   Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-get-thrombolysis-rate-shap-values-and-shap-interactions">
+     Pass 10k cohort through all hospital models, get thrombolysis rate, SHAP values and SHAP interactions.
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-and-data">
-     Model and data
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
+     Plot thrombolysis rate of 10k cohort at each hospital
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aims">
-     Aims:
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#show-stats">
+     Show stats
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-libraries">
-     Import libraries
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#set-filenames">
-     Set filenames
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-output-folders-if-needed">
-     Create output folders if needed
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#read-in-json-file">
-     Read in JSON file
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     Load data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-xgboost-model">
-     Fit XGBoost model
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-get-thrombolysis-rate-shap-values-and-shap-interactions">
-       Pass 10k cohort through all hospital models, get thrombolysis rate, SHAP values and SHAP interactions.
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
-       Plot thrombolysis rate of 10k cohort at each hospital
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#show-stats">
-       Show stats
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-level-of-agreement-between-hospitals">
-     Compare level of agreement between hospitals
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-shap-value-and-main-effect-for-the-hospital-feature-with-the-predicted-10k-thrombolysis-rate">
-     Compare SHAP value (and main effect) for the hospital feature, with the predicted 10k thrombolysis rate
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-shap-values">
-       Get SHAP values
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h4 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#format-the-shap-values-data">
-         Format the SHAP values data
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#save-using-pickle">
-   Save using pickle
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-level-of-agreement-between-hospitals">
+   Compare level of agreement between hospitals
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-shap-value-and-main-effect-for-the-hospital-feature-with-the-predicted-10k-thrombolysis-rate">
+   Compare SHAP value (and main effect) for the hospital feature, with the predicted 10k thrombolysis rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-shap-values">
+     Get SHAP values
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#format-the-shap-values-data">
+       Format the SHAP values data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-shap-interaction-values">
      Get SHAP interaction values
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#at-the-same-tiume-format-the-shap-interaction-data-so-only-get-the-main-effect-for-the-hospital-features">
        At the same tiume: Format the SHAP interaction data so only get the main effect for the hospital features
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#boxplot-all-hospitals-together">
      Boxplot (all hospitals together)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#boxplot-individual-hospitals">
      Boxplot (individual hospitals)
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#get-average-shap-value-and-main-effect-for-each-hospital-for-10k-cohort-attending-that-hospital">
        Get average SHAP (value, and main effect) for each hospital (for 10k cohort attending that hospital)
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#additional-figure-save">
-     Additional figure save
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-figure-save">
+   Additional figure save
+  </a>
  </li>
 </ul>
 
@@ -598,149 +584,135 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plain-english-summary">
+   Plain English summary
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plain-english-summary">
-     Plain English summary
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-data">
+   Model and data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aims">
+   Aims:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
+   Create output folders if needed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-in-json-file">
+   Read in JSON file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-xgboost-model">
+   Fit XGBoost model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-get-thrombolysis-rate-shap-values-and-shap-interactions">
+     Pass 10k cohort through all hospital models, get thrombolysis rate, SHAP values and SHAP interactions.
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-and-data">
-     Model and data
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
+     Plot thrombolysis rate of 10k cohort at each hospital
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aims">
-     Aims:
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#show-stats">
+     Show stats
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-libraries">
-     Import libraries
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#set-filenames">
-     Set filenames
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-output-folders-if-needed">
-     Create output folders if needed
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#read-in-json-file">
-     Read in JSON file
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     Load data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-xgboost-model">
-     Fit XGBoost model
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pass-10k-cohort-through-all-hospital-models-get-thrombolysis-rate-shap-values-and-shap-interactions">
-       Pass 10k cohort through all hospital models, get thrombolysis rate, SHAP values and SHAP interactions.
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#plot-thrombolysis-rate-of-10k-cohort-at-each-hospital">
-       Plot thrombolysis rate of 10k cohort at each hospital
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#show-stats">
-       Show stats
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-level-of-agreement-between-hospitals">
-     Compare level of agreement between hospitals
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-shap-value-and-main-effect-for-the-hospital-feature-with-the-predicted-10k-thrombolysis-rate">
-     Compare SHAP value (and main effect) for the hospital feature, with the predicted 10k thrombolysis rate
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#get-shap-values">
-       Get SHAP values
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h4 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#format-the-shap-values-data">
-         Format the SHAP values data
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#save-using-pickle">
-   Save using pickle
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-level-of-agreement-between-hospitals">
+   Compare level of agreement between hospitals
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-shap-value-and-main-effect-for-the-hospital-feature-with-the-predicted-10k-thrombolysis-rate">
+   Compare SHAP value (and main effect) for the hospital feature, with the predicted 10k thrombolysis rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-shap-values">
+     Get SHAP values
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#format-the-shap-values-data">
+       Format the SHAP values data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-shap-interaction-values">
      Get SHAP interaction values
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#at-the-same-tiume-format-the-shap-interaction-data-so-only-get-the-main-effect-for-the-hospital-features">
        At the same tiume: Format the SHAP interaction data so only get the main effect for the hospital features
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#boxplot-all-hospitals-together">
      Boxplot (all hospitals together)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#boxplot-individual-hospitals">
      Boxplot (individual hospitals)
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#get-average-shap-value-and-main-effect-for-each-hospital-for-10k-cohort-attending-that-hospital">
        Get average SHAP (value, and main effect) for each hospital (for 10k cohort attending that hospital)
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#additional-figure-save">
-     Additional figure save
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-figure-save">
+   Additional figure save
+  </a>
  </li>
 </ul>
 
@@ -1670,20 +1642,14 @@ contribution from not attending the rest</p>
 shap_interaction = explainer.shap_interaction_values(X_test)</p>
 </section>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="save-using-pickle">
-<h1>Save using pickle<a class="headerlink" href="#save-using-pickle" title="Permalink to this headline">#</a></h1>
-<p>with open(filename, ‘wb’) as filehandler:
-pickle.dump(shap_interaction, filehandler)</p>
 <section id="get-shap-interaction-values">
-<h2>Get SHAP interaction values<a class="headerlink" href="#get-shap-interaction-values" title="Permalink to this headline">#</a></h2>
+<h3>Get SHAP interaction values<a class="headerlink" href="#get-shap-interaction-values" title="Permalink to this headline">#</a></h3>
 <p>Use the TreeExplainer to also calculate the SHAP main effect and SHAP interaction values (the sum of which give the SHAP values for each feature)</p>
 <p>A SHAP interaction value is returned for each pair of features (including with itself, which is known as the main effect), for each instance. The SHAP value for a feature is the sum of it’s pair-wise feature interactions.</p>
 <p>Use these values to access the main effect for each of the one-hot encoded hospital features.</p>
 <p>Either load from pickle (if file exists), or calculate.</p>
 <section id="at-the-same-tiume-format-the-shap-interaction-data-so-only-get-the-main-effect-for-the-hospital-features">
-<h3>At the same tiume: Format the SHAP interaction data so only get the main effect for the hospital features<a class="headerlink" href="#at-the-same-tiume-format-the-shap-interaction-data-so-only-get-the-main-effect-for-the-hospital-features" title="Permalink to this headline">#</a></h3>
+<h4>At the same tiume: Format the SHAP interaction data so only get the main effect for the hospital features<a class="headerlink" href="#at-the-same-tiume-format-the-shap-interaction-data-so-only-get-the-main-effect-for-the-hospital-features" title="Permalink to this headline">#</a></h4>
 <p>Features are in the same order in shap_interaction as they are in the original dataset.</p>
 <p>Use this fact to extract the SHAP main effect values for the one-hot encoded hospital features. Create a dataframe containing the SHAP values: an instance per row, and a one-hot encoded hospital feature per column.</p>
 <p>Also include a column containing the Stroke team that each instance attended.</p>
@@ -1790,7 +1756,7 @@ Wall time: 345 ms
 </section>
 </section>
 <section id="boxplot-all-hospitals-together">
-<h2>Boxplot (all hospitals together)<a class="headerlink" href="#boxplot-all-hospitals-together" title="Permalink to this headline">#</a></h2>
+<h3>Boxplot (all hospitals together)<a class="headerlink" href="#boxplot-all-hospitals-together" title="Permalink to this headline">#</a></h3>
 <p>Analyse the range of SHAP values amd SHAP main effect values for the one-hot encoded hospital features. Show as two populations: the attended hospital, the sum of the hospitals not attended</p>
 <p>To create a grouped boxplot, used code from <a class="reference external" href="https://stackoverflow.com/questions/16592222/matplotlib-group-boxplots">https://stackoverflow.com/questions/16592222/matplotlib-group-boxplots</a></p>
 <div class="cell docutils container">
@@ -1853,7 +1819,7 @@ Wall time: 345 ms
 </div>
 </section>
 <section id="boxplot-individual-hospitals">
-<h2>Boxplot (individual hospitals)<a class="headerlink" href="#boxplot-individual-hospitals" title="Permalink to this headline">#</a></h2>
+<h3>Boxplot (individual hospitals)<a class="headerlink" href="#boxplot-individual-hospitals" title="Permalink to this headline">#</a></h3>
 <p>Create a boxplot to show the range of SHAP values and SHAP main effect values for each individual one-hot encoded hospital feature.</p>
 <p>Show the SHAP value as two populations: 1) the group of instances that attend the hospital [black], and 2) the group of instances that do not attend the hosptial [orange].</p>
 <p>Order the hospitals in descending order of median SHAP value for the hospital the instance attended (so those that more often contribute to a yes-thrombolysis decision, through to those that most often contribute to a no-thrombolysis decision).</p>
@@ -2218,7 +2184,7 @@ Wall time: 345 ms
 </div>
 </div>
 <section id="get-average-shap-value-and-main-effect-for-each-hospital-for-10k-cohort-attending-that-hospital">
-<h3>Get average SHAP (value, and main effect) for each hospital (for 10k cohort attending that hospital)<a class="headerlink" href="#get-average-shap-value-and-main-effect-for-each-hospital-for-10k-cohort-attending-that-hospital" title="Permalink to this headline">#</a></h3>
+<h4>Get average SHAP (value, and main effect) for each hospital (for 10k cohort attending that hospital)<a class="headerlink" href="#get-average-shap-value-and-main-effect-for-each-hospital-for-10k-cohort-attending-that-hospital" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise empty lists</span>
@@ -2430,6 +2396,7 @@ Wall time: 345 ms
 <img alt="../_images/04_compare_10k_cohort_key_features_65_0.png" src="../_images/04_compare_10k_cohort_key_features_65_0.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="id1">
