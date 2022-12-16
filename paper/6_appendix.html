@@ -342,17 +342,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -375,7 +364,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/paper/6_appendix.ipynb"
+        <a href="../_sources/paper/6_appendix.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -386,7 +375,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -1011,7 +1000,8 @@ title="Print to PDF"
 <li><p>Age: Age (as middle of 5 year age bands)</p></li>
 </ul>
 <p>The improvement in ROC AUC with increasing features is shown in the figure below.</p>
-<img src="./images/01_feature_selection.jpg" width="800"/><section id="correlations-within-the-10-features">
+<img src="./images/01_feature_selection.jpg" width="800"/>
+<section id="correlations-within-the-10-features">
 <h3>Correlations within the 10 features<a class="headerlink" href="#correlations-within-the-10-features" title="Permalink to this headline">#</a></h3>
 <p>Correlations between the 10 features were measured using coefficients of determination (r-squared). All r-squared were less than 0.15, and all r-squared were less than 0.05 except 1) age and prior disability level (r-squared 0.146), and 2) onset during sleep and precise onset time (r-squared 0.078).</p>
 <table class="colwidths-auto table">
@@ -1224,10 +1214,12 @@ title="Print to PDF"
 </tbody>
 </table>
 <p>The figure below shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.</p>
-<img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800"/><section id="validation-of-hospital-thrombolysis-use">
+<img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800"/>
+<section id="validation-of-hospital-thrombolysis-use">
 <h3>Validation of hospital thrombolysis use<a class="headerlink" href="#validation-of-hospital-thrombolysis-use" title="Permalink to this headline">#</a></h3>
 <p>With k-fold validation, every instance is in one, but only one, test set. The test sets may therefore be combined to have predictions for the whole data set. Using these collated results we may compare predicted thrombolysis use at each hospital, compared with the actual (observed) thrombolysis use. There was very good agreement between predicted and observed thrombolysis use at each hospital (r-squared 0.977).</p>
-<img src="./images/02_xgb_10_features_observed_predicted_rates.jpg" width="500"/></section>
+<img src="./images/02_xgb_10_features_observed_predicted_rates.jpg" width="500"/>
+</section>
 <section id="model-calibration">
 <h3>Model calibration<a class="headerlink" href="#model-calibration" title="Permalink to this headline">#</a></h3>
 <p>The model calibration was checked by binning predictions by probability, and comparing the mean predicted probability with the fraction that were actually positive. This demonstrates that the model was naturally well-calibrated, and was not in need of any calibration correction.</p>
@@ -1303,25 +1295,30 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-<img src="./images/02_xgb_10_features_reliability.jpg" width="800"/></section>
+<img src="./images/02_xgb_10_features_reliability.jpg" width="800"/>
+</section>
 <section id="evaluating-variation-in-model-predictions-and-predicted-10k-cohort-thrombolysis-rate-using-bootstrap-models">
 <h3>Evaluating variation in model predictions and predicted 10k cohort thrombolysis rate using bootstrap models<a class="headerlink" href="#evaluating-variation-in-model-predictions-and-predicted-10k-cohort-thrombolysis-rate-using-bootstrap-models" title="Permalink to this headline">#</a></h3>
 <p>Data was split into a training set of 78,928 patients, and a test set of 10k patients. 30 models were trained, each with a different bootstrap sample of the training set and with a different model random seed. For each of the 10k test set, we evaluated the variation in the predicted probability of receiving thrombolysis. The mean of these standard deviation was 0.057, but the variation depended on the probability, with variation peaking at about 0.13 when the prediction probability of receiving thrombolysis was around 0.5.</p>
-<img src="./images/50_bootstrap_prediction_sd.jpg" width="500"/><p>Additionally, we used the models and test set to predict thrombolysis at each of the 132 hospitals if the 10k cohort of patients had attended each of the hospitals (by changing the hospital one-hot encoding). We predicted the thrombolysis use at each hospital, and examined the variation between the 30 bootstrapped models. The mean of the standard deviation of bootstrap replicates was 1.7% (where hospital thrombolysis use rates were 10% to 45%).</p>
-<img src="./images/50_bootstrap_10k_sd.jpg" width="800"/><p>Bagging experiments were repeated with <em>Baysian Bootstrapping</em> based on weighting training samples using a Dirichlet distribution. Very similar results were achieved, with a mean standard deviation of bootstrap replicate probability predictions of 0.054, and a mean standard deviation of bootstrap replicate 10k thrombolysis use in hospitals of 1.6%.</p>
+<img src="./images/50_bootstrap_prediction_sd.jpg" width="500"/>
+<p>Additionally, we used the models and test set to predict thrombolysis at each of the 132 hospitals if the 10k cohort of patients had attended each of the hospitals (by changing the hospital one-hot encoding). We predicted the thrombolysis use at each hospital, and examined the variation between the 30 bootstrapped models. The mean of the standard deviation of bootstrap replicates was 1.7% (where hospital thrombolysis use rates were 10% to 45%).</p>
+<img src="./images/50_bootstrap_10k_sd.jpg" width="800"/>
+<p>Bagging experiments were repeated with <em>Baysian Bootstrapping</em> based on weighting training samples using a Dirichlet distribution. Very similar results were achieved, with a mean standard deviation of bootstrap replicate probability predictions of 0.054, and a mean standard deviation of bootstrap replicate 10k thrombolysis use in hospitals of 1.6%.</p>
 <p>The evaluation of bootstrapped replicates gave us confidence that a single model fit would be sufficient.</p>
 </section>
 <section id="learning-curves">
 <h3>Learning curves<a class="headerlink" href="#learning-curves" title="Permalink to this headline">#</a></h3>
 <p>Learning curves were performed using stratified 5-fold validation, and by random sampling of the training set. The maximum accuracy achieved was 85% using 70k trainign points, 82.5% accuracy was achieved with 4k training points. There was a shallow improvement between 4k and 70k training points.</p>
-<img src="./images/02_xgb_10_features_learning_curve.jpg" width="800"/></section>
+<img src="./images/02_xgb_10_features_learning_curve.jpg" width="800"/>
+</section>
 <section id="fine-tuning-of-model-regularisation">
 <h3>Fine-tuning of model regularisation<a class="headerlink" href="#fine-tuning-of-model-regularisation" title="Permalink to this headline">#</a></h3>
 <p>As hospital ID is encoded as one-hot, and there are 132 hospitals, it is possible that the effect of hospitals ID becomes ‘regularised out’. <em>Learning rate</em> in XGBoost acts as a regulariser. The lower the learning rate the less weight new trees have, and so the model becomes more regularised (less likely to overfit).</p>
 <p>As we are concerned with differences between hospitals, we did not want to over-regularise the model. To optimise <em>learning rate</em> we looked at the between-hospital variation of predicted thrombolysis use in a 10k cohort of patients (with the model predicting the use of thrombolysis in each hospital with the same 10k cohort). The mode was trained was on the remain 78,928 patients, with varying learning rates.</p>
 <p>Reducing the learning rate below 0.5 led to reduced between-hospital variation in the predicted use of thrombolysis, suggesting that the effect of hospital ID was being reduced by over-regularisation.</p>
 <p>A learning rate of 0.5 was chosen for all modelling (including the accuracy measurements above).</p>
-<img src="./images/91_learning_rate.jpg" width="400"/></section>
+<img src="./images/91_learning_rate.jpg" width="400"/>
+</section>
 </section>
 <section id="an-analysis-of-the-characteristics-of-the-most-thrombolysable-patient-at-each-hospital">
 <h2>An analysis of the characteristics of the most thrombolysable patient at each hospital<a class="headerlink" href="#an-analysis-of-the-characteristics-of-the-most-thrombolysable-patient-at-each-hospital" title="Permalink to this headline">#</a></h2>
@@ -1545,7 +1542,8 @@ title="Print to PDF"
 <section id="beeswarm-plot-of-shap-values">
 <h3>Beeswarm plot of SHAP values<a class="headerlink" href="#beeswarm-plot-of-shap-values" title="Permalink to this headline">#</a></h3>
 <p>The <em>beeswarm</em> plot gives a high level view of the feature values and SHAP values across the whole data set. We can see, for example that if a patient has an infarction then SHAP values are in the range 1-2, but if the patient does not have an infarction (i.e. has a haemorrhage) then SHAP values are in the range -8 to -4, effectively preventing the model from ever predicting thrombolysis would be given to a haemorrhagic patient.</p>
-<img src="./images/03_xgb_10_features_beeswarm.jpg" width="600"/></section>
+<img src="./images/03_xgb_10_features_beeswarm.jpg" width="600"/>
+</section>
 <section id="violin-plots-of-shap-values">
 <h3>Violin plots of SHAP values<a class="headerlink" href="#violin-plots-of-shap-values" title="Permalink to this headline">#</a></h3>
 <p>Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). Key observations are:</p>
@@ -1561,24 +1559,28 @@ title="Print to PDF"
 <section id="hospital-shap-values">
 <h3>Hospital SHAP values<a class="headerlink" href="#hospital-shap-values" title="Permalink to this headline">#</a></h3>
 <p>When examining SHAP, we take the hospital SHAP values for patients attending each hospital (if we examined the hospital SHAP for all patients, it would be dominated by those not-attending each hospital (i.e. coded zero in the one-hot encoding). When we examine the hospital SHAP values for a model trained on all the data, and only for patients attending each hospital, the hospital SHAP values ranged from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis).</p>
-<img src="./images/03_xgb_10_features_hosp_shap_hist.jpg" width="400"/><p>We compared the hospital SHAP value with the observed thrombolysis use at each hospital. Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582 (P&lt;0.0001) , suggesting that 58% of the between-hospital variance in thrombolysis use may be explained by the hospitals’ SHAP values, that is the hospitals’ predisposition to use thrombolysis.</p>
+<img src="./images/03_xgb_10_features_hosp_shap_hist.jpg" width="400"/>
+<p>We compared the hospital SHAP value with the observed thrombolysis use at each hospital. Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582 (P&lt;0.0001) , suggesting that 58% of the between-hospital variance in thrombolysis use may be explained by the hospitals’ SHAP values, that is the hospitals’ predisposition to use thrombolysis.</p>
 <img src="./images/03c_xgb_10_features_attended_hosp_shap_value.jpg" width="400"/>
 <p>The hospital SHAP value is composed of a <em>main</em> effect of the hospital, independent of other patient features, and <em>interaction effects</em>, which is how the hospital ID interacts with other patient features (e.g. if a hospital treats a certain type of patient in a way that is different to the usual pattern). We found that the SHAP value (which is the sum of the <em>main effect</em> and the <em>interaction effects</em>) for hospitals had a broader range than the main effect, as this value included how a hospital may have different predispositions to use thrombolysis in different types of patient.</p>
 <img src="./images/03c_xgb_10_features_individual_hosp_shap_value_and_main_effect_attend_vs_notattend_boxplot.jpg" width="800"/>
 <p>When we re-axamine the correlation between hospital SHAP and observed thrombolysis rate, we find that the main hospital SHAP effect accounts for 56% of the variance in thrombolysis rate (<em>c.f.</em> 58% for the full SHAP).</p>
-<img src="./images/03c_xgb_10_features_attended_hosp_shap_value_and_main_effect_vs_ivt_rate.jpg" width="500"/><section id="hospital-shap-and-10k-cohort">
+<img src="./images/03c_xgb_10_features_attended_hosp_shap_value_and_main_effect_vs_ivt_rate.jpg" width="500"/>
+<section id="hospital-shap-and-10k-cohort">
 <h4>Hospital SHAP and 10k cohort<a class="headerlink" href="#hospital-shap-and-10k-cohort" title="Permalink to this headline">#</a></h4>
 <p>When using the 10k cohort, changing the one-hot encoding to mimic all patients attending each of the 132 hospitals, we found that the median hospital SHAP value for the 10k patients correlated very closely with the predicted thrombolysis use in the 10k cohort at each hospital (r-squared = 0.947 for full SHAP and r-squared = 0.944 for the main effect), confirming that the hospital SHAP is providing a key insight into a hopsital’s predisposition to use thrombolysis.</p>
 <img src="./images/04_xgb_10_features_10k_cohort_attended_hosp_shap.jpg" width="400"/>
 <p>Though we model the same 10k patients going to all hospitals, we found that the SHAP interaction effect (the difference between the full SAHP value and the SHAP main effect) differed between hospitals. This demonstrated how the hospital SHAP is partly dependent on the patients attending (and the hospital’s predisposition to give thrombolysis to different groups of patients).</p>
-<img src="./images/04_xgb_10_features_10k_cohort_individual_hosp_shap_value_and_maineffect_attend_vs_notattend_boxplot.jpg" width="800"/></section>
+<img src="./images/04_xgb_10_features_10k_cohort_individual_hosp_shap_value_and_maineffect_attend_vs_notattend_boxplot.jpg" width="800"/>
+</section>
 </section>
 <section id="waterfall-plots-for-individual-patient-predictions">
 <h3>Waterfall plots for individual patient predictions<a class="headerlink" href="#waterfall-plots-for-individual-patient-predictions" title="Permalink to this headline">#</a></h3>
 <p>Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive. The example shown below is for a patient with a low probability of receiving thrombolysis. The model starts with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features increase that base probability of receiving thrombolysis, those are onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features then reduce the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%.</p>
 <img src="./images/03_xgb_10_features_waterfall_probability_low.jpg" width="600"/>
 <p>We may see a similar plot for a patient with a high (96%) probability of receiving thrombolysis.</p>
-<img src="./images/03_xgb_10_features_waterfall_probability_high.jpg" width="600"/></section>
+<img src="./images/03_xgb_10_features_waterfall_probability_high.jpg" width="600"/>
+</section>
 </section>
 <section id="shap-interactions">
 <h2>SHAP interactions<a class="headerlink" href="#shap-interactions" title="Permalink to this headline">#</a></h2>
@@ -1600,14 +1602,20 @@ title="Print to PDF"
 <h3>Hospital and stroke severity interaction<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>The main effect of prior disability is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5).</p>
 <p><em>Team_XKAWN3771U</em> has a slighty higher general tendency to use thrombolysis than <em>Team_AKCGO9726K</em> (team main effect SHAP = 0.78 vs 0.45). <em>Team_XKAWN3771U</em> has a SHAP interaction that opposes the general prior disability main effect. <em>Team_AKCGO9726K</em> strengthens the main effect of pre-stroke disability - reducing the odds of receiving thrombolysis even further for mild strokes.</p>
-<img src="./images/12ac_disability_interaction_example.jpg" width="600"/></section>
+<img src="./images/12ac_disability_interaction_example.jpg" width="600"/>
+</section>
 </section>
 <section id="subgroup-analysis">
 <h2>Subgroup analysis<a class="headerlink" href="#subgroup-analysis" title="Permalink to this headline">#</a></h2>
-<img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600"/></section>
+<img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600"/>
+</section>
 <section id="k-cohort">
 <h2>10k cohort<a class="headerlink" href="#k-cohort" title="Permalink to this headline">#</a></h2>
-<img src="./images/05_benchmark_thrombolysis_key_features.jpg" width="400"/></section>
+<img src="./images/05_benchmark_thrombolysis_key_features.jpg" width="400"/>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
