@@ -114,13 +114,9 @@ The best model with 1, 2, 5, 10, 25 & all features (60 features before one-hot e
 * Onset during sleep: Did stroke occur in sleep?
 * Age: Age (as middle of 5 year age bands)
 
-The improvement in ROC AUC with increasing features is shown in figure {numref}`figure {number} <feature_selection>`).
+The improvement in ROC AUC with increasing features is shown in the figure below.
 
-:::{figure-md} feature_selection
-<img src="./images/01_feature_selection.jpg" width="800">
-
-Feature selection for an XGBoost model predicting use of thrombolysis. Each feature was selected sequentially by the best improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: ROC improvement with selection of 25 features. Right: ROC improvement with selection of first 10 features.
-:::
+<img src="./images/01_feature_selection.jpg" width="800"/>
 
 ### Correlations within the 10 features
 
@@ -184,13 +180,7 @@ Model accuracy was measured using stratified 5-fold cross validation. The key re
 
 
 
-Figure {numref}`figure {number} <roc_sens_spec>`). shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.
-
-:::{figure-md} roc_sens_spec
-<img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800">
-
-Accuracy of XGBoost model predicting use of thrombolysis. Left: Receiver Operating Characteristic curve. Right: Trade-off between sensitivity and specificity (the maximum sensitivity and specificity that may be achieved simultaneously is 0.839).
-:::
+The figure below shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.
 
 <img src="./images/02_xgb_10_features_roc_sens_spec.jpg" width="800"/>
 
@@ -441,7 +431,7 @@ We may see a similar plot for a patient with a high (96%) probability of receivi
 
 <img src="./images/03_xgb_10_features_waterfall_probability_high.jpg" width="600"/>
 
-## SHAP interactions
+## Hospital SHAP interactions
 
 Below are three examples of how a particular hospital modifies the general SHAP effects - either strengthening the effect, of attenuating it.
 
@@ -471,6 +461,16 @@ The main effect of prior disability is to progressively reduce the odds of recei
 *Team_XKAWN3771U* has a slighty higher general tendency to use thrombolysis than *Team_AKCGO9726K* (team main effect SHAP = 0.78 vs 0.45). *Team_XKAWN3771U* has a SHAP interaction that opposes the general prior disability main effect. *Team_AKCGO9726K* strengthens the main effect of pre-stroke disability - reducing the odds of receiving thrombolysis even further for mild strokes.
 
 <img src="./images/12ac_disability_interaction_example.jpg" width="600"/>
+
+## General SHAP interactions
+
+All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values cam from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.
+
+Some key interactions are:
+  * If a stroke is haemorrhagic, then the interaction is such that the presence of haemorrhage cancels out much of the other SHAP effects (i.e. stroke severity does not matter if the stroke is haemorrhagic).
+  * Likewise elsewhere we find that features that each give negative SHAP values alone have an interaction that attenuates the combined effect of the two features together a little.
+
+<img src="./images/12a_shap_interactions_scatter.jpg" width="1200"/>
 
 ## Subgroup analysis
 
