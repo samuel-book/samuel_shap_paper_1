@@ -188,7 +188,7 @@ The figure below shows the receiver operating characteristic curve, along with t
 
 With k-fold validation, every instance is in one, but only one, test set. The test sets may therefore be combined to have predictions for the whole data set. Using these collated results we may compare predicted thrombolysis use at each hospital, compared with the actual (observed) thrombolysis use. There was very good agreement between predicted and observed thrombolysis use at each hospital (r-squared 0.977).
 
-<img src="./images/02_xgb_10_features_observed_predicted_rates.jpg" width="500"/>
+<img src="images/02_xgb_10_features_observed_predicted_rates.jpg" width="500"/>
 
 ### Model calibration
 
