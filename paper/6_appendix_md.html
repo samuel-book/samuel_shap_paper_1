@@ -627,6 +627,13 @@ title="Print to PDF"
    </em>
    decisions
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#agreement-between-hopsitals-on-10k-cohort-thrombolysis-decisions">
+     Agreement between hopsitals on 10k cohort thrombolysis decisions
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -881,6 +888,13 @@ title="Print to PDF"
    </em>
    decisions
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#agreement-between-hopsitals-on-10k-cohort-thrombolysis-decisions">
+     Agreement between hopsitals on 10k cohort thrombolysis decisions
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -1027,7 +1041,7 @@ title="Print to PDF"
 </section>
 <section id="variation-in-thrombolysis-use">
 <h2>Variation in thrombolysis use<a class="headerlink" href="#variation-in-thrombolysis-use" title="Permalink to this headline">#</a></h2>
-<p>Thrombolysis use varies between hospitals, from 1.5% to 24.3% of all patients, and 7.3% to 49.7% of patients arriving within 4 hours of known stroke onset.</p>
+<p>Thrombolysis use varied between hospitals, from 1.5% to 24.3% of all patients, and 7.3% to 49.7% of patients arriving within 4 hours of known stroke onset.</p>
 <a class="reference internal image-reference" href="../_images/thrombolysis_hist.jpg"><img alt="../_images/thrombolysis_hist.jpg" src="../_images/thrombolysis_hist.jpg" style="width: 800px;" /></a>
 </section>
 <section id="machine-learning">
@@ -1056,7 +1070,7 @@ title="Print to PDF"
 </ul>
 <p>The improvement in ROC AUC with increasing features is shown in the figure below.</p>
 <a class="reference internal image-reference" href="../_images/01_feature_selection.jpg"><img alt="../_images/01_feature_selection.jpg" src="../_images/01_feature_selection.jpg" style="width: 800px;" /></a>
-<p><em>The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features.</em></p>
+<p><em>The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features. ROC was measured with stratified 5-fold cross-validation.</em></p>
 <section id="correlations-within-the-10-features">
 <h3>Correlations within the 10 features<a class="headerlink" href="#correlations-within-the-10-features" title="Permalink to this headline">#</a></h3>
 <p>Correlations between the 10 features were measured using coefficients of determination (r-squared). All r-squared were less than 0.15, and all r-squared were less than 0.05 except 1) age and prior disability level (r-squared 0.146), and 2) onset during sleep and precise onset time (r-squared 0.078).</p>
@@ -1271,6 +1285,7 @@ title="Print to PDF"
 </table>
 <p>The figure below shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.</p>
 <a class="reference internal image-reference" href="../_images/02_xgb_10_features_roc_sens_spec.jpg"><img alt="../_images/02_xgb_10_features_roc_sens_spec.jpg" src="../_images/02_xgb_10_features_roc_sens_spec.jpg" style="width: 800px;" /></a>
+<p><em>Model accuracy of a XGBoost model using 10 features. Left: Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Right: The trade-off between Sensitivity and Specificity. Accuracy was measured with stratified 5-fold cross-validation.</em></p>
 <section id="validation-of-hospital-thrombolysis-use">
 <h3>Validation of hospital thrombolysis use<a class="headerlink" href="#validation-of-hospital-thrombolysis-use" title="Permalink to this headline">#</a></h3>
 <p>With k-fold validation, every instance is in one, but only one, test set. The test sets may therefore be combined to have predictions for the whole data set. Using these collated results we may compare predicted thrombolysis use at each hospital, compared with the actual (observed) thrombolysis use. There was very good agreement between predicted and observed thrombolysis use at each hospital (r-squared 0.977).</p>
@@ -1765,6 +1780,11 @@ title="Print to PDF"
 <li><p>Thrombolysis use would be increased 31.2% at non-benchmark hospitals if benchmark decisions were made at those hospitals. Overall, thrombolysis use, including at the benchmark hospitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysus rate) would be increased 60.2%.</p></li>
 <li><p>The ratio of benchmark:local thrombolysis use ranged from 0.7 to 2.1.</p></li>
 </ul>
+<section id="agreement-between-hopsitals-on-10k-cohort-thrombolysis-decisions">
+<h3>Agreement between hopsitals on 10k cohort thrombolysis decisions<a class="headerlink" href="#agreement-between-hopsitals-on-10k-cohort-thrombolysis-decisions" title="Permalink to this headline">#</a></h3>
+<p>87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse.</p>
+<a class="reference internal image-reference" href="../_images/04_xgb_10_features_10k_cohort_agreement_vs_hospital_single.jpg"><img alt="../_images/04_xgb_10_features_10k_cohort_agreement_vs_hospital_single.jpg" src="../_images/04_xgb_10_features_10k_cohort_agreement_vs_hospital_single.jpg" style="width: 400px;" /></a>
+</section>
 </section>
 </section>
 
