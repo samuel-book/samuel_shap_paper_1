@@ -1,6 +1,6 @@
 # Appendix
 
-Note: For machine learning, our aim was to predict use of thrombolysis in all patients arriving within 4 hours of known stroke onset.
+For machine learning, our aim was to predict which patients would receive thrombolysis at each hospital. We limit machine learning to patients arriving within 4 hours of known stroke onset (36% of all stroke admissions) as these are the patients who arrive in hospital with time left to administer thrombolysis.
 
 Following features selection of the most influential features, 10 features were used for predictions:
 
