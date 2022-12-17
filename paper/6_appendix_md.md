@@ -4,16 +4,16 @@ For machine learning, our aim was to predict which patients would receive thromb
 
 Following features selection of the most influential features, 10 features were used for predictions:
 
-* Arrival-to-scan time: Time from arrival at hospital to scan (mins)
-* Infarction: Stroke type (1 = infarction, 0 = haemorrhage)
-* Stroke severity: Stroke severity (NIHSS) on arrival
-* Precise onset time: Onset time type (1 = precise, 0 = best estimate)
-* Prior disability level: Disability level (modified Rankin Scale) before stroke
-* Stroke team: Stroke team attended
-* Use of AF anticoagulants: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)
-* Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)
-* Onset during sleep: Did stroke occur in sleep?
-* Age: Age (as middle of 5 year age bands)
+* *Arrival-to-scan time*: Time from arrival at hospital to scan (mins)
+* *Infarction*: Stroke type (1 = infarction, 0 = haemorrhage)
+* *Stroke severity*: Stroke severity (NIHSS) on arrival
+* *Precise onset time*: Onset time type (1 = precise, 0 = best estimate)
+* *Prior disability level*: Disability level (modified Rankin Scale) before stroke
+* *Stroke team*: Stroke team attended
+* *Use of AF anticoagulants*: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)
+* *Onset-to-arrival time*: Time from onset of stroke to arrival at hospital (mins)
+* *Onset during sleep*: Did stroke occur in sleep?
+* *Age*: Age (as middle of 5 year age bands)
 
 ## Data
 
@@ -112,26 +112,47 @@ Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams
 * TimeWindow: If the answer to thrombolysis given was “no but”, the reason was Age
 * TooMildSevere: If the answer to thrombolysis given was “no but”, the reason was Stroke too mild or too severe
 
+## Variation in thrombolysis use
+
+Thrombolysis use varies between hospitals, from 1.5% to 24.3% of all patients, and 7.3% to 49.7% of patients arriving within 4 hours of known stroke onset.
+
+<img src="./images/thrombolysis_hist.jpg" width="800"/>
+
+
+## Machine learning
+
+All work was conducted in Python (v3.8). All code is available at: https://github.com/samuel-book/samuel_shap_paper_1
+
+Our machine learning model used XGBoost (*eXtreme Gradient Boosting*, v1.5, Chen & Guestrin, 2016). We used default settings apart from *learning rate* was set at 0.5 (see section below on *'Fine-tuning of model regularisation'*.
+
+Machine learning models were explained using SHAP (*SHapley Additive exPlanations*, v0.41, Lundberg & Lee, 2017). 
+
+Chen, T. & Guestrin, C., 2016. XGBoost: A Scalable Tree Boosting System. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. KDD &#x27;16. New York, NY, USA: ACM, pp. 785–794. Available at: http://doi.acm.org/10.1145/2939672.2939785.
+
+Lundberg SM, Lee SI. A Unified Approach to Interpreting Model Predictions. In: Advances in Neural Information Processing Systems [Internet]. Curran Associates, Inc.; 2017 [cited 2022 Jun 17]. Available from: https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html
+
 ## Feature selection
 
 25 features were selected by identifying one feature at a time that led to greatest improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). ROC AUC was measured using stratified 5-fold cross validation.
 
 The best model with 1, 2, 5, 10, 25 & all features (60 features before one-hot encoding of fields) had ROC AUCs of 0.715, 0.792, 0.891, 0.919, 0.923 & 0.922. We selected 10 features for all subsequent work, which were:
 
-* Arrival-to-scan time: Time from arrival at hospital to scan (mins)
-* Infarction: Stroke type (1 = infarction, 0 = haemorrhage)
-* Stroke severity: Stroke severity (NIHSS) on arrival
-* Precise onset time: Onset time type (1 = precise, 0 = best estimate)
-* Prior disability level: Disability level (modified Rankin Scale) before stroke
-* Stroke team: Stroke team attended
-* Use of AF anticoagulants: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)
-* Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)
-* Onset during sleep: Did stroke occur in sleep?
-* Age: Age (as middle of 5 year age bands)
+* *Arrival-to-scan time*: Time from arrival at hospital to scan (mins)
+* *Infarction*: Stroke type (1 = infarction, 0 = haemorrhage)
+* *Stroke severity*: Stroke severity (NIHSS) on arrival
+* *Precise onset time*: Onset time type (1 = precise, 0 = best estimate)
+* *Prior disability level*: Disability level (modified Rankin Scale) before stroke
+* *Stroke team*: Stroke team attended
+* *Use of AF anticoagulants*: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)
+* *Onset-to-arrival time*: Time from onset of stroke to arrival at hospital (mins)
+* *Onset during sleep*: Did stroke occur in sleep?
+* *Age*: Age (as middle of 5 year age bands)
 
 The improvement in ROC AUC with increasing features is shown in the figure below.
 
 <img src="./images/01_feature_selection.jpg" width="800"/>
+
+*The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features.*
 
 ### Correlations within the 10 features
 
