@@ -44,6 +44,7 @@ The aims of this study were 1) to apply *explainable machine learning* technique
 Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient receives thrombolysis or not. 
 
 <img src="./images/ml_model_high_level.png" width="600">
+*A general depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.*
 
 There are many different types of machine learning (here we use one called *XG-Boost*), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call a *black box* model - that is we give it some information, and it makes a prediction, but we don't know *why* it made that particular prediction. 
 
@@ -107,10 +108,12 @@ Looking at patterns oh SHAP values reveals the following:
 The figure below shows a violin plot of SHAP values for six features.
 
 <img src="./images/xgb_thrombolysis_shap_violin.jpg" width="800">
+*A violin plot showing the individual SHAP values for six features. The shape of the violin shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would would receive thrombolysis. A negative SHAP value pushes the model towards saying that patient would would not receive thrombolysis.*
 
 SHAP plots can also be used to explain predictions of any individual patient. 
 
 <img src="./images/xgb_waterfall_low_probability_2.jpg" width="800">
+*An example of a SHAP waterfall plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).*
 
 ### Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
 
@@ -119,6 +122,7 @@ We can assess each hospital's *'propensity to use thrombolysis'* by passing the 
 When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model, we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
 
 <img src="./images/shap_vs_10k.jpg" width="450">
+*A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.*
 
 We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
 
@@ -146,9 +150,11 @@ The predicted results show a stronger effect of combining non-ideal features.
 When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.
 
 <img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600">
+*A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hopsital.*
 
 ### How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value? 
 
 We can also look at how a hospital's SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital's SHAP value explains 58% of the variance in thrombolysis rate of patients. This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).
 
 <img src="./images/hospital_shap_own_patients.jpg" width="450">
+*A comparison of average hospital SHAP values with actual hospital thrombolysis use for patients arriving within 4 hours of known stroke onset.*
