@@ -121,9 +121,15 @@ Thrombolysis use varies between hospitals, from 1.5% to 24.3% of all patients, a
 
 ## Machine learning
 
-Our machine learning model uses XGBoost (Chen & Guestrin, 2016). We used default settings apart from learning rate was set at 0.5 (see section below on *'Fine-tuning of model regularisation'*.
+All work was conducted in Python (v3.8). All code is available at: https://github.com/samuel-book/samuel_shap_paper_1
+
+Our machine learning model used XGBoost (*eXtreme Gradient Boosting*, v1.5, Chen & Guestrin, 2016). We used default settings apart from *learning rate* was set at 0.5 (see section below on *'Fine-tuning of model regularisation'*.
+
+Machine learning models were explained using SHAP (*SHapley Additive exPlanations*, v0.41, Lundberg & Lee, 2017). 
 
 Chen, T. & Guestrin, C., 2016. XGBoost: A Scalable Tree Boosting System. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. KDD &#x27;16. New York, NY, USA: ACM, pp. 785–794. Available at: http://doi.acm.org/10.1145/2939672.2939785.
+
+Lundberg SM, Lee SI. A Unified Approach to Interpreting Model Predictions. In: Advances in Neural Information Processing Systems [Internet]. Curran Associates, Inc.; 2017 [cited 2022 Jun 17]. Available from: https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html
 
 ## Feature selection
 
