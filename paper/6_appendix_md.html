@@ -600,8 +600,22 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#k-cohort">
-   10k cohort
+  <a class="reference internal nav-link" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
+   A comparison of thrombolysis use in high and low thrombolysing units by feature values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#artificial-patients">
+   Artificial patients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-cohort-and-benchmark-decisions">
+   10k cohort and
+   <em>
+    ‘benchmark’
+   </em>
+   decisions
   </a>
  </li>
 </ul>
@@ -830,8 +844,22 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#k-cohort">
-   10k cohort
+  <a class="reference internal nav-link" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
+   A comparison of thrombolysis use in high and low thrombolysing units by feature values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#artificial-patients">
+   Artificial patients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-cohort-and-benchmark-decisions">
+   10k cohort and
+   <em>
+    ‘benchmark’
+   </em>
+   decisions
   </a>
  </li>
 </ul>
@@ -1597,14 +1625,98 @@ title="Print to PDF"
 </section>
 <section id="subgroup-analysis">
 <h2>Subgroup analysis<a class="headerlink" href="#subgroup-analysis" title="Permalink to this headline">#</a></h2>
+<p>We analyse the observed and predicted use of thrombolysis in subgroups of patients.Those groups are:</p>
+<ul class="simple">
+<li><p>Mild stroke severity (NIHSS &lt; 5)</p></li>
+<li><p>No precise onset time</p></li>
+<li><p>Existing pre-stroke disability (mRS &gt; 2)</p></li>
+<li><p>An <em>‘ideal’</em> thrombolysable patient:</p>
+<ul>
+<li><p>Stroke severity NIHSS in range 10-25</p></li>
+<li><p>Arrival-to-scan time &lt; 30 minutes</p></li>
+<li><p>Stroke type = infarction</p></li>
+<li><p>Precise onset time = True</p></li>
+<li><p>Prior diability level (mRS) = 0</p></li>
+<li><p>No use of AF anticoagulants</p></li>
+<li><p>Onset-to-arrival time &lt; 90 minutes</p></li>
+<li><p>Age &lt; 80 years</p></li>
+<li><p>Onset during sleep = False</p></li>
+</ul>
+</li>
+</ul>
+<p>The figure below shows a boxplot of either observed (top) or predicted (bottom) use of thrombolysis.</p>
+<p>The observed and predicted subgroup analysis show very similar general patterns (with r-squared=0.95, see figure below of comparison of predicted and observed use of thrombolysis at each hospital for all subgroups). The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.</p>
+<p>Some differences exist:</p>
+<ul class="simple">
+<li><p>The use of thrombolysi in <em>ideal</em> patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).</p></li>
+<li><p>The predicted results show a stronger effect of combining non-ideal features.</p></li>
+<li><p>The observed thrombolysis rate shows higher between-hopsital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolsysi rate being on different patients at each hospital, but may also be partly exlained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospial patterns, and will not include, for example, between-clinician variation at each hospital).</p></li>
+</ul>
 <a class="reference internal image-reference" href="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg"><img alt="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg" src="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg" style="width: 600px;" /></a>
+<p>The correlation of predicted and observed use of thrombolysis at each hospital for all subgroups:</p>
+<a class="reference internal image-reference" href="../_images/15a_subgroup_correlation.jpg"><img alt="../_images/15a_subgroup_correlation.jpg" src="../_images/15a_subgroup_correlation.jpg" style="width: 400px;" /></a>
+<p>When we look at thrombolysis use in subgroups at each hospital we see that the observed thrombolysis use tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p>
+<a class="reference internal image-reference" href="../_images/15a_actual_subgroup.jpg"><img alt="../_images/15a_actual_subgroup.jpg" src="../_images/15a_actual_subgroup.jpg" style="width: 800px;" /></a>
+<p>This parallel reduction in use of thrombolysis across the subgroups was also seen in the predicted use of thrombolysis.</p>
+<a class="reference internal image-reference" href="../_images/15_10k_subgroup.jpg"><img alt="../_images/15_10k_subgroup.jpg" src="../_images/15_10k_subgroup.jpg" style="width: 800px;" /></a>
 </section>
-<section id="k-cohort">
-<h2>10k cohort<a class="headerlink" href="#k-cohort" title="Permalink to this headline">#</a></h2>
-<a class="reference internal image-reference" href="../_images/05_benchmark_thrombolysis_key_features.jpg"><img alt="../_images/05_benchmark_thrombolysis_key_features.jpg" src="../_images/05_benchmark_thrombolysis_key_features.jpg" style="width: 400px;" /></a>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<section id="a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
+<h2>A comparison of thrombolysis use in high and low thrombolysing units by feature values<a class="headerlink" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values" title="Permalink to this headline">#</a></h2>
+<p>This experiment plots the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals. The high and low thrombolysing hopsitals are taken as the top and bottom 30 hospitals as ranked by the predicted thrombolysis use in the same 10k cohort of patients. We find that thrombolysis use in low thrombolysing hospitals follows the same general relationship with feature values as the high thrombolysing hospitals, but thrombolysis is consistently lower.</p>
+<a class="reference internal image-reference" href="../_images/09_compare_thrombolysis_by_feature.jpg"><img alt="../_images/09_compare_thrombolysis_by_feature.jpg" src="../_images/09_compare_thrombolysis_by_feature.jpg" style="width: 800px;" /></a>
+</section>
+<section id="artificial-patients">
+<h2>Artificial patients<a class="headerlink" href="#artificial-patients" title="Permalink to this headline">#</a></h2>
+<p>We use artificial patients to investigate controlled changes to patients, and see how many hospitals are predicted to give thrombolysis.</p>
+<p>We start with a ‘base patient’ who has features that are favourable to use of thrombolysis:</p>
+<ul class="simple">
+<li><p>Onset to arrival = 80 mins</p></li>
+<li><p>Arrival to scan = 20 mins</p></li>
+<li><p>Infarction = 1</p></li>
+<li><p>NIHSS = 15</p></li>
+<li><p>Prior disability level = 0</p></li>
+<li><p>Precise onset time = 1</p></li>
+<li><p>Use of AF anticoagulents = 0</p></li>
+</ul>
+<p>We then vary the following features in turn, keeping all other features the same as the base patient:</p>
+<ul class="simple">
+<li><p>NIHSS = 0-40</p></li>
+<li><p>Prior disability level = 0-5</p></li>
+<li><p>Precise onset time = 0-1</p></li>
+</ul>
+<p>The number of hospitals giving thrombolysis:</p>
+<ul class="simple">
+<li><p>Base patient: 132 (99%)</p></li>
+<li><p>Base patient, but NIHSS = 5: 123 (93%)</p></li>
+<li><p>Base patient, but pre-stroke disability = 2: 125 (95%)</p></li>
+<li><p>Base patient, but estimated stroke onset time: 109 (83%)</p></li>
+</ul>
+<p>Combining two marginal features:</p>
+<ul class="simple">
+<li><p>Base patient, but NIHSS = 5 and pre-stroke disability = 2: 78 (59%)</p></li>
+<li><p>Base patient, but NIHSS = 5 and estimated stroke onset time: 30 (23%)</p></li>
+<li><p>Base patient, but pre-stroke disability = 2 and estimated stroke onset time: 26 (20%)</p></li>
+</ul>
+<p>Combining three marginal features:</p>
+<ul class="simple">
+<li><p>Base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 2 (1.5%)</p></li>
+</ul>
+<p>Starting with the ideal patient, and changing only feature at a time we observed the following changes in the proportion of thrombolysis that were predicted to give the patient thrombolysis:</p>
+<a class="reference internal image-reference" href="../_images/20_synthetic_xgb_10_features_IVT_rate_vs_feature_values.jpg"><img alt="../_images/20_synthetic_xgb_10_features_IVT_rate_vs_feature_values.jpg" src="../_images/20_synthetic_xgb_10_features_IVT_rate_vs_feature_values.jpg" style="width: 800px;" /></a>
+<p>We also studied combining changes to the patient (starting with the ‘ideal’ thrombolysable patient. The chart below shows the proportion of hospitals predicted to give a patient thrombolysis by altering stroke severity in combination with estimated (non-precise) onset time, mild pre-existing disability (mRS 2), or a combination of estimated onset time and mild pre-existing disability.</p>
+<a class="reference internal image-reference" href="../_images/20_synthetic_xgb_10_features_interactions.jpg"><img alt="../_images/20_synthetic_xgb_10_features_interactions.jpg" src="../_images/20_synthetic_xgb_10_features_interactions.jpg" style="width: 400px;" /></a>
+</section>
+<section id="k-cohort-and-benchmark-decisions">
+<h2>10k cohort and <em>‘benchmark’</em> decisions<a class="headerlink" href="#k-cohort-and-benchmark-decisions" title="Permalink to this headline">#</a></h2>
+<p>In this experiment we predict, for each hospital, the expected use of thrombolysis for a 10k cohort of patients (the model is trained on the remaining 78,792 patients.</p>
+<p>The 30 hospitals with the highest predicted thrombolysis use in the 10k cohort were considered <em>benchmark</em> hospitals.</p>
+<p>We then took each hospitals own patients and predicted the thrombolysis decision that would made for each patient at each of the hospitals, taking a majority vote of those benchmark hospitals as the <em>benchmark decision</em> for that patient. We estimated the use of thrombolysis at each hospital if the benchmark decision was followed for all patients attending each hospital.</p>
+<a class="reference internal image-reference" href="../_images/05_benchmark_thrombolysis_key_features.jpg"><img alt="../_images/05_benchmark_thrombolysis_key_features.jpg" src="../_images/05_benchmark_thrombolysis_key_features.jpg" style="width: 500px;" /></a>
+<ul class="simple">
+<li><p>83.3% decisions are identical between local and benchmark decisions.</p></li>
+<li><p>Thrombolysis use would be increased 31.2% at non-benchmark hospitals if benchmark decisions were made at those hospitals. Overall, thrombolysis use, including at the benchmark hospitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysus rate) would be increased 60.2%.</p></li>
+<li><p>The ratio of benchmark:local thrombolysis use ranged from 0.7 to 2.1.</p></li>
+</ul>
 </section>
 </section>
 
