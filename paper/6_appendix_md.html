@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Data &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
+    <title>Appendix &#8212; Using explainable machine learning to understand variation in thrombolysis practice</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Probability, odds, and SHAP values (log odds shifts)" href="odds_prob.html" />
-    <link rel="prev" title="SAMueL: Summary and key work" href="intro.html" />
+    <link rel="prev" title="Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates" href="../xgb_10_features/91_learning_rate_optimisation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -103,7 +102,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
+                <a class="reference internal" href="../introduction/intro.html">
                     SAMueL: Summary and key work
                 </a>
             </li>
@@ -113,19 +112,19 @@ const thebe_selector_output = ".output, .cell_output"
   Introductory content
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/data.html">
    Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="odds_prob.html">
+  <a class="reference internal" href="../introduction/odds_prob.html">
    Probability, odds, and SHAP values (log odds shifts)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="shap_worked_example.html">
+  <a class="reference internal" href="../introduction/shap_worked_example.html">
    A simple worked example of Shap
   </a>
  </li>
@@ -256,9 +255,9 @@ const thebe_selector_output = ".output, .cell_output"
   Paper (Work In Progress)
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../paper/6_appendix_md.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Appendix
   </a>
  </li>
@@ -335,7 +334,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/introduction/data.md"
+        <a href="../_sources/paper/6_appendix_md.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -395,53 +394,72 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-access">
-   Data access
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-fields">
-   Data Fields
+  <a class="reference internal nav-link" href="#data">
+   Data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stroke-team">
-     Stroke Team
+    <a class="reference internal nav-link" href="#data-access">
+     Data access
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-general">
-     Patient – general
+    <a class="reference internal nav-link" href="#data-fields">
+     Data Fields
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stroke-team">
+       Stroke Team
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-general">
+       Patient – general
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-pathway-information">
+       Patient – pathway information
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-comorbidities">
+       Patient – comorbidities
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-nih-stroke-scale">
+       Patient – NIH Stroke Scale
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-other-clinical-features">
+       Patient – other clinical features
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-thrombolysis-given">
+       Patient – thrombolysis given
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-reason-stated-for-not-giving-thrombolysis">
+       Patient – reason stated for not giving thrombolysis
+      </a>
+     </li>
+    </ul>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-selection">
+   Feature selection
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-pathway-information">
-     Patient – pathway information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-comorbidities">
-     Patient – comorbidities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-nih-stroke-scale">
-     Patient – NIH Stroke Scale
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-other-clinical-features">
-     Patient – other clinical features
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-thrombolysis-given">
-     Patient – thrombolysis given
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-reason-stated-for-not-giving-thrombolysis">
-     Patient – reason stated for not giving thrombolysis
+    <a class="reference internal nav-link" href="#correlations-within-the-10-features">
+     Correlations within the 10 features
     </a>
    </li>
   </ul>
@@ -455,7 +473,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data</h1>
+                <h1>Appendix</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -466,53 +484,72 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-access">
-   Data access
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-fields">
-   Data Fields
+  <a class="reference internal nav-link" href="#data">
+   Data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stroke-team">
-     Stroke Team
+    <a class="reference internal nav-link" href="#data-access">
+     Data access
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-general">
-     Patient – general
+    <a class="reference internal nav-link" href="#data-fields">
+     Data Fields
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stroke-team">
+       Stroke Team
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-general">
+       Patient – general
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-pathway-information">
+       Patient – pathway information
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-comorbidities">
+       Patient – comorbidities
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-nih-stroke-scale">
+       Patient – NIH Stroke Scale
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-other-clinical-features">
+       Patient – other clinical features
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-thrombolysis-given">
+       Patient – thrombolysis given
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#patient-reason-stated-for-not-giving-thrombolysis">
+       Patient – reason stated for not giving thrombolysis
+      </a>
+     </li>
+    </ul>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-selection">
+   Feature selection
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-pathway-information">
-     Patient – pathway information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-comorbidities">
-     Patient – comorbidities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-nih-stroke-scale">
-     Patient – NIH Stroke Scale
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-other-clinical-features">
-     Patient – other clinical features
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-thrombolysis-given">
-     Patient – thrombolysis given
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#patient-reason-stated-for-not-giving-thrombolysis">
-     Patient – reason stated for not giving thrombolysis
+    <a class="reference internal nav-link" href="#correlations-within-the-10-features">
+     Correlations within the 10 features
     </a>
    </li>
   </ul>
@@ -527,10 +564,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="data">
-<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="appendix">
+<h1>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">#</a></h1>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
 <section id="data-access">
-<h2>Data access<a class="headerlink" href="#data-access" title="Permalink to this headline">#</a></h2>
+<h3>Data access<a class="headerlink" href="#data-access" title="Permalink to this headline">#</a></h3>
 <p>Data was obtained from the Sentinel Stroke National Audit (SSNAP [1]), managed through the Healthcare Quality Improvement Partnership (HQIP [2]). SSNAP has near-complete coverage of all acute stroke admissions in the UK (outside Scotland). All hospitals admitting acute stroke participate in the audit, and year-on-year comparison with Hospital Episode Statistics [3] confirms estimated case ascertainment of 95% of coded cases of acute stroke.</p>
 <p>The NHS Health Research Authority decision tool [4] was used to confirm that ethical approval was not required to access the data. Data access was authorised by HQIP (reference HQIP303).</p>
 <p>Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams in England and Wales between 2016 and 2018 (three full years).</p>
@@ -540,15 +579,15 @@ title="Print to PDF"
 <p>[4] <a class="reference external" href="http://www.hra-decisiontools.org.uk/research/">http://www.hra-decisiontools.org.uk/research/</a></p>
 </section>
 <section id="data-fields">
-<h2>Data Fields<a class="headerlink" href="#data-fields" title="Permalink to this headline">#</a></h2>
+<h3>Data Fields<a class="headerlink" href="#data-fields" title="Permalink to this headline">#</a></h3>
 <section id="stroke-team">
-<h3>Stroke Team<a class="headerlink" href="#stroke-team" title="Permalink to this headline">#</a></h3>
+<h4>Stroke Team<a class="headerlink" href="#stroke-team" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>StrokeTeam: Pseudonymised SSNAP ‘routinely admitting team‘ unique identifier. For emergency care it is expected that each hospital has one stroke team (though post-72 hour care may be reported under a different team at that hospital).PatientUID: Pseudonymised patient unique identifier</p></li>
 </ul>
 </section>
 <section id="patient-general">
-<h3>Patient – general<a class="headerlink" href="#patient-general" title="Permalink to this headline">#</a></h3>
+<h4>Patient – general<a class="headerlink" href="#patient-general" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Pathway: Total number of team transfers, excluding community teams</p></li>
 <li><p>S1AgeOnArrival: Age on arrival aggregated to 5 year bands</p></li>
@@ -558,7 +597,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="patient-pathway-information">
-<h3>Patient – pathway information<a class="headerlink" href="#patient-pathway-information" title="Permalink to this headline">#</a></h3>
+<h4>Patient – pathway information<a class="headerlink" href="#patient-pathway-information" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>S1OnsetInHospital: Whether the patient was already an inpatient at the time of stroke</p></li>
 <li><p>S1OnsetToArrival_min: Time from symptom onset to arrival at hospital in minutes, where known and if out of hospital stroke</p></li>
@@ -574,7 +613,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="patient-comorbidities">
-<h3>Patient – comorbidities<a class="headerlink" href="#patient-comorbidities" title="Permalink to this headline">#</a></h3>
+<h4>Patient – comorbidities<a class="headerlink" href="#patient-comorbidities" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>CongestiveHeartFailure: Pre-Stroke Congestive Heart Failure</p></li>
 <li><p>Hypertension: Pre-Stroke Systemic Hypertension</p></li>
@@ -589,7 +628,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="patient-nih-stroke-scale">
-<h3>Patient – NIH Stroke Scale<a class="headerlink" href="#patient-nih-stroke-scale" title="Permalink to this headline">#</a></h3>
+<h4>Patient – NIH Stroke Scale<a class="headerlink" href="#patient-nih-stroke-scale" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>S2NihssArrival: National Institutes of Health Stroke Scale score on arrival at hospital</p></li>
 <li><p>BestGaze: National Institutes of Health Stroke Scale Item 2 Best Gaze (higher values indicate more severe deficit)</p></li>
@@ -610,7 +649,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="patient-other-clinical-features">
-<h3>Patient – other clinical features<a class="headerlink" href="#patient-other-clinical-features" title="Permalink to this headline">#</a></h3>
+<h4>Patient – other clinical features<a class="headerlink" href="#patient-other-clinical-features" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>S2INR: Patient’s International Normalised ratio (INR) on arrival at hospital (available since 01-Dec-2017)</p></li>
 <li><p>S2INRHigh: INR was greater than 10 on arrival at hospital (available since 01-Dec-2017)</p></li>
@@ -622,13 +661,13 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="patient-thrombolysis-given">
-<h3>Patient – thrombolysis given<a class="headerlink" href="#patient-thrombolysis-given" title="Permalink to this headline">#</a></h3>
+<h4>Patient – thrombolysis given<a class="headerlink" href="#patient-thrombolysis-given" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>S2Thrombolysis: Whether the patient was given thrombolysis (clot busting medication)</p></li>
 </ul>
 </section>
 <section id="patient-reason-stated-for-not-giving-thrombolysis">
-<h3>Patient – reason stated for not giving thrombolysis<a class="headerlink" href="#patient-reason-stated-for-not-giving-thrombolysis" title="Permalink to this headline">#</a></h3>
+<h4>Patient – reason stated for not giving thrombolysis<a class="headerlink" href="#patient-reason-stated-for-not-giving-thrombolysis" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Age: If the answer to thrombolysis given was “no but”, the reason was Age</p></li>
 <li><p>Comorbidity: If the answer to thrombolysis given was “no but”, the reason was Co-morbidity</p></li>
@@ -641,6 +680,184 @@ title="Print to PDF"
 <li><p>TimeWindow: If the answer to thrombolysis given was “no but”, the reason was Age</p></li>
 <li><p>TooMildSevere: If the answer to thrombolysis given was “no but”, the reason was Stroke too mild or too severe</p></li>
 </ul>
+</section>
+</section>
+</section>
+<section id="feature-selection">
+<h2>Feature selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">#</a></h2>
+<p>25 features were selected by identifying one feature at a time that led to greatest improvement in Receiver Operating Characteristic (ROC) Area Under Curve (AUC). ROC AUC was measured using stratified 5-fold cross validation.</p>
+<p>The best model with 1, 2, 5, 10, 25 &amp; all features (60 features before one-hot encoding of fields) had ROC AUCs of 0.715, 0.792, 0.891, 0.919, 0.923 &amp; 0.922. We selected 10 features for all subsequent work, which were:</p>
+<ul class="simple">
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulants: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
+</ul>
+<p>The improvement in ROC AUC with increasing features is shown in the figure below.</p>
+<img src="./images/01_feature_selection.jpg" width="800"/>
+<section id="correlations-within-the-10-features">
+<h3>Correlations within the 10 features<a class="headerlink" href="#correlations-within-the-10-features" title="Permalink to this headline">#</a></h3>
+<p>Correlations between the 10 features were measured using coefficients of determination (r-squared). All r-squared were less than 0.15, and all r-squared were less than 0.05 except 1) age and prior disability level (r-squared 0.146), and 2) onset during sleep and precise onset time (r-squared 0.078).</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:right head"><p>variable 1</p></th>
+<th class="text-align:right head"><p>Variable 2</p></th>
+<th class="text-align:right head"><p>r-squared</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>0.1462</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>0.0784</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>0.0454</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>0.0386</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>0.0344</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>0.0268</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>0.0207</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>0.0186</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>0.0131</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>0.0090</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>0.0070</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>0.0043</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>0.0038</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>0.0033</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>0.0022</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>0.0021</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>0.0019</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>0.0019</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>0.0016</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>0.0011</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>0.0007</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>0.0007</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>0.0006</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>0.0004</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>0.0001</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Onset-to-arrival time</p></td>
+<td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>0.0001</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Stroke severity</p></td>
+<td class="text-align:right"><p>Precise onset time</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Use of AF anticoagulants</p></td>
+<td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Arrival-to-scan time</p></td>
+<td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p>Age</p></td>
+<td class="text-align:right"><p>Onset during sleep</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p>Prior disability level</p></td>
+<td class="text-align:right"><p>Infarction</p></td>
+<td class="text-align:right"><p>0.0000</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 </section>
@@ -658,7 +875,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./introduction"
+            path: "./paper"
         },
         predefinedOutput: true
     }
@@ -672,19 +889,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../xgb_10_features/91_learning_rate_optimisation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">SAMueL: Summary and key work</p>
+            <p class="prev-next-title">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="odds_prob.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Probability, odds, and SHAP values (log odds shifts)</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
