@@ -1,5 +1,20 @@
 # Appendix
 
+Note: For machine learning, our aim was to predict use of thrombolysis in all patients arriving within 4 hours of known stroke onset.
+
+Following features selection of the most influential features, 10 features were used for predictions:
+
+* Arrival-to-scan time: Time from arrival at hospital to scan (mins)
+* Infarction: Stroke type (1 = infarction, 0 = haemorrhage)
+* Stroke severity: Stroke severity (NIHSS) on arrival
+* Precise onset time: Onset time type (1 = precise, 0 = best estimate)
+* Prior disability level: Disability level (modified Rankin Scale) before stroke
+* Stroke team: Stroke team attended
+* Use of AF anticoagulants: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)
+* Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)
+* Onset during sleep: Did stroke occur in sleep?
+* Age: Age (as middle of 5 year age bands)
+
 ## Data
 
 ### Data access
@@ -8,7 +23,7 @@ Data was obtained from the Sentinel Stroke National Audit (SSNAP [1]), managed t
 
 The NHS Health Research Authority decision tool [4] was used to confirm that ethical approval was not required to access the data. Data access was authorised by HQIP (reference HQIP303). 
 
-Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams in England and Wales between 2016 and 2018 (three full years).
+Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams in England and Wales between 2016 and 2018 (three full years). 88,928 patients arrived within 4 hours of known stroke onset.
 
 [1] https://www.strokeaudit.org/
 
@@ -21,7 +36,7 @@ Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams
 ### Data Fields
 
 #### Stroke Team
-* StrokeTeam: Pseudonymised SSNAP ‘routinely admitting team‘ unique identifier. For emergency care it is expected that each hospital has one stroke team (though post-72 hour care may be reported under a different team at that hospital).PatientUID: Pseudonymised patient unique identifier
+* StrokeTeam: Pseudonymised SSNAP ‘routinely admitting team‘ unique identifier. For emergency care it is expected that each hospital has one stroke team (though post-72 hour care may be reported under a different team at that hospital).
 
 #### Patient – general
 * Pathway: Total number of team transfers, excluding community teams
