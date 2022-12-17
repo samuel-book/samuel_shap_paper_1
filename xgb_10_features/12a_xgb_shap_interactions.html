@@ -769,7 +769,7 @@ title="Print to PDF"
 <p>[Note: In this notebook we will refer to the parts of the SHAP value consistently as base value, main effect, and interactions, where the term SHAP feature value refers to the sum of the main effect and interactions].</p>
 <p>SHAP values are in the same units as the model output (for XGBoost these are in log odds).</p>
 <p>Here we fit an XGBoost model to the SAMueL dataset, to predict whether a patient recieves thrombolysis from the values of eight features. We calculate the SHAP values (base, main effect and feature interactions) of this fitted model and show the most useful way (that we have found) to present all of these values in order to gain the most insight into how the model is working. At present this is using a grid of SHAP dependency plots.</p>
-<p>This notebook is based on the blog <a class="reference external" href="https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a">https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</a></p>
+<p>This notebook is based on the blog https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</p>
 </section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
@@ -2406,8 +2406,8 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 However the converse is true for passengers in third class, as the SHAP interaction value is in the opposite sign to the SHAP main effect. A female passenger in third class will have a negative contribution to the survival (but remember that the main effect for female is a strong likelihood to survive), and if you are male in third class this combination will have a positive contribution to your survival (but remember that the main effect for male is a mid-strong likelihood to not survive).</p>
 <p>The grid of dependency graphs are a mirror image across the diagonal. Meaning that the same data is shown in position [0,1] as in [1,0] just with the feature being displayed in the column or by colour is switched over.</p>
 <p>Looking at the graph in position [1, 0] (second row, first column) shows the identical SHAP interation values for the features male - PClass, as we have just discussed above. Now the columns are per class (first, second, third) and the colour is by gender (male, female). Here we see that for first and second class females contributes that there is a mid likelihood to not survive, whereas if male then contributes a positive likelihood to survive. But that this is opposite for third class, where is it the females (red) with a positive likelihood to survive. This is also on top of the main effect from Pclass.</p>
-<p>Resources used to make the grid of dependence plots: <a class="reference external" href="https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots">https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots</a> <br />
-(for future reference, but not yet used here: <a class="reference external" href="https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d">https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d</a>)</p>
+<p>Resources used to make the grid of dependence plots: https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots <br />
+(for future reference, but not yet used here: https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d)</p>
 <p>Restrict the number displayed.
 (choosing 10 features includes the 7 continuous features and then the first three one-hot encoded hospital features. The rest are not shown for purposes of visual clarity).</p>
 <div class="cell docutils container">

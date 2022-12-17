@@ -550,7 +550,7 @@ title="Print to PDF"
 <h1>Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models<a class="headerlink" href="#evaluating-variation-in-model-predictions-and-predicted-10k-thrombolysis-rate-using-bootstrap-models" title="Permalink to this headline">#</a></h1>
 <p>Here we evaluate the variation in model predictions (at a patient level) and predicted 10k thrombolysis rate using bootstrap models.</p>
 <p>We apply two bootstrap methods, In the traditional method we fit multiple models to bootstrapped samples of the training set (random sampling with replacement).</p>
-<p>In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Dirichlet distribution (see <a class="reference external" href="https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148">https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</a>).</p>
+<p>In the Bayesian bootstrap method we fit multiple models, with the training set weighted each time by sampling from a Dirichlet distribution (see https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148).</p>
 <p>These methods give similar results - the average standard deviation in patient-level prediction (the probability of a patient receiving thrombolysis) is about 0.05, but this ranges from about 0.01 to 0.13 dependening on the predicted probability (with greatest variance around 50% predicted probability of receiving thrombolysis). The average standard deviation in predicting the hospital’s expected thrombolysis rate is 0.015-0.02.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1163,7 +1163,7 @@ Accuracy set 29: 0.847
 </section>
 <section id="create-bootstrap-sampled-training-sets-using-bayesian-bootstrapping">
 <h2>Create bootstrap sampled training sets using Bayesian bootstrapping<a class="headerlink" href="#create-bootstrap-sampled-training-sets-using-bayesian-bootstrapping" title="Permalink to this headline">#</a></h2>
-<p>See: <a class="reference external" href="https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148">https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</a></p>
+<p>See: https://towardsdatascience.com/the-bayesian-bootstrap-6ca4a1d45148</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>

@@ -797,7 +797,7 @@ title="Print to PDF"
 <p>[Note: In this notebook we will refer to the parts of the SHAP value consistently as base value, main effect, and interactions, where the term SHAP feature value refers to the sum of the main effect and interactions].</p>
 <p>SHAP values are in the same units as the model output (for XGBoost these are usually in log odds unless we specify we want to see probabilities.).</p>
 <p>Here we fit an XGBoost model to the Titanic dataset, to predict whether a passenger survives from the values of four features (gender, age, ticket class, number of siblings). We calculate the SHAP values (base, main effect and feature interactions) of this fitted model and show the most useful way (that we have found) to present all of these values in order to gain the most insight into how the model is working. At present this is using a grid of SHAP dependency plots.</p>
-<p>This notebook is based on the blog <a class="reference external" href="https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a">https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</a></p>
+<p>This notebook is based on the blog https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</p>
 </section>
 <section id="examples-of-interactions-that-we-will-see">
 <h2>Examples of interactions that we will see<a class="headerlink" href="#examples-of-interactions-that-we-will-see" title="Permalink to this headline">#</a></h2>
@@ -879,7 +879,7 @@ title="Print to PDF"
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
 <p>Code that was used to pre-process the data ready for machine learning may be found at:
-<a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</a></p>
+https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1765,8 +1765,8 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 <p>However the converse is true for passengers in third class, as the SHAP interaction value is in the opposite sign to the SHAP main effect. A female passenger in third class will have a negative contribution to the survival (but remember that the main effect for female is a strong likelihood to survive), and if you are male in third class this combination will have a positive contribution to your survival (but remember that the main effect for male is a mid-strong likelihood to not survive).</p>
 <p>The grid of dependency graphs are a mirror image across the diagonal. Meaning that the same data is shown in position [0,1] as in [1,0] just with the feature being displayed in the column or by colour is switched over.</p>
 <p>Looking at the graph in position [1, 0] (second row, first column) shows the identical SHAP interation values for the features <code class="docutils literal notranslate"><span class="pre">male</span></code> - <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>, as we have just discussed above. Now the columns are per class (first, second, third) and the colour is by gender (male, female). Here we see that for first and second class females contributes that there is a mid likelihood to not survive, whereas if male then contributes a positive likelihood to survive. But that this is opposite for third class, where is it the females (red) with a positive likelihood to survive. This is also on top of the main effect from <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>.</p>
-<p>Resources used to make the grid of dependence plots: <a class="reference external" href="https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots">https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots</a> \</p>
-<p>(for future reference, but not yet used here: <a class="reference external" href="https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d">https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d</a>)</p>
+<p>Resources used to make the grid of dependence plots: https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots \</p>
+<p>(for future reference, but not yet used here: https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span><span class="s2">&quot;SibSp&quot;</span><span class="p">]</span>

@@ -691,7 +691,7 @@ title="Print to PDF"
 <h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
 <p>When fitting a machine learning model to data to make a prediction, it is now possible, with the use of the SHAP library, to allocate contributions of the prediction onto the feature values. This means that we can now turn these black box methods into transparent models and describe what the model used to obtain it’s prediction.</p>
 <p>SHAP values are calculated for each feature of each instance for a fitted model. In addition there is the SHAP base value which is the same value for all of the instances. The base value represents the models best guess for any instance without any extra knowledge about the instance (this can also be thought of as the “expected value”). It is possible to obtain the models prediction of an instance by taking the sum of the SHAP base value and each of the SHAP values for the features. This allows the prediction from a model to be transparant, and we can rank the features by their importance in determining the prediction for each instance.</p>
-<p>In two other detailed notebooks (see GitHub repo for these notebooks: <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">https://github.com/samuel-book/samuel_shap_paper_1</a>), we looked at SHAP values (03a_xgb_shap_values_focus_on_ohe_hospitals.ipynb) and SHAP main effect (3b_xgb_combined_shap_key_features.ipynb) for the one-hot encoded hospital features. We looked at the values for patients that attend the hospital, and for those that do not (as we have seen that the hospital has a SHAP value when a patient attend another one, so there is a contribution to the prediction based on <em>not</em> attending a hospital).</p>
+<p>In two other detailed notebooks (see GitHub repo for these notebooks: https://github.com/samuel-book/samuel_shap_paper_1), we looked at SHAP values (03a_xgb_shap_values_focus_on_ohe_hospitals.ipynb) and SHAP main effect (3b_xgb_combined_shap_key_features.ipynb) for the one-hot encoded hospital features. We looked at the values for patients that attend the hospital, and for those that do not (as we have seen that the hospital has a SHAP value when a patient attend another one, so there is a contribution to the prediction based on <em>not</em> attending a hospital).</p>
 <p>SHAP values are in the same units as the model output (for XGBoost these are in log odds).</p>
 <p>Here we load an already fitted XGBoost model to the SAMueL dataset (in notebook 03a_xgb_shap_values_focus_on_ohe_hospitals.ipynb), to predict whether a patient recieves thrombolysis from the values of eight features. We calculate the SHAP values of this fitted model and explore the SHAP values and SHAP main effect values for each of the one-hot encoded hospital features.</p>
 </section>
@@ -944,7 +944,7 @@ By convention our features are called <code class="docutils literal notranslate"
 <section id="shap-values">
 <h2>SHAP values<a class="headerlink" href="#shap-values" title="Permalink to this headline">#</a></h2>
 <p>SHAP values give the contribution that each feature has on the models prediction, per instance. A SHAP value is returned for each feature, for each instance.</p>
-<p>We will use the shap library: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
+<p>We will use the shap library: https://shap.readthedocs.io/en/latest/index.html</p>
 <p>‘Raw’ SHAP values from XGBoost model are log odds ratios.</p>
 <section id="get-shap-values">
 <h3>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">#</a></h3>
@@ -1301,7 +1301,7 @@ array([ 17. ,   1. ,  14. ,   1. ,   0. ,   0. , 186. ,   0. ,  47.5,
 <section id="shap-interaction-values">
 <h2>SHAP interaction values<a class="headerlink" href="#shap-interaction-values" title="Permalink to this headline">#</a></h2>
 <p>A SHAP interaction value is returned for each pair of features (including with itself, which is known as the main effect), for each instance. The SHAP value for a feature is the sum of it’s pair-wise feature interactions.</p>
-<p>We will use the shap library: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
+<p>We will use the shap library: https://shap.readthedocs.io/en/latest/index.html</p>
 <p>‘Raw’ SHAP interaction values from XGBoost model are log odds ratios.</p>
 <section id="get-shap-interaction-values">
 <h3>Get SHAP interaction values<a class="headerlink" href="#get-shap-interaction-values" title="Permalink to this headline">#</a></h3>
@@ -1601,7 +1601,7 @@ In this case, each of the 88792 instances has a 139x139 matrix of SHAP interacti
 <section id="boxplot-all-hospitals-together">
 <h4>Boxplot (all hospitals together)<a class="headerlink" href="#boxplot-all-hospitals-together" title="Permalink to this headline">#</a></h4>
 <p>Analyse the range of SHAP values amd SHAP main effect values for the one-hot encoded hospital features. Show as two populations: the attended hospital, the sum of the hospitals not attended</p>
-<p>To create a grouped boxplot, used code from <a class="reference external" href="https://stackoverflow.com/questions/16592222/matplotlib-group-boxplots">https://stackoverflow.com/questions/16592222/matplotlib-group-boxplots</a></p>
+<p>To create a grouped boxplot, used code from https://stackoverflow.com/questions/16592222/matplotlib-group-boxplots</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_box_color</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
@@ -1978,7 +1978,7 @@ In this case, each of the 88792 instances has a 139x139 matrix of SHAP interacti
 </div>
 </div>
 <p>Resource for using overall y min and max of both datasets on the 4 plots so have the same range
-<a class="reference external" href="https://blog.finxter.com/how-to-find-the-minimum-of-a-list-of-lists-in-python/#:~:text=With%20the%20key%20argument%20of,of%20the%20list%20of%20lists">https://blog.finxter.com/how-to-find-the-minimum-of-a-list-of-lists-in-python/#:~:text=With the key argument of,of the list of lists</a>.</p>
+https://blog.finxter.com/how-to-find-the-minimum-of-a-list-of-lists-in-python/#:~:text=With%20the%20key%20argument%20of,of%20the%20list%20of%20lists.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot 34 hospitals on each figure to aid visually</span>

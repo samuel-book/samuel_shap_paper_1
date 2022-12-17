@@ -618,13 +618,11 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called <em>thrombolysis</em>. Thrombolysis improves stroke outcomes overall, with more people being able to carry out their normal daily activities. There is, however, a small risk of a bleed in the brain, which is fatal in about 1 in 50 patients receiving thrombolysis, with the risk bing highest in those with the most severe strokes. Overall, thrombolysis does not increase risk of death, as the risk of death from a bleed is balanced out by the benefits of thrombolysis to others. Clinicians, patients, and carers, must however consider both benefits and risks of thrombolysis when deciding on whether to use it.</p>
-<p>Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend (<a class="reference internal" href="#thrombolysis-hist"><span class="std std-numref">figure 1</span></a>).</p>
-<figure class="align-default" id="thrombolysis-hist">
-<a class="reference internal image-reference" href="../_images/thrombolysis_by_hospital.jpg"><img alt="../_images/thrombolysis_by_hospital.jpg" src="../_images/thrombolysis_by_hospital.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Variation in thrombolysis use across hospitals in England and Wales 2016-2018.</span><a class="headerlink" href="#thrombolysis-hist" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend (<code class="xref std std-numref docutils literal notranslate"><span class="pre">figure</span> <span class="pre">{number}</span></code>).</p>
+<p>:::{figure-md} thrombolysis_hist
+<a class="reference internal" href="../_images/thrombolysis_by_hospital.jpg"><img alt="../_images/thrombolysis_by_hospital.jpg" src="../_images/thrombolysis_by_hospital.jpg" style="width: 450px;" /></a></p>
+<p>Variation in thrombolysis use across hospitals in England and Wales 2016-2018.
+:::</p>
 <p>In a previous project, <a class="reference external" href="https://samuel-book.github.io/samuel-1/introduction/intro.html">SAMueL-1</a>, we trained machine-learning models to predict whether any individual patient would receive thrombolysis in any hospital. This allowed us to investigate what differences in treatment are likely to be due to differences between patients, and what differences in treatment were likely to be due to differences between hospitals.</p>
 </section>
 <section id="aims-of-this-study">
@@ -634,13 +632,11 @@ title="Print to PDF"
 <section id="what-is-explainable-machine-learning">
 <h2>What is <em>Explainable Machine Learning</em>?<a class="headerlink" href="#what-is-explainable-machine-learning" title="Permalink to this headline">#</a></h2>
 <p>Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of <em>features</em> about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient receives thrombolysis or not.</p>
-<p>A general diagram of our machine learning is shown in <a class="reference internal" href="#high-level-md"><span class="std std-numref">Figure 2</span></a>.</p>
-<figure class="align-default" id="high-level-md">
-<a class="reference internal image-reference" href="../_images/ml_model_high_level.png"><img alt="../_images/ml_model_high_level.png" src="../_images/ml_model_high_level.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">A general depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.</span><a class="headerlink" href="#high-level-md" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>A general diagram of our machine learning is shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code>.</p>
+<p>:::{figure-md} high_level_md
+<a class="reference internal" href="../_images/ml_model_high_level.png"><img alt="../_images/ml_model_high_level.png" src="../_images/ml_model_high_level.png" style="width: 600px;" /></a></p>
+<p>A general depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.
+:::</p>
 <p>There are many different types of machine learning (here we use one called <em>XG-Boost</em>), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call a <em>black box</em> model - that is we give it some information, and it makes a prediction, but we don’t know <em>why</em> it made that particular prediction.</p>
 <p><em>Explainable Machine Learning</em> seeks to be able to communicate <em>why</em> a model makes the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (we call this <em>global explainability</em>), as well as why the model made the prediction it did for one particular patient (we call this <em>local explainability</em>). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how sure we can be of the model’s predictions - both generally and for any particular prediction.</p>
 <p>In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, carers, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor <em>explainable machine learning</em> output to the wishes of different audiences?</p>
@@ -690,31 +686,25 @@ title="Print to PDF"
 <li><p>Disability level (Rankin) before stroke. The odds of receiving thrombolysis falls about 5 fold between mRS 0 and 5.</p></li>
 <li><p>The hospital SHAP values ranges from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis).</p></li>
 </ul>
-<p><a class="reference internal" href="#shap-violin"><span class="std std-numref">Figure 3</span></a> shows a violin plot of SHAP values for six features.</p>
-<figure class="align-default" id="shap-violin">
-<a class="reference internal image-reference" href="../_images/xgb_thrombolysis_shap_violin.jpg"><img alt="../_images/xgb_thrombolysis_shap_violin.jpg" src="../_images/xgb_thrombolysis_shap_violin.jpg" style="width: 800px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">A violin plot showing the individual SHAP values for six features. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would <em>would</em> receive thrombolysis. A negative SHAP value pushes the model towards saying that patient would would <em>not</em> receive thrombolysis.</span><a class="headerlink" href="#shap-violin" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>SHAP plots can also be used to explain predictions of any individual patient (e.g. <a class="reference internal" href="#waterfall-example"><span class="std std-numref">Figure 4</span></a>).</p>
-<figure class="align-default" id="waterfall-example">
-<a class="reference internal image-reference" href="../_images/xgb_waterfall_low_probability_2.jpg"><img alt="../_images/xgb_waterfall_low_probability_2.jpg" src="../_images/xgb_waterfall_low_probability_2.jpg" style="width: 800px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">An example of a SHAP <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).</span><a class="headerlink" href="#waterfall-example" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code> shows a violin plot of SHAP values for six features.</p>
+<p>:::{figure-md} SHAP_violin
+<a class="reference internal" href="../_images/xgb_thrombolysis_shap_violin.jpg"><img alt="../_images/xgb_thrombolysis_shap_violin.jpg" src="../_images/xgb_thrombolysis_shap_violin.jpg" style="width: 800px;" /></a></p>
+<p>A violin plot showing the individual SHAP values for six features. The shape of the <em>violin</em> shows the spread of the size of SHAP values for each feature value. A positive SHAP vales pushes the model towards saying that patient would <em>would</em> receive thrombolysis. A negative SHAP value pushes the model towards saying that patient would would <em>not</em> receive thrombolysis.
+:::</p>
+<p>SHAP plots can also be used to explain predictions of any individual patient (e.g. <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code>).</p>
+<p>:::{figure-md} waterfall_example
+<a class="reference internal" href="../_images/xgb_waterfall_low_probability_2.jpg"><img alt="../_images/xgb_waterfall_low_probability_2.jpg" src="../_images/xgb_waterfall_low_probability_2.jpg" style="width: 800px;" /></a></p>
+<p>An example of a SHAP <em>waterfall</em> plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).
+:::</p>
 </section>
 <section id="comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
 <h3>Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients<a class="headerlink" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients" title="Permalink to this headline">#</a></h3>
 <p>We can assess each hospital’s <em>‘propensity to use thrombolysis’</em> by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.</p>
-<p>When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model (<a class="reference internal" href="#shap-vs-10k"><span class="std std-numref">Figure 5</span></a>), we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital’s <em>‘propensity to use thrombolysis’</em>.</p>
-<figure class="align-default" id="shap-vs-10k">
-<a class="reference internal image-reference" href="../_images/shap_vs_10k.jpg"><img alt="../_images/shap_vs_10k.jpg" src="../_images/shap_vs_10k.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.</span><a class="headerlink" href="#shap-vs-10k" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model (<code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code>), we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital’s <em>‘propensity to use thrombolysis’</em>.</p>
+<p>:::{figure-md} shap_vs_10k
+<a class="reference internal" href="../_images/shap_vs_10k.jpg"><img alt="../_images/shap_vs_10k.jpg" src="../_images/shap_vs_10k.jpg" style="width: 450px;" /></a></p>
+<p>A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.
+:::</p>
 <p>We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.</p>
 </section>
 <section id="comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients">
@@ -727,65 +717,53 @@ title="Print to PDF"
 <li><p>An ‘ideal’ thrombolysable patient: NIHSS 10-25, Arrival-to-scan time &lt; 30 minutes, Stroke type = infarction, Precise onset time = True, Prior diability level (mRS) = 0, No use of AF anticoagulants, Onset-to-arrival time &lt; 90 minutes, Age &lt; 80 years, Onset during sleep = False</p></li>
 </ul>
 <p>Note: When we use the predicted thrombolysis in the 10k cohort subgroups we are using the same patients at all hospitals. When we examine the observed (‘real’) data we must necessarily look at different patients in each hospital.</p>
-<p>The observed and predicted subgroup analysis show very similar general patterns (<a class="reference internal" href="#subgroup"><span class="std std-numref">Figure 6</span></a>, with r-squared=0.95). The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.</p>
+<p>The observed and predicted subgroup analysis show very similar general patterns (<code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code>, with r-squared=0.95). The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.</p>
 <p>The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p>
 <p>Some differences exist:</p>
 <p>The use of thrombolysi in ideal patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).</p>
 <p>The predicted results show a stronger effect of combining non-ideal features.</p>
 <p>When testing the ‘ideal’ thrombolysable patients, 95% of hospitals would be expected to give thrombolysis to at least 99% of patients.</p>
-<figure class="align-default" id="subgroup">
-<a class="reference internal image-reference" href="../_images/15a_actual_vs_modelled_subgroup_violin.jpg"><img alt="../_images/15a_actual_vs_modelled_subgroup_violin.jpg" src="../_images/15a_actual_vs_modelled_subgroup_violin.jpg" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hopsital.</span><a class="headerlink" href="#subgroup" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>:::{figure-md} subgroup
+<a class="reference internal" href="../_images/15a_actual_vs_modelled_subgroup_violin.jpg"><img alt="../_images/15a_actual_vs_modelled_subgroup_violin.jpg" src="../_images/15a_actual_vs_modelled_subgroup_violin.jpg" style="width: 600px;" /></a></p>
+<p>A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hopsital.
+:::</p>
 </section>
 <section id="how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
 <h3>How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?<a class="headerlink" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value" title="Permalink to this headline">#</a></h3>
-<p>We can also look at how a hospital’s SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital’s SHAP value explains 58% of the variance in thrombolysis rate of patients (<a class="reference internal" href="#hosp-shap"><span class="std std-numref">Figure 7</span></a>). This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).</p>
-<figure class="align-default" id="hosp-shap">
-<a class="reference internal image-reference" href="../_images/hospital_shap_own_patients.jpg"><img alt="../_images/hospital_shap_own_patients.jpg" src="../_images/hospital_shap_own_patients.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">A comparison of average hospital SHAP values with actual hospital thrombolysis use for patients arriving within 4 hours of known stroke onset.</span><a class="headerlink" href="#hosp-shap" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>We can also look at how a hospital’s SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital’s SHAP value explains 58% of the variance in thrombolysis rate of patients (<code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code>). This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).</p>
+<p>:::{figure-md} hosp_shap
+<a class="reference internal" href="../_images/hospital_shap_own_patients.jpg"><img alt="../_images/hospital_shap_own_patients.jpg" src="../_images/hospital_shap_own_patients.jpg" style="width: 450px;" /></a></p>
+<p>A comparison of average hospital SHAP values with actual hospital thrombolysis use for patients arriving within 4 hours of known stroke onset.
+:::</p>
 </section>
 <section id="what-do-shap-interactions-reveal-about-differences-between-hospitals">
 <h3>What do SHAP interactions reveal about differences between hospitals<a class="headerlink" href="#what-do-shap-interactions-reveal-about-differences-between-hospitals" title="Permalink to this headline">#</a></h3>
 <p>SHAP interactions show how one feature may modify the effect of another feature. We are especially interested in how an individual hospital may modify the general effects observed in the model, as this reveals patterns of decisions in individual hospitals. Below are three examples where hospitals make different decisions around stroke severity, disability before stroke, and whether stroke onset time is known precisely or not.</p>
 <section id="stroke-severity">
 <h4>Stroke severity<a class="headerlink" href="#stroke-severity" title="Permalink to this headline">#</a></h4>
-<p><a class="reference internal" href="#nihss-main"><span class="std std-numref">Figure 8</span></a> shows the main effect of stroke severity is to significantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).</p>
-<figure class="align-default" id="nihss-main">
-<a class="reference internal image-reference" href="../_images/12ab_nihss_main_effect.jpg"><img alt="../_images/12ab_nihss_main_effect.jpg" src="../_images/12ab_nihss_main_effect.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">The main effect of stroke severity on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).</span><a class="headerlink" href="#nihss-main" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <a class="reference internal" href="#nihss-interaction"><span class="std std-numref">Figure 9</span></a> shows two stroke teams with opposite effects, one that opposes the general effect of stroke severity, and one that strengthens it.</p>
-<figure class="align-default" id="nihss-interaction">
-<a class="reference internal image-reference" href="../_images/12ab_stroke_severity_interaction_example.jpg"><img alt="../_images/12ab_stroke_severity_interaction_example.jpg" src="../_images/12ab_stroke_severity_interaction_example.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">The interaction between stroke team and the SHAP value of stroke severity (the interaction value is added to the main stroke severity effect). <em>team_KECZG3964M</em> has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.</span><a class="headerlink" href="#nihss-interaction" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code> shows the main effect of stroke severity is to significantly reduce the odds of receiving thrombolysis for mild strokes (NIHSS 0-5), increase the odds of receiving thrombolysis for more moderate to sever strokes (NIHSS 6-32), and then reduce the odds of receiving thrombolysis for very severe stroke strokes (NIHSS 33+).</p>
+<p>:::{figure-md} nihss_main
+<a class="reference internal" href="../_images/12ab_nihss_main_effect.jpg"><img alt="../_images/12ab_nihss_main_effect.jpg" src="../_images/12ab_nihss_main_effect.jpg" style="width: 450px;" /></a></p>
+<p>The main effect of stroke severity on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
+:::</p>
+<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code> shows two stroke teams with opposite effects, one that opposes the general effect of stroke severity, and one that strengthens it.</p>
+<p>:::{figure-md} nihss_interaction
+<a class="reference internal" href="../_images/12ab_stroke_severity_interaction_example.jpg"><img alt="../_images/12ab_stroke_severity_interaction_example.jpg" src="../_images/12ab_stroke_severity_interaction_example.jpg" style="width: 450px;" /></a></p>
+<p>The interaction between stroke team and the SHAP value of stroke severity (the interaction value is added to the main stroke severity effect). <em>team_KECZG3964M</em> has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.
+:::</p>
 </section>
 <section id="disability-before-stroke">
 <h4>Disability before stroke<a class="headerlink" href="#disability-before-stroke" title="Permalink to this headline">#</a></h4>
-<p><a class="reference internal" href="#mrs-main"><span class="std std-numref">Figure 10</span></a> shows the main effect of prior disability - that is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5)</p>
-<figure class="align-default" id="mrs-main">
-<a class="reference internal image-reference" href="../_images/12ac_prior_disability_level_main_effect.jpg"><img alt="../_images/12ac_prior_disability_level_main_effect.jpg" src="../_images/12ac_prior_disability_level_main_effect.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The main effect of pre-stroke disability on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).</span><a class="headerlink" href="#mrs-main" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <a class="reference internal" href="#mrs-interaction"><span class="std std-numref">Figure 11</span></a> shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.</p>
-<figure class="align-default" id="mrs-interaction">
-<a class="reference internal image-reference" href="../_images/12ac_disability_interaction_example.jpg"><img alt="../_images/12ac_disability_interaction_example.jpg" src="../_images/12ac_disability_interaction_example.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). <em>team_AKCGO9726K</em> has a SHAP interaction that attenuates the general prior disability main effect. <em>team_XKAWN3771U</em> strengthens the main effect of pre-stroke disability - reducing the odss of receiving thrombolysis even futher for mild strokes.</span><a class="headerlink" href="#mrs-interaction" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code> shows the main effect of prior disability - that is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5)</p>
+<p>:::{figure-md} mrs_main
+<a class="reference internal" href="../_images/12ac_prior_disability_level_main_effect.jpg"><img alt="../_images/12ac_prior_disability_level_main_effect.jpg" src="../_images/12ac_prior_disability_level_main_effect.jpg" style="width: 450px;" /></a></p>
+<p>The main effect of pre-stroke disability on the odds of receiving thrombolysis (SHAP shows the adjustment of log odds).
+:::</p>
+<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code> shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.</p>
+<p>:::{figure-md} mrs_interaction
+<a class="reference internal" href="../_images/12ac_disability_interaction_example.jpg"><img alt="../_images/12ac_disability_interaction_example.jpg" src="../_images/12ac_disability_interaction_example.jpg" style="width: 450px;" /></a></p>
+<p>The interaction between stroke team and the SHAP value of pre-stroke disability (the interaction value is added to the main disability effect). <em>team_AKCGO9726K</em> has a SHAP interaction that attenuates the general prior disability main effect. <em>team_XKAWN3771U</em> strengthens the main effect of pre-stroke disability - reducing the odss of receiving thrombolysis even futher for mild strokes.
+:::</p>
 </section>
 <section id="stroke-onset-time">
 <h4>Stroke onset time<a class="headerlink" href="#stroke-onset-time" title="Permalink to this headline">#</a></h4>
@@ -794,13 +772,11 @@ title="Print to PDF"
 <li><p>If stroke onset time is known precisely: SHAP = +0.42</p></li>
 <li><p>If stroke onset time is <em>not</em> known precisely: SHAP = -0.85</p></li>
 </ul>
-<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <a class="reference internal" href="#onset-interaction"><span class="std std-numref">Figure 12</span></a> shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.</p>
-<figure class="align-default" id="onset-interaction">
-<a class="reference internal image-reference" href="../_images/12aa_onset_time_type_interaction_example.jpg"><img alt="../_images/12aa_onset_time_type_interaction_example.jpg" src="../_images/12aa_onset_time_type_interaction_example.jpg" style="width: 450px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 12 </span><span class="caption-text">The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). <em>team_HZNVT9936G</em> has interactions that strengthen the effect of <em>precise onset time</em> whereas <em>team_FAJKD7118X</em> has interactions values that attenuate the main effect of <em>precise onset time</em></span><a class="headerlink" href="#onset-interaction" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Individual hospitals, in addition to having their own independent SHAP value, may then specifically adjust this general pattern. <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">{number}</span></code> shows two stroke teams with opposite effects, one that opposes the general effect of pre-stroke disability, and one that strengthens it.</p>
+<p>:::{figure-md} onset_interaction
+<a class="reference internal" href="../_images/12aa_onset_time_type_interaction_example.jpg"><img alt="../_images/12aa_onset_time_type_interaction_example.jpg" src="../_images/12aa_onset_time_type_interaction_example.jpg" style="width: 450px;" /></a></p>
+<p>The interaction between stroke team and the SHAP value of precisely known onset time (the interaction value is added to the main onset effect). <em>team_HZNVT9936G</em> has interactions that strengthen the effect of <em>precise onset time</em> whereas <em>team_FAJKD7118X</em> has interactions values that attenuate the main effect of <em>precise onset time</em>
+:::</p>
 </section>
 </section>
 </section>

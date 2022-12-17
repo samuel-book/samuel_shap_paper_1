@@ -639,7 +639,7 @@ title="Print to PDF"
 <p>[Note: In this notebook we will refer to the parts of the SHAP value consistently as base value, main effect, and interactions, where the term SHAP feature value refers to the sum of the main effect and interactions].</p>
 <p>SHAP values are in the same units as the model output (for XGBoost these are in log odds).</p>
 <p>Here we fit an XGBoost model to the SAMueL dataset, to predict whether a patient recieves thrombolysis from the values of eight features. We calculate the SHAP values (base, main effect and feature interactions) of this fitted model and show the most useful way (that we have found) to present all of these values in order to gain the most insight into how the model is working. At present this is using a grid of SHAP dependency plots.</p>
-<p>This notebook is based on the blog <a class="reference external" href="https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a">https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</a></p>
+<p>This notebook is based on the blog https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</p>
 </section>
 <section id="model-and-data">
 <h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
@@ -1184,8 +1184,8 @@ For feature &quot;Stroke severity&quot;, the proportion of the SHAP values comin
 <h2>SHAP dependence plots for the chosen feature<a class="headerlink" href="#shap-dependence-plots-for-the-chosen-feature" title="Permalink to this headline">#</a></h2>
 <p>We will now show all of the SHAP interaction values between the chosen feature and all of the one-hot encoded hospital features.</p>
 <p>Show just the row for chosen feature vs the 132 hosptials (display them as a grid of subplots, but this is not a matrix, there is no logic to their position in the grid apart from the order in which they appear in the dataset)</p>
-<p>Resources used to make the grid of dependence plots: <a class="reference external" href="https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots">https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots</a> <br />
-(for future reference, but not yet used here: <a class="reference external" href="https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d">https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d</a>)</p>
+<p>Resources used to make the grid of dependence plots: https://stackoverflow.com/questions/58510005/python-shap-package-how-to-plot-a-grid-of-dependence-plots <br />
+(for future reference, but not yet used here: https://gist.github.com/eddjberry/3c1818a780d3cb17390744d6e215ba4d)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get list of hospital one hot encoded column titles</span>

@@ -991,7 +991,7 @@ Accuracy k-fold 5: 0.848
 <section id="shap-values">
 <h2>SHAP values<a class="headerlink" href="#shap-values" title="Permalink to this headline">#</a></h2>
 <p>SHAP values give the contribution that each feature has on the models prediction, per instance. A SHAP value is returned for each feature, for each instance.</p>
-<p>We will use the shap library: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
+<p>We will use the shap library: https://shap.readthedocs.io/en/latest/index.html</p>
 <p>‘Raw’ SHAP values from XGBoost model are log odds ratios.
 A SHAP value is returned for each feature, for each instance, for each model (one per k-fold)</p>
 <section id="get-shap-values">
@@ -1773,7 +1773,7 @@ The mean is calculated in three ways:</p>
 <p>Waterfall plots are ways of plotting the influence of features for individual cases. Here we show them for two instances: one with low, and one with high probability of receiving thrombolysis.</p>
 <p>For both cases, the prediction starts at the base SHAP value (the expected value for each instance, without knowing any information of their features). This is at the bottom of the graph. Each bar shows the contribution to the prediction due to an individual feature value. Until all have added their contribution at the top of the graph. The final prediction.</p>
 <p>Note: A decision plot is an alternative method of showing the same data. For further information see here:
-<a class="reference external" href="https://shap.readthedocs.io/en/latest/example_notebooks/api_examples/plots/decision_plot.html">https://shap.readthedocs.io/en/latest/example_notebooks/api_examples/plots/decision_plot.html</a></p>
+https://shap.readthedocs.io/en/latest/example_notebooks/api_examples/plots/decision_plot.html</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the location of an example each where probability of giving thrombolysis</span>
@@ -1927,8 +1927,8 @@ The mean is calculated in three ways:</p>
 <h3>Show the relationship between feature value and SHAP value for the top 6 influential features<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>(as violin plots)</p>
 <p>Resource:
-<a class="reference external" href="https://towardsdatascience.com/binning-records-on-a-continuous-variable-with-pandas-cut-and-qcut-5d7c8e11d7b0">https://towardsdatascience.com/binning-records-on-a-continuous-variable-with-pandas-cut-and-qcut-5d7c8e11d7b0</a>
-<a class="reference external" href="https://matplotlib.org/3.1.0/gallery/statistics/customized_violin.html">https://matplotlib.org/3.1.0/gallery/statistics/customized_violin.html</a></p>
+https://towardsdatascience.com/binning-records-on-a-continuous-variable-with-pandas-cut-and-qcut-5d7c8e11d7b0
+https://matplotlib.org/3.1.0/gallery/statistics/customized_violin.html</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_ax</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">category_list</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
