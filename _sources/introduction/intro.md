@@ -115,6 +115,7 @@ The figure below shows a violin plot of SHAP values for six features.
 SHAP plots can also be used to explain predictions of any individual patient. 
 
 <img src="./images/xgb_waterfall_low_probability_2.jpg" width="800">
+
 *An example of a SHAP waterfall plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).*
 
 ### Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
