@@ -114,7 +114,7 @@ Data was retrieved for 246,676 emergency stroke admissions to acute stroke teams
 
 ## Variation in thrombolysis use
 
-Thrombolysis use varies between hospitals, from 1.5% to 24.3% of all patients, and 7.3% to 49.7% of patients arriving within 4 hours of known stroke onset.
+Thrombolysis use varied between hospitals, from 1.5% to 24.3% of all patients, and 7.3% to 49.7% of patients arriving within 4 hours of known stroke onset.
 
 <img src="./images/thrombolysis_hist.jpg" width="800"/>
 
@@ -130,6 +130,7 @@ Machine learning models were explained using SHAP (*SHapley Additive exPlanation
 Chen, T. & Guestrin, C., 2016. XGBoost: A Scalable Tree Boosting System. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. KDD &#x27;16. New York, NY, USA: ACM, pp. 785–794. Available at: http://doi.acm.org/10.1145/2939672.2939785.
 
 Lundberg SM, Lee SI. A Unified Approach to Interpreting Model Predictions. In: Advances in Neural Information Processing Systems [Internet]. Curran Associates, Inc.; 2017 [cited 2022 Jun 17]. Available from: https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html
+
 
 ## Feature selection
 
@@ -152,7 +153,7 @@ The improvement in ROC AUC with increasing features is shown in the figure below
 
 <img src="./images/01_feature_selection.jpg" width="800"/>
 
-*The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features.*
+*The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features. ROC was measured with stratified 5-fold cross-validation.*
 
 ### Correlations within the 10 features
 
@@ -219,6 +220,8 @@ Model accuracy was measured using stratified 5-fold cross validation. The key re
 The figure below shows the receiver operating characteristic curve, along with the trade-off between sensitivity and specificity.
 
 <img src="images/02_xgb_10_features_roc_sens_spec.jpg" width="800"/>
+
+*Model accuracy of a XGBoost model using 10 features. Left: Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Right: The trade-off between Sensitivity and Specificity. Accuracy was measured with stratified 5-fold cross-validation.*
 
 ### Validation of hospital thrombolysis use
 
@@ -620,3 +623,9 @@ We then took each hospitals own patients and predicted the thrombolysis decision
 * 83.3% decisions are identical between local and benchmark decisions.
 * Thrombolysis use would be increased 31.2% at non-benchmark hospitals if benchmark decisions were made at those hospitals. Overall, thrombolysis use, including at the benchmark hospitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysus rate) would be increased 60.2%.
 * The ratio of benchmark:local thrombolysis use ranged from 0.7 to 2.1.
+
+### Agreement between hopsitals on 10k cohort thrombolysis decisions
+
+87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse. 
+
+<img src="./images/04_xgb_10_features_10k_cohort_agreement_vs_hospital_single.jpg" width="400"/>
