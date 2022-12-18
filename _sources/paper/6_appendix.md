@@ -331,19 +331,19 @@ Compared with the other groups, the most thrombolysable patients ....
 
 ## Explaining model predictions with SHAP
 
-SHAP values describe how much a feature affects the probability of receiving thrombolysis. These are usually expressed as log odds. Below is a brief introduction to probability, odds, log odds and SHAP values. 
+SHAP values describe how much a feature affects the probability of receiving thrombolysis. These are usually expressed as log odds; that is how much that feature adjusted the predicted log odds of receiving thrombolysis. Below is a brief introduction to probability, odds, log odds and SHAP values. 
 
 ### Probability, odds, and Shap values (log odds shifts): A brief explanation
 
-Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.
+Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain. However, rather than saying 1 in 10 days will be rainy, we can say that there is one rainy day for every nine days where it does not rain. The *odds* of rain take the ratio of rainy days to non-rainy days, and so the *odds* of a rainy day are 1/9 (or 0.111, as a decimal). 
 
-In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
+In our stroke thrombolysis model, SHAP values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
 
-This is made a little more complicated for us because Shap is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of Shap values that we will see in our models.
+This is made a little more complicated for us because SHAP is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant SHAP values in the range of -5 to +5 are, as that is a common range of SHAP values that we will see in our models.
 
 #### Probability
 
-We will take the example that Shap reports that a model's base probability prediction, before the contribution of features is 0.25, or a 25% probability of receiving thrombolysis; that is 1 in 4 patients with this prediction would be expected to receive thrombolysis.
+We will take the example that SHAP reports that a model's base probability prediction, before the contribution of features is 0.25, or a 25% probability of receiving thrombolysis; that is 1 in 4 patients with this prediction would be expected to receive thrombolysis.
 
 #### Odds
 
@@ -351,7 +351,7 @@ We will take the example that Shap reports that a model's base probability predi
 
 *Odds* express the chance of something happening as the ratio of the number of positive occurrences (i.e. receiving thrombolysis) to the number of negative occurrences (i.e. *not* receiving thrombolysis).
 
-If we have probability prediction of 0.25 would receive thrombolysis, that would mean 1 in 4 of those patients receive thrombolysis. Expressed as odds, for every one patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal (1 divided by 3), 0.333.
+If we have probability prediction of 0.25 of receiving thrombolysis, that would mean 1 in 4 of those patients would be expected to receive thrombolysis. Expressed as odds, for every one patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal (1 divided by 3), 0.333.
 
 Odds (O) and probability (P) may be converted with the following equations:
 
@@ -359,17 +359,17 @@ Odds (O) and probability (P) may be converted with the following equations:
 
 2.  P = O / (1 + O)
 
-#### Shap values: Log odds shifts
+#### SHAP values: Log odds shifts
 
-Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 0.5 to 5 give (we will look at positive and negative Shap values).
+Here we will calculate the effect of SHAP values, and try and build some intuition on the size of effect SHAP values of 0.5 to 5 give (we will look at positive and negative SHAP values).
 
-Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the 'Shap value') is usually given in 'log odds' (the logarithm of the odds value). For the mathematically inclined, we use the natural log (*ln*).
+SHAP usually outputs the effect of a particular feature in how much it shifts the odds. The SHAP value is usually given in 'log odds' (the logarithm of the odds value).We use the natural log (*ln*).
 
-Let's look at some Shap values (log odds) and see how much they change the odds of receiving thrombolysis.
+Let's look at some SHAP values (log odds) and see how much they change the odds of receiving thrombolysis.
 
-First we'll look at the shift in odds the Shap values give. This is calculated as *shift = exp(Shap)*
+First we'll look at the shift in odds the SHAP values give. This is calculated as *shift = exp(SHAP)*
 
-|  Shap (log odds) | Shift in odds (multiply original odds) |
+|  SHAP (log odds) | Shift in odds (multiply original odds) |
 |------------------|----------------------------------------|
 |   0.5            |  1.65                                  |
 |   1              |  2.72                                  |
@@ -378,7 +378,7 @@ First we'll look at the shift in odds the Shap values give. This is calculated a
 |   4              |  54.6                                  |
 |   5              |  148                                   |
 
-*Positive Shap values: worked example*
+*Positive SHAP values: a worked example*
 
 Now let us work through an example of starting with a known baseline *probability* (before we consider what we know about a particular patient feature), converting that to *odds*, applying a Shap *log odds shift* for that particular feature, and converting back to *probability* after we have applied the influence of that feature.
 
@@ -393,11 +393,11 @@ Here are the effects of those shifts on our baseline probability of 0.25.
 | 0.25 (25%) | 0.333      | 4    | 54.6               | 18.2      | 0.9479 (94.8%) |
 | 0.25 (25%) | 0.333      | 5    | 148                | 49.5      | 0.9802 (98.0%) |
 
-So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
+So, for example, a SHAP value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
 
-*Negative Shap values: worked example*
+*Negative SHAP values: a worked example*
 
-If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
+If we have a negative SHAP value then odds are reduced (a SHAP of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
 | Starting P | Starting O | SHAP | Shift (multiply O) | Shifted O | Shifted P (%)  |
 |------------|------------|------|--------------------|-----------|----------------|
@@ -408,21 +408,23 @@ If we have a negative Shap value then odds are reduced (a Shap of -1 will lead t
 | 0.25 (25%) | 0.333      | -4   | 54.6               | 18.2      | 0.0061 (0.61%) |
 | 0.25 (25%) | 0.333      | -5   | 148                | 49.5      | 0.0022 (0.22%) |
 
-So, for example, a Shap value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
+So, for example, a SHAP value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A SHAP value of -5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
 
-#### Observations about Shap values
+#### Observations about SHAP values
 
-We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
+We begin to get some intuition on SHAP values. A SHAP value of +0.5 (or -0.5) leads to a small, but still noticeable, change in probability. SHAP values of +5 or -5 have effectively pushed probabilities to one extreme or the other.
 
 ### Consistency of SHAP values across 5-fold validation
 
-The figure below shows the variation in mean absolute SHAP values obtained from the training sets of the 5 models in k-fold validation. SHAP values are well maintained across the five models.
+We examined how reproducible SHAP values are between different k-fold models. The figure below shows the variation in mean absolute SHAP values obtained from the training sets of the 5 models in k-fold validation. SHAP values are well maintained across the five models.
 
 <img src="./images/03_xgb_10_features_shap_violin.jpg" width="400"/>
 
+*Violin plots show the distribution of SHAP values across 5 k-fold models. The horizontal bar shows the median absolute SHAP value.*
+
 This result gave us confidence to use a single train/split to further investigate what SHAP reveals about the model.
 
-We also see the order of general influence of features across the population (note: teams are separated out into individual features, and need a separate analysis to examine SHAP of only those patients attending a particular hospital, as otherwise the SHAP is dominated by all the '0' one-hot encoded feature values):
+We also saw the order of general influence of features across the population (note: teams were separated out into individual one-hot features, and needed a separate analysis to examine SHAP of only those patients attending a particular hospital, as otherwise the SHAP was dominated by all the '0' one-hot encoded feature values):
 
 1. Infarction
 2. Arrival-to-scan time
@@ -436,13 +438,23 @@ We also see the order of general influence of features across the population (no
 
 ### Beeswarm plot of SHAP values
 
-The *beeswarm* plot gives a high level view of the feature values and SHAP values across the whole data set. We can see, for example that if a patient has an infarction then SHAP values are in the range 1-2, but if the patient does not have an infarction (i.e. has a haemorrhage) then SHAP values are in the range -8 to -4, effectively preventing the model from ever predicting thrombolysis would be given to a haemorrhagic patient.
+The *beeswarm* plot gives a high level view of the feature values and SHAP values across the whole data set. We saw, for example that if a patient had an infarction then SHAP values were in the range 1-2, but if the patient did not have an infarction (i.e. has a haemorrhage) then SHAP values were in the range -8 to -4, effectively preventing the model from ever predicting thrombolysis would be given to a haemorrhagic patient. The beeswarm plot was taken from training set for the first k-fold train/test split.
 
 <img src="./images/03_xgb_10_features_beeswarm.jpg" width="600"/>
 
+*Beeswarm plot of SHAP values, taken from the training set for the first of 5 k-fold train/test splits. Features values are indicated by color of the points, and the corresponding SHAP value is shown on the x-axis.*
+
 ### Violin plots of SHAP values
 
-Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). Key observations are:
+Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). The SHAP values were taken the SHAP values of the training set for the first of 5 k-fold train/test splits.
+
+Note: SHAP values are not necessarily the same for all instances with the same feature value. This is because the SHAP value also depends on interactions between features. For example if a hospital is not pre-disposed to give thrombolysis to patients with mild stroke, the SHAP value for the NIHSS value (e.g. NIHSS=1 for  avery mild stroke) will be lower than the SHAP value for the NIHSS value for a similar patient attending a hospital with a greater predisposition to use thrombolysis in patients with milder strokes. These interactions will be explored later.
+
+<img src="./images/03_xgb_10_features_thrombolysis_shap_violin.jpg" width="800"/>
+
+*Violin plots showing the relationship between SHAP values and feature values. The horizontal line shows the median SHAP value. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.*
+
+Key observations were, with SHAP values converted back to odds were:
 
 * Stroke type: As expected,  the SHAP values for stroke types effectively eliminated any chance of receiving thrombolysis for non-ischaemic (haemorrhagic) stroke.
 
@@ -454,27 +466,34 @@ Violin plots show the relationship between feature values and SHAP values for in
 
 * Disability level (Rankin) before stroke. The odds of receiving thrombolysis fell about 5 fold between mRS 0 and 5.
 
-<img src="./images/03_xgb_10_features_thrombolysis_shap_violin.jpg" width="800"/>
-
-
 ### Hospital SHAP values
 
-When examining SHAP, we take the hospital SHAP values for patients attending each hospital (if we examined the hospital SHAP for all patients, it would be dominated by those not-attending each hospital (i.e. coded zero in the one-hot encoding). When we examine the hospital SHAP values for a model trained on all the data, and only for patients attending each hospital, the hospital SHAP values ranged from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). 
+When examining SHAP, we took the hospital SHAP values for patients attending each hospital (if we examined the hospital SHAP for all patients, it would be dominated by those not-attending each hospital (i.e. coded zero in the one-hot encoding). When we examined the hospital SHAP values for a model trained on all the data, and only for patients attending each hospital, the hospital SHAP values ranged from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). 
 
 
 <img src="./images/03_xgb_10_features_hosp_shap_hist.jpg" width="400"/>
 
-We compared the hospital SHAP value with the observed thrombolysis use at each hospital. Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582 (P<0.0001) , suggesting that 58% of the between-hospital variance in thrombolysis use may be explained by the hospitals' SHAP values, that is the hospitals' predisposition to use thrombolysis.
+*Distribution of hospital SHAP values for patients attending each hospital. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.*
+
+We compared the hospital SHAP value with the observed thrombolysis use at each hospital. For this experiment we combined the SHAP values from all the 5 k-fold test data splits, so that all instances were represented.
+
+Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582 (P<0.0001) , suggesting that 58% of the between-hospital variance in thrombolysis use may be explained by the hospitals' SHAP values, that is the hospitals' predisposition to use thrombolysis.
 
 <img src="./images/03c_xgb_10_features_attended_hosp_shap_value.jpg" width="400"/>
+
+*Correlation between median hospital SHAP value and the observed thrombolysis use at each hospital.*
 
 The hospital SHAP value is composed of a *main* effect of the hospital, independent of other patient features, and *interaction effects*, which is how the hospital ID interacts with other patient features (e.g. if a hospital treats a certain type of patient in a way that is different to the usual pattern). We found that the SHAP value (which is the sum of the *main effect* and the *interaction effects*) for hospitals had a broader range than the main effect, as this value included how a hospital may have different predispositions to use thrombolysis in different types of patient. 
 
 <img src="./images/03c_xgb_10_features_individual_hosp_shap_value_and_main_effect_attend_vs_notattend_boxplot.jpg" width="800"/>
 
-When we re-axamine the correlation between hospital SHAP and observed thrombolysis rate, we find that the main hospital SHAP effect accounts for 56% of the variance in thrombolysis rate (*c.f.* 58% for the full SHAP).
+*Boxplots for the SHAP value (composed of the sum of the main effect and the interaction effects) and the SHAP main effect value, for each of 132 hospitals.*
+
+When we re-examine the correlation between hospital SHAP and observed thrombolysis rate, we find that the main hospital SHAP effect accounts for 56% of the variance in thrombolysis rate (*c.f.* 58% for the full SHAP).
 
 <img src="./images/03c_xgb_10_features_attended_hosp_shap_value_and_main_effect_vs_ivt_rate.jpg" width="500"/>
+
+*Correlations between median hospital SHAP value or the median SHAP main effect value, and the observed thrombolysis use at each hospital.*
 
 #### Hospital SHAP and 10k cohort 
 
