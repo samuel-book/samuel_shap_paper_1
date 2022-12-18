@@ -1708,20 +1708,23 @@ title="Print to PDF"
 </section>
 <section id="waterfall-plots-for-individual-patient-predictions">
 <h3>Waterfall plots for individual patient predictions<a class="headerlink" href="#waterfall-plots-for-individual-patient-predictions" title="Permalink to this headline">#</a></h3>
-<p>Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive. The example shown below is for a patient with a low probability of receiving thrombolysis. The model starts with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features increase that base probability of receiving thrombolysis, those are onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features then reduce the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%.</p>
+<p>Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive for many people to follow. The example shown below is for a patient with a low probability of receiving thrombolysis. The model started with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features (coloured red) increased that base probability of receiving thrombolysis; those were onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features (shown in blue) reduced the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%.</p>
 <a class="reference internal image-reference" href="../_images/03_xgb_10_features_waterfall_probability_low.jpg"><img alt="../_images/03_xgb_10_features_waterfall_probability_low.jpg" src="../_images/03_xgb_10_features_waterfall_probability_low.jpg" style="width: 600px;" /></a>
+<p><em>Waterfall plot showing the influence of each feature on the predicted probability of a single patient receiving thrombolysis. This example is for a patient with a predicted low probability of receiving thrombolysis.</em></p>
 <p>We may see a similar plot for a patient with a high (96%) probability of receiving thrombolysis.</p>
 <a class="reference internal image-reference" href="../_images/03_xgb_10_features_waterfall_probability_high.jpg"><img alt="../_images/03_xgb_10_features_waterfall_probability_high.jpg" src="../_images/03_xgb_10_features_waterfall_probability_high.jpg" style="width: 600px;" /></a>
+<p><em>Waterfall plot showing the influence of each feature on the predicted probability of a single patient receiving thrombolysis. This example is for a patient with a predicted high probability of receiving thrombolysis.</em></p>
 </section>
 </section>
 <section id="hospital-shap-interactions">
 <h2>Hospital SHAP interactions<a class="headerlink" href="#hospital-shap-interactions" title="Permalink to this headline">#</a></h2>
-<p>Below are three examples of how a particular hospital modifies the general SHAP effects - either strengthening the effect, of attenuating it.</p>
+<p>Below are three examples of how a particular hospital modified the general SHAP effects - either strengthening the effect, of attenuating it.</p>
 <section id="hospital-and-onset-time-interaction">
 <h3>Hospital and onset time interaction<a class="headerlink" href="#hospital-and-onset-time-interaction" title="Permalink to this headline">#</a></h3>
 <p>The main effect of the <em>precise onset time</em> is that if onset time is known precisely then SHAP (log odds) is increased by 0.42, otherwise it is reduced by 0.85.</p>
 <p><em>Team_HZNVT9936G</em> has a slightly higher main effect for hopsital SHAP (0.26) than <em>Team_FAJKD7118X -0.27)</em>. <em>Team_HZNVT9936G</em> also has interactions that strengthen the effect of <em>precise onset time</em> whereas <em>Team_FAJKD7118X</em> has interactions values that attenuate the main effect of <em>precise onset time</em>.</p>
 <a class="reference internal image-reference" href="../_images/12aa_onset_time_type_interaction_example.jpg"><img alt="../_images/12aa_onset_time_type_interaction_example.jpg" src="../_images/12aa_onset_time_type_interaction_example.jpg" style="width: 600px;" /></a>
+<p><em>SHAP interaction between hospital ID for two teams and whether stroke onset time was known precisely. If a patient attended team HZNVT9936G then SHAP value for having a precise onset time was increased (a strengthening of the main effect of precise onset time). If a patient attended team FAJKD7118X then SHAP value for having a precise onset time was reduced (an attenuation of the main effect of precise onset time).</em></p>
 </section>
 <section id="hospital-and-stroke-severity-interaction">
 <h3>Hospital and stroke severity interaction<a class="headerlink" href="#hospital-and-stroke-severity-interaction" title="Permalink to this headline">#</a></h3>
@@ -1729,23 +1732,26 @@ title="Print to PDF"
 <p><em>Team_TPXYE0168D</em> has a higher general tendency to use thrombolysis than <em>Team_SMVTP6284P</em> (team main effect SHAP = 0.92 vs 0.62)</p>
 <p><em>Team_TPXYE0168D</em> has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. <em>Team_SMVTP6284P</em> strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.</p>
 <a class="reference internal image-reference" href="../_images/12ab_stroke_severity_interaction_example.jpg"><img alt="../_images/12ab_stroke_severity_interaction_example.jpg" src="../_images/12ab_stroke_severity_interaction_example.jpg" style="width: 600px;" /></a>
+<p><em>SHAP interaction between hospital ID for two teams and stroke severity. If a patient attended team TPXYE0168D then SHAP values for low stroke severity were increased (an attenuation of the main effect of stroke severity). If a patient attended team SMVTP6284P then SHAP values for low and severe stroke severity were reduced (a strengthening of the main effect of stroke severity).</em></p>
 </section>
 <section id="id1">
 <h3>Hospital and stroke severity interaction<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>The main effect of prior disability is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5).</p>
 <p><em>Team_XKAWN3771U</em> has a slighty higher general tendency to use thrombolysis than <em>Team_AKCGO9726K</em> (team main effect SHAP = 0.78 vs 0.45). <em>Team_XKAWN3771U</em> has a SHAP interaction that opposes the general prior disability main effect. <em>Team_AKCGO9726K</em> strengthens the main effect of pre-stroke disability - reducing the odds of receiving thrombolysis even further for mild strokes.</p>
 <a class="reference internal image-reference" href="../_images/12ac_disability_interaction_example.jpg"><img alt="../_images/12ac_disability_interaction_example.jpg" src="../_images/12ac_disability_interaction_example.jpg" style="width: 600px;" /></a>
+<p><em>SHAP interaction between hospital ID for two teams and pre-exisiting disability. If a patient attended team AKCGO9726K then SHAP values for increasing pre-stroke disability were increased (an attenuation of the main effect of stroke severity). If a patient attended team XKAWN3771U then SHAP values for increasing pre-stroke disability were reduced (a strengthening of the main effect of stroke severity).</em></p>
 </section>
 </section>
 <section id="general-shap-interactions">
 <h2>General SHAP interactions<a class="headerlink" href="#general-shap-interactions" title="Permalink to this headline">#</a></h2>
 <p>All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values cam from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.</p>
+<a class="reference internal image-reference" href="../_images/12a_shap_interactions_scatter.jpg"><img alt="../_images/12a_shap_interactions_scatter.jpg" src="../_images/12a_shap_interactions_scatter.jpg" style="width: 1200px;" /></a>
+<p><em>SHAP interactions between all features, excluding hospital attended. One feature is shown on the x-axis, and the other feature is colour-coded (from blue for low feature values, and red for high feature values). The y-axis shows the value of the SHAP interaction between the two features; that is the additional value added to the main SHAP effects of each feature.</em></p>
 <p>Some key interactions are:</p>
 <ul class="simple">
 <li><p>If a stroke is haemorrhagic, then the interaction is such that the presence of haemorrhage cancels out much of the other SHAP effects (i.e. stroke severity does not matter if the stroke is haemorrhagic).</p></li>
 <li><p>Likewise elsewhere we find that features that each give negative SHAP values alone have an interaction that attenuates the combined effect of the two features together a little.</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/12a_shap_interactions_scatter.jpg"><img alt="../_images/12a_shap_interactions_scatter.jpg" src="../_images/12a_shap_interactions_scatter.jpg" style="width: 1200px;" /></a>
 </section>
 <section id="subgroup-analysis">
 <h2>Subgroup analysis<a class="headerlink" href="#subgroup-analysis" title="Permalink to this headline">#</a></h2>
@@ -1768,21 +1774,26 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<p>The figure below shows a boxplot of either observed (top) or predicted (bottom) use of thrombolysis.</p>
-<p>The observed and predicted subgroup analysis show very similar general patterns (with r-squared=0.95, see figure below of comparison of predicted and observed use of thrombolysis at each hospital for all subgroups). The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.</p>
+<p>For the observed thrombolysis use, data was limited to the patients attending each hospital. For the predicted thrombolysis use the predictions were based on the 10k patient cohort for all hospitals.</p>
+<p>The figure below shows a boxplot of either observed and predicted use of thrombolysis.</p>
+<a class="reference internal image-reference" href="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg"><img alt="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg" src="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg" style="width: 600px;" /></a>
+<p><em>Boxplot for either observed (top) or predicted (bottom) use of thrombolysis for subgroups of patients.</em></p>
+<p>The observed and predicted subgroup analysis show very similar general patterns (and with a r-squared=0.95).</p>
+<a class="reference internal image-reference" href="../_images/15a_subgroup_correlation.jpg"><img alt="../_images/15a_subgroup_correlation.jpg" src="../_images/15a_subgroup_correlation.jpg" style="width: 400px;" /></a>
+<p><em>A comparison of predicted and observed use of thrombolysis at each hospital for all subgroups</em></p>
+<p>The three subgroups of NIHSS &lt;5, no precise stroke onset time, and prestroke mRS &gt; 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.</p>
 <p>Some differences exist:</p>
 <ul class="simple">
-<li><p>The use of thrombolysi in <em>ideal</em> patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).</p></li>
+<li><p>The use of thrombolysi in <em>ideal</em> patients is a little low in the observed vs actual results (mean hospital thrombolysis use = 89% vs 99%).</p></li>
 <li><p>The predicted results show a stronger effect of combining non-ideal features.</p></li>
-<li><p>The observed thrombolysis rate shows higher between-hopsital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolsysi rate being on different patients at each hospital, but may also be partly exlained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospial patterns, and will not include, for example, between-clinician variation at each hospital).</p></li>
+<li><p>The observed thrombolysis rate shows higher between-hospital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolysis rate being on different patients at each hospital, but may also be partly explained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospital patterns, and will not include, for example, between-clinician variation at each hospital).</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg"><img alt="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg" src="../_images/15a_actual_vs_modelled_subgroup_violin1.jpg" style="width: 600px;" /></a>
-<p>The correlation of predicted and observed use of thrombolysis at each hospital for all subgroups:</p>
-<a class="reference internal image-reference" href="../_images/15a_subgroup_correlation.jpg"><img alt="../_images/15a_subgroup_correlation.jpg" src="../_images/15a_subgroup_correlation.jpg" style="width: 400px;" /></a>
 <p>When we look at thrombolysis use in subgroups at each hospital we see that the observed thrombolysis use tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p>
 <a class="reference internal image-reference" href="../_images/15a_actual_subgroup.jpg"><img alt="../_images/15a_actual_subgroup.jpg" src="../_images/15a_actual_subgroup.jpg" style="width: 800px;" /></a>
+<p><em>Observed thrombolysis use for all patients and subgroups of patients at each of 132 hospitals, with hospitals ordered by descending thrombolysis use of all patients. Results are for all patients attending each hospital.</em></p>
 <p>This parallel reduction in use of thrombolysis across the subgroups was also seen in the predicted use of thrombolysis.</p>
 <a class="reference internal image-reference" href="../_images/15_10k_subgroup.jpg"><img alt="../_images/15_10k_subgroup.jpg" src="../_images/15_10k_subgroup.jpg" style="width: 800px;" /></a>
+<p><em>Predicted thrombolysis use for all patients and subgroups of patients at each of 132 hospitals, with hospitals ordered by descending thrombolysis use of all patients. Results are based on a prediction of thrombolysis in a 10k cohort of patients.</em></p>
 </section>
 <section id="a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
 <h2>A comparison of thrombolysis use in high and low thrombolysing units by feature values<a class="headerlink" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values" title="Permalink to this headline">#</a></h2>

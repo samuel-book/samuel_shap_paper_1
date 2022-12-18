@@ -507,17 +507,21 @@ Though we model the same 10k patients going to all hospitals, we found that the 
 
 ### Waterfall plots for individual patient predictions
 
-Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive. The example shown below is for a patient with a low probability of receiving thrombolysis. The model starts with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features increase that base probability of receiving thrombolysis, those are onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features then reduce the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%. 
+Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive for many people to follow. The example shown below is for a patient with a low probability of receiving thrombolysis. The model started with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features (coloured red) increased that base probability of receiving thrombolysis; those were onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features (shown in blue) reduced the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%. 
 
 <img src="./images/03_xgb_10_features_waterfall_probability_low.jpg" width="600"/>
+
+*Waterfall plot showing the influence of each feature on the predicted probability of a single patient receiving thrombolysis. This example is for a patient with a predicted low probability of receiving thrombolysis.*
 
 We may see a similar plot for a patient with a high (96%) probability of receiving thrombolysis.
 
 <img src="./images/03_xgb_10_features_waterfall_probability_high.jpg" width="600"/>
 
+*Waterfall plot showing the influence of each feature on the predicted probability of a single patient receiving thrombolysis. This example is for a patient with a predicted high probability of receiving thrombolysis.*
+
 ## Hospital SHAP interactions
 
-Below are three examples of how a particular hospital modifies the general SHAP effects - either strengthening the effect, of attenuating it.
+Below are three examples of how a particular hospital modified the general SHAP effects - either strengthening the effect, of attenuating it.
 
 ### Hospital and onset time interaction
 
@@ -527,6 +531,8 @@ The main effect of the *precise onset time* is that if onset time is known preci
 
 
 <img src="./images/12aa_onset_time_type_interaction_example.jpg" width="600"/>
+
+*SHAP interaction between hospital ID for two teams and whether stroke onset time was known precisely. If a patient attended team HZNVT9936G then SHAP value for having a precise onset time was increased (a strengthening of the main effect of precise onset time). If a patient attended team FAJKD7118X then SHAP value for having a precise onset time was reduced (an attenuation of the main effect of precise onset time).*
 
 ### Hospital and stroke severity interaction
 
@@ -538,6 +544,8 @@ The main effect of stroke severity is to significantly reduce the odds of receiv
 
 <img src="./images/12ab_stroke_severity_interaction_example.jpg" width="600"/>
 
+*SHAP interaction between hospital ID for two teams and stroke severity. If a patient attended team TPXYE0168D then SHAP values for low stroke severity were increased (an attenuation of the main effect of stroke severity). If a patient attended team SMVTP6284P then SHAP values for low and severe stroke severity were reduced (a strengthening of the main effect of stroke severity).*
+
 ### Hospital and stroke severity interaction
 
 The main effect of prior disability is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5).
@@ -546,15 +554,19 @@ The main effect of prior disability is to progressively reduce the odds of recei
 
 <img src="./images/12ac_disability_interaction_example.jpg" width="600"/>
 
+*SHAP interaction between hospital ID for two teams and pre-exisiting disability. If a patient attended team AKCGO9726K then SHAP values for increasing pre-stroke disability were increased (an attenuation of the main effect of stroke severity). If a patient attended team XKAWN3771U then SHAP values for increasing pre-stroke disability were reduced (a strengthening of the main effect of stroke severity).*
+
 ## General SHAP interactions
 
 All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values cam from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.
 
+<img src="./images/12a_shap_interactions_scatter.jpg" width="1200"/>
+
+*SHAP interactions between all features, excluding hospital attended. One feature is shown on the x-axis, and the other feature is colour-coded (from blue for low feature values, and red for high feature values). The y-axis shows the value of the SHAP interaction between the two features; that is the additional value added to the main SHAP effects of each feature.*
+
 Some key interactions are:
   * If a stroke is haemorrhagic, then the interaction is such that the presence of haemorrhage cancels out much of the other SHAP effects (i.e. stroke severity does not matter if the stroke is haemorrhagic).
   * Likewise elsewhere we find that features that each give negative SHAP values alone have an interaction that attenuates the combined effect of the two features together a little.
-
-<img src="./images/12a_shap_interactions_scatter.jpg" width="1200"/>
 
 ## Subgroup analysis
 
@@ -573,34 +585,39 @@ We analyse the observed and predicted use of thrombolysis in subgroups of patien
     * Onset-to-arrival time < 90 minutes
     * Age < 80 years
     * Onset during sleep = False
+    
+For the observed thrombolysis use, data was limited to the patients attending each hospital. For the predicted thrombolysis use the predictions were based on the 10k patient cohort for all hospitals.
 
-The figure below shows a boxplot of either observed (top) or predicted (bottom) use of thrombolysis. 
-
-The observed and predicted subgroup analysis show very similar general patterns (with r-squared=0.95, see figure below of comparison of predicted and observed use of thrombolysis at each hospital for all subgroups). The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
-
-Some differences exist:
-* The use of thrombolysi in *ideal* patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).
-* The predicted results show a stronger effect of combining non-ideal features.
-* The observed thrombolysis rate shows higher between-hopsital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolsysi rate being on different patients at each hospital, but may also be partly exlained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospial patterns, and will not include, for example, between-clinician variation at each hospital).
-
+The figure below shows a boxplot of either observed and predicted use of thrombolysis.
 
 <img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600"/>
 
-The correlation of predicted and observed use of thrombolysis at each hospital for all subgroups:
+*Boxplot for either observed (top) or predicted (bottom) use of thrombolysis for subgroups of patients.*
+
+The observed and predicted subgroup analysis show very similar general patterns (and with a r-squared=0.95).
 
 <img src="./images/15a_subgroup_correlation.jpg" width="400"/>
+
+*A comparison of predicted and observed use of thrombolysis at each hospital for all subgroups*
+
+The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
+
+Some differences exist:
+* The use of thrombolysi in *ideal* patients is a little low in the observed vs actual results (mean hospital thrombolysis use = 89% vs 99%).
+* The predicted results show a stronger effect of combining non-ideal features.
+* The observed thrombolysis rate shows higher between-hospital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolysis rate being on different patients at each hospital, but may also be partly explained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospital patterns, and will not include, for example, between-clinician variation at each hospital).
 
 When we look at thrombolysis use in subgroups at each hospital we see that the observed thrombolysis use tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in 'less ideal' patients. 
 
 <img src="./images/15a_actual_subgroup.jpg" width="800"/>
 
+*Observed thrombolysis use for all patients and subgroups of patients at each of 132 hospitals, with hospitals ordered by descending thrombolysis use of all patients. Results are for all patients attending each hospital.*
+
 This parallel reduction in use of thrombolysis across the subgroups was also seen in the predicted use of thrombolysis.
 
 <img src="./images/15_10k_subgroup.jpg" width="800"/>
 
-
-
-
+*Predicted thrombolysis use for all patients and subgroups of patients at each of 132 hospitals, with hospitals ordered by descending thrombolysis use of all patients. Results are based on a prediction of thrombolysis in a 10k cohort of patients.*
 
 ## A comparison of thrombolysis use in high and low thrombolysing units by feature values
 
