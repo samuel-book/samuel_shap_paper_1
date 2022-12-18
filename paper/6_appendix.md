@@ -118,7 +118,7 @@ Thrombolysis use in the original data varied between hospitals, from 1.5% to 24.
 
 <img src="./images/thrombolysis_hist.jpg" width="800"/>
 
-*Histogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset*
+*Histogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset.*
 
 
 ## Machine learning
@@ -204,18 +204,18 @@ Correlations between the 10 features were measured using coefficients of determi
 
 Model accuracy was measured using stratified 5-fold cross validation. The key results are shown below.
 
-| measurement                      | mean  | std   |
+| Accuracy measurement             | mean  | std   |
 |----------------------------------|-------|-------|
-| actual positive rate             | 0.296 | 0.000 |
-| actual negative rate             | 0.704 | 0.000 |
-| predicted positive rate          | 0.294 | 0.002 |
-| predicted negative rate          | 0.706 | 0.002 |
-| accuracy                         | 0.850 | 0.004 |
-| sensitivity (recall)             | 0.743 | 0.004 |
-| specificity                      | 0.894 | 0.004 |
-| precision                        | 0.747 | 0.007 |
+| Actual positive rate             | 0.296 | 0.000 |
+| Actual negative rate             | 0.704 | 0.000 |
+| Predicted positive rate          | 0.294 | 0.002 |
+| Predicted negative rate          | 0.706 | 0.002 |
+| Accuracy                         | 0.850 | 0.004 |
+| Sensitivity (recall)             | 0.743 | 0.004 |
+| Specificity                      | 0.894 | 0.004 |
+| Precision                        | 0.747 | 0.007 |
 | ROC AUC                          | 0.918 | 0.003 |
-| balanced sensitivity/specificity | 0.839 | 0.003 |
+| Balanced sensitivity/specificity | 0.839 | 0.003 |
 
 We found an overall accuracy of 85%, with a balanced accuracy. The predicted thrombolysis rate of 29.4% was very close to the observed thrombolysis rate of 29.6%.
 
