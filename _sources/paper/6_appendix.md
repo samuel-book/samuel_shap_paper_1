@@ -118,7 +118,7 @@ Thrombolysis use in the original data varied between hospitals, from 1.5% to 24.
 
 <img src="./images/thrombolysis_hist.jpg" width="800"/>
 
-*Histogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset*
+*Histogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset.*
 
 
 ## Machine learning
@@ -204,18 +204,18 @@ Correlations between the 10 features were measured using coefficients of determi
 
 Model accuracy was measured using stratified 5-fold cross validation. The key results are shown below.
 
-| measurement                      | mean  | std   |
+| Accuracy measurement             | mean  | std   |
 |----------------------------------|-------|-------|
-| actual positive rate             | 0.296 | 0.000 |
-| actual negative rate             | 0.704 | 0.000 |
-| predicted positive rate          | 0.294 | 0.002 |
-| predicted negative rate          | 0.706 | 0.002 |
-| accuracy                         | 0.850 | 0.004 |
-| sensitivity (recall)             | 0.743 | 0.004 |
-| specificity                      | 0.894 | 0.004 |
-| precision                        | 0.747 | 0.007 |
+| Actual positive rate             | 0.296 | 0.000 |
+| Actual negative rate             | 0.704 | 0.000 |
+| Predicted positive rate          | 0.294 | 0.002 |
+| Predicted negative rate          | 0.706 | 0.002 |
+| Accuracy                         | 0.850 | 0.004 |
+| Sensitivity (recall)             | 0.743 | 0.004 |
+| Specificity                      | 0.894 | 0.004 |
+| Precision                        | 0.747 | 0.007 |
 | ROC AUC                          | 0.918 | 0.003 |
-| balanced sensitivity/specificity | 0.839 | 0.003 |
+| Balanced sensitivity/specificity | 0.839 | 0.003 |
 
 We found an overall accuracy of 85%, with a balanced accuracy. The predicted thrombolysis rate of 29.4% was very close to the observed thrombolysis rate of 29.6%.
 
@@ -288,7 +288,7 @@ Learning curves evaluate the relationship between training set size and model ac
 
 As hospital ID is encoded as one-hot, and there are 132 hospitals, it is possible that the effect of hospitals ID becomes 'regularised out', especially as for each one-hot encoded column about 99% of the feature values will be zero. *Learning rate* in XGBoost acts as a regularising method. The lower the learning rate the less weight new trees have, and so the model becomes more regularised (less likely to overfit).
 
-As we are concerned with differences between hospitals, we did not want to over-regularise the model. To optimise *learning rate* we looked at the between-hospital variation of predicted thrombolysis use in a 10k cohort of patients (with the model predicting the use of thrombolysis in each hospital with the same 10k cohort). The mode was trained on the remaining 78,928 patients, with varying learning rates.
+As we are concerned with differences between hospitals, we did not want to over-regularise the model. To optimise *learning rate* we looked at the between-hospital variation of predicted thrombolysis use in a 10k cohort of patients (with the model predicting the use of thrombolysis in each hospital with the same 10k cohort). The model was trained on the remaining 78,928 patients, with varying learning rates.
 
 Reducing the learning rate below 0.5 led to reduced between-hospital variation in the predicted use of thrombolysis, suggesting that the effect of hospital ID was being reduced by over-regularisation. 
 
@@ -300,12 +300,12 @@ A learning rate of 0.5 was chosen for all modelling (including the accuracy meas
 
 Statistics on the variation in predicted thrombolysis use between hospitals, with varying learning rate, is shown below:
 
-|        | 0.1  | 0.25 | 0.5  | 0.75 | 1.0  |
-|--------|------|------|------|------|------|
-| Mean   | 0.28 | 0.28 | 0.28 | 0.28 | 0.28 |
-| StdDev | 0.03 | 0.05 | 0.06 | 0.07 | 0.07 |
-| Min    | 0.18 | 0.13 | 0.10 | 0.09 | 0.09 |
-| Max    | 0.38 | 0.43 | 0.45 | 0.48 | 0.46 |
+| Learning rate  | 0.1  | 0.25 | 0.5  | 0.75 | 1.0  |
+|----------------|------|------|------|------|------|
+| Mean           | 0.28 | 0.28 | 0.28 | 0.28 | 0.28 |
+| StdDev         | 0.03 | 0.05 | 0.06 | 0.07 | 0.07 |
+| Min            | 0.18 | 0.13 | 0.10 | 0.09 | 0.09 |
+| Max            | 0.38 | 0.43 | 0.45 | 0.48 | 0.46 |
 
 ## An analysis of the characteristics of the most thrombolysable patient at each hospital
 
