@@ -118,6 +118,8 @@ Thrombolysis use in the original data varied between hospitals, from 1.5% to 24.
 
 <img src="./images/thrombolysis_hist.jpg" width="800"/>
 
+*Histogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset*
+
 
 ## Machine learning
 
@@ -155,7 +157,7 @@ The improvement in ROC AUC with increasing features is shown in the figure below
 
 *The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features. ROC was measured with stratified 5-fold cross-validation. Results show the mean of the 5-fold replicates.*
 
-### Correlations within the 10 features
+### Correlations within the 10 selected features
 
 Correlations between the 10 features were measured using coefficients of determination (r-squared). All r-squared were less than 0.15, and all r-squared were less than 0.05 except 1) age and prior disability level (r-squared 0.146), and 2) onset during sleep and precise onset time (r-squared 0.078).
 
