@@ -296,15 +296,26 @@ A learning rate of 0.5 was chosen for all modelling (including the accuracy meas
 
 *Effect of adjusting XGBoost learning rate on the distribution predicted thrombolysis use across 132 hospitals. A narrower distribution indicates that hospital thrombolysis rates are tending towards the mean thrombolysis hospital rate.*
 
+Statistics on the variation in predicted thrombolysis use between hospitals, with varying learning rate, is shown below:
+
+|        | 0.1  | 0.25 | 0.5  | 0.75 | 1.0  |
+|--------|------|------|------|------|------|
+| Mean   | 0.28 | 0.28 | 0.28 | 0.28 | 0.28 |
+| StdDev | 0.03 | 0.05 | 0.06 | 0.07 | 0.07 |
+| Min    | 0.18 | 0.13 | 0.10 | 0.09 | 0.09 |
+| Max    | 0.38 | 0.43 | 0.45 | 0.48 | 0.46 |
+
 ## An analysis of the characteristics of the most thrombolysable patient at each hospital
 
-We identified the patient with the highest probability of thrombolysis at each hospital, and compared the feature values of those patients to:
+We identified the patient with the highest probability of thrombolysis (taken from 5-fold combined test set results) at each hospital, and compared the feature values of those patients to:
 
 * All patients
-* All patients receiving thrombolysis
-* All patients not receiving thrombolysis
+* All patients who had received thrombolysis
+* All patients who had not received thrombolysis
 
 <img src="./images/02a_most_thrombolsyable_violin.jpg" width="800"/>
+
+*Violin plots comparing feature values between the patient with the highest probability of thrombolysis at each hospital with all patients, all patients who had received thrombolysis, and all patients who had not received thrombolysis. Horizontal lines show the mean value of each group.*
 
 Compared with the other groups, the most thrombolysable patients ....
 
@@ -315,7 +326,7 @@ Compared with the other groups, the most thrombolysable patients ....
 * Had lower pre-stroke disability
 * Were not taking anticoagulant medication
 * Had shorter onset-to-arrival times
-* Do not have onset during sleep
+* Did not have onset during sleep
 * Were younger
 
 ## Explaining model predictions with SHAP

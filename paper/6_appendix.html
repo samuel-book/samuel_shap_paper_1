@@ -1397,17 +1397,60 @@ title="Print to PDF"
 <p>A learning rate of 0.5 was chosen for all modelling (including the accuracy measurements above).</p>
 <a class="reference internal image-reference" href="../_images/91_learning_rate.jpg"><img alt="../_images/91_learning_rate.jpg" src="../_images/91_learning_rate.jpg" style="width: 400px;" /></a>
 <p><em>Effect of adjusting XGBoost learning rate on the distribution predicted thrombolysis use across 132 hospitals. A narrower distribution indicates that hospital thrombolysis rates are tending towards the mean thrombolysis hospital rate.</em></p>
+<p>Statistics on the variation in predicted thrombolysis use between hospitals, with varying learning rate, is shown below:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>0.1</p></th>
+<th class="head"><p>0.25</p></th>
+<th class="head"><p>0.5</p></th>
+<th class="head"><p>0.75</p></th>
+<th class="head"><p>1.0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mean</p></td>
+<td><p>0.28</p></td>
+<td><p>0.28</p></td>
+<td><p>0.28</p></td>
+<td><p>0.28</p></td>
+<td><p>0.28</p></td>
+</tr>
+<tr class="row-odd"><td><p>StdDev</p></td>
+<td><p>0.03</p></td>
+<td><p>0.05</p></td>
+<td><p>0.06</p></td>
+<td><p>0.07</p></td>
+<td><p>0.07</p></td>
+</tr>
+<tr class="row-even"><td><p>Min</p></td>
+<td><p>0.18</p></td>
+<td><p>0.13</p></td>
+<td><p>0.10</p></td>
+<td><p>0.09</p></td>
+<td><p>0.09</p></td>
+</tr>
+<tr class="row-odd"><td><p>Max</p></td>
+<td><p>0.38</p></td>
+<td><p>0.43</p></td>
+<td><p>0.45</p></td>
+<td><p>0.48</p></td>
+<td><p>0.46</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="an-analysis-of-the-characteristics-of-the-most-thrombolysable-patient-at-each-hospital">
 <h2>An analysis of the characteristics of the most thrombolysable patient at each hospital<a class="headerlink" href="#an-analysis-of-the-characteristics-of-the-most-thrombolysable-patient-at-each-hospital" title="Permalink to this headline">#</a></h2>
-<p>We identified the patient with the highest probability of thrombolysis at each hospital, and compared the feature values of those patients to:</p>
+<p>We identified the patient with the highest probability of thrombolysis (taken from 5-fold combined test set results) at each hospital, and compared the feature values of those patients to:</p>
 <ul class="simple">
 <li><p>All patients</p></li>
-<li><p>All patients receiving thrombolysis</p></li>
-<li><p>All patients not receiving thrombolysis</p></li>
+<li><p>All patients who had received thrombolysis</p></li>
+<li><p>All patients who had not received thrombolysis</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/02a_most_thrombolsyable_violin.jpg"><img alt="../_images/02a_most_thrombolsyable_violin.jpg" src="../_images/02a_most_thrombolsyable_violin.jpg" style="width: 800px;" /></a>
+<p><em>Violin plots comparing feature values between the patient with the highest probability of thrombolysis at each hospital with all patients, all patients who had received thrombolysis, and all patients who had not received thrombolysis. Horizontal lines show the mean value of each group.</em></p>
 <p>Compared with the other groups, the most thrombolysable patients ….</p>
 <ul class="simple">
 <li><p>Had shorter arrrival-to-scan times</p></li>
@@ -1417,7 +1460,7 @@ title="Print to PDF"
 <li><p>Had lower pre-stroke disability</p></li>
 <li><p>Were not taking anticoagulant medication</p></li>
 <li><p>Had shorter onset-to-arrival times</p></li>
-<li><p>Do not have onset during sleep</p></li>
+<li><p>Did not have onset during sleep</p></li>
 <li><p>Were younger</p></li>
 </ul>
 </section>
