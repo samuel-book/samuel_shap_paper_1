@@ -120,7 +120,6 @@ Thrombolysis use in the original data varied between hospitals, from 1.5% to 24.
 
 *Histogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset.*
 
-
 ## Machine learning
 
 All work was conducted in Python (v3.8). All code is available at: https://github.com/samuel-book/samuel_shap_paper_1
@@ -157,7 +156,7 @@ The improvement in ROC AUC with increasing features is shown in the figure below
 
 *The effect of increasing the number of features on model accuracy measured by Receiver Operating Characteristic (ROC) Area Under Curve (AUC). Left: Improvement with ROC AUC with selection of up to 25 features. Right: Improvement with ROC AUC with selection of the best 10 features. ROC was measured with stratified 5-fold cross-validation. Results show the mean of the 5-fold replicates.*
 
-### Correlations within the 10 selected features
+### Correlations within the 10 features
 
 Correlations between the 10 features were measured using coefficients of determination (r-squared). All r-squared were less than 0.15, and all r-squared were less than 0.05 except 1) age and prior disability level (r-squared 0.146), and 2) onset during sleep and precise onset time (r-squared 0.078).
 
@@ -499,13 +498,17 @@ When we re-examine the correlation between hospital SHAP and observed thrombolys
 
 #### Hospital SHAP and 10k cohort 
 
-When using the 10k cohort, changing the one-hot encoding to mimic all patients attending each of the 132 hospitals, we found that the median hospital SHAP value for the 10k patients correlated very closely with the predicted thrombolysis use in the 10k cohort at each hospital (r-squared = 0.947 for full SHAP and r-squared = 0.944 for the main effect), confirming that the hospital SHAP is providing a key insight into a hopsital's predisposition to use thrombolysis.
+When using the 10k cohort, changing the one-hot encoding to mimic all patients attending each of the 132 hospitals, we found that the median hospital SHAP value for the 10k patients correlated very closely with the predicted thrombolysis use in the 10k cohort at each hospital (r-squared = 0.947 for full SHAP and r-squared = 0.944 for the main effect), confirming that the hospital SHAP is providing a key insight into a hospital's predisposition to use thrombolysis.
 
 <img src="./images/04_xgb_10_features_10k_cohort_attended_hosp_shap.jpg" width="400"/>
 
-Though we model the same 10k patients going to all hospitals, we found that the SHAP interaction effect (the difference between the full SAHP value and the SHAP main effect) differed between hospitals. This demonstrated how the hospital SHAP is partly dependent on the patients attending (and the hospital's predisposition to give thrombolysis to different groups of patients).
+*Correlations between median hospital SHAP value or the median SHAP main effect value, and the predicted thrombolysus rate of the 10k cohort of patients at each hopsital.*
+
+Though we model the same 10k patients going to all hospitals, we found that the SHAP interaction effect (the difference between the full SHAP value and the SHAP main effect) differed between hospitals. This demonstrated how the hospital SHAP is partly dependent on the patients attending (and the hospital's predisposition to give thrombolysis to different groups of patients).
 
 <img src="./images/04_xgb_10_features_10k_cohort_individual_hosp_shap_value_and_maineffect_attend_vs_notattend_boxplot.jpg" width="800"/>
+
+*Boxplots for the SHAP value (composed of the sum of the main effect and the interaction effects) and the SHAP main effect value, for each of 132 hospitals, when evaluated with the 10k patient cohort.*
 
 ### Waterfall plots for individual patient predictions
 
@@ -529,7 +532,7 @@ Below are three examples of how a particular hospital modified the general SHAP 
 
 The main effect of the *precise onset time* is that if onset time is known precisely then SHAP (log odds) is increased by 0.42, otherwise it is reduced by 0.85.
 
-*Team_HZNVT9936G* has a slightly higher main effect for hopsital SHAP (0.26) than *Team_FAJKD7118X -0.27)*. *Team_HZNVT9936G* also has interactions that strengthen the effect of *precise onset time* whereas *Team_FAJKD7118X* has interactions values that attenuate the main effect of *precise onset time*. 
+*Team_HZNVT9936G* has a slightly higher main effect for hospital SHAP (0.26) than *Team_FAJKD7118X* (0.27). *Team_HZNVT9936G* also has interactions that strengthen the effect of *precise onset time* whereas *Team_FAJKD7118X* has interactions values that attenuate the main effect of *precise onset time*. 
 
 
 <img src="./images/12aa_onset_time_type_interaction_example.jpg" width="500"/>
@@ -548,11 +551,11 @@ The main effect of stroke severity is to significantly reduce the odds of receiv
 
 *SHAP interaction between hospital ID for two teams and stroke severity. If a patient attended team TPXYE0168D then SHAP values for low stroke severity were increased (an attenuation of the main effect of stroke severity). If a patient attended team SMVTP6284P then SHAP values for low and severe stroke severity were reduced (a strengthening of the main effect of stroke severity).*
 
-### Hospital and stroke severity interaction
+### Hospital and prior disability interaction
 
 The main effect of prior disability is to progressively reduce the odds of receiving thrombolysis with increasing disability (a SHAP of +0.3 for mrS=0 down to -1.50 for mRS=5).
 
-*Team_XKAWN3771U* has a slighty higher general tendency to use thrombolysis than *Team_AKCGO9726K* (team main effect SHAP = 0.78 vs 0.45). *Team_XKAWN3771U* has a SHAP interaction that opposes the general prior disability main effect. *Team_AKCGO9726K* strengthens the main effect of pre-stroke disability - reducing the odds of receiving thrombolysis even further for mild strokes.
+*Team_XKAWN3771U* has a slightly higher general tendency to use thrombolysis than *Team_AKCGO9726K* (team main effect SHAP = 0.78 vs 0.45). *Team_XKAWN3771U* has a SHAP interaction that opposes the general prior disability main effect. *Team_AKCGO9726K* strengthens the main effect of pre-stroke disability, reducing the odds of receiving thrombolysis even further for mild strokes.
 
 <img src="./images/12ac_disability_interaction_example.jpg" width="500"/>
 
@@ -560,19 +563,19 @@ The main effect of prior disability is to progressively reduce the odds of recei
 
 ## General SHAP interactions
 
-All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values cam from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.
+All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values came from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.
 
 <img src="./images/12a_shap_interactions_scatter.jpg" width="1200"/>
 
 *SHAP interactions between all features, excluding hospital attended. One feature is shown on the x-axis, and the other feature is colour-coded (from blue for low feature values, and red for high feature values). The y-axis shows the value of the SHAP interaction between the two features; that is the additional value added to the main SHAP effects of each feature.*
 
-Some key interactions are:
+Some key interactions identified were:
   * If a stroke is haemorrhagic, then the interaction is such that the presence of haemorrhage cancels out much of the other SHAP effects (i.e. stroke severity does not matter if the stroke is haemorrhagic).
   * Likewise elsewhere we find that features that each give negative SHAP values alone have an interaction that attenuates the combined effect of the two features together a little.
 
 ## Subgroup analysis
 
-We analyse the observed and predicted use of thrombolysis in subgroups of patients.Those groups are:
+We analysed the observed and predicted use of thrombolysis in subgroups of patients.Those groups are:
 
   * Mild stroke severity (NIHSS < 5)
   * No precise onset time
@@ -582,7 +585,7 @@ We analyse the observed and predicted use of thrombolysis in subgroups of patien
     * Arrival-to-scan time < 30 minutes
     * Stroke type = infarction
     * Precise onset time = True
-    * Prior diability level (mRS) = 0
+    * Prior disability level (mRS) = 0
     * No use of AF anticoagulants
     * Onset-to-arrival time < 90 minutes
     * Age < 80 years
@@ -590,7 +593,7 @@ We analyse the observed and predicted use of thrombolysis in subgroups of patien
     
 For the observed thrombolysis use, data was limited to the patients attending each hospital. For the predicted thrombolysis use the predictions were based on the 10k patient cohort for all hospitals.
 
-The figure below shows a boxplot of either observed and predicted use of thrombolysis.
+The figure below shows a boxplot of either observed and predicted use of thrombolysis, broken down by subgroup.
 
 <img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600"/>
 
@@ -602,9 +605,10 @@ The observed and predicted subgroup analysis show very similar general patterns 
 
 *A comparison of predicted and observed use of thrombolysis at each hospital for all subgroups*
 
-The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
+The three subgroups of NIHSS <5, no precise stroke onset time, and pre-stroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
 
 Some differences exist:
+
 * The use of thrombolysi in *ideal* patients is a little low in the observed vs actual results (mean hospital thrombolysis use = 89% vs 99%).
 * The predicted results show a stronger effect of combining non-ideal features.
 * The observed thrombolysis rate shows higher between-hospital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolysis rate being on different patients at each hospital, but may also be partly explained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospital patterns, and will not include, for example, between-clinician variation at each hospital).
@@ -623,7 +627,7 @@ This parallel reduction in use of thrombolysis across the subgroups was also see
 
 ## A comparison of thrombolysis use in high and low thrombolysing units by feature values
 
-This experiment plots the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals. The high and low thrombolysing hopsitals are taken as the top and bottom 30 hospitals as ranked by the predicted thrombolysis use in the same 10k cohort of patients. We find that thrombolysis use in low thrombolysing hospitals follows the same general relationship with feature values as the high thrombolysing hospitals, but thrombolysis is consistently lower.
+We investigated the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals. The high and low thrombolysing hopsitals were taken as the top and bottom 30 hospitals as ranked by the predicted thrombolysis use in the same 10k cohort of patients. We found that thrombolysis use in low thrombolysing hospitals followed the same general relationship with feature values as the high thrombolysing hospitals, but thrombolysis was consistently lower.
 
 <img src="./images/09_compare_thrombolysis_by_feature.jpg" width="800"/>
 
@@ -631,9 +635,9 @@ This experiment plots the relationships between feature values and thrombolysis 
 
 ## Artificial patients
 
-We use artificial patients to investigate controlled changes to patients, and see how many hospitals are predicted to give thrombolysis.
+We used artificial patients to investigate controlled changes to patients, to see how many hospitals were predicted to give thrombolysis.
 
-We start with a 'base patient' who has features that are favourable to use of thrombolysis:
+We started with a 'base patient' who had features that are favourable to use of thrombolysis:
 
 * Onset to arrival = 80 mins
 * Arrival to scan = 20 mins
@@ -643,7 +647,7 @@ We start with a 'base patient' who has features that are favourable to use of th
 * Precise onset time = 1
 * Use of AF anticoagulents = 0
 
-We then vared the following features in turn, keeping all other features the same as the base patient:
+We then varied the following features in turn, keeping all other features the same as the base patient:
 
 * NIHSS = 0-40
 * Prior disability level = 0-5
@@ -670,17 +674,17 @@ Starting with the ideal patient, and changing only feature at a time we investig
 
 <img src="./images/20_synthetic_xgb_10_features_IVT_rate_vs_feature_values.jpg" width="800"/>
 
-*The effect of changing stroke severity, pre-stroke disability, or precise onset time on the proportion of hospitals that would be expected to give thrombolysis to a patient. Patients otherwise have the following feature values: Onset to arrival = 80 mins, Arrival to scan = 20 mins, Infarction = 1, NIHSS = 15, Prior disability level = 0, Precise onset time = 1, Use of AF anticoagulents = 0.*
+*The effect of changing stroke severity, pre-stroke disability, or precise onset time on the proportion of hospitals that would be expected to give thrombolysis to a patient. Patients otherwise have the following feature values: Onset to arrival = 80 mins, Arrival to scan = 20 mins, Infarction = 1, NIHSS = 15, Prior disability level = 0, Precise onset time = 1, Use of AF anticoagulants = 0.*
 
 We also studied combining changes to the patient (starting with the 'ideal' thrombolysable patient. The chart below shows the proportion of hospitals predicted to give a patient thrombolysis by altering stroke severity in combination with estimated (non-precise) onset time, mild pre-existing disability (mRS 2), or a combination of estimated onset time and mild pre-existing disability.
 
 <img src="./images/20_synthetic_xgb_10_features_interactions.jpg" width="400"/>
 
-*The effect of changing stroke severity, alone (blue), or coupled with changes to pre-stroke disability (to mRS = 2, orange), precise onset time (to False, green), or changes to both pre-stroke disability and precise onset time (red) on the proportion of hospitals that would be expected to give thrombolysis to a patient. Patients otherwise have the following feature values: Onset to arrival = 80 mins, Arrival to scan = 20 mins, Infarction = 1, NIHSS = 15, Prior disability level = 0, Precise onset time = 1, Use of AF anticoagulents = 0.*
+*The effect of changing stroke severity, alone (blue), or coupled with changes to pre-stroke disability (to mRS = 2, orange), precise onset time (to False, green), or changes to both pre-stroke disability and precise onset time (red) on the proportion of hospitals that would be expected to give thrombolysis to a patient. Patients otherwise have the following feature values: Onset to arrival = 80 mins, Arrival to scan = 20 mins, Infarction = 1, NIHSS = 15, Prior disability level = 0, Precise onset time = 1, Use of AF anticoagulants = 0.*
 
 ## 10k cohort and *'benchmark'* decisions
 
-In this experiment we predict, for each hospital, the expected use of thrombolysis for a 10k cohort of patients (the model is trained on the remaining 78,792 patients.
+We investigated, for each hospital, the expected use of thrombolysis for a 10k cohort of patients (the model was trained on the remaining 78,792 patients.
 
 The 30 hospitals with the highest predicted thrombolysis use in the 10k cohort were considered *benchmark* hospitals.
 
@@ -691,12 +695,12 @@ We then took each hospitals own patients and predicted the thrombolysis decision
 *A comparison of observed (actual) thrombolysis rate at each hospital and the predicted thrombolysis rate if decisions were made according to the majority vote of the 30 benchmark hospitals. The solid circle shows the current thrombolysis use, and the open circle shows the thrombolysis use predicted by a majority vote of the benchmark hospitals. The red points are those hospitals that are in the top 30 thrombolysing hospitals (the benchmark set) when 10k cohort thrombolysis use is predicted, with all other hospitals coloured blue.*
 
 * 83.3% decisions are identical between local and benchmark decisions.
-* Thrombolysis use would be increased 31.2% at non-benchmark hospitals if benchmark decisions were made at those hospitals. Overall, thrombolysis use, including at the benchmark hospitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysus rate) would be increased 60.2%.
+* Thrombolysis use would be increased 31.2% at non-benchmark hospitals if benchmark decisions were made at those hospitals. Overall, thrombolysis use, including at the benchmark hospitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysis rate) would be increased 60.2%.
 * The ratio of benchmark:local thrombolysis use ranged from 0.7 to 2.1.
 
-### Agreement between hopsitals on 10k cohort thrombolysis decisions
+### Agreement between hospitals on 10k cohort thrombolysis decisions
 
-87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse. 
+We investigated the level of agreement between hospitals in the predicted treatment of the 10k cohort. 87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse. 
 
 <img src="./images/04_xgb_10_features_10k_cohort_agreement_vs_hospital_single.jpg" width="400"/>
 
