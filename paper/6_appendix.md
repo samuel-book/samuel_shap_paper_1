@@ -296,15 +296,26 @@ A learning rate of 0.5 was chosen for all modelling (including the accuracy meas
 
 *Effect of adjusting XGBoost learning rate on the distribution predicted thrombolysis use across 132 hospitals. A narrower distribution indicates that hospital thrombolysis rates are tending towards the mean thrombolysis hospital rate.*
 
+Statistics on the variation in predicted thrombolysis use between hospitals, with varying learning rate, is shown below:
+
+|        | 0.1  | 0.25 | 0.5  | 0.75 | 1.0  |
+|--------|------|------|------|------|------|
+| Mean   | 0.28 | 0.28 | 0.28 | 0.28 | 0.28 |
+| StdDev | 0.03 | 0.05 | 0.06 | 0.07 | 0.07 |
+| Min    | 0.18 | 0.13 | 0.10 | 0.09 | 0.09 |
+| Max    | 0.38 | 0.43 | 0.45 | 0.48 | 0.46 |
+
 ## An analysis of the characteristics of the most thrombolysable patient at each hospital
 
-We identified the patient with the highest probability of thrombolysis at each hospital, and compared the feature values of those patients to:
+We identified the patient with the highest probability of thrombolysis (taken from 5-fold combined test set results) at each hospital, and compared the feature values of those patients to:
 
 * All patients
-* All patients receiving thrombolysis
-* All patients not receiving thrombolysis
+* All patients who had received thrombolysis
+* All patients who had not received thrombolysis
 
 <img src="./images/02a_most_thrombolsyable_violin.jpg" width="800"/>
+
+*Violin plots comparing feature values between the patient with the highest probability of thrombolysis at each hospital with all patients, all patients who had received thrombolysis, and all patients who had not received thrombolysis. Horizontal lines show the mean value of each group.*
 
 Compared with the other groups, the most thrombolysable patients ....
 
@@ -315,24 +326,24 @@ Compared with the other groups, the most thrombolysable patients ....
 * Had lower pre-stroke disability
 * Were not taking anticoagulant medication
 * Had shorter onset-to-arrival times
-* Do not have onset during sleep
+* Did not have onset during sleep
 * Were younger
 
 ## Explaining model predictions with SHAP
 
-SHAP values describe how much a feature affects the probability of receiving thrombolysis. These are usually expressed as log odds. Below is a brief introduction to probability, odds, log odds and SHAP values. 
+SHAP values describe how much a feature affects the probability of receiving thrombolysis. These are usually expressed as log odds; that is how much that feature adjusted the predicted log odds of receiving thrombolysis. Below is a brief introduction to probability, odds, log odds and SHAP values. 
 
 ### Probability, odds, and Shap values (log odds shifts): A brief explanation
 
-Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain.
+Many of us find it easiest to think of the chance of something occurring as a probability. For example, there might be a probability of 10% that it will rain today. That is the same as saying there will be one rainy day out of ten days for days with this given probability of rain. However, rather than saying 1 in 10 days will be rainy, we can say that there is one rainy day for every nine days where it does not rain. The *odds* of rain take the ratio of rainy days to non-rainy days, and so the *odds* of a rainy day are 1/9 (or 0.111, as a decimal). 
 
-In our stroke thrombolysis model, Shap values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
+In our stroke thrombolysis model, SHAP values tell us how knowing something particular about a patient (such as the patient *feature*, 'Is their stroke caused by a clot or a bleed?') adjusts our prediction of whether they will receive thrombolysis or not.
 
-This is made a little more complicated for us because Shap is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant Shap values in the range of 0.5 to 5 (or -0.5 to -5) are, as that is a common range of Shap values that we will see in our models.
+This is made a little more complicated for us because SHAP is usually reported as a *log odds shift*. It is useful for us to see how those relate to probabilities, and get a sense of how significant SHAP values in the range of -5 to +5 are, as that is a common range of SHAP values that we will see in our models.
 
 #### Probability
 
-We will take the example that Shap reports that a model's base probability prediction, before the contribution of features is 0.25, or a 25% probability of receiving thrombolysis; that is 1 in 4 patients with this prediction would be expected to receive thrombolysis.
+We will take the example that SHAP reports that a model's base probability prediction, before the contribution of features is 0.25, or a 25% probability of receiving thrombolysis; that is 1 in 4 patients with this prediction would be expected to receive thrombolysis.
 
 #### Odds
 
@@ -340,7 +351,7 @@ We will take the example that Shap reports that a model's base probability predi
 
 *Odds* express the chance of something happening as the ratio of the number of positive occurrences (i.e. receiving thrombolysis) to the number of negative occurrences (i.e. *not* receiving thrombolysis).
 
-If we have probability prediction of 0.25 would receive thrombolysis, that would mean 1 in 4 of those patients receive thrombolysis. Expressed as odds, for every one patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal (1 divided by 3), 0.333.
+If we have probability prediction of 0.25 of receiving thrombolysis, that would mean 1 in 4 of those patients would be expected to receive thrombolysis. Expressed as odds, for every one patient that receives thrombolysis, three will not. The odds are expressed as 1:3 or 1/3. This may also be calculated as a decimal (1 divided by 3), 0.333.
 
 Odds (O) and probability (P) may be converted with the following equations:
 
@@ -348,17 +359,17 @@ Odds (O) and probability (P) may be converted with the following equations:
 
 2.  P = O / (1 + O)
 
-#### Shap values: Log odds shifts
+#### SHAP values: Log odds shifts
 
-Here we will calculate the effect of Shap values, and try and build some intuition on the size of effect Shap values of 0.5 to 5 give (we will look at positive and negative Shap values).
+Here we will calculate the effect of SHAP values, and try and build some intuition on the size of effect SHAP values of 0.5 to 5 give (we will look at positive and negative SHAP values).
 
-Shap usually outputs the effect of a particular feature in how much it shifts the odds. For reasons we will not go into here, that shift (which is the 'Shap value') is usually given in 'log odds' (the logarithm of the odds value). For the mathematically inclined, we use the natural log (*ln*).
+SHAP usually outputs the effect of a particular feature in how much it shifts the odds. The SHAP value is usually given in 'log odds' (the logarithm of the odds value).We use the natural log (*ln*).
 
-Let's look at some Shap values (log odds) and see how much they change the odds of receiving thrombolysis.
+Let's look at some SHAP values (log odds) and see how much they change the odds of receiving thrombolysis.
 
-First we'll look at the shift in odds the Shap values give. This is calculated as *shift = exp(Shap)*
+First we'll look at the shift in odds the SHAP values give. This is calculated as *shift = exp(SHAP)*
 
-|  Shap (log odds) | Shift in odds (multiply original odds) |
+|  SHAP (log odds) | Shift in odds (multiply original odds) |
 |------------------|----------------------------------------|
 |   0.5            |  1.65                                  |
 |   1              |  2.72                                  |
@@ -367,7 +378,7 @@ First we'll look at the shift in odds the Shap values give. This is calculated a
 |   4              |  54.6                                  |
 |   5              |  148                                   |
 
-*Positive Shap values: worked example*
+*Positive SHAP values: a worked example*
 
 Now let us work through an example of starting with a known baseline *probability* (before we consider what we know about a particular patient feature), converting that to *odds*, applying a Shap *log odds shift* for that particular feature, and converting back to *probability* after we have applied the influence of that feature.
 
@@ -382,11 +393,11 @@ Here are the effects of those shifts on our baseline probability of 0.25.
 | 0.25 (25%) | 0.333      | 4    | 54.6               | 18.2      | 0.9479 (94.8%) |
 | 0.25 (25%) | 0.333      | 5    | 148                | 49.5      | 0.9802 (98.0%) |
 
-So, for example, a Shap value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
+So, for example, a SHAP value of 0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 36%. A SHAP value of 5 for the same feature would shift the probability of that patient receiving thrombolysis up to 98%.
 
-*Negative Shap values: worked example*
+*Negative SHAP values: a worked example*
 
-If we have a negative Shap value then odds are reduced (a Shap of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
+If we have a negative SHAP value then odds are reduced (a SHAP of -1 will lead to the odds being divided by 2.72, which is the same as multiplying by 1/2.72, which is 0.3679):
 
 | Starting P | Starting O | SHAP | Shift (multiply O) | Shifted O | Shifted P (%)  |
 |------------|------------|------|--------------------|-----------|----------------|
@@ -397,21 +408,23 @@ If we have a negative Shap value then odds are reduced (a Shap of -1 will lead t
 | 0.25 (25%) | 0.333      | -4   | 54.6               | 18.2      | 0.0061 (0.61%) |
 | 0.25 (25%) | 0.333      | -5   | 148                | 49.5      | 0.0022 (0.22%) |
 
-So, for example, a Shap value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A Shap value of 5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
+So, for example, a SHAP value of -0.5 for one particular feature tells us that that particular feature in that patient shifts our expected probability of that patient receiving thrombolysis from 25% to 17%. A SHAP value of -5 for the same feature would shift the probability of that patient receiving thrombolysis down to 2%.
 
-#### Observations about Shap values
+#### Observations about SHAP values
 
-We begin to get some intuition on Shap values. A Shap value of 0.5 (or -0.5) leads to a small, but still noticeable, change in probability. Shap values of 5 or -5 have effectively pushed probabilities to one extreme or the other.
+We begin to get some intuition on SHAP values. A SHAP value of +0.5 (or -0.5) leads to a small, but still noticeable, change in probability. SHAP values of +5 or -5 have effectively pushed probabilities to one extreme or the other.
 
 ### Consistency of SHAP values across 5-fold validation
 
-The figure below shows the variation in mean absolute SHAP values obtained from the training sets of the 5 models in k-fold validation. SHAP values are well maintained across the five models.
+We examined how reproducible SHAP values are between different k-fold models. The figure below shows the variation in mean absolute SHAP values obtained from the training sets of the 5 models in k-fold validation. SHAP values are well maintained across the five models.
 
 <img src="./images/03_xgb_10_features_shap_violin.jpg" width="400"/>
 
+*Violin plots show the distribution of SHAP values across 5 k-fold models. The horizontal bar shows the median absolute SHAP value.*
+
 This result gave us confidence to use a single train/split to further investigate what SHAP reveals about the model.
 
-We also see the order of general influence of features across the population (note: teams are separated out into individual features, and need a separate analysis to examine SHAP of only those patients attending a particular hospital, as otherwise the SHAP is dominated by all the '0' one-hot encoded feature values):
+We also saw the order of general influence of features across the population (note: teams were separated out into individual one-hot features, and needed a separate analysis to examine SHAP of only those patients attending a particular hospital, as otherwise the SHAP was dominated by all the '0' one-hot encoded feature values):
 
 1. Infarction
 2. Arrival-to-scan time
@@ -425,13 +438,23 @@ We also see the order of general influence of features across the population (no
 
 ### Beeswarm plot of SHAP values
 
-The *beeswarm* plot gives a high level view of the feature values and SHAP values across the whole data set. We can see, for example that if a patient has an infarction then SHAP values are in the range 1-2, but if the patient does not have an infarction (i.e. has a haemorrhage) then SHAP values are in the range -8 to -4, effectively preventing the model from ever predicting thrombolysis would be given to a haemorrhagic patient.
+The *beeswarm* plot gives a high level view of the feature values and SHAP values across the whole data set. We saw, for example that if a patient had an infarction then SHAP values were in the range 1-2, but if the patient did not have an infarction (i.e. has a haemorrhage) then SHAP values were in the range -8 to -4, effectively preventing the model from ever predicting thrombolysis would be given to a haemorrhagic patient. The beeswarm plot was taken from training set for the first k-fold train/test split.
 
 <img src="./images/03_xgb_10_features_beeswarm.jpg" width="600"/>
 
+*Beeswarm plot of SHAP values, taken from the training set for the first of 5 k-fold train/test splits. Features values are indicated by color of the points, and the corresponding SHAP value is shown on the x-axis.*
+
 ### Violin plots of SHAP values
 
-Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). Key observations are:
+Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). The SHAP values were taken the SHAP values of the training set for the first of 5 k-fold train/test splits.
+
+Note: SHAP values are not necessarily the same for all instances with the same feature value. This is because the SHAP value also depends on interactions between features. For example if a hospital is not pre-disposed to give thrombolysis to patients with mild stroke, the SHAP value for the NIHSS value (e.g. NIHSS=1 for  avery mild stroke) will be lower than the SHAP value for the NIHSS value for a similar patient attending a hospital with a greater predisposition to use thrombolysis in patients with milder strokes. These interactions will be explored later.
+
+<img src="./images/03_xgb_10_features_thrombolysis_shap_violin.jpg" width="800"/>
+
+*Violin plots showing the relationship between SHAP values and feature values. The horizontal line shows the median SHAP value. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.*
+
+Key observations were, with SHAP values converted back to odds were:
 
 * Stroke type: As expected,  the SHAP values for stroke types effectively eliminated any chance of receiving thrombolysis for non-ischaemic (haemorrhagic) stroke.
 
@@ -443,27 +466,34 @@ Violin plots show the relationship between feature values and SHAP values for in
 
 * Disability level (Rankin) before stroke. The odds of receiving thrombolysis fell about 5 fold between mRS 0 and 5.
 
-<img src="./images/03_xgb_10_features_thrombolysis_shap_violin.jpg" width="800"/>
-
-
 ### Hospital SHAP values
 
-When examining SHAP, we take the hospital SHAP values for patients attending each hospital (if we examined the hospital SHAP for all patients, it would be dominated by those not-attending each hospital (i.e. coded zero in the one-hot encoding). When we examine the hospital SHAP values for a model trained on all the data, and only for patients attending each hospital, the hospital SHAP values ranged from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). 
+When examining SHAP, we took the hospital SHAP values for patients attending each hospital (if we examined the hospital SHAP for all patients, it would be dominated by those not-attending each hospital (i.e. coded zero in the one-hot encoding). When we examined the hospital SHAP values for a model trained on all the data, and only for patients attending each hospital, the hospital SHAP values ranged from -1.4 to +1.4. This range of SHAP (log odds) represents a 15 fold difference in odds of receiving thrombolysis (most are in the range of -1 to +1, but this still represents a 7-8 fold difference in odds of receiving thrombolysis). 
 
 
 <img src="./images/03_xgb_10_features_hosp_shap_hist.jpg" width="400"/>
 
-We compared the hospital SHAP value with the observed thrombolysis use at each hospital. Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582 (P<0.0001) , suggesting that 58% of the between-hospital variance in thrombolysis use may be explained by the hospitals' SHAP values, that is the hospitals' predisposition to use thrombolysis.
+*Distribution of hospital SHAP values for patients attending each hospital. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.*
+
+We compared the hospital SHAP value with the observed thrombolysis use at each hospital. For this experiment we combined the SHAP values from all the 5 k-fold test data splits, so that all instances were represented.
+
+Hospital SHAP correlated with observed thrombolysis rate with an r-squared of 0.582 (P<0.0001) , suggesting that 58% of the between-hospital variance in thrombolysis use may be explained by the hospitals' SHAP values, that is the hospitals' predisposition to use thrombolysis.
 
 <img src="./images/03c_xgb_10_features_attended_hosp_shap_value.jpg" width="400"/>
+
+*Correlation between median hospital SHAP value and the observed thrombolysis use at each hospital.*
 
 The hospital SHAP value is composed of a *main* effect of the hospital, independent of other patient features, and *interaction effects*, which is how the hospital ID interacts with other patient features (e.g. if a hospital treats a certain type of patient in a way that is different to the usual pattern). We found that the SHAP value (which is the sum of the *main effect* and the *interaction effects*) for hospitals had a broader range than the main effect, as this value included how a hospital may have different predispositions to use thrombolysis in different types of patient. 
 
 <img src="./images/03c_xgb_10_features_individual_hosp_shap_value_and_main_effect_attend_vs_notattend_boxplot.jpg" width="800"/>
 
-When we re-axamine the correlation between hospital SHAP and observed thrombolysis rate, we find that the main hospital SHAP effect accounts for 56% of the variance in thrombolysis rate (*c.f.* 58% for the full SHAP).
+*Boxplots for the SHAP value (composed of the sum of the main effect and the interaction effects) and the SHAP main effect value, for each of 132 hospitals.*
+
+When we re-examine the correlation between hospital SHAP and observed thrombolysis rate, we find that the main hospital SHAP effect accounts for 56% of the variance in thrombolysis rate (*c.f.* 58% for the full SHAP).
 
 <img src="./images/03c_xgb_10_features_attended_hosp_shap_value_and_main_effect_vs_ivt_rate.jpg" width="500"/>
+
+*Correlations between median hospital SHAP value or the median SHAP main effect value, and the observed thrombolysis use at each hospital.*
 
 #### Hospital SHAP and 10k cohort 
 
@@ -477,17 +507,21 @@ Though we model the same 10k patients going to all hospitals, we found that the 
 
 ### Waterfall plots for individual patient predictions
 
-Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive. The example shown below is for a patient with a low probability of receiving thrombolysis. The model starts with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features increase that base probability of receiving thrombolysis, those are onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features then reduce the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%. 
+Waterfall plots show the influence of features for an individual prediction. We generally handle SHAP values as how they affect log odds of receiving thrombolysis, but for individual predictions, probability plots are more intuitive for many people to follow. The example shown below is for a patient with a low probability of receiving thrombolysis. The model started with a base prediction of a 24% probability of receiving thrombolysis, before feature values are taken into account. Some features (coloured red) increased that base probability of receiving thrombolysis; those were onet-to-arrival time, having a precise onset time, having no prior disability, and being young. Three features (shown in blue) reduced the probability of receiving thrombolysis: the hospital they attended, the long arrival-to-scan time, and having a mild stroke, with a resulting final probability of receiving thrombolysis of 3%. 
 
 <img src="./images/03_xgb_10_features_waterfall_probability_low.jpg" width="600"/>
+
+*Waterfall plot showing the influence of each feature on the predicted probability of a single patient receiving thrombolysis. This example is for a patient with a predicted low probability of receiving thrombolysis.*
 
 We may see a similar plot for a patient with a high (96%) probability of receiving thrombolysis.
 
 <img src="./images/03_xgb_10_features_waterfall_probability_high.jpg" width="600"/>
 
+*Waterfall plot showing the influence of each feature on the predicted probability of a single patient receiving thrombolysis. This example is for a patient with a predicted high probability of receiving thrombolysis.*
+
 ## Hospital SHAP interactions
 
-Below are three examples of how a particular hospital modifies the general SHAP effects - either strengthening the effect, of attenuating it.
+Below are three examples of how a particular hospital modified the general SHAP effects - either strengthening the effect, of attenuating it.
 
 ### Hospital and onset time interaction
 
@@ -496,7 +530,9 @@ The main effect of the *precise onset time* is that if onset time is known preci
 *Team_HZNVT9936G* has a slightly higher main effect for hopsital SHAP (0.26) than *Team_FAJKD7118X -0.27)*. *Team_HZNVT9936G* also has interactions that strengthen the effect of *precise onset time* whereas *Team_FAJKD7118X* has interactions values that attenuate the main effect of *precise onset time*. 
 
 
-<img src="./images/12aa_onset_time_type_interaction_example.jpg" width="600"/>
+<img src="./images/12aa_onset_time_type_interaction_example.jpg" width="500"/>
+
+*SHAP interaction between hospital ID for two teams and whether stroke onset time was known precisely. If a patient attended team HZNVT9936G then SHAP value for having a precise onset time was increased (a strengthening of the main effect of precise onset time). If a patient attended team FAJKD7118X then SHAP value for having a precise onset time was reduced (an attenuation of the main effect of precise onset time).*
 
 ### Hospital and stroke severity interaction
 
@@ -506,7 +542,9 @@ The main effect of stroke severity is to significantly reduce the odds of receiv
 
 *Team_TPXYE0168D* has a SHAP interaction that opposes the general stroke severity main effect, especially increasing the odds of receiving thrombolysis for mild strokes. *Team_SMVTP6284P* strengthens the main effect of stroke severity - reducing the odds of receiving thrombolysis even further for mild strokes.
 
-<img src="./images/12ab_stroke_severity_interaction_example.jpg" width="600"/>
+<img src="./images/12ab_stroke_severity_interaction_example.jpg" width="500"/>
+
+*SHAP interaction between hospital ID for two teams and stroke severity. If a patient attended team TPXYE0168D then SHAP values for low stroke severity were increased (an attenuation of the main effect of stroke severity). If a patient attended team SMVTP6284P then SHAP values for low and severe stroke severity were reduced (a strengthening of the main effect of stroke severity).*
 
 ### Hospital and stroke severity interaction
 
@@ -514,17 +552,21 @@ The main effect of prior disability is to progressively reduce the odds of recei
 
 *Team_XKAWN3771U* has a slighty higher general tendency to use thrombolysis than *Team_AKCGO9726K* (team main effect SHAP = 0.78 vs 0.45). *Team_XKAWN3771U* has a SHAP interaction that opposes the general prior disability main effect. *Team_AKCGO9726K* strengthens the main effect of pre-stroke disability - reducing the odds of receiving thrombolysis even further for mild strokes.
 
-<img src="./images/12ac_disability_interaction_example.jpg" width="600"/>
+<img src="./images/12ac_disability_interaction_example.jpg" width="500"/>
+
+*SHAP interaction between hospital ID for two teams and pre-exisiting disability. If a patient attended team AKCGO9726K then SHAP values for increasing pre-stroke disability were increased (an attenuation of the main effect of stroke severity). If a patient attended team XKAWN3771U then SHAP values for increasing pre-stroke disability were reduced (a strengthening of the main effect of stroke severity).*
 
 ## General SHAP interactions
 
 All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values cam from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.
 
+<img src="./images/12a_shap_interactions_scatter.jpg" width="1200"/>
+
+*SHAP interactions between all features, excluding hospital attended. One feature is shown on the x-axis, and the other feature is colour-coded (from blue for low feature values, and red for high feature values). The y-axis shows the value of the SHAP interaction between the two features; that is the additional value added to the main SHAP effects of each feature.*
+
 Some key interactions are:
   * If a stroke is haemorrhagic, then the interaction is such that the presence of haemorrhage cancels out much of the other SHAP effects (i.e. stroke severity does not matter if the stroke is haemorrhagic).
   * Likewise elsewhere we find that features that each give negative SHAP values alone have an interaction that attenuates the combined effect of the two features together a little.
-
-<img src="./images/12a_shap_interactions_scatter.jpg" width="1200"/>
 
 ## Subgroup analysis
 
@@ -543,40 +585,47 @@ We analyse the observed and predicted use of thrombolysis in subgroups of patien
     * Onset-to-arrival time < 90 minutes
     * Age < 80 years
     * Onset during sleep = False
+    
+For the observed thrombolysis use, data was limited to the patients attending each hospital. For the predicted thrombolysis use the predictions were based on the 10k patient cohort for all hospitals.
 
-The figure below shows a boxplot of either observed (top) or predicted (bottom) use of thrombolysis. 
-
-The observed and predicted subgroup analysis show very similar general patterns (with r-squared=0.95, see figure below of comparison of predicted and observed use of thrombolysis at each hospital for all subgroups). The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
-
-Some differences exist:
-* The use of thrombolysi in *ideal* patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).
-* The predicted results show a stronger effect of combining non-ideal features.
-* The observed thrombolysis rate shows higher between-hopsital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolsysi rate being on different patients at each hospital, but may also be partly exlained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospial patterns, and will not include, for example, between-clinician variation at each hospital).
-
+The figure below shows a boxplot of either observed and predicted use of thrombolysis.
 
 <img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600"/>
 
-The correlation of predicted and observed use of thrombolysis at each hospital for all subgroups:
+*Boxplot for either observed (top) or predicted (bottom) use of thrombolysis for subgroups of patients.*
+
+The observed and predicted subgroup analysis show very similar general patterns (and with a r-squared=0.95).
 
 <img src="./images/15a_subgroup_correlation.jpg" width="400"/>
+
+*A comparison of predicted and observed use of thrombolysis at each hospital for all subgroups*
+
+The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS > 2, all had reduced thrombolysis use, and combining these non-ideal features reduced thrombolysis use further.
+
+Some differences exist:
+* The use of thrombolysi in *ideal* patients is a little low in the observed vs actual results (mean hospital thrombolysis use = 89% vs 99%).
+* The predicted results show a stronger effect of combining non-ideal features.
+* The observed thrombolysis rate shows higher between-hospital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolysis rate being on different patients at each hospital, but may also be partly explained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospital patterns, and will not include, for example, between-clinician variation at each hospital).
 
 When we look at thrombolysis use in subgroups at each hospital we see that the observed thrombolysis use tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in 'less ideal' patients. 
 
 <img src="./images/15a_actual_subgroup.jpg" width="800"/>
 
+*Observed thrombolysis use for all patients and subgroups of patients at each of 132 hospitals, with hospitals ordered by descending thrombolysis use of all patients. Results are for all patients attending each hospital.*
+
 This parallel reduction in use of thrombolysis across the subgroups was also seen in the predicted use of thrombolysis.
 
 <img src="./images/15_10k_subgroup.jpg" width="800"/>
 
-
-
-
+*Predicted thrombolysis use for all patients and subgroups of patients at each of 132 hospitals, with hospitals ordered by descending thrombolysis use of all patients. Results are based on a prediction of thrombolysis in a 10k cohort of patients.*
 
 ## A comparison of thrombolysis use in high and low thrombolysing units by feature values
 
 This experiment plots the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals. The high and low thrombolysing hopsitals are taken as the top and bottom 30 hospitals as ranked by the predicted thrombolysis use in the same 10k cohort of patients. We find that thrombolysis use in low thrombolysing hospitals follows the same general relationship with feature values as the high thrombolysing hospitals, but thrombolysis is consistently lower.
 
 <img src="./images/09_compare_thrombolysis_by_feature.jpg" width="800"/>
+
+*Observed use of thrombolysis by feature value in the top (blue) and bottom (red) 30 thrombolysing hospitals as assessed by predicted thrombolysis use in a 10k cohort of patients.*
 
 ## Artificial patients
 
@@ -592,38 +641,40 @@ We start with a 'base patient' who has features that are favourable to use of th
 * Precise onset time = 1
 * Use of AF anticoagulents = 0
 
-We then vary the following features in turn, keeping all other features the same as the base patient:
+We then vared the following features in turn, keeping all other features the same as the base patient:
 
 * NIHSS = 0-40
 * Prior disability level = 0-5
 * Precise onset time = 0-1
 
-The number of hospitals giving thrombolysis:
+The number of hospitals giving predicted to give thrombolysis to these alternative artificial patients was:
 
 * Base patient: 132 (99%)
-* Base patient, but NIHSS = 5: 123 (93%)
-* Base patient, but pre-stroke disability = 2: 125 (95%)
-* Base patient, but estimated stroke onset time: 109 (83%)
+* As base patient, but NIHSS = 5: 123 (93%)
+* As base patient, but pre-stroke disability = 2: 125 (95%)
+* As base patient, but estimated stroke onset time: 109 (83%)
 
 Combining two marginal features:
 
-* Base patient, but NIHSS = 5 and pre-stroke disability = 2: 78 (59%)
-* Base patient, but NIHSS = 5 and estimated stroke onset time: 30 (23%)
-* Base patient, but pre-stroke disability = 2 and estimated stroke onset time: 26 (20%)
+* As base patient, but NIHSS = 5 and pre-stroke disability = 2: 78 (59%)
+* As base patient, but NIHSS = 5 and estimated stroke onset time: 30 (23%)
+* As base patient, but pre-stroke disability = 2 and estimated stroke onset time: 26 (20%)
 
 Combining three marginal features:
 
-* Base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 2 (1.5%)
+* As base patient, but NIHSS = 5, pre-stroke disability = 2, estimated stroke onset time: 2 (1.5%)
 
-Starting with the ideal patient, and changing only feature at a time we observed the following changes in the proportion of thrombolysis that were predicted to give the patient thrombolysis:
+Starting with the ideal patient, and changing only feature at a time we investigated changing stroke severity, pre-stroke disability, and precise onset time.
 
 <img src="./images/20_synthetic_xgb_10_features_IVT_rate_vs_feature_values.jpg" width="800"/>
+
+*The effect of changing stroke severity, pre-stroke disability, or precise onset time on the proportion of hospitals that would be expected to give thrombolysis to a patient. Patients otherwise have the following feature values: Onset to arrival = 80 mins, Arrival to scan = 20 mins, Infarction = 1, NIHSS = 15, Prior disability level = 0, Precise onset time = 1, Use of AF anticoagulents = 0.*
 
 We also studied combining changes to the patient (starting with the 'ideal' thrombolysable patient. The chart below shows the proportion of hospitals predicted to give a patient thrombolysis by altering stroke severity in combination with estimated (non-precise) onset time, mild pre-existing disability (mRS 2), or a combination of estimated onset time and mild pre-existing disability.
 
 <img src="./images/20_synthetic_xgb_10_features_interactions.jpg" width="400"/>
 
-
+*The effect of changing stroke severity, alone (blue), or coupled with changes to pre-stroke disability (to mRS = 2, orange), precise onset time (to False, green), or changes to both pre-stroke disability and precise onset time (red) on the proportion of hospitals that would be expected to give thrombolysis to a patient. Patients otherwise have the following feature values: Onset to arrival = 80 mins, Arrival to scan = 20 mins, Infarction = 1, NIHSS = 15, Prior disability level = 0, Precise onset time = 1, Use of AF anticoagulents = 0.*
 
 ## 10k cohort and *'benchmark'* decisions
 
@@ -633,7 +684,9 @@ The 30 hospitals with the highest predicted thrombolysis use in the 10k cohort w
 
 We then took each hospitals own patients and predicted the thrombolysis decision that would made for each patient at each of the hospitals, taking a majority vote of those benchmark hospitals as the *benchmark decision* for that patient. We estimated the use of thrombolysis at each hospital if the benchmark decision was followed for all patients attending each hospital.
 
-<img src="./images/05_benchmark_thrombolysis_key_features.jpg" width="500"/>
+<img src="./images/05_benchmark_thrombolysis_key_features.jpg" width="400"/>
+
+*A comparison of observed (actual) thrombolysis rate at each hospital and the predicted thrombolysis rate if decisions were made according to the majority vote of the 30 benchmark hospitals. The solid circle shows the current thrombolysis use, and the open circle shows the thrombolysis use predicted by a majority vote of the benchmark hospitals. The red points are those hospitals that are in the top 30 thrombolysing hospitals (the benchmark set) when 10k cohort thrombolysis use is predicted, with all other hospitals coloured blue.*
 
 * 83.3% decisions are identical between local and benchmark decisions.
 * Thrombolysis use would be increased 31.2% at non-benchmark hospitals if benchmark decisions were made at those hospitals. Overall, thrombolysis use, including at the benchmark hospitals, would be increased 20.7%. Thrombolysis at the 30 lowest thrombolysing units (judged by expected 10k thrombolysus rate) would be increased 60.2%.
@@ -644,3 +697,5 @@ We then took each hospitals own patients and predicted the thrombolysis decision
 87.4% of patients have 80% of hospitals agree on treatment. For those patients that did actually receive thrombolysis, 78.8% of patients have 80% of hospitals agree to thrombolyse. For those patients that did not actually receive thrombolysis, 91.1% of patients have 80% of hospitals agree not to thrombolyse. 
 
 <img src="./images/04_xgb_10_features_10k_cohort_agreement_vs_hospital_single.jpg" width="400"/>
+
+*Agreement on decision-making between hospitals when predicting thrombolysis use in the 10k patient cohort. The x-axis shows the proportion of hospitals which must agree on a decision, and the y-axis shows the proportion of patients that have that level of agreement. Analysis is for all decisions (blue solid), for those who did receive thrombolysis (orange dashed), or for those that did not receive thrombolysis (green dotted).*
