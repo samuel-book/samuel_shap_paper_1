@@ -1,6 +1,6 @@
 # Abstract
 
-*Objectives*: To understand variation in thrombolysis use among patients in England And Wales who arrive at hospital within 4 hours of stroke onset.
+*Objectives*: To understand inter-hospital variation in thrombolysis use among patients in England And Wales who arrive at hospital within 4 hours of stroke onset.
 
 *Design*: Machine learning was applied to the national stroke clinical audit data set, to learn which patients in each hospital would likely receive thrombolysis.
 
