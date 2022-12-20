@@ -561,6 +561,14 @@ The main effect of prior disability is to progressively reduce the odds of recei
 
 *SHAP interaction between hospital ID for two teams and pre-exisiting disability. If a patient attended team AKCGO9726K then SHAP values for increasing pre-stroke disability were increased (an attenuation of the main effect of stroke severity). If a patient attended team XKAWN3771U then SHAP values for increasing pre-stroke disability were reduced (a strengthening of the main effect of stroke severity).*
 
+## Showing SHAP effects before and after adjustment by hospital
+
+Re-plotting the above results:
+
+<img src="./images/12aa_three_way_shap_adjustment.jpg" width="800"/>
+
+*Adjustment of SHAP main effects by individual hospital. Each row first (left) shows the main SHAP effect of the feature, then (middle) a hospital where the SHAP interaction attenuates the main effect, and finally (right) a hospital where the SHAP interaction strengthens the main effect. Top row (red): main SHAP effect and adjusted SHAP values for precise stroke onset time. Middle row (green): main SHAP effect and adjusted SHAP values for stroke severity. Bottom row (blue): main SHAP effect and adjusted SHAP values for pre-stroke disability.*
+
 ## General SHAP interactions
 
 All features may interact with each other, and SHAP captures all these 2-way interactions. We found that the feature main effects (without interactions) accounted for 62% of the total SHAP values, and 38% of the total SHAP values came from interactions. The figure below shows interactions between all features, excluding the one-hot encoded hospitals.
