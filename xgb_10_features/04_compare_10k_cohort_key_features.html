@@ -1315,8 +1315,8 @@ Max0.453
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 20.5 ms, sys: 45 µs, total: 20.6 ms
-Wall time: 20.1 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.1 ms, sys: 88 µs, total: 15.2 ms
+Wall time: 14.8 ms
 </pre></div>
 </div>
 </div>
@@ -1722,8 +1722,8 @@ shap_interaction = explainer.shap_interaction_values(X_test)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.4 ms, sys: 331 ms, total: 346 ms
-Wall time: 345 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 29.3 ms, sys: 365 ms, total: 394 ms
+Wall time: 406 ms
 </pre></div>
 </div>
 </div>
@@ -2399,6 +2399,9 @@ Wall time: 345 ms
 <span class="n">x1</span> <span class="o">=</span> <span class="n">df_hosp_plot</span><span class="p">[</span><span class="s1">&#39;mean SHAP main effect&#39;</span><span class="p">]</span>
 <span class="n">x2</span> <span class="o">=</span> <span class="n">df_hosp_plot</span><span class="p">[</span><span class="s1">&#39;mean SHAP value&#39;</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">df_hosp_plot</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">]</span>
+
+<span class="c1"># Save data</span>
+<span class="n">df_hosp_plot</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_vs_10k_thrombolysis.csv&#39;</span><span class="p">)</span>
 
 <span class="c1"># Fit a regression line to the x1 points</span>
 <span class="n">slope1</span><span class="p">,</span> <span class="n">intercept1</span><span class="p">,</span> <span class="n">r_value1</span><span class="p">,</span> <span class="n">p_value1</span><span class="p">,</span> <span class="n">std_err1</span> <span class="o">=</span> \
