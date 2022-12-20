@@ -463,11 +463,6 @@ title="Print to PDF"
    Subgroup analysis
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
-   A comparison of thrombolysis use in high and low thrombolysing units by feature values
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -546,11 +541,6 @@ title="Print to PDF"
    Subgroup analysis
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
-   A comparison of thrombolysis use in high and low thrombolysing units by feature values
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -566,8 +556,6 @@ title="Print to PDF"
 <section id="variation-in-thrombolysis-use">
 <h2>Variation in thrombolysis use<a class="headerlink" href="#variation-in-thrombolysis-use" title="Permalink to this headline">#</a></h2>
 <p>Thrombolysis use in the original data varied between hospitals, from 1.5% to 24.3% of all patients, and 7.3% to 49.7% of patients arriving within 4 hours of known stroke onset.</p>
-<a class="reference internal image-reference" href="../_images/thrombolysis_hist.jpg"><img alt="../_images/thrombolysis_hist.jpg" src="../_images/thrombolysis_hist.jpg" style="width: 800px;" /></a>
-<p><em>THistogram of observed thrombolysis use in 132 hospitals. Left: Thrombolysis shown as a percentage of all emergency stroke admissions. Right: Thrombolysis shown as a percentage of those patients who arrive at hospitals within 4 hours of known stroke onset.</em></p>
 </section>
 <section id="feature-selection">
 <h2>Feature selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">#</a></h2>
@@ -702,8 +690,8 @@ title="Print to PDF"
 <section id="shap-interactions">
 <h3>SHAP interactions<a class="headerlink" href="#shap-interactions" title="Permalink to this headline">#</a></h3>
 <p>SHAP values are composed of a <em>main effect</em> of a feature, and <em>interaction</em> with other features. The interaction may either strengthen or attenuate the main effect. For example the main effect of knowing a stroke onset time precisely is to increase the odds of receiving thrombolysis, as indicated by a positive SHAP values. Individual hospitals may selectively adjust the influence of knowing the stroke onset time precisely, with some teams strengthening the effect, leading to a larger difference in odds of receiving thrombolysis depending on whether stroke onset time is known precisely, whereas other teams will attenuate the main effect, leading to a smaller difference in odds of receiving thrombolysis.</p>
-<a class="reference internal image-reference" href="../_images/12aa_xgb_10_features_3_features_interaction_example_with_main_effect.jpg"><img alt="../_images/12aa_xgb_10_features_3_features_interaction_example_with_main_effect.jpg" src="../_images/12aa_xgb_10_features_3_features_interaction_example_with_main_effect.jpg" style="width: 800px;" /></a>
-<p><em>SHAP interaction between hospital team, and three features. Top: SHAP interaction between hospital and precise onset time. Having a precise onset time provides a positive SHAP, increasing the odds that a patient will receive thrombolysis. Team HZNVT9936G provides an interaction effect that strengthens the main effect of known onset time precisely, as the interaction effect is in the same direction as the main effect. Team FAJKD7118X has an interaction effect that attenuates the main effect of known onset time precisely, as the interaction effect is in the opposite direction as the main effect. Middle: SHAP interaction between hospital and stroke severity. Having a mild or very severe stroke reduces the odds of receiving thrombolysis. Team TPXYE0168D has an interaction effect that attenuates the main SHAP effect for mild strokes, whereas team SMVTP6284P has an interaction effect that strengthens the main SHAP effect. Bottom: SHAP interaction between hospital and pre-stroke disability. Increasing pre-stroke disability reduces the odds of receiving thrombolysis. Team AKCGO9726K has an interaction effect that attenuates the main SHAP effect for increasing pre-stroke disability, whereas team XKAWN3771U has an interaction effect that strengthens the main SHAP effect.</em></p>
+<a class="reference internal image-reference" href="../_images/12aa_three_way_shap_adjustment.jpg"><img alt="../_images/12aa_three_way_shap_adjustment.jpg" src="../_images/12aa_three_way_shap_adjustment.jpg" style="width: 800px;" /></a>
+<p><em>Adjustment of SHAP main effects by individual hospital. Each row first (left) shows the main SHAP effect of the feature, then (middle) a hospital where the SHAP interaction attenuates the main effect, and finally (right) a hospital where the SHAP interaction strengthens the main effect. Top row (red): main SHAP effect and adjusted SHAP values for precise stroke onset time. Middle row (green): main SHAP effect and adjusted SHAP values for stroke severity. Bottom row (blue): main SHAP effect and adjusted SHAP values for pre-stroke disability.</em></p>
 </section>
 </section>
 <section id="subgroup-analysis">
@@ -739,12 +727,6 @@ title="Print to PDF"
 <li><p>The observed thrombolysis rate shows higher between-hospital variation than the predicted thrombolysis rate. This may be partly explained by the observed thrombolysis rate being on different patients at each hospital, but may also be partly explained by actual use of thrombolysis being slightly more variable than predicted thrombolysis use (which will follow general hospital patterns, and will not include, for example, between-clinician variation at each hospital).</p></li>
 </ul>
 <p>When we looked at thrombolysis use in subgroups at each hospital we see that the observed thrombolysis use tended to reduce in parallel, along with total thrombolysis use, suggesting a shared caution in use of thrombolysis in ‘less ideal’ patients.</p>
-</section>
-<section id="a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values">
-<h2>A comparison of thrombolysis use in high and low thrombolysing units by feature values<a class="headerlink" href="#a-comparison-of-thrombolysis-use-in-high-and-low-thrombolysing-units-by-feature-values" title="Permalink to this headline">#</a></h2>
-<p>We investigated the relationships between feature values and thrombolysis use for low and high thrombolysing hospitals. The high and low thrombolysing hospitals were taken as the top and bottom 30 hospitals as ranked by the predicted thrombolysis use in the same 10k cohort of patients. We found that thrombolysis use in low thrombolysing hospitals followed the same general relationship with feature values as the high thrombolysing hospitals, but thrombolysis was consistently lower.</p>
-<a class="reference internal image-reference" href="../_images/09_compare_thrombolysis_by_feature.jpg"><img alt="../_images/09_compare_thrombolysis_by_feature.jpg" src="../_images/09_compare_thrombolysis_by_feature.jpg" style="width: 800px;" /></a>
-<p><em>Observed use of thrombolysis by feature value in the top (blue) and bottom (red) 30 thrombolysing hospitals as assessed by predicted thrombolysis use in a 10k cohort of patients.</em></p>
 </section>
 </section>
 
