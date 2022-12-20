@@ -4,7 +4,7 @@
 
 *Design*: Machine learning was applied to the national stroke clinical audit data set, to learn which patients in each hospital would likely receive thrombolysis.
 
-*Setting*: All hospitals providing emergency stroke care in England and Wales. Thrombolysis use in these patients ranged from 7% to 49% between hospitals. 
+*Setting*: All hospitals providing emergency stroke care in England and Wales. Thrombolysis use in these patients ranged from 7\% to 49\% between hospitals.
 
 *Participants*: 88,928 stroke patients who arrived at hospital within 4 hours of stroke onset, from 2016 to 2018.
 
