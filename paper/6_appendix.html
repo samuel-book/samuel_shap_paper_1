@@ -610,6 +610,11 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#showing-shap-effects-before-and-after-adjustment-by-hospital">
+   Showing SHAP effects before and after adjustment by hospital
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#general-shap-interactions">
    General SHAP interactions
   </a>
@@ -869,6 +874,11 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#showing-shap-effects-before-and-after-adjustment-by-hospital">
+   Showing SHAP effects before and after adjustment by hospital
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#general-shap-interactions">
@@ -1754,6 +1764,12 @@ title="Print to PDF"
 <a class="reference internal image-reference" href="../_images/12ac_disability_interaction_example.jpg"><img alt="../_images/12ac_disability_interaction_example.jpg" src="../_images/12ac_disability_interaction_example.jpg" style="width: 500px;" /></a>
 <p><em>SHAP interaction between hospital ID for two teams and pre-exisiting disability. If a patient attended team AKCGO9726K then SHAP values for increasing pre-stroke disability were increased (an attenuation of the main effect of stroke severity). If a patient attended team XKAWN3771U then SHAP values for increasing pre-stroke disability were reduced (a strengthening of the main effect of stroke severity).</em></p>
 </section>
+</section>
+<section id="showing-shap-effects-before-and-after-adjustment-by-hospital">
+<h2>Showing SHAP effects before and after adjustment by hospital<a class="headerlink" href="#showing-shap-effects-before-and-after-adjustment-by-hospital" title="Permalink to this headline">#</a></h2>
+<p>Re-plotting the above results:</p>
+<a class="reference internal image-reference" href="../_images/12aa_three_way_shap_adjustment.jpg"><img alt="../_images/12aa_three_way_shap_adjustment.jpg" src="../_images/12aa_three_way_shap_adjustment.jpg" style="width: 800px;" /></a>
+<p><em>Adjustment of SHAP main effects by individual hospital. Each row first (left) shows the main SHAP effect of the feature, then (middle) a hospital where the SHAP interaction attenuates the main effect, and finally (right) a hospital where the SHAP interaction strengthens the main effect. Top row (red): main SHAP effect and adjusted SHAP values for precise stroke onset time. Middle row (green): main SHAP effect and adjusted SHAP values for stroke severity. Bottom row (blue): main SHAP effect and adjusted SHAP values for pre-stroke disability.</em></p>
 </section>
 <section id="general-shap-interactions">
 <h2>General SHAP interactions<a class="headerlink" href="#general-shap-interactions" title="Permalink to this headline">#</a></h2>
