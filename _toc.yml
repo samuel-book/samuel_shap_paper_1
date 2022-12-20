@@ -35,6 +35,6 @@ parts:
 - caption: Paper (Work In Progress)
   chapters:
   - file: paper/abstract.md 
-  - file: paper/results.md 
+  - file: paper/3_results.md 
   - file: paper/6_appendix.md 
   
