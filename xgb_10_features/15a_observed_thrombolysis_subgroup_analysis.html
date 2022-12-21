@@ -466,8 +466,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#check-correlation-of-observed-and-predicted-results-by-subgroup">
-     Check correlation of observed and predicted results by subgroup
+    <a class="reference internal nav-link" href="#check-correlations-betwen-subgroups">
+     Check correlations betwen subgroups
     </a>
    </li>
   </ul>
@@ -542,8 +542,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#check-correlation-of-observed-and-predicted-results-by-subgroup">
-     Check correlation of observed and predicted results by subgroup
+    <a class="reference internal nav-link" href="#check-correlations-betwen-subgroups">
+     Check correlations betwen subgroups
     </a>
    </li>
   </ul>
@@ -1491,25 +1491,44 @@ No precise onset - mRS &gt; 2: r-square = 0.289, p = 0.0000
 <img alt="../_images/15a_observed_thrombolysis_subgroup_analysis_19_0.png" src="../_images/15a_observed_thrombolysis_subgroup_analysis_19_0.png" />
 </div>
 </div>
-<section id="check-correlation-of-observed-and-predicted-results-by-subgroup">
-<h3>Check correlation of observed and predicted results by subgroup<a class="headerlink" href="#check-correlation-of-observed-and-predicted-results-by-subgroup" title="Permalink to this headline">#</a></h3>
+<section id="check-correlations-betwen-subgroups">
+<h3>Check correlations betwen subgroups<a class="headerlink" href="#check-correlations-betwen-subgroups" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collate results</span>
-<span class="n">compare_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_results</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="n">compare_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pairs_to_test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]]</span>
 
-<span class="c1"># Run linear regression</span>
-<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
-        <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">],</span> <span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">])</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;r-squared = </span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">, p = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_to_test</span><span class="p">:</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
+        <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span><span class="n">results</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Correlation between </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">:&#39;</span>
+           <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">  r-squared = </span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">, p = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r-squared = 0.951, p = 0.000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between All patients and NIHSS &lt; 5:
+  r-squared = 0.661, p = 0.000
+
+Correlation between All patients and No precise onset:
+  r-squared = 0.344, p = 0.000
+
+Correlation between All patients and mRS &gt; 2:
+  r-squared = 0.528, p = 0.000
+
+Correlation between NIHSS &lt; 5 and No precise onset:
+  r-squared = 0.221, p = 0.000
+
+Correlation between NIHSS &lt; 5 and mRS &gt; 2:
+  r-squared = 0.308, p = 0.000
+
+Correlation between No precise onset and mRS &gt; 2:
+  r-squared = 0.289, p = 0.000
 </pre></div>
 </div>
 </div>
@@ -1538,7 +1557,21 @@ No precise onset - mRS &gt; 2: r-square = 0.289, p = 0.0000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15a_observed_thrombolysis_subgroup_analysis_22_0.png" src="../_images/15a_observed_thrombolysis_subgroup_analysis_22_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">],</span> <span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">],</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Add best fit</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="n">intercept</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)],</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;compare_df&#39; is not defined
+</pre></div>
+</div>
+<img alt="../_images/15a_observed_thrombolysis_subgroup_analysis_22_1.png" src="../_images/15a_observed_thrombolysis_subgroup_analysis_22_1.png" />
 </div>
 </div>
 <p>The observed and predicted subgroup analysis show very similar general patterns (with r-sqaured=0.95). Some differences exist:</p>
