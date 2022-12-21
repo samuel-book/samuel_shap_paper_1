@@ -2212,6 +2212,40 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 <img alt="../_images/15_10k_thrombolysis_subgroups_51_0.png" src="../_images/15_10k_thrombolysis_subgroups_51_0.png" />
 </div>
 </div>
+<p>Show correlations between major subgroups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Correlations between subgroups:&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;-------------------------------&#39;</span><span class="p">)</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;Ideal&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">))):</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
+            <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">f1</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="n">f2</span><span class="p">])</span>
+        <span class="n">r_square</span> <span class="o">=</span> <span class="n">r_value</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">f2</span><span class="si">}</span><span class="s1">: r-square = </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">, p = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlations between subgroups:
+-------------------------------
+All patients - Ideal: r-square = 0.172, p = 0.0000
+All patients - NIHSS &lt; 5: r-square = 0.766, p = 0.0000
+All patients - No precise onset: r-square = 0.679, p = 0.0000
+All patients - mRS &gt; 2: r-square = 0.774, p = 0.0000
+Ideal - NIHSS &lt; 5: r-square = 0.043, p = 0.0170
+Ideal - No precise onset: r-square = 0.037, p = 0.0275
+Ideal - mRS &gt; 2: r-square = 0.045, p = 0.0146
+NIHSS &lt; 5 - No precise onset: r-square = 0.445, p = 0.0000
+NIHSS &lt; 5 - mRS &gt; 2: r-square = 0.621, p = 0.0000
+No precise onset - mRS &gt; 2: r-square = 0.528, p = 0.0000
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="show-a-summary-of-results">
 <h2>Show a summary of results<a class="headerlink" href="#show-a-summary-of-results" title="Permalink to this headline">#</a></h2>
@@ -2385,7 +2419,7 @@ Percent of hopsitals giving thrombolysis to at least 85 percent patients: 99.2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_10k_thrombolysis_subgroups_54_0.png" src="../_images/15_10k_thrombolysis_subgroups_54_0.png" />
+<img alt="../_images/15_10k_thrombolysis_subgroups_56_0.png" src="../_images/15_10k_thrombolysis_subgroups_56_0.png" />
 </div>
 </div>
 </section>

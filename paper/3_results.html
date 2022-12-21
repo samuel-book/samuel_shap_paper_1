@@ -668,7 +668,7 @@ title="Print to PDF"
 <section id="the-relationship-between-feature-values-and-the-odds-of-receiving-thrombolysis">
 <h3>The relationship between feature values and the odds of receiving thrombolysis<a class="headerlink" href="#the-relationship-between-feature-values-and-the-odds-of-receiving-thrombolysis" title="Permalink to this headline">#</a></h3>
 <p>SHAP values provide the influence of each feature, as the change in log-odds of receiving thrombolysis. SHAP values expressed as log-odds are additive.</p>
-<p>Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). Key observations are:</p>
+<p>Violin plots show the relationship between feature values and SHAP values for individual patients. Key observations are:</p>
 <ul class="simple">
 <li><p>Stroke type: As expected,  the SHAP values for stroke types effectively eliminated any chance of receiving thrombolysis for non-ischaemic (haemorrhagic) stroke.</p></li>
 <li><p>Arrival-to-scan time: The odds of receiving thrombolysis reduced by about 20 fold over the first 100 minutes of arrival to scan time.</p></li>
@@ -677,7 +677,7 @@ title="Print to PDF"
 <li><p>Disability level (Rankin) before stroke. The odds of receiving thrombolysis fell about 5 fold between mRS 0 and 5.</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/03_xgb_10_features_thrombolysis_shap_violin1.jpg"><img alt="../_images/03_xgb_10_features_thrombolysis_shap_violin1.jpg" src="../_images/03_xgb_10_features_thrombolysis_shap_violin1.jpg" style="width: 800px;" /></a>
-<p><em>Violin plots showing the relationship between SHAP values and feature values. The horizontal line shows the median SHAP value. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.</em></p>
+<p><em>Violin plots showing the relationship between SHAP values and feature values. The ‘violins’ show the distribution of SHAP values. The horizontal line shows the median SHAP value. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.</em></p>
 </section>
 <section id="hospital-shap-values">
 <h3>Hospital SHAP values<a class="headerlink" href="#hospital-shap-values" title="Permalink to this headline">#</a></h3>
