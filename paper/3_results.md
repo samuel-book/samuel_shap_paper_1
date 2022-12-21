@@ -84,7 +84,7 @@ Waterfall plots show the influence of features for an individual prediction. We 
 
 SHAP values provide the influence of each feature, as the change in log-odds of receiving thrombolysis. SHAP values expressed as log-odds are additive.
 
-Violin plots show the relationship between feature values and SHAP values for individual patients (the bar in each violin shows the median value). Key observations are:
+Violin plots show the relationship between feature values and SHAP values for individual patients. Key observations are:
 
 * Stroke type: As expected,  the SHAP values for stroke types effectively eliminated any chance of receiving thrombolysis for non-ischaemic (haemorrhagic) stroke.
 
@@ -98,7 +98,7 @@ Violin plots show the relationship between feature values and SHAP values for in
 
 <img src="../xgb_10_features/output/03_xgb_10_features_thrombolysis_shap_violin.jpg" width="800"/>
 
-*Violin plots showing the relationship between SHAP values and feature values. The horizontal line shows the median SHAP value. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.*
+*Violin plots showing the relationship between SHAP values and feature values. The 'violins' show the distribution of SHAP values. The horizontal line shows the median SHAP value. SHAP values were taken from the training set of the first of 5 k-fold train/test splits.*
 
 ### Hospital SHAP values
 
