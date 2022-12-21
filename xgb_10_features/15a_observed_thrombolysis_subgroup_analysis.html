@@ -472,6 +472,11 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-correlations-between-observed-and-predicted-subgroup-thrombolysis">
+   Check correlations between observed and predicted subgroup thrombolysis
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -547,6 +552,11 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-correlations-between-observed-and-predicted-subgroup-thrombolysis">
+   Check correlations between observed and predicted subgroup thrombolysis
+  </a>
  </li>
 </ul>
 
@@ -1533,6 +1543,21 @@ Correlation between No precise onset and mRS &gt; 2:
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="check-correlations-between-observed-and-predicted-subgroup-thrombolysis">
+<h2>Check correlations between observed and predicted subgroup thrombolysis<a class="headerlink" href="#check-correlations-between-observed-and-predicted-subgroup-thrombolysis" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collate results\</span>
+<span class="n">compare_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_results</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">compare_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -1557,21 +1582,7 @@ Correlation between No precise onset and mRS &gt; 2:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">],</span> <span class="n">compare_df</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">],</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Add best fit</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="n">intercept</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)],</span> 
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;compare_df&#39; is not defined
-</pre></div>
-</div>
-<img alt="../_images/15a_observed_thrombolysis_subgroup_analysis_22_1.png" src="../_images/15a_observed_thrombolysis_subgroup_analysis_22_1.png" />
+<img alt="../_images/15a_observed_thrombolysis_subgroup_analysis_24_0.png" src="../_images/15a_observed_thrombolysis_subgroup_analysis_24_0.png" />
 </div>
 </div>
 <p>The observed and predicted subgroup analysis show very similar general patterns (with r-sqaured=0.95). Some differences exist:</p>
@@ -1579,7 +1590,6 @@ Correlation between No precise onset and mRS &gt; 2:
 <li><p>The use of thrombolysi in <em>ideal</em> patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).</p></li>
 <li><p>The predicted results show a stronger effect of combining non-ideal features.</p></li>
 </ul>
-</section>
 </section>
 </section>
 
