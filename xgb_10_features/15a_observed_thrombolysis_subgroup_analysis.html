@@ -1509,9 +1509,13 @@ No precise onset - mRS &gt; 2: r-square = 0.289, p = 0.0000
     <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;All patients&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;No precise onset&#39;</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">]]</span>
+    <span class="p">[</span><span class="s1">&#39;NIHSS &lt; 5&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;No precise onset&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;mRS &gt; 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Age &gt; 80&#39;</span><span class="p">]]</span>
 
 <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_to_test</span><span class="p">:</span>
     <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
@@ -1531,14 +1535,26 @@ Correlation between All patients and No precise onset:
 Correlation between All patients and mRS &gt; 2:
   r-squared = 0.528, p = 0.000
 
+Correlation between All patients and Age &gt; 80:
+  r-squared = 0.801, p = 0.000
+
 Correlation between NIHSS &lt; 5 and No precise onset:
   r-squared = 0.221, p = 0.000
 
 Correlation between NIHSS &lt; 5 and mRS &gt; 2:
   r-squared = 0.308, p = 0.000
 
+Correlation between NIHSS &lt; 5 and Age &gt; 80:
+  r-squared = 0.473, p = 0.000
+
 Correlation between No precise onset and mRS &gt; 2:
   r-squared = 0.289, p = 0.000
+
+Correlation between No precise onset and Age &gt; 80:
+  r-squared = 0.342, p = 0.000
+
+Correlation between mRS &gt; 2 and Age &gt; 80:
+  r-squared = 0.680, p = 0.000
 </pre></div>
 </div>
 </div>
