@@ -13,7 +13,6 @@ dependencies:
   - seaborn
   - scikit-learn
   - tensorflow-gpu=2.4
-  - xgboost=1.5
   - pip:
     - graphviz
     - imbalanced-learn
@@ -21,3 +20,4 @@ dependencies:
     - shap==0.41
     - optuna
     - torch
+    - xgboost==1.5
