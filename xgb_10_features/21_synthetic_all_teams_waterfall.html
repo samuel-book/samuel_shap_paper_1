@@ -662,8 +662,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import benchmark data</span>
 <span class="n">filename</span><span class="o">=</span> <span class="s1">&#39;./output/04_xgb_10_features_10k_cohort_thrombolysis_rate_by_hosp.csv&#39;</span>
 <span class="n">benchmark_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="n">benchmark_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
+<span class="n">benchmark_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Add an index row to rank the teams:</span>
 <span class="n">benchmark_df</span><span class="p">[</span><span class="s1">&#39;Rank&#39;</span><span class="p">]</span> <span class="o">=</span> \
@@ -797,7 +796,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.9453680704506406
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.26516124574717226
 </pre></div>
 </div>
 </div>
