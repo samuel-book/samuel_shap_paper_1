@@ -28,6 +28,7 @@ parts:
   - file: xgb_10_features/12ab_xgb_shap_interactions_focus_on_severity
   - file: xgb_10_features/12ac_xgb_shap_interactions_focus_on_disability
   - file: xgb_10_features/20_synthetic_patients
+  - file: xgb_10_features/21_synthetic_all_teams_waterfall
 - caption: Appendix
   chapters:
   - file: xgb_10_features/50_bagging_variation 
