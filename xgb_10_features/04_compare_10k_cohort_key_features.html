@@ -233,6 +233,11 @@ const thebe_selector_output = ".output, .cell_output"
    Investigating the effect of patient features by varying feature values in artificial patients
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_synthetic_all_teams_waterfall.html">
+   Combined SHAP probability waterfall for all teams
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1316,12 +1321,29 @@ Max0.453
     <span class="c1"># Save using pickle</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
         <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">explainer</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+
+<span class="c1"># Repeat for SHAP explainer with probabilities</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_explainer_probability_&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;object.p&#39;</span><span class="p">)</span>
+<span class="n">file_exists</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">file_exists</span><span class="p">:</span>
+    <span class="c1"># Load SHAP explainer</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">explainer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Get SHAP explainer (using the model and feature values from training set)</span>
+    <span class="c1"># This is not used in this notebook but is saved for other notebooks to use</span>
+    <span class="n">explainer_probability</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">model_output</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">explainer</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.1 ms, sys: 88 µs, total: 15.2 ms
-Wall time: 14.8 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 152 ms, sys: 20 ms, total: 172 ms
+Wall time: 171 ms
 </pre></div>
 </div>
 </div>
@@ -1727,8 +1749,8 @@ shap_interaction = explainer.shap_interaction_values(X_test)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 29.3 ms, sys: 365 ms, total: 394 ms
-Wall time: 406 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 20.7 ms, sys: 328 ms, total: 349 ms
+Wall time: 348 ms
 </pre></div>
 </div>
 </div>
