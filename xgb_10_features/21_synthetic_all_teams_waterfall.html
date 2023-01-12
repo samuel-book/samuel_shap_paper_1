@@ -441,6 +441,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-the-proportion-of-teams-predicted-to-give-thrombolysis">
+   Show the proportion of teams predicted to give thrombolysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#get-shap-values-for-predictions">
    Get SHAP values for predictions
   </a>
@@ -495,6 +500,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-the-proportion-of-teams-predicted-to-give-thrombolysis">
+   Show the proportion of teams predicted to give thrombolysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#get-shap-values-for-predictions">
    Get SHAP values for predictions
   </a>
@@ -529,6 +539,9 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -543,7 +556,7 @@ title="Print to PDF"
     <span class="n">arrival_to_scan_time</span><span class="o">=</span>  <span class="mi">20</span><span class="p">,</span>   <span class="c1"># minutes</span>
     <span class="n">infarction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>              <span class="c1"># 0=no, 1=yes</span>
     <span class="n">stroke_severity</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>         <span class="c1"># 0 to 42</span>
-    <span class="n">onset_time_precise</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>      <span class="c1"># 0=no, 1=yes</span>
+    <span class="n">onset_time_precise</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>      <span class="c1"># 0=no, 1=yes</span>
     <span class="n">prior_disability</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>        <span class="c1"># 0 to 6</span>
     <span class="n">anticoag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>                <span class="c1"># 0=no, 1=yes</span>
     <span class="n">onset_to_arrival_time</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span>  <span class="c1"># minutes</span>
@@ -719,12 +732,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/miniconda3/envs/samuel/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  from pandas import MultiIndex, Int64Index
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -752,6 +759,28 @@ title="Print to PDF"
 <span class="n">thrombolyse_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">),</span> <span class="s1">&#39;No &#39;</span><span class="p">)</span>
 <span class="n">thrombolyse_str</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="s1">&#39;Yes&#39;</span>
 <span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Thrombolyse_str&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">thrombolyse_str</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-the-proportion-of-teams-predicted-to-give-thrombolysis">
+<h2>Show the proportion of teams predicted to give thrombolysis<a class="headerlink" href="#show-the-proportion-of-teams-predicted-to-give-thrombolysis" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_teams</span> <span class="o">=</span> <span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">benchmark</span> <span class="o">=</span> <span class="n">sorted_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HB team&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">][</span><span class="s1">&#39;Benchmark team&#39;</span><span class="p">]</span>
+<span class="n">non_benchmark</span> <span class="o">=</span> <span class="n">sorted_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HB team&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">][</span><span class="s1">&#39;Non-benchmark team&#39;</span><span class="p">]</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of all teams predicted to use thrombolysos = </span><span class="si">{</span><span class="n">all_teams</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of benchmark teams predicted to use thrombolysos = </span><span class="si">{</span><span class="n">benchmark</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of non-benchmark teams predicted to use thrombolysos = </span><span class="si">{</span><span class="n">non_benchmark</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysos = 0.227
+Proportion of benchmark teams predicted to use thrombolysos = 0.667
+Proportion of non-benchmark teams predicted to use thrombolysos = 0.098
 </pre></div>
 </div>
 </div>
@@ -1016,7 +1045,17 @@ title="Print to PDF"
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Feature&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Probability of thrombolysis (%)&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">txt</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Predicted thrombolysis use:&#39;</span> <span class="o">+</span> 
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">All teams = </span><span class="si">{</span><span class="n">all_teams</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">0.0f</span><span class="si">}</span><span class="s1">%&#39;</span> <span class="o">+</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Benchmark teams = </span><span class="si">{</span><span class="n">benchmark</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">0.0f</span><span class="si">}</span><span class="s1">%&#39;</span> <span class="o">+</span> 
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Non-benchmark teams = </span><span class="si">{</span><span class="n">non_benchmark</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">0.0f</span><span class="si">}</span><span class="s1">%&#39;</span>
+        <span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/21_shap_waterfall_with_violin.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 
@@ -1025,7 +1064,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/21_synthetic_all_teams_waterfall_29_0.png" src="../_images/21_synthetic_all_teams_waterfall_29_0.png" />
+<img alt="../_images/21_synthetic_all_teams_waterfall_31_0.png" src="../_images/21_synthetic_all_teams_waterfall_31_0.png" />
 </div>
 </div>
 </section>
