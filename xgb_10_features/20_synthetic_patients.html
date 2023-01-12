@@ -471,8 +471,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#show-shap-waterfall-plots-for-hopsitals-with-high-mediam-and-low-propensity-to-use-thrombolysis">
-   Show SHAP waterfall plots for hopsitals with high, mediam, and low propensity to use thrombolysis
+  <a class="reference internal nav-link" href="#show-shap-waterfall-plots-for-hopsitals-with-high-median-and-low-predisposition-to-use-thrombolysis">
+   Show SHAP waterfall plots for hopsitals with high, median, and low predisposition to use thrombolysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -560,8 +560,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#show-shap-waterfall-plots-for-hopsitals-with-high-mediam-and-low-propensity-to-use-thrombolysis">
-   Show SHAP waterfall plots for hopsitals with high, mediam, and low propensity to use thrombolysis
+  <a class="reference internal nav-link" href="#show-shap-waterfall-plots-for-hopsitals-with-high-median-and-low-predisposition-to-use-thrombolysis">
+   Show SHAP waterfall plots for hopsitals with high, median, and low predisposition to use thrombolysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -893,13 +893,13 @@ Name: 0, dtype: object
 </div>
 </div>
 </section>
-<section id="show-shap-waterfall-plots-for-hopsitals-with-high-mediam-and-low-propensity-to-use-thrombolysis">
-<h2>Show SHAP waterfall plots for hopsitals with high, mediam, and low propensity to use thrombolysis<a class="headerlink" href="#show-shap-waterfall-plots-for-hopsitals-with-high-mediam-and-low-propensity-to-use-thrombolysis" title="Permalink to this headline">#</a></h2>
+<section id="show-shap-waterfall-plots-for-hopsitals-with-high-median-and-low-predisposition-to-use-thrombolysis">
+<h2>Show SHAP waterfall plots for hopsitals with high, median, and low predisposition to use thrombolysis<a class="headerlink" href="#show-shap-waterfall-plots-for-hopsitals-with-high-median-and-low-predisposition-to-use-thrombolysis" title="Permalink to this headline">#</a></h2>
 <p>Load the SHAP explainer model (this was set up using the model and feature values from training set). To be used later to create waterfall plots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up method to estimate SHAP values for tree models and ensembles of trees</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/03a_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_explainer_object_probability.p&#39;</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/04_xgb_10_features_10k_cohort_shap_explainer_probability_object.p&#39;</span><span class="p">)</span>
 
 <span class="c1"># Load SHAP explainer</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
