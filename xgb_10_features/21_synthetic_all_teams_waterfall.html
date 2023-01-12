@@ -553,15 +553,15 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select patient details</span>
 <span class="n">patient_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">arrival_to_scan_time</span><span class="o">=</span>  <span class="mi">20</span><span class="p">,</span>   <span class="c1"># minutes</span>
+    <span class="n">arrival_to_scan_time</span> <span class="o">=</span>  <span class="mi">15</span><span class="p">,</span>   <span class="c1"># minutes</span>
     <span class="n">infarction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>              <span class="c1"># 0=no, 1=yes</span>
-    <span class="n">stroke_severity</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>         <span class="c1"># 0 to 42</span>
+    <span class="n">stroke_severity</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>        <span class="c1"># 0 to 42</span>
     <span class="n">onset_time_precise</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>      <span class="c1"># 0=no, 1=yes</span>
     <span class="n">prior_disability</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>        <span class="c1"># 0 to 6</span>
     <span class="n">anticoag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>                <span class="c1"># 0=no, 1=yes</span>
-    <span class="n">onset_to_arrival_time</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span>  <span class="c1"># minutes</span>
+    <span class="n">onset_to_arrival_time</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>  <span class="c1"># minutes</span>
     <span class="n">onset_during_sleep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>      <span class="c1"># 0=no, 1=yes</span>
-    <span class="n">age</span> <span class="o">=</span> <span class="mf">72.5</span>                   <span class="c1"># years</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="mi">72</span>                     <span class="c1"># years</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -778,9 +778,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysos = 0.227
-Proportion of benchmark teams predicted to use thrombolysos = 0.667
-Proportion of non-benchmark teams predicted to use thrombolysos = 0.098
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysos = 0.348
+Proportion of benchmark teams predicted to use thrombolysos = 0.900
+Proportion of non-benchmark teams predicted to use thrombolysos = 0.186
 </pre></div>
 </div>
 </div>
@@ -1021,7 +1021,7 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.098
 <span class="c1"># (including filled shape outline transparency)</span>
 <span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="c1"># Colour of the filled shape:</span>
-<span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="c1"># Colour of the lines:</span>
 <span class="n">linecollections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cmins&#39;</span><span class="p">,</span> <span class="s1">&#39;cmaxes&#39;</span><span class="p">,</span> <span class="s1">&#39;cbars&#39;</span><span class="p">,</span> <span class="s1">&#39;cmedians&#39;</span><span class="p">]</span>
@@ -1043,7 +1043,7 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.098
     <span class="n">yticklabels_drawn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Feature&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Probability of thrombolysis (%)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Probability of receiving thrombolysis (%)&#39;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
