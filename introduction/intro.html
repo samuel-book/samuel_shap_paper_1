@@ -469,6 +469,11 @@ title="Print to PDF"
      How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-artificial-patients">
+     Using artificial patients
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -551,6 +556,11 @@ title="Print to PDF"
      How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-artificial-patients">
+     Using artificial patients
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -576,6 +586,7 @@ title="Print to PDF"
 <li><p>The odds of receiving thrombolysis was about 3 fold greater when the onset time was registered as being known precisely.</p></li>
 <li><p>The odds of receiving thrombolysis fell about 5 fold with increasing pre-stroke disability.</p></li>
 <li><p>There was a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals accounted for about 60% of the variance in use of thrombolysis for patients who arrived at hospital within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients was due to differences in patient populations between hospitals.</p></li>
+<li><p>The hospital, rather than differences in local patient populations, explains the majority of variation in thrombolysis use between hospitals.</p></li>
 <li><p>In both observed (actual) data, and predicted use of thrombolysis, we examined subgroups of patients. We could identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then found groups of patients where hospitals would vary in their attitude to use of  thrombolysis, with some hospitals not giving thrombolysis to any patients and other hopsitals giving thrombolysis to 30-40% of patients who arrived at hospital within 4 hours of known stroke onset time. Key groups where hospitals differed in their use of thrombolysis were:</p>
 <ul>
 <li><p>Low stroke severity (e.g. NIHSS &lt;5)</p></li>
@@ -584,6 +595,7 @@ title="Print to PDF"
 </ul>
 </li>
 <li><p>Combinations of non-ideal features (e.g. mild stroke <em>and</em> stroke onset time not known precisely) further suppressed use of thrombolysis.</p></li>
+<li><p>Artificial patients may be used to ask particular questions about predicted variation in thrombolysis use.</p></li>
 </ul>
 </section>
 <section id="background">
@@ -690,6 +702,26 @@ title="Print to PDF"
 <p>We can also look at how a hospital’s SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital’s SHAP value explains 58% of the variance in thrombolysis rate of patients. This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).</p>
 <a class="reference internal image-reference" href="../_images/hospital_shap_own_patients.jpg"><img alt="../_images/hospital_shap_own_patients.jpg" src="../_images/hospital_shap_own_patients.jpg" style="width: 450px;" /></a>
 <p><em>A comparison of average hospital SHAP values with actual hospital thrombolysis use for patients arriving within 4 hours of known stroke onset.</em></p>
+</section>
+<section id="using-artificial-patients">
+<h3>Using artificial patients<a class="headerlink" href="#using-artificial-patients" title="Permalink to this headline">#</a></h3>
+<p>We may construct artificial patients to compare decision-making with a particular focus.</p>
+<p>For example we may start with a highly thrombolysable patient:</p>
+<ul class="simple">
+<li><p>Infarction = Yes</p></li>
+<li><p>Stroke severity (NIHSS) = 15</p></li>
+<li><p>Precise onset time = Yes</p></li>
+<li><p>Disability (mRS) before stroke = 0</p></li>
+<li><p>Age = 72</p></li>
+<li><p>Onset-to-arrival = 60 minutes</p></li>
+<li><p>Arrival-to-scan = 15 minutes</p></li>
+<li><p>Use of anticoagulants for AF = No</p></li>
+<li><p>Onset during sleep = No</p></li>
+</ul>
+<p>For such a patient we find 131/132 would be expected to give them thrombolysis.</p>
+<p>If we change only stroke severity (NIHSS) to 5, we find 95% of stroke teams would be expected to give them thrombolysis.</p>
+<p>If we change only precise onset time to ‘No’, we find 87% of stroke teams would be expected to give them thrombolysis.</p>
+<p>If we change both stroke severity (NIHSS) to 5, and precise onset time to ‘No’, we find 35% of stroke teams would be expected to give them thrombolysis.</p>
 </section>
 </section>
 <div class="toctree-wrapper compound">

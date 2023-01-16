@@ -726,7 +726,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the XGBoost model that was trained on the 10k cohort train/test dataset (in notebook 04)</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;./saved_models/04_xgb_10_features_10k_cohort.p&#39;</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/03a_xgb_10_features.p&#39;</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
@@ -778,9 +778,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysos = 0.348
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysos = 0.356
 Proportion of benchmark teams predicted to use thrombolysos = 0.900
-Proportion of non-benchmark teams predicted to use thrombolysos = 0.186
+Proportion of non-benchmark teams predicted to use thrombolysos = 0.196
 </pre></div>
 </div>
 </div>
@@ -791,12 +791,7 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.186
 <p>Use a previously saved SHAP explainer model (from notebook 04_compare_10k_cohort_key_features.ipynb).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load SHAP explainers</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;./output/04_xgb_10_features_10k_cohort_shap_explainer_object.p&#39;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
-    <span class="n">explainer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
-
-<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;./output/04_xgb_10_features_10k_cohort_shap_explainer_probability_object.p&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;./output/03a_xgb_10_features_shap_explainer_object_probability.p&#39;</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
     <span class="n">explainer_probability</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
@@ -825,7 +820,7 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.186
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.26516124574717226
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2995270168908044
 </pre></div>
 </div>
 </div>

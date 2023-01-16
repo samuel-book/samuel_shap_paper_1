@@ -16,7 +16,9 @@ We found general patterns of use of thrombolysis. When we looked for patterns of
 
 * The odds of receiving thrombolysis fell about 5 fold with increasing pre-stroke disability.
 
-* There was a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals accounted for about 60% of the variance in use of thrombolysis for patients who arrived at hospital within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients was due to differences in patient populations between hospitals. 
+* There was a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals accounted for about 60% of the variance in use of thrombolysis for patients who arrived at hospital within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients was due to differences in patient populations between hospitals.
+
+* The hospital, rather than differences in local patient populations, explains the majority of variation in thrombolysis use between hospitals.
 
 * In both observed (actual) data, and predicted use of thrombolysis, we examined subgroups of patients. We could identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then found groups of patients where hospitals would vary in their attitude to use of  thrombolysis, with some hospitals not giving thrombolysis to any patients and other hopsitals giving thrombolysis to 30-40% of patients who arrived at hospital within 4 hours of known stroke onset time. Key groups where hospitals differed in their use of thrombolysis were:
     * Low stroke severity (e.g. NIHSS <5)
@@ -24,6 +26,8 @@ We found general patterns of use of thrombolysis. When we looked for patterns of
     * The existence of pre-stroke disability
     
 * Combinations of non-ideal features (e.g. mild stroke *and* stroke onset time not known precisely) further suppressed use of thrombolysis.
+
+* Artificial patients may be used to ask particular questions about predicted variation in thrombolysis use.
 
 ## Background
 
@@ -164,3 +168,28 @@ We can also look at how a hospital's SHAP value correlates with the thrombolysis
 <img src="./images/hospital_shap_own_patients.jpg" width="450">
 
 *A comparison of average hospital SHAP values with actual hospital thrombolysis use for patients arriving within 4 hours of known stroke onset.*
+
+### Using artificial patients
+
+We may construct artificial patients to compare decision-making with a particular focus. 
+
+For example we may start with a highly thrombolysable patient:
+
+* Infarction = Yes
+* Stroke severity (NIHSS) = 15
+* Precise onset time = Yes
+* Disability (mRS) before stroke = 0
+* Age = 72
+* Onset-to-arrival = 60 minutes
+* Arrival-to-scan = 15 minutes
+* Use of anticoagulants for AF = No
+* Onset during sleep = No
+
+For such a patient we find 131/132 would be expected to give them thrombolysis. 
+
+If we change only stroke severity (NIHSS) to 5, we find 95% of stroke teams would be expected to give them thrombolysis.
+
+If we change only precise onset time to 'No', we find 87% of stroke teams would be expected to give them thrombolysis.
+
+If we change both stroke severity (NIHSS) to 5, and precise onset time to 'No', we find 35% of stroke teams would be expected to give them thrombolysis.
+
