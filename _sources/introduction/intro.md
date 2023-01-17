@@ -2,32 +2,9 @@
 
 Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaboration with the Sentinel Stroke National Audit Program (SSNAP).
 
-## A very short summary....
+## A very short summary (credit: ChatGPT)....
 
-Most strokes are caused by a clot stopping blood flow to a part of the brain. If a patient arrives at hospital soon enough, they may be suitable for treatment with clot-busting drugs. This is called *thrombolysis*. Hospitals vary significantly in how much they use thrombolysis - from 5% to 25% of emergency stroke admissions. Our aim was to understand how much of this variation comes from differences in choices in when to use thrombolysis, and what those difference are. To do this we built a machine learning model that learned which patients would receive thrombolysis at each hospital admitting emergency stroke patients. The model has 85% accuracy. We then use a technique called *SHAP* to understand this model, and by understanding the model we start to understand what shapes decisions to use thrombolysis in different hospitals in the real world. We can also use the model to ask "what treatment would this one patient likely receive if they attended different hospitals?
-
-We found general patterns of use of thrombolysis. When we looked for patterns of use across hospitals, we found:
-
-* The odds of receiving thrombolysis reduced about 20 fold over the first 100 minutes of arrival to scan time.
-
-* When considering stroke severity, odds of receiving thrombolysis was lowest at mild stroke severity, rose and peaked at with moderate to severe strokes, and then fell again with the highest severity strokes. The difference between minimum odds (at the mildest strokes) and maximum odds (with moderate-severe strokes) of receiving thrombolysis was 35 fold.
-
-* The odds of receiving thrombolysis was about 3 fold greater when the onset time was registered as being known precisely.
-
-* The odds of receiving thrombolysis fell about 5 fold with increasing pre-stroke disability.
-
-* There was a 15 fold difference in the odds of receiving thrombolysis between hospitals. The difference between hospitals accounted for about 60% of the variance in use of thrombolysis for patients who arrived at hospital within 4 hours of known stroke onset time; 40% of the variance in treatment of these patients was due to differences in patient populations between hospitals.
-
-* The hospital, rather than differences in local patient populations, explains the majority of variation in thrombolysis use between hospitals.
-
-* In both observed (actual) data, and predicted use of thrombolysis, we examined subgroups of patients. We could identify a group of patients to whom essentially all stroke teams would give thrombolysis. We then found groups of patients where hospitals would vary in their attitude to use of  thrombolysis, with some hospitals not giving thrombolysis to any patients and other hopsitals giving thrombolysis to 30-40% of patients who arrived at hospital within 4 hours of known stroke onset time. Key groups where hospitals differed in their use of thrombolysis were:
-    * Low stroke severity (e.g. NIHSS <5)
-    * Stroke onset time not known precisely
-    * The existence of pre-stroke disability
-    
-* Combinations of non-ideal features (e.g. mild stroke *and* stroke onset time not known precisely) further suppressed use of thrombolysis.
-
-* Artificial patients may be used to ask particular questions about predicted variation in thrombolysis use.
+This study used an explainable machine learning model to analyze data from 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of stroke onset. The study found that there is substantial variation in the use of thrombolysis, a treatment for stroke, between hospitals, with rates ranging from 7% to 49%. The study found that factors such as the amount of time between arrival at the hospital and being scanned, the severity of the stroke, the patient's pre-existing disability, and whether the stroke onset time was known precisely, influenced the odds of receiving thrombolysis. However, the study found that the majority of the variation in thrombolysis use between hospitals may be explained by differences in the hospitals' willingness to use the treatment, rather than the characteristics of the patients they treated.
 
 ## Background
 
