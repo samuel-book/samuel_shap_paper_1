@@ -1,0 +1,17 @@
+What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice.
+
+Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, Martin James*
+
+
+Background and aims: There remains substantial between-hospital variation in thrombolysis use among patients in England and Wales who arrive at hospital within 4 hours of known stroke onset. Thrombolysis use (2016-2018) in these patients varied 7-fold from 7% to 49% between hospitals.
+
+Methods: An XGBoost (eXtreme Gradient Boosting) machine learning model, coupled with a SHAP (SHapley Additive exPlanations) explainability model, was used to predict which patients would receive thrombolysis at each hospital, and to assess the contribution of patient characteristics to the odds of receiving thrombolysis. The model was based on 88,928 patients arriving within 4 hours of known stroke onset at all 132 emergency stroke units in England and Wales, as recorded in the national stroke audit, SSNAP.
+
+Results: The model revealed that the odds of receiving thrombolysis reduced 20-fold over the first 100 minutes of arrival-to-scan time, varied 30-fold depending on stroke severity, reduced 3-fold with imprecise onset time, fell 5-fold with increasing pre-stroke disability, and varied 15-fold between hospitals. The hospital identification (hospital SHAP value) explained 58% of the variance in between-hospital thrombolysis use. Compared with hospitals with higher thrombolysis use, hospitals with lower use were particularly less likely to give thrombolysis to patients with milder strokes, prior disability, or patients with imprecise onset time.
+
+Conclusions: Using explainable machine learning, we have identified that the majority of the between-hospital variation in thrombolysis use in England and Wales may be explained not by casemix but by differences in hospital predisposition to use thrombolysis.
+
+
+
+This study used an explainable machine learning model to analyze data from 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset. The study found that there is substantial variation in the use of thrombolysis, a treatment for stroke, between hospitals, with rates ranging from 7% to 49%. The study found that factors such as the amount of time between arrival at the hospital and being scanned, the severity of the stroke, the patient's pre-existing disability, and whether the stroke onset time was known precisely, influenced the odds of receiving thrombolysis. However, the study found that the majority of the variation in thrombolysis use between hospitals may be explained by differences in the hospitals' willingness to use the treatment, rather than the characteristics of the patients they treated.
+
