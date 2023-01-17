@@ -18,7 +18,7 @@ Expert opinion is that about one in five patients should receive thrombolysis, a
 
 ## Aims of this study
 
-The aims of this study were 1) to apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals, and 2) to model and explain what are the the features that are most important in hospitals that we predict would make *different* decisions about any given patient.
+The aims of this study were 1) to apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals, and 2) to understand the types of patients where hopsitals would make *different* decisions about any given patient.
 
 ## What is *Explainable Machine Learning*?
 
