@@ -174,7 +174,7 @@ We can plot SHAP plots for the same patient attending each hospital, to give add
 
 <img src="./images/21_shap_waterfall_with_violin_contentious.jpg" width="600">
 
-*SHAP value plots for the same patient attending 132 different hopsitals*
+*SHAP value plots for the same patient attending 132 different hospitals. Benchmark teams (blue) are the 30 teams with the highest predicted thrombolysis use if all hospitals saw the same 10k patient cohort.*
 
 
 
