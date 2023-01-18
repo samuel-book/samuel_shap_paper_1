@@ -1,4 +1,4 @@
-# SAMueL (Stroke Audit Machine Learning): What would other emergency stroke teams? Summary and key work
+# What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice
 
 Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaboration with the Sentinel Stroke National Audit Program (SSNAP).
 
