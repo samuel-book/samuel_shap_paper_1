@@ -38,7 +38,7 @@ In this project we are very much on a journey - discovering what different peopl
 
 ## Methods
 
-In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. 
+In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. Our model and analysis was based on 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset (37% of all emergency stroke admissions).
 
 In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using *all* available features. These 10 features were:
 
