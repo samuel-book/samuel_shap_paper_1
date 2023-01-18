@@ -33,9 +33,3 @@ parts:
   chapters:
   - file: xgb_10_features/50_bagging_variation 
   - file: xgb_10_features/91_learning_rate_optimisation
-- caption: Paper (Work In Progress)
-  chapters:
-  - file: paper/abstract.md 
-  - file: paper/3_results.md 
-  - file: paper/6_appendix.md 
-  
