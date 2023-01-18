@@ -170,3 +170,13 @@ If we change only precise onset time to 'No', we find 87% of stroke teams would 
 
 If we change both stroke severity (NIHSS) to 5, and precise onset time to 'No', we find 35% of stroke teams would be expected to give them thrombolysis.
 
+We can plot SHAP plots for the same patient attending each hospital, to give additional insight into the model workings.
+
+<img src="./images/21_shap_waterfall_with_violin_contentious.jpg" width="600">
+
+*SHAP value plots for the same patient attending 132 different hopsitals*
+
+
+
+
+
