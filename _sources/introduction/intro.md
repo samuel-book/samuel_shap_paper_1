@@ -75,7 +75,7 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ### Predicting thrombolysis use with an XG-Boost model
 
-Looking at patterns oh SHAP values reveals the following:
+Looking at patterns of SHAP values reveals the following:
 
 * Stroke type: As expected, the SHAP values for stroke types shows that the model effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
 
@@ -103,15 +103,15 @@ SHAP plots can also be used to explain predictions of any individual patient.
 
 ### Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
 
-We can assess each hospital's *'propensity to use thrombolysis'* by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.
+We can assess each hospital's *'predisposition (or willingness) to use thrombolysis'* by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.
 
-When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model, we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
+When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model, we find a very strong correlation (R-squared = 0.92). This helps to validate average hospital SHAP being used as a measure of a hospital's *'predisposition to use thrombolysis'*.
 
 <img src="./images/shap_vs_10k.jpg" width="450">
 
 *A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.*
 
-We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
+We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the odds of receiving thrombolysis.
 
 ### Comparing actual and predicted thrombolysis use in subgroups of patients
 
@@ -130,7 +130,7 @@ The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS
 
 Some differences exist:
 
-The use of thrombolysi in ideal patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).
+The use of thrombolysis in ideal patients is a little low in the observed vs actual results (mean hospital thrombolysis use = 89% vs 99%).
 
 The predicted results show a stronger effect of combining non-ideal features.
 
