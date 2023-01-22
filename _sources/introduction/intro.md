@@ -26,7 +26,7 @@ The aims of this study were:
 
 ## What is *Explainable Machine Learning*?
 
-Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient receives thrombolysis or not. 
+Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient received thrombolysis or not. 
 
 <img src="./images/ml_model_high_level.png" width="600">
 
@@ -34,15 +34,13 @@ Machine learning models generally learn from large sets of data - learning patte
 
 There are many different types of machine learning (here we use one called *XG-Boost*), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call a *black box* model - that is we give it some information, and it makes a prediction, but we don't know *why* it made that particular prediction. 
 
-*Explainable Machine Learning* seeks to be able to communicate *why* a model makes the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how sure we can be of the model's predictions - both generally and for any particular prediction.
-
-In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, carers, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor *explainable machine learning* output to the wishes of different audiences?
+*Explainable Machine Learning* seeks to be able to communicate *why* a model makes the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative that data is of where the model will be used in practice), and how sure we can be of the model's predictions.
 
 (*Explainable machine learning* may also be known as *Explainable ML*, *Explainable artificial intelligence*, or *Explainable AI*).
 
 ## Methods
 
-In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. Our model and analysis was based on 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset (37% of all emergency stroke admissions).
+In this study we used a machine learning method called *XG-Boost* (which is short for *eXtreme Gradient Boosting*) to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. Our model and analysis was based on 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset (37% of all emergency stroke admissions).
 
 In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using *all* available features. These 10 features were:
 
