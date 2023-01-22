@@ -12,17 +12,21 @@ Stroke is a common cause of adult disability. Most strokes (about four out of fi
 
 Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend. 
 
-<img src="./images/thrombolysis_by_hospital.jpg" width="450">
+<img src="./images/thrombolysis_hist.jpg" width="800">
 
 *Variation in thrombolysis use across hospitals in England and Wales 2016-2018.*
 
 ## Aims of this study
 
-The aims of this study were 1) to apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals, and 2) to understand the types of patients where hopsitals would make *different* decisions about any given patient.
+The aims of this study were:
+
+1) To apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals.
+
+2) To understand the types of patients where hopsitals would make *different* decisions about any given patient.
 
 ## What is *Explainable Machine Learning*?
 
-Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient receives thrombolysis or not. 
+Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of *features* about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient received thrombolysis or not. 
 
 <img src="./images/ml_model_high_level.png" width="600">
 
@@ -30,15 +34,13 @@ Machine learning models generally learn from large sets of data - learning patte
 
 There are many different types of machine learning (here we use one called *XG-Boost*), but all are making predictions based on similarities to what the model has seen before. Many machine learning models are what we call a *black box* model - that is we give it some information, and it makes a prediction, but we don't know *why* it made that particular prediction. 
 
-*Explainable Machine Learning* seeks to be able to communicate *why* a model makes the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative is that data of where the model will be used in practice), and how sure we can be of the model's predictions - both generally and for any particular prediction.
-
-In this project we are very much on a journey - discovering what different people would like to know about the model. Do patients, carers, clinicians, and other machine learning researchers all want to know the same things, or different things? How can we tailor *explainable machine learning* output to the wishes of different audiences?
+*Explainable Machine Learning* seeks to be able to communicate *why* a model makes the prediction it does. We seek to understand, and communicate, the general patterns that the model is making (we call this *global explainability*), as well as why the model made the prediction it did for one particular patient (we call this *local explainability*). We also try to explain other important aspects about the model such as where the training data came from (and how representative that data is of where the model will be used in practice), and how sure we can be of the model's predictions.
 
 (*Explainable machine learning* may also be known as *Explainable ML*, *Explainable artificial intelligence*, or *Explainable AI*).
 
 ## Methods
 
-In this study we used a machine learning method called *XG-Boost* to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. Our model and analysis was based on 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset (37% of all emergency stroke admissions).
+In this study we used a machine learning method called *XG-Boost* (which is short for *eXtreme Gradient Boosting*) to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. Our model and analysis was based on 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset (37% of all emergency stroke admissions).
 
 In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using *all* available features. These 10 features were:
 
@@ -73,9 +75,9 @@ The same principle may be applied in machine learning: How does any one feature 
 
 ### Predicting thrombolysis use with an XG-Boost model
 
-Looking at patterns oh SHAP values reveals the following:
+Looking at patterns of SHAP values reveals the following:
 
-* Stroke type: As expected,  the SHAP values for stroke types effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
+* Stroke type: As expected, the SHAP values for stroke types shows that the model effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
 
 * Arrival-to-scan time: The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.
 
@@ -101,15 +103,15 @@ SHAP plots can also be used to explain predictions of any individual patient.
 
 ### Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
 
-We can assess each hospital's *'propensity to use thrombolysis'* by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.
+We can assess each hospital's *'predisposition (or willingness) to use thrombolysis'* by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.
 
-When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model, we find a very strong correlation (R-squared = 0.917). This helps to validate average hospital SHAP being used as a measure of a hospital's *'propensity to use thrombolysis'*.
+When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model, we find a very strong correlation (R-squared = 0.92). This helps to validate average hospital SHAP being used as a measure of a hospital's *'predisposition to use thrombolysis'*.
 
 <img src="./images/shap_vs_10k.jpg" width="450">
 
 *A comparison of average hospital SHAP values with predicted hospital thrombolysis use if all hospitals saw the same 10k patient cohort.*
 
-We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the ods of receiving thrombolysis.
+We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the odds of receiving thrombolysis.
 
 ### Comparing actual and predicted thrombolysis use in subgroups of patients
 
@@ -128,7 +130,7 @@ The three subgroups of NIHSS <5, no precise stroke onset time, and prestroke mRS
 
 Some differences exist:
 
-The use of thrombolysi in ideal patients is a little low in the observed vs actual results (mean hopsital thrombolysis use = 89% vs 99%).
+The use of thrombolysis in ideal patients is a little low in the observed vs actual results (mean hospital thrombolysis use = 89% vs 99%).
 
 The predicted results show a stronger effect of combining non-ideal features.
 
