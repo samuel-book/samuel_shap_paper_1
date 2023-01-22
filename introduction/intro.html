@@ -619,7 +619,7 @@ title="Print to PDF"
 <h3>Predicting thrombolysis use with an XG-Boost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xg-boost-model" title="Permalink to this headline">#</a></h3>
 <p>Looking at patterns oh SHAP values reveals the following:</p>
 <ul class="simple">
-<li><p>Stroke type: As expected,  the SHAP values for stroke types effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.</p></li>
+<li><p>Stroke type: As expected, the SHAP values for stroke types shows that the model effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.</p></li>
 <li><p>Arrival-to-scan time: The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.</p></li>
 <li><p>Stroke severity (NIHSS): The odds of receiving thrombolysis is lowest at NIHSS 0, rises and peaks at NIHSS 15-25, and then falls again with higher stroke severity. The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis is 30-35 fold.</p></li>
 <li><p>Stroke onset time type (precise vs. estimated): The odds of receiving thrombolysis are about 3 fold greater for precise onset time than estimated onset time.</p></li>

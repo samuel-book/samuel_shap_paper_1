@@ -77,7 +77,7 @@ The same principle may be applied in machine learning: How does any one feature 
 
 Looking at patterns oh SHAP values reveals the following:
 
-* Stroke type: As expected,  the SHAP values for stroke types effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
+* Stroke type: As expected, the SHAP values for stroke types shows that the model effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.
 
 * Arrival-to-scan time: The odds of receiving thrombolysis reduces by about 20 fold over the first 100 minutes of arrival to scan time.
 
