@@ -2,9 +2,13 @@
 
 Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaboration with the Sentinel Stroke National Audit Program (SSNAP).
 
-## A very short summary (credit: ChatGPT)....
+## A short summary
 
-This study used an explainable machine learning model to analyze data from 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset. The study found that there is substantial variation in the use of thrombolysis, a treatment for stroke, between hospitals, with rates ranging from 7% to 49%. The study found that factors such as the amount of time between arrival at the hospital and being scanned, the severity of the stroke, the patient's pre-existing disability, and whether the stroke onset time was known precisely, influenced the odds of receiving thrombolysis. However, the study found that the majority of the variation in thrombolysis use between hospitals may be explained by differences in the hospitals' willingness to use the treatment, rather than the characteristics of the patients they treated.
+Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called *thrombolysis*. Use of thrombolysis is only about half of what the NHS long-term plan suggests it should be, and varies a lot between hospitals.
+
+We used explainable machine learning to investigate which patients receive thrombolysis at each hopsital. To do this we used data on nearly 90,000 patients who arrived at hospital with time still left to give thrombolysis (as thrombolysis must be given within four and a half hours after stroke onset).
+
+We found that in patients arriving in time to receive thrombolysis, the use of thrombolysis ranged between hospitals from 7% (1 in 14 patients) to 49% (1 in 2 patients). The chance of receiving thrombolysis depended on the time it took to perform a brain scan, the severity of the stroke, whether the time of stroke onset was known precisely, and the level of disability the patient had before the stroke. But the most interesting finding was that the majority of the variation in thrombolysis usage between hospitals was due to the hospitals' willingness and readiness to use the treatment, rather than any differences in patients between hospitals.
 
 ## Background
 
