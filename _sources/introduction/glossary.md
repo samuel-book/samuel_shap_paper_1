@@ -20,7 +20,7 @@ Artificial patients are patients where we make up their characteristics. We migh
 * Use of anticoagulants for AF = No
 * Onset during sleep = No
 
-This allows us to explore how changing any feature or features of the patient will change the likelihood that such a patient would receive thrombolysis in each hopsital.
+This allows us to explore how changing any feature or features of the patient will change the likelihood that such a patient would receive thrombolysis in each hospital.
 
 ## Explainable machine learning
 
