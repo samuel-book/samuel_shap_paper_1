@@ -113,9 +113,13 @@ For example, let's say we have a dataset of fruits that includes the categories 
 
 This transformation allows machine learning algorithms to work with categorical data more easily by representing them as numerical values that can be used in mathematical calculations.
 
+## Python
+
+Python is a popular programming language that was created in the late 1980s by Guido van Rossum. It is designed to be easy to read and write, with a clear and simple syntax that emphasizes readability.
+
 ## Receiver operating characteristic (ROC) curve
 
-A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model. In plain English, it shows how well a model is able to distinguish between two classes by plotting the trade-off between sensitivity (the ability of the model to correctly identify positive cases) and specificity (the ability of the model to correctly identify negative cases).
+A Receiver Operating Characteristic (ROC) curve is a graph that shows how well a machine learning model can distinguish between two classes. In plain English, it shows how well a model is able to distinguish between two classes by plotting the trade-off between sensitivity (the ability of the model to correctly identify positive cases) and specificity (the ability of the model to correctly identify negative cases).
 
 The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at different classification thresholds. The TPR represents the proportion of positive cases that are correctly identified by the model, while the FPR represents the proportion of negative cases that are incorrectly classified as positive by the model.
 
