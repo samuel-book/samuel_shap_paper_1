@@ -3,6 +3,7 @@ root: introduction/intro
 parts:
 - caption: Introductory content
   chapters:
+  - file: introduction/glossary
   - file: introduction/data
   - file: introduction/odds_prob
   - file: introduction/shap_worked_example
