@@ -448,6 +448,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python">
+   Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">
    Receiver operating characteristic (ROC) curve
   </a>
@@ -569,6 +574,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#one-hot-encoding">
    One-hot encoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python">
+   Python
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -726,9 +736,13 @@ title="Print to PDF"
 <p>For example, let’s say we have a dataset of fruits that includes the categories apple, banana, and orange. In one-hot encoding, apple would be represented as [1, 0, 0], banana as [0, 1, 0], and orange as [0, 0, 1].</p>
 <p>This transformation allows machine learning algorithms to work with categorical data more easily by representing them as numerical values that can be used in mathematical calculations.</p>
 </section>
+<section id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">#</a></h2>
+<p>Python is a popular programming language that was created in the late 1980s by Guido van Rossum. It is designed to be easy to read and write, with a clear and simple syntax that emphasizes readability.</p>
+</section>
 <section id="receiver-operating-characteristic-roc-curve">
 <h2>Receiver operating characteristic (ROC) curve<a class="headerlink" href="#receiver-operating-characteristic-roc-curve" title="Permalink to this headline">#</a></h2>
-<p>A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model. In plain English, it shows how well a model is able to distinguish between two classes by plotting the trade-off between sensitivity (the ability of the model to correctly identify positive cases) and specificity (the ability of the model to correctly identify negative cases).</p>
+<p>A Receiver Operating Characteristic (ROC) curve is a graph that shows how well a machine learning model can distinguish between two classes. In plain English, it shows how well a model is able to distinguish between two classes by plotting the trade-off between sensitivity (the ability of the model to correctly identify positive cases) and specificity (the ability of the model to correctly identify negative cases).</p>
 <p>The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at different classification thresholds. The TPR represents the proportion of positive cases that are correctly identified by the model, while the FPR represents the proportion of negative cases that are incorrectly classified as positive by the model.</p>
 <p>A perfect model would have a TPR of 1 and an FPR of 0, resulting in a point in the top left corner of the ROC curve. A random model, on the other hand, would have a diagonal line from the bottom left to the top right of the graph, indicating that the TPR and FPR are roughly equal.</p>
 <p>The area under the ROC curve (AUC) is often used as a summary statistic to compare the performance of different models. An AUC of 0.5 represents a random model, while an AUC of 1.0 represents a perfect model. In general, a higher AUC indicates better discrimination between the two classes.</p>
