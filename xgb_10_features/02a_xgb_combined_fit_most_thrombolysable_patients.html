@@ -115,6 +115,11 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/glossary.html">
+   Glossary of technical terms
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../introduction/data.html">
    Data
   </a>
@@ -404,6 +409,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-data">
    Import data
   </a>
@@ -445,6 +455,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-packages">
    Import packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -525,15 +540,28 @@ title="Print to PDF"
 </div>
 </div>
 </section>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set model type (used in file save, e.g. xgb_combined_calibrated_oversampled)</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_of_features_to_use</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;02a&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="import-data">
 <h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">#</a></h2>
 <p>Predictions were previous saved from Notebook 02</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./predictions/02_xgb_10_features_combined_test_features.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./predictions/02_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_combined_test_features.csv&#39;</span><span class="p">)</span>
 <span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">);</span> <span class="n">features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">);</span> 
-<span class="n">predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./predictions/02_xgb_10_features_predictions.csv&#39;</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./predictions/02_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_predictions.csv&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add jitter to age to spread values for plotting</span>
 <span class="n">jitter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
@@ -593,7 +621,7 @@ title="Print to PDF"
       <td>0</td>
       <td>186.0</td>
       <td>0</td>
-      <td>47.7</td>
+      <td>46.9</td>
       <td>1</td>
     </tr>
     <tr>
@@ -607,7 +635,7 @@ title="Print to PDF"
       <td>0</td>
       <td>71.0</td>
       <td>0</td>
-      <td>50.4</td>
+      <td>53.7</td>
       <td>1</td>
     </tr>
     <tr>
@@ -621,7 +649,7 @@ title="Print to PDF"
       <td>0</td>
       <td>67.0</td>
       <td>0</td>
-      <td>40.1</td>
+      <td>41.5</td>
       <td>0</td>
     </tr>
     <tr>
@@ -635,7 +663,7 @@ title="Print to PDF"
       <td>0</td>
       <td>86.0</td>
       <td>0</td>
-      <td>76.9</td>
+      <td>79.8</td>
       <td>0</td>
     </tr>
     <tr>
@@ -649,7 +677,7 @@ title="Print to PDF"
       <td>0</td>
       <td>83.0</td>
       <td>0</td>
-      <td>79.3</td>
+      <td>79.0</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -795,7 +823,7 @@ title="Print to PDF"
       <td>0</td>
       <td>186.0</td>
       <td>0</td>
-      <td>47.7</td>
+      <td>46.9</td>
       <td>1</td>
       <td>0.957469</td>
       <td>1.0</td>
@@ -813,7 +841,7 @@ title="Print to PDF"
       <td>0</td>
       <td>71.0</td>
       <td>0</td>
-      <td>50.4</td>
+      <td>53.7</td>
       <td>1</td>
       <td>0.560687</td>
       <td>1.0</td>
@@ -831,7 +859,7 @@ title="Print to PDF"
       <td>0</td>
       <td>67.0</td>
       <td>0</td>
-      <td>40.1</td>
+      <td>41.5</td>
       <td>0</td>
       <td>0.026418</td>
       <td>0.0</td>
@@ -849,7 +877,7 @@ title="Print to PDF"
       <td>0</td>
       <td>86.0</td>
       <td>0</td>
-      <td>76.9</td>
+      <td>79.8</td>
       <td>0</td>
       <td>0.000148</td>
       <td>0.0</td>
@@ -867,7 +895,7 @@ title="Print to PDF"
       <td>0</td>
       <td>83.0</td>
       <td>0</td>
-      <td>79.3</td>
+      <td>79.0</td>
       <td>1</td>
       <td>0.907736</td>
       <td>1.0</td>
@@ -896,7 +924,9 @@ title="Print to PDF"
 
 <span class="c1"># Convert to dataframe and save</span>
 <span class="n">most_thrombolysable_patients</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">most_thrombolysable_patients</span><span class="p">)</span>
-<span class="n">most_thrombolysable_patients</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./predictions/02a_most_thrombolsyable_patients&#39;</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s1">&#39;idx&#39;</span><span class="p">)</span>
+<span class="n">most_thrombolysable_patients</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;./predictions/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_most_thrombolsyable_patients&#39;</span><span class="p">,</span> 
+    <span class="n">index_label</span><span class="o">=</span><span class="s1">&#39;idx&#39;</span><span class="p">)</span>
 
 <span class="n">most_thrombolysable_patients</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -950,7 +980,7 @@ title="Print to PDF"
       <td>0</td>
       <td>10.0</td>
       <td>0</td>
-      <td>88.8</td>
+      <td>85.4</td>
       <td>1</td>
       <td>0.976182</td>
       <td>1.0</td>
@@ -968,7 +998,7 @@ title="Print to PDF"
       <td>0</td>
       <td>39.0</td>
       <td>0</td>
-      <td>50.0</td>
+      <td>45.5</td>
       <td>1</td>
       <td>0.960032</td>
       <td>1.0</td>
@@ -986,7 +1016,7 @@ title="Print to PDF"
       <td>0</td>
       <td>57.0</td>
       <td>0</td>
-      <td>66.3</td>
+      <td>68.0</td>
       <td>0</td>
       <td>0.902480</td>
       <td>1.0</td>
@@ -1004,7 +1034,7 @@ title="Print to PDF"
       <td>0</td>
       <td>6.0</td>
       <td>0</td>
-      <td>66.7</td>
+      <td>66.5</td>
       <td>1</td>
       <td>0.963226</td>
       <td>1.0</td>
@@ -1022,7 +1052,7 @@ title="Print to PDF"
       <td>0</td>
       <td>35.0</td>
       <td>0</td>
-      <td>56.5</td>
+      <td>59.6</td>
       <td>1</td>
       <td>0.921572</td>
       <td>1.0</td>
@@ -1093,21 +1123,25 @@ Observed proportion thrombolysed = 0.894
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
 
     <span class="c1"># Add labels</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Most</span><span class="se">\n</span><span class="s1">thrombolysable&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Thrombolysed&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-thrombolysed&#39;</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Most</span><span class="se">\n</span><span class="s1">thrombolysable&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Thrombolysed&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Non-thrombolysed&#39;</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> 
+                       <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/02a_most_thrombolsyable_violin.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_most_thrombolsyable_violin.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02a_xgb_combined_fit_most_thrombolysable_patients_13_0.png" src="../_images/02a_xgb_combined_fit_most_thrombolysable_patients_13_0.png" />
+<img alt="../_images/02a_xgb_combined_fit_most_thrombolysable_patients_15_0.png" src="../_images/02a_xgb_combined_fit_most_thrombolysable_patients_15_0.png" />
 </div>
 </div>
 </section>

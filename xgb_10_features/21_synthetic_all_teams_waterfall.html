@@ -115,6 +115,11 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/glossary.html">
+   Glossary of technical terms
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../introduction/data.html">
    Data
   </a>
@@ -399,6 +404,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-artificial-patient-feature-values-and-team-s-to-highlight">
    Set artificial patient feature values, and team(s) to highlight
   </a>
@@ -436,6 +446,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plot-the-combined-waterfall">
    Plot the combined waterfall
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extra-code-for-paper">
+   Extra code (for paper)
   </a>
  </li>
 </ul>
@@ -458,6 +473,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-filenames">
+   Set filenames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-artificial-patient-feature-values-and-team-s-to-highlight">
    Set artificial patient feature values, and team(s) to highlight
   </a>
@@ -497,6 +517,11 @@ title="Print to PDF"
    Plot the combined waterfall
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extra-code-for-paper">
+   Extra code (for paper)
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -510,6 +535,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="combined-shap-probability-waterfall-for-all-teams">
 <h1>Combined SHAP probability waterfall for all teams<a class="headerlink" href="#combined-shap-probability-waterfall-for-all-teams" title="Permalink to this headline">#</a></h1>
 <p>Create a plot that contains a SHAP probability waterfall for each team separately, but all on the same axis. There’s not much room for bars so we plot lines and markers instead.</p>
+<p>Use data from 10k cohort to identify the benchmark hospitals (from notebook 04).</p>
+<p>Predict the thrombolysis use of the same patient at each hospital using the all data model from notebook 03a.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports:</span>
@@ -524,6 +551,19 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set model type (used in file save, e.g. xgb_combined_calibrated_oversampled)</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_of_features_to_use</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;21&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="set-artificial-patient-feature-values-and-team-s-to-highlight">
 <h2>Set artificial patient feature values, and team(s) to highlight<a class="headerlink" href="#set-artificial-patient-feature-values-and-team-s-to-highlight" title="Permalink to this headline">#</a></h2>
 <p>Change these patient details and highlighted team names.</p>
@@ -651,7 +691,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import benchmark data</span>
-<span class="n">filename</span><span class="o">=</span> <span class="s1">&#39;./output/04_xgb_10_features_10k_cohort_thrombolysis_rate_by_hosp.csv&#39;</span>
+<span class="n">filename</span><span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/04_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_10k_cohort_thrombolysis_rate_by_hosp.csv&#39;</span>
 <span class="n">benchmark_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">benchmark_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -703,8 +743,9 @@ title="Print to PDF"
 <h2>Get predictions of use of probability of thrombolysis for each team<a class="headerlink" href="#get-predictions-of-use-of-probability-of-thrombolysis-for-each-team" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the XGBoost model that was trained on the 10k cohort train/test dataset (in notebook 04)</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/03a_xgb_10_features.p&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the XGBoost model that was trained on the 10k cohort train/test dataset </span>
+<span class="c1">#   (in notebook 04)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/03a_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
@@ -747,18 +788,23 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_teams</span> <span class="o">=</span> <span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">benchmark</span> <span class="o">=</span> <span class="n">sorted_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HB team&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">][</span><span class="s1">&#39;Benchmark team&#39;</span><span class="p">]</span>
-<span class="n">non_benchmark</span> <span class="o">=</span> <span class="n">sorted_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HB team&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">][</span><span class="s1">&#39;Non-benchmark team&#39;</span><span class="p">]</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of all teams predicted to use thrombolysos = </span><span class="si">{</span><span class="n">all_teams</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of benchmark teams predicted to use thrombolysos = </span><span class="si">{</span><span class="n">benchmark</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of non-benchmark teams predicted to use thrombolysos = </span><span class="si">{</span><span class="n">non_benchmark</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">benchmark</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HB team&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                                         <span class="p">[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">][</span><span class="s1">&#39;Benchmark team&#39;</span><span class="p">])</span>
+<span class="n">non_benchmark</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;HB team&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                                     <span class="p">[</span><span class="s1">&#39;Thrombolyse&#39;</span><span class="p">][</span><span class="s1">&#39;Non-benchmark team&#39;</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of all teams predicted to use thrombolysis = &#39;</span> 
+                                                       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">all_teams</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of benchmark teams predicted to use thrombolysis = &#39;</span>
+                                                       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">benchmark</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Proportion of non-benchmark teams predicted to use thrombolysis = &#39;</span>
+                                                       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">non_benchmark</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysos = 0.356
-Proportion of benchmark teams predicted to use thrombolysos = 0.900
-Proportion of non-benchmark teams predicted to use thrombolysos = 0.196
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of all teams predicted to use thrombolysis = 0.356
+Proportion of benchmark teams predicted to use thrombolysis = 0.900
+Proportion of non-benchmark teams predicted to use thrombolysis = 0.196
 </pre></div>
 </div>
 </div>
@@ -769,7 +815,7 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.196
 <p>Use a previously saved SHAP explainer model (from notebook 04_compare_10k_cohort_key_features.ipynb).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;./output/03a_xgb_10_features_shap_explainer_object_probability.p&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/03a_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_explainer_object_probability.p&#39;</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
     <span class="n">explainer_probability</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
@@ -873,7 +919,7 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.196
 <code class="docutils literal notranslate"><span class="pre">grid_cat_sorted[:,</span> <span class="pre">0]</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the grids by increasing standard deviation in the shifts for each feature.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the grids by increasing standard deviation in the shifts for each feature</span>
 <span class="n">grid_waterfall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">grid_cat_sorted</span><span class="p">)</span>
 <span class="c1"># Sort the grid in order of increasing standard deviation:</span>
 <span class="n">inds_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">grid_waterfall</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
@@ -1030,14 +1076,92 @@ Proportion of non-benchmark teams predicted to use thrombolysos = 0.196
 
 <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./output/21_shap_waterfall_with_violin.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_waterfall_with_violin.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/21_synthetic_all_teams_waterfall_31_0.png" src="../_images/21_synthetic_all_teams_waterfall_31_0.png" />
+<img alt="../_images/21_synthetic_all_teams_waterfall_33_0.png" src="../_images/21_synthetic_all_teams_waterfall_33_0.png" />
+</div>
+</div>
+</section>
+<section id="extra-code-for-paper">
+<h2>Extra code (for paper)<a class="headerlink" href="#extra-code-for-paper" title="Permalink to this headline">#</a></h2>
+<p>Plot the combined waterfall, do not include the identification of the benchmark hospitals</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">features_waterfall</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Draw on the bottom</span>
+<span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.35</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">team</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]):</span>
+    <span class="c1"># Plot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid_waterfall_cumsum</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y_vals</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> 
+            <span class="n">alpha</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colour</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="n">legend_name</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="n">zorder</span><span class="p">)</span>
+
+<span class="c1"># Violin plot</span>
+<span class="n">v_dict</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span>
+    <span class="n">final_probs_list</span><span class="p">,</span>
+    <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>                   <span class="c1"># Horizontal box plot</span>
+    <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="n">y_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>       <span class="c1"># Position on y-axis</span>
+    <span class="n">widths</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>                   <span class="c1"># Max height of the violin</span>
+    <span class="n">showextrema</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>             <span class="c1"># Add whiskers at ends</span>
+    <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span>              <span class="c1"># Add whisker at median</span>
+<span class="p">)</span>
+<span class="c1"># Update style:</span>
+<span class="c1"># Reset default transparency </span>
+<span class="c1"># (including filled shape outline transparency)</span>
+<span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="c1"># Colour of the filled shape:</span>
+<span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">v_dict</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="c1"># Colour of the lines:</span>
+<span class="n">linecollections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cmins&#39;</span><span class="p">,</span> <span class="s1">&#39;cmaxes&#39;</span><span class="p">,</span> <span class="s1">&#39;cbars&#39;</span><span class="p">,</span> <span class="s1">&#39;cmedians&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">lc</span> <span class="ow">in</span> <span class="n">linecollections</span><span class="p">:</span>
+    <span class="n">v_dict</span><span class="p">[</span><span class="n">lc</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Axis formatting:</span>
+<span class="c1"># Make twice as many y tick locations as we need, slightly offset:</span>
+<span class="n">yticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_vals</span><span class="p">,</span> <span class="n">y_vals</span> <span class="o">+</span> <span class="mf">1e-7</span><span class="p">)</span>
+<span class="c1"># Give the first half of the ticks the full labels,</span>
+<span class="c1"># and the second half just the feature names:</span>
+<span class="n">yticklabels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">features_with_values_waterfall</span><span class="p">,</span> <span class="n">features_waterfall</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">yticks</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">yticklabels</span><span class="p">)</span>
+<span class="c1"># Change the colour of the first half of the drawn ticks:</span>
+<span class="n">yticklabels_drawn</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_vals</span><span class="p">)):</span>
+    <span class="n">yticklabels_drawn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Feature&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Probability of receiving thrombolysis (%)&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">txt</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted thrombolysis use: &#39;</span>
+       <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="n">all_teams</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">0.0f</span><span class="si">}</span><span class="s1">% from 132 teams&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">((</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_waterfall_with_violin_&#39;</span>
+             <span class="sa">f</span><span class="s1">&#39;no_benchmark.jpg&#39;</span><span class="p">),</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/21_synthetic_all_teams_waterfall_35_0.png" src="../_images/21_synthetic_all_teams_waterfall_35_0.png" />
 </div>
 </div>
 </section>
