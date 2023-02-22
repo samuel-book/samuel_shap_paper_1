@@ -393,6 +393,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anticoagulants">
+   Anticoagulants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#artificial-patients">
    Artificial patients
   </a>
@@ -410,6 +415,16 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradient-boosting-decision-trees">
    Gradient boosting decision trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#haemorrhage">
+   Haemorrhage
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infarction-and-ischaemic-stroke">
+   Infarction and ischaemic stroke
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -497,6 +512,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anticoagulants">
+   Anticoagulants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#artificial-patients">
    Artificial patients
   </a>
@@ -514,6 +534,16 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradient-boosting-decision-trees">
    Gradient boosting decision trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#haemorrhage">
+   Haemorrhage
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#infarction-and-ischaemic-stroke">
+   Infarction and ischaemic stroke
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -593,9 +623,26 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="glossary-of-technical-terms">
 <h1>Glossary of technical terms<a class="headerlink" href="#glossary-of-technical-terms" title="Permalink to this headline">#</a></h1>
+<section id="anticoagulants">
+<h2>Anticoagulants<a class="headerlink" href="#anticoagulants" title="Permalink to this headline">#</a></h2>
+<p>Anticoagulants are medicines that help prevent blood clots. They may be used to help prevent stroke that is caused by atrial fibrillation. Atrial fibrillation is a condition where the heart beats irregularly and can cause blood to pool in the heart. This can increase the risk of blood clots forming, which can lead to stroke. Anticoagulants are given to people with atrial fibrillation to help prevent these blood clots from forming. They work by interfering with the blood’s ability to clot, which can reduce the risk of stroke. Anticoagulants need to be carefully monitored to make sure they are working effectively and not causing any unwanted side effects.</p>
+<p>Thrombolysis is not usually given to patients on anticoagulants, though a doctor may to choose to use it in some patients, for example, if they have tested the blood’s ability to clot, which may be measured and reported as an INR (International Normalized Ratio).</p>
+</section>
 <section id="artificial-patients">
 <h2>Artificial patients<a class="headerlink" href="#artificial-patients" title="Permalink to this headline">#</a></h2>
-<p>Artificial patients are patients where we make up their characteristics. This allows us to explore how changing any feature or features of the patient will change the likelihood that such a patient would receive thrombolysis in each hopsital.</p>
+<p>Artificial patients are patients where we make up their characteristics. We might, for example, make up a patient as follows:</p>
+<ul class="simple">
+<li><p>Infarction (stroke caused by clot) = Yes</p></li>
+<li><p>Stroke severity (NIHSS) = 15</p></li>
+<li><p>Precise onset time known = Yes</p></li>
+<li><p>Disability (mRS) before stroke = 0</p></li>
+<li><p>Age = 72</p></li>
+<li><p>Onset-to-arrival = 60 minutes</p></li>
+<li><p>Arrival-to-scan = 15 minutes</p></li>
+<li><p>Use of anticoagulants for AF = No</p></li>
+<li><p>Onset during sleep = No</p></li>
+</ul>
+<p>This allows us to explore how changing any feature or features of the patient will change the likelihood that such a patient would receive thrombolysis in each hopsital.</p>
 </section>
 <section id="explainable-machine-learning">
 <h2>Explainable machine learning<a class="headerlink" href="#explainable-machine-learning" title="Permalink to this headline">#</a></h2>
@@ -622,6 +669,17 @@ title="Print to PDF"
 <p>Gradient boosting trees is a powerful machine learning algorithm that can be used for a wide range of applications, including image recognition, natural language processing, and predictive analytics. It’s particularly useful for problems where there are many variables and complex relationships between them, and where accurate predictions are critical.</p>
 <p>We use a type of gradient boosting decision tree model called XGBoost (eXtreme Gradient Boost).</p>
 </section>
+<section id="haemorrhage">
+<h2>Haemorrhage<a class="headerlink" href="#haemorrhage" title="Permalink to this headline">#</a></h2>
+<p>A haemorrhage is a bleed from a blood vessel within the body.</p>
+<p>2 out of 10 strokes are caused by a bleed in the brain. These patients must not be given thrombolysis (which is used to dissolve clots), otherwise the bleed is likely to be made much worse.</p>
+</section>
+<section id="infarction-and-ischaemic-stroke">
+<h2>Infarction and ischaemic stroke<a class="headerlink" href="#infarction-and-ischaemic-stroke" title="Permalink to this headline">#</a></h2>
+<p>An infarction is a blood clot that leads to loss of blood supply to an area of the body. In the case of stroke an infarction is a clot in a blood vessel in the brain that leads to loss of blood supply to the area of the brain fed by that blood vessel. In stroke, if the patient arrives in hospital in time they may be suitable for thrombolysis to dissolve the clot.</p>
+<p>A stroke caused by an infarction is also known as an ischaemic stroke, which is another way to describe a stroke caused by a blockage in a blood vessel.</p>
+<p>8 out of 10 strokes are cause by a clot.</p>
+</section>
 <section id="machine-learning">
 <h2>Machine learning<a class="headerlink" href="#machine-learning" title="Permalink to this headline">#</a></h2>
 <p>Machine learning is a type of artificial intelligence that involves teaching machines to learn from data, rather than being explicitly programmed to perform specific tasks. In plain English, machine learning is a way to teach computers how to make predictions or decisions based on patterns in data, similar to how humans learn from experience.</p>
@@ -631,14 +689,16 @@ title="Print to PDF"
 <h2>Modified Rankin Scale (MRS)<a class="headerlink" href="#modified-rankin-scale-mrs" title="Permalink to this headline">#</a></h2>
 <p>The Modified Rankin Scale (MRS) is a widely used clinical tool to measure the degree of disability or dependence in patients who have suffered a stroke or other neurological disorders.</p>
 <p>The MRS scores range from 0 to 6, with 0 indicating no symptoms and 6 indicating death. The scale includes six levels of disability, with each level reflecting a different degree of dependence:</p>
-<p>No symptoms.
-No significant disability, able to carry out all usual duties and activities.
-Slight disability, able to look after oneself but unable to carry out all previous activities.
-Moderate disability, requires some help but able to walk unassisted.
-Moderately severe disability, unable to walk unassisted and requires constant care.
-Severe disability, bedridden and requires constant nursing care.
-Death.
-The MRS is commonly used in clinical practice, research studies, and clinical trials as a measure of functional outcome after stroke or other neurological disorders. It provides a simple and standardized way to assess the patient’s level of disability or dependence and can be used to track the patient’s progress over time.</p>
+<ol class="simple">
+<li><p>No symptoms.</p></li>
+<li><p>No significant disability, able to carry out all usual duties and activities.</p></li>
+<li><p>Slight disability, able to look after oneself but unable to carry out all previous activities.</p></li>
+<li><p>Moderate disability, requires some help but able to walk unassisted.</p></li>
+<li><p>Moderately severe disability, unable to walk unassisted and requires constant care.</p></li>
+<li><p>Severe disability, bedridden and requires constant nursing care.</p></li>
+<li><p>Death.</p></li>
+</ol>
+<p>The MRS is commonly used in clinical practice, research studies, and clinical trials as a measure of functional outcome after stroke or other neurological disorders. It provides a simple and standardized way to assess the patient’s level of disability or dependence and can be used to track the patient’s progress over time.</p>
 <p>The MRS is a useful tool for healthcare professionals in making treatment decisions and for patients and their families in understanding the severity of the disability and the potential for recovery. It also helps to standardize the assessment of disability across different clinical settings and research studies.</p>
 </section>
 <section id="nihss">
@@ -687,7 +747,7 @@ The MRS is commonly used in clinical practice, research studies, and clinical tr
 <section id="stroke">
 <h2>Stroke<a class="headerlink" href="#stroke" title="Permalink to this headline">#</a></h2>
 <p>A stroke, also known as a cerebrovascular accident (CVA), is a medical condition that occurs when blood flow to a part of the brain is interrupted or reduced, leading to brain cell damage or death. The interruption or reduction in blood flow can be caused by a blockage or rupture of a blood vessel in the brain.</p>
-<p>There are two main types of stroke: ischemic stroke and hemorrhagic stroke. Ischemic stroke is the most common type and occurs when a blood clot blocks a blood vessel in the brain. Hemorrhagic stroke, on the other hand, occurs when a blood vessel in the brain ruptures or leaks.</p>
+<p>There are two main types of stroke: ischemic stroke and hemorrhagic stroke. Ischaemic stroke is the most common type and occurs when a blood clot blocks a blood vessel in the brain. Hemorrhagic stroke, on the other hand, occurs when a blood vessel in the brain ruptures or leaks.</p>
 <p>Symptoms of a stroke may include sudden weakness or numbness in the face, arm, or leg, especially on one side of the body; sudden confusion or trouble speaking or understanding speech; sudden vision problems in one or both eyes; sudden dizziness or loss of balance or coordination; and severe headache with no known cause.</p>
 <p>A stroke is a medical emergency, and rapid treatment is crucial to minimize brain damage and prevent long-term disability or death. Treatment may include medications to dissolve blood clots or control bleeding, surgery to repair ruptured blood vessels or remove blood clots, and rehabilitation to regain lost skills and functions.</p>
 </section>
