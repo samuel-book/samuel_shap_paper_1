@@ -6,7 +6,7 @@ Part of the NIHR *SAMueL* (Stroke Audit Machine Learning) project, in collaborat
 
 Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called *thrombolysis*. Use of thrombolysis is only about half of what the NHS long-term plan suggests it should be, and varies a lot between hospitals.
 
-We used explainable machine learning to investigate which patients receive thrombolysis at each hopsital. To do this we used data on nearly 90,000 patients who arrived at hospital with time still left to give thrombolysis (as thrombolysis must be given within four and a half hours after stroke onset).
+We used explainable machine learning to investigate which patients receive thrombolysis at each hospital. To do this we used data on nearly 90,000 patients who arrived at hospital with time still left to give thrombolysis (as thrombolysis must be given within four and a half hours after stroke onset).
 
 We found that in patients arriving in time to receive thrombolysis, the use of thrombolysis ranged between hospitals from 7% (1 in 14 patients) to 49% (1 in 2 patients). The chance of receiving thrombolysis depended on the time it took to perform a brain scan, the severity of the stroke, whether the time of stroke onset was known precisely, and the level of disability the patient had before the stroke. But the most interesting finding was that the majority of the variation in thrombolysis usage between hospitals was due to the hospitals' willingness and readiness to use the treatment, rather than any differences in patients between hospitals.
 
@@ -26,7 +26,7 @@ The aims of this study were:
 
 1) To apply *explainable machine learning* techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals.
 
-2) To understand the types of patients where hopsitals would make *different* decisions about any given patient.
+2) To understand the types of patients where hospitals would make *different* decisions about any given patient.
 
 ## What is *Explainable Machine Learning*?
 
@@ -142,7 +142,7 @@ When testing the 'ideal' thrombolysable patients, 95% of hospitals would be expe
 
 <img src="./images/15a_actual_vs_modelled_subgroup_violin.jpg" width="600">
 
-*A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hopsital.*
+*A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hospital.*
 
 ### How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value? 
 
