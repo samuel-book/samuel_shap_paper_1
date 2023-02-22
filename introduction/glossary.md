@@ -101,6 +101,18 @@ The total score on the NIHSS can range from 0 to 42, with higher scores indicati
 
 The NIHSS is a widely recognized and accepted tool for evaluating stroke patients and is used in clinical practice, research studies, and clinical trials. It helps healthcare professionals to quickly and objectively assess the patient's neurological function and provide appropriate treatment based on the severity of the stroke.
 
+## One-hot encoding
+
+One-hot encoding is a technique used in data processing and machine learning to convert categorical data into numerical data.
+
+Categorical data refers to data that represents different categories, such as color, shape, or size, and cannot be measured in numerical values. For example, the colors red, blue, and green are categories, but they cannot be measured in numerical values.
+
+One-hot encoding transforms each category into a binary vector (a list of numbers) of 0s and 1s. The length of the vector is equal to the number of categories, and each vector has a single 1 in the position corresponding to its category and 0s elsewhere.
+
+For example, let's say we have a dataset of fruits that includes the categories apple, banana, and orange. In one-hot encoding, apple would be represented as [1, 0, 0], banana as [0, 1, 0], and orange as [0, 0, 1].
+
+This transformation allows machine learning algorithms to work with categorical data more easily by representing them as numerical values that can be used in mathematical calculations.
+
 ## Receiver operating characteristic (ROC) curve
 
 A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model. In plain English, it shows how well a model is able to distinguish between two classes by plotting the trade-off between sensitivity (the ability of the model to correctly identify positive cases) and specificity (the ability of the model to correctly identify negative cases).
