@@ -1,8 +1,26 @@
 # Glossary of technical terms
 
+## Anticoagulants
+
+Anticoagulants are medicines that help prevent blood clots. They may be used to help prevent stroke that is caused by atrial fibrillation. Atrial fibrillation is a condition where the heart beats irregularly and can cause blood to pool in the heart. This can increase the risk of blood clots forming, which can lead to stroke. Anticoagulants are given to people with atrial fibrillation to help prevent these blood clots from forming. They work by interfering with the blood's ability to clot, which can reduce the risk of stroke. Anticoagulants need to be carefully monitored to make sure they are working effectively and not causing any unwanted side effects. 
+
+Thrombolysis is not usually given to patients on anticoagulants, though a doctor may to choose to use it in some patients, for example, if they have tested the blood's ability to clot, which may be measured and reported as an INR (International Normalized Ratio).
+
 ## Artificial patients
 
-Artificial patients are patients where we make up their characteristics. This allows us to explore how changing any feature or features of the patient will change the likelihood that such a patient would receive thrombolysis in each hopsital.
+Artificial patients are patients where we make up their characteristics. We might, for example, make up a patient as follows:
+
+* Infarction (stroke caused by clot) = Yes
+* Stroke severity (NIHSS) = 15
+* Precise onset time known = Yes
+* Disability (mRS) before stroke = 0
+* Age = 72
+* Onset-to-arrival = 60 minutes
+* Arrival-to-scan = 15 minutes
+* Use of anticoagulants for AF = No
+* Onset during sleep = No
+
+This allows us to explore how changing any feature or features of the patient will change the likelihood that such a patient would receive thrombolysis in each hopsital.
 
 ## Explainable machine learning
 
@@ -35,6 +53,20 @@ Gradient boosting trees is a powerful machine learning algorithm that can be use
 
 We use a type of gradient boosting decision tree model called XGBoost (eXtreme Gradient Boost).
 
+## Haemorrhage
+
+A haemorrhage is a bleed from a blood vessel within the body.
+
+2 out of 10 strokes are caused by a bleed in the brain. These patients must not be given thrombolysis (which is used to dissolve clots), otherwise the bleed is likely to be made much worse.
+
+## Infarction and ischaemic stroke
+
+An infarction is a blood clot that leads to loss of blood supply to an area of the body. In the case of stroke an infarction is a clot in a blood vessel in the brain that leads to loss of blood supply to the area of the brain fed by that blood vessel. In stroke, if the patient arrives in hospital in time they may be suitable for thrombolysis to dissolve the clot.
+
+A stroke caused by an infarction is also known as an ischaemic stroke, which is another way to describe a stroke caused by a blockage in a blood vessel.
+
+8 out of 10 strokes are cause by a clot.
+
 ## Machine learning
 
 Machine learning is a type of artificial intelligence that involves teaching machines to learn from data, rather than being explicitly programmed to perform specific tasks. In plain English, machine learning is a way to teach computers how to make predictions or decisions based on patterns in data, similar to how humans learn from experience.
@@ -47,13 +79,14 @@ The Modified Rankin Scale (MRS) is a widely used clinical tool to measure the de
 
 The MRS scores range from 0 to 6, with 0 indicating no symptoms and 6 indicating death. The scale includes six levels of disability, with each level reflecting a different degree of dependence:
 
-No symptoms.
-No significant disability, able to carry out all usual duties and activities.
-Slight disability, able to look after oneself but unable to carry out all previous activities.
-Moderate disability, requires some help but able to walk unassisted.
-Moderately severe disability, unable to walk unassisted and requires constant care.
-Severe disability, bedridden and requires constant nursing care.
-Death.
+0. No symptoms.
+1. No significant disability, able to carry out all usual duties and activities.
+2. Slight disability, able to look after oneself but unable to carry out all previous activities.
+3. Moderate disability, requires some help but able to walk unassisted.
+4. Moderately severe disability, unable to walk unassisted and requires constant care.
+5. Severe disability, bedridden and requires constant nursing care.
+6. Death.
+
 The MRS is commonly used in clinical practice, research studies, and clinical trials as a measure of functional outcome after stroke or other neurological disorders. It provides a simple and standardized way to assess the patient's level of disability or dependence and can be used to track the patient's progress over time.
 
 The MRS is a useful tool for healthcare professionals in making treatment decisions and for patients and their families in understanding the severity of the disability and the potential for recovery. It also helps to standardize the assessment of disability across different clinical settings and research studies.
@@ -120,7 +153,7 @@ When dividing your dataset into a train and test set, how much of the result is 
 
 A stroke, also known as a cerebrovascular accident (CVA), is a medical condition that occurs when blood flow to a part of the brain is interrupted or reduced, leading to brain cell damage or death. The interruption or reduction in blood flow can be caused by a blockage or rupture of a blood vessel in the brain.
 
-There are two main types of stroke: ischemic stroke and hemorrhagic stroke. Ischemic stroke is the most common type and occurs when a blood clot blocks a blood vessel in the brain. Hemorrhagic stroke, on the other hand, occurs when a blood vessel in the brain ruptures or leaks.
+There are two main types of stroke: ischemic stroke and hemorrhagic stroke. Ischaemic stroke is the most common type and occurs when a blood clot blocks a blood vessel in the brain. Hemorrhagic stroke, on the other hand, occurs when a blood vessel in the brain ruptures or leaks.
 
 Symptoms of a stroke may include sudden weakness or numbness in the face, arm, or leg, especially on one side of the body; sudden confusion or trouble speaking or understanding speech; sudden vision problems in one or both eyes; sudden dizziness or loss of balance or coordination; and severe headache with no known cause.
 
