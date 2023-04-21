@@ -1,0 +1,1565 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Fit a single XGBoost model and calculate the SHAP values &#8212; What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'xgb_10_features/03a_xgb_all_data_shap_values_vs_feature_values';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model" href="03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html" />
+    <link rel="prev" title="Explaining XGBoost model predictions with SHAP values" href="03_xgb_combined_shap_key_features.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introductory content</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/glossary.html">Glossary of technical terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/data.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/odds_prob.html">Probability, odds, and SHAP values (log odds shifts)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/shap_worked_example.html">A simple worked example of Shap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="90_shap_interactions_on_titanic.html">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">Measuring accuracy of XGBoost models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_xgb_combined_shap_key_features.html">Explaining XGBoost model predictions with SHAP values</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fit a single XGBoost model and calculate the SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03c_xgb_all_data_shap_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP main effects from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03d_xgb_all_data_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values and SHAP main effects from a single XGBoost model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html">How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate.html">Calculate and use <em>subset</em> SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using a 10k cohort of patients to compare decision-making</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_xgb_10k_cohort_key_features.html">A comparison of 10k cohort thrombolysis rates across hospitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04a_xgb_10k_cohort_shap_values_interaction_values.html">A comparison of hospital SHAP values and SHAP main effect values for the 10k cohort.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04b_xgb_10k_cohort_thrombolysis_subgroups.html">A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04c_xgb_10k_cohort%E2%80%8B_vs_observed_thrombolysis_subgroups.html">A comparison of actual thrombolysis rates across hospitals: subgroup analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/xgb_10_features/03a_xgb_all_data_shap_values_vs_feature_values.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fit a single XGBoost model and calculate the SHAP values</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-filenames">Set filenames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-folders-if-needed">Create output folders if needed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-json-file">Read in JSON file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-list-of-feature-names">Get list of feature names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-data">Edit data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">Divide into X (features) and y (labels)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encode-hospital-feature">One-hot encode hospital feature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-model-feature-names">Get model feature names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-xgboost-model">Fit XGBoost model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-values">SHAP values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-values">Get SHAP values</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-average-shap-values-for-each-feature-across-all-the-patients">Calculate average SHAP values for each feature (across all the patients)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots-show-the-relationship-between-feature-value-and-shap-value-for-all-of-the-features">Violin plots show the relationship between feature value and SHAP value for all of the features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-shap-values-for-the-hospital-one-hot-encoded-features">Compare SHAP values for the hospital one-hot encoded features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-same-colour-scheme-as-violin-plot-for-paper">Use same colour scheme as violin plot (for paper)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-using-color-scheme-from-violin-plots">Plot histogram using color scheme from violin plots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="fit-a-single-xgboost-model-and-calculate-the-shap-values">
+<h1>Fit a single XGBoost model and calculate the SHAP values<a class="headerlink" href="#fit-a-single-xgboost-model-and-calculate-the-shap-values" title="Permalink to this heading">#</a></h1>
+<p><strong>Research question: What is the relationship between the SHAP value and feature value?</strong></p>
+<section id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this heading">#</a></h2>
+<p>When fitting a machine learning model to data to make a prediction, it is now possible, with the use of the SHAP library, to allocate contributions of the prediction onto the feature values. This means that we can now turn these black box methods into transparent models and describe what the model used to obtain it’s prediction.</p>
+<p>SHAP values are calculated for each feature of each instance for a fitted model. In addition there is the SHAP base value which is the same value for all of the instances. The base value represents the models best guess for any instance without any extra knowledge about the instance (this can also be thought of as the “expected value”). It is possible to obtain the models prediction of an instance by taking the sum of the SHAP base value and each of the SHAP values for the features. This allows the prediction from a model to be transparant, and we can rank the features by their importance in determining the prediction for each instance.</p>
+<p>In our previous notebook (03_xgb_combined_shap_key_features.ipynb) we looked at SHAP values for all the features (fitting models to k-fold data and comparing the differences of the SHAP values obtained across the 5 models). Here we will fit a single model to all of the data (no test set), calculate the SHAP values for this model and focus on understanding the relationship between the SHAP value and feature values for all of the features. We will also calculate the impact (in odds) that a change in feature value has on the likelihood of receiving thrombolysis.</p>
+<p>SHAP values are in the same units as the model output (for XGBoost these are in log odds).</p>
+</section>
+<section id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this heading">#</a></h2>
+<p>XGBoost model was trained on all of the data (no test set used). The 10 features in the model are:</p>
+<ul class="simple">
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
+</ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Did the patient receive thrombolysis (0 = No, 1 = Yes)</p></li>
+</ul>
+</section>
+<section id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Fit XGBoost model using feature data (no test set) to predict whether patient gets thrombolysis</p></li>
+<li><p>Calculate the SHAP values of the features</p></li>
+<li><p>Understand the relationship between SHAP values and feature values for each feature (using violin plots, histograms and descriptive text about the impact (in odds) that a change in feature value has on the likelihood of receiving thrombolysis)</p></li>
+</ul>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Stroke type: The SHAP values for stroke type show that the model effectively eliminated any probability of receiving thrombolysis for non-ischaemic (haemorrhagic) stroke.</p></li>
+<li><p>Arrival-to-scan time: The odds of receiving thrombolysis reduced by about 20 fold over the first 100 minutes of arrival to scan time.</p></li>
+<li><p>Stroke severity (NIHSS): The odds of receiving thrombolysis were lowest at NIHSS 0, increased and peaked at NIHSS 15-25, and then fell again with higher stroke severity (NIHSS above 25). The difference between minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving thrombolysis was 30-35 fold.</p></li>
+<li><p>Stroke onset time type (precise vs. estimated): The odds of receiving thrombolysis were about 3 fold greater for precise onset time than estimated onset time.</p></li>
+<li><p>Disability level (mRS) before stroke: The odds of receiving thrombolysis fell about 5 fold between mRS 0 and 5.</p></li>
+</ul>
+</section>
+<section id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Import machine learning methods</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">exists</span>
+
+<span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># .floor and .ceil</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># So can take deep copy</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up strings (describing the model) to use in filenames</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_of_features_to_use</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;03a&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-output-folders-if-needed">
+<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./output&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./predictions&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this heading">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/01_feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">dict_feature_name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h2>
+<p>Data has previously been split into 5 stratified k-fold splits.</p>
+<p>For this exercise, we will fit a model using all of the data (rather than train/test splits used to assess accuracy). We will join up all of the test data (by definition, each instance exists only once across all of the 5 test sets)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_loc</span> <span class="o">=</span> <span class="s1">&#39;../data/kfold_5fold/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise empty list</span>
+<span class="n">test_data_kfold</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Read in the names of the selected features for the model</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/01_feature_selection.csv&#39;</span><span class="p">)</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
+<span class="c1"># And add the target feature name: S2Thrombolysis</span>
+<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="c1"># For each k-fold split</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># Read in test set, restrict to chosen features, rename titles, &amp; store</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;test_</span><span class="si">{0}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dict_feature_name</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">test_data_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+
+<span class="c1"># Join all the test sets. Set &quot;ignore_index = True&quot; to reset the index in the</span>
+<span class="c1">#   new dataframe (to run from 0 to n-1), otherwise get duplicate index values</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">test_data_kfold</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-list-of-feature-names">
+<h2>Get list of feature names<a class="headerlink" href="#get-list-of-feature-names" title="Permalink to this heading">#</a></h2>
+<p>Before convert stroke team to one-hot encoded features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">test_data_kfold</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="edit-data">
+<h2>Edit data<a class="headerlink" href="#edit-data" title="Permalink to this heading">#</a></h2>
+<section id="divide-into-x-features-and-y-labels">
+<h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this heading">#</a></h3>
+<p>We will separate out our features (the data we use to make a prediction) from our label (what we are trying to predict).
+By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (thrombolysis or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Average thromboylsis (this is the expected outcome of each patient, without knowing anything about the patient)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Average treatment: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average treatment: 0.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="one-hot-encode-hospital-feature">
+<h3>One-hot encode hospital feature<a class="headerlink" href="#one-hot-encode-hospital-feature" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keep copy of original, with &#39;Stroke team&#39; not one-hot encoded</span>
+<span class="n">X_combined</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># One-hot encode &#39;Stroke team&#39;</span>
+<span class="n">X_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">X_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-model-feature-names">
+<h3>Get model feature names<a class="headerlink" href="#get-model-feature-names" title="Permalink to this heading">#</a></h3>
+<p>With one-hot encoded hospitals</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a list of the model feature names</span>
+<span class="n">feature_names_ohe</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fit-xgboost-model">
+<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this heading">#</a></h2>
+<p>An XGBoost model is trained on the full dataset (rather than train/test splits used to assess accuracy).</p>
+<p>Use learning rate 0.5 to regularise the model. Increasing the learning rate value, increases the regularisation. Using a learning rate of 0.5 gives maximum variation between the hosptials. The default learning rate of 0.1 results in few differences between the hospitals (with eight of the one-hot encoded hospital features were not being used in the model - they each had a 0 SHAP value for all of the instances).</p>
+<p>See https://samuel-book.github.io/samuel_shap_paper_1/xgb_with_feature_selection/91_learning_rate_optimisation.html?highlight=learning%20rate</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
+<span class="c1"># Check if exists</span>
+<span class="n">file_exists</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">file_exists</span><span class="p">:</span>
+    <span class="c1"># Load models</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+        
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Define and Fit model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+
+<span class="c1"># Get the predictions for each patient </span>
+<span class="c1">#   (the classification, and the probability of being in either class)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Calculate the models accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Model accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model accuracy: 0.878
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="shap-values">
+<h2>SHAP values<a class="headerlink" href="#shap-values" title="Permalink to this heading">#</a></h2>
+<p>SHAP values give the contribution that each feature has on the models prediction, per instance. A SHAP value is returned for each feature, for each instance.</p>
+<p>We will use the shap library: https://shap.readthedocs.io/en/latest/index.html</p>
+<p>‘Raw’ SHAP values from XGBoost model are log odds ratios.</p>
+<section id="get-shap-values">
+<h3>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this heading">#</a></h3>
+<p>TreeExplainer is a fast and exact method to estimate SHAP values for tree models and ensembles of trees. Once set up, we can use this explainer to calculate the SHAP values.</p>
+<p>Either load from pickle (if file exists), or calculate.</p>
+<p>Setup method to estimate SHAP values (in their default units: log odds)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># Set up method to estimate SHAP values for tree models and ensembles of trees</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_explainer.p&#39;</span>
+<span class="n">file_exists</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">file_exists</span><span class="p">:</span>
+    <span class="c1"># Load SHAP explainer</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">explainer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Set up method to estimate SHAP values for tree models &amp; ensembles of trees</span>
+    <span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">explainer</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 617 ms, sys: 1.5 s, total: 2.11 s
+Wall time: 275 ms
+</pre></div>
+</div>
+</div>
+</div>
+<p>Setup method to estimate SHAP values as a probability</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># Set up method to estimate SHAP values for tree models and ensembles of trees    </span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_explainer_probability.p&#39;</span><span class="p">)</span>
+<span class="n">file_exists</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">file_exists</span><span class="p">:</span>
+    <span class="c1"># Load SHAP interaction</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">explainer_probability</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">explainer_probability</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> 
+                                               <span class="n">model_output</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">explainer_probability</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 183 ms, sys: 23.7 ms, total: 206 ms
+Wall time: 207 ms
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate the SHAP values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># Get/calculate SHAP values</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_values_extended.p&#39;</span>
+<span class="n">file_exists</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">file_exists</span><span class="p">:</span>
+    <span class="c1"># Load explainer</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Get SHAP values</span>
+    <span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1min 38s, sys: 6.01 s, total: 1min 44s
+Wall time: 9.18 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>The explainer returns the base value which is the same value for all instances [shap_value.base_values], the shap values per feature [shap_value.values]. It also returns the feature dataset values [shap_values.data]. You can (sometimes!) access the feature names from the explainer [explainer.data_feature_names].</p>
+<p>Let’s take a look at the data held for the first instance:</p>
+<ul class="simple">
+<li><p>.values has the SHAP value for each of the four features.</p></li>
+<li><p>.base_values has the best guess value without knowing anything about the instance.</p></li>
+<li><p>.data has each of the feature values</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_values_extended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.values =
+array([ 7.56502628e-01,  4.88319576e-01,  1.10273695e+00,  4.40223962e-01,
+        4.98975307e-01,  2.02812225e-01, -2.62601525e-01,  3.69181409e-02,
+        2.30234995e-01,  3.20923195e-04, -6.03703642e-03, -7.17267860e-04,
+        0.00000000e+00, -4.91688668e-04,  1.20360847e-03,  1.77788886e-03,
+       -4.34198463e-03, -2.76021136e-04, -2.79896380e-03,  3.52182891e-03,
+       -2.73969141e-04,  8.53505917e-03, -5.28220041e-03, -8.25227005e-04,
+        6.20208494e-03,  6.92215608e-03, -6.32244349e-03, -3.35367222e-04,
+        7.81939551e-03, -4.71850217e-06, -4.25534381e-05,  6.48253039e-03,
+        8.43156071e-04, -6.28353562e-04, -1.25156669e-02, -7.92063680e-03,
+       -1.99409085e-03, -5.05548809e-03, -3.90118686e-03,  1.30317558e-03,
+        0.00000000e+00, -6.48246554e-04,  1.19629130e-03,  8.26304778e-04,
+        1.28053436e-02,  2.55714403e-03, -3.20375757e-03,  4.23251512e-03,
+       -7.19791185e-03,  4.02670400e-03,  3.75146419e-03,  8.31848301e-04,
+        3.45067866e-03,  3.92199913e-03,  1.05317042e-04,  9.53648426e-03,
+        2.34490633e-03, -1.05699897e-03, -7.75758363e-03,  1.09220366e-03,
+        0.00000000e+00,  5.15310653e-03, -1.28013985e-02,  7.28079583e-03,
+        1.98326469e-03,  2.40865033e-04,  6.70310017e-03,  1.18395500e-03,
+        8.82393331e-04,  2.83133984e-03,  2.06021918e-03, -8.22589453e-03,
+        5.11038816e-03, -3.25066457e-03, -1.15480982e-02,  9.36000666e-04,
+        2.03671609e-03, -2.02708528e-03, -5.31264208e-03,  2.42300611e-03,
+        3.16989725e-04,  3.67143471e-03, -5.07418578e-03, -2.68517504e-03,
+        3.30522249e-04, -6.63852552e-03, -1.63316587e-03,  1.75383547e-03,
+       -4.12231544e-03,  1.20234396e-03, -6.25999365e-03,  0.00000000e+00,
+       -1.00428164e-02, -1.76329317e-03,  3.12283775e-03,  4.69124934e-04,
+       -1.22163491e-03,  2.30912305e-03,  9.43152234e-04,  1.22348359e-03,
+        5.29656609e-05, -9.66969132e-03,  3.44762520e-06, -5.46710449e-04,
+        4.26546484e-03,  4.65912558e-03,  1.30611981e-04, -2.89813057e-03,
+       -2.98934802e-03, -1.47398096e-03, -2.31104009e-02, -3.47609469e-03,
+       -5.73671749e-03,  3.97895870e-04,  9.02379164e-04, -5.86819311e-04,
+       -1.79305486e-03, -5.28960605e-04, -2.10736915e-02,  3.50499223e-03,
+       -2.04754542e-04, -2.86527374e-03,  1.52953295e-03, -3.72403156e-06,
+        1.42271689e-03, -2.97368824e-04,  5.06201060e-04,  5.77868486e-04,
+       -1.44459037e-02,  3.30785802e-03, -2.37809308e-03, -7.35214865e-03,
+        3.36531224e-03,  1.49519066e-03, -2.46208580e-03,  7.20066251e-04,
+        6.83251710e-04, -1.92034326e-03,  2.39002449e-03, -8.96935933e-04,
+        4.85493708e-03], dtype=float32)
+
+.base_values =
+-1.1629876
+
+.data =
+array([ 17. ,   1. ,  14. ,   1. ,   0. ,   0. , 186. ,   0. ,  47.5,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   1. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,   0. ,
+         0. ,   0. ,   0. ,   0. ,   0. ,   0. ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is one of these for each instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_values_extended</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(88792, 141)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="calculate-average-shap-values-for-each-feature-across-all-the-patients">
+<h4>Calculate average SHAP values for each feature (across all the patients)<a class="headerlink" href="#calculate-average-shap-values-for-each-feature-across-all-the-patients" title="Permalink to this heading">#</a></h4>
+<p>Calculate the mean SHAP value for each feature (across all instances), in three ways:</p>
+<ul class="simple">
+<li><p>mean of raw values</p></li>
+<li><p>mean of absolute values</p></li>
+<li><p>absolute of mean of raw values</p></li>
+</ul>
+<p>(Will use mean |SHAP| to rank the features to determine the order of features for the violin plots)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get SHAP values</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Calculate mean SHAP value for each feature (across all instances)</span>
+<span class="n">df_shap_values_mean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">feature_names_ohe</span><span class="p">)</span>
+<span class="n">df_shap_values_mean</span><span class="p">[</span><span class="s1">&#39;mean_shap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_shap_values_mean</span><span class="p">[</span><span class="s1">&#39;abs_mean_shap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df_shap_values_mean</span><span class="p">[</span><span class="s1">&#39;mean_shap&#39;</span><span class="p">])</span>
+<span class="n">df_shap_values_mean</span><span class="p">[</span><span class="s1">&#39;mean_abs_shap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_shap_values_mean</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_shap_values_mean</span><span class="p">[</span><span class="s1">&#39;mean_abs_shap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span>
+    <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">df_shap_values_mean</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_shap_values_mean</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_shap</th>
+      <th>abs_mean_shap</th>
+      <th>mean_abs_shap</th>
+      <th>rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Infarction</th>
+      <td>-0.974695</td>
+      <td>0.974695</td>
+      <td>1.540489</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>Arrival-to-scan time</th>
+      <td>-0.385795</td>
+      <td>0.385795</td>
+      <td>0.991457</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>Stroke severity</th>
+      <td>-0.196834</td>
+      <td>0.196834</td>
+      <td>0.915676</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>Precise onset time</th>
+      <td>-0.061659</td>
+      <td>0.061659</td>
+      <td>0.538988</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>Prior disability level</th>
+      <td>-0.005883</td>
+      <td>0.005883</td>
+      <td>0.387559</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>Use of AF anticoagulants</th>
+      <td>-0.041382</td>
+      <td>0.041382</td>
+      <td>0.310106</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>Onset-to-arrival time</th>
+      <td>-0.066359</td>
+      <td>0.066359</td>
+      <td>0.291748</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>-0.014048</td>
+      <td>0.014048</td>
+      <td>0.167593</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>Onset during sleep</th>
+      <td>-0.024299</td>
+      <td>0.024299</td>
+      <td>0.102481</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>team_VKKDD9172T</th>
+      <td>-0.005500</td>
+      <td>0.005500</td>
+      <td>0.029842</td>
+      <td>10.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Take order of the first 9 features (assuming that all of the teams one-hot encoded features are ranked below the other features).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_shap_ranked</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_shap_values_mean</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="violin-plots-show-the-relationship-between-feature-value-and-shap-value-for-all-of-the-features">
+<h3>Violin plots show the relationship between feature value and SHAP value for all of the features<a class="headerlink" href="#violin-plots-show-the-relationship-between-feature-value-and-shap-value-for-all-of-the-features" title="Permalink to this heading">#</a></h3>
+<p>Output descriptive text to use in the paper to describe the differences a feature value had on the likelihood of receiving thromboylsis.</p>
+<p>Resource:
+https://towardsdatascience.com/binning-records-on-a-continuous-variable-with-pandas-cut-and-qcut-5d7c8e11d7b0
+https://matplotlib.org/3.1.0/gallery/statistics/customized_violin.html</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_ax</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">category_list</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ax [matplotlib axis object] = matplotlib axis object</span>
+<span class="sd">    category_list [list] = used for the xtick labels (the grouping of the data)</span>
+<span class="sd">    feat [string] = used in the axis label, the feature that is being plotted</span>
+<span class="sd">    rotation [integer] = xtick label rotation</span>
+
+<span class="sd">    reeturn [matplotlib axis object]</span>
+<span class="sd">    </span>
+<span class="sd">    resource: </span>
+<span class="sd">    https://matplotlib.org/3.1.0/gallery/statistics/customized_violin.html</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Set the axes ranges and axes labels</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">category_list</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SHAP values for </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Feature values for </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create violin plot and descriptive text</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feature Age needs special consideration. It needs the x ticks to be created,</span>
+<span class="c1"># as the other features with over 50 unique values, but age is already grouped </span>
+<span class="c1"># for the model (into 5yr groups) and so is treated as the other type.</span>
+
+<span class="c1"># Create figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># A subplot showing violin plot for each feature.</span>
+<span class="c1"># First prepare the fature data for the violin plot: if feature has more than </span>
+<span class="c1"># 50 unique values then assume it needs to be binned (a violin for each bin)</span>
+
+<span class="c1"># Determine number of rows of subplots by rounding up</span>
+<span class="n">nrows</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">features_shap_ranked</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Through each feature</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">features_shap_ranked</span><span class="p">):</span>    
+    
+    <span class="c1"># Get data adn SHAP values</span>
+    <span class="n">feature_data</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">feature_shap</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="c1"># If feature has more that 50 unique values, then assume it needs to be </span>
+    <span class="c1"># binned (otherwise assume they are unique categories)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">feature_data</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="c1"># bin the data, create a violin per bin</span>
+        
+        <span class="c1"># settings for the plot</span>
+        <span class="n">rotation</span> <span class="o">=</span> <span class="mi">45</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="mi">30</span>
+        <span class="n">n_bins</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">((</span><span class="n">feature_data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">/</span><span class="n">step</span><span class="p">))</span>
+        
+        <span class="c1"># create list of bin values</span>
+        <span class="n">bin_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)]</span>
+        <span class="n">bin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+        <span class="c1"># create list of bins (the unique categories)</span>
+        <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">category_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_bins</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="si">}</span><span class="s1">+&#39;</span><span class="p">)</span>
+
+        <span class="c1"># bin the feature data</span>
+        <span class="n">feature_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">feature_data</span><span class="p">,</span> <span class="n">bin_list</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">category_list</span><span class="p">,</span> 
+                              <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># create a violin per unique value</span>
+        
+        <span class="c1"># settings for the plot</span>
+        <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span>
+        
+        <span class="c1"># create list of unique categories in the feature data</span>
+        <span class="c1"># Age needs to keep its decimal value (midpoint between 5 yrs)</span>
+        <span class="n">category_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">feature_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">feat</span> <span class="o">!=</span> <span class="s1">&#39;Age&#39;</span><span class="p">:</span>
+            <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">category_list</span><span class="p">]</span>
+
+    <span class="c1"># create a list, each entry contains the corresponsing SHAP value for that </span>
+    <span class="c1"># category (or bin). A violin will represent each list.    </span>
+    <span class="n">shap_per_category</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">category_list</span><span class="p">:</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">feature_data</span> <span class="o">==</span> <span class="n">category</span>
+        <span class="n">shap_per_category</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_shap</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+
+    <span class="c1"># Output descriptive text to use in the paper to describe the differences a </span>
+    <span class="c1"># feature value had on the likelihood of receiving thromboylsis.</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Infarction&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stroke type: The SHAP values for stroke type show that the </span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;model effectively eliminated any probability of receiving </span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;thrombolysis for non-ischaemic (haemorrhagic) stroke. The </span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;odds of receiving thrombolysis fell about </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;fold.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>    
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Arrival-to-scan time&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Arrival-to-scan time: The odds of receiving thrombolysis reduced by </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;about </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (20) fold over the first 120 minutes of arrival to scan time.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>    
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Stroke severity&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stroke severity (NIHSS): The odds of receiving thrombolysis were lowest</span><span class="se">\n</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; at NIHSS 0, increased and peaked at NIHSS 15-25, and then fell again </span><span class="se">\n</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;with higher stroke severity (NIHSS above 25). The difference between </span><span class="se">\n</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving </span><span class="se">\n</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;thrombolysis was </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (30-35) fold.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Precise onset time&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stroke onset time type (precise vs. estimated): The odds of receiving </span><span class="se">\n</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;thrombolysis were about </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (3) fold greater for precise onset time than </span><span class="se">\n</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;estimated onset time.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Prior disability level&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Disability level (mRS) before stroke: The odds of receiving </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;thrombolysis fell about </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> (5) fold between mRS 0 and 5.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Use of AF anticoagulants&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Use of AF anticoagulants: The odds of receiving thrombolysis were about</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> fold greater for no use.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Onset-to-arrival time&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Onset-to-arrival time: The odds of receiving thrombolysis were similar </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;below 120 minutes, then fell about </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> fold between 120 and above.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Age&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">17</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Age: The odds of receiving thrombolysis were similar below 80 years </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;old, then fell about </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> fold between 80 and 120 years old.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s2">&quot;Onset during sleep&quot;</span><span class="p">:</span>
+        <span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Onset during sleep: The odds of receiving thrombolysis were about </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> fold lower for onset during sleep.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s1">&#39;Age&#39;</span><span class="p">:</span>
+        <span class="c1"># create text of x ticks</span>
+        <span class="n">category_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mf">2.5</span><span class="p">)</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">2.5</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">category_list</span><span class="p">]</span>
+
+        <span class="c1"># SSNAP dataset had oldest age category as 100-120 (not a 5 yr band as </span>
+        <span class="c1">#   the other ages). To accommodate this, if last age category is &quot;110&quot;</span>
+        <span class="c1">#   then overwrite the label with the correct band (100-120), and not</span>
+        <span class="c1">#   107-112 as the above code would create.</span>
+        <span class="k">if</span> <span class="n">category_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;107-112&#39;</span><span class="p">:</span>
+            <span class="n">category_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;100-120&#39;</span>
+            
+    <span class="c1"># create violin plot</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">,</span> <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    
+    <span class="c1"># Add line at Shap = 0</span>
+    <span class="n">feature_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_values</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">)</span>   
+
+    <span class="c1"># customise the axes</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">set_ax</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">category_list</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    
+    <span class="c1"># Adjust stroke severity tickmarks</span>
+    <span class="k">if</span> <span class="n">feat</span> <span class="o">==</span> <span class="s1">&#39;Stroke severity&#39;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">category_list</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>   
+    
+    <span class="c1"># Add title</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_thrombolysis_shap_violin_all_&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;features.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stroke type: The SHAP values for stroke type show that the 
+model effectively eliminated any probability of receiving 
+thrombolysis for non-ischaemic (haemorrhagic) stroke. The 
+odds of receiving thrombolysis fell about 6402.03 
+fold.
+
+Arrival-to-scan time: The odds of receiving thrombolysis reduced by 
+about 9.68 (20) fold over the first 120 minutes of arrival to scan time.
+
+Stroke severity (NIHSS): The odds of receiving thrombolysis were lowest
+ at NIHSS 0, increased and peaked at NIHSS 15-25, and then fell again 
+with higher stroke severity (NIHSS above 25). The difference between 
+minimum odds (at NIHSS 0) and maximum odds (at 15-25) of receiving 
+thrombolysis was 26.69 (30-35) fold.
+
+Stroke onset time type (precise vs. estimated): The odds of receiving 
+thrombolysis were about 3.24 (3) fold greater for precise onset time than 
+estimated onset time.
+
+Disability level (mRS) before stroke: The odds of receiving 
+thrombolysis fell about 6.48 (5) fold between mRS 0 and 5.
+
+Use of AF anticoagulants: The odds of receiving thrombolysis were about
+ 4.95 fold greater for no use.
+
+Onset-to-arrival time: The odds of receiving thrombolysis were similar 
+below 120 minutes, then fell about 3.64 fold between 120 and above.
+
+Age: The odds of receiving thrombolysis were similar below 80 years 
+old, then fell about 1.69 fold between 80 and 120 years old.
+
+Onset during sleep: The odds of receiving thrombolysis were about 
+4.17 fold lower for onset during sleep.
+</pre></div>
+</div>
+<img alt="../_images/89462333677b4551217b76db34b171c801e96c357f3edafa62a33b0aabd99760.png" src="../_images/89462333677b4551217b76db34b171c801e96c357f3edafa62a33b0aabd99760.png" />
+</div>
+</div>
+</section>
+<section id="compare-shap-values-for-the-hospital-one-hot-encoded-features">
+<h3>Compare SHAP values for the hospital one-hot encoded features<a class="headerlink" href="#compare-shap-values-for-the-hospital-one-hot-encoded-features" title="Permalink to this heading">#</a></h3>
+<p>The hospital feature is one-hot encoded, so there is a SHAP value per stroke team. We will use this to create a histogram of the frequency of the SHAP value for the hospital feature (take the mean of the SHAP values for the instances for each hospital’s own patients).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list for storing patient data and hospital SHAP</span>
+<span class="n">feature_data_with_shap</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Get mean SHAP for stroke team when patient attending that stroke team</span>
+<span class="n">unique_stroketeams_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]))</span>
+<span class="n">stroke_team_mean_shap</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Loop through stroke teams</span>
+<span class="k">for</span> <span class="n">stroke_team</span> <span class="ow">in</span> <span class="n">unique_stroketeams_list</span><span class="p">:</span>
+    <span class="c1"># Identify rows in test data that match each stroke team</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">stroke_team</span>
+    <span class="n">stroke_team_shap_all_features</span> <span class="o">=</span> <span class="n">shap_values</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="c1"># Get column index for stroke_team_in_shap</span>
+    <span class="n">feature_name</span> <span class="o">=</span> <span class="s1">&#39;team_&#39;</span> <span class="o">+</span> <span class="n">stroke_team</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">feature_names_ohe</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+    <span class="c1"># Get SHAP values for hospital</span>
+    <span class="n">stroke_team_shap</span> <span class="o">=</span> <span class="n">stroke_team_shap_all_features</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span>
+    <span class="c1"># Get mean</span>
+    <span class="n">mean_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stroke_team_shap</span><span class="p">)</span>
+    <span class="c1"># Store mean</span>
+    <span class="n">stroke_team_mean_shap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_shap</span><span class="p">)</span>
+    <span class="c1"># Get and store feature data and add SHAP</span>
+    <span class="n">feature_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">feature_data</span><span class="p">[</span><span class="s1">&#39;Hospital_SHAP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_team_shap</span>
+    <span class="n">feature_data_with_shap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_data</span><span class="p">)</span>
+
+<span class="c1"># Concatenate and save feature_data_with_shap</span>
+<span class="n">feature_data_with_shap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">feature_data_with_shap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">feature_data_with_shap</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+   <span class="sa">f</span><span class="s1">&#39;./predictions/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_feature_data_with_hospital_shap.csv&#39;</span><span class="p">,</span> 
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Create and save shap mean value per hospital</span>
+<span class="n">hospital_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">hospital_data</span><span class="p">[</span><span class="s2">&quot;stroke_team&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unique_stroketeams_list</span>
+<span class="n">hospital_data</span><span class="p">[</span><span class="s2">&quot;shap_mean&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stroke_team_mean_shap</span>
+<span class="n">hospital_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;./predictions/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_mean_shap_per_hospital.csv&#39;</span><span class="p">,</span> 
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospital_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stroke_team</th>
+      <th>shap_mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AGNOF1041H</td>
+      <td>-0.026516</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AKCGO9726K</td>
+      <td>0.520501</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AOBTM3098N</td>
+      <td>-0.401549</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>APXEE8191H</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ATDID5461S</td>
+      <td>0.182610</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>YPKYH1768F</td>
+      <td>-0.166696</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>YQMZV4284N</td>
+      <td>0.388534</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>ZBVSO0975W</td>
+      <td>-0.573069</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>ZHCLE1578P</td>
+      <td>0.139613</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>ZRRCV7012C</td>
+      <td>-0.484217</td>
+    </tr>
+  </tbody>
+</table>
+<p>132 rows × 2 columns</p>
+</div></div></div>
+</div>
+<section id="use-same-colour-scheme-as-violin-plot-for-paper">
+<h4>Use same colour scheme as violin plot (for paper)<a class="headerlink" href="#use-same-colour-scheme-as-violin-plot-for-paper" title="Permalink to this heading">#</a></h4>
+<p>Code used to get colour of violin plots
+Resource: https://stackoverflow.com/questions/26291479/changing-the-color-of-matplotlibs-violin-plots</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="n">vp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">,</span> <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">vp1</span> <span class="ow">in</span> <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">]:</span>
+    <span class="n">facecolor</span> <span class="o">=</span> <span class="n">vp1</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">()</span>
+    <span class="n">edgecolor</span> <span class="o">=</span> <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmeans&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_colors</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b9e655c408f45f349ba38b67fa4c0faa0413c09baf85484e16a36cd05a3d33cc.png" src="../_images/b9e655c408f45f349ba38b67fa4c0faa0413c09baf85484e16a36cd05a3d33cc.png" />
+</div>
+</div>
+</section>
+<section id="plot-histogram-using-color-scheme-from-violin-plots">
+<h4>Plot histogram using color scheme from violin plots<a class="headerlink" href="#plot-histogram-using-color-scheme-from-violin-plots" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>facecolor = [0.12156863, 0.46666667, 0.70588235, 0.3]</p></li>
+<li><p>edgecolor= [0.12156863, 0.46666667, 0.70588235, 1.]</p></li>
+</ul>
+<p>Plot histogram of the frequency of the mean SHAP value for the instances for each hospital’s own patients</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histogram</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">stroke_team_mean_shap</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> 
+        <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mf">0.12156863</span><span class="p">,</span> <span class="mf">0.46666667</span><span class="p">,</span> <span class="mf">0.70588235</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> 
+        <span class="n">ec</span><span class="o">=</span><span class="p">[</span><span class="mf">0.12156863</span><span class="p">,</span> <span class="mf">0.46666667</span><span class="p">,</span> <span class="mf">0.70588235</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> 
+        <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;SHAP values for one-hot encoded hospital features&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_hosp_shap_hist.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
+            <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b16b8bae99e06400ce263c6bc591cbc346181579169b8b963e2bfaf76581609d.png" src="../_images/b16b8bae99e06400ce263c6bc591cbc346181579169b8b963e2bfaf76581609d.png" />
+</div>
+</div>
+<p>Output descriptive text to use in the paper to describe the differences the hospitalfeature value had on the likelihood of receiving thromboylsis.
+Convert from log odds to odds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">range_shap_log_odds</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">stroke_team_mean_shap</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">stroke_team_mean_shap</span><span class="p">)</span>
+<span class="n">odds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">range_shap_log_odds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was a </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">odds</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> fold difference in odds of receiving thrombolysis between hospitals&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There was a 13.6 fold difference in odds of receiving thrombolysis between hospitals
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./xgb_10_features"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_xgb_combined_shap_key_features.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Explaining XGBoost model predictions with SHAP values</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-filenames">Set filenames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-folders-if-needed">Create output folders if needed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-json-file">Read in JSON file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-list-of-feature-names">Get list of feature names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-data">Edit data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">Divide into X (features) and y (labels)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encode-hospital-feature">One-hot encode hospital feature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-model-feature-names">Get model feature names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-xgboost-model">Fit XGBoost model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-values">SHAP values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-values">Get SHAP values</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-average-shap-values-for-each-feature-across-all-the-patients">Calculate average SHAP values for each feature (across all the patients)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots-show-the-relationship-between-feature-value-and-shap-value-for-all-of-the-features">Violin plots show the relationship between feature value and SHAP value for all of the features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-shap-values-for-the-hospital-one-hot-encoded-features">Compare SHAP values for the hospital one-hot encoded features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-same-colour-scheme-as-violin-plot-for-paper">Use same colour scheme as violin plot (for paper)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-using-color-scheme-from-violin-plots">Plot histogram using color scheme from violin plots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

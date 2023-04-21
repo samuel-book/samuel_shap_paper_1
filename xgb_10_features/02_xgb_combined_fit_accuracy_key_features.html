@@ -1,48 +1,59 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Measuring accuracy of XGBoost models &#8212; What would other emgerncy stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
-    
+    <title>Measuring accuracy of XGBoost models &#8212; What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,56 +61,87 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'xgb_10_features/02_xgb_combined_fit_accuracy_key_features';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="An anlysis of the characteristics of the most thrombolysable patient at each hopsital" href="02a_xgb_combined_fit_most_thrombolysable_patients.html" />
+    <link rel="next" title="Explaining XGBoost model predictions with SHAP values" href="03_xgb_combined_shap_key_features.html" />
     <link rel="prev" title="Check correlation between features selected for the model" href="07_correlation.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">What would other emgerncy stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -108,568 +150,230 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Introductory content
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introductory content</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/glossary.html">
-   Glossary of technical terms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/data.html">
-   Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/odds_prob.html">
-   Probability, odds, and SHAP values (log odds shifts)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/shap_worked_example.html">
-   A simple worked example of Shap
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="90_shap_interactions_on_titanic.html">
-   Examining interactions between features with SHAP interactions: Using Titanic survival as an example
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/glossary.html">Glossary of technical terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/data.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/odds_prob.html">Probability, odds, and SHAP values (log odds shifts)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/shap_worked_example.html">A simple worked example of Shap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="90_shap_interactions_on_titanic.html">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Predicting thrombolysis use and explaining the predictions with Shap
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
-   XGBoost feature selection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_correlation.html">
-   Check correlation between features selected for the model
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Measuring accuracy of XGBoost models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02a_xgb_combined_fit_most_thrombolysable_patients.html">
-   An anlysis of the characteristics of the most thrombolysable patient at each hopsital
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_xgb_combined_shap_key_features.html">
-   Explaining XGBoost model predictions with SHAP values
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Measuring accuracy of XGBoost models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_xgb_combined_shap_key_features.html">Explaining XGBoost model predictions with SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03a_xgb_all_data_shap_values_vs_feature_values.html">Fit a single XGBoost model and calculate the SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03c_xgb_all_data_shap_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP main effects from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03d_xgb_all_data_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values and SHAP main effects from a single XGBoost model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html">How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate.html">Calculate and use <em>subset</em> SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Comparing thrombolysis decisions between hospitals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using a 10k cohort of patients to compare decision-making</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
-   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_10k_thrombolysis_subgroups.html">
-   A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15a_observed_thrombolysis_subgroup_analysis.html">
-   A comparison of actual thrombolysis rates across hospitals: subgroup analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_compare_benchmark_decisions_key_features.html">
-   Compare local thrombolysis decisions with benchmark decisions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.html">
-   Comparing Shap values between high and low thrombolysing hospitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
-   Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">
-   Explaining XGBoost model predictions with SHAP values: Analysis of hopsital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12a_xgb_shap_interactions.html">
-   Describing model predictions, using SHAP values and SHAP interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12aa_xgb_shap_interactions_focus_on_onsettime.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12ab_xgb_shap_interactions_focus_on_severity.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12ac_xgb_shap_interactions_focus_on_disability.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with pre-stroke disability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values in artificial patients
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_synthetic_all_teams_waterfall.html">
-   Combined SHAP probability waterfall for all teams
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="50_bagging_variation.html">
-   Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
-   Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="04_xgb_10k_cohort_key_features.html">A comparison of 10k cohort thrombolysis rates across hospitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04a_xgb_10k_cohort_shap_values_interaction_values.html">A comparison of hospital SHAP values and SHAP main effect values for the 10k cohort.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04b_xgb_10k_cohort_thrombolysis_subgroups.html">A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04c_xgb_10k_cohort%E2%80%8B_vs_observed_thrombolysis_subgroups.html">A comparison of actual thrombolysis rates across hospitals: subgroup analysis</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/xgb_10_features/02_xgb_combined_fit_accuracy_key_features.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/xgb_10_features/02_xgb_combined_fit_accuracy_key_features.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plain-english-summary">
-   Plain English summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-and-data">
-   Model and data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims">
-   Aims
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
-   Observations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-libraries">
-   Import libraries
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#set-filenames">
-   Set filenames
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
-   Create output folders if needed
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#read-in-json-file">
-   Read in JSON file
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#functions">
-   Functions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-accuracy-measures">
-     Calculate accuracy measures
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-xgboost-model">
-   Fit XGBoost model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#results">
-   Results
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accuracy-measures">
-     Accuracy measures
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves">
-     Receiver Operator Characteristic and Sensitivity-Specificity Curves
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identify-cross-over-point-on-sensitivity-specificity-curve">
-     Identify cross-over point on sensitivity-specificity curve
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#collate-and-save-results">
-     Collate and save results
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">
-   Compare predicted and actual thrombolysis rates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#feature-importances">
-   Feature Importances
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
-   Calibration and assessment of accuracy when model has high confidence
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#check-for-predicted-thrombolysis-in-test-set">
-   Check for predicted thrombolysis in test set
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#learning-curve">
-   Learning curve
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Measuring accuracy of XGBoost models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plain-english-summary">
-   Plain English summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-and-data">
-   Model and data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims">
-   Aims
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
-   Observations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-libraries">
-   Import libraries
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#set-filenames">
-   Set filenames
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-output-folders-if-needed">
-   Create output folders if needed
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#read-in-json-file">
-   Read in JSON file
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#functions">
-   Functions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-accuracy-measures">
-     Calculate accuracy measures
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-xgboost-model">
-   Fit XGBoost model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#results">
-   Results
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accuracy-measures">
-     Accuracy measures
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves">
-     Receiver Operator Characteristic and Sensitivity-Specificity Curves
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identify-cross-over-point-on-sensitivity-specificity-curve">
-     Identify cross-over point on sensitivity-specificity curve
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#collate-and-save-results">
-     Collate and save results
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">
-   Compare predicted and actual thrombolysis rates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#feature-importances">
-   Feature Importances
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
-   Calibration and assessment of accuracy when model has high confidence
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#check-for-predicted-thrombolysis-in-test-set">
-   Check for predicted thrombolysis in test set
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#learning-curve">
-   Learning curve
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Measuring accuracy of XGBoost models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-filenames">Set filenames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-folders-if-needed">Create output folders if needed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-json-file">Read in JSON file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-accuracy-measures">Calculate accuracy measures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-xgboost-model">Fit XGBoost model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-measures">Accuracy measures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves">Receiver Operator Characteristic and Sensitivity-Specificity Curves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-cross-over-point-on-sensitivity-specificity-curve">Identify cross-over point on sensitivity-specificity curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collate-and-save-results">Collate and save results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">Compare predicted and actual thrombolysis rates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importances">Feature Importances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">Calibration and assessment of accuracy when model has high confidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-for-predicted-thrombolysis-in-test-set">Check for predicted thrombolysis in test set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-curve">Learning curve</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="measuring-accuracy-of-xgboost-models">
-<h1>Measuring accuracy of XGBoost models<a class="headerlink" href="#measuring-accuracy-of-xgboost-models" title="Permalink to this headline">#</a></h1>
-<p>(using stratified 5-fold cross validation, and a model with 8 features)</p>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="measuring-accuracy-of-xgboost-models">
+<h1>Measuring accuracy of XGBoost models<a class="headerlink" href="#measuring-accuracy-of-xgboost-models" title="Permalink to this heading">#</a></h1>
+<p>(using stratified 5-fold cross validation, and a model with 10 features)</p>
 <section id="plain-english-summary">
-<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
-<p>We have decided to simplify our model by using 10 independent features to predict which patients receive thrombolysis. This gives a good balance of performance (in terms of ROC AUC, achieving over 99%% of what can be obtained with all features) and model complexity.</p>
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this heading">#</a></h2>
+<p>We have decided to simplify our model by using 10 independent features to predict which patients receive thrombolysis. This gives a good balance of performance (in terms of ROC AUC, achieving over 99% of what can be obtained with all of the 84 features) and model complexity.</p>
 <p>There are many other ways in which to report model performance - in this notebook we will report on a range of these. The overall model accuracy is 84.7%, so between 8 and 9 out of 10 instances will have a correct prediction. The model is also well calibrated (for example, all of the patients that a model predicts 40% probability for, 40% of them did receive it).</p>
 </section>
 <section id="model-and-data">
-<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this heading">#</a></h2>
 <p>XGBoost models were trained on stratified k-fold cross-validation data. The 10 features in the model are:</p>
 <ul class="simple">
 <li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
@@ -690,29 +394,33 @@ title="Print to PDF"
 <p>The 10 features included in the model (to predict whether a patient will receive thrombolysis) were chosen sequentially as having the single best improvement in model performance (using the ROC AUC). The stroke team feature is included as a one-hot encoded feature.</p>
 </section>
 <section id="aims">
-<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Measure a range of accuracy scores (e.g. accuracy, sensitivity, specificity, F1, etc).</p></li>
 <li><p>Plot Receiver Operator Characteristic Curve and measure AUC.</p></li>
 <li><p>Identify cross-over point of sensitivity and specificity.</p></li>
-<li><p>Save individual patient predictions.</p></li>
 <li><p>Compare predicted and observed thrombolysis use at each hospital.</p></li>
+<li><p>Examine feature importances</p></li>
+<li><p>Check model calibration (reliability)</p></li>
 <li><p>Examine learning curves</p></li>
-<li><p>Check model calibration.</p></li>
+<li><p>Save individual patient predictions.</p></li>
 </ul>
 </section>
 <section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Overall accuracy = 84.8%</p></li>
-<li><p>Using nominal threshold (50% probability), specificity (89.4%) is greater than sensitivity (74.0%)</p></li>
-<li><p>The model can achieve 83.7% sensitivity and specificity simultaneously</p></li>
+<li><p>Overall accuracy = 85.0%</p></li>
+<li><p>Using nominal threshold (50% probability), specificity (89.4%) is greater than sensitivity (74.3%)</p></li>
+<li><p>The model can achieve 83.9% sensitivity and specificity simultaneously</p></li>
 <li><p>ROC AUC = 0.918</p></li>
+<li><p>The model explains 97.7% of the variation of the observed thrombolysis use at each hospital.</p></li>
+<li><p>The top 5 features are: 1) stroke type, 2) use of AF anticoagulants, 3) onset during sleep, 4) onset time type, 5) stroke severity.</p></li>
 <li><p>The model is well calibrated</p></li>
+<li><p>We have sufficient volume of data to train a model</p></li>
 </ul>
 </section>
 <section id="import-libraries">
-<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -739,11 +447,12 @@ title="Print to PDF"
 </div>
 </section>
 <section id="set-filenames">
-<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this headline">#</a></h2>
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set model type (used in file save, e.g. xgb_combined_calibrated_oversampled)</span>
-<span class="n">model_type</span> <span class="o">=</span> <span class="s1">&#39;xgb_10_features&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up strings (describing the model) to use in filenames</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_of_features_to_use</span><span class="si">}</span><span class="s1">_features&#39;</span>
 <span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;02&#39;</span>
 </pre></div>
 </div>
@@ -751,7 +460,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="create-output-folders-if-needed">
-<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this headline">#</a></h2>
+<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./output&#39;</span>
@@ -771,8 +480,8 @@ title="Print to PDF"
 </div>
 </section>
 <section id="read-in-json-file">
-<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this headline">#</a></h2>
-<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this heading">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 10 features selected in the model. Use these as the column titles in the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/01_feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
@@ -783,7 +492,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h2>
 <p>Data has previously been split into 5 stratified k-fold splits.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -798,7 +507,6 @@ title="Print to PDF"
 <span class="n">train_data_kfold</span><span class="p">,</span> <span class="n">test_data_kfold</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
 <span class="c1"># Read in the names of the selected features for the model</span>
-<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/01_feature_selection.csv&#39;</span><span class="p">)</span>
 <span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
 <span class="c1"># And add the target feature name: S2Thrombolysis</span>
@@ -820,14 +528,14 @@ title="Print to PDF"
 </div>
 </section>
 <section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h2>
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h2>
 <section id="calculate-accuracy-measures">
-<h3>Calculate accuracy measures<a class="headerlink" href="#calculate-accuracy-measures" title="Permalink to this headline">#</a></h3>
+<h3>Calculate accuracy measures<a class="headerlink" href="#calculate-accuracy-measures" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
-    
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates a range of accuracy scores from observed and predicted classes.</span>
 <span class="sd">    </span>
 <span class="sd">    Takes two list or NumPy arrays (observed class values, and predicted class </span>
@@ -935,7 +643,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="fit-xgboost-model">
-<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
+<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this heading">#</a></h2>
 <p>Fit XGBoost model for each k-fold training/test split, and get feature importance values (a value per feature, per model from each k-fold split).</p>
 <p>Save models.</p>
 <div class="cell docutils container">
@@ -952,6 +660,7 @@ title="Print to PDF"
 <span class="n">X_test_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">y_train_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">y_test_kfold</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">accuracy_kfold</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Loop through k folds</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -985,13 +694,13 @@ title="Print to PDF"
 
         <span class="c1"># Save using pickle</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/&#39;</span>
-                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Load models</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./saved_models/&#39;</span>
-                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.p&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
             <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
             <span class="n">model_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>        
@@ -1010,9 +719,9 @@ title="Print to PDF"
     <span class="n">feature_importance_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_importance</span><span class="p">)</span>
         
     <span class="c1"># Print accuracy</span>
-    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_class</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">accuracy_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_class</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">))</span>
     <span class="nb">print</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s1">&#39;Run </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">, accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="sa">f</span><span class="s1">&#39;Run </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">, accuracy: </span><span class="si">{</span><span class="n">accuracy_kfold</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1028,9 +737,9 @@ Run 4, accuracy: 0.848
 </div>
 </section>
 <section id="results">
-<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
 <section id="accuracy-measures">
-<h3>Accuracy measures<a class="headerlink" href="#accuracy-measures" title="Permalink to this headline">#</a></h3>
+<h3>Accuracy measures<a class="headerlink" href="#accuracy-measures" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up list for results</span>
@@ -1468,7 +1177,7 @@ Run 4, accuracy: 0.848
 </div>
 </section>
 <section id="receiver-operator-characteristic-and-sensitivity-specificity-curves">
-<h3>Receiver Operator Characteristic and Sensitivity-Specificity Curves<a class="headerlink" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves" title="Permalink to this headline">#</a></h3>
+<h3>Receiver Operator Characteristic and Sensitivity-Specificity Curves<a class="headerlink" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves" title="Permalink to this heading">#</a></h3>
 <p>Receiver Operator Characteristic Curve:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1568,25 +1277,27 @@ SD AUC: 0.0025
 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_roc_sens_spec.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_roc_sens_spec.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_28_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_28_0.png" />
+<img alt="../_images/373cf7f4282570d43da49cef0d635b211fd79444e53c5ee339ea32f2fda5cdc6.png" src="../_images/373cf7f4282570d43da49cef0d635b211fd79444e53c5ee339ea32f2fda5cdc6.png" />
 </div>
 </div>
 </section>
 <section id="identify-cross-over-point-on-sensitivity-specificity-curve">
-<h3>Identify cross-over point on sensitivity-specificity curve<a class="headerlink" href="#identify-cross-over-point-on-sensitivity-specificity-curve" title="Permalink to this headline">#</a></h3>
+<h3>Identify cross-over point on sensitivity-specificity curve<a class="headerlink" href="#identify-cross-over-point-on-sensitivity-specificity-curve" title="Permalink to this heading">#</a></h3>
 <p>Adjusting the classification threshold allows us to balance sensitivity (the proportion of patients receiving thrombolysis correctly identified) and specificity (the proportion of patients <em>not</em> receiving thrombolysis correctly identified). An increase in sensitivity causes a loss in specificity (and vice versa). Here we identify the pint where specificity and sensitivity hold the same value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_intersect</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Returns the point of intersection of the lines passing through a2,a1 and b2,b1.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Returns the point of intersection of the lines passing through a2,a1 and </span>
+<span class="sd">    b2,b1.</span>
+<span class="sd">    </span>
 <span class="sd">    a1: [x, y] a point on the first line</span>
 <span class="sd">    a2: [x, y] another point on the first line</span>
 <span class="sd">    b1: [x, y] a point on the second line</span>
@@ -1645,7 +1356,7 @@ SD intersection: 0.0027
 </div>
 </section>
 <section id="collate-and-save-results">
-<h3>Collate and save results<a class="headerlink" href="#collate-and-save-results" title="Permalink to this headline">#</a></h3>
+<h3>Collate and save results<a class="headerlink" href="#collate-and-save-results" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospital_results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1671,14 +1382,15 @@ SD intersection: 0.0027
                 <span class="n">model_predictions</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_predictions</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">])</span>
 
 <span class="c1"># Save</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./predictions/02_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_predictions.csv&#39;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./predictions/02_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_predictions.csv&#39;</span>
 <span class="n">model_predictions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Save combined test set</span>
 <span class="n">combined_test_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">test_data_kfold</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">combined_test_set</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span> <span class="k">del</span> <span class="n">combined_test_set</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span>
 <span class="n">combined_test_set</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./predictions/&#39;</span>
-                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_combined_test_features.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_combined_test_features.csv&#39;</span><span class="p">,</span> 
+                         <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1686,7 +1398,7 @@ SD intersection: 0.0027
 </section>
 </section>
 <section id="compare-predicted-and-actual-thrombolysis-rates">
-<h2>Compare predicted and actual thrombolysis rates<a class="headerlink" href="#compare-predicted-and-actual-thrombolysis-rates" title="Permalink to this headline">#</a></h2>
+<h2>Compare predicted and actual thrombolysis rates<a class="headerlink" href="#compare-predicted-and-actual-thrombolysis-rates" title="Permalink to this heading">#</a></h2>
 <p>We compare the actual and predicted thrombolysis rates, taken from collating the five test sets (in k-fold validation all instances are in one, and only one, test set).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1730,19 +1442,19 @@ SD intersection: 0.0027
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Observed thrombolysis use (%)&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted thrombolysis use (%)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_observed_predicted_rates.jpg&#39;</span><span class="p">,</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_observed_predicted_rates.jpg&#39;</span><span class="p">,</span> 
             <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_38_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_38_0.png" />
+<img alt="../_images/a737a911022a2fd59fb9edb96ac4987d813d40f36a69449d32bf89dd561f4d68.png" src="../_images/a737a911022a2fd59fb9edb96ac4987d813d40f36a69449d32bf89dd561f4d68.png" />
 </div>
 </div>
 </section>
 <section id="feature-importances">
-<h2>Feature Importances<a class="headerlink" href="#feature-importances" title="Permalink to this headline">#</a></h2>
+<h2>Feature Importances<a class="headerlink" href="#feature-importances" title="Permalink to this heading">#</a></h2>
 <p>Get XGBoost feature importances (average across k-fold results)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1762,7 +1474,7 @@ SD intersection: 0.0027
 
 <span class="c1"># Save</span>
 <span class="n">feature_importance_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/&#39;</span>
-                             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_feature_importance.csv&#39;</span><span class="p">)</span>
+                             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_feature_importance.csv&#39;</span><span class="p">)</span>
 
 <span class="c1"># Display top 25</span>
 <span class="n">feature_importance_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
@@ -1919,18 +1631,18 @@ SD intersection: 0.0027
          <span class="n">rotation_mode</span><span class="o">=</span><span class="s2">&quot;anchor&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_feature_weights_bar.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_feature_weights_bar.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_42_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_42_0.png" />
+<img alt="../_images/824cdd84b61fe263d8790ba89ce797389a7c790ba018c65eb0cd6282f1a0dd71.png" src="../_images/824cdd84b61fe263d8790ba89ce797389a7c790ba018c65eb0cd6282f1a0dd71.png" />
 </div>
 </div>
 </section>
 <section id="calibration-and-assessment-of-accuracy-when-model-has-high-confidence">
-<h2>Calibration and assessment of accuracy when model has high confidence<a class="headerlink" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence" title="Permalink to this headline">#</a></h2>
+<h2>Calibration and assessment of accuracy when model has high confidence<a class="headerlink" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collate results in Dataframe</span>
@@ -2165,13 +1877,13 @@ SD intersection: 0.0027
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_reliability.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_reliability.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_47_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_47_0.png" />
+<img alt="../_images/92f68ec91476e3a4676fca96ba3a1932fe70b9582ed322f3d9f21ca21751397c.png" src="../_images/92f68ec91476e3a4676fca96ba3a1932fe70b9582ed322f3d9f21ca21751397c.png" />
 </div>
 </div>
 <p>Get accuracy of model when model is at least 80% confident</p>
@@ -2197,7 +1909,7 @@ Accuracy: 0.881
 </div>
 </section>
 <section id="check-for-predicted-thrombolysis-in-test-set">
-<h2>Check for predicted thrombolysis in test set<a class="headerlink" href="#check-for-predicted-thrombolysis-in-test-set" title="Permalink to this headline">#</a></h2>
+<h2>Check for predicted thrombolysis in test set<a class="headerlink" href="#check-for-predicted-thrombolysis-in-test-set" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">combined_test_set</span><span class="p">[</span><span class="s1">&#39;Infarction&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
@@ -2222,7 +1934,7 @@ Accuracy: 0.881
 </div>
 </section>
 <section id="learning-curve">
-<h2>Learning curve<a class="headerlink" href="#learning-curve" title="Permalink to this headline">#</a></h2>
+<h2>Learning curve<a class="headerlink" href="#learning-curve" title="Permalink to this heading">#</a></h2>
 <p>Examine the relationship between training data size and accuracy.</p>
 <p>Plot learning curve</p>
 <div class="cell docutils container">
@@ -2307,13 +2019,13 @@ Accuracy: 0.881
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">_learning_curve.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_learning_curve.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_xgb_combined_fit_accuracy_key_features_56_0.png" src="../_images/02_xgb_combined_fit_accuracy_key_features_56_0.png" />
+<img alt="../_images/c1ab135d36bd5c1e24e35dbb337c2da935c13f89a40043131cd718cc5f1c3da3.png" src="../_images/c1ab135d36bd5c1e24e35dbb337c2da935c13f89a40043131cd718cc5f1c3da3.png" />
 </div>
 </div>
 </section>
@@ -2331,7 +2043,7 @@ Accuracy: 0.881
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./xgb_10_features"
         },
         predefinedOutput: true
@@ -2339,50 +2051,130 @@ Accuracy: 0.881
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="07_correlation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Check correlation between features selected for the model</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="02a_xgb_combined_fit_most_thrombolysable_patients.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">An anlysis of the characteristics of the most thrombolysable patient at each hopsital</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_correlation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Check correlation between features selected for the model</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="03_xgb_combined_shap_key_features.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explaining XGBoost model predictions with SHAP values</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-filenames">Set filenames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-folders-if-needed">Create output folders if needed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-json-file">Read in JSON file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-accuracy-measures">Calculate accuracy measures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-xgboost-model">Fit XGBoost model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-measures">Accuracy measures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operator-characteristic-and-sensitivity-specificity-curves">Receiver Operator Characteristic and Sensitivity-Specificity Curves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-cross-over-point-on-sensitivity-specificity-curve">Identify cross-over point on sensitivity-specificity curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collate-and-save-results">Collate and save results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-predicted-and-actual-thrombolysis-rates">Compare predicted and actual thrombolysis rates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importances">Feature Importances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-and-assessment-of-accuracy-when-model-has-high-confidence">Calibration and assessment of accuracy when model has high confidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-for-predicted-thrombolysis-in-test-set">Check for predicted thrombolysis in test set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-curve">Learning curve</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,48 +1,59 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Examining interactions between features with SHAP interactions: Using Titanic survival as an example &#8212; What would other emgerncy stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
-    
+    <title>Examining interactions between features with SHAP interactions: Using Titanic survival as an example &#8212; What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,56 +61,87 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'xgb_10_features/90_shap_interactions_on_titanic';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="XGBoost feature selection" href="01_xgb_combined_fit_feature_selection.html" />
+    <link rel="next" title="Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates" href="91_learning_rate_optimisation.html" />
     <link rel="prev" title="A simple worked example of Shap" href="../introduction/shap_worked_example.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">What would other emgerncy stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -108,687 +150,244 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Introductory content
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introductory content</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/glossary.html">
-   Glossary of technical terms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/data.html">
-   Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/odds_prob.html">
-   Probability, odds, and SHAP values (log odds shifts)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction/shap_worked_example.html">
-   A simple worked example of Shap
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Examining interactions between features with SHAP interactions: Using Titanic survival as an example
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/glossary.html">Glossary of technical terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/data.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/odds_prob.html">Probability, odds, and SHAP values (log odds shifts)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/shap_worked_example.html">A simple worked example of Shap</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Predicting thrombolysis use and explaining the predictions with Shap
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">
-   XGBoost feature selection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_correlation.html">
-   Check correlation between features selected for the model
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">
-   Measuring accuracy of XGBoost models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02a_xgb_combined_fit_most_thrombolysable_patients.html">
-   An anlysis of the characteristics of the most thrombolysable patient at each hopsital
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_xgb_combined_shap_key_features.html">
-   Explaining XGBoost model predictions with SHAP values
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">Measuring accuracy of XGBoost models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_xgb_combined_shap_key_features.html">Explaining XGBoost model predictions with SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03a_xgb_all_data_shap_values_vs_feature_values.html">Fit a single XGBoost model and calculate the SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03c_xgb_all_data_shap_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP main effects from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03d_xgb_all_data_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values and SHAP main effects from a single XGBoost model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html">How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate.html">Calculate and use <em>subset</em> SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Comparing thrombolysis decisions between hospitals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using a 10k cohort of patients to compare decision-making</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="04_compare_10k_cohort_key_features.html">
-   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_10k_thrombolysis_subgroups.html">
-   A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15a_observed_thrombolysis_subgroup_analysis.html">
-   A comparison of actual thrombolysis rates across hospitals: subgroup analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_compare_benchmark_decisions_key_features.html">
-   Compare local thrombolysis decisions with benchmark decisions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.html">
-   Comparing Shap values between high and low thrombolysing hospitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
-   Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">
-   Explaining XGBoost model predictions with SHAP values: Analysis of hopsital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12a_xgb_shap_interactions.html">
-   Describing model predictions, using SHAP values and SHAP interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12aa_xgb_shap_interactions_focus_on_onsettime.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12ab_xgb_shap_interactions_focus_on_severity.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12ac_xgb_shap_interactions_focus_on_disability.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with pre-stroke disability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values in artificial patients
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_synthetic_all_teams_waterfall.html">
-   Combined SHAP probability waterfall for all teams
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="50_bagging_variation.html">
-   Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="91_learning_rate_optimisation.html">
-   Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="04_xgb_10k_cohort_key_features.html">A comparison of 10k cohort thrombolysis rates across hospitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04a_xgb_10k_cohort_shap_values_interaction_values.html">A comparison of hospital SHAP values and SHAP main effect values for the 10k cohort.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04b_xgb_10k_cohort_thrombolysis_subgroups.html">A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04c_xgb_10k_cohort%E2%80%8B_vs_observed_thrombolysis_subgroups.html">A comparison of actual thrombolysis rates across hospitals: subgroup analysis</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/xgb_10_features/90_shap_interactions_on_titanic.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/xgb_10_features/90_shap_interactions_on_titanic.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Examining interactions between features with SHAP interactions: Using Titanic survival as an example
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plain-english-summary">
-     Plain English summary
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examples-of-interactions-that-we-will-see">
-     Examples of interactions that we will see
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-and-data">
-     Model and data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aims">
-     Aims
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-modules">
-     Import modules
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     Load data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-     Divide into X (features) and y (labels)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-xgboost-model">
-     Fit XGBoost model
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-values">
-     Get SHAP values
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#view-shap-values-using-beeswarm-plot">
-       View SHAP values using beeswarm plot
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-interaction-values">
-     Get SHAP interaction values
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interaction-matrix-show-mean-absolute-values">
-       SHAP interaction matrix: show mean absolute values
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
-       The proportion of SHAP that is from the interactions: calculated from the absolute mean
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values">
-       The proportion of SHAP that is from the interactions: calculated per instance from the absolute values
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interaction-matrix-represented-as-histograms">
-       SHAP interaction matrix: represented as histograms
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-a-worked-example-for-the-first-instance">
-     Show a worked example for the first instance
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction">
-     Sum of the SHAP value components (base + main effects + interactions) = model prediction
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#histogram-of-total-shap">
-   Histogram of total SHAP
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots">
-     How the SHAP main effect (or interaction) varies across the instances: using violin plots
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">
-       SHAP main effect of the
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         male
-        </span>
-       </code>
-       feature (also called
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         male:male
-        </span>
-       </code>
-       in SHAP interactions)
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interaction-of-male-pclass">
-       SHAP interaction of male-Pclass
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots">
-     How the SHAP main effect (or interaction) varies across the instances: using dependence plots
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-main-effect-of-male-male">
-       SHAP main effect of male-male
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       SHAP interaction of male-Pclass
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#grid-of-shap-dependence-plots">
-     Grid of SHAP dependence plots
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-shap-plotting-options">
-     Other SHAP plotting options
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interactions-summary-plot-a-grid-of-beeswarms">
-       SHAP interactions summary plot (a grid of beeswarms)
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Observations
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Examining interactions between features with SHAP interactions: Using Titanic survival as an example</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Examining interactions between features with SHAP interactions: Using Titanic survival as an example
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plain-english-summary">
-     Plain English summary
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examples-of-interactions-that-we-will-see">
-     Examples of interactions that we will see
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-and-data">
-     Model and data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aims">
-     Aims
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observations">
-     Observations
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-modules">
-     Import modules
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     Load data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-     Divide into X (features) and y (labels)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-xgboost-model">
-     Fit XGBoost model
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-values">
-     Get SHAP values
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#view-shap-values-using-beeswarm-plot">
-       View SHAP values using beeswarm plot
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-shap-interaction-values">
-     Get SHAP interaction values
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interaction-matrix-show-mean-absolute-values">
-       SHAP interaction matrix: show mean absolute values
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
-       The proportion of SHAP that is from the interactions: calculated from the absolute mean
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values">
-       The proportion of SHAP that is from the interactions: calculated per instance from the absolute values
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interaction-matrix-represented-as-histograms">
-       SHAP interaction matrix: represented as histograms
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-a-worked-example-for-the-first-instance">
-     Show a worked example for the first instance
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction">
-     Sum of the SHAP value components (base + main effects + interactions) = model prediction
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#histogram-of-total-shap">
-   Histogram of total SHAP
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots">
-     How the SHAP main effect (or interaction) varies across the instances: using violin plots
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">
-       SHAP main effect of the
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         male
-        </span>
-       </code>
-       feature (also called
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         male:male
-        </span>
-       </code>
-       in SHAP interactions)
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interaction-of-male-pclass">
-       SHAP interaction of male-Pclass
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots">
-     How the SHAP main effect (or interaction) varies across the instances: using dependence plots
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-main-effect-of-male-male">
-       SHAP main effect of male-male
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       SHAP interaction of male-Pclass
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#grid-of-shap-dependence-plots">
-     Grid of SHAP dependence plots
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-shap-plotting-options">
-     Other SHAP plotting options
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#shap-interactions-summary-plot-a-grid-of-beeswarms">
-       SHAP interactions summary plot (a grid of beeswarms)
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Observations
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Examining interactions between features with SHAP interactions: Using Titanic survival as an example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-interactions-that-we-will-see">Examples of interactions that we will see</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">Divide into X (features) and y (labels)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-xgboost-model">Fit XGBoost model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-values">Get SHAP values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#view-shap-values-using-beeswarm-plot">View SHAP values using beeswarm plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-interaction-values">Get SHAP interaction values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interaction-matrix-show-mean-absolute-values">SHAP interaction matrix: show mean absolute values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">The proportion of SHAP that is from the interactions: calculated from the absolute mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values">The proportion of SHAP that is from the interactions: calculated per instance from the absolute values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interaction-matrix-represented-as-histograms">SHAP interaction matrix: represented as histograms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-a-worked-example-for-the-first-instance">Show a worked example for the first instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction">Sum of the SHAP value components (base + main effects + interactions) = model prediction</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-of-total-shap">Histogram of total SHAP</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots">How the SHAP main effect (or interaction) varies across the instances: using violin plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">SHAP main effect of the <code class="docutils literal notranslate"><span class="pre">male</span></code> feature (also called <code class="docutils literal notranslate"><span class="pre">male:male</span></code> in SHAP interactions)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interaction-of-male-pclass">SHAP interaction of male-Pclass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots">How the SHAP main effect (or interaction) varies across the instances: using dependence plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-main-effect-of-male-male">SHAP main effect of male-male</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">SHAP interaction of male-Pclass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-of-shap-dependence-plots">Grid of SHAP dependence plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-shap-plotting-options">Other SHAP plotting options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interactions-summary-plot-a-grid-of-beeswarms">SHAP interactions summary plot (a grid of beeswarms)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Observations</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="examining-interactions-between-features-with-shap-interactions-using-titanic-survival-as-an-example">
-<h1>Examining interactions between features with SHAP interactions: Using Titanic survival as an example<a class="headerlink" href="#examining-interactions-between-features-with-shap-interactions-using-titanic-survival-as-an-example" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="examining-interactions-between-features-with-shap-interactions-using-titanic-survival-as-an-example">
+<h1>Examining interactions between features with SHAP interactions: Using Titanic survival as an example<a class="headerlink" href="#examining-interactions-between-features-with-shap-interactions-using-titanic-survival-as-an-example" title="Permalink to this heading">#</a></h1>
 <p>WARNING!! SHAP interactions are powerful, but can be complicated. Make sure you have a good understanding of general SHAP values first. Shap interactions are not for beginners!</p>
 <section id="plain-english-summary">
-<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this headline">#</a></h2>
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this heading">#</a></h2>
 <p>When fitting a machine learning model to data to make a prediction, it is now possible, with the use of the SHAP library, to identify contributions to the prediction by each feature in an example. This means that we can now turn these black box methods into transparent models and describe what the model used to obtain its prediction.</p>
 <p>SHAP values are calculated for each feature of each instance for a fitted model. In addition there is the SHAP base value which is the same value for all of the instances. The base value represents the model’s prediction for any instance without any extra knowledge about the instance (this can also be thought of as the “expected value” before any feature data is known). It is possible to obtain the models prediction of an instance by taking the sum of the SHAP base value and each of the SHAP values for the features. This allows the prediction from a model to be transparent, and we can rank the features by their importance in determining the prediction for each instance.</p>
 <p>The overall SHAP value depends on both the main effect of a feature’s value, and any interactions with other features. This means that two different examples may have different SHAP values for a feature even if they both have the same feature value.</p>
@@ -798,7 +397,7 @@ title="Print to PDF"
 <p>This notebook is based on the blog https://towardsdatascience.com/analysing-interactions-with-shap-8c4a2bc11c2a</p>
 </section>
 <section id="examples-of-interactions-that-we-will-see">
-<h2>Examples of interactions that we will see<a class="headerlink" href="#examples-of-interactions-that-we-will-see" title="Permalink to this headline">#</a></h2>
+<h2>Examples of interactions that we will see<a class="headerlink" href="#examples-of-interactions-that-we-will-see" title="Permalink to this heading">#</a></h2>
 <p>As an example to show what SHAP interactions can reveal:</p>
 <ul class="simple">
 <li><p>Being male reduces your chances of survival</p></li>
@@ -813,7 +412,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="model-and-data">
-<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this headline">#</a></h2>
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this heading">#</a></h2>
 <p>XGBoost models were trained on all of the data (not split into training and test set). The four features in the model are:</p>
 <ul class="simple">
 <li><p>male: gender of the passenger (0 = female, 1 = male)</p></li>
@@ -827,7 +426,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="aims">
-<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this headline">#</a></h2>
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Fit XGBoost model using feature data to predict whether passenger survived</p></li>
 <li><p>Calculate the SHAP main effect and SHAP interaction values</p></li>
@@ -836,14 +435,14 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>SHAP interactions are awesome! But they may take some time to digest.</p></li>
 <li><p>Viewing them as a grid of SHAP dependency plots clearly shows the overall relationships that the model uses to derive it’s predictions for the whole dataset.</p></li>
 </ul>
 </section>
 <section id="import-modules">
-<h2>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">#</a></h2>
+<h2>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -873,7 +472,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h2>
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
 <p>Code that was used to pre-process the data ready for machine learning may be found at:
@@ -917,7 +516,7 @@ https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/0
 </div>
 </section>
 <section id="divide-into-x-features-and-y-labels">
-<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">#</a></h2>
+<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this heading">#</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are trying to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survived or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell docutils container">
@@ -944,7 +543,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </section>
 <section id="fit-xgboost-model">
-<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this headline">#</a></h2>
+<h2>Fit XGBoost model<a class="headerlink" href="#fit-xgboost-model" title="Permalink to this heading">#</a></h2>
 <p>Here will fit a model to all of the data (rather than train/test splits used to assess accuracy).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1000,7 +599,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </section>
 <section id="get-shap-values">
-<h2>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this headline">#</a></h2>
+<h2>Get SHAP values<a class="headerlink" href="#get-shap-values" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">TreeExplainer</span></code> is a fast and exact method to estimate SHAP values for tree models and ensembles of trees.
 Using this we can calculate the SHAP values.</p>
 <div class="cell docutils container">
@@ -1055,7 +654,7 @@ array([ 1.,  3., 22.,  1.])
 </div>
 </div>
 <section id="view-shap-values-using-beeswarm-plot">
-<h3>View SHAP values using beeswarm plot<a class="headerlink" href="#view-shap-values-using-beeswarm-plot" title="Permalink to this headline">#</a></h3>
+<h3>View SHAP values using beeswarm plot<a class="headerlink" href="#view-shap-values-using-beeswarm-plot" title="Permalink to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">beeswarm</span></code> plot gives a good visual representation of the general SHAP value pattern for the whole dataset.</p>
 <p>Each feature is shown on a separate row. It shows the distribution of the SHAP values for each feature. The colour represents the feature data value, and the shape of the data points represent the distribution of the feature’s SHAP values (with a bulge representing a larger number of points, and a thin row representing fewer points). A SHAP value less than 0 (as seen on the x-axis) reduces the likelihood that the passenger will survive, whereas a SHAP value greater than 0 increases the likelihood that the passenger will survive.</p>
 <p>The actual prediction of whether a passenger will survive is the sum of each of the SHAP feature values and the SHAP base value.</p>
@@ -1068,13 +667,13 @@ array([ 1.,  3., 22.,  1.])
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_23_0.png" src="../_images/90_shap_interactions_on_titanic_23_0.png" />
+<img alt="../_images/4e1cc0bbbf97d745c49401f4002d33276329b41d6d08a3bdd89a50cd6370d238.png" src="../_images/4e1cc0bbbf97d745c49401f4002d33276329b41d6d08a3bdd89a50cd6370d238.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="get-shap-interaction-values">
-<h2>Get SHAP interaction values<a class="headerlink" href="#get-shap-interaction-values" title="Permalink to this headline">#</a></h2>
+<h2>Get SHAP interaction values<a class="headerlink" href="#get-shap-interaction-values" title="Permalink to this heading">#</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">TreeExplainer</span></code> to also calculate the SHAP main effect and SHAP interaction values (the sum of which give the SHAP values for each feature).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1117,7 +716,7 @@ array([ 1.,  3., 22.,  1.])
 </div>
 </div>
 <section id="shap-interaction-matrix-show-mean-absolute-values">
-<h3>SHAP interaction matrix: show mean absolute values<a class="headerlink" href="#shap-interaction-matrix-show-mean-absolute-values" title="Permalink to this headline">#</a></h3>
+<h3>SHAP interaction matrix: show mean absolute values<a class="headerlink" href="#shap-interaction-matrix-show-mean-absolute-values" title="Permalink to this heading">#</a></h3>
 <p>Here we see the absolute mean of the SHAP interaction values for all of the instances.</p>
 <p>The values on the diagonal show the main effect for the feature, and the other values show the SHAP interaction for pairs of features (note again that these are symetrical across the diagonal, with <code class="docutils literal notranslate"><span class="pre">male:Age</span></code> having the same value as <code class="docutils literal notranslate"><span class="pre">Age:male</span></code>, and the total SHAP interaction between age and being male being the sum of these two symmetrical pairs).</p>
 <div class="cell docutils container">
@@ -1190,7 +789,7 @@ array([ 1.,  3., 22.,  1.])
 </div>
 </section>
 <section id="the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">
-<h3>The proportion of SHAP that is from the interactions: calculated from the absolute mean<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean" title="Permalink to this headline">#</a></h3>
+<h3>The proportion of SHAP that is from the interactions: calculated from the absolute mean<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean" title="Permalink to this heading">#</a></h3>
 <p>Looking at all of the instances together, what proportion of the SHAP value comes from the SHAP interations?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1202,7 +801,7 @@ array([ 1.,  3., 22.,  1.])
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The proportion of the SHAP values coming from the interactions are: &#39;</span>
       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">interaction_shap</span><span class="o">/</span><span class="n">total_shap</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The proportion of the SHAP values coming from the main effects are: &#39;</span>
-      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">interaction_shap</span><span class="o">/</span><span class="n">total_shap</span><span class="p">)</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">interaction_shap</span><span class="o">/</span><span class="n">total_shap</span><span class="p">)</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1215,7 +814,7 @@ The proportion of the SHAP values coming from the main effects are: 0.600
 </div>
 </section>
 <section id="the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values">
-<h3>The proportion of SHAP that is from the interactions: calculated per instance from the absolute values<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values" title="Permalink to this headline">#</a></h3>
+<h3>The proportion of SHAP that is from the interactions: calculated per instance from the absolute values<a class="headerlink" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values" title="Permalink to this heading">#</a></h3>
 <p>Looking at each instances, what proportion of the SHAP value comes from the SHAP interations. Show the range of proportions (one per instance) as a histogram?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1246,12 +845,12 @@ The proportion of the SHAP values coming from the main effects are: 0.600
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Number of instances&#39;)
 </pre></div>
 </div>
-<img alt="../_images/90_shap_interactions_on_titanic_35_1.png" src="../_images/90_shap_interactions_on_titanic_35_1.png" />
+<img alt="../_images/1219e059c56f525fe0c748168c8b8a941d504dd89a32bd855b604c09fea3a2ed.png" src="../_images/1219e059c56f525fe0c748168c8b8a941d504dd89a32bd855b604c09fea3a2ed.png" />
 </div>
 </div>
 </section>
 <section id="shap-interaction-matrix-represented-as-histograms">
-<h3>SHAP interaction matrix: represented as histograms<a class="headerlink" href="#shap-interaction-matrix-represented-as-histograms" title="Permalink to this headline">#</a></h3>
+<h3>SHAP interaction matrix: represented as histograms<a class="headerlink" href="#shap-interaction-matrix-represented-as-histograms" title="Permalink to this heading">#</a></h3>
 <p>Show the distribution of all of the instance values for each SHAP interation and SHAP main effect.</p>
 <p>These plots help to show us, as at individual passenger level, the strength of the interactions between different features.</p>
 <div class="cell docutils container">
@@ -1310,13 +909,13 @@ The proportion of the SHAP values coming from the main effects are: 0.600
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_37_0.png" src="../_images/90_shap_interactions_on_titanic_37_0.png" />
+<img alt="../_images/9aa42d7bbc35078a757e52d86524007b26afe3f1393a8302b63b498d51bf799c.png" src="../_images/9aa42d7bbc35078a757e52d86524007b26afe3f1393a8302b63b498d51bf799c.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="show-a-worked-example-for-the-first-instance">
-<h2>Show a worked example for the first instance<a class="headerlink" href="#show-a-worked-example-for-the-first-instance" title="Permalink to this headline">#</a></h2>
+<h2>Show a worked example for the first instance<a class="headerlink" href="#show-a-worked-example-for-the-first-instance" title="Permalink to this heading">#</a></h2>
 <p>Start with the feature values, and then show the SHAP values and how they can be represented as main effect and interactions. Also show that by summing them along with the base value gives the model output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1479,7 +1078,7 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </section>
 <section id="sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction">
-<h2>Sum of the SHAP value components (base + main effects + interactions) = model prediction<a class="headerlink" href="#sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction" title="Permalink to this headline">#</a></h2>
+<h2>Sum of the SHAP value components (base + main effects + interactions) = model prediction<a class="headerlink" href="#sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction" title="Permalink to this heading">#</a></h2>
 <p>We’ve seen a worked through example for one instance that the sum of the SHAP interactions and main effects and base value equals the model output (the log odds of predicted P).</p>
 <p>Here we show that it holds for all of the instances.</p>
 <div class="cell docutils container">
@@ -1521,13 +1120,13 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_41_0.png" src="../_images/90_shap_interactions_on_titanic_41_0.png" />
+<img alt="../_images/fb597e66f692fd502765c5ea2a9e27eff65da566493a56d305022adc16e91d9e.png" src="../_images/fb597e66f692fd502765c5ea2a9e27eff65da566493a56d305022adc16e91d9e.png" />
 </div>
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="histogram-of-total-shap">
-<h1>Histogram of total SHAP<a class="headerlink" href="#histogram-of-total-shap" title="Permalink to this headline">#</a></h1>
+<section id="histogram-of-total-shap">
+<h1>Histogram of total SHAP<a class="headerlink" href="#histogram-of-total-shap" title="Permalink to this heading">#</a></h1>
 <p>Here we show a histogram for total SHAP values for all passengers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1542,13 +1141,13 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_43_0.png" src="../_images/90_shap_interactions_on_titanic_43_0.png" />
+<img alt="../_images/ca9a0058010b989dabd710dc67e91a39fb057a61d21a54dca4a0376dfeb3bdd4.png" src="../_images/ca9a0058010b989dabd710dc67e91a39fb057a61d21a54dca4a0376dfeb3bdd4.png" />
 </div>
 </div>
 <section id="how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots">
-<h2>How the SHAP main effect (or interaction) varies across the instances: using violin plots<a class="headerlink" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots" title="Permalink to this headline">#</a></h2>
+<h2>How the SHAP main effect (or interaction) varies across the instances: using violin plots<a class="headerlink" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots" title="Permalink to this heading">#</a></h2>
 <section id="shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">
-<h3>SHAP main effect of the <code class="docutils literal notranslate"><span class="pre">male</span></code> feature (also called <code class="docutils literal notranslate"><span class="pre">male:male</span></code> in SHAP interactions)<a class="headerlink" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions" title="Permalink to this headline">#</a></h3>
+<h3>SHAP main effect of the <code class="docutils literal notranslate"><span class="pre">male</span></code> feature (also called <code class="docutils literal notranslate"><span class="pre">male:male</span></code> in SHAP interactions)<a class="headerlink" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions" title="Permalink to this heading">#</a></h3>
 <p>For this example lets focus on the feature <code class="docutils literal notranslate"><span class="pre">male</span></code>. This feature has two possible values: males (<code class="docutils literal notranslate"><span class="pre">male</span></code>=1) and females (<code class="docutils literal notranslate"><span class="pre">male</span></code>=0).</p>
 <p>From the histogram in the matrix showing the main effect for the feature male, we can see that there are ~550 instances with a male main effect of about -1, and ~300 instances with a male main effect of about 2.</p>
 <p>From this we can not see which of these instances are which gender (male or female).</p>
@@ -1559,7 +1158,7 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_violin_shap_interaction</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">shap_interaction</span><span class="p">,</span> <span class="n">main_feature</span><span class="p">,</span> 
                                  <span class="n">interaction_feature</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given the two features (main_feature and interaction_feature), plot the SHAP </span>
 <span class="sd">    interations as violin plots. </span>
 <span class="sd">    The main_feature will have it&#39;s data values displayed on the x axis. </span>
@@ -1645,12 +1244,12 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_46_0.png" src="../_images/90_shap_interactions_on_titanic_46_0.png" />
+<img alt="../_images/5887fab62a093d4a4d0f479bff0c99d26259653b57e3db4ae3fd72826bd32fc1.png" src="../_images/5887fab62a093d4a4d0f479bff0c99d26259653b57e3db4ae3fd72826bd32fc1.png" />
 </div>
 </div>
 </section>
 <section id="shap-interaction-of-male-pclass">
-<h3>SHAP interaction of male-Pclass<a class="headerlink" href="#shap-interaction-of-male-pclass" title="Permalink to this headline">#</a></h3>
+<h3>SHAP interaction of male-Pclass<a class="headerlink" href="#shap-interaction-of-male-pclass" title="Permalink to this heading">#</a></h3>
 <p>We can also see the range of the SHAP interaction value between the features male-Pclass (divided by the male categories).</p>
 <p>Because interactions are symmetrical, and the interaction is split between the symmetrical pairs (<code class="docutils literal notranslate"><span class="pre">male:PClass</span></code> and <code class="docutils literal notranslate"><span class="pre">Pclass-male</span></code>) here will will double the values to get the sum of the symmetrical interactions.</p>
 <p>This shows that for females the SHAP interaction value between male-Pclass ranges from -1.2 to 1.8, and for males it has a smaller range (-1.1 to 0.6). Since this is in addition to the main effect (for which all females had a strong likelihood to survive), for some females their likelihood for surviving is further increased, whereas for others their likelihood for surviving is reduced - but never enough to have a likelihood of not surviving. Remember that we’d need to add on all of the other SHAP interations to get the likelihood of surviving for females.</p>
@@ -1662,7 +1261,7 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_48_0.png" src="../_images/90_shap_interactions_on_titanic_48_0.png" />
+<img alt="../_images/00e6fb03a53dde6f21493506b60d90c499de7fb4395329409115629f23fdc292.png" src="../_images/00e6fb03a53dde6f21493506b60d90c499de7fb4395329409115629f23fdc292.png" />
 </div>
 </div>
 <p>Violin plots can only display the values for one of the features in a feature-pairing - by it’s placement on the x axis. In the violin plot above we can only see the value for the feature male, but not the value for the feature Pclass.</p>
@@ -1670,9 +1269,9 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </section>
 </section>
 <section id="how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots">
-<h2>How the SHAP main effect (or interaction) varies across the instances: using dependence plots<a class="headerlink" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots" title="Permalink to this headline">#</a></h2>
+<h2>How the SHAP main effect (or interaction) varies across the instances: using dependence plots<a class="headerlink" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots" title="Permalink to this heading">#</a></h2>
 <section id="shap-main-effect-of-male-male">
-<h3>SHAP main effect of male-male<a class="headerlink" href="#shap-main-effect-of-male-male" title="Permalink to this headline">#</a></h3>
+<h3>SHAP main effect of male-male<a class="headerlink" href="#shap-main-effect-of-male-male" title="Permalink to this heading">#</a></h3>
 <p>We can see from the violin plot that the main effect (male-male) is quite different depending on whether the instance is male (a negative SHAP main effect value) or female (a positive SHAP main effect value).</p>
 <p>This means that the feature will contribute a strong likelihood of survival if the instance is female, and a mid-strong likelihood of not surviving if the instance is male.</p>
 <p>A dependence plot of the same data that’s in the violin plot will represent it as individual points, instead of as a distribution. Doing so, it will plot all of the points on two points on the x axis: 0 for female, and 1 for male. A lot of information is lost due to overlap. To see more detail we add some jitter to the x-axis to spread the points out and so we cna get a sense of the density of the points in relation to the y value.</p>
@@ -1699,12 +1298,12 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_51_0.png" src="../_images/90_shap_interactions_on_titanic_51_0.png" />
+<img alt="../_images/25641a5d5d8c06e7acf8bb13576c747510d157c37524a0fb5aaa315dc5634414.png" src="../_images/25641a5d5d8c06e7acf8bb13576c747510d157c37524a0fb5aaa315dc5634414.png" />
 </div>
 </div>
 </section>
 <section id="id1">
-<h3>SHAP interaction of male-Pclass<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h3>SHAP interaction of male-Pclass<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <p>A hinderence of using a violin plot to show the data for the SHAP interaction of a feature pair is that we can only show one of the feature values (on the x axis).</p>
 <p>When using a dependence plot to show the data for the SHAP interaction of a feature pairing we can display both of the feature values: the point location on the x axis shows the value of one of the features, and the colour of the point shows the value of the other feature.</p>
 <p>Note: SHAP’s built in <code class="docutils literal notranslate"><span class="pre">dependence_plot</span></code> already doubles interaction values to account for symetrical pairs (e.g. <code class="docutils literal notranslate"><span class="pre">male-Pclass</span></code> and <code class="docutils literal notranslate"><span class="pre">Pclass-male</span></code>).</p>
@@ -1745,13 +1344,13 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_53_0.png" src="../_images/90_shap_interactions_on_titanic_53_0.png" />
+<img alt="../_images/6926d2be1a77de396b6bf6d887cad681d3601078ceebccb7009ee514acf7fe7f.png" src="../_images/6926d2be1a77de396b6bf6d887cad681d3601078ceebccb7009ee514acf7fe7f.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="grid-of-shap-dependence-plots">
-<h2>Grid of SHAP dependence plots<a class="headerlink" href="#grid-of-shap-dependence-plots" title="Permalink to this headline">#</a></h2>
+<h2>Grid of SHAP dependence plots<a class="headerlink" href="#grid-of-shap-dependence-plots" title="Permalink to this heading">#</a></h2>
 <p>We will now show all of the SHAP interaction values in a grid of plots: each row and column represents a feature.</p>
 <p>NOTE: Remeber that the buils in SHAP <code class="docutils literal notranslate"><span class="pre">dependence_plot</span></code> double interaction values to account for symmetrical pairs, so looking at either pair will show the full interaction.</p>
 <p>The diagonal graphs show the SHAP main effect for each feature. The SHAP interactions between features are off the diagonal, these are split symetrically (eg. <code class="docutils literal notranslate"><span class="pre">age-male</span></code> = <code class="docutils literal notranslate"><span class="pre">male-age</span></code>).</p>
@@ -1794,19 +1393,19 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_55_0.png" src="../_images/90_shap_interactions_on_titanic_55_0.png" />
+<img alt="../_images/6cabf326dc7fe7f56ee2240edd20474e864ea0b150a3a911820093ee74cf83d3.png" src="../_images/6cabf326dc7fe7f56ee2240edd20474e864ea0b150a3a911820093ee74cf83d3.png" />
 </div>
 </div>
 <p>Using the individual instance values you can unpick and understand how each instance gets their classification.</p>
 <p>Each instance is represented in the grid of SHAP depencency plots, and so this shows all of the relationships that the model uses to derive it’s predictions for the whole dataset.</p>
 </section>
 <section id="other-shap-plotting-options">
-<h2>Other SHAP plotting options<a class="headerlink" href="#other-shap-plotting-options" title="Permalink to this headline">#</a></h2>
+<h2>Other SHAP plotting options<a class="headerlink" href="#other-shap-plotting-options" title="Permalink to this heading">#</a></h2>
 <p>The SHAP library also offers other plotting options, such as a summary plot based on the beeswarm plot.</p>
 <p>We will show it here for completeness, however we found it to be tricky to interprete, and left gaps in our understanding of the relationships (it left us with further questions).</p>
 <p>It was due to this that we created our grid of dependency plots (as displayed above).</p>
 <section id="shap-interactions-summary-plot-a-grid-of-beeswarms">
-<h3>SHAP interactions summary plot (a grid of beeswarms)<a class="headerlink" href="#shap-interactions-summary-plot-a-grid-of-beeswarms" title="Permalink to this headline">#</a></h3>
+<h3>SHAP interactions summary plot (a grid of beeswarms)<a class="headerlink" href="#shap-interactions-summary-plot-a-grid-of-beeswarms" title="Permalink to this heading">#</a></h3>
 <p>The beeswarm plot above showed the overall SHAP value for the feature. This next plot (a grid of beeswarms) shows the SHAP main effect and SHAP interactions for each feature. Each row and column represents a feature. The beeswarms on the diagonal represent the SHAP main effect for that feature, and those off the diagonal represent the SHAP interations with the other features.</p>
 <p>The graphs are symmetrical around the diagonal, and so the shape of the data in the corresponding graph about the diagonal are the same, however the points are coloured based on the value of the feature represented by the row. For example, the first row this showing the feature male, so red represents the value male, and blue represents the value female. The second row shows the feature Pclass where blue represents first class, purple represents second class, and red represents third class. The third row shows the feature Age where blue represents the youngest, purple represent middle aged and red represents oldest. The fourth row shows the feature SibSp where blue represents no siblings, purple represents 3-4 siblings, and red represents seven siblings.</p>
 <p>The shape of the data is based on the density of points that have the SHAP interaction value as displayed on the x axis.</p>
@@ -1818,13 +1417,13 @@ The model prediction for each instance can be arrived at by starting at the SHAP
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90_shap_interactions_on_titanic_59_0.png" src="../_images/90_shap_interactions_on_titanic_59_0.png" />
+<img alt="../_images/8fe96c880e3bbdfb561bcc9ad425e724f7cccaf02fc3c5b2ad55ec9f17bbd902.png" src="../_images/8fe96c880e3bbdfb561bcc9ad425e724f7cccaf02fc3c5b2ad55ec9f17bbd902.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="id2">
-<h2>Observations<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2>Observations<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>SHAP interactions are awesome!</p></li>
 <li><p>Viewing them as a grid of SHAP dependency plots clearly shows the overall relationships that the model uses to derive it’s predictions for the whole dataset.</p></li>
@@ -1844,7 +1443,7 @@ The model prediction for each instance can be arrived at by starting at the SHAP
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./xgb_10_features"
         },
         predefinedOutput: true
@@ -1852,50 +1451,149 @@ The model prediction for each instance can be arrived at by starting at the SHAP
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../introduction/shap_worked_example.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">A simple worked example of Shap</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="01_xgb_combined_fit_feature_selection.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">XGBoost feature selection</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../introduction/shap_worked_example.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">A simple worked example of Shap</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="91_learning_rate_optimisation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-interactions-that-we-will-see">Examples of interactions that we will see</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">Divide into X (features) and y (labels)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-xgboost-model">Fit XGBoost model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-values">Get SHAP values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#view-shap-values-using-beeswarm-plot">View SHAP values using beeswarm plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-interaction-values">Get SHAP interaction values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interaction-matrix-show-mean-absolute-values">SHAP interaction matrix: show mean absolute values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-from-the-absolute-mean">The proportion of SHAP that is from the interactions: calculated from the absolute mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proportion-of-shap-that-is-from-the-interactions-calculated-per-instance-from-the-absolute-values">The proportion of SHAP that is from the interactions: calculated per instance from the absolute values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interaction-matrix-represented-as-histograms">SHAP interaction matrix: represented as histograms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-a-worked-example-for-the-first-instance">Show a worked example for the first instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-the-shap-value-components-base-main-effects-interactions-model-prediction">Sum of the SHAP value components (base + main effects + interactions) = model prediction</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-of-total-shap">Histogram of total SHAP</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-violin-plots">How the SHAP main effect (or interaction) varies across the instances: using violin plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-main-effect-of-the-male-feature-also-called-male-male-in-shap-interactions">SHAP main effect of the <code class="docutils literal notranslate"><span class="pre">male</span></code> feature (also called <code class="docutils literal notranslate"><span class="pre">male:male</span></code> in SHAP interactions)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interaction-of-male-pclass">SHAP interaction of male-Pclass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-shap-main-effect-or-interaction-varies-across-the-instances-using-dependence-plots">How the SHAP main effect (or interaction) varies across the instances: using dependence plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-main-effect-of-male-male">SHAP main effect of male-male</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">SHAP interaction of male-Pclass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-of-shap-dependence-plots">Grid of SHAP dependence plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-shap-plotting-options">Other SHAP plotting options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interactions-summary-plot-a-grid-of-beeswarms">SHAP interactions summary plot (a grid of beeswarms)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Observations</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

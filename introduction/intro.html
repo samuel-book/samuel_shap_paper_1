@@ -1,48 +1,59 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice &#8212; What would other emgerncy stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
-    
+    <title>What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice &#8212; What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,55 +61,86 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'introduction/intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Glossary of technical terms" href="glossary.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">What would other emgerncy stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    <p class="title logo__title">What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
@@ -107,481 +149,236 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Introductory content
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introductory content</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   Glossary of technical terms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="data.html">
-   Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="odds_prob.html">
-   Probability, odds, and SHAP values (log odds shifts)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="shap_worked_example.html">
-   A simple worked example of Shap
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/90_shap_interactions_on_titanic.html">
-   Examining interactions between features with SHAP interactions: Using Titanic survival as an example
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary of technical terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odds_prob.html">Probability, odds, and SHAP values (log odds shifts)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shap_worked_example.html">A simple worked example of Shap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/90_shap_interactions_on_titanic.html">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Predicting thrombolysis use and explaining the predictions with Shap
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/01_xgb_combined_fit_feature_selection.html">
-   XGBoost feature selection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/07_correlation.html">
-   Check correlation between features selected for the model
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/02_xgb_combined_fit_accuracy_key_features.html">
-   Measuring accuracy of XGBoost models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/02a_xgb_combined_fit_most_thrombolysable_patients.html">
-   An anlysis of the characteristics of the most thrombolysable patient at each hopsital
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/03_xgb_combined_shap_key_features.html">
-   Explaining XGBoost model predictions with SHAP values
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/07_correlation.html">Check correlation between features selected for the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/02_xgb_combined_fit_accuracy_key_features.html">Measuring accuracy of XGBoost models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03_xgb_combined_shap_key_features.html">Explaining XGBoost model predictions with SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03a_xgb_all_data_shap_values_vs_feature_values.html">Fit a single XGBoost model and calculate the SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03c_xgb_all_data_shap_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP main effects from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03d_xgb_all_data_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values and SHAP main effects from a single XGBoost model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html">How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate.html">Calculate and use <em>subset</em> SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Comparing thrombolysis decisions between hospitals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using a 10k cohort of patients to compare decision-making</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/04_compare_10k_cohort_key_features.html">
-   A comparison of 10k cohort thrombolysis rates across hospitals, and comparison with hospital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/15_10k_thrombolysis_subgroups.html">
-   A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/15a_observed_thrombolysis_subgroup_analysis.html">
-   A comparison of actual thrombolysis rates across hospitals: subgroup analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/05_compare_benchmark_decisions_key_features.html">
-   Compare local thrombolysis decisions with benchmark decisions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units.html">
-   Comparing Shap values between high and low thrombolysing hospitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units.html">
-   Plotting thrombolysis rate by feature value for low and high thrombolysing hopsitals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">
-   Explaining XGBoost model predictions with SHAP values: Analysis of hopsital SHAP values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/12a_xgb_shap_interactions.html">
-   Describing model predictions, using SHAP values and SHAP interactions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/12aa_xgb_shap_interactions_focus_on_onsettime.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Precise Onset Time
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/12ab_xgb_shap_interactions_focus_on_severity.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with Stroke Severity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/12ac_xgb_shap_interactions_focus_on_disability.html">
-   Describing model predictions, using SHAP values and SHAP interactions focusing on how Hospitals interact with pre-stroke disability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/20_synthetic_patients.html">
-   Investigating the effect of patient features by varying feature values in artificial patients
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/21_synthetic_all_teams_waterfall.html">
-   Combined SHAP probability waterfall for all teams
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/50_bagging_variation.html">
-   Evaluating variation in model predictions and predicted 10k thrombolysis rate using bootstrap models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../xgb_10_features/91_learning_rate_optimisation.html">
-   Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/04_xgb_10k_cohort_key_features.html">A comparison of 10k cohort thrombolysis rates across hospitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/04a_xgb_10k_cohort_shap_values_interaction_values.html">A comparison of hospital SHAP values and SHAP main effect values for the 10k cohort.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/04b_xgb_10k_cohort_thrombolysis_subgroups.html">A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgb_10_features/04c_xgb_10k_cohort%E2%80%8B_vs_observed_thrombolysis_subgroups.html">A comparison of actual thrombolysis rates across hospitals: subgroup analysis</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/introduction/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/introduction/intro.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-short-summary">
-   A short summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims-of-this-study">
-   Aims of this study
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-explainable-machine-learning">
-   What is
-   <em>
-    Explainable Machine Learning
-   </em>
-   ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods">
-   Methods
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-are-shapley-values">
-     What are Shapley values?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#key-findings">
-   Key findings
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">
-     Predicting thrombolysis use with an XG-Boost model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
-     Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients">
-     Comparing actual and predicted thrombolysis use in subgroups of patients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
-     How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-artificial-patients">
-     Using artificial patients
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-short-summary">
-   A short summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aims-of-this-study">
-   Aims of this study
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-explainable-machine-learning">
-   What is
-   <em>
-    Explainable Machine Learning
-   </em>
-   ?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods">
-   Methods
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-are-shapley-values">
-     What are Shapley values?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#key-findings">
-   Key findings
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">
-     Predicting thrombolysis use with an XG-Boost model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
-     Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients">
-     Comparing actual and predicted thrombolysis use in subgroups of patients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
-     How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-artificial-patients">
-     Using artificial patients
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-short-summary">A short summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-this-study">Aims of this study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-explainable-machine-learning">What is <em>Explainable Machine Learning</em>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-shapley-values">What are Shapley values?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings">Key findings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">Predicting thrombolysis use with an XG-Boost model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients">Comparing actual and predicted thrombolysis use in subgroups of patients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-artificial-patients">Using artificial patients</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="what-would-other-emergency-stroke-teams-do-using-explainable-machine-learning-to-understand-variation-in-thrombolysis-practice">
-<h1>What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice<a class="headerlink" href="#what-would-other-emergency-stroke-teams-do-using-explainable-machine-learning-to-understand-variation-in-thrombolysis-practice" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="what-would-other-emergency-stroke-teams-do-using-explainable-machine-learning-to-understand-variation-in-thrombolysis-practice">
+<h1>What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice<a class="headerlink" href="#what-would-other-emergency-stroke-teams-do-using-explainable-machine-learning-to-understand-variation-in-thrombolysis-practice" title="Permalink to this heading">#</a></h1>
 <p>Part of the NIHR <em>SAMueL</em> (Stroke Audit Machine Learning) project, in collaboration with the Sentinel Stroke National Audit Program (SSNAP).</p>
 <section id="a-short-summary">
-<h2>A short summary<a class="headerlink" href="#a-short-summary" title="Permalink to this headline">#</a></h2>
+<h2>A short summary<a class="headerlink" href="#a-short-summary" title="Permalink to this heading">#</a></h2>
 <p>Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called <em>thrombolysis</em>. Use of thrombolysis is only about half of what the NHS long-term plan suggests it should be, and varies a lot between hospitals.</p>
 <p>We used explainable machine learning to investigate which patients receive thrombolysis at each hospital. To do this we used data on nearly 90,000 patients who arrived at hospital with time still left to give thrombolysis (as thrombolysis must be given within four and a half hours after stroke onset).</p>
 <p>We found that in patients arriving in time to receive thrombolysis, the use of thrombolysis ranged between hospitals from 7% (1 in 14 patients) to 49% (1 in 2 patients). The chance of receiving thrombolysis depended on the time it took to perform a brain scan, the severity of the stroke, whether the time of stroke onset was known precisely, and the level of disability the patient had before the stroke. But the most interesting finding was that the majority of the variation in thrombolysis usage between hospitals was due to the hospitals’ willingness and readiness to use the treatment, rather than any differences in patients between hospitals.</p>
 </section>
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
 <p>Stroke is a common cause of adult disability. Most strokes (about four out of five) are caused by a blood clot in the brain, and have the potential to be treated with clot-busting drugs to break up the blood clot that is causing their stroke  - this is called <em>thrombolysis</em>. Thrombolysis improves stroke outcomes overall, with more people being able to carry out their normal daily activities. There is, however, a small risk of a bleed in the brain, which is fatal in about 1 in 50 patients receiving thrombolysis, with the risk being highest in those with the most severe strokes. Overall, thrombolysis does not increase risk of death, as the risk of death from a bleed is balanced out by the benefits of thrombolysis to others. Clinicians, patients, and carers, must however consider both benefits and risks of thrombolysis when deciding on whether to use it.</p>
 <p>Expert opinion is that about one in five patients should receive thrombolysis, and this is the target set in the NHS long term plan. At the moment only about one in nine patients actually receive this treatment in the UK. There is a lot of variation between hospitals, which means that the same patient might receive different treatment depending on which hospital they attend.</p>
 <a class="reference internal image-reference" href="../_images/thrombolysis_hist.jpg"><img alt="../_images/thrombolysis_hist.jpg" src="../_images/thrombolysis_hist.jpg" style="width: 800px;" /></a>
 <p><em>Variation in thrombolysis use across hospitals in England and Wales 2016-2018.</em></p>
 </section>
 <section id="aims-of-this-study">
-<h2>Aims of this study<a class="headerlink" href="#aims-of-this-study" title="Permalink to this headline">#</a></h2>
+<h2>Aims of this study<a class="headerlink" href="#aims-of-this-study" title="Permalink to this heading">#</a></h2>
 <p>The aims of this study were:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>To apply <em>explainable machine learning</em> techniques to investigate the most significant features that drive decisions to use thrombolysis at different hospitals.</p></li>
 <li><p>To understand the types of patients where hospitals would make <em>different</em> decisions about any given patient.</p></li>
 </ol>
 </section>
 <section id="what-is-explainable-machine-learning">
-<h2>What is <em>Explainable Machine Learning</em>?<a class="headerlink" href="#what-is-explainable-machine-learning" title="Permalink to this headline">#</a></h2>
+<h2>What is <em>Explainable Machine Learning</em>?<a class="headerlink" href="#what-is-explainable-machine-learning" title="Permalink to this heading">#</a></h2>
 <p>Machine learning models generally learn from large sets of data - learning patterns between aspects of the data and some outcome of interest. In this case the data contains a range of <em>features</em> about the patient, such as their age, sex, a breakdown of their stroke symptoms, etc. The machine learning model learns the relationship between those features and whether the patient received thrombolysis or not.</p>
 <a class="reference internal image-reference" href="../_images/ml_model_high_level.png"><img alt="../_images/ml_model_high_level.png" src="../_images/ml_model_high_level.png" style="width: 600px;" /></a>
 <p><em>A general depiction of machine learning models trained to predict use of thrombolysis for any patient given 1) the hospital they attend, 2) patient and clinical information, and 3) pathway and process information.</em></p>
@@ -590,7 +387,7 @@ title="Print to PDF"
 <p>(<em>Explainable machine learning</em> may also be known as <em>Explainable ML</em>, <em>Explainable artificial intelligence</em>, or <em>Explainable AI</em>).</p>
 </section>
 <section id="methods">
-<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this heading">#</a></h2>
 <p>In this study we used a machine learning method called <em>XG-Boost</em> (which is short for <em>eXtreme Gradient Boosting</em>) to predict decisions to give thrombolysis at each of 132 hospitals in England and Wales that deal with emergency stroke admissions. Our model and analysis was based on 88,928 patients who arrived at emergency stroke units in England and Wales within 4 hours of known stroke onset (37% of all emergency stroke admissions).</p>
 <p>In order to make the model easier to explain, we found the most important features that would predict whether a patient received thrombolysis or not. We found that with just 10 features we could get accuracy that was very close to using <em>all</em> available features. These 10 features were:</p>
 <ul class="simple">
@@ -608,7 +405,7 @@ title="Print to PDF"
 <p>Note: The <a class="reference external" href="https://github.com/samuel-book/samuel_shap_paper_1">GitHub repository</a> also includes XG-Boost models using all available features.</p>
 <p>In order to explain model predictions we used a method called Shapley values, which are described below.</p>
 <section id="what-are-shapley-values">
-<h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this headline">#</a></h3>
+<h3>What are Shapley values?<a class="headerlink" href="#what-are-shapley-values" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>Shapley values (or <em>SHAP</em>, SHapley Additive exPlanations, values, which is a particular method of estimating Shapley values) are <em>‘the average expected marginal contribution of one player after all possible combinations have been considered’</em>.</p>
 </div></blockquote>
@@ -621,9 +418,9 @@ title="Print to PDF"
 </section>
 </section>
 <section id="key-findings">
-<h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this headline">#</a></h2>
+<h2>Key findings<a class="headerlink" href="#key-findings" title="Permalink to this heading">#</a></h2>
 <section id="predicting-thrombolysis-use-with-an-xg-boost-model">
-<h3>Predicting thrombolysis use with an XG-Boost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xg-boost-model" title="Permalink to this headline">#</a></h3>
+<h3>Predicting thrombolysis use with an XG-Boost model<a class="headerlink" href="#predicting-thrombolysis-use-with-an-xg-boost-model" title="Permalink to this heading">#</a></h3>
 <p>Looking at patterns of SHAP values reveals the following:</p>
 <ul class="simple">
 <li><p>Stroke type: As expected, the SHAP values for stroke types shows that the model effectively eliminates any chance of receiving thrombolysis for haemorrhagic stroke.</p></li>
@@ -641,7 +438,7 @@ title="Print to PDF"
 <p><em>An example of a SHAP waterfall plot showing the most influential features in influencing the model’s prediction of a patient probability of receiving thrombolysis (in this case a patient with a very low probability of receiving thrombolysis). In this example the three most influential features, reducing the chance of receiving thrombolysis were 1) low stroke severity (NIHSS 2), 2) slow arrival-to-scan time (138 mins), and 3 the hospital attended (stroke team LFPMM4706C).</em></p>
 </section>
 <section id="comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">
-<h3>Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients<a class="headerlink" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients" title="Permalink to this headline">#</a></h3>
+<h3>Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients<a class="headerlink" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients" title="Permalink to this heading">#</a></h3>
 <p>We can assess each hospital’s <em>‘predisposition (or willingness) to use thrombolysis’</em> by passing the same 10k cohort of patients through all hospital prediction models (by keeping all patient features the same apart from changing the hospital ID). In this analysis we train the XGBoost model on all patients apart from those in the 10k patient cohort (which are selected randomly from the full data set), and then assess thrombolysis use in the 10k data set.</p>
 <p>When we compare this 10k thrombolysis rate to the average hospital SHAP model in our previously trained XGBoost model, we find a very strong correlation (R-squared = 0.92). This helps to validate average hospital SHAP being used as a measure of a hospital’s <em>‘predisposition to use thrombolysis’</em>.</p>
 <a class="reference internal image-reference" href="../_images/shap_vs_10k.jpg"><img alt="../_images/shap_vs_10k.jpg" src="../_images/shap_vs_10k.jpg" style="width: 450px;" /></a>
@@ -649,7 +446,7 @@ title="Print to PDF"
 <p>We see that hospital SHAP values range from about -1.5 to +1.5. This range of 3 (in log odds) between hospitals represents a range of about 20 fold in the odds of a patient receiving thrombolysis, simply by virtue of which hospital they attend. Most hospitals lie within the range of -1.0 to +1.0, but this still represents a 7-8 fold range in the odds of receiving thrombolysis.</p>
 </section>
 <section id="comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients">
-<h3>Comparing actual and predicted thrombolysis use in subgroups of patients<a class="headerlink" href="#comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients" title="Permalink to this headline">#</a></h3>
+<h3>Comparing actual and predicted thrombolysis use in subgroups of patients<a class="headerlink" href="#comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients" title="Permalink to this heading">#</a></h3>
 <p>We can select subgroups from the 10k patient cohort and the observed data (where we create subgroups of patients who attend each hospital and observed whether they were actually given thrombolysis or not). The subgroups selected were:</p>
 <ul class="simple">
 <li><p>Mild stroke severity (NIHSS &lt; 5)</p></li>
@@ -668,13 +465,13 @@ title="Print to PDF"
 <p><em>A comparison of between-hospital range of thrombolysis use for subgroups of observed (top) or the 10k patient cohort (bottom). The observed patients are the actual thrombolysis use at each hospital for subgroups of their own patients. The predicted 10k patient subgroups are the same patients for every hospital.</em></p>
 </section>
 <section id="how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">
-<h3>How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?<a class="headerlink" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value" title="Permalink to this headline">#</a></h3>
+<h3>How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?<a class="headerlink" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value" title="Permalink to this heading">#</a></h3>
 <p>We can also look at how a hospital’s SHAP value correlates with the thrombolysis rate for patients attending each hospital (focussing on patients arriving within 4 hours of stroke onset). We see that the hospital’s SHAP value explains 58% of the variance in thrombolysis rate of patients. This suggests that, differences in decisions on whether and when to use thrombolysis dominates differences in patient mix or difference in key process times (time to arrival, and time from arrival to scan).</p>
 <a class="reference internal image-reference" href="../_images/hospital_shap_own_patients.jpg"><img alt="../_images/hospital_shap_own_patients.jpg" src="../_images/hospital_shap_own_patients.jpg" style="width: 450px;" /></a>
 <p><em>A comparison of average hospital SHAP values with actual hospital thrombolysis use for patients arriving within 4 hours of known stroke onset.</em></p>
 </section>
 <section id="using-artificial-patients">
-<h3>Using artificial patients<a class="headerlink" href="#using-artificial-patients" title="Permalink to this headline">#</a></h3>
+<h3>Using artificial patients<a class="headerlink" href="#using-artificial-patients" title="Permalink to this heading">#</a></h3>
 <p>We may construct artificial patients to compare decision-making with a particular focus.</p>
 <p>For example we may start with a highly thrombolysable patient:</p>
 <ul class="simple">
@@ -703,8 +500,6 @@ title="Print to PDF"
 </div>
 <div class="toctree-wrapper compound">
 </div>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -719,7 +514,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./introduction"
         },
         predefinedOutput: true
@@ -727,43 +522,111 @@ title="Print to PDF"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="glossary.html" title="next page">
-    <div class="prev-next-info">
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="right-next"
+       href="glossary.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Glossary of technical terms</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-short-summary">A short summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-this-study">Aims of this study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-explainable-machine-learning">What is <em>Explainable Machine Learning</em>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-shapley-values">What are Shapley values?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings">Key findings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-thrombolysis-use-with-an-xg-boost-model">Predicting thrombolysis use with an XG-Boost model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-hospital-shap-values-with-the-predicted-thrombolysis-rate-at-each-hospital-if-all-hospitals-saw-the-same-10k-cohort-of-patients">Comparing hospital SHAP values with the predicted thrombolysis rate at each hospital if all hospitals saw the same 10k cohort of patients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-actual-and-predicted-thrombolysis-use-in-subgroups-of-patients">Comparing actual and predicted thrombolysis use in subgroups of patients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-much-of-the-variation-in-thrombolysis-use-for-patients-arriving-within-4-hours-of-known-stroke-onset-can-be-explained-by-the-hospital-shap-value">How much of the variation in thrombolysis use (for patients arriving within 4 hours of known stroke onset) can be explained by the hospital SHAP value?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-artificial-patients">Using artificial patients</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

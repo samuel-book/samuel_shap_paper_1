@@ -1,0 +1,1727 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Calculate and use subset SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes &#8212; What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'xgb_10_features/03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A comparison of 10k cohort thrombolysis rates across hospitals" href="04_xgb_10k_cohort_key_features.html" />
+    <link rel="prev" title="How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?" href="03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    What would other emergency stroke teams do? Using explainable machine learning to understand variation in thrombolysis practice
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introductory content</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/glossary.html">Glossary of technical terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/data.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/odds_prob.html">Probability, odds, and SHAP values (log odds shifts)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/shap_worked_example.html">A simple worked example of Shap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="90_shap_interactions_on_titanic.html">Examining interactions between features with SHAP interactions: Using Titanic survival as an example</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">Measuring accuracy of XGBoost models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_xgb_combined_shap_key_features.html">Explaining XGBoost model predictions with SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03a_xgb_all_data_shap_values_vs_feature_values.html">Fit a single XGBoost model and calculate the SHAP values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03b_xgb_all_data_shap_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03c_xgb_all_data_shap_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP main effects from a single XGBoost model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03d_xgb_all_data_shap_values_and_interaction_values_focus_on_ohe_hospitals.html">Explore the hospital effect on thrombolysis use, using SHAP values and SHAP main effects from a single XGBoost model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html">How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Calculate and use <em>subset</em> SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using a 10k cohort of patients to compare decision-making</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_xgb_10k_cohort_key_features.html">A comparison of 10k cohort thrombolysis rates across hospitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04a_xgb_10k_cohort_shap_values_interaction_values.html">A comparison of hospital SHAP values and SHAP main effect values for the 10k cohort.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04b_xgb_10k_cohort_thrombolysis_subgroups.html">A comparison of expected 10k cohort thrombolysis rates across hospitals: subgroup analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04c_xgb_10k_cohort%E2%80%8B_vs_observed_thrombolysis_subgroups.html">A comparison of actual thrombolysis rates across hospitals: subgroup analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/xgb_10_features/03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Calculate and use subset SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-filenames">Set filenames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-folders-if-needed">Create output folders if needed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-json-file">Read in JSON file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-data">Edit data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">Divide into X (features) and y (labels)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encode-hospital-feature">One-hot encode hospital feature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-model-feature-names">Get model feature names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-interactions">Get SHAP interactions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-data">Prepare the data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-two-subset-of-features">Define the two subset of features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-shap-values-for-unattended-hostpials">Remove SHAP values for unattended hostpials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-values-without-any-information-on-hospital-attended">1) SHAP values without any information on hospital attended</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-effect-value-for-each-of-the-features">2) Main effect value for each of the features</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interactions-with-another-feature-in-it-s-subset-patient-or-hospital">3) SHAP interactions with another feature in it’s subset (patient or hospital)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interactions-with-a-feature-in-the-other-subset">4) SHAP interactions with a feature in the other subset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-subset-value-main-effect-shap-interaction-with-another-feature-in-it-s-subset">5) SHAP subset value (main effect + SHAP interaction with another feature in it’s subset)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-each-hospital-calculate-the-mean-feature-shap-value-for-the-attended-patients">For each hospital, calculate the mean feature SHAP value for the attended patients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-regressions-to-processed-data">Fit regressions to processed data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-plot-for-paper-compilation-of-some-of-the-above-plots">Create plot for paper (compilation of some of the above plots)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-to-file">Save data to file</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="calculate-and-use-subset-shap-values-from-a-single-xgboost-model-to-attribute-hospital-ivt-variation-to-patient-mix-and-hospital-processes">
+<h1>Calculate and use <em>subset</em> SHAP values (from a single XGBoost model) to attribute hospital IVT variation to patient mix and hospital processes<a class="headerlink" href="#calculate-and-use-subset-shap-values-from-a-single-xgboost-model-to-attribute-hospital-ivt-variation-to-patient-mix-and-hospital-processes" title="Permalink to this heading">#</a></h1>
+<p><strong>Research question: How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to its different patient mix?</strong></p>
+<section id="plain-english-summary">
+<h2>Plain English summary<a class="headerlink" href="#plain-english-summary" title="Permalink to this heading">#</a></h2>
+<p>When fitting a machine learning model to data to make a prediction, it is now possible, with the use of the SHAP library, to allocate contributions of the prediction onto the feature values. This means that we can now turn these black box methods into transparent models and describe what the model used to obtain it’s prediction.</p>
+<p>SHAP values are calculated for each feature of each instance for a fitted model. In addition there is the SHAP base value which is the same value for all of the instances. The base value represents the models best guess for any instance without any extra knowledge about the instance (this can also be thought of as the “expected value”). It is possible to obtain the models prediction of an instance by taking the sum of the SHAP base value and each of the SHAP values for the features. This allows the prediction from a model to be transparant, and we can rank the features by their importance in determining the prediction for each instance.</p>
+<p>The SHAP values for each feature are comprised of the feature’s main effect (what is due to the feature value, the standalone effect) and all of the pairwise interaction effects with each of the other features (a value per feature pairings).</p>
+<p>In this notebook we will use the model trained on all of the data (from notebook 03a) and the SHAP interaction values (from notebook 03c) and focus on understanding how much of the variation in the hosptial’s thrombolysis rate can be attributed to the difference in the hospital processes, and to its different patient mix.</p>
+<p>In notebook 03e we split the features into two subsets: the hospital features, and patient features. Then fitted a multiple linear regression on each subset to predict the hosptial thrombolysis rate. So far in that notebook (03e) we looked at the two extremes of dividing the SHAP values between the two subsets: 1) including the features SHAP values (includes all interactions) and 2) including the features main effect (no ineractions).</p>
+<p>In this notebook we will define and calculate the <em>subset</em> SHAP values for each feature. These will only include the SHAP interactions for the features that are in the same regression (so the main effect and the interactions that are with the other features in the multiple regression). This will exclude any SHAP interactions that are between the hostpial features and patient features. As in notebook 03e, we will fit a multiple regression on the mean value of these (for hospital attended) to predict hosptial thrombolysis rate.</p>
+<p>The 10 features in the model can be classified as either those that are describing the patients characteristics (the “patient descriptive features”) or those that are describing the hospital’s processes (the “hospital descriptive features”). There are eight patient descriptive features (age, stroke severity, prior disability, onset-to-arrival time, stroke type, type of onset time, anticoagulants, and onset during sleep) and there are two hospital descriptive features (arrival-to-scan time, and hospital attended). For this analysis, we only included the single one-hot encoded feature for the attended hospital (and did not include the other 131 one-hot encoded features for the unattended hospitals). We calculated the subset SHAP value for each feature by only including the components of it’s SHAP value that exclusively contain the effect from the features in the same subset. This is expressed as the sum of the main effect and the interaction effects with the other features within it’s subset. For the feature “arrival to scan”, which is part of the hospital descriptive subset, its subset SHAP value is the main effect plus the interaction with the feature hospital attended. For each of the features in the patient descriptive subset, its subset SHAP value is the main effect plus the sum of the interactions with each of the other seven patient descriptive features. For each set of descriptive features (hospital and patient) we fitted a multiple regression to predict the hospitals observed thrombolysis rate from the mean subset SHAP value of each feature for patients attending each hospital (using values from the all data model).</p>
+<p>SHAP values are in the same units as the model output (for XGBoost these are in log odds).</p>
+<p>When isolating features in this way we find that average SHAP results for each hopsital explains 95% of the the between-hopsital variation in thrombolysis. The hospital features alone could explain 74% of this variation, and patient features alone 36% of the variation.</p>
+</section>
+<section id="model-and-data">
+<h2>Model and data<a class="headerlink" href="#model-and-data" title="Permalink to this heading">#</a></h2>
+<p>Using the XGBoost model trained on all of the data (no test set used) from notebook 03a_xgb_combined_shap_key_features.ipynb. The 10 features in the model are:</p>
+<ul class="simple">
+<li><p>Arrival-to-scan time: Time from arrival at hospital to scan (mins)</p></li>
+<li><p>Infarction: Stroke type (1 = infarction, 0 = haemorrhage)</p></li>
+<li><p>Stroke severity: Stroke severity (NIHSS) on arrival</p></li>
+<li><p>Precise onset time: Onset time type (1 = precise, 0 = best estimate)</p></li>
+<li><p>Prior disability level: Disability level (modified Rankin Scale) before stroke</p></li>
+<li><p>Stroke team: Stroke team attended</p></li>
+<li><p>Use of AF anticoagulents: Use of atrial fibrillation anticoagulant (1 = Yes, 0 = No)</p></li>
+<li><p>Onset-to-arrival time: Time from onset of stroke to arrival at hospital (mins)</p></li>
+<li><p>Onset during sleep: Did stroke occur in sleep?</p></li>
+<li><p>Age: Age (as middle of 5 year age bands)</p></li>
+</ul>
+<p>And one target feature:</p>
+<ul class="simple">
+<li><p>Thrombolysis: Did the patient receive thrombolysis (0 = No, 1 = Yes)</p></li>
+</ul>
+</section>
+<section id="aims">
+<h2>Aims<a class="headerlink" href="#aims" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Using XGBoost model fitted on all the data (no test set) using 10 features</p></li>
+<li><p>Using SHAP interaction values calculate subset SHAP values</p></li>
+<li><p>Fit a multiple regression on the mean value of the subset SHAP values (for hospital attended) to predict hosptial thrombolysis rate for: 1) patient features 2) hospital features</p></li>
+</ul>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>SHAP interactions may be used to isolate patient and hopsital effects, while still allowing interactions within those two subsets.</p></li>
+</ul>
+<p>Using mean SHAP values:</p>
+<ul class="simple">
+<li><p>The hospital subset (hopsital ID and arrival-to-scan) explained 74% of the between-hopsital variation in thrombolysis.</p></li>
+<li><p>The patient characteristic subset explained 36% of the between-hopsital variation in thrombolysis.</p></li>
+<li><p>Combining hopsital and patient subsets explained 95% of the between-hopsital variation in thrombolysis.</p></li>
+<li><p>The sum of the hospital and patient subset explained variance is 110% (compared to 95% when combined in a single fit). This suggests that there is a small amount of shared information between these subsets.</p></li>
+</ul>
+</section>
+<section id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Import machine learning methods</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="c1"># Import shap for shapley values</span>
+<span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># .floor and .ceil</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># So can take deep copy</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-filenames">
+<h2>Set filenames<a class="headerlink" href="#set-filenames" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up strings (describing the model) to use in filenames</span>
+<span class="n">number_of_features_to_use</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">model_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;xgb_</span><span class="si">{</span><span class="n">number_of_features_to_use</span><span class="si">}</span><span class="s1">_features&#39;</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="s1">&#39;03f&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-output-folders-if-needed">
+<h2>Create output folders if needed<a class="headerlink" href="#create-output-folders-if-needed" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./saved_models&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./output&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./predictions&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-in-json-file">
+<h2>Read in JSON file<a class="headerlink" href="#read-in-json-file" title="Permalink to this heading">#</a></h2>
+<p>Contains a dictionary for plain English feature names for the 8 features selected in the model. Use these as the column titles in the DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./output/01_feature_name_dict.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">dict_feature_name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h2>
+<p>Data has previously been split into 5 stratified k-fold splits.</p>
+<p>For this exercise, we will fit a model using all of the data (rather than train/test splits used to assess accuracy). We will join up all of the test data (by definition, each instance exists only once across all of the 5 test sets)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_loc</span> <span class="o">=</span> <span class="s1">&#39;../data/kfold_5fold/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise empty list</span>
+<span class="n">test_data_kfold</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Read in the names of the selected features for the model</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./output/01_feature_selection.csv&#39;</span><span class="p">)</span>
+<span class="n">key_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">])[:</span><span class="n">number_of_features_to_use</span><span class="p">]</span>
+<span class="c1"># And add the target feature name: S2Thrombolysis</span>
+<span class="n">key_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S2Thrombolysis&#39;</span><span class="p">)</span>
+
+<span class="c1"># For each k-fold split</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># Read in test set, restrict to chosen features, rename titles, &amp; store</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s1">&#39;test_</span><span class="si">{0}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">key_features</span><span class="p">]</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dict_feature_name</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">test_data_kfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+
+<span class="c1"># Join all the test sets. Set &quot;ignore_index = True&quot; to reset the index in the</span>
+<span class="c1">#   new dataframe (to run from 0 to n-1), otherwise get duplicate index values</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">test_data_kfold</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="edit-data">
+<h2>Edit data<a class="headerlink" href="#edit-data" title="Permalink to this heading">#</a></h2>
+<section id="divide-into-x-features-and-y-labels">
+<h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this heading">#</a></h3>
+<p>We will separate out our features (the data we use to make a prediction) from our label (what we are trying to predict).
+By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (thrombolysis or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Average thromboylsis (this is the expected outcome of each patient, without knowing anything about the patient)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Average treatment: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average treatment: 0.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="one-hot-encode-hospital-feature">
+<h3>One-hot encode hospital feature<a class="headerlink" href="#one-hot-encode-hospital-feature" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keep copy of original, with &#39;Stroke team&#39; not one-hot encoded</span>
+<span class="n">X_combined</span> <span class="o">=</span> <span class="n">X_data</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># One-hot encode &#39;Stroke team&#39;</span>
+<span class="n">X_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_data</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+<span class="n">X_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_data</span><span class="p">,</span> <span class="n">X_hosp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-model-feature-names">
+<h3>Get model feature names<a class="headerlink" href="#get-model-feature-names" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names_ohe</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="get-shap-interactions">
+<h2>Get SHAP interactions<a class="headerlink" href="#get-shap-interactions" title="Permalink to this heading">#</a></h2>
+<p>Read in the SHAP interactions as calculated in notebook 03b_xgb_shap_interaction_values_focus_on_ohe_hospitals.ipynb</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/03c_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_interactions.p&#39;</span>
+
+<span class="c1"># Load SHAP interaction</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+    <span class="n">shap_interactions</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 23.3 ms, sys: 3.22 s, total: 3.25 s
+Wall time: 5.27 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_interactions</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(88792, 141, 141)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-the-data">
+<h2>Prepare the data<a class="headerlink" href="#prepare-the-data" title="Permalink to this heading">#</a></h2>
+<section id="define-the-two-subset-of-features">
+<h3>Define the two subset of features<a class="headerlink" href="#define-the-two-subset-of-features" title="Permalink to this heading">#</a></h3>
+<p>Define the features as either 1) patient or 2) hospital features</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">patient_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Infarction&#39;</span><span class="p">,</span><span class="s1">&#39;Stroke severity&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;Precise onset time&#39;</span><span class="p">,</span><span class="s1">&#39;Prior disability level&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;Use of AF anticoagulants&#39;</span><span class="p">,</span><span class="s1">&#39;Onset-to-arrival time&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;Onset during sleep&#39;</span><span class="p">,</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hospital_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Arrival-to-scan time&#39;</span><span class="p">,</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-shap-values-for-unattended-hostpials">
+<h3>Remove SHAP values for unattended hostpials<a class="headerlink" href="#remove-shap-values-for-unattended-hostpials" title="Permalink to this heading">#</a></h3>
+<p>Each patient attends one hospital. For each patient, remove the SHAP values for the one-hot encoded hosptial features that are not for the attended hospital (so only have the one-hot encoded hospital attended).</p>
+<p>Using the SHAP interaction (having removed any contribution from unattended hospitals), create five arrays containing a value per feature:</p>
+<ol class="arabic simple">
+<li><p>SHAP value (sum of row)</p></li>
+<li><p>main effect (diagonal value)</p></li>
+<li><p>SHAP interactions with other features within multiple regression feature set (per feature row, the columns of the other in regression features)</p></li>
+<li><p>SHAP interactions with other features outside multiple regression feature set (per feature row, the columns of the features not in the regression)</p></li>
+<li><p>SHAP subset value (main effect + SHAP values within = array(2) + array(3)</p></li>
+</ol>
+<p>Identify the locations for the hospital features within the SHAP values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get list of just the one-hot encoded hospital names</span>
+<span class="n">hospitals_ohe</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feature_names_ohe</span> <span class="k">if</span> <span class="s1">&#39;team_&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+<span class="c1"># Get indices for the hospitals from columns</span>
+<span class="n">hospitals_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">feature_names_ohe</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hospitals_ohe</span><span class="p">]</span>
+<span class="n">hospitals_indices</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[9, 10, 11, 12, 13]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Look at each patient data in turn (each patient attends a differnt hospital, so work per patient).</p>
+<p>First remove any contribution from unattended hospitals (remove the main effect and interactions with the one-hot encoded features for the hosptial not attended). For each patient, identify the hosptial they attended, keep the SHAP for that one-hot encoded feature and remove the other 131 one-hot encoded features.</p>
+<p>Create five versions of the SHAP value (using the SHAP data without unattended hospital contributions):</p>
+<section id="shap-values-without-any-information-on-hospital-attended">
+<h4>1) SHAP values without any information on hospital attended<a class="headerlink" href="#shap-values-without-any-information-on-hospital-attended" title="Permalink to this heading">#</a></h4>
+<p>Sum of row</p>
+</section>
+<section id="main-effect-value-for-each-of-the-features">
+<h4>2) Main effect value for each of the features<a class="headerlink" href="#main-effect-value-for-each-of-the-features" title="Permalink to this heading">#</a></h4>
+<p>Diagonal value
+We will refer to these as “p_main” (for a patient feature) and “h_main” (for a hospital feature)</p>
+</section>
+<section id="shap-interactions-with-another-feature-in-it-s-subset-patient-or-hospital">
+<h4>3) SHAP interactions with another feature in it’s subset (patient or hospital)<a class="headerlink" href="#shap-interactions-with-another-feature-in-it-s-subset-patient-or-hospital" title="Permalink to this heading">#</a></h4>
+<p>SHAP interactions with other features within multiple regression feature set (per feature row, the columns of the other in regression features)
+We will refer to these as “p_interactions” (for a patient feature) and “h_interactions” (for a hospital feature)</p>
+</section>
+<section id="shap-interactions-with-a-feature-in-the-other-subset">
+<h4>4) SHAP interactions with a feature in the other subset<a class="headerlink" href="#shap-interactions-with-a-feature-in-the-other-subset" title="Permalink to this heading">#</a></h4>
+<p>SHAP interactions with other features outside multiple regression feature set (per feature row, the columns of the features not in the regression)
+We will refer to these as “hpph_interaction”</p>
+</section>
+<section id="shap-subset-value-main-effect-shap-interaction-with-another-feature-in-it-s-subset">
+<h4>5) SHAP subset value (main effect + SHAP interaction with another feature in it’s subset)<a class="headerlink" href="#shap-subset-value-main-effect-shap-interaction-with-another-feature-in-it-s-subset" title="Permalink to this heading">#</a></h4>
+<p>This is the sum of array #2 + array #3
+We will refer to these are “p_main_interactions” and “h_main_interactions”.</p>
+<p>Store each SHAP version in it’s own dataframe, to be used later to calculate the mean value per hosptial for each value type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="c1"># create list (one per value type) with features as column title</span>
+<span class="n">shap_values_without_unattended_hosp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">shap_main_effects</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">shap_interactions_within_subset</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">shap_interactions_across_subsets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">subset_shap_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># work through each patients shap interaction matrix</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shap_interactions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+    <span class="c1"># get shap interactions for a patient</span>
+    <span class="n">si</span> <span class="o">=</span> <span class="n">shap_interactions</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+
+    <span class="c1"># get hospital the patient attends</span>
+    <span class="n">attend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+    
+    <span class="c1"># get column index for hosptial attend</span>
+    <span class="n">hospital_keep_index</span> <span class="o">=</span> <span class="p">[</span><span class="n">feature_names_ohe</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;team_</span><span class="si">{</span><span class="n">attend</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)]</span>
+
+    <span class="c1"># get indices for the other hosptials (those not attend) to remove for </span>
+    <span class="c1">#   this patient</span>
+    <span class="n">hospitals_remove_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">hospitals_indices</span><span class="p">)</span> <span class="o">-</span> 
+                                    <span class="nb">set</span><span class="p">(</span><span class="n">hospital_keep_index</span><span class="p">))</span>
+    
+    <span class="c1"># delete the rows and columns in the shap interaction matrix for the </span>
+    <span class="c1">#   hospitals not attended</span>
+    <span class="n">shap_interaction_attendhosp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">hospitals_remove_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">shap_interaction_attendhosp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">shap_interaction_attendhosp</span><span class="p">,</span> 
+                                            <span class="n">hospitals_remove_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># and remove the not attended hospitals from the column names</span>
+    <span class="n">feature_names_attendhosp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">feature_names_ohe</span><span class="p">,</span> 
+                                     <span class="n">hospitals_remove_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># rename the one hosptial left with the generic &quot;Stroke team&quot; name</span>
+    <span class="n">feature_names_attendhosp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                                    <span class="n">feature_names_attendhosp</span><span class="p">,</span> 
+                                    <span class="sa">f</span><span class="s1">&#39;team_</span><span class="si">{</span><span class="n">attend</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;Stroke team&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># number of features in the resulting shap interaction matrix</span>
+    <span class="n">n_si_features</span> <span class="o">=</span> <span class="n">shap_interaction_attendhosp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># get the indices for the features in each multiple regression</span>
+    <span class="n">patient_features_col_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">feature_names_attendhosp</span><span class="o">==</span><span class="n">f</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+                               <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">patient_features</span><span class="p">]</span>
+    <span class="n">hospital_features_col_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">feature_names_attendhosp</span><span class="o">==</span><span class="n">f</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+                                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">hospital_features</span><span class="p">]</span>
+    
+    <span class="c1"># calculate the different feature values</span>
+    <span class="c1"># 1. SHAP values (without any contribution from hospital not attended)</span>
+    <span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_interaction_attendhosp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># add to list (entry per patient containing value per feature)</span>
+    <span class="n">shap_values_without_unattended_hosp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shap_values</span><span class="p">)</span>
+
+    <span class="c1"># 2. main effect value for each of the features</span>
+    <span class="n">main_effects</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">shap_interaction_attendhosp</span><span class="p">)</span>
+
+    <span class="c1"># add to list (entry per patient contianing value per feature)</span>
+    <span class="n">shap_main_effects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">main_effects</span><span class="p">)</span>
+    
+    <span class="c1"># 3. SHAP interactions within feature subset (patient, hospital)</span>
+    <span class="n">list_of_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">patient_features_col_id</span><span class="p">,</span>
+                    <span class="n">hospital_features_col_id</span><span class="p">]</span>
+
+    <span class="c1"># initialise a zero array with size of number of features (excluding </span>
+    <span class="c1">#   unattended hostpial)</span>
+    <span class="n">within_subset_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_si_features</span><span class="p">))</span>
+    <span class="c1"># Through a list of subset features at a time</span>
+    <span class="k">for</span> <span class="n">features_col_ids</span> <span class="ow">in</span> <span class="n">list_of_list</span><span class="p">:</span> 
+        <span class="c1"># Through features in subset</span>
+        <span class="k">for</span> <span class="n">f1</span> <span class="ow">in</span> <span class="n">features_col_ids</span><span class="p">:</span>
+            <span class="c1"># Take a deep copy of all of the features</span>
+            <span class="n">remaining</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">features_col_ids</span><span class="p">)</span>
+            <span class="c1"># Remove the current feature (get a list of the other features in </span>
+            <span class="c1">#   the subset</span>
+            <span class="n">remaining</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+            <span class="c1"># Initialise a variable to sum the interactions that are with</span>
+            <span class="c1">#   features from the same subset</span>
+            <span class="n">sum_elements</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># Through the other features in the subset</span>
+            <span class="k">for</span> <span class="n">f2</span> <span class="ow">in</span> <span class="n">remaining</span><span class="p">:</span>
+                <span class="n">sum_elements</span> <span class="o">+=</span> <span class="n">shap_interaction_attendhosp</span><span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">]</span>
+            <span class="c1"># Store summed interactions in the array</span>
+            <span class="n">within_subset_array</span><span class="p">[</span><span class="n">f1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum_elements</span>
+    
+    <span class="c1"># add to list (entry per patient contianing value per feature)</span>
+    <span class="n">shap_interactions_within_subset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">within_subset_array</span><span class="p">)</span>
+    
+    <span class="c1"># 4. SHAP interactions outside feature subset</span>
+    <span class="n">across_subsets_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_si_features</span><span class="p">))</span>
+
+    <span class="c1"># Through patient subset features</span>
+    <span class="k">for</span> <span class="n">f1</span> <span class="ow">in</span> <span class="n">patient_features_col_id</span><span class="p">:</span>
+        <span class="c1"># Initialise variable to sum the interactions that are with</span>
+        <span class="c1">#   features from the different subset</span>
+        <span class="n">sum_elements</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Through the features in the other subset</span>
+        <span class="k">for</span> <span class="n">f2</span> <span class="ow">in</span> <span class="n">hospital_features_col_id</span><span class="p">:</span>
+            <span class="n">sum_elements</span> <span class="o">+=</span> <span class="n">shap_interaction_attendhosp</span><span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">]</span>
+        <span class="c1"># Store summed interactions in the array</span>
+        <span class="n">across_subsets_array</span><span class="p">[</span><span class="n">f1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum_elements</span>
+
+    <span class="c1"># Through patient subset features</span>
+    <span class="k">for</span> <span class="n">f1</span> <span class="ow">in</span> <span class="n">hospital_features_col_id</span><span class="p">:</span>
+        <span class="c1"># Initialise variable to sum the interactions that are with</span>
+        <span class="c1">#   features from the different subset</span>
+        <span class="n">sum_elements</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Through the features in the other subset</span>
+        <span class="k">for</span> <span class="n">f2</span> <span class="ow">in</span> <span class="n">patient_features_col_id</span><span class="p">:</span>
+            <span class="n">sum_elements</span> <span class="o">+=</span> <span class="n">shap_interaction_attendhosp</span><span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">]</span>
+        <span class="c1"># Store summed interactions in the array</span>
+        <span class="n">across_subsets_array</span><span class="p">[</span><span class="n">f1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum_elements</span>
+
+    <span class="c1"># add to list (entry per patient contianing value per feature)</span>
+    <span class="n">shap_interactions_across_subsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">across_subsets_array</span><span class="p">)</span>
+
+    <span class="c1"># 5. Subset SHAP value </span>
+    <span class="c1"># (main effect + SHAP interactions within: array2 + array3)</span>
+    <span class="n">main_effect_and_within</span> <span class="o">=</span> <span class="n">main_effects</span> <span class="o">+</span> <span class="n">within_subset_array</span>
+    
+    <span class="c1"># add to list (entry per patient contianing value per feature)</span>
+    <span class="n">subset_shap_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">main_effect_and_within</span><span class="p">)</span>
+    
+<span class="c1"># put lists into dataframe, with features as column title</span>
+<span class="n">df_hosp_shap_values_without_unattended_hosp</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">shap_values_without_unattended_hosp</span><span class="p">,</span> 
+                                     <span class="n">columns</span><span class="o">=</span><span class="n">feature_names_attendhosp</span><span class="p">))</span>
+<span class="n">df_hosp_shap_main_effects</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">shap_main_effects</span><span class="p">,</span> 
+                                     <span class="n">columns</span><span class="o">=</span><span class="n">feature_names_attendhosp</span><span class="p">))</span>
+<span class="n">df_hosp_shap_interactions_within</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">shap_interactions_within_subset</span><span class="p">,</span> 
+                                     <span class="n">columns</span><span class="o">=</span><span class="n">feature_names_attendhosp</span><span class="p">))</span>
+<span class="n">df_hosp_shap_interactions_outside</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">shap_interactions_across_subsets</span><span class="p">,</span> 
+                                     <span class="n">columns</span><span class="o">=</span><span class="n">feature_names_attendhosp</span><span class="p">))</span>
+<span class="n">df_hosp_subset_shap_values</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">subset_shap_values</span><span class="p">,</span> 
+                                     <span class="n">columns</span><span class="o">=</span><span class="n">feature_names_attendhosp</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 33.8 s, sys: 115 ms, total: 33.9 s
+Wall time: 33.9 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check that contributions from hospitals not attended are very small</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the total SHAP value per instance (this is not the predicted value </span>
+<span class="c1">#   as this is not including the base value).</span>
+<span class="n">total_shap_value_per_instance</span> <span class="o">=</span> <span class="n">shap_interactions</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">sv_without_unattended</span> <span class="o">=</span> <span class="n">df_hosp_shap_values_without_unattended_hosp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sv_difference</span> <span class="o">=</span> <span class="n">total_shap_value_per_instance</span> <span class="o">-</span> <span class="n">sv_without_unattended</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sv_difference</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;SHAP contribution from not attended hospitals&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Count&#39;)
+</pre></div>
+</div>
+<img alt="../_images/64540b4ffdae3fcb4d3cbcd2b61a5ffc39a63020a8bba4c65099c819c38d9d9a.png" src="../_images/64540b4ffdae3fcb4d3cbcd2b61a5ffc39a63020a8bba4c65099c819c38d9d9a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;By not including the unattended hospitals in the SHAP values, we are &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;missing between </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sv_difference</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> and &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sv_difference</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> fold difference in odds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>By not including the unattended hospitals in the SHAP values, we are missing between 0.68 and 1.18 fold difference in odds
+</pre></div>
+</div>
+</div>
+</div>
+<p>Most are around the zero mark.</p>
+</section>
+</section>
+<section id="for-each-hospital-calculate-the-mean-feature-shap-value-for-the-attended-patients">
+<h3>For each hospital, calculate the mean feature SHAP value for the attended patients<a class="headerlink" href="#for-each-hospital-calculate-the-mean-feature-shap-value-for-the-attended-patients" title="Permalink to this heading">#</a></h3>
+<p>Here we will use dictionaries to store DataFrames, in place of using dynamic variable names</p>
+<p>We will also want to add hospital IVT rate. Calculate these here first</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate IVT rate per hosptial</span>
+<span class="n">hosp_ivt_rate</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;Thrombolysis&quot;</span><span class="p">]</span>
+<span class="n">hosp_ivt_rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stroke team
+AGNOF1041H    0.352468
+AKCGO9726K    0.369748
+AOBTM3098N    0.218803
+APXEE8191H    0.226481
+ATDID5461S    0.240385
+                ...   
+YPKYH1768F    0.246057
+YQMZV4284N    0.236170
+ZBVSO0975W    0.250000
+ZHCLE1578P    0.223639
+ZRRCV7012C    0.157670
+Name: Thrombolysis, Length: 132, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get set of unique hosptial names</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_stroketeams_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each of the five versions of the SHAP values, calcualte the mean value per set of patients that attend each hospital.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup dictionary for the five dataframe (using key to access them dynamically</span>
+<span class="n">dict_shap_instance_df</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># key</span>
+<span class="n">list_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;without_unattended_hosp&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;main_effects&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;interactions_within&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;interactions_outside&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;subset_shap_values&quot;</span><span class="p">]</span>
+
+<span class="n">dict_shap_instance_df</span><span class="p">[</span><span class="n">list_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df_hosp_shap_values_without_unattended_hosp</span>
+<span class="n">dict_shap_instance_df</span><span class="p">[</span><span class="n">list_keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df_hosp_shap_main_effects</span>
+<span class="n">dict_shap_instance_df</span><span class="p">[</span><span class="n">list_keys</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df_hosp_shap_interactions_within</span>
+<span class="n">dict_shap_instance_df</span><span class="p">[</span><span class="n">list_keys</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df_hosp_shap_interactions_outside</span>
+<span class="n">dict_shap_instance_df</span><span class="p">[</span><span class="n">list_keys</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df_hosp_subset_shap_values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup dictionary for the five dataframe (using key to access them dynamically</span>
+<span class="n">dict_shap_groupby_df</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># key</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">list_keys</span><span class="p">:</span>
+
+    <span class="n">temp_df</span> <span class="o">=</span> <span class="n">dict_shap_instance_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="c1"># Add the team attended for each patient to the dataframe</span>
+    <span class="n">temp_df</span> <span class="o">=</span> <span class="n">temp_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Stroke team&quot;</span><span class="p">],</span> 
+                           <span class="n">rsuffix</span><span class="o">=</span><span class="s1">&#39; attended&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Groupby the stroke team, calculate mean of all features for patients </span>
+    <span class="c1">#   attending each hospital</span>
+    <span class="n">temp_df</span> <span class="o">=</span> <span class="n">temp_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Stroke team attended&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># Add thrombolysis rate to each dataframe</span>
+    <span class="n">temp_df</span> <span class="o">=</span> <span class="n">temp_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hosp_ivt_rate</span><span class="p">)</span>
+    
+    <span class="c1"># Add dataframe to dictionary</span>
+    <span class="n">dict_shap_groupby_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fit-regressions-to-processed-data">
+<h2>Fit regressions to processed data<a class="headerlink" href="#fit-regressions-to-processed-data" title="Permalink to this heading">#</a></h2>
+<p>We will fit</p>
+<ul class="simple">
+<li><p>a linear regression for all the features against a target feature (thrombolysis rate).</p></li>
+<li><p>using multiple linear regression to predict the hospitals thrombolysis rate from a subset of features.</p></li>
+</ul>
+<p>Define a function to fit and plot a linear regressions for all the features against a target feature</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_regressions</span><span class="p">(</span><span class="n">df_hosp_mean</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">x_label_text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit and plot a linear regression for all the features in the features list</span>
+<span class="sd">    against the target feature (Thrombolysis rate).</span>
+<span class="sd">    </span>
+<span class="sd">    df_hosp_mean [pandas DataFrame]: column per feature, row per hospital, value</span>
+<span class="sd">                              is mean for instances that attend that hospital</span>
+<span class="sd">    features [list]: Features to individually fit a linear regression against </span>
+<span class="sd">                     the hospital thrombolysis rate</span>
+<span class="sd">    x_label_text [str]: Text to use in first part of x axis label string</span>
+<span class="sd">    Return []: empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">((</span><span class="n">n_features</span> <span class="o">/</span> <span class="n">cols</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">((</span><span class="mi">6</span><span class="o">*</span><span class="n">cols</span><span class="p">),(</span><span class="mi">6</span><span class="o">*</span><span class="n">rows</span><span class="p">)))</span>
+    
+    <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span> 
+        <span class="c1"># Setup data for chart</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">df_hosp_mean</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">df_hosp_mean</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Fit a regression line to the x2 points</span>
+        <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
+            <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">r_square</span> <span class="o">=</span> <span class="n">r_value</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
+
+        <span class="c1"># Create scatter plot with regression line</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="n">count</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x_label_text</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s2"> &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(mean of the instances that attend the hospital)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+        <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="c1"># Add  text</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slope</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;x + &#39;</span> <span class="o">+</span> 
+              <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intercept</span><span class="p">)))</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1">p: &#39;</span>
+                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="se">\n</span><span class="s1">formula: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    
+        <span class="n">x_placement</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">+</span> <span class="mf">0.05</span><span class="o">*</span><span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span>
+        <span class="n">y_placement</span> <span class="o">=</span> <span class="n">ymax</span> <span class="o">-</span> <span class="mf">0.15</span><span class="o">*</span><span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_placement</span><span class="p">,</span> <span class="n">y_placement</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span>
+                 <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
+
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define a function to fit and plot a multiple regression on a set of features vs thrombolysis rate</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_and_plot_multiple_regression</span><span class="p">(</span><span class="n">df_hosp_mean</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">x_label_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+                                     <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    df_hosp_mean contains the data, features contain the columns to plot as a </span>
+<span class="sd">    multiple regression against the thrombolysis rate.</span>
+<span class="sd">    </span>
+<span class="sd">    df_hosp_mean [DataFrame]:column per feature, row per hospital, value is </span>
+<span class="sd">                             mean for instances that attend that hospital</span>
+<span class="sd">    features [list]: list of feature names (column titles in df_hosp_mean) to </span>
+<span class="sd">                     include in the multiple regression</span>
+<span class="sd">    x_label_text [str]: Text to use in x axis label</span>
+<span class="sd">    ax [matplotlib ax object]: matplotlib ax object</span>
+<span class="sd">    return [matplotlib ax object]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df_hosp_mean</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">df_hosp_mean</span><span class="p">[</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">]</span>
+
+    <span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">df_reg_coeff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">features</span><span class="p">,</span> 
+                                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;coeff&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df_reg_coeff</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    
+    <span class="c1"># performance</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="c1"># Fit a regression line to the obs and pred IVT use</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> \
+        <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">r_square</span> <span class="o">=</span> <span class="n">r_value</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">y_pred_line</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">slope</span><span class="p">)</span>
+    
+    <span class="c1"># Create scatter plot with regression line</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">y_pred_line</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+    <span class="n">axis_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">)</span>
+    <span class="n">axis_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">axis_min</span><span class="p">,</span> <span class="n">axis_max</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">axis_min</span><span class="p">,</span> <span class="n">axis_max</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hospital thrombolysis rate</span><span class="se">\n</span><span class="s1">(predicted</span><span class="si">{</span><span class="n">x_label_text</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Hospital thrombolysis rate (observed)&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="c1"># Add  text</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slope</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;x + &#39;</span> <span class="o">+</span> 
+          <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intercept</span><span class="p">)))</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1">p: &#39;</span>
+             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="se">\n</span><span class="s1">formula: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">x_placement</span> <span class="o">=</span> <span class="n">axis_min</span> <span class="o">+</span> <span class="mf">0.05</span><span class="o">*</span><span class="p">(</span><span class="n">axis_max</span> <span class="o">-</span> <span class="n">axis_min</span><span class="p">)</span>
+    <span class="n">y_placement</span> <span class="o">=</span> <span class="n">axis_max</span> <span class="o">-</span> <span class="mf">0.15</span><span class="o">*</span><span class="p">(</span><span class="n">axis_max</span> <span class="o">-</span> <span class="n">axis_min</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_placement</span><span class="p">,</span> <span class="n">y_placement</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span>
+             <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each of the five types of SHAP value is stored in a dataframe, stored in a dictionary, accessed using a key.</p>
+<p>For each SHAP type, fit:</p>
+<ol class="arabic simple">
+<li><p>A <em>linear regression</em> of each feature vs. hosptial thrombolysis rate</p></li>
+<li><p>A <em>muiltiple linear regression</em> using two subsets of features (i. patient features, ii. hospital features) to predict the hosptial thrombolysis rate.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SHAP values without unattended hospitals&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;SHAP main effect&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;SHAP interactions within&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;SHAP interactions outside&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Subset SHAP values&quot;</span><span class="p">]</span>
+
+<span class="c1"># Through each of the five SHAP value versions</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list_keys</span><span class="p">,</span> <span class="n">list_titles</span><span class="p">):</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dict_shap_groupby_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;********************************&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">). </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;********************************&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Linear regression between hosptial IVT rate and each patient &quot;</span>
+          <span class="s2">&quot;feature (mean for attended patients)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">()</span>
+    <span class="n">plot_regressions</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">patient_features</span><span class="p">,</span> <span class="n">title</span> <span class="o">+</span> <span class="s2">&quot; for&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">()</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiple linear regression to predict hosptial IVT rate from &quot;</span>
+          <span class="s2">&quot;patient features (mean for attended patients)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">()</span>
+    <span class="n">fit_and_plot_multiple_regression</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">patient_features</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="p">()</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Linear regression between hospital IVT rate and each hospital &quot;</span>
+          <span class="s2">&quot;feature (mean for attended patients)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">()</span>
+    <span class="n">plot_regressions</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hospital_features</span><span class="p">,</span> <span class="n">title</span> <span class="o">+</span> <span class="s2">&quot; for&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiple linear regression to predict hospital IVT rate from &quot;</span>
+          <span class="s2">&quot;hospital features (mean for attended patients)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">()</span>
+    <span class="n">fit_and_plot_multiple_regression</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hospital_features</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
+1). SHAP values without unattended hospitals
+********************************
+
+Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/29848df4593b4b33106c5e6c624f19f4d9b7ef1453563fef36fd51c0ecde53ec.png" src="../_images/29848df4593b4b33106c5e6c624f19f4d9b7ef1453563fef36fd51c0ecde53ec.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
+
+                             coeff
+Infarction                0.040841
+Stroke severity           0.138831
+Precise onset time        0.057969
+Prior disability level    0.046839
+Use of AF anticoagulants -0.057981
+Onset-to-arrival time     0.055069
+Onset during sleep        0.120940
+Age                       1.053469
+</pre></div>
+</div>
+<img alt="../_images/d3b1a6eda11e84b429980a9bf351e281ad4e274b458d432e67af608756a34d0f.png" src="../_images/d3b1a6eda11e84b429980a9bf351e281ad4e274b458d432e67af608756a34d0f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/9acd69333ddb27289fb335de3acec13b1e4b498d173bd812332273fd7dca796b.png" src="../_images/9acd69333ddb27289fb335de3acec13b1e4b498d173bd812332273fd7dca796b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
+
+                         coeff
+Arrival-to-scan time  0.080042
+Stroke team           0.107340
+</pre></div>
+</div>
+<img alt="../_images/12cf40fc716d1e0c07c1e5a605d05125d8ecd7aa25db33049e89f271842ecc76.png" src="../_images/12cf40fc716d1e0c07c1e5a605d05125d8ecd7aa25db33049e89f271842ecc76.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
+2). SHAP main effect
+********************************
+
+Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/b43fb866ed38e0c23c3d88aff139d0afb96ebcbbca06f54f6867d06688d02d6b.png" src="../_images/b43fb866ed38e0c23c3d88aff139d0afb96ebcbbca06f54f6867d06688d02d6b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
+
+                             coeff
+Infarction                0.044203
+Stroke severity           0.161030
+Precise onset time        0.052356
+Prior disability level    0.041763
+Use of AF anticoagulants  0.004634
+Onset-to-arrival time    -0.332927
+Onset during sleep        0.216030
+Age                       0.793499
+</pre></div>
+</div>
+<img alt="../_images/677089fb059aec0b4704e2a60060a038bb7ff8c757f468e86250fac42787eae3.png" src="../_images/677089fb059aec0b4704e2a60060a038bb7ff8c757f468e86250fac42787eae3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/82b64e9e7c2c9613126b5fbb929226b9433db8095f4b788ec3d566c411169809.png" src="../_images/82b64e9e7c2c9613126b5fbb929226b9433db8095f4b788ec3d566c411169809.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
+
+                         coeff
+Arrival-to-scan time  0.078443
+Stroke team           0.104766
+</pre></div>
+</div>
+<img alt="../_images/0e9f4b275a0fb0ff4560fde97afc014c11399633aeffce65a39230beb2c52abb.png" src="../_images/0e9f4b275a0fb0ff4560fde97afc014c11399633aeffce65a39230beb2c52abb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
+3). SHAP interactions within
+********************************
+
+Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/f15f98977433224dfb8ad8b6ceb4a0324f93c34d6b64c24f4381c8b0763a64a6.png" src="../_images/f15f98977433224dfb8ad8b6ceb4a0324f93c34d6b64c24f4381c8b0763a64a6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
+
+                             coeff
+Infarction               -0.857990
+Stroke severity           0.876208
+Precise onset time       -0.373399
+Prior disability level    1.872548
+Use of AF anticoagulants  2.636026
+Onset-to-arrival time     0.489986
+Onset during sleep        1.599541
+Age                       0.020306
+</pre></div>
+</div>
+<img alt="../_images/c9db3ecd3aa40e8d39b37b24041fa91533ee445c7a23a9dbde0a11e014112b33.png" src="../_images/c9db3ecd3aa40e8d39b37b24041fa91533ee445c7a23a9dbde0a11e014112b33.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/fc7f0c697806316484706db059cf58db16a7b87dc18070a4f83c1f443fb361d7.png" src="../_images/fc7f0c697806316484706db059cf58db16a7b87dc18070a4f83c1f443fb361d7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
+
+                              coeff
+Arrival-to-scan time -311138.315711
+Stroke team           311138.273753
+</pre></div>
+</div>
+<img alt="../_images/36d7209d95799de7e7fb59bf34307e07b207c7f6fbcf9807c4d57cfb5cc5ac6c.png" src="../_images/36d7209d95799de7e7fb59bf34307e07b207c7f6fbcf9807c4d57cfb5cc5ac6c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
+4). SHAP interactions outside
+********************************
+
+Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/48caf55f46d5c63b8b75a3ce4ca050cfd6f7875b7b1f2d7888ce0fa82fb067b2.png" src="../_images/48caf55f46d5c63b8b75a3ce4ca050cfd6f7875b7b1f2d7888ce0fa82fb067b2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
+
+                             coeff
+Infarction               -1.518389
+Stroke severity          -0.107786
+Precise onset time        0.026807
+Prior disability level    0.088766
+Use of AF anticoagulants -1.447954
+Onset-to-arrival time     1.304490
+Onset during sleep        0.118613
+Age                       0.548842
+</pre></div>
+</div>
+<img alt="../_images/52a088e9960ebf89f559e5575e1ca570419891b6664886d7d145809f8f5bcbdb.png" src="../_images/52a088e9960ebf89f559e5575e1ca570419891b6664886d7d145809f8f5bcbdb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/205b278e2e9b25c9407066090a1ffe9474ef70c7c9714f322ec142d6421398b7.png" src="../_images/205b278e2e9b25c9407066090a1ffe9474ef70c7c9714f322ec142d6421398b7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
+
+                         coeff
+Arrival-to-scan time -0.648343
+Stroke team           0.062870
+</pre></div>
+</div>
+<img alt="../_images/db9ede867e72136e915bdb6e1a7f3f6f817c3e9acfbab79ec6a204055875bac3.png" src="../_images/db9ede867e72136e915bdb6e1a7f3f6f817c3e9acfbab79ec6a204055875bac3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
+5). Subset SHAP values
+********************************
+
+Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/f032ee6cfad8a3a02e65ee61dd42314e6c9c9f53ca5cc37333047f317fec46c1.png" src="../_images/f032ee6cfad8a3a02e65ee61dd42314e6c9c9f53ca5cc37333047f317fec46c1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
+
+                             coeff
+Infarction                0.041541
+Stroke severity           0.149400
+Precise onset time        0.065744
+Prior disability level    0.047780
+Use of AF anticoagulants  0.032430
+Onset-to-arrival time    -0.275901
+Onset during sleep        0.181704
+Age                       1.033392
+</pre></div>
+</div>
+<img alt="../_images/2acf2d1a435d8d2cd39e70c1a763c244bd7a2aa27c3d6705829c55f7aa428955.png" src="../_images/2acf2d1a435d8d2cd39e70c1a763c244bd7a2aa27c3d6705829c55f7aa428955.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
+</pre></div>
+</div>
+<img alt="../_images/77e20c02547398d1e40e2a19414ea93e7e0104379d4781399bf79295d0a84f8a.png" src="../_images/77e20c02547398d1e40e2a19414ea93e7e0104379d4781399bf79295d0a84f8a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
+
+                         coeff
+Arrival-to-scan time  0.078743
+Stroke team           0.106717
+</pre></div>
+</div>
+<img alt="../_images/3ea3677d01098ca2f848e30d03789ee13a1982f8e9d10e8d589185c698747eee.png" src="../_images/3ea3677d01098ca2f848e30d03789ee13a1982f8e9d10e8d589185c698747eee.png" />
+</div>
+</div>
+<section id="create-plot-for-paper-compilation-of-some-of-the-above-plots">
+<h3>Create plot for paper (compilation of some of the above plots)<a class="headerlink" href="#create-plot-for-paper-compilation-of-some-of-the-above-plots" title="Permalink to this heading">#</a></h3>
+<p>Plot fit from regressions vs IVT rate per hospital for 1) subset SHAP values for patient features 2) subset SHAP values for hospital features 3) subset SHAP values for all features (patient and hospital).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;subset_shap_values&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dict_shap_groupby_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+<span class="c1"># Create plots with 3 subplots</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiple linear regression using just patient feature subset SHAP values&quot;</span>
+      <span class="s2">&quot; to predict hospital IVT rates&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># LHS figure of multiple regression with patient contributions</span>
+<span class="n">fit_and_plot_multiple_regression</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">patient_features</span><span class="p">,</span> 
+    <span class="n">x_label_text</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot; from subset SHAP values</span><span class="se">\n</span><span class="s2">for patient descriptive features&quot;</span><span class="p">),</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiple regression using just hospital feature subset SHAP values to &quot;</span>
+      <span class="s2">&quot;predict hospital IVT rates&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># LHS figure of multiple regression with patient contributions</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fit_and_plot_multiple_regression</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">hospital_features</span><span class="p">,</span> 
+    <span class="n">x_label_text</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot; from subset SHAP values</span><span class="se">\n</span><span class="s2">for hospital descriptive features&quot;</span><span class="p">),</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiple regression using hospital and patient feature subset SHAP &quot;</span>
+      <span class="s2">&quot;values to predict hospital IVT rates&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># LHS figure of multiple regression with patient contributions</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fit_and_plot_multiple_regression</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="p">(</span><span class="n">hospital_features</span> <span class="o">+</span> <span class="n">patient_features</span><span class="p">),</span> 
+    <span class="n">x_label_text</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot; from subset SHAP values</span><span class="se">\n</span><span class="s2">for hospital and patient descriptive &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;features&quot;</span><span class="p">),</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Save figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;_multiple_regression_patient_hospital.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression using just patient feature subset SHAP values to predict hospital IVT rates
+
+                             coeff
+Infarction                0.041541
+Stroke severity           0.149400
+Precise onset time        0.065744
+Prior disability level    0.047780
+Use of AF anticoagulants  0.032430
+Onset-to-arrival time    -0.275901
+Onset during sleep        0.181704
+Age                       1.033392
+
+
+Multiple regression using just hospital feature subset SHAP values to predict hospital IVT rates
+
+                         coeff
+Arrival-to-scan time  0.078743
+Stroke team           0.106717
+
+
+Multiple regression using hospital and patient feature subset SHAP values to predict hospital IVT rates
+
+                             coeff
+Arrival-to-scan time      0.057419
+Stroke team               0.112744
+Infarction                0.037032
+Stroke severity           0.088508
+Precise onset time        0.133341
+Prior disability level    0.095554
+Use of AF anticoagulants  0.141731
+Onset-to-arrival time    -0.058397
+Onset during sleep        0.100957
+Age                       0.139023
+</pre></div>
+</div>
+<img alt="../_images/5f35931f144b569379dcf7bfdef819444f5b935a5fb69869a9fc95d1ad221593.png" src="../_images/5f35931f144b569379dcf7bfdef819444f5b935a5fb69869a9fc95d1ad221593.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="save-data-to-file">
+<h2>Save data to file<a class="headerlink" href="#save-data-to-file" title="Permalink to this heading">#</a></h2>
+<p>Create a table with a row per patient with five columns (all raw values, not absolute):</p>
+<ul class="simple">
+<li><p>sum P contributions</p></li>
+<li><p>sum h contributions</p></li>
+<li><p>sum hpph contributions</p></li>
+<li><p>sum not attended hospital contributions</p></li>
+<li><p>total SHAP value</p></li>
+</ul>
+<p>To check if results are correlated with embedding-NN output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. The patient features</span>
+
+<span class="c1"># sum the main effects</span>
+<span class="n">total_p_main_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df_hosp_shap_main_effects</span><span class="p">[</span><span class="n">patient_features</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># sum the interactions with other patient features</span>
+<span class="n">total_p_interaction_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df_hosp_shap_interactions_within</span><span class="p">[</span><span class="n">patient_features</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># sum patient contributions</span>
+<span class="n">total_p_contributions_per_instance</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_p_main_per_instance</span> <span class="o">+</span> 
+                                      <span class="n">total_p_interaction_per_instance</span><span class="p">)</span>
+
+<span class="c1"># proportion of patient contributions from interactions</span>
+<span class="n">total_p_interactions_proportion_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">total_p_interaction_per_instance</span><span class="o">/</span><span class="n">total_p_contributions_per_instance</span><span class="p">)</span>
+
+<span class="c1"># 2. The hospital features</span>
+
+<span class="c1"># sum the main effects</span>
+<span class="n">total_h_main_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df_hosp_shap_main_effects</span><span class="p">[</span><span class="n">hospital_features</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># sum the interactions with other hospital features</span>
+<span class="n">total_h_interaction_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df_hosp_shap_interactions_within</span><span class="p">[</span><span class="n">hospital_features</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># sum hospital contributions</span>
+<span class="n">total_h_contributions_per_instance</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_h_main_per_instance</span> <span class="o">+</span> 
+                                      <span class="n">total_h_interaction_per_instance</span><span class="p">)</span>
+
+<span class="c1"># proportion of hospital contributions from interactions</span>
+<span class="n">total_h_interactions_proportion_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">total_h_interaction_per_instance</span><span class="o">/</span><span class="n">total_h_contributions_per_instance</span><span class="p">)</span>
+
+<span class="c1"># 3. Hospital-patient interactions</span>
+<span class="n">total_hpph_contributions_per_instance</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="n">df_hosp_shap_interactions_outside</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># 4. From unattended hospitals</span>
+<span class="n">total_unattended_h_per_instance</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_shap_value_per_instance</span> <span class="o">-</span> 
+                                   <span class="p">(</span><span class="n">total_p_contributions_per_instance</span> <span class="o">+</span>
+                                    <span class="n">total_h_contributions_per_instance</span> <span class="o">+</span>
+                                    <span class="n">total_hpph_contributions_per_instance</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sum_p_contributions&quot;</span><span class="p">,</span> <span class="s2">&quot;sum_h_contributions&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;sum_hpph_contributions&quot;</span><span class="p">,</span> <span class="s2">&quot;sum_h_unattended_contributions&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;total_shap_value&quot;</span><span class="p">]</span>
+
+<span class="n">df_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">total_p_contributions_per_instance</span><span class="p">,</span> 
+                     <span class="n">total_h_contributions_per_instance</span><span class="p">,</span> 
+                     <span class="n">total_hpph_contributions_per_instance</span><span class="p">,</span>
+                     <span class="n">total_unattended_h_per_instance</span><span class="p">,</span>
+                     <span class="n">total_shap_value_per_instance</span><span class="p">,</span>
+                     <span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">df_to_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_shap</span><span class="p">,</span> 
+                          <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">df_to_file</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">&#39;</span>
+                  <span class="sa">f</span><span class="s1">&#39;_shap_p_h_hpph_contributions.csv&#39;</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Save dictionary of dataframes (for use in another notebook).</p>
+<p>This dictionary used five keys to access the five dataframes containing a different version of SHAP value (per feature, per instance): “without_unattended_hosp”, “main_effects”, “interactions_within”, “interactions_outside”, “subset_shap_values”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;dict_of_shap_subset_values_dataframes.p&#39;</span><span class="p">)</span> 
+
+<span class="c1"># Save dictionary of dataframes using pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dict_shap_instance_df</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./xgb_10_features"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How much of the variation in the hosptials thrombolysis rate can be attributed to the difference in the hospital processes, and to different patient populations?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_xgb_10k_cohort_key_features.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A comparison of 10k cohort thrombolysis rates across hospitals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plain-english-summary">Plain English summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-data">Model and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims">Aims</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-filenames">Set filenames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-folders-if-needed">Create output folders if needed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-json-file">Read in JSON file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-data">Edit data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">Divide into X (features) and y (labels)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encode-hospital-feature">One-hot encode hospital feature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-model-feature-names">Get model feature names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-shap-interactions">Get SHAP interactions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-data">Prepare the data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-two-subset-of-features">Define the two subset of features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-shap-values-for-unattended-hostpials">Remove SHAP values for unattended hostpials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-values-without-any-information-on-hospital-attended">1) SHAP values without any information on hospital attended</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-effect-value-for-each-of-the-features">2) Main effect value for each of the features</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interactions-with-another-feature-in-it-s-subset-patient-or-hospital">3) SHAP interactions with another feature in it’s subset (patient or hospital)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-interactions-with-a-feature-in-the-other-subset">4) SHAP interactions with a feature in the other subset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shap-subset-value-main-effect-shap-interaction-with-another-feature-in-it-s-subset">5) SHAP subset value (main effect + SHAP interaction with another feature in it’s subset)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-each-hospital-calculate-the-mean-feature-shap-value-for-the-attended-patients">For each hospital, calculate the mean feature SHAP value for the attended patients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-regressions-to-processed-data">Fit regressions to processed data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-plot-for-paper-compilation-of-some-of-the-above-plots">Create plot for paper (compilation of some of the above plots)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-to-file">Save data to file</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kerry Pearn, Michael Allen, Anna Laws, Richard Everson, and Martin James
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
