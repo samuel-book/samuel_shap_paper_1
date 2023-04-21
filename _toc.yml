@@ -10,27 +10,21 @@ parts:
   - file: xgb_10_features/90_shap_interactions_on_titanic
 - caption: Predicting thrombolysis use and explaining the predictions with Shap
   chapters:
+  - file: xgb_10_features/91_learning_rate_optimisation
   - file: xgb_10_features/01_xgb_combined_fit_feature_selection
   - file: xgb_10_features/07_correlation
   - file: xgb_10_features/02_xgb_combined_fit_accuracy_key_features
-  - file: xgb_10_features/02a_xgb_combined_fit_most_thrombolysable_patients
   - file: xgb_10_features/03_xgb_combined_shap_key_features
-- caption: Comparing thrombolysis decisions between hospitals
+  - file: xgb_10_features/03a_xgb_all_data_shap_values_vs_feature_values
+  - file: xgb_10_features/03b_xgb_all_data_shap_values_focus_on_ohe_hospitals
+  - file: xgb_10_features/03c_xgb_all_data_shap_interaction_values_focus_on_ohe_hospitals
+  - file: xgb_10_features/03d_xgb_all_data_shap_values_and_interaction_values_focus_on_ohe_hospitals
+  - file: xgb_10_features/03e_xgb_shap_value_and_main_effect_regressions_on_hospital_ivt_rate
+  - file: xgb_10_features/03f_xgb_subset_shap_value_regressions_on_hospital_ivt_rate
+- caption: Using a 10k cohort of patients to compare decision-making
   chapters:
-  - file: xgb_10_features/04_compare_10k_cohort_key_features
-  - file: xgb_10_features/15_10k_thrombolysis_subgroups
-  - file: xgb_10_features/15a_observed_thrombolysis_subgroup_analysis
-  - file: xgb_10_features/05_compare_benchmark_decisions_key_features
-  - file: xgb_10_features/08_xgb_combined_fit_shap_high_vs_low_thrombolysing_units
-  - file: xgb_10_features/09_plot_thrombolysis_at_high_vs_low_thrombolysing_units
-  - file: xgb_10_features/03c_xgb_shap_values_and_interaction_values_focus_on_ohe_hospitals
-  - file: xgb_10_features/12a_xgb_shap_interactions
-  - file: xgb_10_features/12aa_xgb_shap_interactions_focus_on_onsettime
-  - file: xgb_10_features/12ab_xgb_shap_interactions_focus_on_severity
-  - file: xgb_10_features/12ac_xgb_shap_interactions_focus_on_disability
-  - file: xgb_10_features/20_synthetic_patients
-  - file: xgb_10_features/21_synthetic_all_teams_waterfall
-- caption: Appendix
-  chapters:
-  - file: xgb_10_features/50_bagging_variation 
-  - file: xgb_10_features/91_learning_rate_optimisation
+  - file: xgb_10_features/04_xgb_10k_cohort_key_features
+  - file: xgb_10_features/04a_xgb_10k_cohort_shap_values_interaction_values
+  - file: xgb_10_features/04b_xgb_10k_cohort_thrombolysis_subgroups
+  - file: xgb_10_features/04c_xgb_10k_cohort​_vs_observed_thrombolysis_subgroups
+
