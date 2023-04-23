@@ -359,7 +359,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-average-shap-value-and-main-effect-for-each-attended-hospital-for-10k-cohort-attending-that-hospital">Get average SHAP (value, and main effect) for each attended hospital (for 10k cohort attending that hospital)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-figure-for-paper">Additional figure (for paper)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-figures-for-paper">Additional figures (for paper)</a></li>
 </ul>
             </nav>
         </div>
@@ -705,11 +705,13 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_SHAP_values.csv&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_values.p&#39;</span>
 <span class="n">file_exists</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">file_exists</span><span class="p">:</span>
-    <span class="n">df_hosp_shap_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1"># Load SHAP values (in a dictionary, using hospital as a key</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">df_hosp_shap_values</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="c1"># Get list of hospital one hot encoded column titles</span>
     <span class="n">hospitals_ohe</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;^team&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
@@ -755,6 +757,10 @@ document.write(`
 
         <span class="c1"># Add to master DataFrame</span>
         <span class="n">df_hosp_shap_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_hosp_shap_values</span><span class="p">,</span> <span class="n">df_temp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+    <span class="c1"># Save using pickle</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">df_hosp_shap_values</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
 
 <span class="c1"># View preview</span>
 <span class="n">df_hosp_shap_values</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -1784,8 +1790,8 @@ The range of SHAP main effect values for the not attended hospitals are -0.11  t
 </div>
 </section>
 </section>
-<section id="additional-figure-for-paper">
-<h2>Additional figure (for paper)<a class="headerlink" href="#additional-figure-for-paper" title="Permalink to this heading">#</a></h2>
+<section id="additional-figures-for-paper">
+<h2>Additional figures (for paper)<a class="headerlink" href="#additional-figures-for-paper" title="Permalink to this heading">#</a></h2>
 <p>Include just the SHAP value vs thrombolysis rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1830,6 +1836,52 @@ The range of SHAP main effect values for the not attended hospitals are -0.11  t
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/9cee2a4457ca98ff98911277625b7740b02fb2bac698e50776cf0a5d5e1989de.png" src="../_images/9cee2a4457ca98ff98911277625b7740b02fb2bac698e50776cf0a5d5e1989de.png" />
+</div>
+</div>
+<p>Include just the SHAP main effect value vs thrombolysis rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup data for chart</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df_hosp_plot</span><span class="p">[</span><span class="s1">&#39;mean SHAP main effect&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_hosp_plot</span><span class="p">[</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">]</span>
+
+<span class="c1"># Fit a regression line to the x points</span>
+<span class="n">slope1</span><span class="p">,</span> <span class="n">intercept1</span><span class="p">,</span> <span class="n">r_value1</span><span class="p">,</span> <span class="n">p_value1</span><span class="p">,</span> <span class="n">std_err1</span> <span class="o">=</span> \
+    <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">r_square1</span> <span class="o">=</span> <span class="n">r_value1</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">y_pred1</span> <span class="o">=</span> <span class="n">intercept1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">slope1</span><span class="p">)</span>
+
+<span class="c1"># Create scatter plot with regression line</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Attended hospital SHAP main effect value&quot;</span>
+              <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(mean of the instances that attend the hospital)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Thrombolysis rate&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Add text</span>
+<span class="n">text1</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square1</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">text1</span><span class="p">,</span> 
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
+
+<span class="c1"># Save figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;_attended_hosp_shap_maineffect_vs_ivt_rate.jpg&#39;</span><span class="p">,</span> 
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fac440570206fe84d2f0fb74e4092139bf81ea3a86553dbd293c4ed7d8b61832.png" src="../_images/fac440570206fe84d2f0fb74e4092139bf81ea3a86553dbd293c4ed7d8b61832.png" />
 </div>
 </div>
 </section>
@@ -1934,7 +1986,7 @@ The range of SHAP main effect values for the not attended hospitals are -0.11  t
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-average-shap-value-and-main-effect-for-each-attended-hospital-for-10k-cohort-attending-that-hospital">Get average SHAP (value, and main effect) for each attended hospital (for 10k cohort attending that hospital)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-figure-for-paper">Additional figure (for paper)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-figures-for-paper">Additional figures (for paper)</a></li>
 </ul>
   </nav></div>
 

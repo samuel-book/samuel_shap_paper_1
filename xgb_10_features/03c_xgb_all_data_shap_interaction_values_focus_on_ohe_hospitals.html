@@ -455,10 +455,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/kerry/miniconda3/envs/samuel2/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/miniconda3/envs/sam8/lib/python3.8/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
   from pandas import MultiIndex, Int64Index
-/home/kerry/miniconda3/envs/samuel2/lib/python3.8/site-packages/tqdm/auto.py:22: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -634,14 +632,15 @@ By convention our features are called <code class="docutils literal notranslate"
     <span class="n">shap_interactions</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_interaction_values</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     
     <span class="c1"># Save using pickle</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_shap_interactions.p&#39;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
         <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">shap_interactions</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 48 ms, sys: 3.09 s, total: 3.14 s
-Wall time: 7.35 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 8h 48min 31s, sys: 1min 32s, total: 8h 50min 3s
+Wall time: 15min 27s
 </pre></div>
 </div>
 </div>
@@ -959,7 +958,7 @@ In this case, each of the 88792 instances has a 139x139 matrix of SHAP interacti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2f578cf703d0b40c6b17c31503bf029c27362761e52d0a2b1eae40139a9f2762.png" src="../_images/2f578cf703d0b40c6b17c31503bf029c27362761e52d0a2b1eae40139a9f2762.png" />
+<img alt="../_images/ad09434e05a1d60b4bd21995ab645e0b74ae39ff0d13ef8beeca0cac2a957f93.png" src="../_images/ad09434e05a1d60b4bd21995ab645e0b74ae39ff0d13ef8beeca0cac2a957f93.png" />
 </div>
 </div>
 </section>
@@ -1035,7 +1034,7 @@ In this case, each of the 88792 instances has a 139x139 matrix of SHAP interacti
       <td>CNBGF2713O</td>
       <td>1.195877</td>
       <td>1.314107</td>
-      <td>1.351095</td>
+      <td>1.351094</td>
       <td>1.393786</td>
       <td>1.508929</td>
     </tr>
@@ -1062,7 +1061,7 @@ In this case, each of the 88792 instances has a 139x139 matrix of SHAP interacti
       <td>MHMYL4920B</td>
       <td>0.753430</td>
       <td>0.946048</td>
-      <td>0.964973</td>
+      <td>0.964972</td>
       <td>0.986911</td>
       <td>1.103224</td>
     </tr>
@@ -1307,7 +1306,7 @@ In this case, each of the 88792 instances has a 139x139 matrix of SHAP interacti
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shows the range of contributions to the prediction from this hospital when patients 1) do [black], and 2) do not [orange] attend this hosptial
 </pre></div>
 </div>
-<img alt="../_images/41c3f1b094ff8adcd326e79549630e392f88dae58aaafe3a43c86e8d92c6e15e.png" src="../_images/41c3f1b094ff8adcd326e79549630e392f88dae58aaafe3a43c86e8d92c6e15e.png" />
+<img alt="../_images/2d89df9134d72effe4f5a50baac57a2acec810c0a4d31bc917a054b3e46a16d0.png" src="../_images/2d89df9134d72effe4f5a50baac57a2acec810c0a4d31bc917a054b3e46a16d0.png" />
 </div>
 </div>
 <p>Notice that when patients do not attend the hospital the range of the SHAP values are largely centred on zero.
@@ -1385,7 +1384,7 @@ There are 4 hospitals whose interquartile range is zero
   <tbody>
     <tr>
       <th>CNBGF2713O</th>
-      <td>1.351095</td>
+      <td>1.351094</td>
       <td>0.480263</td>
     </tr>
     <tr>
@@ -1400,7 +1399,7 @@ There are 4 hospitals whose interquartile range is zero
     </tr>
     <tr>
       <th>MHMYL4920B</th>
-      <td>0.964973</td>
+      <td>0.964972</td>
       <td>0.473792</td>
     </tr>
     <tr>
@@ -1420,7 +1419,7 @@ There are 4 hospitals whose interquartile range is zero
     </tr>
     <tr>
       <th>LGNPK4211W</th>
-      <td>-1.050425</td>
+      <td>-1.050424</td>
       <td>0.227181</td>
     </tr>
     <tr>
@@ -1486,7 +1485,7 @@ There are 4 hospitals whose interquartile range is zero
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/73b8fe4b7c0490cc6939ff6296a91952d5be1c78a9b76506d66a82fdb44e3260.png" src="../_images/73b8fe4b7c0490cc6939ff6296a91952d5be1c78a9b76506d66a82fdb44e3260.png" />
+<img alt="../_images/572c1755fb01325b3cd88583b4e60fd484c1a4e0a8d73fd168e45ba4f3d91c34.png" src="../_images/572c1755fb01325b3cd88583b4e60fd484c1a4e0a8d73fd168e45ba4f3d91c34.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1797,7 +1796,7 @@ QTELJ8888W has SHAP value 0.0 for all instances
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The count of unique SHAP main effect values for each hospital
 </pre></div>
 </div>
-<img alt="../_images/078af1f574f2b4605bffa85f9ecbdb72250d3c066ed050c4e5e630b0a653f937.png" src="../_images/078af1f574f2b4605bffa85f9ecbdb72250d3c066ed050c4e5e630b0a653f937.png" />
+<img alt="../_images/e939e703a4e8e22f6fa709c47fcd708cee7a1aa99553e857576c55bc7d2c7cbc.png" src="../_images/e939e703a4e8e22f6fa709c47fcd708cee7a1aa99553e857576c55bc7d2c7cbc.png" />
 </div>
 </div>
 <p>Is there a relationship between number of unique SHAP main effect values, and hospital admission numnbers?</p>
@@ -1861,9 +1860,9 @@ QTELJ8888W has SHAP value 0.0 for all instances
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;admissions&#39;, ylabel=&#39;number_of_unique_shap_values_not_attend&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/55c071207c8775ee55b8051cc3602f9ef1be97341977d60014367f0e27c6812f.png" src="../_images/55c071207c8775ee55b8051cc3602f9ef1be97341977d60014367f0e27c6812f.png" />
-<img alt="../_images/13f766e835ffe4c31e0adc8d1f0f966de79cf3a93ae9b627647bde72cdbc4ea7.png" src="../_images/13f766e835ffe4c31e0adc8d1f0f966de79cf3a93ae9b627647bde72cdbc4ea7.png" />
-<img alt="../_images/c60b674c3804b908ac9cea621c51df1606d74d9ad293e0641ce10b94b9891491.png" src="../_images/c60b674c3804b908ac9cea621c51df1606d74d9ad293e0641ce10b94b9891491.png" />
+<img alt="../_images/82952110b119efd6422c376db962c3817b194efac41436fa9e806e6e551c7c2a.png" src="../_images/82952110b119efd6422c376db962c3817b194efac41436fa9e806e6e551c7c2a.png" />
+<img alt="../_images/ea3a9b0bd64e8dae284418113d30ca167f4db9d2bda448d9610b2b6597b89bb8.png" src="../_images/ea3a9b0bd64e8dae284418113d30ca167f4db9d2bda448d9610b2b6597b89bb8.png" />
+<img alt="../_images/10104a653f458639bfab598eb2746416b550bef1cbf9ca444a381aa4aeed9deb.png" src="../_images/10104a653f458639bfab598eb2746416b550bef1cbf9ca444a381aa4aeed9deb.png" />
 </div>
 </div>
 <p>Let’s look at a hospital with the most unique values</p>
@@ -1997,9 +1996,9 @@ Number of patients 88049
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function matplotlib.pyplot.show(close=None, block=None)&gt;
 </pre></div>
 </div>
-<img alt="../_images/f43ef6eaa7c3b1b78528d2403a2569fdbca0be55b053d2e81c0b374955bbfe38.png" src="../_images/f43ef6eaa7c3b1b78528d2403a2569fdbca0be55b053d2e81c0b374955bbfe38.png" />
-<img alt="../_images/501378d42e327ca500bb5fda82d4e8a72c3aaac6acfe13e8530bcbf7561b2ae2.png" src="../_images/501378d42e327ca500bb5fda82d4e8a72c3aaac6acfe13e8530bcbf7561b2ae2.png" />
-<img alt="../_images/14128473f8f45e918a51f8bfa384cf7e32f84b5d6fb822dfacd39af424c6609a.png" src="../_images/14128473f8f45e918a51f8bfa384cf7e32f84b5d6fb822dfacd39af424c6609a.png" />
+<img alt="../_images/7631acc33cfbe7ce6e87d192346f3b687da39843564fe7dfe1827d01089f1654.png" src="../_images/7631acc33cfbe7ce6e87d192346f3b687da39843564fe7dfe1827d01089f1654.png" />
+<img alt="../_images/98e719a9a6ab80b40830776126c286594cfa127cabeb99a89cc518fecac1f50c.png" src="../_images/98e719a9a6ab80b40830776126c286594cfa127cabeb99a89cc518fecac1f50c.png" />
+<img alt="../_images/f3ea581c5665767b7188001967d2fdaa4124267ad36864dfd0e34b54992a2e60.png" src="../_images/f3ea581c5665767b7188001967d2fdaa4124267ad36864dfd0e34b54992a2e60.png" />
 </div>
 </div>
 <p>So there’s two populations, but in the top plot you can not see the histogram for the instances that attended the hospital, as their frequency is too few and the plot is dominated by the frequency range for the number of patients who did not attend the hosptial.</p>
@@ -2065,7 +2064,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shows the range of contributions to the prediction from this hospital for all the instances
 </pre></div>
 </div>
-<img alt="../_images/de08793b2b0e644d6e57a30afd7a88deeda7a5c981bcec6eb753ab7c9de7f3d9.png" src="../_images/de08793b2b0e644d6e57a30afd7a88deeda7a5c981bcec6eb753ab7c9de7f3d9.png" />
+<img alt="../_images/bec19b78dbc43d52748372fe1806c35bf45ea039801f5ff5c3ec139395de39f9.png" src="../_images/bec19b78dbc43d52748372fe1806c35bf45ea039801f5ff5c3ec139395de39f9.png" />
 </div>
 </div>
 <p>Shows that hospitals have the majority of their cases at value 0. Some hospitals have a wider range of SHAP main effect values than others, with most having their range entirely on one side of 0 or the other.</p>
@@ -2132,7 +2131,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shows the range of contributions to the prediction from this hospital when patients attend this hosptial
 </pre></div>
 </div>
-<img alt="../_images/506afa8f6a73c0756bc79068893a970c32a69232ee63a3e5b17ac6e95618083e.png" src="../_images/506afa8f6a73c0756bc79068893a970c32a69232ee63a3e5b17ac6e95618083e.png" />
+<img alt="../_images/1e3900e7ff32ae0f1ab6bfd8a374535b917c08e22377528e73c37b9911f49ed2.png" src="../_images/1e3900e7ff32ae0f1ab6bfd8a374535b917c08e22377528e73c37b9911f49ed2.png" />
 </div>
 </div>
 <p>Edit data so only contains instances when not go to hospital</p>
@@ -2196,7 +2195,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shows the range of contributions to the prediction from this hospital when patients do not attend this hosptial
 </pre></div>
 </div>
-<img alt="../_images/df8c4337d0ded98add5e0ead0a554fcf353936a658ece0d61506f0dc52078a54.png" src="../_images/df8c4337d0ded98add5e0ead0a554fcf353936a658ece0d61506f0dc52078a54.png" />
+<img alt="../_images/901f33c82441758162e45e88fea861d4accb76954c11e56dca7b2e793ed4b857.png" src="../_images/901f33c82441758162e45e88fea861d4accb76954c11e56dca7b2e793ed4b857.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2265,7 +2264,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shows the range of contributions to the prediction from this hospital when patients 1) do [black], and 2) do not [orange] attend this hosptial
 </pre></div>
 </div>
-<img alt="../_images/3c98640509d1aaadd17003ee956cf045b8128f7b23dfeab3c21bb87577c78817.png" src="../_images/3c98640509d1aaadd17003ee956cf045b8128f7b23dfeab3c21bb87577c78817.png" />
+<img alt="../_images/351b9261f35c0a1fb4d9c4fdcf5c599618ca5f76e1422746197dc8bf79e53825.png" src="../_images/351b9261f35c0a1fb4d9c4fdcf5c599618ca5f76e1422746197dc8bf79e53825.png" />
 </div>
 </div>
 <p>Does it help understanding to represent this as histograms?</p>
@@ -2330,7 +2329,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/51dd52b1a89522fa4f6395bf897467e3e34c43d0794b9e4b9b8a855b3d9a2d7a.png" src="../_images/51dd52b1a89522fa4f6395bf897467e3e34c43d0794b9e4b9b8a855b3d9a2d7a.png" />
+<img alt="../_images/e6ea7bd94ef7be58c3b8b631daa2852ab1ac391f8a878e4ca9daacbb018ae917.png" src="../_images/e6ea7bd94ef7be58c3b8b631daa2852ab1ac391f8a878e4ca9daacbb018ae917.png" />
 </div>
 </div>
 <p>One with just the instances that attend each hosptial</p>
@@ -2362,7 +2361,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/84ab1b25a62377b032a6f08ab09ef06db49d798d94102e9ca62ad1111e2018d6.png" src="../_images/84ab1b25a62377b032a6f08ab09ef06db49d798d94102e9ca62ad1111e2018d6.png" />
+<img alt="../_images/9ce3ff295a724bf483a428a577cc1597bfd6cbadf20d42bea8b2bb78c604b707.png" src="../_images/9ce3ff295a724bf483a428a577cc1597bfd6cbadf20d42bea8b2bb78c604b707.png" />
 </div>
 </div>
 <p>One with just the instances that don’t attend each hosptial.</p>
@@ -2395,7 +2394,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b5225aa06131438d09dbcd685d593aa3a40caf02f0bb20e80b15385242a77e38.png" src="../_images/b5225aa06131438d09dbcd685d593aa3a40caf02f0bb20e80b15385242a77e38.png" />
+<img alt="../_images/d91c043fec45bd600ace4b3a8bbed77eeb6a69c969527263cff5599991473789.png" src="../_images/d91c043fec45bd600ace4b3a8bbed77eeb6a69c969527263cff5599991473789.png" />
 </div>
 </div>
 <p>Code showing the same histograms, with each having the same x axis range and y axis range</p>
@@ -2463,7 +2462,7 @@ Those that do not attend have a low SHAP value, a smaller range of values, but f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ab5884a8d6c5c135f4f43cede0c0b95d0e14ab40e0ae35b9ab01dd0457bd1888.png" src="../_images/ab5884a8d6c5c135f4f43cede0c0b95d0e14ab40e0ae35b9ab01dd0457bd1888.png" />
+<img alt="../_images/9839f71cdf621532cd5b6f81946d03d0287a925c40eb20f9f00e05f60262ed76.png" src="../_images/9839f71cdf621532cd5b6f81946d03d0287a925c40eb20f9f00e05f60262ed76.png" />
 </div>
 </div>
 </section>
