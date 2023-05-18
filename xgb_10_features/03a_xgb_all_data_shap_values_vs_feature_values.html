@@ -161,7 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Optimisation of XGBoost learning rates (regularisation)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">Measuring accuracy of XGBoost models</a></li>
@@ -351,7 +351,6 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots-show-the-relationship-between-feature-value-and-shap-value-for-all-of-the-features">Violin plots show the relationship between feature value and SHAP value for all of the features</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-shap-values-for-the-hospital-one-hot-encoded-features">Compare SHAP values for the hospital one-hot encoded features</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-same-colour-scheme-as-violin-plot-for-paper">Use same colour scheme as violin plot (for paper)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-using-color-scheme-from-violin-plots">Plot histogram using color scheme from violin plots</a></li>
 </ul>
 </li>
@@ -678,8 +677,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 617 ms, sys: 1.5 s, total: 2.11 s
-Wall time: 275 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.36 s, sys: 187 ms, total: 4.55 s
+Wall time: 170 ms
 </pre></div>
 </div>
 </div>
@@ -709,8 +708,8 @@ Wall time: 275 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 183 ms, sys: 23.7 ms, total: 206 ms
-Wall time: 207 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 121 ms, sys: 16.1 ms, total: 137 ms
+Wall time: 137 ms
 </pre></div>
 </div>
 </div>
@@ -738,8 +737,8 @@ Wall time: 207 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1min 38s, sys: 6.01 s, total: 1min 44s
-Wall time: 9.18 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2min 6s, sys: 888 ms, total: 2min 7s
+Wall time: 3.76 s
 </pre></div>
 </div>
 </div>
@@ -1199,7 +1198,7 @@ Onset during sleep: The odds of receiving thrombolysis were about
 4.17 fold lower for onset during sleep.
 </pre></div>
 </div>
-<img alt="../_images/89462333677b4551217b76db34b171c801e96c357f3edafa62a33b0aabd99760.png" src="../_images/89462333677b4551217b76db34b171c801e96c357f3edafa62a33b0aabd99760.png" />
+<img alt="../_images/4a4b37686f3ce70570cea1dcb34147afed77c7f267352de2a02bde2f37fbbe8d.png" src="../_images/4a4b37686f3ce70570cea1dcb34147afed77c7f267352de2a02bde2f37fbbe8d.png" />
 </div>
 </div>
 </section>
@@ -1340,27 +1339,6 @@ Onset during sleep: The odds of receiving thrombolysis were about
 <p>132 rows × 2 columns</p>
 </div></div></div>
 </div>
-<section id="use-same-colour-scheme-as-violin-plot-for-paper">
-<h4>Use same colour scheme as violin plot (for paper)<a class="headerlink" href="#use-same-colour-scheme-as-violin-plot-for-paper" title="Permalink to this heading">#</a></h4>
-<p>Code used to get colour of violin plots
-Resource: https://stackoverflow.com/questions/26291479/changing-the-color-of-matplotlibs-violin-plots</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
-<span class="n">vp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">shap_per_category</span><span class="p">,</span> <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">vp1</span> <span class="ow">in</span> <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">]:</span>
-    <span class="n">facecolor</span> <span class="o">=</span> <span class="n">vp1</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">()</span>
-    <span class="n">edgecolor</span> <span class="o">=</span> <span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmeans&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_colors</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/b9e655c408f45f349ba38b67fa4c0faa0413c09baf85484e16a36cd05a3d33cc.png" src="../_images/b9e655c408f45f349ba38b67fa4c0faa0413c09baf85484e16a36cd05a3d33cc.png" />
-</div>
-</div>
-</section>
 <section id="plot-histogram-using-color-scheme-from-violin-plots">
 <h4>Plot histogram using color scheme from violin plots<a class="headerlink" href="#plot-histogram-using-color-scheme-from-violin-plots" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
@@ -1379,7 +1357,7 @@ Resource: https://stackoverflow.com/questions/26291479/changing-the-color-of-mat
         <span class="n">ec</span><span class="o">=</span><span class="p">[</span><span class="mf">0.12156863</span><span class="p">,</span> <span class="mf">0.46666667</span><span class="p">,</span> <span class="mf">0.70588235</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> 
         <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;SHAP values for one-hot encoded hospital features&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;SHAP values for hospital attended&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_hosp_shap_hist.jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
             <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -1388,7 +1366,7 @@ Resource: https://stackoverflow.com/questions/26291479/changing-the-color-of-mat
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b16b8bae99e06400ce263c6bc591cbc346181579169b8b963e2bfaf76581609d.png" src="../_images/b16b8bae99e06400ce263c6bc591cbc346181579169b8b963e2bfaf76581609d.png" />
+<img alt="../_images/ca9d36c6630bd4a87a5874407d54d98d951e2ba8e3f7ba9802df382f1364a85f.png" src="../_images/ca9d36c6630bd4a87a5874407d54d98d951e2ba8e3f7ba9802df382f1364a85f.png" />
 </div>
 </div>
 <p>Output descriptive text to use in the paper to describe the differences the hospitalfeature value had on the likelihood of receiving thromboylsis.
@@ -1503,7 +1481,6 @@ Convert from log odds to odds.</p>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots-show-the-relationship-between-feature-value-and-shap-value-for-all-of-the-features">Violin plots show the relationship between feature value and SHAP value for all of the features</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-shap-values-for-the-hospital-one-hot-encoded-features">Compare SHAP values for the hospital one-hot encoded features</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-same-colour-scheme-as-violin-plot-for-paper">Use same colour scheme as violin plot (for paper)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-using-color-scheme-from-violin-plots">Plot histogram using color scheme from violin plots</a></li>
 </ul>
 </li>

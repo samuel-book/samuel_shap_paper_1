@@ -161,7 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Optimisation of XGBoost learning rates (regularisation)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Measuring accuracy of XGBoost models</a></li>
@@ -1284,7 +1284,7 @@ SD AUC: 0.0025
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/373cf7f4282570d43da49cef0d635b211fd79444e53c5ee339ea32f2fda5cdc6.png" src="../_images/373cf7f4282570d43da49cef0d635b211fd79444e53c5ee339ea32f2fda5cdc6.png" />
+<img alt="../_images/a40bf7f4cf8282eacee55fab0a8002e9aad9eef40580ba8daef057bbda68b278.png" src="../_images/a40bf7f4cf8282eacee55fab0a8002e9aad9eef40580ba8daef057bbda68b278.png" />
 </div>
 </div>
 </section>
@@ -1449,7 +1449,51 @@ SD intersection: 0.0027
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a737a911022a2fd59fb9edb96ac4987d813d40f36a69449d32bf89dd561f4d68.png" src="../_images/a737a911022a2fd59fb9edb96ac4987d813d40f36a69449d32bf89dd561f4d68.png" />
+<img alt="../_images/9177a1757474514c89dd7a7240c6927f54d70aaf84361d2fee894e46cf905f96.png" src="../_images/9177a1757474514c89dd7a7240c6927f54d70aaf84361d2fee894e46cf905f96.png" />
+</div>
+</div>
+<p>Show difference between predicted and observed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="o">=</span> <span class="n">mean_results_by_hosp</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_results_by_hosp</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">]</span>
+<span class="n">diff</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    132.000000
+mean       0.002797
+std        0.014317
+min       -0.029851
+25%       -0.005546
+50%        0.001765
+75%        0.010494
+max        0.051829
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show absolute difference between predicted and observed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">mean_results_by_hosp</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_results_by_hosp</span><span class="p">[</span><span class="s1">&#39;predicted&#39;</span><span class="p">])</span>
+<span class="n">abs_diff</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    132.000000
+mean       0.010846
+std        0.009713
+min        0.000000
+25%        0.003808
+50%        0.007745
+75%        0.016260
+max        0.051829
+dtype: float64
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -1637,7 +1681,7 @@ SD intersection: 0.0027
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/824cdd84b61fe263d8790ba89ce797389a7c790ba018c65eb0cd6282f1a0dd71.png" src="../_images/824cdd84b61fe263d8790ba89ce797389a7c790ba018c65eb0cd6282f1a0dd71.png" />
+<img alt="../_images/faef30c27f60c944e4f56f38f29acbc823ea18318637004123ba4734d4c9ae44.png" src="../_images/faef30c27f60c944e4f56f38f29acbc823ea18318637004123ba4734d4c9ae44.png" />
 </div>
 </div>
 </section>
@@ -1883,7 +1927,7 @@ SD intersection: 0.0027
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/92f68ec91476e3a4676fca96ba3a1932fe70b9582ed322f3d9f21ca21751397c.png" src="../_images/92f68ec91476e3a4676fca96ba3a1932fe70b9582ed322f3d9f21ca21751397c.png" />
+<img alt="../_images/40ecde3a9a20a48a56feeebce4d381c6aff3d8c3940ca6e69b3aa057d12a4b4c.png" src="../_images/40ecde3a9a20a48a56feeebce4d381c6aff3d8c3940ca6e69b3aa057d12a4b4c.png" />
 </div>
 </div>
 <p>Get accuracy of model when model is at least 80% confident</p>
@@ -2025,7 +2069,7 @@ Accuracy: 0.881
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c1ab135d36bd5c1e24e35dbb337c2da935c13f89a40043131cd718cc5f1c3da3.png" src="../_images/c1ab135d36bd5c1e24e35dbb337c2da935c13f89a40043131cd718cc5f1c3da3.png" />
+<img alt="../_images/647b60aba2f8d50493a7048094a60b1a51292c3d4e343a13a2154e4e782cf106.png" src="../_images/647b60aba2f8d50493a7048094a60b1a51292c3d4e343a13a2154e4e782cf106.png" />
 </div>
 </div>
 </section>
