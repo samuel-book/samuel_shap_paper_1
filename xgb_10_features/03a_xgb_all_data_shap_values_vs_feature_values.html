@@ -354,6 +354,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-using-color-scheme-from-violin-plots">Plot histogram using color scheme from violin plots</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-all-patients-through-all-hospital-models-to-calculate-their-thrombolysis-rate">Pass all patients through all hospital models to calculate their thrombolysis rate</a></li>
 </ul>
 </li>
 </ul>
@@ -677,8 +678,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.36 s, sys: 187 ms, total: 4.55 s
-Wall time: 170 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 28.5 ms, sys: 213 µs, total: 28.7 ms
+Wall time: 27.4 ms
 </pre></div>
 </div>
 </div>
@@ -708,8 +709,8 @@ Wall time: 170 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 121 ms, sys: 16.1 ms, total: 137 ms
-Wall time: 137 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 26 ms, sys: 0 ns, total: 26 ms
+Wall time: 25.4 ms
 </pre></div>
 </div>
 </div>
@@ -737,8 +738,8 @@ Wall time: 137 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2min 6s, sys: 888 ms, total: 2min 7s
-Wall time: 3.76 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.26 ms, sys: 83 ms, total: 86.3 ms
+Wall time: 85 ms
 </pre></div>
 </div>
 </div>
@@ -1387,6 +1388,67 @@ Convert from log odds to odds.</p>
 </div>
 </section>
 </section>
+<section id="pass-all-patients-through-all-hospital-models-to-calculate-their-thrombolysis-rate">
+<h3>Pass all patients through all hospital models to calculate their thrombolysis rate<a class="headerlink" href="#pass-all-patients-through-all-hospital-models-to-calculate-their-thrombolysis-rate" title="Permalink to this heading">#</a></h3>
+<p>For each hospital, set all of the 10k patients in the test set as attending that hospital, and calculate the thrombolysis rate. This will give a thrombolysis rate for each hospital with patient variation removed, and only hospital factors remaining.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get list of hospital names</span>
+<span class="n">hospitals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">]))</span>
+<span class="n">hospitals</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="c1"># Initiate lists</span>
+<span class="n">thrombolysis_rate</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">single_predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="c1"># One hot encode hospitals (test set)</span>
+<span class="n">X_test_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;team&#39;</span><span class="p">)</span>
+
+<span class="c1"># For each hospital</span>
+<span class="k">for</span> <span class="n">hospital</span> <span class="ow">in</span> <span class="n">hospitals</span><span class="p">:</span>
+    
+    <span class="c1"># Get test data without thrombolysis hospital or stroke team</span>
+    <span class="n">X_test_no_hosp</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Thrombolysis&#39;</span><span class="p">,</span> <span class="s1">&#39;Stroke team&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Copy hospital dataframe and change hospital ID (after setting all to zero)</span>
+    <span class="n">X_test_adjusted_hospital</span> <span class="o">=</span> <span class="n">X_test_hosp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">X_test_adjusted_hospital</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">team</span> <span class="o">=</span> <span class="s2">&quot;team_&quot;</span> <span class="o">+</span> <span class="n">hospital</span>
+    <span class="n">X_test_adjusted_hospital</span><span class="p">[</span><span class="n">team</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="n">X_test_adjusted</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">X_test_no_hosp</span><span class="p">,</span> <span class="n">X_test_adjusted_hospital</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Get predicted probabilities and class</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_adjusted</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_adjusted</span><span class="p">)</span>
+    <span class="n">thrombolysis_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    
+    <span class="c1"># Save predictions</span>
+    <span class="n">single_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert individual predictions (a list of arrays) to a NumPy array, and </span>
+<span class="c1">#   transpose</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">single_predictions</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Convert to DataFrame</span>
+<span class="n">patient_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">patient_results</span><span class="p">)</span>
+
+<span class="c1"># And save as file</span>
+<span class="n">patient_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">_individual_&#39;</span>
+                       <span class="sa">f</span><span class="s1">&#39;predictions.csv&#39;</span><span class="p">,</span> 
+                       <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1484,6 +1546,7 @@ Convert from log odds to odds.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-using-color-scheme-from-violin-plots">Plot histogram using color scheme from violin plots</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-all-patients-through-all-hospital-models-to-calculate-their-thrombolysis-rate">Pass all patients through all hospital models to calculate their thrombolysis rate</a></li>
 </ul>
 </li>
 </ul>

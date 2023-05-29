@@ -161,7 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting thrombolysis use and explaining the predictions with Shap</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Evaluation of XGBoost learning rates on distribution of 10k thrombolysis rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="91_learning_rate_optimisation.html">Optimisation of XGBoost learning rates (regularisation)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01_xgb_combined_fit_feature_selection.html">XGBoost feature selection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_correlation.html">Check correlation between features selected for the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_xgb_combined_fit_accuracy_key_features.html">Measuring accuracy of XGBoost models</a></li>
@@ -618,8 +618,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 23.3 ms, sys: 3.22 s, total: 3.25 s
-Wall time: 5.27 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 0 ns, sys: 2.8 s, total: 2.8 s
+Wall time: 2.8 s
 </pre></div>
 </div>
 </div>
@@ -864,8 +864,8 @@ We will refer to these are “p_main_interactions” and “h_main_interactions�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 33.8 s, sys: 115 ms, total: 33.9 s
-Wall time: 33.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 32.1 s, sys: 501 ms, total: 32.6 s
+Wall time: 32.5 s
 </pre></div>
 </div>
 </div>
@@ -889,7 +889,7 @@ Wall time: 33.9 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Count&#39;)
 </pre></div>
 </div>
-<img alt="../_images/64540b4ffdae3fcb4d3cbcd2b61a5ffc39a63020a8bba4c65099c819c38d9d9a.png" src="../_images/64540b4ffdae3fcb4d3cbcd2b61a5ffc39a63020a8bba4c65099c819c38d9d9a.png" />
+<img alt="../_images/5688d1eb1614b78b7075937e3e5bd4f46d0b97b1e86c652da0a444faca62b937.png" src="../_images/5688d1eb1614b78b7075937e3e5bd4f46d0b97b1e86c652da0a444faca62b937.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1207,7 +1207,7 @@ Name: Thrombolysis, Length: 132, dtype: float64
 Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/29848df4593b4b33106c5e6c624f19f4d9b7ef1453563fef36fd51c0ecde53ec.png" src="../_images/29848df4593b4b33106c5e6c624f19f4d9b7ef1453563fef36fd51c0ecde53ec.png" />
+<img alt="../_images/35804a59944a6eca5484f5a34abc84533de51351cfcb12db30a69725b72ec48b.png" src="../_images/35804a59944a6eca5484f5a34abc84533de51351cfcb12db30a69725b72ec48b.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
 
                              coeff
@@ -1217,15 +1217,15 @@ Precise onset time        0.057969
 Prior disability level    0.046839
 Use of AF anticoagulants -0.057981
 Onset-to-arrival time     0.055069
-Onset during sleep        0.120940
+Onset during sleep        0.120939
 Age                       1.053469
 </pre></div>
 </div>
-<img alt="../_images/d3b1a6eda11e84b429980a9bf351e281ad4e274b458d432e67af608756a34d0f.png" src="../_images/d3b1a6eda11e84b429980a9bf351e281ad4e274b458d432e67af608756a34d0f.png" />
+<img alt="../_images/f004d643402f8c8ce84a89818cb72df5f0e39c8bf17a914c2435d2f1fd54843f.png" src="../_images/f004d643402f8c8ce84a89818cb72df5f0e39c8bf17a914c2435d2f1fd54843f.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/9acd69333ddb27289fb335de3acec13b1e4b498d173bd812332273fd7dca796b.png" src="../_images/9acd69333ddb27289fb335de3acec13b1e4b498d173bd812332273fd7dca796b.png" />
+<img alt="../_images/dafd711e34118be13b4a2598ea4f39ddf30e1e7738c22bcc3b20b26d0087681b.png" src="../_images/dafd711e34118be13b4a2598ea4f39ddf30e1e7738c22bcc3b20b26d0087681b.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
 
                          coeff
@@ -1233,7 +1233,7 @@ Arrival-to-scan time  0.080042
 Stroke team           0.107340
 </pre></div>
 </div>
-<img alt="../_images/12cf40fc716d1e0c07c1e5a605d05125d8ecd7aa25db33049e89f271842ecc76.png" src="../_images/12cf40fc716d1e0c07c1e5a605d05125d8ecd7aa25db33049e89f271842ecc76.png" />
+<img alt="../_images/6bcbde6da685606c7ea96efc93138ad1ccb13b040181991a29ec807a36997504.png" src="../_images/6bcbde6da685606c7ea96efc93138ad1ccb13b040181991a29ec807a36997504.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
 2). SHAP main effect
 ********************************
@@ -1241,7 +1241,7 @@ Stroke team           0.107340
 Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/b43fb866ed38e0c23c3d88aff139d0afb96ebcbbca06f54f6867d06688d02d6b.png" src="../_images/b43fb866ed38e0c23c3d88aff139d0afb96ebcbbca06f54f6867d06688d02d6b.png" />
+<img alt="../_images/ed7db1c6332adbb26ac5e6b2436a21de7dcbc186e66ba6aeabc7eedef8b2f8c9.png" src="../_images/ed7db1c6332adbb26ac5e6b2436a21de7dcbc186e66ba6aeabc7eedef8b2f8c9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
 
                              coeff
@@ -1255,11 +1255,11 @@ Onset during sleep        0.216030
 Age                       0.793499
 </pre></div>
 </div>
-<img alt="../_images/677089fb059aec0b4704e2a60060a038bb7ff8c757f468e86250fac42787eae3.png" src="../_images/677089fb059aec0b4704e2a60060a038bb7ff8c757f468e86250fac42787eae3.png" />
+<img alt="../_images/4dd19b98faddc5935a3428156c84b5465dd0a2fc94c07901d0593ee217fb38d6.png" src="../_images/4dd19b98faddc5935a3428156c84b5465dd0a2fc94c07901d0593ee217fb38d6.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/82b64e9e7c2c9613126b5fbb929226b9433db8095f4b788ec3d566c411169809.png" src="../_images/82b64e9e7c2c9613126b5fbb929226b9433db8095f4b788ec3d566c411169809.png" />
+<img alt="../_images/462641cf747763f198c848bce831ddcb9503359d34ffa82234fb6252fc2c7824.png" src="../_images/462641cf747763f198c848bce831ddcb9503359d34ffa82234fb6252fc2c7824.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
 
                          coeff
@@ -1267,7 +1267,7 @@ Arrival-to-scan time  0.078443
 Stroke team           0.104766
 </pre></div>
 </div>
-<img alt="../_images/0e9f4b275a0fb0ff4560fde97afc014c11399633aeffce65a39230beb2c52abb.png" src="../_images/0e9f4b275a0fb0ff4560fde97afc014c11399633aeffce65a39230beb2c52abb.png" />
+<img alt="../_images/563fdeccf2e9084b9f7d0a9992f5da740d35f4fb82d1ccffffbffec9f7ae1255.png" src="../_images/563fdeccf2e9084b9f7d0a9992f5da740d35f4fb82d1ccffffbffec9f7ae1255.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
 3). SHAP interactions within
 ********************************
@@ -1275,7 +1275,7 @@ Stroke team           0.104766
 Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/f15f98977433224dfb8ad8b6ceb4a0324f93c34d6b64c24f4381c8b0763a64a6.png" src="../_images/f15f98977433224dfb8ad8b6ceb4a0324f93c34d6b64c24f4381c8b0763a64a6.png" />
+<img alt="../_images/f2d09008f606095b2f9a84dff955269031a4955893d1ea56867177bcb1e477a4.png" src="../_images/f2d09008f606095b2f9a84dff955269031a4955893d1ea56867177bcb1e477a4.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
 
                              coeff
@@ -1289,19 +1289,19 @@ Onset during sleep        1.599541
 Age                       0.020306
 </pre></div>
 </div>
-<img alt="../_images/c9db3ecd3aa40e8d39b37b24041fa91533ee445c7a23a9dbde0a11e014112b33.png" src="../_images/c9db3ecd3aa40e8d39b37b24041fa91533ee445c7a23a9dbde0a11e014112b33.png" />
+<img alt="../_images/17a26c6212139f1a2170c73ea3de76f6d6c34ad31d301d67019f97ada52e1c32.png" src="../_images/17a26c6212139f1a2170c73ea3de76f6d6c34ad31d301d67019f97ada52e1c32.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/fc7f0c697806316484706db059cf58db16a7b87dc18070a4f83c1f443fb361d7.png" src="../_images/fc7f0c697806316484706db059cf58db16a7b87dc18070a4f83c1f443fb361d7.png" />
+<img alt="../_images/547645b7942ecb0fb7fa529aafe5d11477acc1e2d4f7af80b52ccb99e79e0dd5.png" src="../_images/547645b7942ecb0fb7fa529aafe5d11477acc1e2d4f7af80b52ccb99e79e0dd5.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
 
                               coeff
-Arrival-to-scan time -311138.315711
-Stroke team           311138.273753
+Arrival-to-scan time -311138.315408
+Stroke team           311138.273450
 </pre></div>
 </div>
-<img alt="../_images/36d7209d95799de7e7fb59bf34307e07b207c7f6fbcf9807c4d57cfb5cc5ac6c.png" src="../_images/36d7209d95799de7e7fb59bf34307e07b207c7f6fbcf9807c4d57cfb5cc5ac6c.png" />
+<img alt="../_images/fa8f0b488f0ee65c9e338e8f498fb4a9161b8452475a6202a7fdf81c5e2202e7.png" src="../_images/fa8f0b488f0ee65c9e338e8f498fb4a9161b8452475a6202a7fdf81c5e2202e7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
 4). SHAP interactions outside
 ********************************
@@ -1309,7 +1309,7 @@ Stroke team           311138.273753
 Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/48caf55f46d5c63b8b75a3ce4ca050cfd6f7875b7b1f2d7888ce0fa82fb067b2.png" src="../_images/48caf55f46d5c63b8b75a3ce4ca050cfd6f7875b7b1f2d7888ce0fa82fb067b2.png" />
+<img alt="../_images/9919846e0916318e88459ab7287dde73c9c278673caa74c71b7317e3b3ad36af.png" src="../_images/9919846e0916318e88459ab7287dde73c9c278673caa74c71b7317e3b3ad36af.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
 
                              coeff
@@ -1323,11 +1323,11 @@ Onset during sleep        0.118613
 Age                       0.548842
 </pre></div>
 </div>
-<img alt="../_images/52a088e9960ebf89f559e5575e1ca570419891b6664886d7d145809f8f5bcbdb.png" src="../_images/52a088e9960ebf89f559e5575e1ca570419891b6664886d7d145809f8f5bcbdb.png" />
+<img alt="../_images/f00fc75b2a806656ef075571d22a5e1d390e774597bf5359c5b7d8029fe82595.png" src="../_images/f00fc75b2a806656ef075571d22a5e1d390e774597bf5359c5b7d8029fe82595.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/205b278e2e9b25c9407066090a1ffe9474ef70c7c9714f322ec142d6421398b7.png" src="../_images/205b278e2e9b25c9407066090a1ffe9474ef70c7c9714f322ec142d6421398b7.png" />
+<img alt="../_images/362c5edb46e1bb936308c9a33a69b68d95f8fb1e2b4a9721ba6cb792869c1afc.png" src="../_images/362c5edb46e1bb936308c9a33a69b68d95f8fb1e2b4a9721ba6cb792869c1afc.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
 
                          coeff
@@ -1335,7 +1335,7 @@ Arrival-to-scan time -0.648343
 Stroke team           0.062870
 </pre></div>
 </div>
-<img alt="../_images/db9ede867e72136e915bdb6e1a7f3f6f817c3e9acfbab79ec6a204055875bac3.png" src="../_images/db9ede867e72136e915bdb6e1a7f3f6f817c3e9acfbab79ec6a204055875bac3.png" />
+<img alt="../_images/a7658f42d8cee8f83e857a7c30a95f113cefa36023e18577662c29c0a4d434a3.png" src="../_images/a7658f42d8cee8f83e857a7c30a95f113cefa36023e18577662c29c0a4d434a3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>********************************
 5). Subset SHAP values
 ********************************
@@ -1343,7 +1343,7 @@ Stroke team           0.062870
 Linear regression between hosptial IVT rate and each patient feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/f032ee6cfad8a3a02e65ee61dd42314e6c9c9f53ca5cc37333047f317fec46c1.png" src="../_images/f032ee6cfad8a3a02e65ee61dd42314e6c9c9f53ca5cc37333047f317fec46c1.png" />
+<img alt="../_images/66a08c6330d46971d79ceb4cc66d3f19cdc57d9061328e367329bb04220897b3.png" src="../_images/66a08c6330d46971d79ceb4cc66d3f19cdc57d9061328e367329bb04220897b3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hosptial IVT rate from patient features (mean for attended patients)
 
                              coeff
@@ -1357,11 +1357,11 @@ Onset during sleep        0.181704
 Age                       1.033392
 </pre></div>
 </div>
-<img alt="../_images/2acf2d1a435d8d2cd39e70c1a763c244bd7a2aa27c3d6705829c55f7aa428955.png" src="../_images/2acf2d1a435d8d2cd39e70c1a763c244bd7a2aa27c3d6705829c55f7aa428955.png" />
+<img alt="../_images/aa462c4da1571c99f371cac9ec0bb2a9cae5e1d369dd1855ed61f5b0e3a316ec.png" src="../_images/aa462c4da1571c99f371cac9ec0bb2a9cae5e1d369dd1855ed61f5b0e3a316ec.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression between hospital IVT rate and each hospital feature (mean for attended patients)
 </pre></div>
 </div>
-<img alt="../_images/77e20c02547398d1e40e2a19414ea93e7e0104379d4781399bf79295d0a84f8a.png" src="../_images/77e20c02547398d1e40e2a19414ea93e7e0104379d4781399bf79295d0a84f8a.png" />
+<img alt="../_images/3e405d79d1cab6d1673a2775b1548f11f91a5c754a14b2fceb96dadc555820b3.png" src="../_images/3e405d79d1cab6d1673a2775b1548f11f91a5c754a14b2fceb96dadc555820b3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple linear regression to predict hospital IVT rate from hospital features (mean for attended patients)
 
                          coeff
@@ -1369,7 +1369,7 @@ Arrival-to-scan time  0.078743
 Stroke team           0.106717
 </pre></div>
 </div>
-<img alt="../_images/3ea3677d01098ca2f848e30d03789ee13a1982f8e9d10e8d589185c698747eee.png" src="../_images/3ea3677d01098ca2f848e30d03789ee13a1982f8e9d10e8d589185c698747eee.png" />
+<img alt="../_images/9ae121cde50c03325bfe4aca5bcfd0fca56927c31e26f25c1e4a4568268d8e6d.png" src="../_images/9ae121cde50c03325bfe4aca5bcfd0fca56927c31e26f25c1e4a4568268d8e6d.png" />
 </div>
 </div>
 <section id="create-plot-for-paper-compilation-of-some-of-the-above-plots">
@@ -1468,7 +1468,7 @@ Onset during sleep        0.100957
 Age                       0.139023
 </pre></div>
 </div>
-<img alt="../_images/5f35931f144b569379dcf7bfdef819444f5b935a5fb69869a9fc95d1ad221593.png" src="../_images/5f35931f144b569379dcf7bfdef819444f5b935a5fb69869a9fc95d1ad221593.png" />
+<img alt="../_images/ba62dc945a313ebd371d6601e69130ca4d2494959377e95e6c4aff99d1039543.png" src="../_images/ba62dc945a313ebd371d6601e69130ca4d2494959377e95e6c4aff99d1039543.png" />
 </div>
 </div>
 </section>
@@ -1535,7 +1535,7 @@ Age                       0.139023
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sum_p_contributions&quot;</span><span class="p">,</span> <span class="s2">&quot;sum_h_contributions&quot;</span><span class="p">,</span>
            <span class="s2">&quot;sum_hpph_contributions&quot;</span><span class="p">,</span> <span class="s2">&quot;sum_h_unattended_contributions&quot;</span><span class="p">,</span>
-           <span class="s2">&quot;total_shap_value&quot;</span><span class="p">]</span>
+           <span class="s2">&quot;total_shap_without_base&quot;</span><span class="p">]</span>
 
 <span class="n">df_shap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">total_p_contributions_per_instance</span><span class="p">,</span> 
                      <span class="n">total_h_contributions_per_instance</span><span class="p">,</span> 
@@ -1546,6 +1546,15 @@ Age                       0.139023
 
 <span class="n">df_to_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_shap</span><span class="p">,</span> 
                           <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Add base value</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;./output/03a_xgb_10_features_shap_values_extended.p&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandler</span><span class="p">:</span>
+    <span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+
+<span class="n">df_to_file</span><span class="p">[</span><span class="s1">&#39;base_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">base_values</span>
+<span class="n">df_to_file</span><span class="p">[</span><span class="s1">&#39;total_shap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_to_file</span><span class="p">[</span><span class="s1">&#39;total_shap_without_base&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                            <span class="n">df_to_file</span><span class="p">[</span><span class="s1">&#39;base_value&#39;</span><span class="p">]</span>
 
 <span class="n">df_to_file</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./output/</span><span class="si">{</span><span class="n">notebook</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">model_text</span><span class="si">}</span><span class="s1">&#39;</span>
                   <span class="sa">f</span><span class="s1">&#39;_shap_p_h_hpph_contributions.csv&#39;</span><span class="p">,</span> <span class="p">)</span>
